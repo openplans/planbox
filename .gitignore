@@ -18,9 +18,13 @@ develop-eggs
 .installed.cfg
 lib
 lib64
+.tmp
+.sass-cache
+bower_components/
 
 # Installer logs
 pip-log.txt
+npm-debug.log
 
 # Unit test / coverage reports
 .coverage
@@ -37,3 +41,4 @@ nosetests.xml
 # Local settings and environments
 local_settings.py
 env/
+node_modules/
