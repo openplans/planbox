@@ -1,0 +1,45 @@
+language: python
+python:
+  - "2.7"
+  - "3.3"
+
+env:
+  global:
+    # Encrypted SauceLabs username and access key. See
+    # http://about.travis-ci.org/docs/user/addons/#Sauce-Connect
+    - secure: "Kt9OpZv934sRj0K9KP3m82ecn5/eQBWgeI5CWqIrcykjn6cTuY/KI4IMF2I8\nilZHVMDj/lx82teB9X8zHUlWige4aZJ0b0L1FtoMgf/lprKwh2uFt6olnwvU\nEPrF9U2rMNvc+UTDywzs+4dplE2zHCuIx8J111aSa1CAHQxdIeY="
+    - secure: "ZmrIM5bgoouu289OvC1E4t3vSnOVuR/UiRRoNAaeieTJAaW4y5BypyAdO7FZ\nMvJkuhsoVNld4IxfN7ta6XYV0VBnia2+y5RN1CppoTII9WmdjKlxIgTeNeOR\nzanlmGx1NZqMto0dG1xToeOVbDlh4fh44HwZDpMAU/bgKHmRNQw="
+addons:
+  sauce_connect: true
+
+install:
+  # Django test requirements
+  - pip install -r requirements.txt
+  - pip install coverage selenium
+  - cp src/planbox/local_settings.py.template src/planbox/local_settings.py
+
+  # JavaScript test requirements
+  - sudo apt-get install nodejs npm
+  - sudo npm install -g grunt-cli
+  - sudo npm install -g bower
+  - bower install
+
+before_script:
+  - psql -c 'create database planbox;' -U postgres
+  - psql -d planbox -c 'create extension postgis;' -U postgres
+  - python src/manage.py syncdb --all --noinput
+  - gunicorn --chdir src planbox.wsgi:application --bind 0.0.0.0:80 --worker-class gevent --workers 4 --daemon
+
+script:
+  # Run tests and generate coverage statistics for Django
+  - python src/manage.py test --with-coverage --cover-package=planbox --cover-package=planbox_data --cover-package=planbox_ui
+
+  # Run tests for JavaScript
+  - grunt test
+
+notifications:
+  email:
+    recipients:
+      - dev@openplans.org
+    on_success: change
+    on_failure: always
