@@ -19,7 +19,6 @@ install:
   - cp src/planbox/local_settings.py.template src/planbox/local_settings.py
 
   # JavaScript test requirements
-  - sudo apt-get install -y python-software-properties python g++ make
   - sudo add-apt-repository ppa:chris-lea/node.js  # For the latest nodejs
   - sudo apt-get update
   - sudo apt-get install nodejs npm
