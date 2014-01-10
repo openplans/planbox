@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+# App
+class AppView (TemplateView):
+    template_name = 'index.html'
+
+
+# App views
+app_view = AppView.as_view()

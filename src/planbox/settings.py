@@ -39,6 +39,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'south',
+
+    'planbox_ui',
+    'planbox_data',
 )
 
 MIDDLEWARE_CLASSES = (
