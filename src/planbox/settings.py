@@ -89,5 +89,5 @@ STATIC_URL = '/static/'
 
 try:
     execfile(os.path.join(SETTINGS_DIR, 'local_settings.py'))
-except IOError, e:
+except IOError:
     pass
