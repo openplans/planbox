@@ -19,9 +19,9 @@ install:
   - cp src/planbox/local_settings.py.template src/planbox/local_settings.py
 
   # JavaScript test requirements
-  - sudo add-apt-repository ppa:chris-lea/node.js  # For the latest nodejs
-  - sudo apt-get update
-  - sudo apt-get install nodejs npm
+  - sudo add-apt-repository -y ppa:chris-lea/node.js  # For the latest nodejs
+  - sudo apt-get -y update
+  - sudo apt-get -y install nodejs npm
   - sudo npm install -g grunt-cli
   - sudo npm install -g bower
   - bower install
