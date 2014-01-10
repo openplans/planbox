@@ -21,7 +21,7 @@ install:
   # JavaScript test requirements
   - sudo add-apt-repository -y ppa:chris-lea/node.js  # For the latest nodejs
   - sudo apt-get -y update
-  - sudo apt-get -y install nodejs npm
+  - sudo apt-get -y install nodejs
   - sudo npm install -g grunt-cli
   - sudo npm install -g bower
   - bower install
