@@ -24,7 +24,7 @@ install:
   - sudo apt-get -y install nodejs
   - sudo npm install -g grunt-cli
   - sudo npm install -g bower
-  - npm install
+  - sudo npm install
   - bower install
 
 before_script:
