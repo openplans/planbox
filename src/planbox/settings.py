@@ -90,7 +90,9 @@ STATIC_URL = '/static/'
 
 # Local settings overrides
 
+local_settings_filename = os.path.join(SETTINGS_DIR, 'local_settings.py')
 try:
-    execfile(os.path.join(SETTINGS_DIR, 'local_settings.py'))
+    with open(local_settings_filename, 'r') as local_settings_file:
+        exec(local_settings_file.read())
 except IOError:
     pass
