@@ -39,4 +39,5 @@ nosetests.xml
 local_settings.py
 env/
 .env/
+env?/
 node_modules/
