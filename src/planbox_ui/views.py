@@ -2,9 +2,13 @@ from django.views.generic import TemplateView
 
 
 # App
-class AppView (TemplateView):
+class IndexView (TemplateView):
     template_name = 'index.html'
 
 
+class ProjectView (TemplateView):
+    template_name = 'project.html'
+
 # App views
-app_view = AppView.as_view()
+index_view = IndexView.as_view()
+project_view = ProjectView.as_view()

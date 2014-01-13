@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Main Street Pedestrian Improvements
+{% endblock %}
+
+{% block meta_description %}
+All about the Main Street Pedestrian Improvements
+{% endblock %}
+
+
+{% block styles %}
+  {% if debug %}
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/normalize-css/normalize.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" type="text/css" media="screen, projection" />
+  {% else %}
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/dist/style.min.css" type="text/css" media="screen, projection" />
+  {% endif %}
+{% endblock %}
+
+
+{% block body %}
+
+<header class="project-header" style="background-image:url({{ STATIC_URL }}images/pedestrians.jpg);">
+  <div class="container">
+    <h1 class="project-title">Main Street Pedestrian Improvements</h1>
+  </div>
+</header>
+
+<section class="project-details">
+  <div class="container">
+    <p class="project-status project-status-active"><strong>Active</strong></p>
+    <p class="project-location">Anytown, USA</p>
+    <p class="project-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+</section>
+
+<section class="project-timeline">
+  <div class="container">
+    <ol class="event-list unstyled-list">
+      <li class="event event-complete">
+        <h1 class="event-title">Event Title (January 4, 2015)</h1>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </li>
+      <li class="event event-active">
+        <h1 class="event-title">Winter 2015 Phase</h1>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </li>
+      <li class="event">
+        <h1 class="event-title">Another Event (April 2, 2015)</h1>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+      </li>
+      <li class="event">
+        <h1 class="event-title">Yet one more event for the list. This one's a long one. Friday, April 16, 2pm-5pm</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </li>
+      <li class="event">
+        <h1 class="event-title">Phase II, Summer 2015</h1>
+        <p>Excepteur sint occaecat cupidatat non proident.</p>
+      </li>
+      <li class="event">
+        <h1 class="event-title">Event Title</h1>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </li>
+      <li class="event">
+        <h1 class="event-title">Estimated Completion: October 31, 2015</h1>
+        <p></p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<footer class="project-colophon">
+  <div class="container">
+    <p class="project-contact-info">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p class="powered-by">Powered by <a href="index.html">Planbox</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.</p>
+  </div>
+</footer>
+{% endblock %}
+
+{% block scripts %}
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="html5sortable/jquery.sortable.js"></script>
+<script>
+  $( document ).ready(function() {
+
+    if (window.location.hash == "#admin") {
+      $('.project-header').addClass('logged-in').before('<div class="admin-bar">Signed in as <a href="#"><strong>Username</strong></a>. <a href="#" class="logout">Sign Out</a></div>');
+      $('.project-colophon').after('<div class="save-bar"><div class="container"><a href="#" class="save-btn btn btn-block btn-large">Save Project</a></div></div>');
+      $('p:not(.project-status,.powered-by), h1, h2, h3, h4, h5, h6').attr('contenteditable','true').addClass('content-editable');
+      $('.event').addClass('draggable').append('<span class="handle">&#8801;</span>').append('<span class="delete"><span class="delete-icon">&times;</span> Delete</span>');
+      $('.event-list').sortable({
+        handle: '.handle'
+      });
+      $('.project-timeline .container').append('<a href="#" class="btn btn-small add-event-btn">Add Event</a>')
+      $('.project-status').append('<select class="status-selector"><option>Not Started</option><option selected="selected">Active</option><option>Complete</option></select>');
+    }
+
+  });
+</script>
+
+{% endblock %}

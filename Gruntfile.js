@@ -277,7 +277,8 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-          '<%= yeoman.dist %>/styles/main.css': [
+          '<%= yeoman.dist %>/styles/dist/styles.min.css': [
+            '<%= yeoman.app %>/bower_components/normalize-css/normalize.css',
             '.tmp/styles/{,*/}*.css',
             '<%= yeoman.app %>/styles/{,*/}*.css'
           ]
@@ -380,7 +381,7 @@ module.exports = function (grunt) {
       grunt.task.run([
         'clean:server',
         'concurrent:test',
-        'autoprefixer',
+        // 'autoprefixer',
       ]);
     }
 
@@ -393,8 +394,8 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     // 'clean:dist',
     // 'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
+    // 'concurrent:dist',
+    // 'autoprefixer',
     'concat',
     'cssmin',
     'uglify',

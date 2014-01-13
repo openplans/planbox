@@ -1,0 +1,642 @@
+
+/* =Base Styles
+-------------------------------------------------------------- */
+
+/* Typography */
+body { 
+  background: #666;
+  color: #fff;
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.5; 
+}
+select, input, textarea {
+  background: #fff;
+  color: #666;
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 400;
+}
+h1,h2,h3,h4,h5,h6 {
+  margin: 0 0 0.25em 0;
+  line-height: 1.25;
+  font-weight: 800;
+  text-shadow: 0 0 3px rgba(0,0,0,0.25);
+}
+h1 { font-size: 2em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.75em; }
+h4 { font-size: 1.5em; }
+h5 { font-size: 1.25em; }
+h6 { font-size: 1em; text-transform: uppercase; }
+
+a:hover, a:active { outline: none; }
+a, a:active, a:visited { color: LightBlue; }
+a:hover { color: #48a5bf; }
+p { margin: 0 0 1.2em; }
+ul, ol { margin-left: 1.8em; }
+ol { list-style-type: decimal; }
+ul, ol, dl { margin-bottom: 0.6em; }
+ul li, ol li { padding-bottom: 0.6em; }
+.unstyled-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.unstyled-list li {
+  padding-bottom: 0;
+}
+strong {
+  font-weight: 800;
+}
+hr {
+  margin: 1.5em 0;
+  border: 0;
+  border: 1px solid #eeeeee;
+  border-top-color: rgba(0,0,0,0.2);
+  border-bottom-color: rgba(255,255,255,0.75);
+  border-right: 0;
+  border-left: 0;
+}
+.container hr {
+  margin-right: -10px;
+  margin-left: -10px;
+}
+.capitalize { text-transform: capitalize; }
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+.icon-inline {
+  height: 1.5em;
+  width: auto;
+  margin: 0 0.25em -0.375em 0.5em;
+}
+.icon-muted {
+  opacity: 0.75;
+}
+
+.illustration {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Buttons */
+.btn,
+.btn:visited,
+.btn:link {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  padding: 0.25em 0.5em;
+  margin-bottom: 0;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-color: #268099;
+  font-weight: 800;
+  border: 0.25em solid #48a5bf;
+  border-radius: 0.25em;
+}
+.btn:hover {
+  background-color: #48a5bf;
+  color: #fff !important;
+}
+.btn-primary,
+.btn-primary:visited,
+.btn-primary:link {
+  background-color: #268099;
+  border-color: #48a5bf;
+  color: #fff;
+}
+.btn-block,
+.btn-block:visited,
+.btn-block:link {
+  clear: both;
+  display: block;
+  margin: 0 0 1.2em;
+  padding: 0.5em;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+  width: 100%;
+  line-height: 1.5;
+}
+.btn-large {
+  font-size: 1.25em;
+  padding: 0.75em 1em 0.5em;
+}
+.btn-small {
+  font-size: 0.85em;
+}
+
+/* Forms */
+form {
+}
+label {
+/*  background: #a1cbcf;*/
+/*  float: left;*/
+/*  padding: 0.25em 1em 0 0.75em;*/
+/*  color: #fff;*/
+/*  font-size: 0.875em;*/
+/*  border-radius: 0.25em 0.625em 0 0;*/
+}
+.input-block,
+textarea {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+  width: 100%;
+  border: 0.25em solid #a1cbcf;
+  padding: 0.5em;
+  outline: 0;
+  line-height: 1.5;
+}
+.input-block:focus,
+textarea:focus {
+  outline: 2px solid #268099;
+}
+textarea {
+  height: 6.5em;
+  resize: none;
+}
+
+/* Avatars */
+a.user-link {
+  float: left;
+  margin-right: 10px;
+}
+.avatar {
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+
+
+/* =Nonsemantic Base Styles
+-------------------------------------------------------------- */
+
+.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; visibility: hidden; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+/* Hide for both screenreaders and browsers */
+.is-hidden { display: none; visibility: hidden; }
+/* Hide only visually, but have it available for screenreaders */
+.is-screen-reader-text,
+.is-visuallyhidden {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+/* Hide visually and from screenreaders, but maintain layout */
+.is-invisible { visibility: hidden; }
+
+.nobreak { white-space: nowrap; }
+
+
+/* =Layout
+-------------------------------------------------------------- */
+
+html {}
+body {
+}
+.container {
+  max-width: 44em;
+  padding: 1em;
+  margin: 0 auto;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.main {
+  background: #eee url(images/workers.jpg) center center repeat;
+  background-size: cover;
+  color: #666;
+  padding: 1em 0;
+}
+.main h1,.main h2,.main h3,.main h4,.main h5,.main h6,
+.secondary h1,.secondary h2,.secondary h3,.secondary h4,.secondary h5,.secondary h6 {
+  text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+}
+.main a, .secondary a { color: #48a5bf; }
+.main a:hover, .secondary a:hover { color: #18758f; }
+
+.secondary {
+  background: #ddd;
+  color: #666;
+  padding: 1em 0;
+}
+.tertiary {
+  background: #eee;
+  color: #666;
+  padding: 1em 0;
+}
+
+
+/* =Site/Project Header
+-------------------------------------------------------------- */
+
+.site-header,
+.project-header {
+  background: #268099;
+  color: #fff;
+  padding: 1em 0;
+  background-position: center center;
+  background-repeat: repeat;
+  background-size: cover;
+}
+.site-title,
+.project-title {
+  font-weight: 800;
+  margin-bottom: 0;
+}
+.site-logo {
+  font-size: 1.375em;
+  text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125);
+  font-weight: 100;
+  -webkit-animation: shadowloop 4s infinite; /* Safari 4+ */
+  -moz-animation:    shadowloop 4s infinite; /* Fx 5+ */
+  -o-animation:      shadowloop 4s infinite; /* Opera 12+ */
+  animation:         shadowloop 4s infinite; /* IE 10+ */
+}
+@-webkit-keyframes shadowloop {
+  0%   { text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125); }
+  50% { text-shadow: 0 0.125em 0 rgba(255,255,255,0.625), 0 0.25em 0 rgba(255,255,255,0.375), 0 0.375em 0 rgba(255,255,255,0.25); }
+  100%   { text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125); }
+}
+@-moz-keyframes shadowloop {
+  0%   { text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125); }
+  50% { text-shadow: 0 0.125em 0 rgba(255,255,255,0.625), 0 0.25em 0 rgba(255,255,255,0.375), 0 0.375em 0 rgba(255,255,255,0.25); }
+  100%   { text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125); }
+}
+@-o-keyframes shadowloop {
+  0%   { text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125); }
+  50% { text-shadow: 0 0.125em 0 rgba(255,255,255,0.625), 0 0.25em 0 rgba(255,255,255,0.375), 0 0.375em 0 rgba(255,255,255,0.25); }
+  100%   { text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125); }
+}
+@keyframes shadowloop {
+  0%   { text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125); }
+  50% { text-shadow: 0 0.125em 0 rgba(255,255,255,0.625), 0 0.25em 0 rgba(255,255,255,0.375), 0 0.375em 0 rgba(255,255,255,0.25); }
+  100%   { text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125); }
+}
+
+.site-description {
+  font-weight: 400;
+}
+
+.product-details {
+/*  font-weight: 100;*/
+  background: #eee;
+  background: rgba(255,255,255,0.75);
+  color: #444;
+  padding: 1em;
+  border-radius: 0.25em;
+}
+
+
+/* =Project Details
+-------------------------------------------------------------- */
+
+.project-details {
+  background: #eee;
+  color: #666;
+}
+.project-details .container {
+  position: relative;
+}
+
+.project-status {
+  text-align: center;
+  line-height: 1.25;
+  padding: 0.375em 0;
+  background: #ddd;
+  margin: -0.5em -0.5em 1em -0.5em;
+}
+.project-status strong {
+  text-transform: uppercase;
+  text-shadow: 0 0 3px rgba(0,0,0,0.25);
+  font-size: 1.25em;
+}
+.project-status-active {
+  background: #57D982;
+  color: #fff;
+}
+
+.project-location {
+  margin-bottom: 0;
+  font-weight: 100;
+  text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+}
+.project-description {
+  background: #eee;
+  font-size: 1.25em;
+}
+
+
+/* =Project Timeline
+-------------------------------------------------------------- */
+
+.project-timeline {
+  background: #888;
+  color: #fff;
+}
+.event-list {
+  border-left: 0.5em solid #eee;
+  padding: 2em 0 0.5em;
+  margin: -1em 0;
+}
+li.event {
+  padding-left: 1.5em;
+  position: relative;
+  clear: both;
+}
+.event:before {
+  content: '';
+  position: absolute;
+  top: 0.5em;
+  left: -1em;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 1em;
+  background: #eee;
+}
+.event:after {
+  content: '';
+  position: absolute;
+  top: 0.75em;
+  left: -0.75em;
+  width: 1em;
+  height: 1em;
+  border-radius: 1em;
+  background: #888;
+}
+.event-complete:after {
+  background: #eee;
+}
+.event-active:after {
+  background: #57D982;
+}
+
+
+/* =Colophon
+-------------------------------------------------------------- */
+
+.project-colophon,
+.site-colophon {
+  padding-top: 1em;
+  background: #666;
+  color: #ddd;
+  font-weight: 800;
+}
+.site-colophon {
+  background: #407280;
+}
+.project-colophon a, .project-colophon a:active, .project-colophon a:visited,
+.site-colophon a, .site-colophon a:active, .site-colophon a:visited {
+  color: #fff;
+  text-decoration: none;
+}
+.project-colophon a:hover,
+.site-colophon a:hover {
+  text-decoration: underline;
+}
+.project-contact-info {
+  font-size: 1.375em;
+}
+.powered-by {
+  text-align: right;
+  font-size: 0.875em;
+  font-weight: 100;
+  color: #ccc;
+  padding-top: 2em;
+}
+.powered-by a {
+  font-weight: 400;
+}
+.openplans-logo {
+  width: 236px;
+  height: auto;
+  margin: 0 0.5em 0.5em 0;
+}
+
+/* =Admin
+-------------------------------------------------------------- */
+
+.admin-bar {
+  background: #444;
+  color: #eee;
+  padding: 0.75em 1em;
+  box-shadow: 0 0.5em 0.5em rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 9999;
+}
+.admin-bar a {
+  color: #fff;
+}
+a.logout {
+  color: HotPink;
+  float: right;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  line-height: 2;
+}
+.content-editable:hover {
+  outline: 2px solid HotPink;
+}
+.draggable {
+  padding-right: 3em;
+}
+.handle {
+	cursor: move;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 2.5em;
+	line-height: 1;
+	width: 1em;
+	height: 1em;
+	text-align: center;
+	color: #777;
+}
+.event:hover .handle {
+	color: #aaa;
+}
+.event:hover .handle:hover {
+	color: #fff;
+}
+li.sortable-placeholder {
+	border: 1px dashed #fff;
+	background: none;
+	padding: 4em 0;
+}
+.add-event-btn {
+  position: relative;
+  left: -0.5em;
+}
+.status-selector {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 0;
+  opacity: 0;
+  -webkit-appearance: none;
+}
+.delete {
+  position: relative;
+  top: -1em;
+  left: -9999px;
+  color: Pink;
+  cursor: pointer;
+}
+.event:hover .delete {
+  left: 0;
+}
+.delete-icon {
+  font-size: 1.5em;
+  position: relative;
+}
+.status-selector {
+  cursor: pointer;
+}
+.save-bar {
+  background: #444;
+  color: #eee;
+  padding: 0;
+  box-shadow: 0 0.5em 0.5em rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 9999;
+}
+
+
+/* =Media Queries for Responsive Layout
+-------------------------------------------------------------- */
+
+@media only screen and (min-width: 22em) {
+  .site-header,
+  .project-header {
+    padding-top: 2em;
+  }
+  .site-title,
+  .project-title {
+    font-size: 3em;
+  }
+  .product-details {
+    font-size: 1.25em;
+  }
+  .project-status {
+    position: absolute;
+    top: -1.5em;
+    right: 1em;
+    border-radius: 0.875em 0.125em;
+    padding: 0.5em 1.25em;
+    margin: 0;
+  }
+  .project-status strong {
+    font-size: 1.375em;
+  }
+  .project-location {
+    font-size: 1.5em;
+  }
+  .project-colophon {
+    padding-top: 2em;
+    padding-bottom: 1em;
+  }
+  .big-p {
+    font-size: 1.25em;
+  }
+  .illustration {
+    float: left;
+    margin: 0 1em 0.5em 0;
+    opacity: 0.625;
+  }
+  .form-prompt {
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (min-width: 44em) {
+  .project-header {
+    padding-top: 5em;
+  }
+  .site-header {
+    padding-top: 3em;
+  }
+  .site-title,
+  .project-title {
+    font-size: 4em;
+  }
+  .product-details {
+    font-size: 1.5em;
+  }
+  .project-status strong {
+    font-size: 1.625em;
+    padding: 0 0.25em;
+  }
+  .project-location {
+    font-size: 1.875em;
+  }
+  .project-colophon {
+    padding-top: 3em;
+    padding-bottom: 2em;
+  }
+  .logged-in {
+    margin-top: 3em;
+  }
+  .admin-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
+  }
+  .save-bar {
+    position: fixed;
+    top: -0.5em;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    height: 0;
+    overflow: visible;
+    background: transparent;
+    box-shadow: none;
+  }
+  .save-bar .container {
+    max-width: 18em;
+  }
+  .save-btn {
+    box-shadow: 0 0.25em 0.5em rgba(0,0,0,0.5);
+  }
+  .interest-form p.email {
+    width: 65%;
+    float: left;
+  }
+  .interest-form p.submit {
+    width: 35%;
+    float: left;
+  }
+  .interest-form p.submit .btn-block {
+    border-radius: 0 0.25em 0.25em 0;
+  }
+  .big-p {
+    font-size: 1.5em;
+  }
+  .form-prompt {
+    font-size: 1.75em;
+  }
+  .openplans-logo {
+    float: left;
+  }
+  .funding-p {
+    margin-left: 236px;
+    padding-left: 1.5em;
+    font-size: 1.25em;
+  }
+}
