@@ -1,0 +1,55 @@
+<header class="project-header" style="background-image:url({{ STATIC_URL }}images/pedestrians.jpg);">
+  <div class="container">
+    <h1 class="project-title">{{ title }}</h1>
+  </div>
+</header>
+
+<section class="project-details">
+  <div class="container">
+    <p class="project-status project-status-active"><strong>{{ status }}</strong></p>
+    <p class="project-location">{{ location }}</p>
+    <p class="project-description">{{ description }}</p>
+  </div>
+</section>
+
+<section class="project-timeline">
+  <div class="container">
+    <ol class="event-list unstyled-list">
+      <li class="event event-complete">
+        <h1 class="event-title">Event Title (January 4, 2015)</h1>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </li>
+      <li class="event event-active">
+        <h1 class="event-title">Winter 2015 Phase</h1>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </li>
+      <li class="event">
+        <h1 class="event-title">Another Event (April 2, 2015)</h1>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+      </li>
+      <li class="event">
+        <h1 class="event-title">Yet one more event for the list. This one's a long one. Friday, April 16, 2pm-5pm</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </li>
+      <li class="event">
+        <h1 class="event-title">Phase II, Summer 2015</h1>
+        <p>Excepteur sint occaecat cupidatat non proident.</p>
+      </li>
+      <li class="event">
+        <h1 class="event-title">Event Title</h1>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </li>
+      <li class="event">
+        <h1 class="event-title">Estimated Completion: October 31, 2015</h1>
+        <p></p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<footer class="project-colophon">
+  <div class="container">
+    <p class="project-contact-info">{{ contact }}</p>
+    <p class="powered-by">{{#_}}Powered by <a href="index.html">Planbox</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
+  </div>
+</footer>

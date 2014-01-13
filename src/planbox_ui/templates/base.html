@@ -27,6 +27,11 @@
 
   {% block styles %}{% endblock %}
 
+  {% if debug %}
+  <script src="{{ STATIC_URL }}bower_components/modernizr/modernizr.js"></script>
+  {% else %}
+  <script src="{{ STATIC_URL }}js/modernizr.min.js"></script>
+  {% endif %}
 </head>
 <body>
   {% block body %}{% endblock %}
