@@ -4,7 +4,7 @@
 
 /* Typography */
 body { 
-  background: #666;
+  background: #407280;
   color: #fff;
   font-family: 'Alegreya Sans', sans-serif;
   font-weight: 400;
@@ -20,7 +20,7 @@ h1,h2,h3,h4,h5,h6 {
   margin: 0 0 0.25em 0;
   line-height: 1.25;
   font-weight: 800;
-  text-shadow: 0 0 3px rgba(0,0,0,0.25);
+  text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
 }
 h1 { font-size: 2em; }
 h2 { font-size: 2em; }
@@ -30,8 +30,9 @@ h5 { font-size: 1.25em; }
 h6 { font-size: 1em; text-transform: uppercase; }
 
 a:hover, a:active { outline: none; }
-a, a:active, a:visited { color: LightBlue; }
-a:hover { color: #48a5bf; }
+a, a:active, a:visited { color: #48a5bf; }
+a:hover { color: #18758f; }
+
 p { margin: 0 0 1.2em; }
 ul, ol { margin-left: 1.8em; }
 ol { list-style-type: decimal; }
@@ -58,8 +59,8 @@ hr {
   border-left: 0;
 }
 .container hr {
-  margin-right: -10px;
-  margin-left: -10px;
+  margin-right: -1em;
+  margin-left: -1em;
 }
 .capitalize { text-transform: capitalize; }
 
@@ -76,10 +77,10 @@ img {
 .icon-muted {
   opacity: 0.75;
 }
-
 .illustration {
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 0.625em;
+  opacity: 0.625;
 }
 
 /* Buttons */
@@ -106,13 +107,6 @@ img {
   background-color: #48a5bf;
   color: #fff !important;
 }
-.btn-primary,
-.btn-primary:visited,
-.btn-primary:link {
-  background-color: #268099;
-  border-color: #48a5bf;
-  color: #fff;
-}
 .btn-block,
 .btn-block:visited,
 .btn-block:link {
@@ -135,15 +129,24 @@ img {
 }
 
 /* Forms */
-form {
+form {}
+form p {
+  position: relative;
 }
 label {
-/*  background: #a1cbcf;*/
-/*  float: left;*/
-/*  padding: 0.25em 1em 0 0.75em;*/
-/*  color: #fff;*/
-/*  font-size: 0.875em;*/
-/*  border-radius: 0.25em 0.625em 0 0;*/
+  background: #268099;
+  float: left;
+  padding: 0.25em 1em 0 0.75em;
+  color: #fff;
+  font-size: 0.875em;
+  border-radius: 0 0.75em 0 0;
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+}
+input:focus + label {
+  visibility: visible;
 }
 .input-block,
 textarea {
@@ -163,17 +166,6 @@ textarea:focus {
 textarea {
   height: 6.5em;
   resize: none;
-}
-
-/* Avatars */
-a.user-link {
-  float: left;
-  margin-right: 10px;
-}
-.avatar {
-  display: block;
-  width: 50px;
-  height: 50px;
 }
 
 
@@ -202,10 +194,12 @@ a.user-link {
 /* =Layout
 -------------------------------------------------------------- */
 
-html {}
-body {
+#page {
+  background-color: #eee;
+  color: #666;
 }
 .container {
+  position: relative;
   max-width: 44em;
   padding: 1em;
   margin: 0 auto;
@@ -213,49 +207,74 @@ body {
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
 }
-.main {
-  background: #eee url(images/workers.jpg) center center repeat;
-  background-size: cover;
-  color: #666;
-  padding: 1em 0;
-}
-.main h1,.main h2,.main h3,.main h4,.main h5,.main h6,
-.secondary h1,.secondary h2,.secondary h3,.secondary h4,.secondary h5,.secondary h6 {
-  text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
-}
-.main a, .secondary a { color: #48a5bf; }
-.main a:hover, .secondary a:hover { color: #18758f; }
-
-.secondary {
-  background: #ddd;
-  color: #666;
-  padding: 1em 0;
-}
-.tertiary {
-  background: #eee;
-  color: #666;
-  padding: 1em 0;
-}
 
 
-/* =Site/Project Header
+/* =Site Header
 -------------------------------------------------------------- */
 
-.site-header,
-.project-header {
+.site-header {
   background: #268099;
   color: #fff;
-  padding: 1em 0;
+  padding: 2em 0 0;
   background-position: center center;
   background-repeat: repeat;
   background-size: cover;
 }
-.site-title,
-.project-title {
+.site-title {
   font-weight: 800;
   margin-bottom: 0;
+  text-shadow: 0 0 3px rgba(0,0,0,0.25);
 }
-.site-logo {
+.site-description {
+  font-size: 1.5em;
+  font-weight: 400;
+  text-shadow: 0 0 3px rgba(0,0,0,0.25);
+}
+a.login-link {
+  float: right;
+  position: absolute;
+  top: -0.875em;
+  right: 1.25em;
+  padding: 0.125em 0.75em 0 0.625em ;
+  height: 1.75em;
+  font-size: 0.875em;
+  font-weight: 800;
+  line-height: 1.75em;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-color: LightBlue;
+  border-radius: 0.25em;
+}
+a.login-link:before {
+  content: '';
+  float: left;
+  position: relative;
+  top: 0.75em;
+  width: 1em;
+  height: 0.625em;
+  margin: 0 0.5em 0 0;
+  background: #48a5bf;
+  border-radius: 1em 1em 0 0;
+}
+a.login-link:after {
+  content: '';
+  float: left;
+  position: absolute;
+  top: 0.25em;
+  left: 0.75em;
+  width: 0.75em;
+  height: 0.75em;
+  margin: 0 0.375em 0 0;
+  background: Tan;
+  border-radius: 1em;
+  
+}
+
+
+/* =Product
+-------------------------------------------------------------- */
+
+.product-logo {
   font-size: 1.375em;
   text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125);
   font-weight: 100;
@@ -285,17 +304,27 @@ body {
   100%   { text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125); }
 }
 
-.site-description {
-  font-weight: 400;
-}
-
 .product-details {
-/*  font-weight: 100;*/
+  background: #eee url(../images/workers.jpg) center center repeat;
+  background-size: cover;
+  color: #666;
+  padding: 1em 0;
+}
+.call-to-action {
   background: #eee;
-  background: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.8);
   color: #444;
   padding: 1em;
   border-radius: 0.25em;
+}
+.product-pitch {
+  padding-top: 1em;
+}
+.product-pitch h4 {
+  margin-bottom: 1em;
+}
+.product-pitch p {
+  font-size: 1.25em;
 }
 
 
@@ -386,27 +415,17 @@ li.event {
 /* =Colophon
 -------------------------------------------------------------- */
 
-.project-colophon,
 .site-colophon {
   padding-top: 1em;
-  background: #666;
-  color: #ddd;
-  font-weight: 800;
-}
-.site-colophon {
   background: #407280;
+  color: #ddd;
 }
-.project-colophon a, .project-colophon a:active, .project-colophon a:visited,
 .site-colophon a, .site-colophon a:active, .site-colophon a:visited {
   color: #fff;
   text-decoration: none;
 }
-.project-colophon a:hover,
 .site-colophon a:hover {
   text-decoration: underline;
-}
-.project-contact-info {
-  font-size: 1.375em;
 }
 .powered-by {
   text-align: right;
@@ -419,10 +438,11 @@ li.event {
   font-weight: 400;
 }
 .openplans-logo {
-  width: 236px;
+  width: 150px;
   height: auto;
   margin: 0 0.5em 0.5em 0;
 }
+
 
 /* =Admin
 -------------------------------------------------------------- */
@@ -520,16 +540,12 @@ li.sortable-placeholder {
 -------------------------------------------------------------- */
 
 @media only screen and (min-width: 22em) {
-  .site-header,
-  .project-header {
-    padding-top: 2em;
+  .site-title {
+    font-size: 2.5em;
   }
-  .site-title,
-  .project-title {
-    font-size: 3em;
-  }
-  .product-details {
-    font-size: 1.25em;
+  .site-title a {
+    text-decoration: none;
+    color: #fff;
   }
   .project-status {
     position: absolute;
@@ -540,48 +556,45 @@ li.sortable-placeholder {
     margin: 0;
   }
   .project-status strong {
-    font-size: 1.375em;
+/*    font-size: 1.375em;*/
   }
   .project-location {
-    font-size: 1.5em;
+/*    font-size: 1.5em;*/
   }
   .project-colophon {
     padding-top: 2em;
     padding-bottom: 1em;
   }
-  .big-p {
-    font-size: 1.25em;
-  }
   .illustration {
     float: left;
     margin: 0 1em 0.5em 0;
-    opacity: 0.625;
-  }
-  .form-prompt {
-    font-size: 1.5em;
   }
 }
 
 @media only screen and (min-width: 44em) {
+  #page {
+    font-size: 1.25em;
+  }
+  .container {
+    max-width: 36em;
+  }
   .project-header {
     padding-top: 5em;
   }
   .site-header {
     padding-top: 3em;
+    padding-bottom: 1em;
   }
   .site-title,
   .project-title {
-    font-size: 4em;
-  }
-  .product-details {
-    font-size: 1.5em;
+/*    font-size: 4em;*/
   }
   .project-status strong {
-    font-size: 1.625em;
+/*    font-size: 1.625em;*/
     padding: 0 0.25em;
   }
   .project-location {
-    font-size: 1.875em;
+/*    font-size: 1.875em;*/
   }
   .project-colophon {
     padding-top: 3em;
@@ -624,19 +637,14 @@ li.sortable-placeholder {
   }
   .interest-form p.submit .btn-block {
     border-radius: 0 0.25em 0.25em 0;
-  }
-  .big-p {
-    font-size: 1.5em;
-  }
-  .form-prompt {
-    font-size: 1.75em;
+    margin-bottom: 0;
   }
   .openplans-logo {
     float: left;
   }
-  .funding-p {
-    margin-left: 236px;
+  .funding-info {
+    margin-left: 150px;
+    padding-top: 0.25em;
     padding-left: 1.5em;
-    font-size: 1.25em;
   }
 }

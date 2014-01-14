@@ -1,0 +1,17 @@
+{% extends 'product-base.html' %}
+
+{% block main %}
+
+<section class="main">
+  <div class="container">
+    <p style="float:right;"><small><a href="/password-reset">Lost your password?</a></small></p>
+    <h3>Sign In</h3>
+    <form>
+      <p><input required type="text" name="my-username" class="input-block" placeholder="Username" pattern="[A-Za-z0-9-_]{1,30}" max="30" tabindex="1"> <label for="my-username"><strong>Username</strong></label></p>
+      <p><input required type="password" name="my-password" class="input-block" placeholder="Password" max="30" tabindex="2"><label for="my-password"><strong>Password</strong></label></p>
+      <p><input type="submit" value="Sign In" class="btn btn-large" tabindex="3"></p>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Plan In A Box
+{% endblock %}
+
+{% block meta_description %}
+One-click Planning Project Promotion
+{% endblock %}
+
+{% block styles %}
+  {% if debug %}
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/normalize-css/normalize.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" type="text/css" media="screen, projection" />
+  {% else %}
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/dist/style.min.css" type="text/css" media="screen, projection" />
+  {% endif %}
+{% endblock %}
+
+{% block page %}
+
+<header class="site-header">
+  <div class="container">
+    <h1 class="site-title"><a href="/"><span class="product-logo">&#9649;</span>&nbsp;Plan In A Box</a></h1>
+    <h2 class="site-description">One-click Promotion for Street Improvement Projects</h2>
+    <a href="/signin" class="login-link nobreak">Sign In</a>
+  </div>
+</header>
+
+{% block main %}{% endblock %}
+
+<footer class="site-colophon">
+  <div class="container">
+    <a href="http://openplans.org/"><img src="{{ STATIC_URL }}images/OpenPlans-logo-whitetxt.png" class="openplans-logo"></a>
+    <p class="funding-info"><small>Plan In A Box is a product of <a href="http://openplans.org/">OpenPlans</a>, with support from <a href="http://www.knightfoundation.org/">Knight Foundation</a>.</small></p>
+  </div>
+</footer>
+
+{% endblock %}

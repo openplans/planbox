@@ -1,57 +1,30 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>planbox</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css styles/vendor.css -->
-        <!-- bower:css -->
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
-    </head>
-    <body>
-        <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+{% extends 'product-base.html' %}
 
+{% block main %}
 
-        <div class="hero-unit">
-          <h1>'Allo, 'Allo!</h1>
-          <p>You now have</p>
-          <ul>
-            <li>HTML5 Boilerplate</li>
+<section class="product-details">
+  <div class="container">
+    <div class="call-to-action">
+      <h3>"What's going on here?" <small style="white-space:nowrap;">&ndash; Citizens</small></h3>
+      <p>Plan In A Box gets information about projects out into the world, making it easier for people to discover projects, stay engaged, and be more informed participants.</p>
+      <form class="interest-form clearfix">
+        <p class="email"><input type="text" class="input-block" placeholder="email@example.org"></p>
+        <p class="submit"><a href="/signup" class="btn btn-block">Sign up!</a></p>
+      </form>
+    </div>
+  </div>
+</section>
 
-          </ul>
-        </div>
+<section class="">
+  <div class="container">
+    <div class="product-pitch">
+      <h4>Keep Communities Informed and Engaged</h4>
+      <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/search.png">Information about proposed street changes is often hard for residents to find and track.</p>
+      <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/stopwatch.png">Sharing timely, helpful information is challenging for busy planners.</p>
+      <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/headache.png">Being uninformed leads to frustration and unsatisfactory experiences, even for great projects. And unhappy people slow down the public process for everyone.</p>
+      <p class=""><strong>Plan In A Box is an web tool that helps planners create and share information about projects, so neighbors can stay informed about proposed changes. You can use Plan In A Box to create engaging, informative web information to reach people and provide useful updates.</strong></p>
+    </div>
+  </div>
+</section>
 
-
-        <!-- build:js scripts/vendor.js -->
-        <!-- bower:js -->
-        <script src="bower_components/jquery/jquery.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X');ga('send','pageview');
-        </script>
-
-        <!-- build:js scripts/main.js -->
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
-</body>
-</html>
+{% endblock %}
