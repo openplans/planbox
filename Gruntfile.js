@@ -297,6 +297,7 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/underscore/underscore.js',
             '<%= yeoman.app %>/bower_components/backbone/backbone.js',
             '<%= yeoman.app %>/bower_components/backbone.marionette/lib/backbone.marionette.js',
+            '<%= yeoman.app %>/bower_components/backbone-relational/backbone-relational.js',
             '<%= yeoman.app %>/bower_components/moment/moment.js',
             '<%= yeoman.app %>/bower_components/spin.js/spin.js'
           ],

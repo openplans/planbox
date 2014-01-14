@@ -29,6 +29,7 @@ All about the Main Street Pedestrian Improvements
   <script src="{{ STATIC_URL }}bower_components/underscore/underscore.js"></script>
   <script src="{{ STATIC_URL }}bower_components/backbone/backbone.js"></script>
   <script src="{{ STATIC_URL }}bower_components/backbone.marionette/lib/backbone.marionette.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/backbone-relational/backbone-relational.js"></script>
   <script src="{{ STATIC_URL }}bower_components/moment/moment.js"></script>
   <script src="{{ STATIC_URL }}bower_components/spin.js/spin.js"></script>
   <!-- <script src="html5sortable/jquery.sortable.js"></script> -->
@@ -43,12 +44,27 @@ All about the Main Street Pedestrian Improvements
           location: 'Marcus Hook, PA',
           status: 'active',
           description: 'The Marcus Hook Streetscape Improvement Project looks to improve the appearance of SR 13 (Post Road / 10th Street) and SR 452 (Market Street), improve pedestrian and bicycle traffic, rescale the highway to suit the current conditions for which the highway is used and connect the Borough to the larger East Coast Greenway.',
-          contact: 'DVRPC, 190 N. Independence Mall West, 8th Floor, Philadelphia, PA 19106-1520 215.592.1800'
+          contact: 'DVRPC, 190 N. Independence Mall West, 8th Floor, Philadelphia, PA 19106-1520 215.592.1800',
+          events: [
+            { label: 'Project Kick-Off Meeting' },
+            { label: 'Scoping Field Review' },
+            { label: 'Safety Review Submission' },
+            { label: 'Traffic Unit Submission' },
+            { label: 'ADA Submission' },
+            { label: 'Lighting Unit Submission' },
+            { label: 'Utility Unit Submission' },
+            { label: 'Right-of-Way Unit Submission' },
+            { label: 'Construction Unit Submission' },
+            { label: 'Pre PS&E Design Review' },
+            { label: 'Contract Management Unit' },
+            { label: 'Bridge Unit Submission' }
+          ]
         }
       }
     };
   </script>
 
+  <script src="{{ STATIC_URL }}scripts/models.js"></script>
   <script src="{{ STATIC_URL }}scripts/views.js"></script>
   <script src="{{ STATIC_URL }}scripts/app.js"></script>
   {% else %}

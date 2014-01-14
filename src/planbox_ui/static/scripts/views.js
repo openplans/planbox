@@ -10,8 +10,17 @@ var Planbox = Planbox || {};
     return Handlebars.compile(rawTemplate);
   };
 
-  NS.ProjectView = Backbone.Marionette.ItemView.extend({
-    template: '#project-tpl'
+  NS.EventView = Backbone.Marionette.ItemView.extend({
+    template: '#event-tpl',
+    tagName: 'li',
+    className: 'event'
   });
+
+  NS.ProjectView = Backbone.Marionette.CompositeView.extend({
+    template: '#project-tpl',
+    itemView: NS.EventView,
+    itemViewContainer: '.event-list'
+  });
+
 
 }(Planbox, jQuery));

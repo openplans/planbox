@@ -13,10 +13,11 @@ var Planbox = Planbox || {};
   });
 
   NS.app.addInitializer(function(options){
-    var projectModel = new Backbone.Model(NS.Data.project);
+    var projectModel = new NS.ProjectModel(NS.Data.project);
 
     NS.app.mainRegion.show(new NS.ProjectView({
-      model: projectModel
+      model: projectModel,
+      collection: projectModel.get('events')
     }));
   });
 
