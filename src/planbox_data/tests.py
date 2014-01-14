@@ -1,12 +1,12 @@
 from django.test import TestCase
-from nose.tools import assert_equal
+from nose.tools import assert_equal, assert_in, ok_
 from django_nose.tools import assert_num_queries
 
 from django.contrib.auth.models import User as AuthUser
 from planbox_data.models import User, Project, Event
+from planbox_data.serializers import ProjectSerializer
 
-
-class UserTests (TestCase):
+class UserModelTests (TestCase):
     def tear_down(self):
         AuthUser.objects.all().delete()
         User.objects.all().delete()
@@ -29,7 +29,7 @@ class UserTests (TestCase):
         assert_equal(user_strings, ['mjumbewu', 'atogle'])
 
 
-class EventTests (TestCase):
+class EventModelTests (TestCase):
     def tear_down(self):
         AuthUser.objects.all().delete()
         User.objects.all().delete()
@@ -62,3 +62,61 @@ class EventTests (TestCase):
         Event.objects.create(label='test unrelated label', project=unrelated_project)
         event_4 = Event.objects.create(label='test label 4', project_id=project.pk)
         assert_equal(event_4.index, 4)
+
+
+class ProjectSerializerTests (TestCase):
+    def tear_down(self):
+        AuthUser.objects.all().delete()
+        User.objects.all().delete()
+        Project.objects.all().delete()
+        Event.objects.all().delete()
+
+    def test_events_are_nested_in_data(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        user = User.objects.create(auth=auth)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=user)
+        events = [
+            Event.objects.create(label='test label 1', project=project),
+            Event.objects.create(label='test label 2', project=project),
+            Event.objects.create(label='test label 3', project=project),
+        ]
+
+        serializer = ProjectSerializer(project)
+        data = serializer.data
+
+        assert_in('events', data)
+        assert_equal(len(data['events']), 3)
+        assert_equal([int(e['label'].split()[-1]) for e in data['events']], [1, 2, 3])
+
+    def test_events_are_loaded_from_nested_data(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        user = User.objects.create(auth=auth)
+
+        serializer = ProjectSerializer(data={
+            'slug': 'test-slug',
+            'title': 'test title',
+            'location': 'test location',
+            'description': 'test description',
+            'events': [
+                {'label': 'test label 1'},
+                {'label': 'test label 2'},
+                {'label': 'test label 3'}
+            ],
+            'owner_type': 'user',
+            'owner_id': user.pk
+        })
+
+        ok_(serializer.is_valid(), serializer.errors)
+        project = serializer.save()
+        assert_equal([int(e.label.split()[-1]) for e in project.events.all()], [1, 2, 3])
+
+    def test_invalid_project_does_not_raise_exception(self):
+        serializer = ProjectSerializer(data={
+            'events': [
+                {'label': 'test label 1'},
+                {'label': 'test label 2'},
+                {'label': 'test label 3'}
+            ],
+        })
+
+        ok_(not serializer.is_valid())
