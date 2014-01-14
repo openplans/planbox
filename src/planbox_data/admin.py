@@ -12,10 +12,20 @@ class OrganizationAdmin (admin.ModelAdmin):
     pass
 
 
+class EventInline (admin.TabularInline):
+    model = Event
+    extra = 2
+    readonly_fields = ('index',)
+
+
 class ProjectAdmin (GenericAdminModelAdmin):
     list_display = ('__unicode__', 'owner', 'slug', 'status')
     list_filter = ('status',)
     prepopulated_fields = {"slug": ("title",)}
+
+    inlines = (
+        EventInline,
+    )
 
 
 admin.site.register(User, UserAdmin)
