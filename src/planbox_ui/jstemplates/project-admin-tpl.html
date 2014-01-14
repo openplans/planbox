@@ -1,0 +1,38 @@
+<div class="admin-bar">Signed in as <a href="#"><strong>Username</strong></a>. <a href="#" class="logout">Sign Out</a></div>
+
+<header class="project-header logged-in" style="background-image:url({{ STATIC_URL }}images/pedestrians.jpg);">
+  <div class="container">
+    <h1 class="project-title content-editable" data-attr="title" contenteditable>{{ title }}</h1>
+  </div>
+</header>
+
+<section class="project-details">
+  <div class="container">
+    <p class="project-status project-status-active content-editable">
+      <strong>{{ status }}</strong>
+      <select class="status-selector" data-attr="status">
+        <option value="not-started">Not Started</option>
+        <option value="active" selected="selected">Active</option>
+        <option value="complete">Complete</option>
+      </select>
+    </p>
+    <p class="project-location content-editable" data-attr="location" contenteditable>{{ location }}</p>
+    <p class="project-description content-editable" data-attr="description" contenteditable>{{ description }}</p>
+  </div>
+</section>
+
+<section class="project-timeline">
+  <div class="container">
+    <ol class="event-list unstyled-list"></ol>
+    <a href="#" class="btn btn-small add-event-btn">Add Event</a>
+  </div>
+</section>
+
+<div class="save-bar is-hidden"><div class="container"><a href="#" class="save-btn btn btn-block btn-large">Save Project</a></div></div>
+
+<footer class="project-colophon">
+  <div class="container">
+    <p class="project-contact-info content-editable" data-attr="contact" contenteditable>{{ contact }}</p>
+    <p class="powered-by">{{#_}}Powered by <a href="index.html">Planbox</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
+  </div>
+</footer>

@@ -15,7 +15,7 @@ var Planbox = Planbox || {};
   NS.app.addInitializer(function(options){
     var projectModel = new NS.ProjectModel(NS.Data.project);
 
-    NS.app.mainRegion.show(new NS.ProjectView({
+    NS.app.mainRegion.show(new NS.ProjectAdminView({
       model: projectModel,
       collection: projectModel.get('events')
     }));
