@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% load jstemplate %}
 
+
 {% block title %}
 Main Street Pedestrian Improvements
 {% endblock %}
+
 
 {% block meta_description %}
 All about the Main Street Pedestrian Improvements
@@ -19,6 +21,7 @@ All about the Main Street Pedestrian Improvements
   {% endif %}
 {% endblock %}
 
+
 {% block scripts %}
   {% if debug %}
   <script src="{{ STATIC_URL }}bower_components/jquery/jquery.js"></script>
@@ -33,8 +36,8 @@ All about the Main Street Pedestrian Improvements
   <script>
     // Test data!
     var Planbox = {
-      projects: [
-        {
+      Data: {
+        project: {
           slug: 'marcus-hook-streetscape',
           title: 'Marcus Hook Streetscape',
           location: 'Marcus Hook, PA',
@@ -42,12 +45,11 @@ All about the Main Street Pedestrian Improvements
           description: 'The Marcus Hook Streetscape Improvement Project looks to improve the appearance of SR 13 (Post Road / 10th Street) and SR 452 (Market Street), improve pedestrian and bicycle traffic, rescale the highway to suit the current conditions for which the highway is used and connect the Borough to the larger East Coast Greenway.',
           contact: 'DVRPC, 190 N. Independence Mall West, 8th Floor, Philadelphia, PA 19106-1520 215.592.1800'
         }
-      ]
+      }
     };
   </script>
 
   <script src="{{ STATIC_URL }}scripts/views.js"></script>
-  <script src="{{ STATIC_URL }}scripts/controller.js"></script>
   <script src="{{ STATIC_URL }}scripts/app.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/dist/components.min.js"></script>
