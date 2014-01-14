@@ -24,7 +24,7 @@ class UserTests (TestCase):
 
         with assert_num_queries(1):
             users = User.objects.all()
-            user_strings = [unicode(u) for u in users]
+            user_strings = [str(u) for u in users]
 
         assert_equal(user_strings, ['mjumbewu', 'atogle'])
 
