@@ -144,9 +144,19 @@ label {
   position: absolute;
   left: 0;
   bottom: 100%;
+  opacity: 0.25;
+  line-height: 1.5em;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: height 0.1s ease, opacity 0.5s ease;
+     -moz-transition: height 0.1s ease, opacity 0.5s ease;
+       -o-transition: height 0.1s ease, opacity 0.5s ease;
+          transition: height 0.1s ease, opacity 0.5s ease;
 }
 input:focus + label {
   visibility: visible;
+  opacity: 1;
+  height: 1.5em;
 }
 .input-block,
 textarea {
