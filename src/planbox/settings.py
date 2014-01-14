@@ -40,6 +40,7 @@ INSTALLED_APPS = (
 
     'jstemplate',
     'south',
+    'genericadmin',
 
     'planbox_ui',
     'planbox_data',

@@ -41,3 +41,4 @@ env/
 .env/
 env?/
 node_modules/
+db.sqlite3
