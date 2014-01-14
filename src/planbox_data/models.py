@@ -26,6 +26,7 @@ class Project (models.Model):
     status = models.CharField(help_text=_("A string representing the project's status"), choices=STATUS_CHOICES, default='not-started', max_length=32)
     location = models.CharField(help_text=_("The general location of the project, e.g. \"Philadelphia, PA\", \"Clifton Heights, Louisville, KY\", \"4th St. Corridor, Brooklyn, NY\", etc."), max_length=256, default='')
     description = models.TextField(help_text=_("An introductory description of the project"), default='')
+    contact = models.TextField(help_text=_("The contact information for the project"), default='')
 
     # An owner can be either a user or an organization
     owner_type = models.ForeignKey(ContentType, limit_choices_to=OWNER_MODEL_CHOICES)
