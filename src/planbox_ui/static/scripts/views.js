@@ -25,37 +25,7 @@ var Planbox = Planbox || {};
 
 
   // Admin ====================================================================
-  NS.EventAdminView = Backbone.Marionette.ItemView.extend({
-    template: '#event-admin-tpl',
-    tagName: 'li',
-    className: 'event draggable'
-  });
-
-  NS.ProjectAdminView = Backbone.Marionette.CompositeView.extend({
-    template: '#project-admin-tpl',
-    itemView: NS.EventAdminView,
-    itemViewContainer: '.event-list',
-    ui: {
-      saveBar: '.save-bar',
-      saveBtn: '.save-btn',
-      editables: '[contenteditable]:not(.event [contenteditable])',
-      statusSelector: '.status-selector',
-      statusLabel: '.project-status'
-    },
-    events: {
-      'blur @ui.editables': 'handleEditableBlur',
-      'change @ui.statusSelector': 'handleStatusChange',
-      'click @ui.saveBtn': 'handleSave'
-
-    },
-    modelEvents: {
-      'change': 'dataChanged'
-    },
-    collectionEvents: {
-      'change': 'dataChanged',
-      'add':    'dataChanged',
-      'remove': 'dataChanged'
-    },
+  NS.ContentEditableMixin = {
     handleEditableBlur: function(evt) {
       var $target = $(evt.target),
           attr = $target.attr('data-attr'),
@@ -66,7 +36,58 @@ var Planbox = Planbox || {};
       // Set the value of what was just blurred. Setting an event to the same
       // value does not trigger a change event.
       this.model.set(attr, val);
+    }
+  };
+
+  NS.EventAdminView = Backbone.Marionette.ItemView.extend({
+    template: '#event-admin-tpl',
+    tagName: 'li',
+    className: 'event draggable',
+    ui: {
+      editables: '[contenteditable]',
+      deleteBtn: '.delete'
     },
+    events: {
+      'blur @ui.editables': 'handleEditableBlur',
+      'click @ui.deleteBtn': 'handleDeleteClick'
+    },
+    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
+    handleDeleteClick: function(evt) {
+      evt.preventDefault();
+
+      if (window.confirm('Really delete "'+this.model.get('label')+'"?')) {
+        this.model.destroy();
+      }
+    }
+  });
+
+  NS.ProjectAdminView = Backbone.Marionette.CompositeView.extend({
+    template: '#project-admin-tpl',
+    itemView: NS.EventAdminView,
+    itemViewContainer: '.event-list',
+    ui: {
+      editables: '[contenteditable]:not(.event [contenteditable])',
+      saveBar: '.save-bar',
+      saveBtn: '.save-btn',
+      statusSelector: '.status-selector',
+      statusLabel: '.project-status',
+      addBtn: '.add-event-btn'
+    },
+    events: {
+      'blur @ui.editables': 'handleEditableBlur',
+      'change @ui.statusSelector': 'handleStatusChange',
+      'click @ui.saveBtn': 'handleSave',
+      'click @ui.addBtn': 'handleAddClick'
+    },
+    modelEvents: {
+      'change': 'dataChanged'
+    },
+    collectionEvents: {
+      'change': 'dataChanged',
+      'add':    'dataChanged',
+      'remove': 'dataChanged'
+    },
+    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
     handleStatusChange: function(evt) {
       var $target = $(evt.target),
           attr = $target.attr('data-attr'),
@@ -85,6 +106,13 @@ var Planbox = Planbox || {};
       evt.preventDefault();
       this.model.save();
       this.ui.saveBar.addClass('is-hidden');
+    },
+    handleAddClick: function(evt) {
+      evt.preventDefault();
+
+      this.collection.add({});
+
+      this.$('.event-title.content-editable').focus();
     },
     dataChanged: function() {
       // Show the save button
