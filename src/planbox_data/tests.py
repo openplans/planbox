@@ -88,7 +88,7 @@ class ProjectSerializerTests (TestCase):
         assert_equal(len(data['events']), 3)
         assert_equal([int(e['label'].split()[-1]) for e in data['events']], [1, 2, 3])
 
-    def test_events_are_loaded_from_nested_data(self):
+    def test_events_are_created_from_nested_data(self):
         auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
         user = User.objects.create(auth=auth)
 
@@ -109,6 +109,38 @@ class ProjectSerializerTests (TestCase):
         ok_(serializer.is_valid(), serializer.errors)
         project = serializer.save()
         assert_equal([int(e.label.split()[-1]) for e in project.events.all()], [1, 2, 3])
+
+    def test_events_are_updated_from_nested_data(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        user = User.objects.create(auth=auth)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=user)
+        events = [
+            Event.objects.create(label='test label 1', project=project),
+            Event.objects.create(label='test label 3', project=project),
+        ]
+
+        serializer = ProjectSerializer(project, data={
+            'id': project.pk,
+            'slug': 'test-slug',
+            'title': 'test new title',
+            'location': 'test location',
+            'description': 'test description',
+            'events': [
+                {'label': 'test label 3', 'id': events[1].pk},
+                {'label': 'test label 2'},
+                {'label': 'test label 1', 'id': events[0].pk}
+            ],
+            'owner_type': 'user',
+            'owner_id': user.pk
+        })
+
+        ok_(serializer.is_valid(), serializer.errors)
+        new_project = serializer.save()
+        assert_equal(project.pk, new_project.pk)
+        assert_equal(new_project.title, 'test new title')
+        assert_equal([int(e.label.split()[-1]) for e in project.events.all()], [3, 2, 1])
+        assert_equal(project.events.all()[0].pk, events[1].pk)
+        assert_equal(project.events.all()[2].pk, events[0].pk)
 
     def test_invalid_project_does_not_raise_exception(self):
         serializer = ProjectSerializer(data={

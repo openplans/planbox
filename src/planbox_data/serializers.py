@@ -8,27 +8,19 @@ class EventSerializer (serializers.ModelSerializer):
         model = models.Event
         exclude = ('project', 'index')
 
+    def field_from_native(self, data, files, field_name, into):
+        super(EventSerializer, self).field_from_native(data, files, field_name, into)
+
+        # If this is being used as a field, respect the order of the items.
+        # Renumber the index values to reflect the incoming order.
+        if self.many and field_name in into:
+            for index, event in enumerate(into[field_name]):
+                event.index = index
+
 
 class ProjectSerializer (serializers.ModelSerializer):
-    events = EventSerializer(many=True)
+    events = EventSerializer(many=True, allow_add_remove=True)
     owner_type = serializers.SlugRelatedField(slug_field='model', queryset=ContentType.objects.filter(models.Project.OWNER_MODEL_CHOICES))
 
     class Meta:
         model = models.Project
-
-    def from_native(self, data, files):
-        project = super(ProjectSerializer, self).from_native(data, files)
-
-        if data and project:
-            events_data = data.get('events', [])
-            events_serializer = EventSerializer(data=events_data, many=True)
-
-            if not events_serializer.is_valid():
-                raise serializers.ValidationError({'events': events_serializer.errors})
-
-            events = events_serializer.object
-            for index, event in enumerate(events):
-                event.project = project
-                event.index = index
-
-        return project
