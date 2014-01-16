@@ -472,10 +472,10 @@ li.event {
 .event-title {
   text-shadow: 0 0 3px rgba(0,0,0,0.25);
   position: relative;
-  float: left;
+/*  float: left;*/
 }
 .event-description {
-  clear: left;
+/*  clear: left;*/
   position: relative;
 }
 
