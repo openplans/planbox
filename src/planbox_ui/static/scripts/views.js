@@ -45,7 +45,7 @@ var Planbox = Planbox || {};
     className: 'event draggable',
     ui: {
       editables: '[contenteditable]',
-      deleteBtn: '.delete'
+      deleteBtn: '.delete-event-btn'
     },
     events: {
       'blur @ui.editables': 'handleEditableBlur',

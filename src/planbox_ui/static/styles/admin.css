@@ -1,0 +1,193 @@
+
+/* =Admin Bar
+-------------------------------------------------------------- */
+
+.admin-bar {
+  background: #444;
+  color: #eee;
+  padding: 0.75em 1em;
+  box-shadow: 0 0.375em 0.5em rgba(0,0,0,0.25);
+  position: relative;
+  z-index: 9999;
+}
+.admin-bar a {}
+
+/* Project Visibility */
+.project-visibility-form {
+  clear: none;
+  display: inline;
+}
+
+/* User Navigation */
+.user-nav {
+  float: right;
+  position: relative;
+}
+.user-menu-link {
+  font-size: 0.875em;
+  margin: 0.5em 0 0 1em;
+}
+.user-menu-link:hover {
+  color: #fff;
+}
+.user-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #18758f;
+  padding: 2px;
+  box-shadow: 0 0.5em 0.5em rgba(0,0,0,0.25);
+}
+.user-menu:before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  right: 2em;
+  width: 0;
+  height: 0;
+  border: 8px solid #18758f;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-left-color: transparent;
+}
+.user-menu:after {
+  content: "";
+  position: absolute;
+  top: -12px;
+  right: 2em;
+  width: 0;
+  height: 0;
+  border: 8px solid #48a5bf;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-left-color: transparent;
+}
+.user-menu li {
+  border-top: 2px solid #18758f;
+}
+.user-menu li:first-child {
+  border-top: 0;
+}
+.user-menu a {
+  display: block;
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  line-height: 2;
+  padding: 0 1em;
+  background: #48a5bf;
+  color: #eee;
+}
+.user-menu a:hover {
+  color: #fff;
+}
+.save-btn {
+  float: left;
+  margin: 0 1em 0 0;
+}
+
+
+/* =ContentEditable States
+-------------------------------------------------------------- */
+
+.content-editable {
+  box-shadow: 0 0 0 0.25em transparent;
+  -webkit-transition: all 0.3s ease;
+     -moz-transition: all 0.3s ease;
+       -o-transition: all 0.3s ease;
+          transition: all 0.3s ease;
+}
+.content-editable:hover {
+  background-color: #00B4E6;
+  box-shadow: 0 0 0 0.25em #00B4E6;
+  color: #fff;
+  text-shadow: none;
+}
+.content-editable:focus {
+  outline: 0;
+  box-shadow: -0.25em -0.25em #fff, 0.25em -0.25em #fff, -0.25em 0.25em #fff, 0.25em 0.25em #fff, 
+              -0.35em -0.35em #00B4E6, 0.35em -0.35em #00B4E6, -0.35em 0.35em #00B4E6, 0.35em 0.35em #00B4E6;
+  background-color: #fff;
+  color: #666;
+  text-shadow: none;
+}
+
+
+/* =Events Controls
+-------------------------------------------------------------- */
+
+.draggable {
+  padding-right: 3em;
+}
+.handle {
+	cursor: move;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 2.5em;
+	line-height: 1;
+	width: 1em;
+	height: 1em;
+	text-align: center;
+	color: #777;
+}
+.handle:hover {
+	color: #fff;
+}
+li.sortable-placeholder {
+	border: 1px dashed #fff;
+	background: none;
+	padding: 4em 0;
+}
+
+.add-event-btn {
+  position: relative;
+  left: -0.5em;
+}
+
+.delete-event-btn {
+  position: relative;
+  top: -1.5em;
+}
+.delete-icon {}
+
+
+
+.status-selector {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 0;
+  opacity: 0;
+  -webkit-appearance: none;
+}
+.status-selector {
+  cursor: pointer;
+}
+
+
+/* =Media Queries for Responsive Layout
+-------------------------------------------------------------- */
+
+@media only screen and (min-width: 44em) {
+  .project-status strong {
+    padding: 0 0.25em;
+  }
+  .project-colophon {
+    padding-top: 3em;
+    padding-bottom: 2em;
+  }
+  .site-header {
+    padding-top: 6em;
+  }
+  .admin-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
+  }
+}

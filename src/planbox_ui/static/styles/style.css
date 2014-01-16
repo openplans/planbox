@@ -125,7 +125,66 @@ img {
   padding: 0.75em 1em 0.5em;
 }
 .btn-small {
-  font-size: 0.85em;
+  font-size: 0.875em;
+}
+.btn-mini {
+  font-size: x-small;
+  font-weight: 400;
+}
+.btn-secondary,
+.btn-secondary:visited,
+.btn-secondary:link {
+  background-color: #E65CA1;
+  border: 0.25em solid #FF66B3;
+}
+.btn-secondary:hover {
+  background-color: #FF66B3;
+}
+.btn-disabled,
+.btn-disabled:visited,
+.btn-disabled:link {
+  background-color: Gray;
+  background-color: rgba(125,125,125,0.25);
+  border-color: DarkGray;
+  border-color: rgba(125,125,125,0.25);
+  color: DarkGray !important;
+  color: rgba(125,125,125,0.25) !important;
+  cursor: default;
+}
+
+/* User Link Icon */
+a.user-link {
+  position: relative;
+  height: 1.75em;
+  line-height: 1.75em;
+  padding: 0.125em 0.75em 0 0.625em ;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: block;
+}
+a.user-link:before {
+  content: '';
+  float: left;
+  position: relative;
+  top: 0.75em;
+  width: 1em;
+  height: 0.625em;
+  margin: 0 0.5em 0 0;
+  background: #48a5bf;
+  border-radius: 1em 1em 0 0;
+}
+a.user-link:after {
+  content: '';
+  float: left;
+  position: absolute;
+  top: 0.25em;
+  left: 0.75em;
+  width: 0.75em;
+  height: 0.75em;
+  margin: 0 0.375em 0 0;
+  background: Tan;
+  border-radius: 1em;
+  
 }
 
 /* Forms */
@@ -242,44 +301,16 @@ textarea {
   font-weight: 400;
   text-shadow: 0 0 3px rgba(0,0,0,0.25);
 }
+
 a.login-link {
   float: right;
   position: absolute;
   top: -0.875em;
   right: 1.25em;
-  padding: 0.125em 0.75em 0 0.625em ;
-  height: 1.75em;
   font-size: 0.875em;
   font-weight: 800;
-  line-height: 1.75em;
-  text-decoration: none;
-  text-transform: uppercase;
   background-color: LightBlue;
   border-radius: 0.25em;
-}
-a.login-link:before {
-  content: '';
-  float: left;
-  position: relative;
-  top: 0.75em;
-  width: 1em;
-  height: 0.625em;
-  margin: 0 0.5em 0 0;
-  background: #48a5bf;
-  border-radius: 1em 1em 0 0;
-}
-a.login-link:after {
-  content: '';
-  float: left;
-  position: absolute;
-  top: 0.25em;
-  left: 0.75em;
-  width: 0.75em;
-  height: 0.75em;
-  margin: 0 0.375em 0 0;
-  background: Tan;
-  border-radius: 1em;
-  
 }
 
 
@@ -316,7 +347,7 @@ a.login-link:after {
   100%   { text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125); }
 }
 
-.product-details {
+.product-overview {
   background: #eee url(../images/workers.jpg) center center repeat;
   background-size: cover;
   color: #666;
@@ -329,6 +360,7 @@ a.login-link:after {
   padding: 1em;
   border-radius: 0.25em;
 }
+.product-details {}
 .product-pitch {
   padding-top: 1em;
 }
@@ -340,23 +372,20 @@ a.login-link:after {
 }
 
 
-/* =Project Details
+/* =Project Content
 -------------------------------------------------------------- */
 
-.project-details {
-  background: #eee;
-  color: #666;
-}
+.project-details {}
 .project-details .container {
   position: relative;
 }
-
 .project-status {
   text-align: center;
   line-height: 1.25;
   padding: 0.375em 0;
   background: #ddd;
   margin: -0.5em -0.5em 1em -0.5em;
+  position: relative;
 }
 .project-status strong {
   text-transform: uppercase;
@@ -372,10 +401,11 @@ a.login-link:after {
   margin-bottom: 0;
   font-weight: 100;
   text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+  float: left;
 }
 .project-description {
-  background: #eee;
   font-size: 1.25em;
+  clear: left;
 }
 
 
@@ -416,6 +446,13 @@ li.event {
   border-radius: 1em;
   background: #888;
 }
+.event-title {
+  text-shadow: 0 0 3px rgba(0,0,0,0.25);
+}
+.event-description {
+  clear: left;
+}
+
 .event-complete:after {
   background: #eee;
 }
@@ -456,102 +493,13 @@ li.event {
 }
 
 
-/* =Admin
--------------------------------------------------------------- */
-
-.admin-bar {
-  background: #444;
-  color: #eee;
-  padding: 0.75em 1em;
-  box-shadow: 0 0.5em 0.5em rgba(0,0,0,0.5);
-  position: relative;
-  z-index: 9999;
-}
-.admin-bar a {
-  color: #fff;
-}
-a.logout {
-  color: HotPink;
-  float: right;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 0.75em;
-  line-height: 2;
-}
-.content-editable:hover {
-  outline: 2px solid HotPink;
-}
-.draggable {
-  padding-right: 3em;
-}
-.handle {
-	cursor: move;
-	position: absolute;
-	top: 0;
-	right: 0;
-	font-size: 2.5em;
-	line-height: 1;
-	width: 1em;
-	height: 1em;
-	text-align: center;
-	color: #777;
-}
-.event:hover .handle {
-	color: #aaa;
-}
-.event:hover .handle:hover {
-	color: #fff;
-}
-li.sortable-placeholder {
-	border: 1px dashed #fff;
-	background: none;
-	padding: 4em 0;
-}
-.add-event-btn {
-  position: relative;
-  left: -0.5em;
-}
-.status-selector {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border: 0;
-  opacity: 0;
-  -webkit-appearance: none;
-}
-.delete {
-  position: relative;
-  top: -1em;
-  left: -9999px;
-  color: Pink;
-  cursor: pointer;
-}
-.event:hover .delete {
-  left: 0;
-}
-.delete-icon {
-  font-size: 1.5em;
-  position: relative;
-}
-.status-selector {
-  cursor: pointer;
-}
-.save-bar {
-  background: #444;
-  color: #eee;
-  padding: 0;
-  box-shadow: 0 0.5em 0.5em rgba(0,0,0,0.5);
-  position: relative;
-  z-index: 9999;
-}
-
-
 /* =Media Queries for Responsive Layout
 -------------------------------------------------------------- */
 
 @media only screen and (min-width: 22em) {
+  .site-header {
+    padding-bottom: 0.75em;
+  }
   .site-title {
     font-size: 2.5em;
   }
@@ -566,12 +514,6 @@ li.sortable-placeholder {
     border-radius: 0.875em 0.125em;
     padding: 0.5em 1.25em;
     margin: 0;
-  }
-  .project-status strong {
-/*    font-size: 1.375em;*/
-  }
-  .project-location {
-/*    font-size: 1.5em;*/
   }
   .project-colophon {
     padding-top: 2em;
@@ -590,54 +532,16 @@ li.sortable-placeholder {
   .container {
     max-width: 36em;
   }
-  .project-header {
-    padding-top: 5em;
-  }
   .site-header {
     padding-top: 3em;
-    padding-bottom: 1em;
-  }
-  .site-title,
-  .project-title {
-/*    font-size: 4em;*/
+    padding-bottom: 1.5em;
   }
   .project-status strong {
-/*    font-size: 1.625em;*/
     padding: 0 0.25em;
-  }
-  .project-location {
-/*    font-size: 1.875em;*/
   }
   .project-colophon {
     padding-top: 3em;
     padding-bottom: 2em;
-  }
-  .logged-in {
-    margin-top: 3em;
-  }
-  .admin-bar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: auto;
-    left: 0;
-  }
-  .save-bar {
-    position: fixed;
-    top: -0.5em;
-    right: 0;
-    bottom: auto;
-    left: 0;
-    height: 0;
-    overflow: visible;
-    background: transparent;
-    box-shadow: none;
-  }
-  .save-bar .container {
-    max-width: 18em;
-  }
-  .save-btn {
-    box-shadow: 0 0.25em 0.5em rgba(0,0,0,0.5);
   }
   .interest-form p.email {
     width: 65%;
