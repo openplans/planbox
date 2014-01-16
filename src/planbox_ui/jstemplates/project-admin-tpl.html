@@ -3,8 +3,10 @@
   <div class="admin-bar clearfix">
     <a href="#" class="save-btn btn btn-disabled">Save Project</a>
     <form action="" class="project-visibility-form">
-      <input type="radio" name="project-visibility" value="public"> Public
-      <input type="radio" name="project-visibility" value="private"> Private
+      <input type="radio" name="project-visibility" value="public" id="public-radio-btn" class="is-visuallyhidden"><label for="public-radio-btn" class="radio-btn-label"><span class="checked-icon">&#10004;</span> Public</label>
+      <input type="radio" name="project-visibility" value="private" id="private-radio-btn" class="is-visuallyhidden" checked><label for="private-radio-btn" class="radio-btn-label"><span class="checked-icon">&#10004;</span> Private</label>
+      <!-- TODO: .addClass('checked') to the checked radio button for IE8, which doesn't understand :checked -->
+      <!-- TODO: Q: Should there be a confirmation alert when switching project visibility? -->
     </form>
     <nav class="user-nav">
       <a href="#" class="user-menu-link user-link"><strong>Username</strong></a>

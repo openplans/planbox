@@ -15,7 +15,9 @@
 /* Project Visibility */
 .project-visibility-form {
   clear: none;
-  display: inline;
+  float: left;
+  overflow: hidden;
+  border-radius: 0.25em;
 }
 
 /* User Navigation */
