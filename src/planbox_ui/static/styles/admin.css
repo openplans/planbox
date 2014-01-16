@@ -203,6 +203,7 @@ li.sortable-placeholder {
 @media only screen and (min-width: 60em) {
 
   /* Editing Prompts */
+  .content-editable:empty:before,
   .site-title:hover:before,
   .site-title:focus:before,
   .project-status:hover:before,
@@ -235,35 +236,43 @@ li.sortable-placeholder {
     line-height: 2;
     white-space: nowrap;
   }
+  .site-title:empty:before,
   .site-title:hover:before,
   .site-title:focus:before {
     content: 'Project Title';
   }
+  .project-status:empty:before,
   .project-status:hover:before,
   .project-status:focus:before {
     content: 'Project Status';
   }
+  .project-location:empty:before,
   .project-location:hover:before,
   .project-location:focus:before {
     content: 'Project Location';
   }
+  .project-description:empty:before,
   .project-description:hover:before,
   .project-description:focus:before {
     content: 'Project Description';
   }
+  .project-contact-info:empty:before,
   .project-contact-info:hover:before,
   .project-contact-info:focus:before {
     content: 'Project Contact Info';
   }
+  .event-title:empty:before,
   .event-title:hover:before,
   .event-title:focus:before {
     content: 'Event Title';
   }
+  .event-description:empty:before,
   .event-description:hover:before,
   .event-description:focus:before {
     content: 'Event Description';
   }
 
+  .content-editable:empty:after,
   .site-title:hover:after,
   .site-title:focus:after,
   .project-status:hover:after,
