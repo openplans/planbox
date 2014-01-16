@@ -299,7 +299,8 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/backbone.marionette/lib/backbone.marionette.js',
             '<%= yeoman.app %>/bower_components/backbone-relational/backbone-relational.js',
             '<%= yeoman.app %>/bower_components/moment/moment.js',
-            '<%= yeoman.app %>/bower_components/spin.js/spin.js'
+            '<%= yeoman.app %>/bower_components/spin.js/spin.js',
+            '<%= yeoman.app %>/bower_components/html5sortable/jquery.sortable.js'
           ],
           '<%= yeoman.app %>/scripts/dist/modernizr.min.js': [
             '<%= yeoman.app %>/bower_components/modernizr/modernizr.js'

@@ -87,6 +87,14 @@ var Planbox = Planbox || {};
       'add':    'dataChanged',
       'remove': 'dataChanged'
     },
+    onRender: function() {
+      this.$('.event-list').sortable({
+        handle: '.handle'
+      }).bind('sortupdate', function(evt) {
+        console.log(evt);
+      });
+
+    },
     handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
     handleStatusChange: function(evt) {
       var $target = $(evt.target),
@@ -113,6 +121,11 @@ var Planbox = Planbox || {};
       this.collection.add({});
 
       this.$('.event-title.content-editable').focus();
+
+      this.$('.event-list').sortable({
+        handle: '.handle'
+      });
+
     },
     dataChanged: function() {
       // Show the save button
