@@ -42,7 +42,7 @@ var Planbox = Planbox || {};
   NS.EventAdminView = Backbone.Marionette.ItemView.extend({
     template: '#event-admin-tpl',
     tagName: 'li',
-    className: 'event draggable',
+    className: 'event',
     ui: {
       editables: '[contenteditable]',
       deleteBtn: '.delete-event-btn'
@@ -50,6 +50,9 @@ var Planbox = Planbox || {};
     events: {
       'blur @ui.editables': 'handleEditableBlur',
       'click @ui.deleteBtn': 'handleDeleteClick'
+    },
+    initialize: function() {
+      this.$el.attr('data-id', this.model.cid);
     },
     handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
     handleDeleteClick: function(evt) {
@@ -82,17 +85,25 @@ var Planbox = Planbox || {};
       'change': 'dataChanged'
     },
     collectionEvents: {
-      'change': 'dataChanged',
-      'add':    'dataChanged',
-      'remove': 'dataChanged'
+      'change':  'dataChanged',
+      'add':     'dataChanged',
+      'remove':  'dataChanged',
+      'reorder': 'dataChanged'
     },
     onRender: function() {
-      this.$('.event-list').sortable({
-        handle: '.handle'
-      }).bind('sortupdate', function(evt) {
-        console.log(evt);
-      });
+      var self = this;
 
+      this.$('.event-list').sortable({
+        handle: '.handle',
+        update: function(evt, ui) {
+          var id = $(ui.item).attr('data-id'),
+              model = self.collection.get(id),
+              index = $(ui.item).index();
+
+          // Silent because we don't want the list to rerender
+          self.collection.moveTo(model, index);
+        }
+      });
     },
     handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
     handleStatusChange: function(evt) {
@@ -120,11 +131,6 @@ var Planbox = Planbox || {};
       this.collection.add({});
 
       this.$('.event-title.content-editable').focus();
-
-      this.$('.event-list').sortable({
-        handle: '.handle'
-      });
-
     },
     dataChanged: function() {
       // Show the save button

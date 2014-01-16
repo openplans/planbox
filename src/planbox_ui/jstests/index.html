@@ -11,9 +11,14 @@
     <script>mocha.setup('bdd')</script>
     <!-- assertion framework -->
     <script src="lib/chai.js"></script>
-    <script>var expect = chai.expect</script>
+    <script src="lib/sinon-chai.js"></script>
+    <script src="lib/sinon-1.7.3.js"></script>
+    <script>var assert = chai.assert</script>
 
-    <!-- include source files here... -->
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/backbone/backbone.js"></script>
+    <script src="bower_components/backbone-relational/backbone-relational.js"></script>
+    <script src="scripts/models.js"></script>
 
     <!-- include spec files here... -->
     <script src="spec/test.js"></script>
