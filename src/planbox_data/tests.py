@@ -1,16 +1,40 @@
-from django.test import TestCase
-from nose.tools import assert_equal, assert_in, ok_
+from django.core.urlresolvers import reverse
+from django.test import TestCase, RequestFactory
 from django_nose.tools import assert_num_queries
+from nose.tools import assert_equal, assert_in, ok_
+from rest_framework.status import HTTP_200_OK, HTTP_204_NO_CONTENT, HTTP_403_FORBIDDEN
 
-from django.contrib.auth.models import User as AuthUser
+from django.contrib.auth.models import User as AuthUser, AnonymousUser
 from planbox_data.models import User, Project, Event
+from planbox_data.permissions import IsOwnerOrReadOnly
 from planbox_data.serializers import ProjectSerializer
+from planbox_data.views import router
 
-class UserModelTests (TestCase):
+
+class PlanBoxTestCase (TestCase):
+    def setUp(self): self.set_up()
+    def tearDown(self): self.tear_down()
+
+    def set_up(self):
+        class URLConf:
+            urlpatterns = router.urls
+        self.urlconf = URLConf
+        self.factory = RequestFactory()
+
     def tear_down(self):
         AuthUser.objects.all().delete()
         User.objects.all().delete()
+        Project.objects.all().delete()
+        Event.objects.all().delete()
 
+    def get_view_callback(self, name):
+        for urlpattern in self.urlconf.urlpatterns:
+            if urlpattern.name == name:
+                return urlpattern.callback
+        raise ValueError('No pattern named %r. Choices are %r' % (name, [p.name for p in self.urlconf.urlpatterns]))
+
+
+class UserModelTests (PlanBoxTestCase):
     def test_str_requires_no_extra_queries(self):
         '''
         We should not have to make any extra queries to get the string
@@ -29,13 +53,7 @@ class UserModelTests (TestCase):
         assert_equal(user_strings, ['mjumbewu', 'atogle'])
 
 
-class EventModelTests (TestCase):
-    def tear_down(self):
-        AuthUser.objects.all().delete()
-        User.objects.all().delete()
-        Project.objects.all().delete()
-        Event.objects.all().delete()
-
+class EventModelTests (PlanBoxTestCase):
     def test_event_indicies_are_generated_correctly(self):
         '''
         Event indicies should be calculated as one more than the highest-index
@@ -64,13 +82,7 @@ class EventModelTests (TestCase):
         assert_equal(event_4.index, 4)
 
 
-class ProjectSerializerTests (TestCase):
-    def tear_down(self):
-        AuthUser.objects.all().delete()
-        User.objects.all().delete()
-        Project.objects.all().delete()
-        Event.objects.all().delete()
-
+class ProjectSerializerTests (PlanBoxTestCase):
     def test_events_are_nested_in_data(self):
         auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
         user = User.objects.create(auth=auth)
@@ -152,3 +164,151 @@ class ProjectSerializerTests (TestCase):
         })
 
         ok_(not serializer.is_valid())
+
+
+
+class OwnerPermissionTests (PlanBoxTestCase):
+    def init_test_assets(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        owner = User.objects.create(auth=auth)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
+        permission = IsOwnerOrReadOnly()
+        return permission, auth, owner, project
+
+    def test_null_auth_data_is_handled(self):
+        permission, _, _, project = self.init_test_assets()
+        request = self.factory.put('')
+        request.user = None
+        ok_(not permission.has_object_permission(request, None, project))
+
+    def test_anon_auth_data_is_ok_for_safe_requests(self):
+        permission, _, _, project = self.init_test_assets()
+        request = self.factory.get('')
+        request.user = AnonymousUser()
+        ok_(permission.has_object_permission(request, None, project))
+
+    def test_anon_auth_data_not_ok_for_unsafe_requests(self):
+        permission, _, _, project = self.init_test_assets()
+        request = self.factory.put('')
+        request.user = AnonymousUser()
+        ok_(not permission.has_object_permission(request, None, project))
+
+    def test_non_owner_auth_data_is_ok_for_safe_requests(self):
+        permission, _, _, project = self.init_test_assets()
+        auth = AuthUser.objects.create_user(username='atogle', password='456')
+        User.objects.create(auth=auth)
+        request = self.factory.get('')
+        request.user = auth
+        ok_(permission.has_object_permission(request, None, project))
+
+    def test_non_owner_auth_data_not_ok_for_unsafe_requests(self):
+        permission, _, _, project = self.init_test_assets()
+        auth = AuthUser.objects.create_user(username='atogle', password='456')
+        User.objects.create(auth=auth)
+        request = self.factory.put('')
+        request.user = auth
+        ok_(not permission.has_object_permission(request, None, project))
+
+    def test_no_owner_data_is_ok_for_safe_requests(self):
+        permission, _, _, project = self.init_test_assets()
+        auth = AuthUser.objects.create_user(username='atogle', password='456')
+        request = self.factory.get('')
+        request.user = auth
+        ok_(permission.has_object_permission(request, None, project))
+
+    def test_no_owner_data_not_ok_for_unsafe_requests(self):
+        permission, _, _, project = self.init_test_assets()
+        auth = AuthUser.objects.create_user(username='atogle', password='456')
+        request = self.factory.put('')
+        request.user = auth
+        ok_(not permission.has_object_permission(request, None, project))
+
+    def test_owner_auth_data_is_ok_for_safe_requests(self):
+        permission, auth, _, project = self.init_test_assets()
+        request = self.factory.get('')
+        request.user = auth
+        ok_(permission.has_object_permission(request, None, project))
+
+    def test_owner_auth_data_is_ok_for_unsafe_requests(self):
+        permission, auth, _, project = self.init_test_assets()
+        request = self.factory.put('')
+        request.user = auth
+        ok_(permission.has_object_permission(request, None, project))
+
+class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
+    def init_test_assets(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        owner = User.objects.create(auth=auth)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
+
+        kwargs = {'pk': project.pk}
+        view = self.get_view_callback('project-detail')
+        url = reverse('project-detail', kwargs=kwargs)
+
+        return auth, owner, project, kwargs, view, url
+
+    def test_anonymous_can_GET_detail(self):
+        url = self.init_test_assets()[-1]
+        response = self.client.get(url)
+        assert_equal(response.status_code, HTTP_200_OK)
+
+    def test_anonymous_cannot_PUT_detail(self):
+        _, owner, _, _, _, url = self.init_test_assets()
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner_type": "user", "owner_id": %s}' % (owner.pk), content_type='application/json')
+        # Even though the user is unauthenticated and a 401 seems like it might
+        # be in order, we don't want a www-authenticate response header to be
+        # sent, so we'll send a 403.
+        assert_equal(response.status_code, HTTP_403_FORBIDDEN)
+
+    def test_anonymous_cannot_DELETE_detail(self):
+        url = self.init_test_assets()[-1]
+        response = self.client.delete(url)
+        assert_equal(response.status_code, HTTP_403_FORBIDDEN)
+
+    def test_non_owner_can_GET_detail(self):
+        url = self.init_test_assets()[-1]
+
+        auth = AuthUser.objects.create_user(username='atogle', password='456')
+        nonowner = User.objects.create(auth=auth)
+        self.client.login(username='atogle', password='456')
+
+        response = self.client.get(url)
+        assert_equal(response.status_code, HTTP_200_OK)
+
+    def test_non_owner_cannot_PUT_detail(self):
+        _, owner, _, _, _, url = self.init_test_assets()
+
+        auth = AuthUser.objects.create_user(username='atogle', password='456')
+        nonowner = User.objects.create(auth=auth)
+        self.client.login(username='atogle', password='456')
+
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner_type": "user", "owner_id": %s}' % (owner.pk), content_type='application/json')
+        assert_equal(response.status_code, HTTP_403_FORBIDDEN, (response.status_code, str(response)))
+
+    def test_non_owner_cannot_DELETE_detail(self):
+        url = self.init_test_assets()[-1]
+
+        auth = AuthUser.objects.create_user(username='atogle', password='456')
+        nonowner = User.objects.create(auth=auth)
+        self.client.login(username='atogle', password='456')
+
+        response = self.client.delete(url)
+        assert_equal(response.status_code, HTTP_403_FORBIDDEN)
+
+    def test_owner_can_GET_detail(self):
+        auth, _, _, _, _, url = self.init_test_assets()
+        self.client.login(username=auth.username, password='123')
+        response = self.client.get(url)
+        assert_equal(response.status_code, HTTP_200_OK)
+
+    def test_owner_can_PUT_detail(self):
+        auth, owner, _, _, _, url = self.init_test_assets()
+        self.client.login(username=auth.username, password='123')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner_type": "user", "owner_id": %s}' % (owner.pk), content_type='application/json')
+        assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
+
+    def test_owner_can_DELETE_detail(self):
+        auth, _, _, _, _, url = self.init_test_assets()
+        self.client.login(username=auth.username, password='123')
+        response = self.client.delete(url)
+        assert_equal(response.status_code, HTTP_204_NO_CONTENT)
