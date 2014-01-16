@@ -318,6 +318,7 @@ input[type='radio']:checked + .radio-btn-label .checked-icon {
   font-weight: 800;
   margin-bottom: 0;
   text-shadow: 0 0 3px rgba(0,0,0,0.25);
+  position: relative;
 }
 .site-description {
   font-size: 1.5em;
@@ -421,20 +422,19 @@ a.login-link {
 }
 
 .project-location {
+  position: relative;
   margin-bottom: 0;
   font-weight: 100;
   text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
   float: left;
 }
 .project-description {
+  position: relative;
   font-size: 1.25em;
   clear: left;
 }
 
-
-/* =Project Timeline
--------------------------------------------------------------- */
-
+/* Project Timeline */
 .project-timeline {
   background: #888;
   color: #fff;
@@ -471,9 +471,12 @@ li.event {
 }
 .event-title {
   text-shadow: 0 0 3px rgba(0,0,0,0.25);
+  position: relative;
+  float: left;
 }
 .event-description {
   clear: left;
+  position: relative;
 }
 
 .event-complete:after {
@@ -481,6 +484,11 @@ li.event {
 }
 .event-active:after {
   background: #57D982;
+}
+
+/* Project Footer */
+.project-contact-info {
+  position: relative;
 }
 
 

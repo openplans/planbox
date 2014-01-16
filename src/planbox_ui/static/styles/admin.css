@@ -90,15 +90,20 @@
 }
 
 
-/* =ContentEditable States
+/* =Editable Content
 -------------------------------------------------------------- */
 
 .content-editable {
   box-shadow: 0 0 0 0.25em transparent;
+  min-width: 1em;
   -webkit-transition: all 0.3s ease;
      -moz-transition: all 0.3s ease;
        -o-transition: all 0.3s ease;
           transition: all 0.3s ease;
+}
+.content-editable:empty {
+  background-color: #777;
+  background-color: rgba(0,0,0,0.1);
 }
 .content-editable:hover {
   background-color: #00B4E6;
@@ -114,7 +119,6 @@
   color: #666;
   text-shadow: none;
 }
-
 
 /* =Events Controls
 -------------------------------------------------------------- */
@@ -175,6 +179,7 @@ li.sortable-placeholder {
 -------------------------------------------------------------- */
 
 @media only screen and (min-width: 44em) {
+
   .project-status strong {
     padding: 0 0.25em;
   }
@@ -192,4 +197,88 @@ li.sortable-placeholder {
     bottom: auto;
     left: 0;
   }
+
+}
+
+@media only screen and (min-width: 60em) {
+
+  /* Editing Prompts */
+  .site-title:before,
+  .project-status:before,
+  .project-location:before,
+  .project-description:before,
+  .project-contact-info:before,
+  .event-title:before,
+  .event-description:before {
+    clear: both;
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    z-index: 9990;
+    font-size: small;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #fff;
+    background: #00B4E6;
+    background: #444;
+    margin: -1em 10px 0 0;
+    padding: 0 0.625em;
+    border-radius: 0.25em;
+    text-shadow: none;
+    line-height: 2;
+    white-space: nowrap;
+  }
+  .site-title:before {
+    content: 'Project Title';
+  }
+  .project-status:before {
+    content: 'Project Status';
+  }
+  .project-location:before {
+    content: 'Project Location';
+  }
+  .project-description:before {
+    content: 'Project Description';
+  }
+  .project-contact-info:before {
+    content: 'Project Contact Info';
+  }
+  .event-title:before {
+    content: 'Event Title';
+    right: auto;
+    left: 100%;
+    margin: -1em 0 0 14px;
+  }
+  .event-description:before {
+    content: 'Event Description';
+  }
+
+  .site-title:after,
+  .project-status:after,
+  .project-location:after,
+  .project-description:after,
+  .project-timeline:after,
+  .project-contact-info:after,
+  .event-title:after,
+  .event-description:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: 0;
+    height: 0;
+    margin: -8px -6px 0 0;
+    border: 8px solid #444;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+  }
+  .event-title:after {
+    right: auto;
+    left: 100%;
+    margin: -8px 0 0 -2px;
+    border-left-color: transparent;
+    border-right-color: #444;
+  }
+
 }
