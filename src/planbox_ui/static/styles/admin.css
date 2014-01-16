@@ -203,13 +203,20 @@ li.sortable-placeholder {
 @media only screen and (min-width: 60em) {
 
   /* Editing Prompts */
-  .site-title:before,
-  .project-status:before,
-  .project-location:before,
-  .project-description:before,
-  .project-contact-info:before,
-  .event-title:before,
-  .event-description:before {
+  .site-title:hover:before,
+  .site-title:focus:before,
+  .project-status:hover:before,
+  .project-status:focus:before,
+  .project-location:hover:before,
+  .project-location:focus:before,
+  .project-description:hover:before,
+  .project-description:focus:before,
+  .project-contact-info:hover:before,
+  .project-contact-info:focus:before,
+  .event-title:hover:before,
+  .event-title:focus:before,
+  .event-description:hover:before,
+  .event-description:focus:before {
     clear: both;
     position: absolute;
     top: 50%;
@@ -228,39 +235,54 @@ li.sortable-placeholder {
     line-height: 2;
     white-space: nowrap;
   }
-  .site-title:before {
+  .site-title:hover:before,
+  .site-title:focus:before {
     content: 'Project Title';
   }
-  .project-status:before {
+  .project-status:hover:before,
+  .project-status:focus:before {
     content: 'Project Status';
   }
-  .project-location:before {
+  .project-location:hover:before,
+  .project-location:focus:before {
     content: 'Project Location';
   }
-  .project-description:before {
+  .project-description:hover:before,
+  .project-description:focus:before {
     content: 'Project Description';
   }
-  .project-contact-info:before {
+  .project-contact-info:hover:before,
+  .project-contact-info:focus:before {
     content: 'Project Contact Info';
   }
-  .event-title:before {
+  .event-title:hover:before,
+  .event-title:focus:before {
     content: 'Event Title';
     right: auto;
     left: 100%;
     margin: -1em 0 0 14px;
   }
-  .event-description:before {
+  .event-description:hover:before,
+  .event-description:focus:before {
     content: 'Event Description';
   }
 
-  .site-title:after,
-  .project-status:after,
-  .project-location:after,
-  .project-description:after,
-  .project-timeline:after,
-  .project-contact-info:after,
-  .event-title:after,
-  .event-description:after {
+  .site-title:hover:after,
+  .site-title:focus:after,
+  .project-status:hover:after,
+  .project-status:focus:after,
+  .project-location:hover:after,
+  .project-location:focus:after,
+  .project-description:hover:after,
+  .project-description:focus:after,
+  .project-timeline:hover:after,
+  .project-timeline:focus:after,
+  .project-contact-info:hover:after,
+  .project-contact-info:focus:after,
+  .event-title:hover:after,
+  .event-title:focus:after,
+  .event-description:hover:after,
+  .event-description:focus:after {
     content: '';
     position: absolute;
     top: 50%;
@@ -273,7 +295,8 @@ li.sortable-placeholder {
     border-right-color: transparent;
     border-bottom-color: transparent;
   }
-  .event-title:after {
+  .event-title:hover:after,
+  .event-title:focus:after {
     right: auto;
     left: 100%;
     margin: -8px 0 0 -2px;
