@@ -67,7 +67,6 @@ var Planbox = Planbox || {};
     itemViewContainer: '.event-list',
     ui: {
       editables: '[contenteditable]:not(.event [contenteditable])',
-      saveBar: '.save-bar',
       saveBtn: '.save-btn',
       statusSelector: '.status-selector',
       statusLabel: '.project-status',
@@ -113,7 +112,7 @@ var Planbox = Planbox || {};
     handleSave: function(evt) {
       evt.preventDefault();
       this.model.save();
-      this.ui.saveBar.addClass('is-hidden');
+      this.ui.saveBtn.addClass('btn-disabled');
     },
     handleAddClick: function(evt) {
       evt.preventDefault();
@@ -129,7 +128,7 @@ var Planbox = Planbox || {};
     },
     dataChanged: function() {
       // Show the save button
-      this.ui.saveBar.removeClass('is-hidden');
+      this.ui.saveBtn.removeClass('btn-disabled');
     }
   });
 
