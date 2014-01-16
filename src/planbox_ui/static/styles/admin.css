@@ -258,9 +258,6 @@ li.sortable-placeholder {
   .event-title:hover:before,
   .event-title:focus:before {
     content: 'Event Title';
-    right: auto;
-    left: 100%;
-    margin: -1em 0 0 14px;
   }
   .event-description:hover:before,
   .event-description:focus:before {
@@ -282,7 +279,9 @@ li.sortable-placeholder {
   .event-title:hover:after,
   .event-title:focus:after,
   .event-description:hover:after,
-  .event-description:focus:after {
+  .event-description:focus:after,
+  .event-title:hover:after,
+  .event-title:focus:after {
     content: '';
     position: absolute;
     top: 50%;
@@ -294,14 +293,6 @@ li.sortable-placeholder {
     border-top-color: transparent;
     border-right-color: transparent;
     border-bottom-color: transparent;
-  }
-  .event-title:hover:after,
-  .event-title:focus:after {
-    right: auto;
-    left: 100%;
-    margin: -8px 0 0 -2px;
-    border-left-color: transparent;
-    border-right-color: #444;
   }
 
 }
