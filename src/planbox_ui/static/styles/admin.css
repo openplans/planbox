@@ -233,8 +233,31 @@ li.sortable-placeholder {
 }
 
 .add-event-btn {
+  padding-left: 2.5em !important;
   position: relative;
-  left: -0.5em;
+  left: -1.25em;
+  top: -0.5em;
+}
+.add-event-btn:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0.5em;
+  margin-top: -0.75em;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 1em;
+  background: #eee;
+}
+.add-event-btn:after {
+  content: '';
+  position: absolute;
+  top: 0.5em;
+  left: 0.75em;
+  width: 1em;
+  height: 1em;
+  border-radius: 1em;
+  background: #888;
 }
 
 .delete-event-btn {
