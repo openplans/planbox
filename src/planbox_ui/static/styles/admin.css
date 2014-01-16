@@ -204,20 +204,8 @@ li.sortable-placeholder {
 
   /* Editing Prompts */
   .content-editable:empty:before,
-  .site-title:hover:before,
-  .site-title:focus:before,
-  .project-status:hover:before,
-  .project-status:focus:before,
-  .project-location:hover:before,
-  .project-location:focus:before,
-  .project-description:hover:before,
-  .project-description:focus:before,
-  .project-contact-info:hover:before,
-  .project-contact-info:focus:before,
-  .event-title:hover:before,
-  .event-title:focus:before,
-  .event-description:hover:before,
-  .event-description:focus:before {
+  .content-editable:hover:before,
+  .content-editable:focus:before {
     clear: both;
     position: absolute;
     top: 50%;
@@ -227,11 +215,10 @@ li.sortable-placeholder {
     font-weight: 100;
     text-transform: uppercase;
     color: #fff;
-    background: #00B4E6;
     background: #444;
-    margin: -1em 10px 0 0;
+    margin: -1em 1em 0 0;
     padding: 0 0.625em;
-    border-radius: 0.25em;
+    border-radius: 0.5em 0 0 0.5em;
     text-shadow: none;
     line-height: 2;
     white-space: nowrap;
@@ -273,35 +260,20 @@ li.sortable-placeholder {
   }
 
   .content-editable:empty:after,
-  .site-title:hover:after,
-  .site-title:focus:after,
-  .project-status:hover:after,
-  .project-status:focus:after,
-  .project-location:hover:after,
-  .project-location:focus:after,
-  .project-description:hover:after,
-  .project-description:focus:after,
-  .project-timeline:hover:after,
-  .project-timeline:focus:after,
-  .project-contact-info:hover:after,
-  .project-contact-info:focus:after,
-  .event-title:hover:after,
-  .event-title:focus:after,
-  .event-description:hover:after,
-  .event-description:focus:after,
-  .event-title:hover:after,
-  .event-title:focus:after {
+  .content-editable:hover:after,
+  .content-editable:focus:after {
     content: '';
     position: absolute;
     top: 50%;
     right: 100%;
     width: 0;
     height: 0;
-    margin: -8px -6px 0 0;
-    border: 8px solid #444;
+    margin: -1em -1em 0 0;
+    border: 1em solid #444;
     border-top-color: transparent;
     border-right-color: transparent;
     border-bottom-color: transparent;
+    font-size: small;
   }
 
 }
