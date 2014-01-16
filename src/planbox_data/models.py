@@ -33,6 +33,9 @@ class Project (models.Model):
     owner_id = models.PositiveIntegerField()
     owner = generic.GenericForeignKey('owner_type', 'owner_id')
 
+    class Meta:
+        unique_together = [('owner_type', 'owner_id', 'slug')]
+
     def __str__(self):
         return self.title
 

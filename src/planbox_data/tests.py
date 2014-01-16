@@ -1,7 +1,8 @@
 from django.core.urlresolvers import reverse
+from django.db import IntegrityError
 from django.test import TestCase, RequestFactory
 from django_nose.tools import assert_num_queries
-from nose.tools import assert_equal, assert_in, ok_
+from nose.tools import assert_equal, assert_in, assert_raises, ok_
 from rest_framework.status import HTTP_200_OK, HTTP_204_NO_CONTENT, HTTP_403_FORBIDDEN
 
 from django.contrib.auth.models import User as AuthUser, AnonymousUser
@@ -32,6 +33,33 @@ class PlanBoxTestCase (TestCase):
             if urlpattern.name == name:
                 return urlpattern.callback
         raise ValueError('No pattern named %r. Choices are %r' % (name, [p.name for p in self.urlconf.urlpatterns]))
+
+
+class ProjectModelTests (TestCase):
+    def test_cannot_create_project_with_same_slug_and_owner(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        user = User.objects.create(auth=auth)
+        project1 = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user)
+        project2 = Project.objects.create(slug='test-2', title='x', location='x', description='x', owner=user)
+
+        with assert_raises(IntegrityError):
+            project2.slug = 'test-1'
+            project2.save()
+
+    def test_can_create_project_with_same_slug_and_different_owner(self):
+        auth1 = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        user1 = User.objects.create(auth=auth1)
+        auth2 = AuthUser.objects.create_user(username='atogle', password='456')
+        user2 = User.objects.create(auth=auth2)
+        project1 = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user1)
+        project2 = Project.objects.create(slug='test-2', title='x', location='x', description='x', owner=user1)
+
+        project2.slug = 'test-1'
+        project2.owner = user2
+        project2.save()
+
+        projects = Project.objects.filter(slug='test-1')
+        assert_equal(projects.count(), 2)
 
 
 class UserModelTests (PlanBoxTestCase):
@@ -235,6 +263,7 @@ class OwnerPermissionTests (PlanBoxTestCase):
         request.user = auth
         ok_(permission.has_object_permission(request, None, project))
 
+
 class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
     def init_test_assets(self):
         auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
@@ -312,3 +341,57 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
         self.client.login(username=auth.username, password='123')
         response = self.client.delete(url)
         assert_equal(response.status_code, HTTP_204_NO_CONTENT)
+
+
+
+class ProjectListViewAuthenticationTests (PlanBoxTestCase):
+    def init_test_assets(self):
+        auths = [
+            AuthUser.objects.create_user(username='mjumbewu', password='123'),
+            AuthUser.objects.create_user(username='atogle', password='456'),
+        ]
+        owners = [
+            User.objects.create(auth=auths[0]),
+            User.objects.create(auth=auths[1]),
+        ]
+        projects = [
+            Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=owners[0]),
+            Project.objects.create(slug='test-2', title='x', location='x', description='x', owner=owners[0]),
+            Project.objects.create(slug='test-3', title='x', location='x', description='x', owner=owners[0]),
+            Project.objects.create(slug='test-4', title='x', location='x', description='x', owner=owners[1]),
+        ]
+
+        kwargs = {}
+        view = self.get_view_callback('project-list')
+        url = reverse('project-list', kwargs=kwargs)
+
+        return auths, owners, projects, kwargs, view, url
+
+    def test_anonymous_can_GET_list_of_public_projects(self):
+        pass
+        # url = self.init_test_assets()[-1]
+        # response = self.client.get(url)
+        # assert_equal(response.status_code, HTTP_200_OK)
+
+    def test_anonymous_cannot_POST_new_project(self):
+        pass
+        # _, owner, _, _, _, url = self.init_test_assets()
+        # response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner_type": "user", "owner_id": %s}' % (owner.pk), content_type='application/json')
+        # # Even though the user is unauthenticated and a 401 seems like it might
+        # # be in order, we don't want a www-authenticate response header to be
+        # # sent, so we'll send a 403.
+        # assert_equal(response.status_code, HTTP_403_FORBIDDEN)
+
+    def test_authed_user_can_GET_list_of_public_and_all_own_projects(self):
+        pass
+        # auth, _, _, _, _, url = self.init_test_assets()
+        # self.client.login(username=auth.username, password='123')
+        # response = self.client.get(url)
+        # assert_equal(response.status_code, HTTP_200_OK)
+
+    def test_authed_user_can_POST_new_project(self):
+        pass
+        # auth, owner, _, _, _, url = self.init_test_assets()
+        # self.client.login(username=auth.username, password='123')
+        # response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner_type": "user", "owner_id": %s}' % (owner.pk), content_type='application/json')
+        # assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
