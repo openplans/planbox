@@ -26,25 +26,38 @@
   position: relative;
 }
 .user-menu-link {
-  font-size: 0.875em;
-  margin: 0.5em 0 0 1em;
+  margin: 0 0 0 0.625em;
+  padding-right: 0.125em !important;
+  background: #555;
+  border: 0.25em solid #555;
+  border-radius: 0.25em;
+}
+.user-menu-link strong {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  text-indent: -9999px;
 }
 .user-menu-link:hover {
   color: #fff;
 }
 .user-menu {
   position: absolute;
+  z-index: 9999;
   top: 100%;
-  right: 0;
+  right: 9999px;
   background: #18758f;
   padding: 2px;
   box-shadow: 0 0.5em 0.5em rgba(0,0,0,0.25);
+}
+.user-menu.is-open {
+  right: 0;
 }
 .user-menu:before {
   content: "";
   position: absolute;
   top: -15px;
-  right: 2em;
+  right: 0.875em;
   width: 0;
   height: 0;
   border: 8px solid #18758f;
@@ -56,7 +69,7 @@
   content: "";
   position: absolute;
   top: -12px;
-  right: 2em;
+  right: 0.875em;
   width: 0;
   height: 0;
   border: 8px solid #48a5bf;
@@ -86,7 +99,11 @@
 }
 .save-btn {
   float: left;
-  margin: 0 1em 0 0;
+  margin: 0.5em 0 0 0;
+  width: 100%;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 
 
@@ -120,18 +137,104 @@
   text-shadow: none;
 }
 
+/* Editing Prompts */
+.content-editable:empty:before,
+.content-editable:hover:before,
+.content-editable:focus:before {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  z-index: 9990;
+  min-width: 9em;
+  font-size: small;
+  font-weight: 100;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  background: #444;
+  margin: 0 0 1em 0;
+  padding: 0 0.625em;
+  border-radius: 0.375em;
+  text-shadow: none;
+  line-height: 2;
+  white-space: nowrap;
+}
+.content-editable:empty:after,
+.content-editable:hover:after,
+.content-editable:focus:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 4em;
+  width: 0;
+  height: 0;
+  margin: 0 0 -1em 0;
+  border: 1em solid #444;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  font-size: small;
+}
+.site-title:empty:before,
+.site-title:hover:before,
+.site-title:focus:before {
+  content: 'Project Title';
+}
+.project-status:empty:before,
+.project-status:hover:before,
+.project-status:focus:before {
+  content: 'Project Status';
+}
+.project-location:empty:before,
+.project-location:hover:before,
+.project-location:focus:before {
+  content: 'Project Location';
+}
+.project-description:empty:before,
+.project-description:hover:before,
+.project-description:focus:before {
+  content: 'Project Description';
+}
+.project-contact-info:empty:before,
+.project-contact-info:hover:before,
+.project-contact-info:focus:before {
+  content: 'Project Contact Info';
+}
+.event-title:empty:before,
+.event-title:hover:before,
+.event-title:focus:before {
+  content: 'Event Title';
+}
+.event-description:empty:before,
+.event-description:hover:before,
+.event-description:focus:before {
+  content: 'Event Description';
+}
+.content-editable:empty:before,
+.content-editable:empty:after {
+  display: none;
+}
+.content-editable:hover:before,
+.content-editable:focus:before,
+.content-editable:hover:after,
+.content-editable:focus:after {
+  display: block;
+}
+
+
 /* =Events Controls
 -------------------------------------------------------------- */
 
-.draggable {
-  padding-right: 3em;
+.ui-sortable {}
+.ui-sortable .event {
+  padding-right: 2.25em;
 }
 .handle {
 	cursor: move;
 	position: absolute;
 	top: 0;
 	right: 0;
-	font-size: 2.5em;
+	font-size: 1.5em;
 	line-height: 1;
 	width: 1em;
 	height: 1em;
@@ -139,17 +242,72 @@
 	color: #777;
 }
 .handle:hover {
-	color: #fff;
+	color: #ccc;
 }
-li.sortable-placeholder {
-	border: 1px dashed #fff;
-	background: none;
-	padding: 4em 0;
+.handle:hover:before {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  bottom: auto;
+  left: auto;
+  z-index: 9990;
+  min-width: 9em;
+  font-size: small;
+  font-weight: 100;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  background: #444;
+  margin: -1em 1em 0 0;
+  padding: 0 0.625em;
+  border-radius: 0.5em 0 0 0.5em;
+  line-height: 2;
+  white-space: nowrap;
+}
+.handle:hover:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  width: 0;
+  height: 0;
+  margin: -1em -1em 0 0;
+  border: 1em solid #444;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  font-size: small;
+}
+.handle:hover:before {
+  content: 'Drag to reorder';
 }
 
 .add-event-btn {
+  padding-left: 2.5em !important;
   position: relative;
-  left: -0.5em;
+  left: -1.25em;
+  top: -0.5em;
+}
+.add-event-btn:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0.5em;
+  margin-top: -0.75em;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 1em;
+  background: #eee;
+}
+.add-event-btn:after {
+  content: '';
+  position: absolute;
+  top: 0.5em;
+  left: 0.75em;
+  width: 1em;
+  height: 1em;
+  border-radius: 1em;
+  background: #888;
 }
 
 .delete-event-btn {
@@ -157,8 +315,6 @@ li.sortable-placeholder {
   top: -1.5em;
 }
 .delete-icon {}
-
-
 
 .status-selector {
   position: absolute;
@@ -180,6 +336,15 @@ li.sortable-placeholder {
 
 @media only screen and (min-width: 44em) {
 
+  .save-btn {
+    float: left;
+    margin: 0 0 0 0.625em;
+    width: auto;
+  	-webkit-box-sizing: content-box;
+  	   -moz-box-sizing: content-box;
+  	        box-sizing: content-box;
+  }
+
   .project-status strong {
     padding: 0 0.25em;
   }
@@ -197,83 +362,44 @@ li.sortable-placeholder {
     bottom: auto;
     left: 0;
   }
+  .user-menu-link {
+    padding-right: 0.75em !important;
+  }
+  .user-menu-link strong {
+    display: inline;
+    text-indent: 0;
+  }
+  .user-menu:before,
+  .user-menu:after {
+    right: 2em;
+  }
 
 }
 
 @media only screen and (min-width: 60em) {
-
-  /* Editing Prompts */
   .content-editable:empty:before,
   .content-editable:hover:before,
   .content-editable:focus:before {
-    clear: both;
-    position: absolute;
+    display: block;
     top: 50%;
     right: 100%;
-    z-index: 9990;
-    font-size: small;
-    font-weight: 100;
-    text-transform: uppercase;
-    color: #fff;
-    background: #444;
+    bottom: auto;
+    left: auto;
     margin: -1em 1em 0 0;
-    padding: 0 0.625em;
     border-radius: 0.5em 0 0 0.5em;
-    text-shadow: none;
-    line-height: 2;
-    white-space: nowrap;
+    min-width: 0;
   }
-  .site-title:empty:before,
-  .site-title:hover:before,
-  .site-title:focus:before {
-    content: 'Project Title';
-  }
-  .project-status:empty:before,
-  .project-status:hover:before,
-  .project-status:focus:before {
-    content: 'Project Status';
-  }
-  .project-location:empty:before,
-  .project-location:hover:before,
-  .project-location:focus:before {
-    content: 'Project Location';
-  }
-  .project-description:empty:before,
-  .project-description:hover:before,
-  .project-description:focus:before {
-    content: 'Project Description';
-  }
-  .project-contact-info:empty:before,
-  .project-contact-info:hover:before,
-  .project-contact-info:focus:before {
-    content: 'Project Contact Info';
-  }
-  .event-title:empty:before,
-  .event-title:hover:before,
-  .event-title:focus:before {
-    content: 'Event Title';
-  }
-  .event-description:empty:before,
-  .event-description:hover:before,
-  .event-description:focus:before {
-    content: 'Event Description';
-  }
-
   .content-editable:empty:after,
   .content-editable:hover:after,
   .content-editable:focus:after {
-    content: '';
-    position: absolute;
+    display: block;
     top: 50%;
     right: 100%;
-    width: 0;
-    height: 0;
+    left: auto;
     margin: -1em -1em 0 0;
     border: 1em solid #444;
     border-top-color: transparent;
     border-right-color: transparent;
     border-bottom-color: transparent;
-    font-size: small;
   }
-
 }

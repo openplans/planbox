@@ -1,21 +1,21 @@
 <div class="logged-in">
 
   <div class="admin-bar clearfix">
-    <a href="#" class="save-btn btn btn-disabled">Save Project</a>
-    <form action="" class="project-visibility-form">
-      <input type="radio" data-attr="public" name="project-public" value="true" id="public-radio-btn" class="is-visuallyhidden"{{#if public}} checked{{/if}}><label for="public-radio-btn" class="radio-btn-label"><span class="checked-icon">&#10004;</span> Public</label>
-      <input type="radio" data-attr="public" name="project-public" value="false" id="private-radio-btn" class="is-visuallyhidden"{{^if public}} checked{{/if}}><label for="private-radio-btn" class="radio-btn-label"><span class="checked-icon">&#10004;</span> Private</label>
-      <!-- TODO: .addClass('checked') to the checked radio button for IE8, which doesn't understand :checked -->
-      <!-- TODO: Q: Should there be a confirmation alert when switching project visibility? -->
-    </form>
     <nav class="user-nav">
       <a href="#" class="user-menu-link user-link"><strong>Username</strong></a>
       <ul class="user-menu unstyled-list">
+        <!-- TODO: .toggleClass('is-open') on .user-menu when .user-menu-link (or a menu item) is clicked -->
         <li><a href="#">My Projects</a></li>
         <li><a href="#">Sign Out</a></li>
       </ul>
     </nav>
-  </div>
+    <form action="" class="project-visibility-form">
+      <input type="radio" data-attr="public" name="project-public" value="false" id="private-radio-btn" class="is-visuallyhidden"{{^if public}} checked{{/if}}><label for="private-radio-btn" class="radio-btn-label"><span class="checked-icon">&#10004;</span> Private</label>
+      <input type="radio" data-attr="public" name="project-public" value="true" id="public-radio-btn" class="is-visuallyhidden"{{#if public}} checked{{/if}}><label for="public-radio-btn" class="radio-btn-label"><span class="checked-icon">&#10004;</span> Public</label>
+      <!-- TODO: Q: Should there be a confirmation alert when switching project visibility? -->
+    </form>
+    <a href="#" class="save-btn btn btn-disabled">Save Project</a>
+   </div>
 
   <header class="site-header" style="background-image:url({{ STATIC_URL }}images/pedestrians.jpg);">
     <div class="container">
@@ -41,7 +41,8 @@
   <section class="project-timeline">
     <div class="container">
       <ol class="event-list unstyled-list"></ol>
-      <a href="#" class="btn btn-small add-event-btn">Add Event</a>
+      <br>
+      <a href="#" class="btn add-event-btn">Add Event</a>
     </div>
   </section>
 
