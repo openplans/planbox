@@ -125,7 +125,7 @@ var Planbox = Planbox || {};
     handleVisibilityChange: function(evt) {
       var $target = $(evt.target),
           attr = $target.attr('data-attr'),
-          val = $target.val();
+          val = ($target.val() === 'true');
 
       evt.preventDefault();
 
