@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.test import TestCase, RequestFactory
@@ -60,6 +62,59 @@ class ProjectModelTests (TestCase):
 
         projects = Project.objects.filter(slug='test-1')
         assert_equal(projects.count(), 2)
+
+    def test_can_create_a_project_with_auto_generated_slug(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        user = User.objects.create(auth=auth)
+
+        project1 = Project.objects.create(title='My Project', location='x', description='x', owner=user)
+        assert_equal(project1.slug, 'my-project')
+
+        # Ensure conflict resolution
+        project2 = Project.objects.create(title='My Project', location='x', description='x', owner=user)
+        assert_equal(project2.slug, 'my-project-2')
+
+        # Ensure error if no title is provided
+        with assert_raises(Exception):
+            # import pdb; pdb.set_trace()
+            Project.objects.create(title='', location='x', description='x', owner=user)
+
+    def test_owner_owns_project(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        user = User.objects.create(auth=auth)
+        project = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user)
+
+        ok_(project.owned_by(auth))
+        ok_(project.owned_by(user))
+
+    def test_non_owner_doesnt_own_project(self):
+        auth1 = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        user1 = User.objects.create(auth=auth1)
+        project = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user1)
+
+        auth2 = AuthUser.objects.create_user(username='atogle', password='456')
+        user2 = User.objects.create(auth=auth2)
+
+        ok_(not project.owned_by(auth2))
+        ok_(not project.owned_by(user2))
+
+    def test_non_planbox_user_doesnt_own_project(self):
+        auth1 = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        user1 = User.objects.create(auth=auth1)
+        project = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user1)
+
+        auth2 = AuthUser.objects.create_user(username='atogle', password='456')
+
+        ok_(not project.owned_by(auth2))
+
+    def test_anon_user_doesnt_own_project(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        user = User.objects.create(auth=auth)
+        project = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user)
+
+        anon = AnonymousUser()
+
+        ok_(not project.owned_by(anon))
 
 
 class UserModelTests (PlanBoxTestCase):

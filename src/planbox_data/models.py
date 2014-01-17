@@ -1,11 +1,28 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
+from django.contrib import auth
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.db import models
+from django.utils.text import slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
+
+AuthUser = auth.get_user_model()
+
+
+def uniquify_slug(slug, existing_slugs):
+    if slug not in existing_slugs:
+        return slug
+
+    uniquifier = 2
+    while True:
+        new_slug = '%s-%s' % (slug, uniquifier)
+        if new_slug not in existing_slugs:
+            return new_slug
+        else:
+            uniquifier += 1
 
 
 @python_2_unicode_compatible
@@ -22,11 +39,11 @@ class Project (models.Model):
     )
 
     title = models.CharField(max_length=1024)
-    slug = models.CharField(max_length=128)
+    slug = models.CharField(max_length=128, blank=True)
     public = models.BooleanField(default=False)
     status = models.CharField(help_text=_("A string representing the project's status"), choices=STATUS_CHOICES, default='not-started', max_length=32)
-    location = models.CharField(help_text=_("The general location of the project, e.g. \"Philadelphia, PA\", \"Clifton Heights, Louisville, KY\", \"4th St. Corridor, Brooklyn, NY\", etc."), max_length=256, default='')
-    description = models.TextField(help_text=_("An introductory description of the project"), default='')
+    location = models.CharField(help_text=_("The general location of the project, e.g. \"Philadelphia, PA\", \"Clifton Heights, Louisville, KY\", \"4th St. Corridor, Brooklyn, NY\", etc."), max_length=256, default='', blank=True)
+    description = models.TextField(help_text=_("An introductory description of the project"), default='', blank=True)
     contact = models.TextField(help_text=_("The contact information for the project"), default='', blank=True)
 
     # An owner can be either a user or an organization
@@ -39,6 +56,26 @@ class Project (models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if self.title and not self.slug:
+            self.slug = uniquify_slug(
+                slugify(self.title),
+                [p.slug for p in self.owner.projects.all()]
+            )
+        super(Project, self).save(*args, **kwargs)
+
+    def owned_by(self, obj):
+        if isinstance(obj, AuthUser):
+            try:
+                obj = obj.planbox_user
+            except User.DoesNotExist:
+                return False
+
+        if isinstance(obj, self.owner_type.model_class()) and self.owner_id == obj.pk:
+            return True
+
+        return False
 
 
 @python_2_unicode_compatible

@@ -13,9 +13,17 @@ var Planbox = Planbox || {};
   });
 
   NS.app.addInitializer(function(options){
-    var projectModel = new NS.ProjectModel(NS.Data.project);
+    var projectModel, ProjectView;
 
-    NS.app.mainRegion.show(new NS.ProjectAdminView({
+    if (NS.Data.isOwner && !NS.Data.project.owner_id) {
+      NS.Data.project.owner_id = NS.Data.user.id;
+      NS.Data.project.owner_type = 'user';
+    }
+
+    projectModel = new NS.ProjectModel(NS.Data.project);
+    ProjectView = NS.Data.isOwner ? NS.ProjectAdminView : NS.ProjectView;
+
+    NS.app.mainRegion.show(new ProjectView({
       model: projectModel,
       collection: projectModel.get('events')
     }));

@@ -24,3 +24,8 @@ class ProjectSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = models.Project
+
+
+class UserSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.User

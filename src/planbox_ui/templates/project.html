@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% load jstemplate %}
+{% load handlebarsjs from jstemplate %}
+{% load as_json from planbox_utils %}
 
 
 {% block title %}
@@ -14,11 +15,20 @@ All about the Main Street Pedestrian Improvements
 
 {% block styles %}
   {% if debug %}
+
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/normalize-css/normalize.css" type="text/css" media="screen, projection" />
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" type="text/css" media="screen, projection" />
+  {% if is_owner %}
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.css" type="text/css" media="screen, projection" />
+  {% endif %}
+
   {% else %}
+
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/dist/style.min.css" type="text/css" media="screen, projection" />
+  {% if is_owner %}
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.min.css" type="text/css" media="screen, projection" />
+  {% endif %}
+
   {% endif %}
 {% endblock %}
 
@@ -43,7 +53,9 @@ All about the Main Street Pedestrian Improvements
     // Test data!
     var Planbox = {
       Data: {
-        project: {{ project_data|safe }}
+        project: {{ project_data|as_json }},
+        user: {{ user_data|as_json }},
+        isOwner: {{ is_owner|as_json }}
       }
     };
   </script>
