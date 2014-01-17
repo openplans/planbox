@@ -512,6 +512,7 @@ a.login-link {
   font-weight: 100;
   text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
   float: left;
+  min-width: 40% !important;
 }
 .project-description {
   position: relative;
