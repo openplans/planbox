@@ -135,6 +135,7 @@
   background-color: #fff;
   color: #666;
   text-shadow: none;
+  z-index: 100;
 }
 
 /* Editing Prompts */
