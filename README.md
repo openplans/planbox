@@ -21,10 +21,19 @@ Describe the technology stack and any dependencies.
 
     git clone git@github.com:openplans/planbox.git
 
-### Next thing
+### Install dependencies
 
-TBD
+     cd planbox
+     virtualenv env
+     source env/bin/activate
+     pip install -r requirements.txt
+     bower install
+     cp src/planbox/local_settings.py.template src/planbox/local_settings.py 
 
+### Start your local server
+
+     src/manage.py runserver
+    
 
 ## Deploy to Heroku
 
