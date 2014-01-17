@@ -27,12 +27,16 @@ class ProjectView (TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjectView, self).get_context_data(**kwargs)
-        
-        user_serializer = UserSerializer(self.request.user.planbox_user)
+
+        if (self.request.user.is_authenticated()):
+            user_serializer = UserSerializer(self.request.user.planbox_user)
+            context['user_data'] = user_serializer.data
+        else:
+            context['user_data'] = None
+
         project_serializer = ProjectSerializer(self.project)
 
         context['project_data'] = project_serializer.data
-        context['user_data'] = user_serializer.data
         context['is_owner'] = self.project.owned_by(self.request.user)
         return context
 

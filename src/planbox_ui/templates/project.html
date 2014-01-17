@@ -50,13 +50,11 @@ All about the Main Street Pedestrian Improvements
   <script src="{{ STATIC_URL }}bower_components/django-csrf.js/django-csrf.js"></script>
 
   <script>
-    // Test data!
-    var Planbox = {
-      Data: {
-        project: {{ project_data|as_json }},
-        user: {{ user_data|as_json }},
-        isOwner: {{ is_owner|as_json }}
-      }
+    var Planbox = Planbox || {}
+    Planbox.Data = {
+      project: {{ project_data|as_json }},
+      user: {{ user_data|as_json }},
+      isOwner: {{ is_owner|as_json }}
     };
   </script>
 
