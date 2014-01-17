@@ -1,8 +1,21 @@
-from django.views.generic import TemplateView
+from django.conf import settings
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User as AuthUser
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import resolve_url
+from django.utils.decorators import method_decorator
+from django.utils.http import is_safe_url
+from django.views.generic import TemplateView, FormView
 from planbox_data.models import Project
 from planbox_data.serializers import ProjectSerializer, UserSerializer
+
+
+class LoginRequired (object):
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(LoginRequired, self).dispatch(request, *args, **kwargs)
 
 
 # App
@@ -18,8 +31,26 @@ class PasswordResetView (TemplateView):
     template_name = 'password-reset.html'
 
 
-class SigninView (TemplateView):
+class SigninView (FormView):
     template_name = 'signin.html'
+    form_class = AuthenticationForm
+
+    def get_context_data(self, **kwargs):
+        if 'next' in self.request.GET:
+            kwargs['next_url'] = self.request.GET['next']
+        return super(SigninView, self).get_context_data(**kwargs)
+
+    def get_success_url(self):
+        # Ensure the user-originating redirection url is safe.
+        redirect_to = self.request.REQUEST.get('next', '')
+        if not is_safe_url(url=redirect_to, host=self.request.get_host()):
+            redirect_to = resolve_url(settings.LOGIN_REDIRECT_URL)
+        return redirect_to
+
+    def form_valid(self, form):
+        # Okay, security check complete. Log the user in.
+        login(self.request, form.get_user())
+        return super(SigninView, self).form_valid(form)
 
 
 class ProjectView (TemplateView):
@@ -47,7 +78,7 @@ class ProjectView (TemplateView):
         return super(ProjectView, self).get(request, owner_name, slug)
 
 
-class NewProjectView (TemplateView):
+class NewProjectView (LoginRequired, TemplateView):
     template_name = 'project.html'
 
     def get_context_data(self, **kwargs):
@@ -61,7 +92,6 @@ class NewProjectView (TemplateView):
         return context
 
     def get(self, request, owner_name):
-        # TODO: Decorate with @login_required
         # TODO: Set Andy's login page as the login page
 
         owner_auth = AuthUser.objects.get(username=owner_name)

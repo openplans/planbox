@@ -47,6 +47,8 @@ INSTALLED_APPS = (
     'planbox_data',
 )
 
+LOGIN_URL = 'app-signin'
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -11,10 +11,15 @@
     <div class="alert alert-error alert-dismissable">I am a dismissable error. I have a close button. <a href="#" class="close">&times;</a></div>
     <p style="float:right;"><small><a href="/password-reset">Lost your password?</a></small></p>
     <h3>Sign In</h3>
-    <form>
-      <p><input required type="text" name="my-username" id="my-username" class="input-block" placeholder="Username" pattern="[A-Za-z0-9-_]{1,30}" max="30" tabindex="1"> <label for="my-username" class="float-label"><strong>Username</strong></label></p>
-      <p><input required type="password" name="my-password" id="my-password" class="input-block" placeholder="Password" max="30" tabindex="2"><label for="my-password" class="float-label"><strong>Password</strong></label></p>
+    <form method="POST">
+      {% csrf_token %}
+      <p><input required type="text" name="username" id="my-username" class="input-block" placeholder="Username" pattern="[A-Za-z0-9-_]{1,30}" max="30" tabindex="1"> <label for="my-username" class="float-label"><strong>Username</strong></label></p>
+      <p><input required type="password" name="password" id="my-password" class="input-block" placeholder="Password" max="30" tabindex="2"><label for="my-password" class="float-label"><strong>Password</strong></label></p>
       <p><input type="submit" value="Sign In" class="btn btn-large" tabindex="3"></p>
+
+      {% if next_url %}
+      <input type="hidden" name="next" value="{{ next_url }}">
+      {% endif %}
     </form>
   </div>
 </section>
