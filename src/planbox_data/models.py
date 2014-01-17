@@ -17,12 +17,13 @@ class Project (models.Model):
     )
 
     OWNER_MODEL_CHOICES = (
-        models.Q(app_label='planbox_data', model='user') | 
+        models.Q(app_label='planbox_data', model='user') |
         models.Q(app_label='planbox_data', model='organization')
     )
 
     title = models.CharField(max_length=1024)
     slug = models.CharField(max_length=128)
+    public = models.BooleanField(default=False)
     status = models.CharField(help_text=_("A string representing the project's status"), choices=STATUS_CHOICES, default='not-started', max_length=32)
     location = models.CharField(help_text=_("The general location of the project, e.g. \"Philadelphia, PA\", \"Clifton Heights, Louisville, KY\", \"4th St. Corridor, Brooklyn, NY\", etc."), max_length=256, default='')
     description = models.TextField(help_text=_("An introductory description of the project"), default='')
