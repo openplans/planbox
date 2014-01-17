@@ -155,9 +155,7 @@ img {
 /* User Link Icon */
 a.user-link {
   position: relative;
-  height: 1.75em;
-  line-height: 1.75em;
-  padding: 0.125em 0.75em 0 0.625em ;
+  padding: 0.25em 0.75em 0.25em 0.625em ;
   text-decoration: none;
   text-transform: uppercase;
   display: block;
@@ -177,7 +175,7 @@ a.user-link:after {
   content: '';
   float: left;
   position: absolute;
-  top: 0.25em;
+  top: 0.375em;
   left: 0.75em;
   width: 0.75em;
   height: 0.75em;
@@ -319,6 +317,10 @@ input[type='radio']:checked + .radio-btn-label .checked-icon {
   margin-bottom: 0;
   text-shadow: 0 0 3px rgba(0,0,0,0.25);
   position: relative;
+}
+.site-title a {
+  text-decoration: none;
+  color: #fff;
 }
 .site-description {
   font-size: 1.5em;
@@ -533,10 +535,6 @@ li.event {
   }
   .site-title {
     font-size: 2.5em;
-  }
-  .site-title a {
-    text-decoration: none;
-    color: #fff;
   }
   .project-status {
     position: absolute;
