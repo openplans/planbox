@@ -73,11 +73,13 @@ var Planbox = Planbox || {};
       saveBtn: '.save-btn',
       statusSelector: '.status-selector',
       statusLabel: '.project-status',
-      addBtn: '.add-event-btn'
+      addBtn: '.add-event-btn',
+      visibilityToggle: '[name=project-public]'
     },
     events: {
       'blur @ui.editables': 'handleEditableBlur',
       'change @ui.statusSelector': 'handleStatusChange',
+      'change @ui.visibilityToggle': 'handleVisibilityChange',
       'click @ui.saveBtn': 'handleSave',
       'click @ui.addBtn': 'handleAddClick'
     },
@@ -117,6 +119,19 @@ var Planbox = Planbox || {};
         .removeClass('project-status-not-started project-status-active project-status-complete')
         .addClass('project-status-'+val)
         .find('strong').text(val);
+
+      this.model.set(attr, val);
+    },
+    handleVisibilityChange: function(evt) {
+      var $target = $(evt.target),
+          attr = $target.attr('data-attr'),
+          val = $target.val();
+
+      evt.preventDefault();
+
+      // For IE8 only
+      this.ui.visibilityToggle.removeClass('checked');
+      $target.addClass('checked');
 
       this.model.set(attr, val);
     },
