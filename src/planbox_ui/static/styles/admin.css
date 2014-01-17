@@ -43,6 +43,7 @@
 }
 .user-menu {
   position: absolute;
+  z-index: 9999;
   top: 100%;
   right: 9999px;
   background: #18758f;
@@ -56,7 +57,7 @@
   content: "";
   position: absolute;
   top: -15px;
-  right: 2em;
+  right: 0.875em;
   width: 0;
   height: 0;
   border: 8px solid #18758f;
@@ -68,7 +69,7 @@
   content: "";
   position: absolute;
   top: -12px;
-  right: 2em;
+  right: 0.875em;
   width: 0;
   height: 0;
   border: 8px solid #48a5bf;
@@ -367,6 +368,10 @@
   .user-menu-link strong {
     display: inline;
     text-indent: 0;
+  }
+  .user-menu:before,
+  .user-menu:after {
+    right: 2em;
   }
 
 }
