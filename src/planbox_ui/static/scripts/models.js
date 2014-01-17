@@ -13,7 +13,8 @@ var Planbox = Planbox || {};
       key: 'events',
       relatedModel: 'EventModel',
       collectionType: 'EventCollection'
-    }]
+    }],
+    urlRoot: '/api/projects'
   });
 
   NS.EventModel = Backbone.RelationalModel.extend({});

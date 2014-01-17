@@ -3,7 +3,7 @@ from .views import index_view, project_view, signup_view, signin_view, password_
 
 urlpatterns = patterns('',
 
-    url(r'^project/', project_view, name='app-project'),
+    url(r'^(?P<owner_name>[^/]+)/(?P<slug>[^/]+)/', project_view, name='app-project'),
     url(r'^signup/$', signup_view, name='app-signup'),
     url(r'^signin/$', signin_view, name='app-signin'),
     url(r'^password-reset/$', password_reset_view, name='app-password-reset'),
