@@ -74,11 +74,6 @@ class ProjectModelTests (TestCase):
         project2 = Project.objects.create(title='My Project', location='x', description='x', owner=user)
         assert_equal(project2.slug, 'my-project-2')
 
-        # Ensure error if no title is provided
-        with assert_raises(Exception):
-            # import pdb; pdb.set_trace()
-            Project.objects.create(title='', location='x', description='x', owner=user)
-
     def test_owner_owns_project(self):
         auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
         user = User.objects.create(auth=auth)
@@ -166,6 +161,14 @@ class EventModelTests (PlanBoxTestCase):
 
 
 class ProjectSerializerTests (PlanBoxTestCase):
+    def test_project_with_empty_title_is_invalid(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        user = User.objects.create(auth=auth)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=user)
+
+        serializer = ProjectSerializer(project, data={'slug': '', 'title': ''})
+        ok_(not serializer.is_valid(), 'Project with empty slug and title should not validate')
+
     def test_events_are_nested_in_data(self):
         auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
         user = User.objects.create(auth=auth)

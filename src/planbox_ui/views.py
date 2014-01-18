@@ -1,9 +1,13 @@
+from __future__ import unicode_literals
+
 from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User as AuthUser
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.shortcuts import resolve_url
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
@@ -92,9 +96,11 @@ class NewProjectView (LoginRequired, TemplateView):
         return context
 
     def get(self, request, owner_name):
-        # TODO: Set Andy's login page as the login page
+        # Check whether this page is for the auth'd user
+        if owner_name != request.user.username:
+            return redirect('app-new-project', owner_name=self.request.user.username)
 
-        owner_auth = AuthUser.objects.get(username=owner_name)
+        owner_auth = get_object_or_404(AuthUser, username=owner_name)
 
         # Check whether the user has an existing project and redirect there.
         try:
@@ -102,8 +108,7 @@ class NewProjectView (LoginRequired, TemplateView):
         except IndexError:
             pass
         else:
-            # TODO: Redirect
-            pass
+            return redirect('app-project', owner_name=owner_name, slug=project.slug)
 
         return super(NewProjectView, self).get(request, owner_name)
 
