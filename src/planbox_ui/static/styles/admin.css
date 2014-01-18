@@ -138,6 +138,52 @@
   z-index: 100;
 }
 
+/* Project Steps */
+.step {
+  clear: both;
+  background-color: #F5FF8C;
+  background-color: rgba(245,255,140,0.8);
+  color: #666;
+  font-size: 1.25em;
+  font-weight: 400;
+  text-shadow: none;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25em 0.25em 0 0;
+  margin: 0.5em 0 0 0;
+}
+.step small {
+  font-weight: 800;
+}
+.step-title {
+  margin-top: 0;
+}
+.step-status {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  border-radius: 0.25em 0 0.25em 0.25em;
+  float: right;
+}
+.step-description {
+  margin-top: 1.5em;
+}
+.step-timeline {
+  margin-bottom: 0.75em;
+}
+
+.step-title:before,
+.step-location:before,
+.step-description:before,
+.step-contact-info:before {
+  content: '\2939';
+  position: relative;
+  top: 0.25em;
+  margin-right: 0.25em;
+}
+.step-status:after {
+  content: '\2934';
+  margin-left: 0.25em;
+}
+
 /* Editing Prompts */
 .content-editable:empty:before,
 .content-editable:hover:before,

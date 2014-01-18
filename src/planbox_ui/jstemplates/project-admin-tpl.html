@@ -19,12 +19,14 @@
 
   <header class="site-header" style="background-image:url({{ STATIC_URL }}images/pedestrians.jpg);">
     <div class="container">
+      <h2 class="step step-title">Step 1: <small>Let's give your project a title.</small></h2>
       <h1 class="site-title content-editable" data-attr="title" contenteditable>{{ title }}</h1>
     </div>
   </header>
 
   <section class="project-details">
     <div class="container">
+      <h2 class="step step-status">Step 2: <small>Set the current status.</small></h2>
       <p class="project-status project-status-active content-editable">
         <strong>{{ status }}</strong>
         <select class="status-selector" data-attr="status">
@@ -33,13 +35,16 @@
           <option value="complete">Complete</option>
         </select>
       </p>
+      <h2 class="step step-location">Step 3: <small>Where is your project located?</small></h2>
       <p class="project-location content-editable" data-attr="location" contenteditable>{{ location }}</p>
+      <h2 class="step step-description">Step 4: <small>Give a short description of your project.</small></h2>
       <p class="project-description content-editable" data-attr="description" contenteditable>{{ description }}</p>
     </div>
   </section>
 
   <section class="project-timeline">
     <div class="container">
+      <h2 class="step step-timeline">Step 5: <small>Add events to your project timeline.</small></h2>
       <ol class="event-list unstyled-list"></ol>
       <br>
       <a href="#" class="btn add-event-btn">Add Event</a>
@@ -48,6 +53,7 @@
 
   <footer class="site-colophon">
     <div class="container">
+      <h2 class="step step-contact-info">Step 6: <small>Enter your contact information.</small></h2>
       <p class="project-contact-info content-editable" data-attr="contact" contenteditable>{{ contact }}</p>
       <p class="powered-by">{{#_}}Powered by <a href="index.html">Planbox</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
     </div>
