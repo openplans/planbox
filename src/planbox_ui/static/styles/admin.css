@@ -8,16 +8,18 @@
   padding: 0.75em 1em;
   box-shadow: 0 0.375em 0.5em rgba(0,0,0,0.25);
   position: relative;
-  z-index: 9999;
+  z-index: 500;
 }
 .admin-bar a {}
 
 /* Project Visibility */
-.project-visibility-form {
+.project-visibility {
   clear: none;
   float: left;
   overflow: hidden;
   border-radius: 0.25em;
+  padding: 0.25em 0.25em 0.25em 0;
+  border: 0.25em solid transparent;
 }
 
 /* User Navigation */
@@ -43,7 +45,7 @@
 }
 .user-menu {
   position: absolute;
-  z-index: 9999;
+  z-index: 50;
   top: 100%;
   right: 9999px;
   background: #18758f;
@@ -191,7 +193,7 @@
   position: absolute;
   bottom: 100%;
   left: 0;
-  z-index: 9990;
+  z-index: 150;
   min-width: 9em;
   font-size: small;
   font-weight: 100;
@@ -297,7 +299,7 @@
   right: 100%;
   bottom: auto;
   left: auto;
-  z-index: 9990;
+  z-index: 150;
   min-width: 9em;
   font-size: small;
   font-weight: 100;

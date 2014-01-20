@@ -83,6 +83,15 @@ img {
   opacity: 0.625;
 }
 
+/* Dingbats */
+.checked-icon {
+  color: #57D982;
+}
+.checked-icon.unchecked {
+  color: #777;
+  color: rgba(100,100,100,0.8);
+}
+
 /* Buttons */
 .btn,
 .btn:visited,
@@ -237,28 +246,6 @@ textarea {
   height: 6.5em;
   resize: none;
 }
-.radio-btn-label {
-  float: left;
-  padding: 0.25em 0.875em 0.25em 0.5em;
-  cursor: pointer;
-  background-color: #777;
-  border: 0.25em solid #777;
-  color: #bbb;
-}
-input[type='radio'].checked + .radio-btn-label,
-input[type='radio']:checked + .radio-btn-label {
-  color: #fff;
-  background-color: #18758f;
-  border-color: #18758f;
-}
-.radio-btn-label .checked-icon {
-  visibility: hidden;
-  color: #57D982;
-}
-input[type='radio'].checked + .radio-btn-label .checked-icon,
-input[type='radio']:checked + .radio-btn-label .checked-icon {
-  visibility: visible;
-}
 
 /* Alerts*/
 .alert {
@@ -369,6 +356,9 @@ input[type='radio']:checked + .radio-btn-label .checked-icon {
 /* =Layout
 -------------------------------------------------------------- */
 
+html, body {
+  min-height: 100%;
+}
 #page {
   background-color: #eee;
   color: #666;
@@ -610,6 +600,44 @@ li.event {
 }
 
 
+/* =Modal Overlay
+-------------------------------------------------------------- */
+
+.overlay {
+  *background: #666;
+  background: rgba(100,100,100,0.8);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 600;
+  padding: 1em;
+}
+.modal {
+  background: #fff;
+  max-width: 28em;
+  max-height: 100%;
+  overflow: scroll;
+  padding: 1em;
+  margin: 0 auto;
+  border-radius: 0.25em;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.modal-head {
+  margin: -1em -1em 1em;
+  padding: 1em;
+  background: #eee;
+}
+.modal-header {
+  margin-bottom: 0;
+}
+.modal-body {  
+}
+
+
 /* =Media Queries for Responsive Layout
 -------------------------------------------------------------- */
 
@@ -675,5 +703,11 @@ li.event {
     margin-left: 150px;
     padding-top: 0.25em;
     padding-left: 1.5em;
+  }
+  .overlay {
+    padding: 3em;
+  }
+  .modal {
+    border-radius: 0.375em;
   }
 }

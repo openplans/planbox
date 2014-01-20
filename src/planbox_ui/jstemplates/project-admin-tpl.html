@@ -1,62 +1,88 @@
-<div class="logged-in">
+<div class="admin-bar clearfix">
+  <nav class="user-nav">
+    <a href="#" class="user-menu-link user-link"><strong>Username</strong></a>
+    <ul class="user-menu unstyled-list">
+      <!-- TODO: .toggleClass('is-open') on .user-menu when .user-menu-link (or a menu item) is clicked -->
+      <li><a href="#">My Projects</a></li>
+      <li><a href="#">Sign Out</a></li>
+    </ul>
+  </nav>
 
-  <div class="admin-bar clearfix">
-    <nav class="user-nav">
-      <a href="#" class="user-menu-link user-link"><strong>Username</strong></a>
-      <ul class="user-menu unstyled-list">
-        <!-- TODO: .toggleClass('is-open') on .user-menu when .user-menu-link (or a menu item) is clicked -->
-        <li><a href="#">My Projects</a></li>
-        <li><a href="#">Sign Out</a></li>
-      </ul>
-    </nav>
-    <form action="" class="project-visibility-form">
-      <input type="radio" data-attr="public" name="project-public" value="false" id="private-radio-btn" class="is-visuallyhidden"{{^if public}} checked{{/if}}><label for="private-radio-btn" class="radio-btn-label"><span class="checked-icon">&#10004;</span> Private</label>
-      <input type="radio" data-attr="public" name="project-public" value="true" id="public-radio-btn" class="is-visuallyhidden"{{#if public}} checked{{/if}}><label for="public-radio-btn" class="radio-btn-label"><span class="checked-icon">&#10004;</span> Public</label>
-      <!-- TODO: Q: Should there be a confirmation alert when switching project visibility? -->
-    </form>
-    <a href="#" class="save-btn btn btn-disabled">Save Project</a>
-   </div>
+  {{#if public}}
+  <div class="project-visibility"><span class="checked-icon">&#10004;</span>&nbsp;This Project is Public</div>
+  {{else}}
+  <div class="project-visibility"><span class="checked-icon unchecked">&#10004;</span>&nbsp;This Project is Private</small></div>
+  {{/if}}
 
-  <header class="site-header" style="background-image:url({{ STATIC_URL }}images/pedestrians.jpg);">
-    <div class="container">
-      <h2 class="step step-title">Step 1: <small>Let's give your project a title.</small></h2>
-      <h1 class="site-title content-editable" data-attr="title" contenteditable>{{ title }}</h1>
+  <a href="#" class="save-btn btn btn-disabled">Save Project</a>
+ </div>
+
+<header class="site-header" style="background-image:url({{ STATIC_URL }}images/pedestrians.jpg);">
+  <div class="container">
+    {{^if title }}<h2 class="step step-title">Step 1: <small>Let's give your project a title.</small></h2>{{/if}}
+    <h1 class="site-title content-editable" data-attr="title" contenteditable>{{ title }}</h1>
+  </div>
+</header>
+
+<section class="project-details">
+  <div class="container">
+    {{^if status}}<h2 class="step step-status">Step 2: <small>Set the current status.</small></h2>{{/if}}
+    <p class="project-status project-status-active content-editable">
+      <strong>{{ status }}</strong>
+      <select class="status-selector" data-attr="status">
+        <option value="not-started">Not Started</option>
+        <option value="active" selected="selected">Active</option>
+        <option value="complete">Complete</option>
+      </select>
+    </p>
+    {{^if location}}<h2 class="step step-location">Step 3: <small>Where is your project located?</small></h2>{{/if}}
+    <p class="project-location content-editable" data-attr="location" contenteditable>{{ location }}</p>
+    {{^if description}}<h2 class="step step-description">Step 4: <small>Give a short description of your project.</small></h2>{{/if}}
+    <p class="project-description content-editable" data-attr="description" contenteditable>{{ description }}</p>
+  </div>
+</section>
+
+<section class="project-timeline">
+  <div class="container">
+    <!-- TODO: hide this if there are events -->
+    <h2 class="step step-timeline">Step 5: <small>Add events to your project timeline.</small></h2>
+    <ol class="event-list unstyled-list"></ol>
+    <br>
+    <a href="#" class="btn add-event-btn">Add Event</a>
+  </div>
+</section>
+
+<footer class="site-colophon">
+  <div class="container">
+    {{^if contact}}<h2 class="step step-contact-info">Step 6: <small>Enter your contact information.</small></h2>{{/if}}
+    <p class="project-contact-info content-editable" data-attr="contact" contenteditable>{{ contact }}</p>
+    <p class="powered-by">{{#_}}Powered by <a href="index.html">Planbox</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
+  </div>
+</footer>
+
+<!-- TODO: insert the modal w/ .js instead of hardcoding it -->
+<div class="overlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 class="modal-header"><span class="checked-icon">&#10004;</span> Project Saved.</h3>
     </div>
-  </header>
-
-  <section class="project-details">
-    <div class="container">
-      <h2 class="step step-status">Step 2: <small>Set the current status.</small></h2>
-      <p class="project-status project-status-active content-editable">
-        <strong>{{ status }}</strong>
-        <select class="status-selector" data-attr="status">
-          <option value="not-started">Not Started</option>
-          <option value="active" selected="selected">Active</option>
-          <option value="complete">Complete</option>
-        </select>
-      </p>
-      <h2 class="step step-location">Step 3: <small>Where is your project located?</small></h2>
-      <p class="project-location content-editable" data-attr="location" contenteditable>{{ location }}</p>
-      <h2 class="step step-description">Step 4: <small>Give a short description of your project.</small></h2>
-      <p class="project-description content-editable" data-attr="description" contenteditable>{{ description }}</p>
+    <div class="modal-body">
+      <h5>But it's still private.</h5>
+      <p>This project is only visible to you when you're signed in. When you're ready for everyone to see it&hellip;</p>
+      <p><a href="#" class="btn btn-large btn-block">Make this project public</a></p>
+      <hr>
+      <p style="text-align:right;"><a href="#" class="btn btn-small btn-secondary">Continue Editing</a></p>
     </div>
-  </section>
-
-  <section class="project-timeline">
-    <div class="container">
-      <h2 class="step step-timeline">Step 5: <small>Add events to your project timeline.</small></h2>
-      <ol class="event-list unstyled-list"></ol>
-      <br>
-      <a href="#" class="btn add-event-btn">Add Event</a>
-    </div>
-  </section>
-
-  <footer class="site-colophon">
-    <div class="container">
-      <h2 class="step step-contact-info">Step 6: <small>Enter your contact information.</small></h2>
-      <p class="project-contact-info content-editable" data-attr="contact" contenteditable>{{ contact }}</p>
-      <p class="powered-by">{{#_}}Powered by <a href="index.html">Planbox</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
-    </div>
-  </footer>
-
+    <!-- <div class="modal-body">
+      <h5>But you're not done yet!</h5>
+      <p>Be sure to publicize this project on social networks, mailing lists, your own website&hellip;</p>
+      <span class='st_facebook_large' displayText='Facebook'></span>
+      <span class='st_twitter_large' displayText='Tweet'></span>
+      <span class='st_googleplus_large' displayText='Google +'></span>
+      <span class='st_pinterest_large' displayText='Pinterest'></span>
+      <span class='st_email_large' displayText='Email'></span>
+      <hr>
+      <p style="text-align:right;"><a href="#" class="btn btn-small btn-secondary">Continue Editing</a></p>
+    </div> -->
+  </div>
 </div>
