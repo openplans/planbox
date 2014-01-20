@@ -293,6 +293,9 @@
 .handle:hover {
 	color: #ccc;
 }
+.event:first-child.event:last-child .handle {
+  display: none;
+}
 .handle:hover:before {
   position: absolute;
   top: 50%;
