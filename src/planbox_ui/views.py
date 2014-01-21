@@ -11,8 +11,8 @@ from django.shortcuts import redirect
 from django.shortcuts import resolve_url
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
-from django.views.generic import TemplateView, FormView
-from planbox_data.models import Project
+from django.views.generic import TemplateView, FormView, DetailView
+from planbox_data.models import Project, User, Organization
 from planbox_data.serializers import ProjectSerializer, UserSerializer
 
 
@@ -65,22 +65,34 @@ class ProjectView (TemplateView):
         context = super(ProjectView, self).get_context_data(**kwargs)
 
         if (self.request.user.is_authenticated()):
-            user_serializer = UserSerializer(self.request.user.planbox_user)
-            context['user_data'] = user_serializer.data
+            try:
+                user_profile = self.request.user.planbox_profile
+            except User.DoesNotExist:
+                user_profile = None
         else:
-            context['user_data'] = None
+            user_profile = None
 
+        user_serializer = UserSerializer(user_profile)
         project_serializer = ProjectSerializer(self.project)
 
+        context['user_data'] = None if user_profile is None else user_serializer.data
         context['project_data'] = project_serializer.data
-        context['is_owner'] = self.project.owned_by(self.request.user)
+        context['is_owner'] = self.project.owned_by(user_profile)
+
         return context
 
     def get(self, request, owner_name, slug):
-        user_type = ContentType.objects.get(app_label='planbox_data', model='user')
-        owner_auth = AuthUser.objects.get(username=owner_name)
-        self.project = Project.objects.get(owner_type=user_type, owner_id=owner_auth.planbox_user.id, slug=slug)
-        return super(ProjectView, self).get(request, owner_name, slug)
+        owner_types = ContentType.objects.get_for_models(User, Organization)
+
+        try:
+            owner = User.objects.get(auth__username=owner_name)
+            owner_type = owner_types[User]
+        except User.DoesNotExist:
+            owner = get_object_or_404(Organization, name=owner_name)
+            owner_type = owner_types[Organization]
+
+        self.project = get_object_or_404(Project, owner_type=owner_type, owner_id=owner.pk, slug=slug)
+        return super(ProjectView, self).get(request, pk=self.project.pk)
 
 
 class NewProjectView (LoginRequired, TemplateView):
@@ -89,11 +101,11 @@ class NewProjectView (LoginRequired, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(NewProjectView, self).get_context_data(**kwargs)
 
-        user_serializer = UserSerializer(self.request.user.planbox_user)
-
+        user_serializer = UserSerializer(self.request.user.planbox_profile)
         context['project_data'] = {}
         context['user_data'] = user_serializer.data
         context['is_owner'] = True
+
         return context
 
     def get(self, request, owner_name):
@@ -103,13 +115,14 @@ class NewProjectView (LoginRequired, TemplateView):
 
         owner_auth = get_object_or_404(AuthUser, username=owner_name)
 
-        # Check whether the user has an existing project and redirect there.
-        try:
-            project = owner_auth.planbox_user.projects.all()[0]
-        except IndexError:
-            pass
-        else:
-            return redirect('app-project', owner_name=owner_name, slug=project.slug)
+        if 'force_new' not in request.GET:
+            # Check whether the user has an existing project and redirect there.
+            try:
+                project = owner_auth.planbox_profile.projects.all()[0]
+            except IndexError:
+                pass
+            else:
+                return redirect('app-project', owner_name=owner_name, slug=project.slug)
 
         return super(NewProjectView, self).get(request, owner_name)
 

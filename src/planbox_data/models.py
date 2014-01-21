@@ -68,7 +68,7 @@ class Project (models.Model):
     def owned_by(self, obj):
         if isinstance(obj, AuthUser):
             try:
-                obj = obj.planbox_user
+                obj = obj.planbox_profile
             except User.DoesNotExist:
                 return False
 
@@ -107,6 +107,10 @@ class Organization (models.Model):
     name = models.CharField(max_length=128)
     projects = generic.GenericRelation(Project, content_type_field='owner_type', object_id_field='owner_id')
 
+    class Meta:
+        verbose_name = 'Organization Profile'
+        verbose_name_plural = 'Organization Profiles'
+
     def __str__(self):
         return self.name
 
@@ -118,11 +122,15 @@ class UserManager (models.Manager):
 
 @python_2_unicode_compatible
 class User (models.Model):
-    auth = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='planbox_user', help_text=_("The authentication account to use for this user"))
+    auth = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='planbox_profile', help_text=_("The authentication account to use for this user"))
     projects = generic.GenericRelation(Project, content_type_field='owner_type', object_id_field='owner_id')
     organizations = models.ManyToManyField(Organization, related_name='members', blank=True)
 
     objects = UserManager()
+
+    class Meta:
+        verbose_name = 'User Profile'
+        verbose_name_plural = 'User Profiles'
 
     def __str__(self):
         return self.auth.username

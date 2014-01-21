@@ -18,14 +18,14 @@ class IsOwnerOrReadOnly (permissions.BasePermission):
             return False
 
         try:
-            user = auth.planbox_user
+            profile = auth.planbox_profile
         except models.User.DoesNotExist:
-            user = None
+            profile = None
         
-        if user is None:
+        if profile is None:
             return False
 
-        return obj.owner == user
+        return obj.owner == profile
 
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:

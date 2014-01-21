@@ -4,7 +4,7 @@ from nose.tools import assert_equal
 
 from django.contrib.auth.models import User as AuthUser, AnonymousUser
 from planbox_data.models import User, Project, Event
-from planbox_ui.views import new_project_view
+from planbox_ui.views import project_view, new_project_view
 
 
 class PlanBoxUITestCase (TestCase):
@@ -73,18 +73,81 @@ class NewProjectViewTests (PlanBoxUITestCase):
         assert_equal(response.url, project_url)
 
 
-# class ProjectDetailsTests (PlanBoxUITestCase):
-#     def test_anon_gets_non_editable_details(self):
-#         auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
-#         owner = User.objects.create(auth=auth)
-#         project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
+class ProjectDetailViewTests (PlanBoxUITestCase):
+    def test_anon_gets_non_editable_details(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        owner = User.objects.create(auth=auth)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
 
-#         kwargs = {
-#             'owner_name': 'mjumbewu',
-#             'slug': 'test-slug'
-#         }
+        kwargs = {
+            'owner_name': 'mjumbewu',
+            'slug': 'test-slug'
+        }
 
-#         url = reverse('app-project', kwargs=kwargs)
-#         response = self.client.get(url)
+        url = reverse('app-project', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = AnonymousUser()
+        response = project_view(request, **kwargs)
 
-#         assert_equal(response.status_code, 200)
+        assert_equal(response.status_code, 200)
+        assert_equal(response.context_data.get('is_owner'), False)
+
+    def test_non_planbox_user_gets_non_editable_details(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        owner = User.objects.create(auth=auth)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
+
+        kwargs = {
+            'owner_name': 'mjumbewu',
+            'slug': 'test-slug'
+        }
+
+        auth2 = AuthUser.objects.create_user(username='atogle', password='456')
+
+        url = reverse('app-project', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth2
+        response = project_view(request, **kwargs)
+
+        assert_equal(response.status_code, 200)
+        assert_equal(response.context_data.get('is_owner'), False)
+
+    def test_non_owner_gets_non_editable_details(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        owner = User.objects.create(auth=auth)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
+
+        kwargs = {
+            'owner_name': 'mjumbewu',
+            'slug': 'test-slug'
+        }
+
+        auth2 = AuthUser.objects.create_user(username='atogle', password='456')
+        owner2 = User.objects.create(auth=auth2)
+
+        url = reverse('app-project', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth2
+        response = project_view(request, **kwargs)
+
+        assert_equal(response.status_code, 200)
+        assert_equal(response.context_data.get('is_owner'), False)
+
+    def test_owner_gets_editable_details(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        owner = User.objects.create(auth=auth)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
+
+        kwargs = {
+            'owner_name': 'mjumbewu',
+            'slug': 'test-slug'
+        }
+
+        url = reverse('app-project', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth
+        response = project_view(request, **kwargs)
+
+        assert_equal(response.status_code, 200)
+        assert_equal(response.context_data.get('is_owner'), True)
+
