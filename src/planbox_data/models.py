@@ -5,6 +5,7 @@ from django.contrib import auth
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.db import models
+from django.db.models.signals import post_save
 from django.utils.text import slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
@@ -23,6 +24,14 @@ def uniquify_slug(slug, existing_slugs):
             return new_slug
         else:
             uniquifier += 1
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+    auth = instance
+    if created:
+        profile = User(auth=auth)
+        profile.save()
+post_save.connect(create_user_profile, sender=AuthUser, dispatch_uid="user-profile-creation-signal")
 
 
 @python_2_unicode_compatible
