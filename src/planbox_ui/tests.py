@@ -1,10 +1,11 @@
+from django.contrib.sessions.backends.cache import SessionStore
 from django.core.urlresolvers import reverse
 from django.test import TestCase, RequestFactory
 from nose.tools import assert_equal
 
 from django.contrib.auth.models import User as AuthUser, AnonymousUser
 from planbox_data.models import User, Project, Event
-from planbox_ui.views import project_view, new_project_view
+from planbox_ui.views import project_view, new_project_view, signup_view, signin_view
 
 
 class PlanBoxUITestCase (TestCase):
@@ -19,6 +20,42 @@ class PlanBoxUITestCase (TestCase):
         User.objects.all().delete()
         Project.objects.all().delete()
         Event.objects.all().delete()
+
+
+class SignupViewTests (PlanBoxUITestCase):
+    def test_user_is_redirected_home_on_successful_signup(self):
+        url = reverse('app-signup')
+
+        user_data = {
+            'username': 'mjumbewu',
+            'password': '123',
+            'email': 'mjumbewu@example.com',
+        }
+
+        request = self.factory.post(url, data=user_data)
+        request.user = AnonymousUser()
+        request.session = SessionStore('session')
+        response = signup_view(request)
+        assert_equal(response.status_code, 302)
+        assert_equal(response.url, reverse('app-new-project', kwargs={'owner_name': 'mjumbewu'}))
+
+
+class SigninViewTests (PlanBoxUITestCase):
+    def test_user_is_redirected_home_on_successful_signin(self):
+        AuthUser.objects.create_user(username='mjumbewu', password='123')
+        url = reverse('app-signin')
+
+        user_data = {
+            'username': 'mjumbewu',
+            'password': '123',
+        }
+
+        request = self.factory.post(url, data=user_data)
+        request.user = AnonymousUser()
+        request.session = SessionStore('session')
+        response = signin_view(request)
+        assert_equal(response.status_code, 302)
+        assert_equal(response.url, reverse('app-new-project', kwargs={'owner_name': 'mjumbewu'}))
 
 
 class NewProjectViewTests (PlanBoxUITestCase):
