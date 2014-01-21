@@ -46,14 +46,15 @@ class SigninView (FormView):
 
     def get_success_url(self):
         # Ensure the user-originating redirection url is safe.
-        redirect_to = self.request.REQUEST.get('next', '')
+        redirect_to = self.request.REQUEST.get('next', resolve_url('app-new-project', owner_name=self.username))
         if not is_safe_url(url=redirect_to, host=self.request.get_host()):
             redirect_to = resolve_url(settings.LOGIN_REDIRECT_URL)
         return redirect_to
 
     def form_valid(self, form):
         # Okay, security check complete. Log the user in.
-        login(self.request, form.get_user())
+        self.username = form.get_user()
+        login(self.request, self.username)
         return super(SigninView, self).form_valid(form)
 
 
