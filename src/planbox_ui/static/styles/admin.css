@@ -147,14 +147,10 @@
   background-color: rgba(245,255,140,0.8);
   color: #666;
   font-size: 1.25em;
-  font-weight: 400;
   text-shadow: none;
-  padding: 0.25em 0.5em;
+  padding: 0.5em 0.75em 0.625em;
   border-radius: 0.25em 0.25em 0 0;
   margin: 0.5em 0 0 0;
-}
-.step small {
-  font-weight: 800;
 }
 .step-title {
   margin-top: 0;
@@ -164,6 +160,10 @@
   margin-bottom: 0.5em;
   border-radius: 0.25em 0 0.25em 0.25em;
   float: right;
+  width: 100%;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .step-description {
   margin-top: 1.5em;
@@ -424,6 +424,11 @@
   .user-menu:before,
   .user-menu:after {
     right: 2em;
+  }
+  .step-status {
+    float: right;
+    padding-left: 1.25em;
+    width: auto;
   }
 
 }
