@@ -170,12 +170,14 @@
 }
 .step-timeline {
   margin-bottom: 0.75em;
+  border-radius: 0.25em 0.25em 0.25em 0;
 }
 
 .step-title:before,
 .step-location:before,
 .step-description:before,
-.step-contact-info:before {
+.step-contact-info:before,
+.step-copy-url:before {
   content: '\2939';
   position: relative;
   top: 0.25em;
@@ -184,6 +186,13 @@
 .step-status:after {
   content: '\2934';
   margin-left: 0.25em;
+}
+.step-copy-url {
+  float: left;
+  padding-right: 1em;
+/*  background-color: #777;*/
+/*  color: #fff;*/
+  font-size: 1em;
 }
 
 /* Editing Prompts */
@@ -367,6 +376,22 @@
 }
 .status-selector {
   cursor: pointer;
+}
+
+
+/* =Modals
+-------------------------------------------------------------- */
+
+.copy-url-input {
+  font-size: 1.5em;
+  font-weight: 800;
+  display: block;
+  margin: 0 0 0.375em;
+  padding: 0.25em;
+  width: 100%;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 
 
