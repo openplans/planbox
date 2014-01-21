@@ -30,14 +30,20 @@ class SignupViewTests (PlanBoxUITestCase):
             'username': 'mjumbewu',
             'password': '123',
             'email': 'mjumbewu@example.com',
+            'affiliation': 'OpenPlans',
         }
 
         request = self.factory.post(url, data=user_data)
         request.user = AnonymousUser()
         request.session = SessionStore('session')
         response = signup_view(request)
+
+        # If you get a 200 here, it's probably because of wrong form data.
         assert_equal(response.status_code, 302)
         assert_equal(response.url, reverse('app-new-project', kwargs={'owner_name': 'mjumbewu'}))
+
+        user_profile = User.objects.get(auth__username='mjumbewu')
+        assert_equal(user_profile.affiliation, 'OpenPlans')
 
 
 class SigninViewTests (PlanBoxUITestCase):

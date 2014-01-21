@@ -23,6 +23,7 @@ class UserCreationForm(forms.ModelForm):
                          "@/./+/-/_ characters.")})
     password = forms.CharField(label=_("Password"),
         widget=forms.PasswordInput)
+    affiliation = forms.CharField(label=_("Organizational Affiliation"), max_length=256)
 
     class Meta:
         model = AuthUser
@@ -46,6 +47,8 @@ class UserCreationForm(forms.ModelForm):
         auth.set_password(self.cleaned_data["password"])
         if commit:
             auth.save()
+            auth.planbox_profile.affiliation = self.cleaned_data["affiliation"]
+            auth.planbox_profile.save()
 
             # TODO: Send welcome email
 

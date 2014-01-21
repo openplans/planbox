@@ -134,6 +134,7 @@ class User (models.Model):
     auth = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='planbox_profile', help_text=_("The authentication account to use for this user"))
     projects = generic.GenericRelation(Project, content_type_field='owner_type', object_id_field='owner_id')
     organizations = models.ManyToManyField(Organization, related_name='members', blank=True)
+    affiliation = models.CharField(max_length=256, blank=True, default='')
 
     objects = UserManager()
 
