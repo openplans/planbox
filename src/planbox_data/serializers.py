@@ -14,6 +14,9 @@ class EventSerializer (serializers.ModelSerializer):
         # If this is being used as a field, respect the order of the items.
         # Renumber the index values to reflect the incoming order.
         if self.many and field_name in into:
+            if not isinstance(into.get(field_name), (list, tuple)):
+                raise serializers.ValidationError("must be an array")
+
             for index, event in enumerate(into[field_name]):
                 event.index = index
 

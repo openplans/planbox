@@ -231,6 +231,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
 
     def test_invalid_project_does_not_raise_exception(self):
         serializer = ProjectSerializer(data={
+            # Title and owner is required
             'events': [
                 {'label': 'test label 1'},
                 {'label': 'test label 2'},
@@ -240,6 +241,43 @@ class ProjectSerializerTests (PlanBoxTestCase):
 
         ok_(not serializer.is_valid())
 
+    def test_null_events_are_invalid_for_new_project(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        user = auth.planbox_profile
+
+        serializer = ProjectSerializer(data={
+            'slug': 'test-slug',
+            'title': 'test title',
+            'location': 'test location',
+            'description': 'test description',
+            'events': None,
+            'owner_type': 'user',
+            'owner_id': user.pk
+        })
+
+        ok_(not serializer.is_valid())
+        assert_in('events', serializer.errors)
+
+    def test_null_events_are_invalid_for_existing_project(self):
+        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        user = auth.planbox_profile
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=user)
+        Event.objects.create(label='test label 1', project=project),
+        Event.objects.create(label='test label 3', project=project),
+
+        serializer = ProjectSerializer(project, data={
+            'id': project.pk,
+            'slug': 'test-slug',
+            'title': 'test new title',
+            'location': 'test location',
+            'description': 'test description',
+            'events': None,
+            'owner_type': 'user',
+            'owner_id': user.pk
+        })
+
+        ok_(not serializer.is_valid())
+        assert_in('events', serializer.errors)
 
 
 class OwnerPermissionTests (PlanBoxTestCase):
