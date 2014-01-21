@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Handlebars _ */
+/*globals Backbone jQuery Handlebars Modernizr _ */
 
 var Planbox = Planbox || {};
 
@@ -137,7 +137,26 @@ var Planbox = Planbox || {};
     },
     handleSave: function(evt) {
       evt.preventDefault();
-      this.model.save();
+      var self = this;
+
+      this.model.save(null, {
+        success: function(model) {
+          var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
+
+          if (window.location.pathname !== path) {
+            if (Modernizr.history) {
+              window.history.pushState('', '', path);
+            } else {
+              window.location = path;
+            }
+          }
+
+          self.render();
+        },
+        error: function() {
+          window.alert('Unable to save your project. Please try again.');
+        }
+      });
       this.ui.saveBtn.addClass('btn-disabled');
     },
     handleAddClick: function(evt) {

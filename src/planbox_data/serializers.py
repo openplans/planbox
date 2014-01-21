@@ -27,5 +27,7 @@ class ProjectSerializer (serializers.ModelSerializer):
 
 
 class UserSerializer (serializers.ModelSerializer):
+    username = serializers.CharField(source='auth.username')
+
     class Meta:
         model = models.User
