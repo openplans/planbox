@@ -499,6 +499,7 @@ a.login-link {
 .project-location {
   position: relative;
   margin-bottom: 0;
+  font-size: 1.375em;
   font-weight: 100;
   text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
   float: left;
