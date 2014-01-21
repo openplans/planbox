@@ -482,7 +482,7 @@ a.login-link {
   text-align: center;
   line-height: 1.25;
   padding: 0.375em 0;
-  background: #ddd;
+  background: #aaa;
   margin: -0.5em -0.5em 1em -0.5em;
   position: relative;
 }
@@ -490,9 +490,6 @@ a.login-link {
   text-transform: uppercase;
   text-shadow: 0 0 3px rgba(0,0,0,0.25);
   font-size: 1.25em;
-}
-.project-status-active {
-  background: #57D982;
   color: #fff;
 }
 
