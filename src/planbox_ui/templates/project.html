@@ -54,10 +54,16 @@ All about the Main Street Pedestrian Improvements
     Planbox.Data = {
       project: {{ project_data|as_json }},
       user: {{ user_data|as_json }},
-      isOwner: {{ is_owner|as_json }}
+      isOwner: {{ is_owner|as_json }},
+      statuses: [
+        { 'value': 'not-started', 'label': 'Not Started'},
+        { 'value': 'active', 'label': 'Active'},
+        { 'value': 'complete', 'label': 'Complete'}
+      ]
     };
   </script>
 
+  <script src="{{ STATIC_URL }}scripts/handlebars-helpers.js"></script>
   <script src="{{ STATIC_URL }}scripts/models.js"></script>
   <script src="{{ STATIC_URL }}scripts/views.js"></script>
   <script src="{{ STATIC_URL }}scripts/app.js"></script>

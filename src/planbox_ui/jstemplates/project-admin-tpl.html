@@ -27,12 +27,16 @@
 <section class="project-details">
   <div class="container">
     {{^if status}}<h2 class="step step-status">Set the current status.</h2>{{/if}}
-    <p class="project-status project-status-active content-editable">
-      <strong>{{ status }}</strong>
+    <p class="project-status content-editable">
+      <strong>
+        {{ status_label status }}
+      </strong>
       <select class="status-selector" data-attr="status">
-        <option value="not-started">Not Started</option>
-        <option value="active" selected="selected">Active</option>
-        <option value="complete">Complete</option>
+        {{# select status }}
+          {{# each_status}}
+            <option value="{{ value }}">{{ label }}</option>
+          {{/ each_status}}
+        {{/ select }}
       </select>
     </p>
     {{^if location}}<h2 class="step step-location">Where is your project located?</h2>{{/if}}

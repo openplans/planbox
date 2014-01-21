@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Handlebars */
+/*globals Backbone jQuery Handlebars _ */
 
 var Planbox = Planbox || {};
 
@@ -116,9 +116,9 @@ var Planbox = Planbox || {};
       evt.preventDefault();
 
       this.ui.statusLabel
-        .removeClass('project-status-not-started project-status-active project-status-complete')
-        .addClass('project-status-'+val)
-        .find('strong').text(val);
+        // .removeClass('project-status-not-started project-status-active project-status-complete')
+        // .addClass('project-status-'+val)
+        .find('strong').text(_.findWhere(NS.Data.statuses, {'value': val}).label);
 
       this.model.set(attr, val);
     },
