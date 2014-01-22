@@ -11,7 +11,8 @@ class UserCreationForm(forms.ModelForm):
     requires a single password field, and also accepts an email address.
     """
     error_messages = {
-        'duplicate_username': _("A user with that username already exists."),
+        'duplicate_email': _("A user with the email address \"%s\" already exists. Please contact us if you've forgotten your login information."),
+        'duplicate_username': _("A user with the username \"%s\" already exists."),
     }
     email = forms.EmailField(label=_("Email"), max_length=254)
     username = forms.RegexField(label=_("Username"), max_length=30,
@@ -29,6 +30,20 @@ class UserCreationForm(forms.ModelForm):
         model = UserAuth
         fields = ("username", "email")
 
+    def clean_email(self):
+        # If someone has already signed up with a given email address, they
+        # probably just forgot they have an account, or forgot their account
+        # credentials.
+        email = self.cleaned_data["email"]
+        try:
+            UserAuth._default_manager.get(email__iexact=email)
+        except UserAuth.DoesNotExist:
+            return email
+        raise forms.ValidationError(
+            self.error_messages['duplicate_email'] % email,
+            code='duplicate_email',
+        )
+
     def clean_username(self):
         # Since User.username is unique, this check is redundant,
         # but it sets a nicer error message than the ORM. See #13147.
@@ -38,7 +53,7 @@ class UserCreationForm(forms.ModelForm):
         except UserAuth.DoesNotExist:
             return username
         raise forms.ValidationError(
-            self.error_messages['duplicate_username'],
+            self.error_messages['duplicate_username'] % username,
             code='duplicate_username',
         )
 
