@@ -4,8 +4,8 @@
 
 /* Typography */
 body {
-  background: #407280;
-  color: #fff;
+  background-color: #eee;
+  color: #666;
   font-family: 'Alegreya Sans', sans-serif;
   font-weight: 400;
   line-height: 1.5;
@@ -105,7 +105,7 @@ img {
   vertical-align: middle;
   cursor: pointer;
   color: #fff;
-  text-decoration: none;
+  text-decoration: none !important;
   text-transform: uppercase;
   background-color: #268099;
   font-weight: 800;
@@ -260,11 +260,6 @@ textarea {
   padding: 0.625em;
   margin: 0 0 1.25em;
   position: relative;
-  float: left;
-  width: 100%;
-	-webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
 }
 .alert-error {
   background-color: #D91616;
@@ -359,10 +354,7 @@ textarea {
 html, body {
   min-height: 100%;
 }
-#page {
-  background-color: #eee;
-  color: #666;
-}
+#page {}
 .container {
   position: relative;
   max-width: 44em;
@@ -482,7 +474,7 @@ a.login-link {
   text-align: center;
   line-height: 1.25;
   padding: 0.375em 0;
-  background: #ddd;
+  background: #aaa;
   margin: -0.5em -0.5em 1em -0.5em;
   position: relative;
 }
@@ -490,15 +482,13 @@ a.login-link {
   text-transform: uppercase;
   text-shadow: 0 0 3px rgba(0,0,0,0.25);
   font-size: 1.25em;
-}
-.project-status-active {
-  background: #57D982;
   color: #fff;
 }
 
 .project-location {
   position: relative;
   margin-bottom: 0;
+  font-size: 1.375em;
   font-weight: 100;
   text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
   float: left;

@@ -4,12 +4,10 @@
 
 <section class="main">
   <div class="container">
-    <div class="alert">I'm just a generic alert. You can give me colors and icons with classes: alert-error, alert-success, alert-warning.</div>
-    <div class="alert alert-success">Awesome! You've completed the taks perfectly. Keep up the good work.</div>
-    <div class="alert alert-warning">I'm just a warning. Best check yo self, you're not looking too good.</div>
-    <div class="alert alert-error">Your username or password was not recognized. Please try again.</div>
-    <div class="alert alert-error alert-dismissable">I am a dismissable error. I have a close button. <a href="#" class="close">&times;</a></div>
-    <p style="float:right;"><small><a href="/password-reset">Lost your password?</a></small></p>
+    {% if form.non_field_errors %}
+    <div class="alert alert-error"><strong>{{ form.non_field_errors.as_text|slice:"2:" }}</strong></div>
+    {% endif %}
+
     <h3>Sign In</h3>
     <form method="POST">
       {% csrf_token %}

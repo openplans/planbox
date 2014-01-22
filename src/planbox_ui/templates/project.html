@@ -54,10 +54,16 @@ All about the Main Street Pedestrian Improvements
     Planbox.Data = {
       project: {{ project_data|as_json }},
       user: {{ user_data|as_json }},
-      isOwner: {{ is_owner|as_json }}
+      isOwner: {{ is_owner|as_json }},
+      statuses: [
+        { 'value': 'not-started', 'label': 'Not Started'},
+        { 'value': 'active', 'label': 'Active'},
+        { 'value': 'complete', 'label': 'Complete'}
+      ]
     };
   </script>
 
+  <script src="{{ STATIC_URL }}scripts/handlebars-helpers.js"></script>
   <script src="{{ STATIC_URL }}scripts/models.js"></script>
   <script src="{{ STATIC_URL }}scripts/views.js"></script>
   <script src="{{ STATIC_URL }}scripts/app.js"></script>
@@ -66,29 +72,4 @@ All about the Main Street Pedestrian Improvements
   {% endif %}
 
   {% handlebarsjs '(.*)' precompile register_partials %}
-<!--
-<script>
-  $( document ).ready(function() {
-
-    if (window.location.hash == "#admin") {
-      $('.project-header').addClass('logged-in').before('<div class="admin-bar">Signed in as <a href="#"><strong>Username</strong></a>. <a href="#" class="logout">Sign Out</a></div>');
-      $('.project-colophon').after('<div class="save-bar"><div class="container"><a href="#" class="save-btn btn btn-block btn-large">Save Project</a></div></div>');
-      $('p:not(.project-status,.powered-by), h1, h2, h3, h4, h5, h6').attr('contenteditable','true').addClass('content-editable');
-      $('.event').addClass('draggable').append('<span class="handle">&#8801;</span>').append('<span class="delete"><span class="delete-icon">&times;</span> Delete</span>');
-      // $('.event-list').sortable({
-      //   handle: '.handle'
-      // });
-      $('.project-timeline .container').append('<a href="#" class="btn btn-small add-event-btn">Add Event</a>')
-      $('.project-status').append('<select class="status-selector"><option>Not Started</option><option selected="selected">Active</option><option>Complete</option></select>');
-    }
-
-  });
-</script>
--->
-
-<!-- AddThis scripts -->
-<script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher: "ur-cbe12a02-34b3-d267-5157-a64143172c52", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
-
 {% endblock %}

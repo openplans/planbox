@@ -99,6 +99,11 @@
 .user-menu a:hover {
   color: #fff;
 }
+
+
+/* =Save Button
+-------------------------------------------------------------- */
+
 .save-btn {
   float: left;
   margin: 0.5em 0 0 0;
@@ -106,6 +111,28 @@
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
+}
+
+@keyframes pulse {
+    0% { background-color: #E65CA1; }
+   50% { background-color: #FF80BF; }
+  100% { background-color: #E65CA1; }
+}
+@-webkit-keyframes pulse {
+    0% { background-color: #E65CA1; }
+	 50% { background-color: #FF80BF; }
+	100% { background-color: #E65CA1; }
+}
+.save-btn {
+  box-shadow: inset 0 0 1em #E65CA1;
+  -webkit-animation: pulse 1.5s infinite ease-in-out;
+          animation: pulse 1.5s infinite ease-in-out;
+}
+.save-btn.btn-disabled,
+.save-btn:hover {
+  box-shadow: none;
+  -webkit-animation: none;
+          animation: none;
 }
 
 
@@ -140,21 +167,30 @@
   z-index: 100;
 }
 
+.status-selector {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 0;
+  opacity: 0;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
 /* Project Steps */
 .step {
   clear: both;
   background-color: #F5FF8C;
   background-color: rgba(245,255,140,0.8);
   color: #666;
-  font-size: 1.25em;
-  font-weight: 400;
+  font-size: 1em;
   text-shadow: none;
-  padding: 0.25em 0.5em;
+  padding: 0.5em 0.75em 0.625em;
   border-radius: 0.25em 0.25em 0 0;
   margin: 0.5em 0 0 0;
-}
-.step small {
-  font-weight: 800;
 }
 .step-title {
   margin-top: 0;
@@ -164,18 +200,24 @@
   margin-bottom: 0.5em;
   border-radius: 0.25em 0 0.25em 0.25em;
   float: right;
+  width: 100%;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .step-description {
-  margin-top: 1.5em;
+  margin-top: 2.5em;
 }
 .step-timeline {
   margin-bottom: 0.75em;
+  border-radius: 0.25em 0.25em 0.25em 0;
 }
 
 .step-title:before,
 .step-location:before,
 .step-description:before,
-.step-contact-info:before {
+.step-contact-info:before,
+.step-copy-url:before {
   content: '\2939';
   position: relative;
   top: 0.25em;
@@ -185,9 +227,15 @@
   content: '\2934';
   margin-left: 0.25em;
 }
+.step-copy-url {
+  float: left;
+  padding-right: 1em;
+/*  background-color: #777;*/
+/*  color: #fff;*/
+  font-size: 1em;
+}
 
 /* Editing Prompts */
-.content-editable:empty:before,
 .content-editable:hover:before,
 .content-editable:focus:before {
   position: absolute;
@@ -208,7 +256,6 @@
   line-height: 2;
   white-space: nowrap;
 }
-.content-editable:empty:after,
 .content-editable:hover:after,
 .content-editable:focus:after {
   content: '';
@@ -224,44 +271,33 @@
   border-bottom-color: transparent;
   font-size: small;
 }
-.site-title:empty:before,
 .site-title:hover:before,
 .site-title:focus:before {
   content: 'Project Title';
 }
-.project-status:empty:before,
 .project-status:hover:before,
 .project-status:focus:before {
   content: 'Project Status';
 }
-.project-location:empty:before,
 .project-location:hover:before,
 .project-location:focus:before {
   content: 'Project Location';
 }
-.project-description:empty:before,
 .project-description:hover:before,
 .project-description:focus:before {
   content: 'Project Description';
 }
-.project-contact-info:empty:before,
 .project-contact-info:hover:before,
 .project-contact-info:focus:before {
-  content: 'Project Contact Info';
+  content: 'Contact Info';
 }
-.event-title:empty:before,
 .event-title:hover:before,
 .event-title:focus:before {
   content: 'Event Title';
 }
-.event-description:empty:before,
 .event-description:hover:before,
 .event-description:focus:before {
   content: 'Event Description';
-}
-.content-editable:empty:before,
-.content-editable:empty:after {
-  display: none;
 }
 .content-editable:hover:before,
 .content-editable:focus:before,
@@ -368,18 +404,20 @@
 }
 .delete-icon {}
 
-.status-selector {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border: 0;
-  opacity: 0;
-  -webkit-appearance: none;
-}
-.status-selector {
-  cursor: pointer;
+
+/* =Modals
+-------------------------------------------------------------- */
+
+.copy-url-input {
+  font-size: 1.5em;
+  font-weight: 800;
+  display: block;
+  margin: 0 0 0.375em;
+  padding: 0.25em;
+  width: 100%;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 
 
@@ -388,9 +426,12 @@
 
 @media only screen and (min-width: 44em) {
 
+  .project-visibility {
+    padding-right: 0.5em;
+  }
   .save-btn {
     float: left;
-    margin: 0 0 0 0.625em;
+    margin: 0;
     width: auto;
   	-webkit-box-sizing: content-box;
   	   -moz-box-sizing: content-box;
@@ -425,11 +466,18 @@
   .user-menu:after {
     right: 2em;
   }
+  .step {
+    font-size: 1.25em;
+  }
+  .step-status {
+    float: right;
+    padding-left: 1.25em;
+    width: auto;
+  }
 
 }
 
 @media only screen and (min-width: 60em) {
-  .content-editable:empty:before,
   .content-editable:hover:before,
   .content-editable:focus:before {
     display: block;
@@ -441,7 +489,6 @@
     border-radius: 0.5em 0 0 0.5em;
     min-width: 0;
   }
-  .content-editable:empty:after,
   .content-editable:hover:after,
   .content-editable:focus:after {
     display: block;

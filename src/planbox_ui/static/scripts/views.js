@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Handlebars */
+/*globals Backbone jQuery Handlebars Modernizr _ */
 
 var Planbox = Planbox || {};
 
@@ -39,6 +39,40 @@ var Planbox = Planbox || {};
     }
   };
 
+  NS.ProjectAdminModalView = Backbone.Marionette.ItemView.extend({
+    template: '#project-admin-modal-tpl',
+    className: 'overlay',
+    ui: {
+      closeBtn: '.btn-close',
+      makePublicBtn: '.btn-public',
+      makePublicContent: '.make-public-content',
+      shareContent: '.share-content'
+    },
+    events: {
+      'click @ui.closeBtn': 'handleClose',
+      'click @ui.makePublicBtn': 'handleMakePublic'
+    },
+    handleClose: function(evt) {
+      evt.preventDefault();
+      this.close();
+    },
+    handleMakePublic: function(evt) {
+      var self = this;
+
+      evt.preventDefault();
+
+      this.model.save({public: true}, {
+        success: function() {
+          self.ui.makePublicContent.addClass('is-hidden');
+          self.ui.shareContent.removeClass('is-hidden');
+        },
+        error: function() {
+          window.alert('Unable to make this public. Please try again.');
+        }
+      });
+    }
+  });
+
   NS.EventAdminView = Backbone.Marionette.ItemView.extend({
     template: '#event-admin-tpl',
     tagName: 'li',
@@ -58,8 +92,11 @@ var Planbox = Planbox || {};
     handleDeleteClick: function(evt) {
       evt.preventDefault();
 
-      if (window.confirm('Really delete "'+this.model.get('label')+'"?')) {
-        this.model.destroy();
+      if (window.confirm('Really delete?')) {
+        // I know this is weird, but calling destroy on the model will sync,
+        // and there's no url to support that since it's related to the project
+        // model. So we're just going to do the remove directly.
+        this.model.collection.remove(this.model);
       }
     }
   });
@@ -74,17 +111,21 @@ var Planbox = Planbox || {};
       statusSelector: '.status-selector',
       statusLabel: '.project-status',
       addBtn: '.add-event-btn',
-      visibilityToggle: '[name=project-public]'
+      visibilityToggle: '[name=project-public]',
+      userMenuLink: '.user-menu-link',
+      userMenu: '.user-menu'
     },
     events: {
       'blur @ui.editables': 'handleEditableBlur',
       'change @ui.statusSelector': 'handleStatusChange',
       'change @ui.visibilityToggle': 'handleVisibilityChange',
       'click @ui.saveBtn': 'handleSave',
-      'click @ui.addBtn': 'handleAddClick'
+      'click @ui.addBtn': 'handleAddClick',
+      'click @ui.userMenuLink': 'handleUserMenuClick'
     },
     modelEvents: {
-      'change': 'dataChanged'
+      'change': 'dataChanged',
+      'sync': 'onSync'
     },
     collectionEvents: {
       'change':  'dataChanged',
@@ -107,6 +148,11 @@ var Planbox = Planbox || {};
         }
       });
     },
+    onSync: function() {
+      // When the model is synced with the server, we're going to rerender
+      // the view to match the data.
+      this.render();
+    },
     handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
     handleStatusChange: function(evt) {
       var $target = $(evt.target),
@@ -116,9 +162,9 @@ var Planbox = Planbox || {};
       evt.preventDefault();
 
       this.ui.statusLabel
-        .removeClass('project-status-not-started project-status-active project-status-complete')
-        .addClass('project-status-'+val)
-        .find('strong').text(val);
+        // .removeClass('project-status-not-started project-status-active project-status-complete')
+        // .addClass('project-status-'+val)
+        .find('strong').text(_.findWhere(NS.Data.statuses, {'value': val}).label);
 
       this.model.set(attr, val);
     },
@@ -137,8 +183,34 @@ var Planbox = Planbox || {};
     },
     handleSave: function(evt) {
       evt.preventDefault();
-      this.model.save();
-      this.ui.saveBtn.addClass('btn-disabled');
+      var self = this,
+          $target = $(evt.target);
+
+      if (!$target.hasClass('btn-disabled')) {
+        this.model.save(null, {
+          success: function(model) {
+            var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
+
+            if (window.location.pathname !== path) {
+              if (Modernizr.history) {
+                window.history.pushState('', '', path);
+              } else {
+                window.location = path;
+              }
+            }
+
+            if (!model.get('public')) {
+              // Don't show the model if the project is already public
+              NS.app.overlayRegion.show(new NS.ProjectAdminModalView({
+                model: model
+              }));
+            }
+          },
+          error: function() {
+            window.alert('Unable to save your project. Please try again.');
+          }
+        });
+      }
     },
     handleAddClick: function(evt) {
       evt.preventDefault();
@@ -146,6 +218,10 @@ var Planbox = Planbox || {};
       this.collection.add({});
 
       this.$('.event-title.content-editable').focus();
+    },
+    handleUserMenuClick: function(evt) {
+      evt.preventDefault();
+      this.ui.userMenu.toggleClass('is-open');
     },
     dataChanged: function() {
       // Show the save button

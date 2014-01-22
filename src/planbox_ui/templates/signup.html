@@ -4,12 +4,25 @@
 
 <section class="main">
   <div class="container">
+    {% if form.errors.email %}
+    <div class="alert alert-error"><strong>{{ form.errors.email.as_text|slice:"2:" }}</strong></div>
+    {% elif form.errors.username %}
+    <div class="alert alert-error"><strong>{{ form.errors.username.as_text|slice:"2:" }}</strong></div>
+    {% endif %}
+
     <h3>Sign up for a Plan In A Box account!</h3>
     <p>Choose a username and password to create your account. Please note, the username you select will be publicly visible in your project URLs.</p>
-    <form>
-      <p><input required type="email" name="my-email" id="my-email" class="input-block" placeholder="email@example.org" tabindex="1"> <label for="my-email" class="float-label"><strong>Email</strong></label></p>
-      <p><input required type="text" name="my-username" id="my-username" class="input-block" placeholder="Username" pattern="[A-Za-z0-9-_]{1,30}" max="30" tabindex="2"> <label for="my-username" class="float-label"><strong>Username</strong></label></p>
-      <p><input required type="password" name="my-password" id="my-password" class="input-block" placeholder="Password" max="30" tabindex="3"><label for="my-password" class="float-label"><strong>Password</strong></label></p>
+    <form method="POST">
+      {% csrf_token %}
+
+      <p><input required type="email" name="email" id="my-email" class="input-block" placeholder="email@example.org" tabindex="1" value="{{ form.email.value|default_if_none:'' }}"> <label for="my-email" class="float-label"><strong>Email</strong></label></p>
+
+      <p><input required type="text" name="username" id="my-username" class="input-block" placeholder="Username" pattern="[A-Za-z0-9-_]{1,30}" max="30" tabindex="2" value="{{ form.username.value|default_if_none:'' }}"> <label for="my-username" class="float-label"><strong>Username</strong></label></p>
+
+      <p><input required type="password" name="password" id="my-password" class="input-block" placeholder="Password" max="30" tabindex="3"><label for="my-password" class="float-label"><strong>Password</strong></label></p>
+
+      <p><input required type="text" name="affiliation" id="my-affiliation" class="input-block" placeholder="Organizational Affiliation" max="256" tabindex="4" value="{{ form.affiliation.value|default_if_none:'' }}"> <label for="my-affiliation" class="float-label"><strong>Organizational Affiliation</strong></label></p>
+
       <p><input type="submit" value="Create Account" class="btn btn-large" tabindex="4"></p>
     </form>
     <p><small>By creating an account, you agree to our <a href="#">Terms of Service</a>.</small></p>

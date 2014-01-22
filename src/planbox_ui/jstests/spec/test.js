@@ -4,9 +4,9 @@
   'use strict';
   describe('models.js', function () {
 
-      it('should have a Planbox namespace', function () {
-        assert.isDefined(Planbox);
-      });
+    it('should have a Planbox namespace', function () {
+      assert.isDefined(Planbox);
+    });
 
     describe('EventCollection', function () {
       var c;

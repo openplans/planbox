@@ -5,11 +5,12 @@ from django.contrib import auth
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.db import models
+from django.db.models.signals import post_save
 from django.utils.text import slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
 
-AuthUser = auth.get_user_model()
+UserAuth = auth.get_user_model()
 
 
 def uniquify_slug(slug, existing_slugs):
@@ -23,6 +24,14 @@ def uniquify_slug(slug, existing_slugs):
             return new_slug
         else:
             uniquifier += 1
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+    auth = instance
+    if created:
+        profile = User(auth=auth)
+        profile.save()
+post_save.connect(create_user_profile, sender=UserAuth, dispatch_uid="user-profile-creation-signal")
 
 
 @python_2_unicode_compatible
@@ -66,9 +75,9 @@ class Project (models.Model):
         super(Project, self).save(*args, **kwargs)
 
     def owned_by(self, obj):
-        if isinstance(obj, AuthUser):
+        if isinstance(obj, UserAuth):
             try:
-                obj = obj.planbox_profile
+                obj = obj.profile
             except User.DoesNotExist:
                 return False
 
@@ -122,9 +131,10 @@ class UserManager (models.Manager):
 
 @python_2_unicode_compatible
 class User (models.Model):
-    auth = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='planbox_profile', help_text=_("The authentication account to use for this user"))
+    auth = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='profile', help_text=_("The authentication account to use for this user"))
     projects = generic.GenericRelation(Project, content_type_field='owner_type', object_id_field='owner_id')
     organizations = models.ManyToManyField(Organization, related_name='members', blank=True)
+    affiliation = models.CharField(max_length=256, blank=True, default='')
 
     objects = UserManager()
 

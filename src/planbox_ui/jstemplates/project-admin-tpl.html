@@ -1,51 +1,59 @@
 <div class="admin-bar clearfix">
   <nav class="user-nav">
-    <a href="#" class="user-menu-link user-link"><strong>Username</strong></a>
+    <a href="#" class="user-menu-link user-link"><strong>{{user 'username' }}</strong></a>
     <ul class="user-menu unstyled-list">
-      <!-- TODO: .toggleClass('is-open') on .user-menu when .user-menu-link (or a menu item) is clicked -->
-      <li><a href="#">My Projects</a></li>
-      <li><a href="#">Sign Out</a></li>
+      <li><a href="/{{user 'username' }}/new/">My Project</a></li>
+      <li><a href="/signout?next={{ window_location }}">Sign Out</a></li>
     </ul>
   </nav>
 
   {{#if public}}
-  <div class="project-visibility"><span class="checked-icon">&#10004;</span>&nbsp;This Project is Public</div>
+  <div class="project-visibility"><span class="checked-icon">&#10004;</span>&nbsp;Published.</div>
   {{else}}
-  <div class="project-visibility"><span class="checked-icon unchecked">&#10004;</span>&nbsp;This Project is Private</small></div>
+  <div class="project-visibility"><span class="checked-icon unchecked">&#10004;</span>&nbsp;Unpublished.</div>
   {{/if}}
 
-  <a href="#" class="save-btn btn btn-disabled">Save Project</a>
+  {{#if public}}
+  <a href="#" class="save-btn btn btn-secondary btn-disabled">Publish Changes</a>
+  {{else}}
+  <a href="#" class="save-btn btn btn-secondary btn-disabled">Save Draft</a>
+  {{/if}}
  </div>
 
-<header class="site-header" style="background-image:url({{ STATIC_URL }}images/pedestrians.jpg);">
+<header class="site-header">
   <div class="container">
-    {{^if title }}<h2 class="step step-title">Step 1: <small>Let's give your project a title.</small></h2>{{/if}}
+    {{^if title }}<h2 class="step step-title">Let's give your project a title.</h2>{{/if}}
     <h1 class="site-title content-editable" data-attr="title" contenteditable>{{ title }}</h1>
   </div>
 </header>
 
 <section class="project-details">
   <div class="container">
-    {{^if status}}<h2 class="step step-status">Step 2: <small>Set the current status.</small></h2>{{/if}}
-    <p class="project-status project-status-active content-editable">
-      <strong>{{ status }}</strong>
+    {{^if status}}<h2 class="step step-status">Set the current status.</h2>{{/if}}
+    <p class="project-status content-editable">
+      <strong>
+        {{ status_label status }}
+      </strong>
       <select class="status-selector" data-attr="status">
-        <option value="not-started">Not Started</option>
-        <option value="active" selected="selected">Active</option>
-        <option value="complete">Complete</option>
+        {{# select status }}
+          {{# each_status}}
+            <option value="{{ value }}">{{ label }}</option>
+          {{/ each_status}}
+        {{/ select }}
       </select>
     </p>
-    {{^if location}}<h2 class="step step-location">Step 3: <small>Where is your project located?</small></h2>{{/if}}
+    {{^if location}}<h2 class="step step-location">Where is it located?</h2>{{/if}}
     <p class="project-location content-editable" data-attr="location" contenteditable>{{ location }}</p>
-    {{^if description}}<h2 class="step step-description">Step 4: <small>Give a short description of your project.</small></h2>{{/if}}
+    {{^if description}}<h2 class="step step-description">Give it a short description.</h2>{{/if}}
     <p class="project-description content-editable" data-attr="description" contenteditable>{{ description }}</p>
   </div>
 </section>
 
 <section class="project-timeline">
   <div class="container">
-    <!-- TODO: hide this if there are events -->
-    <h2 class="step step-timeline">Step 5: <small>Add events to your project timeline.</small></h2>
+    {{^if events.length }}
+    <h2 class="step step-timeline">Add to the timeline.</h2>
+    {{/if}}
     <ol class="event-list unstyled-list"></ol>
     <br>
     <a href="#" class="btn add-event-btn">Add Event</a>
@@ -54,35 +62,18 @@
 
 <footer class="site-colophon">
   <div class="container">
-    {{^if contact}}<h2 class="step step-contact-info">Step 6: <small>Enter your contact information.</small></h2>{{/if}}
+    {{^if contact}}<h2 class="step step-contact-info">Provide contact information.</h2>{{/if}}
+
     <p class="project-contact-info content-editable" data-attr="contact" contenteditable>{{ contact }}</p>
+
+    <p>
+      {{#if public}}
+      <a href="#" class="save-btn btn btn-secondary btn-disabled">Publish Changes</a>
+      {{else}}
+      <a href="#" class="save-btn btn btn-secondary btn-disabled">Save Draft</a>
+      {{/if}}
+    </p>
+
     <p class="powered-by">{{#_}}Powered by <a href="index.html">Planbox</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
   </div>
 </footer>
-
-<!-- TODO: insert the modal w/ .js instead of hardcoding it -->
-<!-- <div class="overlay">
-  <div class="modal">
-    <div class="modal-head">
-      <h3 class="modal-header"><span class="checked-icon">&#10004;</span> Project Saved.</h3>
-    </div>
-    <div class="modal-body">
-      <h5>But it's still private.</h5>
-      <p>This project is only visible to you when you're signed in. When you're ready for everyone to see it&hellip;</p>
-      <p><a href="#" class="btn btn-large btn-block">Make this project public</a></p>
-      <hr>
-      <p style="text-align:right;"><a href="#" class="btn btn-small btn-secondary">Continue Editing</a></p>
-    </div> -->
-    <!-- <div class="modal-body">
-      <h5>But you're not done yet!</h5>
-      <p>Be sure to publicize this project on social networks, mailing lists, your own website&hellip;</p>
-      <span class='st_facebook_large' displayText='Facebook'></span>
-      <span class='st_twitter_large' displayText='Tweet'></span>
-      <span class='st_googleplus_large' displayText='Google +'></span>
-      <span class='st_pinterest_large' displayText='Pinterest'></span>
-      <span class='st_email_large' displayText='Email'></span>
-      <hr>
-      <p style="text-align:right;"><a href="#" class="btn btn-small btn-secondary">Continue Editing</a></p>
-    </div> -->
-  </div>
-</div>
