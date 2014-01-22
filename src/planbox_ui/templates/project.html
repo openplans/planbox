@@ -26,7 +26,7 @@ All about the Main Street Pedestrian Improvements
 
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/dist/style.min.css" type="text/css" media="screen, projection" />
   {% if is_owner %}
-  <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.min.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/dist/admin.min.css" type="text/css" media="screen, projection" />
   {% endif %}
 
   {% endif %}
@@ -48,6 +48,9 @@ All about the Main Street Pedestrian Improvements
   <script src="{{ STATIC_URL }}bower_components/backbone.marionette/lib/backbone.marionette.js"></script>
   <script src="{{ STATIC_URL }}bower_components/backbone-relational/backbone-relational.js"></script>
   <script src="{{ STATIC_URL }}bower_components/django-csrf.js/django-csrf.js"></script>
+  {% else %}
+  <script src="{{ STATIC_URL }}scripts/dist/components.min.js"></script>
+  {% endif %}
 
   <script>
     var Planbox = Planbox || {}
@@ -63,12 +66,13 @@ All about the Main Street Pedestrian Improvements
     };
   </script>
 
+  {% if debug %}
   <script src="{{ STATIC_URL }}scripts/handlebars-helpers.js"></script>
   <script src="{{ STATIC_URL }}scripts/models.js"></script>
   <script src="{{ STATIC_URL }}scripts/views.js"></script>
   <script src="{{ STATIC_URL }}scripts/app.js"></script>
   {% else %}
-  <script src="{{ STATIC_URL }}scripts/dist/components.min.js"></script>
+  <script src="{{ STATIC_URL }}scripts/dist/app.min.js"></script>
   {% endif %}
 
   {% handlebarsjs '(.*)' precompile register_partials %}

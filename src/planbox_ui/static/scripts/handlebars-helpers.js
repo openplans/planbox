@@ -3,6 +3,7 @@
 var Planbox = Planbox || {};
 
 (function(NS) {
+  'use strict';
 
   Handlebars.registerHelper('debug', function(obj) {
     return JSON.stringify(obj);

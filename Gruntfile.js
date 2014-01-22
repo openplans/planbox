@@ -277,10 +277,12 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-          '<%= yeoman.dist %>/styles/dist/styles.min.css': [
+          '<%= yeoman.app %>/styles/dist/styles.min.css': [
             '<%= yeoman.app %>/bower_components/normalize-css/normalize.css',
-            '.tmp/styles/{,*/}*.css',
-            '<%= yeoman.app %>/styles/{,*/}*.css'
+            '<%= yeoman.app %>/styles/style.css'
+          ],
+          '<%= yeoman.app %>/styles/dist/admin.min.css': [
+            '<%= yeoman.app %>/styles/admin.css'
           ]
         }
       }
@@ -293,14 +295,23 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.app %>/scripts/dist/components.min.js': [
             '<%= yeoman.app %>/bower_components/jquery/jquery.js',
+            '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.core.js',
+            '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.widget.js',
+            '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.mouse.js',
+            '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.sortable.js',
+            '<%= yeoman.app %>/bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js',
             '<%= yeoman.app %>/bower_components/handlebars/handlebars.js',
             '<%= yeoman.app %>/bower_components/underscore/underscore.js',
             '<%= yeoman.app %>/bower_components/backbone/backbone.js',
             '<%= yeoman.app %>/bower_components/backbone.marionette/lib/backbone.marionette.js',
             '<%= yeoman.app %>/bower_components/backbone-relational/backbone-relational.js',
-            '<%= yeoman.app %>/bower_components/moment/moment.js',
-            '<%= yeoman.app %>/bower_components/spin.js/spin.js',
-            '<%= yeoman.app %>/bower_components/html5sortable/jquery.sortable.js'
+            '<%= yeoman.app %>/bower_components/django-csrf.js/django-csrf.js'
+          ],
+          '<%= yeoman.app %>/scripts/dist/app.min.js': [
+            '<%= yeoman.app %>/scripts/handlebars-helpers.js',
+            '<%= yeoman.app %>/scripts/models.js',
+            '<%= yeoman.app %>/scripts/views.js',
+            '<%= yeoman.app %>/scripts/app.js'
           ],
           '<%= yeoman.app %>/scripts/dist/modernizr.min.js': [
             '<%= yeoman.app %>/bower_components/modernizr/modernizr.js'
