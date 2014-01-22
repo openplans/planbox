@@ -48,8 +48,9 @@
 
 <section class="project-timeline">
   <div class="container">
-    <!-- TODO: hide this if there are events -->
+    {{^if events.length }}
     <h2 class="step step-timeline">Add events to your project timeline.</h2>
+    {{/if}}
     <ol class="event-list unstyled-list"></ol>
     <br>
     <a href="#" class="btn add-event-btn">Add Event</a>

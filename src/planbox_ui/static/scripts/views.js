@@ -58,8 +58,11 @@ var Planbox = Planbox || {};
     handleDeleteClick: function(evt) {
       evt.preventDefault();
 
-      if (window.confirm('Really delete "'+this.model.get('label')+'"?')) {
-        this.model.destroy();
+      if (window.confirm('Really delete?')) {
+        // I know this is weird, but calling destroy on the model will sync,
+        // and there's no url to support that since it's related to the project
+        // model. So we're just going to do the remove directly.
+        this.model.collection.remove(this.model);
       }
     }
   });
