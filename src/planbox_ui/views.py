@@ -97,7 +97,7 @@ class ProjectView (TemplateView):
 
         if (self.request.user.is_authenticated()):
             try:
-                user_profile = self.request.user.planbox_profile
+                user_profile = self.request.user.profile
             except UserProfile.DoesNotExist:
                 user_profile = None
         else:
@@ -132,7 +132,7 @@ class NewProjectView (LoginRequired, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(NewProjectView, self).get_context_data(**kwargs)
 
-        user_serializer = UserSerializer(self.request.user.planbox_profile)
+        user_serializer = UserSerializer(self.request.user.profile)
         context['project_data'] = {}
         context['user_data'] = user_serializer.data
         context['is_owner'] = True
@@ -149,7 +149,7 @@ class NewProjectView (LoginRequired, TemplateView):
         if 'force_new' not in request.GET:
             # Check whether the user has an existing project and redirect there.
             try:
-                project = owner_auth.planbox_profile.projects.all()[0]
+                project = owner_auth.profile.projects.all()[0]
             except IndexError:
                 pass
             else:

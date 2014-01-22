@@ -67,7 +67,7 @@ class SigninViewTests (PlanBoxUITestCase):
 class NewProjectViewTests (PlanBoxUITestCase):
     def test_user_gets_redirected_to_own_new_project_page(self):
         auth1 = AuthUser.objects.create_user(username='mjumbewu', password='123')
-        owner1 = auth1.planbox_profile
+        owner1 = auth1.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner1)
 
         auth2 = AuthUser.objects.create_user(username='atogle', password='456')
@@ -100,7 +100,7 @@ class NewProjectViewTests (PlanBoxUITestCase):
         # NOTE: This test is only relevant as long as users can have only one
         #       project.
         auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.planbox_profile
+        owner = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
 
         url_kwargs = {'owner_name': auth.username}
@@ -118,7 +118,7 @@ class NewProjectViewTests (PlanBoxUITestCase):
 class ProjectDetailViewTests (PlanBoxUITestCase):
     def test_anon_gets_non_editable_details(self):
         auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.planbox_profile
+        owner = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
 
         kwargs = {
@@ -136,7 +136,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
 
     def test_non_planbox_user_gets_non_editable_details(self):
         auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.planbox_profile
+        owner = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
 
         kwargs = {
@@ -156,7 +156,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
 
     def test_non_owner_gets_non_editable_details(self):
         auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.planbox_profile
+        owner = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
 
         kwargs = {
@@ -165,7 +165,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         }
 
         auth2 = AuthUser.objects.create_user(username='atogle', password='456')
-        owner2 = auth2.planbox_profile
+        owner2 = auth2.profile
 
         url = reverse('app-project', kwargs=kwargs)
         request = self.factory.get(url)
@@ -177,7 +177,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
 
     def test_owner_gets_editable_details(self):
         auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.planbox_profile
+        owner = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
 
         kwargs = {

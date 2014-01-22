@@ -18,7 +18,7 @@ class IsOwnerOrReadOnly (permissions.BasePermission):
             return False
 
         try:
-            profile = auth.planbox_profile
+            profile = auth.profile
         except models.User.DoesNotExist:
             profile = None
         

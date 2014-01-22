@@ -47,8 +47,8 @@ class UserCreationForm(forms.ModelForm):
         auth.set_password(self.cleaned_data["password"])
         if commit:
             auth.save()
-            auth.planbox_profile.affiliation = self.cleaned_data["affiliation"]
-            auth.planbox_profile.save()
+            auth.profile.affiliation = self.cleaned_data["affiliation"]
+            auth.profile.save()
 
             # TODO: Send welcome email
 

@@ -85,7 +85,7 @@ class Migration(SchemaMigration):
         u'planbox_data.user': {
             'Meta': {'object_name': 'User'},
             'affiliation': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '256', 'blank': 'True'}),
-            'auth': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "u'planbox_profile'", 'unique': 'True', 'to': u"orm['auth.User']"}),
+            'auth': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "u'profile'", 'unique': 'True', 'to': u"orm['auth.User']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'organizations': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'members'", 'blank': 'True', 'to': u"orm['planbox_data.Organization']"})
         }
