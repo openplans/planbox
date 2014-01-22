@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "dependencies": {},
   "devDependencies": {
+    "bower": "1.2.x",
     "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.11",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-uglify": "~0.2.0",
@@ -27,7 +29,11 @@
     "time-grunt": "~0.2.0",
     "jshint-stylish": "~0.1.3"
   },
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install; ./node_modules/grunt-cli/bin/grunt"
+  },
   "engines": {
-    "node": ">=0.8.0"
+    "node": "0.10.x",
+    "npm": "1.3.x"
   }
 }
