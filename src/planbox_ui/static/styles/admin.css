@@ -99,6 +99,11 @@
 .user-menu a:hover {
   color: #fff;
 }
+
+
+/* =Save Button
+-------------------------------------------------------------- */
+
 .save-btn {
   float: left;
   margin: 0.5em 0 0 0;
@@ -106,6 +111,28 @@
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
+}
+
+@keyframes pulse {
+    0% { background-color: #E65CA1; }
+   50% { background-color: #FF80BF; }
+  100% { background-color: #E65CA1; }
+}
+@-webkit-keyframes pulse {
+    0% { background-color: #E65CA1; }
+	 50% { background-color: #FF80BF; }
+	100% { background-color: #E65CA1; }
+}
+.save-btn {
+  box-shadow: inset 0 0 1em #E65CA1;
+  -webkit-animation: pulse 1.5s infinite ease-in-out;
+          animation: pulse 1.5s infinite ease-in-out;
+}
+.save-btn.btn-disabled,
+.save-btn:hover {
+  box-shadow: none;
+  -webkit-animation: none;
+          animation: none;
 }
 
 
@@ -399,9 +426,12 @@
 
 @media only screen and (min-width: 44em) {
 
+  .project-visibility {
+    padding-right: 0.5em;
+  }
   .save-btn {
     float: left;
-    margin: 0 0 0 0.625em;
+    margin: 0;
     width: auto;
   	-webkit-box-sizing: content-box;
   	   -moz-box-sizing: content-box;

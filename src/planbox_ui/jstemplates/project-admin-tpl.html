@@ -14,7 +14,11 @@
   <div class="project-visibility"><span class="checked-icon unchecked">&#10004;</span>&nbsp;This Project is Private</small></div>
   {{/if}}
 
-  <a href="#" class="save-btn btn btn-disabled">Save Draft</a>
+  {{#if public}}
+  <a href="#" class="save-btn btn btn-disabled">Publish Changes</a>
+  {{else}}
+  <a href="#" class="save-btn btn btn-secondary btn-disabled">Save Draft</a>
+  {{/if}}
  </div>
 
 <header class="site-header">
@@ -60,7 +64,17 @@
 <footer class="site-colophon">
   <div class="container">
     {{^if contact}}<h2 class="step step-contact-info">Enter your contact information.</h2>{{/if}}
+
     <p class="project-contact-info content-editable" data-attr="contact" contenteditable>{{ contact }}</p>
+
+    <p>
+      {{#if public}}
+      <a href="#" class="save-btn btn btn-disabled">Publish Changes</a>
+      {{else}}
+      <a href="#" class="save-btn btn btn-disabled">Save Draft</a>
+      {{/if}}
+    </p>
+    
     <p class="powered-by">{{#_}}Powered by <a href="index.html">Planbox</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
   </div>
 </footer>
