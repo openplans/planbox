@@ -4,8 +4,8 @@
 
 /* Typography */
 body {
-  background: #407280;
-  color: #fff;
+  background-color: #eee;
+  color: #666;
   font-family: 'Alegreya Sans', sans-serif;
   font-weight: 400;
   line-height: 1.5;
@@ -105,7 +105,7 @@ img {
   vertical-align: middle;
   cursor: pointer;
   color: #fff;
-  text-decoration: none;
+  text-decoration: none !important;
   text-transform: uppercase;
   background-color: #268099;
   font-weight: 800;
@@ -354,10 +354,7 @@ textarea {
 html, body {
   min-height: 100%;
 }
-#page {
-  background-color: #eee;
-  color: #666;
-}
+#page {}
 .container {
   position: relative;
   max-width: 44em;

@@ -41,6 +41,7 @@ var Planbox = Planbox || {};
 
   NS.ProjectAdminModalView = Backbone.Marionette.ItemView.extend({
     template: '#project-admin-modal-tpl',
+    className: 'overlay',
     ui: {
       closeBtn: '.btn-close',
       makePublicBtn: '.btn-public',
