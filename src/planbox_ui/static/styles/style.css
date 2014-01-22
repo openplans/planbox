@@ -260,11 +260,6 @@ textarea {
   padding: 0.625em;
   margin: 0 0 1.25em;
   position: relative;
-  float: left;
-  width: 100%;
-	-webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
 }
 .alert-error {
   background-color: #D91616;
