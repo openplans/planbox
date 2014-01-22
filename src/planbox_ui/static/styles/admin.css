@@ -186,7 +186,7 @@
   background-color: #F5FF8C;
   background-color: rgba(245,255,140,0.8);
   color: #666;
-  font-size: 1.25em;
+  font-size: 1em;
   text-shadow: none;
   padding: 0.5em 0.75em 0.625em;
   border-radius: 0.25em 0.25em 0 0;
@@ -206,7 +206,7 @@
 	        box-sizing: border-box;
 }
 .step-description {
-  margin-top: 1.5em;
+  margin-top: 2.5em;
 }
 .step-timeline {
   margin-bottom: 0.75em;
@@ -289,7 +289,7 @@
 }
 .project-contact-info:hover:before,
 .project-contact-info:focus:before {
-  content: 'Project Contact Info';
+  content: 'Contact Info';
 }
 .event-title:hover:before,
 .event-title:focus:before {
@@ -465,6 +465,9 @@
   .user-menu:before,
   .user-menu:after {
     right: 2em;
+  }
+  .step {
+    font-size: 1.25em;
   }
   .step-status {
     float: right;
