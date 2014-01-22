@@ -8,6 +8,9 @@ var Planbox = Planbox || {};
     return JSON.stringify(obj);
   });
 
+  Handlebars.registerHelper('window_location', function() {
+    return window.location.toString();
+  });
 
   Handlebars.registerHelper('status_label', function(status_value, options) {
     var status = _.findWhere(NS.Data.statuses, {'value': status_value});
