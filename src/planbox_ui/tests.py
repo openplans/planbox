@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase, RequestFactory
 from nose.tools import assert_equal
 
-from django.contrib.auth.models import User as AuthUser, AnonymousUser
+from django.contrib.auth.models import User as UserAuth, AnonymousUser
 from planbox_data.models import User, Project, Event
 from planbox_ui.views import project_view, new_project_view, signup_view, signin_view
 
@@ -16,7 +16,7 @@ class PlanBoxUITestCase (TestCase):
         self.factory = RequestFactory()
 
     def tear_down(self):
-        AuthUser.objects.all().delete()
+        UserAuth.objects.all().delete()
         User.objects.all().delete()
         Project.objects.all().delete()
         Event.objects.all().delete()
@@ -48,7 +48,7 @@ class SignupViewTests (PlanBoxUITestCase):
 
 class SigninViewTests (PlanBoxUITestCase):
     def test_user_is_redirected_home_on_successful_signin(self):
-        AuthUser.objects.create_user(username='mjumbewu', password='123')
+        UserAuth.objects.create_user(username='mjumbewu', password='123')
         url = reverse('app-signin')
 
         user_data = {
@@ -66,11 +66,11 @@ class SigninViewTests (PlanBoxUITestCase):
 
 class NewProjectViewTests (PlanBoxUITestCase):
     def test_user_gets_redirected_to_own_new_project_page(self):
-        auth1 = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        auth1 = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner1 = auth1.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner1)
 
-        auth2 = AuthUser.objects.create_user(username='atogle', password='456')
+        auth2 = UserAuth.objects.create_user(username='atogle', password='456')
 
         url1_kwargs = {'owner_name': auth1.username}
         url1 = reverse('app-new-project', kwargs=url1_kwargs)
@@ -84,7 +84,7 @@ class NewProjectViewTests (PlanBoxUITestCase):
         assert_equal(response.url, url2)
 
     def test_anon_user_gets_redirected_to_login(self):
-        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
 
         url_kwargs = {'owner_name': auth.username}
         url = reverse('app-new-project', kwargs=url_kwargs)
@@ -99,7 +99,7 @@ class NewProjectViewTests (PlanBoxUITestCase):
     def test_user_gets_redirected_to_existing_project(self):
         # NOTE: This test is only relevant as long as users can have only one
         #       project.
-        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
 
@@ -117,7 +117,7 @@ class NewProjectViewTests (PlanBoxUITestCase):
 
 class ProjectDetailViewTests (PlanBoxUITestCase):
     def test_anon_gets_non_editable_details(self):
-        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
 
@@ -135,7 +135,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         assert_equal(response.context_data.get('is_owner'), False)
 
     def test_non_planbox_user_gets_non_editable_details(self):
-        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
 
@@ -144,7 +144,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
             'slug': 'test-slug'
         }
 
-        auth2 = AuthUser.objects.create_user(username='atogle', password='456')
+        auth2 = UserAuth.objects.create_user(username='atogle', password='456')
 
         url = reverse('app-project', kwargs=kwargs)
         request = self.factory.get(url)
@@ -155,7 +155,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         assert_equal(response.context_data.get('is_owner'), False)
 
     def test_non_owner_gets_non_editable_details(self):
-        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
 
@@ -164,7 +164,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
             'slug': 'test-slug'
         }
 
-        auth2 = AuthUser.objects.create_user(username='atogle', password='456')
+        auth2 = UserAuth.objects.create_user(username='atogle', password='456')
         owner2 = auth2.profile
 
         url = reverse('app-project', kwargs=kwargs)
@@ -176,7 +176,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         assert_equal(response.context_data.get('is_owner'), False)
 
     def test_owner_gets_editable_details(self):
-        auth = AuthUser.objects.create_user(username='mjumbewu', password='123')
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
 

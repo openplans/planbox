@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User as AuthUser
+from django.contrib.auth.models import User as UserAuth
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
@@ -22,7 +22,7 @@ class AppMixin (object):
         if obj is None and self.request.user.is_authenticated():
             obj = self.request.user
 
-        if isinstance(obj, AuthUser):
+        if isinstance(obj, UserAuth):
             owner_name = obj.username
         elif isinstance(obj, UserProfile):
             owner_name = obj.auth.username
@@ -144,7 +144,7 @@ class NewProjectView (LoginRequired, TemplateView):
         if owner_name != request.user.username:
             return redirect('app-new-project', owner_name=self.request.user.username)
 
-        owner_auth = get_object_or_404(AuthUser, username=owner_name)
+        owner_auth = get_object_or_404(UserAuth, username=owner_name)
 
         if 'force_new' not in request.GET:
             # Check whether the user has an existing project and redirect there.

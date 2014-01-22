@@ -10,7 +10,7 @@ from django.utils.text import slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
 
-AuthUser = auth.get_user_model()
+UserAuth = auth.get_user_model()
 
 
 def uniquify_slug(slug, existing_slugs):
@@ -31,7 +31,7 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         profile = User(auth=auth)
         profile.save()
-post_save.connect(create_user_profile, sender=AuthUser, dispatch_uid="user-profile-creation-signal")
+post_save.connect(create_user_profile, sender=UserAuth, dispatch_uid="user-profile-creation-signal")
 
 
 @python_2_unicode_compatible
@@ -75,7 +75,7 @@ class Project (models.Model):
         super(Project, self).save(*args, **kwargs)
 
     def owned_by(self, obj):
-        if isinstance(obj, AuthUser):
+        if isinstance(obj, UserAuth):
             try:
                 obj = obj.profile
             except User.DoesNotExist:

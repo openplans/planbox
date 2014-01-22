@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext as _
 
-from planbox_data.models import AuthUser, User as UserProfile
+from planbox_data.models import UserAuth, User as UserProfile
 
 
 class UserCreationForm(forms.ModelForm):
@@ -26,7 +26,7 @@ class UserCreationForm(forms.ModelForm):
     affiliation = forms.CharField(label=_("Organizational Affiliation"), max_length=256)
 
     class Meta:
-        model = AuthUser
+        model = UserAuth
         fields = ("username", "email")
 
     def clean_username(self):
@@ -34,8 +34,8 @@ class UserCreationForm(forms.ModelForm):
         # but it sets a nicer error message than the ORM. See #13147.
         username = self.cleaned_data["username"]
         try:
-            AuthUser._default_manager.get(username=username)
-        except AuthUser.DoesNotExist:
+            UserAuth._default_manager.get(username=username)
+        except UserAuth.DoesNotExist:
             return username
         raise forms.ValidationError(
             self.error_messages['duplicate_username'],
