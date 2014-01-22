@@ -39,6 +39,39 @@ var Planbox = Planbox || {};
     }
   };
 
+  NS.ProjectAdminModalView = Backbone.Marionette.ItemView.extend({
+    template: '#project-admin-modal-tpl',
+    ui: {
+      closeBtn: '.btn-close',
+      makePublicBtn: '.btn-public',
+      makePublicContent: '.make-public-content',
+      shareContent: '.share-content'
+    },
+    events: {
+      'click @ui.closeBtn': 'handleClose',
+      'click @ui.makePublicBtn': 'handleMakePublic'
+    },
+    handleClose: function(evt) {
+      evt.preventDefault();
+      this.close();
+    },
+    handleMakePublic: function(evt) {
+      var self = this;
+
+      evt.preventDefault();
+
+      this.model.save({public: true}, {
+        success: function() {
+          self.ui.makePublicContent.addClass('is-hidden');
+          self.ui.shareContent.removeClass('is-hidden');
+        },
+        error: function() {
+          window.alert('Unable to make this public. Please try again.');
+        }
+      });
+    }
+  });
+
   NS.EventAdminView = Backbone.Marionette.ItemView.extend({
     template: '#event-admin-tpl',
     tagName: 'li',
@@ -87,7 +120,8 @@ var Planbox = Planbox || {};
       'click @ui.addBtn': 'handleAddClick'
     },
     modelEvents: {
-      'change': 'dataChanged'
+      'change': 'dataChanged',
+      'sync': 'onSync'
     },
     collectionEvents: {
       'change':  'dataChanged',
@@ -109,6 +143,11 @@ var Planbox = Planbox || {};
           self.collection.moveTo(model, index);
         }
       });
+    },
+    onSync: function() {
+      // When the model is synced with the server, we're going to rerender
+      // the view to match the data.
+      this.render();
     },
     handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
     handleStatusChange: function(evt) {
@@ -140,27 +179,34 @@ var Planbox = Planbox || {};
     },
     handleSave: function(evt) {
       evt.preventDefault();
-      var self = this;
+      var self = this,
+          $target = $(evt.target);
 
-      this.model.save(null, {
-        success: function(model) {
-          var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
+      if (!$target.hasClass('btn-disabled')) {
+        this.model.save(null, {
+          success: function(model) {
+            var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
 
-          if (window.location.pathname !== path) {
-            if (Modernizr.history) {
-              window.history.pushState('', '', path);
-            } else {
-              window.location = path;
+            if (window.location.pathname !== path) {
+              if (Modernizr.history) {
+                window.history.pushState('', '', path);
+              } else {
+                window.location = path;
+              }
             }
-          }
 
-          self.render();
-        },
-        error: function() {
-          window.alert('Unable to save your project. Please try again.');
-        }
-      });
-      this.ui.saveBtn.addClass('btn-disabled');
+            if (!model.get('public')) {
+              // Don't show the model if the project is already public
+              NS.app.overlayRegion.show(new NS.ProjectAdminModalView({
+                model: model
+              }));
+            }
+          },
+          error: function() {
+            window.alert('Unable to save your project. Please try again.');
+          }
+        });
+      }
     },
     handleAddClick: function(evt) {
       evt.preventDefault();

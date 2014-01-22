@@ -9,7 +9,8 @@ var Planbox = Planbox || {};
   NS.app = new Backbone.Marionette.Application();
 
   NS.app.addRegions({
-    mainRegion: '#page'
+    mainRegion: '#page',
+    overlayRegion: '#overlay-container'
   });
 
   NS.app.addInitializer(function(options){
