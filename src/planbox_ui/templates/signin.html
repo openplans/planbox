@@ -10,6 +10,11 @@
     <div class="alert alert-error">Your username or password was not recognized. Please try again.</div>
     <div class="alert alert-error alert-dismissable">I am a dismissable error. I have a close button. <a href="#" class="close">&times;</a></div>
     <p style="float:right;"><small><a href="/password-reset">Lost your password?</a></small></p>
+
+    {% if form.non_field_errors %}
+    <div class="alert alert-error"><strong>{{ form.non_field_errors.as_text|slice:"2:" }}</strong></div>
+    {% endif %}
+
     <h3>Sign In</h3>
     <form method="POST">
       {% csrf_token %}
