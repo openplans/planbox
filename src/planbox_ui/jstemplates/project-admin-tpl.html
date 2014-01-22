@@ -1,10 +1,9 @@
 <div class="admin-bar clearfix">
   <nav class="user-nav">
-    <a href="#" class="user-menu-link user-link"><strong>Username</strong></a>
+    <a href="#" class="user-menu-link user-link"><strong>{{user 'username' }}</strong></a>
     <ul class="user-menu unstyled-list">
-      <!-- TODO: .toggleClass('is-open') on .user-menu when .user-menu-link (or a menu item) is clicked -->
-      <li><a href="#">My Projects</a></li>
-      <li><a href="#">Sign Out</a></li>
+      <li><a href="/{{user 'username' }}/new/">My Project</a></li>
+      <li><a href="/signout?next={{ window_location }}">Sign Out</a></li>
     </ul>
   </nav>
 
@@ -74,7 +73,7 @@
       <a href="#" class="save-btn btn btn-secondary btn-disabled">Save Draft</a>
       {{/if}}
     </p>
-    
+
     <p class="powered-by">{{#_}}Powered by <a href="index.html">Planbox</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
   </div>
 </footer>

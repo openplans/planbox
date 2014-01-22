@@ -111,14 +111,17 @@ var Planbox = Planbox || {};
       statusSelector: '.status-selector',
       statusLabel: '.project-status',
       addBtn: '.add-event-btn',
-      visibilityToggle: '[name=project-public]'
+      visibilityToggle: '[name=project-public]',
+      userMenuLink: '.user-menu-link',
+      userMenu: '.user-menu'
     },
     events: {
       'blur @ui.editables': 'handleEditableBlur',
       'change @ui.statusSelector': 'handleStatusChange',
       'change @ui.visibilityToggle': 'handleVisibilityChange',
       'click @ui.saveBtn': 'handleSave',
-      'click @ui.addBtn': 'handleAddClick'
+      'click @ui.addBtn': 'handleAddClick',
+      'click @ui.userMenuLink': 'handleUserMenuClick'
     },
     modelEvents: {
       'change': 'dataChanged',
@@ -215,6 +218,10 @@ var Planbox = Planbox || {};
       this.collection.add({});
 
       this.$('.event-title.content-editable').focus();
+    },
+    handleUserMenuClick: function(evt) {
+      evt.preventDefault();
+      this.ui.userMenu.toggleClass('is-open');
     },
     dataChanged: function() {
       // Show the save button

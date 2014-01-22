@@ -12,11 +12,21 @@ var Planbox = Planbox || {};
     return window.location.toString();
   });
 
+  Handlebars.registerHelper('user', function(attr, options) {
+    // If there are two args, then we asked for a specific attribute
+    if (options) {
+      return NS.Data.user[attr];
+    }
+
+    // Only one arg, so attr is really options
+    options = attr;
+    return options.fn(NS.Data.user);
+  });
+
   Handlebars.registerHelper('status_label', function(status_value, options) {
     var status = _.findWhere(NS.Data.statuses, {'value': status_value});
     return status ? status.label : NS.Data.statuses[0].label;
   });
-
 
   Handlebars.registerHelper('each_status', function(options) {
     var result = '';
@@ -27,7 +37,6 @@ var Planbox = Planbox || {};
 
     return result;
   });
-
 
   Handlebars.registerHelper('select', function(value, options) {
     var $el = $('<div/>').html(options.fn(this)),

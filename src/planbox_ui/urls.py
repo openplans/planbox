@@ -5,10 +5,11 @@ from .views import index_view, project_view, new_project_view, signup_view, sign
 
 urlpatterns = patterns('',
 
-    url(r'^(?P<owner_name>[^/]+)/new', new_project_view, name='app-new-project'),
+    url(r'^(?P<owner_name>[^/]+)/new/', new_project_view, name='app-new-project'),
     url(r'^(?P<owner_name>[^/]+)/(?P<slug>[^/]+)/', project_view, name='app-project'),
     url(r'^signup/$', signup_view, name='app-signup'),
     url(r'^signin/$', signin_view, name='app-signin'),
+    url(r'^signout/$', 'django.contrib.auth.views.logout', name='app-signout', kwargs={'next_page': '/'}),
     url(r'^password-reset/$', password_reset_view, name='app-password-reset'),
     url(r'^$', index_view, name='app-index'),
 )
