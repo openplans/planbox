@@ -18,6 +18,8 @@ develop-eggs
 .tmp
 .sass-cache
 bower_components/
+*.min.js
+*.min.css
 
 # Installer logs
 pip-log.txt
@@ -43,3 +45,4 @@ env?/
 node_modules/
 db.sqlite3
 .env
+staticfiles/

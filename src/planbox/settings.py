@@ -91,22 +91,34 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_ROOT = 'staticfiles'
+# Make filepaths relative to settings.
+def rel_path(*subs):
+    """Make filepaths relative to this settings file"""
+    root_path = os.path.dirname(os.path.abspath(__file__))
+    return os.path.abspath(os.path.join(root_path, *subs))
+
+STATIC_ROOT = rel_path('../../staticfiles')
 STATIC_URL = '/static/'
+
+
+# If we need to load additional settings...
+
+def load_settings(settings_filename):
+    settings_filename = os.path.join(SETTINGS_DIR, settings_filename)
+    with open(settings_filename, 'r') as settings_file:
+        exec(settings_file.read())
 
 
 # Use the heroku settings, if we're on Heroku
 
 import os
 if os.environ.get('IS_HEROKU'):
-    from heroku_settings import *
+    load_settings('heroku_settings.py')
 
 
 # Local settings overrides
 
-local_settings_filename = os.path.join(SETTINGS_DIR, 'local_settings.py')
 try:
-    with open(local_settings_filename, 'r') as local_settings_file:
-        exec(local_settings_file.read())
+    load_settings('local_settings.py')
 except IOError:
     pass

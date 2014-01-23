@@ -124,7 +124,7 @@ module.exports = function (grunt) {
       all: [
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/{,*/}*.js',
-        '!<%= yeoman.app %>/scripts/dist{,*/}*.js',
+        '!<%= yeoman.app %>/scripts/{,*/}*.min.js',
         '!<%= yeoman.app %>/scripts/vendor/*',
         '<%= yeoman.test %>/spec/{,*/}*.js'
       ]
@@ -277,11 +277,11 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-          '<%= yeoman.app %>/styles/dist/styles.min.css': [
+          '<%= yeoman.app %>/styles/style.min.css': [
             '<%= yeoman.app %>/bower_components/normalize-css/normalize.css',
             '<%= yeoman.app %>/styles/style.css'
           ],
-          '<%= yeoman.app %>/styles/dist/admin.min.css': [
+          '<%= yeoman.app %>/styles/admin.min.css': [
             '<%= yeoman.app %>/styles/admin.css'
           ]
         }
@@ -293,7 +293,7 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          '<%= yeoman.app %>/scripts/dist/components.min.js': [
+          '<%= yeoman.app %>/scripts/components.min.js': [
             '<%= yeoman.app %>/bower_components/jquery/jquery.js',
             '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.core.js',
             '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.widget.js',
@@ -307,13 +307,13 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/backbone-relational/backbone-relational.js',
             '<%= yeoman.app %>/bower_components/django-csrf.js/django-csrf.js'
           ],
-          '<%= yeoman.app %>/scripts/dist/app.min.js': [
+          '<%= yeoman.app %>/scripts/app.min.js': [
             '<%= yeoman.app %>/scripts/handlebars-helpers.js',
             '<%= yeoman.app %>/scripts/models.js',
             '<%= yeoman.app %>/scripts/views.js',
             '<%= yeoman.app %>/scripts/app.js'
           ],
-          '<%= yeoman.app %>/scripts/dist/modernizr.min.js': [
+          '<%= yeoman.app %>/scripts/modernizr.min.js': [
             '<%= yeoman.app %>/bower_components/modernizr/modernizr.js'
           ]
         }

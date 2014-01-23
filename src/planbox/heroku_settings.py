@@ -7,7 +7,7 @@ TEMPLATE_DEBUG = DEBUG
 SHOW_DEBUG_TOOLBAR = (os.environ.get('SHOW_DEBUG_TOOLBAR', 'False') in ['true', 'True']) or DEBUG
 
 # STATIC_ROOT should be set the same here as in settings.py
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = rel_path('../../staticfiles')
 STATIC_URL = '/static/'
 
 SECRET_KEY = 'changemeloremipsumdolorsitametconsecteturadipisicingelit'
