@@ -13,7 +13,7 @@ One-click Planning Project Promotion
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/normalize-css/normalize.css" type="text/css" media="screen, projection" />
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" type="text/css" media="screen, projection" />
   {% else %}
-  <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" media="screen, projection" />
   {% endif %}
 {% endblock %}
 

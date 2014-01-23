@@ -24,9 +24,9 @@ All about the Main Street Pedestrian Improvements
 
   {% else %}
 
-  <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" media="screen, projection" />
   {% if is_owner %}
-  <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.min.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" media="screen, projection" />
   {% endif %}
 
   {% endif %}
@@ -49,7 +49,7 @@ All about the Main Street Pedestrian Improvements
   <script src="{{ STATIC_URL }}bower_components/backbone-relational/backbone-relational.js"></script>
   <script src="{{ STATIC_URL }}bower_components/django-csrf.js/django-csrf.js"></script>
   {% else %}
-  <script src="{{ STATIC_URL }}scripts/components.min.js"></script>
+  <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
 
   <script>
@@ -72,7 +72,7 @@ All about the Main Street Pedestrian Improvements
   <script src="{{ STATIC_URL }}scripts/views.js"></script>
   <script src="{{ STATIC_URL }}scripts/app.js"></script>
   {% else %}
-  <script src="{{ STATIC_URL }}scripts/app.min.js"></script>
+  <script src="{{ STATIC_URL }}scripts/app.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
 
   {% handlebarsjs '(.*)' precompile register_partials %}
