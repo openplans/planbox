@@ -5,7 +5,7 @@ import datetime
 DEBUG = (os.environ.get('DEBUG', 'False') in ['true', 'True'])
 TEMPLATE_DEBUG = DEBUG
 SHOW_DEBUG_TOOLBAR = (os.environ.get('SHOW_DEBUG_TOOLBAR', 'False') in ['true', 'True']) or DEBUG
-SSL_ENABLED = (os.environ.get('DEBUG', 'True') in ['true', 'True'])
+HTTPS_ENABLED = (os.environ.get('HTTPS', 'on').lower() in ['true', 'on'])
 
 # STATIC_ROOT should be set the same here as in settings.py
 STATIC_ROOT = rel_path('../../staticfiles')

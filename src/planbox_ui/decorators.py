@@ -13,13 +13,15 @@ from django.http import HttpResponsePermanentRedirect
 
 def ssl_required(view_func):
     def is_ssl_enabled(request):
-        if settings.DEBUG:
-            if request.META.get('REMOTE_ADDR', None) in settings.INTERNAL_IPS:
-                return False
-
-        elif not getattr(settings, 'SSL_ENABLED', True):
+        # If explicitly off, then it's off
+        if not getattr(settings, 'HTTPS_ENABLED', True):
             return False
 
+        # If you're debugging and coming from an internal IP address, it's off
+        elif settings.DEBUG and request.META.get('REMOTE_ADDR', None) in settings.INTERNAL_IPS:
+            return False
+
+        # Otherwise, it's on
         else:
             return True
 
