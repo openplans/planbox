@@ -83,6 +83,12 @@ img {
   opacity: 0.625;
 }
 
+.has-cover-image {
+  background-position: center center;
+  background-repeat: repeat;
+  background-size: cover;
+}
+
 /* Dingbats */
 .checked-icon {
   color: #57D982;
@@ -417,30 +423,24 @@ html, body {
 /* =Site Header
 -------------------------------------------------------------- */
 
-.site-header {
+.site-header,
+.product-header {
   background: #268099;
   color: #fff;
   padding: 2em 0 0;
-  background-position: center center;
-  background-repeat: repeat;
-  background-size: cover;
 }
-.site-title {
+.site-title,
+.product-title {
   font-weight: 800;
   margin-bottom: 0;
   text-shadow: 0 0 3px rgba(0,0,0,0.25);
   position: relative;
 }
-.site-title a {
+.site-title a,
+.product-title a {
   text-decoration: none;
   color: #fff;
 }
-.site-description {
-  font-size: 1.5em;
-  font-weight: 400;
-  text-shadow: 0 0 3px rgba(0,0,0,0.25);
-}
-
 a.login-link {
   float: right;
   position: absolute;
@@ -456,6 +456,9 @@ a.login-link {
 /* =Product
 -------------------------------------------------------------- */
 
+.product-title {
+  font-size: xx-large;
+}
 .product-logo {
   font-size: 1.375em;
   text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125);
@@ -486,9 +489,26 @@ a.login-link {
   100%   { text-shadow: 0 0.125em 0 rgba(255,255,255,0.5), 0 0.25em 0 rgba(255,255,255,0.25), 0 0.375em 0 rgba(255,255,255,0.125); }
 }
 
+.product-section--the-problem {
+  background-image: url(../images/ye-olde-street.jpg);
+  color: #fff;
+  padding: 1em 0;
+}
+.product-section--the-problem h3 {
+  font-size: 2.5em;
+  text-shadow: 0 0 3px rgba(0,0,0,0.25);
+}
+.product-section--the-answer {}
+.the-answer h3 {
+  font-size: 2.5em;
+/*  font-weight: 400;*/
+  line-height: 1.25;
+}
+.the-answer p {
+  font-size: 1.375em;
+}
 .product-overview {
-  background: #eee url(../images/workers.jpg) center center repeat;
-  background-size: cover;
+  background-image: url(../images/workers.jpg);
   color: #666;
   padding: 1em 0;
 }
@@ -499,7 +519,6 @@ a.login-link {
   padding: 1em;
   border-radius: 0.25em;
 }
-.product-details {}
 .product-pitch {
   padding-top: 1em;
 }
@@ -507,7 +526,10 @@ a.login-link {
   margin-bottom: 1em;
 }
 .product-pitch p {
-  font-size: 1.25em;
+  font-size: 1.125em;
+}
+.interest-form p.email {
+  margin-bottom: 0.25em;
 }
 
 
@@ -656,7 +678,7 @@ li.event {
   background: #fff;
   max-width: 28em;
   max-height: 100%;
-  overflow: scroll;
+  overflow: auto;
   padding: 1em;
   margin: 0 auto;
   border-radius: 0.25em;
@@ -715,6 +737,14 @@ li.event {
     padding-top: 3em;
     padding-bottom: 1.5em;
   }
+
+  .product-section--the-problem {
+    padding-top: 2em;
+  }
+  .product-section--the-problem h3 {
+    font-size: 2.75em;
+  }
+
   .project-status strong {
     padding: 0 0.25em;
   }
@@ -725,6 +755,7 @@ li.event {
   .interest-form p.email {
     width: 65%;
     float: left;
+    margin-bottom: 1.25em;
   }
   .interest-form p.submit {
     width: 35%;
@@ -751,5 +782,19 @@ li.event {
   .beta-notice {
     font-size: 1.25em;
     position: fixed;
+  }
+}
+
+@media only screen and (min-width: 52em) {
+  .product-header {
+    padding: 0;
+  }
+  .product-title {}
+  a.login-link {
+    top: 1.75em;
+  }
+  .product-section--the-problem {
+    padding-top: 3.5em;
+    padding-bottom: 1.5em;
   }
 }

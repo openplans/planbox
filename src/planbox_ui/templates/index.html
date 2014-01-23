@@ -2,27 +2,38 @@
 
 {% block main %}
 
-<section class="product-overview">
+<section class="product-section--the-problem has-cover-image">
   <div class="container">
-    <div class="call-to-action">
-      <h3>"What's going on here?" <small style="white-space:nowrap;">&ndash; Citizens</small></h3>
-      <p>Plan In A Box gets information about projects out into the world, making it easier for people to discover projects, stay engaged, and be more informed participants.</p>
+    <h3>Still using old-fashioned methods to promote your street improvement projects?</h3>
+  </div>
+</section>
+
+<section class="product-section--the-answer">
+  <div class="container">
+    <div class="the-answer">
+
+      <h3>Residents need useful, timely, engaging project info on the web.</h3>
+      <p><strong>Plan In A Box</strong> provides a high quality website for your street improvement project, so everyone can find out what's happening, stay engaged, and be more informed participants.</p>
+
+      <h4>Sign up for a Plan In A Box account!</h4>
       <form class="interest-form clearfix" method="GET" action="{% url 'app-signup' %}">
         <p class="email"><input required name="email" type="email" class="input-block" placeholder="email@example.org"></p>
         <p class="submit"><button class="btn btn-block">Sign up!</button></p>
       </form>
+
     </div>
   </div>
 </section>
 
-<section class="product-details">
+<section class="product-overview has-cover-image">
   <div class="container">
-    <div class="product-pitch">
-      <h4>Keep Communities Informed and Engaged</h4>
-      <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/search.png">Information about proposed street changes is often hard for residents to find and track.</p>
-      <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/stopwatch.png">Sharing timely, helpful information is challenging for busy planners.</p>
-      <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/headache.png">Being uninformed leads to frustration and unsatisfactory experiences, even for great projects. And unhappy people slow down the public process for everyone.</p>
-      <p class=""><strong>Plan In A Box is an web tool that helps planners create and share information about projects, so neighbors can stay informed about proposed changes. You can use Plan In A Box to create engaging, informative web information to reach people and provide useful updates.</strong></p>
+    <div class="call-to-action">
+      <div class="product-pitch">
+        <h4>Keep Communities Informed and Engaged</h4>
+        <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/search.png">Information about proposed street changes is often hard for residents to find and track.</p>
+        <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/stopwatch.png">Sharing timely, helpful information is challenging for busy planners.</p>
+        <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/headache.png">Being uninformed leads to frustration and unsatisfactory experiences, even for great projects. And unhappy people slow down the public process for everyone.</p>
+      </div>
     </div>
   </div>
 </section>
