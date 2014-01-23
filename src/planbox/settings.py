@@ -106,12 +106,11 @@ STATIC_URL = '/static/'
 def load_settings(settings_filename):
     settings_filename = os.path.join(SETTINGS_DIR, settings_filename)
     with open(settings_filename, 'r') as settings_file:
-        exec(settings_file.read())
+        exec(settings_file.read(), globals())
 
 
 # Use the heroku settings, if we're on Heroku
 
-import os
 if os.environ.get('IS_HEROKU'):
     load_settings('heroku_settings.py')
 
