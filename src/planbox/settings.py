@@ -48,6 +48,8 @@ INSTALLED_APPS = (
 )
 
 LOGIN_URL = 'app-signin'
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.gzip.GZipMiddleware',

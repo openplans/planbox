@@ -14,6 +14,7 @@ from django.utils.http import is_safe_url
 from django.views.generic import TemplateView, FormView
 from planbox_data.models import Project, User as UserProfile, Organization as OrgProfile
 from planbox_data.serializers import ProjectSerializer, UserSerializer
+from planbox_ui.decorators import ssl_required
 from planbox_ui.forms import UserCreationForm
 
 
@@ -35,12 +36,18 @@ class LoginRequired (object):
         return super(LoginRequired, self).dispatch(request, *args, **kwargs)
 
 
+class SSLRequired (object):
+    @method_decorator(ssl_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(SSLRequired, self).dispatch(request, *args, **kwargs)
+
+
 # App
 class IndexView (TemplateView):
     template_name = 'index.html'
 
 
-class SignupView (AppMixin, FormView):
+class SignupView (AppMixin, SSLRequired, FormView):
     template_name = 'signup.html'
     form_class = UserCreationForm
 
@@ -66,7 +73,7 @@ class PasswordResetView (TemplateView):
     template_name = 'password-reset.html'
 
 
-class SigninView (AppMixin, FormView):
+class SigninView (AppMixin, SSLRequired, FormView):
     template_name = 'signin.html'
     form_class = AuthenticationForm
 
@@ -89,7 +96,7 @@ class SigninView (AppMixin, FormView):
         return super(SigninView, self).form_valid(form)
 
 
-class ProjectView (TemplateView):
+class ProjectView (SSLRequired, TemplateView):
     template_name = 'project.html'
 
     def get_context_data(self, **kwargs):
@@ -126,7 +133,7 @@ class ProjectView (TemplateView):
         return super(ProjectView, self).get(request, pk=self.project.pk)
 
 
-class NewProjectView (LoginRequired, TemplateView):
+class NewProjectView (LoginRequired, SSLRequired, TemplateView):
     template_name = 'project.html'
 
     def get_context_data(self, **kwargs):

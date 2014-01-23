@@ -12,8 +12,19 @@ from django.http import HttpResponsePermanentRedirect
 
 
 def ssl_required(view_func):
+    def is_ssl_enabled(request):
+        if settings.DEBUG:
+            if request.META.get('REMOTE_ADDR', None) in settings.INTERNAL_IPS:
+                return False
+
+        elif settings.SSL_DISABLED:
+            return False
+
+        else:
+            return True
+
     def _checkssl(request, *args, **kwargs):
-        if not settings.DEBUG and not request.is_secure():
+        if is_ssl_enabled(request) and not request.is_secure():
             if hasattr(settings, 'SSL_DOMAIN'):
                 url_str = urlparse.urljoin(
                     settings.SSL_DOMAIN,
