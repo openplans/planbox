@@ -17,7 +17,7 @@ def ssl_required(view_func):
             if request.META.get('REMOTE_ADDR', None) in settings.INTERNAL_IPS:
                 return False
 
-        elif settings.SSL_DISABLED:
+        elif not getattr(settings, 'SSL_ENABLED', True):
             return False
 
         else:
