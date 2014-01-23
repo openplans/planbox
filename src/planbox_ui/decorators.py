@@ -6,7 +6,13 @@ Source: https://djangosnippets.org/snippets/1351/
 Author: pjs (https://djangosnippets.org/users/pjs/)
 """
 
-import urlparse
+try:
+    # Python 2
+    import urlparse
+except ImportError:
+    # Python 3
+    from urllib import parse as urlparse
+
 from django.conf import settings
 from django.http import HttpResponsePermanentRedirect
 
