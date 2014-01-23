@@ -30,10 +30,11 @@ var Planbox = Planbox || {};
   });
 
   Handlebars.registerHelper('each_status', function(options) {
-    var result = '';
+    var result = '',
+        context = this;
 
     _.each(NS.Data.statuses, function(status) {
-      result += options.fn(_.extend(this, status));
+      result += options.fn(_.extend(context, status));
     });
 
     return result;
