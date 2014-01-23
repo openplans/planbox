@@ -354,7 +354,10 @@ textarea {
 html, body {
   min-height: 100%;
 }
-#page {}
+#page {
+  overflow: hidden;
+  position: relative;
+}
 .container {
   position: relative;
   max-width: 44em;
@@ -363,6 +366,51 @@ html, body {
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
+}
+
+.beta-notice {
+  background-color: #F5FF8C;
+  background-color: rgba(245,255,140,0.5);
+  color: #fff;
+  font-size: 0.75em;
+  font-weight: 800;
+  line-height: 3.75;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 0 3px rgba(0,0,0,0.25);
+  width: 3em;
+  height: 3em;
+  position: absolute;
+  top: -0.875em;
+  left: -0.125em;
+  overflow: visible;
+  -webkit-transform: rotate(-10deg);
+     -moz-transform: rotate(-10deg);
+      -ms-transform: rotate(-10deg);
+       -o-transform: rotate(-10deg);
+}
+.beta-notice:before, .beta-notice:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3em;
+  width: 3em;
+  background-color: #F5FF8C;
+  background-color: rgba(245,255,140,0.5);
+  z-index: -1;
+}
+.beta-notice:before {
+  -webkit-transform: rotate(30deg);
+     -moz-transform: rotate(30deg);
+      -ms-transform: rotate(30deg);
+       -o-transform: rotate(30deg);
+}
+.beta-notice:after {
+  -webkit-transform: rotate(60deg);
+     -moz-transform: rotate(60deg);
+      -ms-transform: rotate(60deg);
+       -o-transform: rotate(60deg);
 }
 
 
@@ -699,5 +747,9 @@ li.event {
   }
   .modal {
     border-radius: 0.375em;
+  }
+  .beta-notice {
+    font-size: 1.25em;
+    position: fixed;
   }
 }
