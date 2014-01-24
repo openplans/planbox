@@ -3,14 +3,11 @@
 {% load as_json from planbox_utils %}
 
 
-{% block title %}
-Main Street Pedestrian Improvements
-{% endblock %}
+{% block title %}{{ project_data.title }}{% endblock %}
 
+{% block meta_description %}{{ project_data.description }}{% endblock %}
 
-{% block meta_description %}
-All about the Main Street Pedestrian Improvements
-{% endblock %}
+{% block meta_author %}OpenPlans{% endblock %} {# TODO: Fill this in with project's owner name #}
 
 
 {% block styles %}
