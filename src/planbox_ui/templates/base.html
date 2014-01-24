@@ -34,6 +34,10 @@
   {% endif %}
 </head>
 <body>
+  <!--[if lt IE 9]>
+    <div class="alert alert-error">You are using an outdated browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+  <![endif]-->
+
   <div id="overlay-container"></div>
   <div id="page">
   {% block page %}{% endblock %}
