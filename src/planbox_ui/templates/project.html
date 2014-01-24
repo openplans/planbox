@@ -5,9 +5,20 @@
 
 {% block title %}{{ project_data.title }}{% endblock %}
 
-{% block meta_description %}{{ project_data.description }}{% endblock %}
+{% block meta %}
+  <meta name="description" content="{{ project_data.description }}">
+  {# TODO: Fill this in with project's owner name #}
+  <meta name="author" content="OpenPlans">
 
-{% block meta_author %}OpenPlans{% endblock %} {# TODO: Fill this in with project's owner name #}
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@planinabox">
+  <meta name="twitter:title" content="{{ project_data.title }}">
+  <meta name="twitter:description" content="{{ project_data.description }}">
+  {# TODO: Fill this in with project owner's twitter name #}
+  <meta name="twitter:creator" content="">
+  {# TODO: Fill this in with Planbox logo #}
+  <meta name="twitter:image:src" content="">
+{% endblock %}
 
 
 {% block styles %}
