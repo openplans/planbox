@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User as UserAuth
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.contenttypes.models import ContentType
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import resolve_url
@@ -130,6 +131,10 @@ class ProjectView (SSLRequired, TemplateView):
             owner_type = owner_types[OrgProfile]
 
         self.project = get_object_or_404(Project, owner_type=owner_type, owner_id=owner.pk, slug=slug)
+
+        if not (self.project.public or self.project.owned_by(self.request.user)):
+            raise Http404
+
         return super(ProjectView, self).get(request, pk=self.project.pk)
 
 

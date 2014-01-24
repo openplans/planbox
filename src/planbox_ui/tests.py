@@ -1,7 +1,8 @@
 from django.contrib.sessions.backends.cache import SessionStore
 from django.core.urlresolvers import reverse
+from django.http import Http404
 from django.test import TestCase, RequestFactory
-from nose.tools import assert_equal
+from nose.tools import assert_equal, assert_raises
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
 from planbox_data.models import User, Project, Event
@@ -119,7 +120,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
     def test_anon_gets_non_editable_details(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=True)
 
         kwargs = {
             'owner_name': 'mjumbewu',
@@ -134,30 +135,10 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         assert_equal(response.status_code, 200)
         assert_equal(response.context_data.get('is_owner'), False)
 
-    def test_non_planbox_user_gets_non_editable_details(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
-
-        kwargs = {
-            'owner_name': 'mjumbewu',
-            'slug': 'test-slug'
-        }
-
-        auth2 = UserAuth.objects.create_user(username='atogle', password='456')
-
-        url = reverse('app-project', kwargs=kwargs)
-        request = self.factory.get(url)
-        request.user = auth2
-        response = project_view(request, **kwargs)
-
-        assert_equal(response.status_code, 200)
-        assert_equal(response.context_data.get('is_owner'), False)
-
     def test_non_owner_gets_non_editable_details(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=True)
 
         kwargs = {
             'owner_name': 'mjumbewu',
@@ -178,7 +159,61 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
     def test_owner_gets_editable_details(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=True)
+
+        kwargs = {
+            'owner_name': 'mjumbewu',
+            'slug': 'test-slug'
+        }
+
+        url = reverse('app-project', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth
+        response = project_view(request, **kwargs)
+
+        assert_equal(response.status_code, 200)
+        assert_equal(response.context_data.get('is_owner'), True)
+
+    def test_anon_gets_404_on_non_public_project(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        owner = auth.profile
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=False)
+
+        kwargs = {
+            'owner_name': 'mjumbewu',
+            'slug': 'test-slug'
+        }
+
+        url = reverse('app-project', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = AnonymousUser()
+
+        with assert_raises(Http404):
+            project_view(request, **kwargs)
+
+    def test_non_owner_gets_404_on_non_public_project(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        owner = auth.profile
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=False)
+
+        kwargs = {
+            'owner_name': 'mjumbewu',
+            'slug': 'test-slug'
+        }
+
+        auth2 = UserAuth.objects.create_user(username='atogle', password='456')
+
+        url = reverse('app-project', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth2
+
+        with assert_raises(Http404):
+            project_view(request, **kwargs)
+
+    def test_owner_gets_editable_details_on_non_public_project(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        owner = auth.profile
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=False)
 
         kwargs = {
             'owner_name': 'mjumbewu',

@@ -34,6 +34,28 @@ def create_user_profile(sender, instance, created, **kwargs):
 post_save.connect(create_user_profile, sender=UserAuth, dispatch_uid="user-profile-creation-signal")
 
 
+class ProjectQuerySet (models.query.QuerySet):
+    def Q_owner(self, owner):
+        if isinstance(owner, UserAuth):
+            owner = owner.profile
+
+        owner_type = ContentType.objects.get_for_model(owner)
+        return models.Q(owner_type=owner_type, owner_id=owner.pk)
+
+    def filter_by_owner_or_public(self, owner):
+        owner_query = self.Q_owner(owner)
+        public_query = models.Q(public=True)
+        return self.filter(owner_query | public_query)
+
+
+class ProjectManager (models.Manager):
+    def get_queryset(self):
+        return ProjectQuerySet(self.model, using=self._db)
+
+    def filter_by_owner_or_public(self, owner):
+        return self.get_queryset().filter_by_owner_or_public(owner)
+
+
 @python_2_unicode_compatible
 class Project (models.Model):
     STATUS_CHOICES = (
@@ -59,6 +81,8 @@ class Project (models.Model):
     owner_type = models.ForeignKey(ContentType, limit_choices_to=OWNER_MODEL_CHOICES)
     owner_id = models.PositiveIntegerField()
     owner = generic.GenericForeignKey('owner_type', 'owner_id')
+
+    objects = ProjectManager()
 
     class Meta:
         unique_together = [('owner_type', 'owner_id', 'slug')]

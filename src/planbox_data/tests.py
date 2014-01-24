@@ -5,7 +5,7 @@ from django.db import IntegrityError
 from django.test import TestCase, RequestFactory
 from django_nose.tools import assert_num_queries
 from nose.tools import assert_equal, assert_in, assert_raises, ok_
-from rest_framework.status import HTTP_200_OK, HTTP_204_NO_CONTENT, HTTP_403_FORBIDDEN
+from rest_framework.status import HTTP_200_OK, HTTP_204_NO_CONTENT, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
 from planbox_data.models import User, Project, Event
@@ -41,8 +41,8 @@ class ProjectModelTests (TestCase):
     def test_cannot_create_project_with_same_slug_and_owner(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
-        project1 = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user)
-        project2 = Project.objects.create(slug='test-2', title='x', location='x', description='x', owner=user)
+        project1 = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user, public=True)
+        project2 = Project.objects.create(slug='test-2', title='x', location='x', description='x', owner=user, public=True)
 
         with assert_raises(IntegrityError):
             project2.slug = 'test-1'
@@ -53,8 +53,8 @@ class ProjectModelTests (TestCase):
         user1 = auth1.profile
         auth2 = UserAuth.objects.create_user(username='atogle', password='456')
         user2 = auth2.profile
-        project1 = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user1)
-        project2 = Project.objects.create(slug='test-2', title='x', location='x', description='x', owner=user1)
+        project1 = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user1, public=True)
+        project2 = Project.objects.create(slug='test-2', title='x', location='x', description='x', owner=user1, public=True)
 
         project2.slug = 'test-1'
         project2.owner = user2
@@ -67,11 +67,11 @@ class ProjectModelTests (TestCase):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
 
-        project1 = Project.objects.create(title='My Project', location='x', description='x', owner=user)
+        project1 = Project.objects.create(title='My Project', location='x', description='x', owner=user, public=True)
         assert_equal(project1.slug, 'my-project')
 
         # Ensure conflict resolution
-        project2 = Project.objects.create(title='My Project', location='x', description='x', owner=user)
+        project2 = Project.objects.create(title='My Project', location='x', description='x', owner=user, public=True)
         assert_equal(project2.slug, 'my-project-2')
 
     def test_owner_owns_project(self):
@@ -337,7 +337,7 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
     def init_test_assets(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=True)
 
         kwargs = {'pk': project.pk}
         view = self.get_view_callback('project-detail')
@@ -409,6 +409,50 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
         assert_equal(response.status_code, HTTP_204_NO_CONTENT)
 
 
+class NonPublicProjectDetailViewAuthenticationTests (PlanBoxTestCase):
+    def init_test_assets(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        owner = auth.profile
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=False)
+
+        kwargs = {'pk': project.pk}
+        view = self.get_view_callback('project-detail')
+        url = reverse('project-detail', kwargs=kwargs)
+
+        return auth, owner, project, kwargs, view, url
+
+    def test_anonymous_cannot_GET_detail(self):
+        url = self.init_test_assets()[-1]
+        response = self.client.get(url)
+        assert_equal(response.status_code, HTTP_404_NOT_FOUND)
+
+    def test_non_owner_cannot_GET_detail(self):
+        url = self.init_test_assets()[-1]
+
+        UserAuth.objects.create_user(username='atogle', password='456')
+        self.client.login(username='atogle', password='456')
+
+        response = self.client.get(url)
+        assert_equal(response.status_code, HTTP_404_NOT_FOUND)
+
+    def test_owner_can_GET_detail(self):
+        auth, _, _, _, _, url = self.init_test_assets()
+        self.client.login(username=auth.username, password='123')
+        response = self.client.get(url)
+        assert_equal(response.status_code, HTTP_200_OK)
+
+    def test_owner_can_PUT_detail(self):
+        auth, owner, _, _, _, url = self.init_test_assets()
+        self.client.login(username=auth.username, password='123')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner_type": "user", "public": false, "owner_id": %s}' % (owner.pk), content_type='application/json')
+        assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
+
+    def test_owner_can_DELETE_detail(self):
+        auth, _, _, _, _, url = self.init_test_assets()
+        self.client.login(username=auth.username, password='123')
+        response = self.client.delete(url)
+        assert_equal(response.status_code, HTTP_204_NO_CONTENT)
+
 
 class ProjectListViewAuthenticationTests (PlanBoxTestCase):
     def init_test_assets(self):
@@ -418,10 +462,10 @@ class ProjectListViewAuthenticationTests (PlanBoxTestCase):
         ]
         owners = [auth.profile for auth in auths]
         projects = [
-            Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=owners[0]),
-            Project.objects.create(slug='test-2', title='x', location='x', description='x', owner=owners[0]),
-            Project.objects.create(slug='test-3', title='x', location='x', description='x', owner=owners[0]),
-            Project.objects.create(slug='test-4', title='x', location='x', description='x', owner=owners[1]),
+            Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=owners[0], public=True),
+            Project.objects.create(slug='test-2', title='x', location='x', description='x', owner=owners[0], public=False),
+            Project.objects.create(slug='test-3', title='x', location='x', description='x', owner=owners[0], public=True),
+            Project.objects.create(slug='test-4', title='x', location='x', description='x', owner=owners[1], public=True),
         ]
 
         kwargs = {}
