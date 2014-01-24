@@ -188,6 +188,9 @@ var Planbox = Planbox || {};
 
       if (!$target.hasClass('btn-disabled')) {
         this.model.save(null, {
+          // We are not interested in change events that come from the server,
+          // and it causes the save button to enable after saving a new project
+          silent: true,
           success: function(model) {
             var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
 
