@@ -62,6 +62,10 @@ var Planbox = Planbox || {};
       evt.preventDefault();
 
       this.model.save({public: true}, {
+        // We are not interested in change events that come from the server,
+        // and it causes the save button to enable after saving a new project
+        silent: true,
+
         success: function() {
           self.ui.makePublicContent.addClass('is-hidden');
           self.ui.shareContent.removeClass('is-hidden');
