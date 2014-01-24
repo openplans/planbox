@@ -29,7 +29,7 @@ def uniquify_slug(slug, existing_slugs):
 def create_user_profile(sender, instance, created, **kwargs):
     auth = instance
     if created:
-        profile = User(auth=auth)
+        profile = User(auth=auth, slug=auth.username)
         profile.save()
 post_save.connect(create_user_profile, sender=UserAuth, dispatch_uid="user-profile-creation-signal")
 
@@ -138,6 +138,7 @@ class Event (models.Model):
 @python_2_unicode_compatible
 class Organization (models.Model):
     name = models.CharField(max_length=128)
+    slug = models.CharField(max_length=128)
     projects = generic.GenericRelation(Project, content_type_field='owner_type', object_id_field='owner_id')
 
     class Meta:
@@ -156,6 +157,7 @@ class UserManager (models.Manager):
 @python_2_unicode_compatible
 class User (models.Model):
     auth = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='profile', help_text=_("The authentication account to use for this user"))
+    slug = models.CharField(max_length=128)
     projects = generic.GenericRelation(Project, content_type_field='owner_type', object_id_field='owner_id')
     organizations = models.ManyToManyField(Organization, related_name='members', blank=True)
     affiliation = models.CharField(max_length=256, blank=True, default='')
@@ -167,4 +169,7 @@ class User (models.Model):
         verbose_name_plural = 'User Profiles'
 
     def __str__(self):
-        return self.auth.username
+        if self.slug == self.auth.username:
+            return self.auth.username
+        else:
+            return '%s (slug="%s")' % (self.auth.username, self.slug)

@@ -11,7 +11,7 @@
 
 {% for project in projects %}
    <url>
-      <loc>http://{{ request.get_host }}/{{ project.owner.auth.username }}/{{ project.slug }}</loc>
+      <loc>http://{{ request.get_host }}{% url 'app-project' project.owner.slug project.slug %}</loc>
       <lastmod>{{ settings.LAST_DEPLOY_DATE|slice:":10" }}</lastmod>
       <changefreq>daily</changefreq>
       <priority>0.8</priority>
