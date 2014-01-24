@@ -19,7 +19,7 @@ class EventInline (admin.TabularInline):
 
 
 class ProjectAdmin (GenericAdminModelAdmin):
-    list_display = ('__unicode__', 'owner', 'slug', 'status')
+    list_display = ('__unicode__', 'owner', 'slug', 'status', 'public')
     list_filter = ('status',)
     prepopulated_fields = {"slug": ("title",)}
 

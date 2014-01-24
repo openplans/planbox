@@ -1,10 +1,13 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 INTERNAL_IPS = ('127.0.0.1',)
-HTTPS_ENABLED = False
 
 INSTALLED_APPS += (
     'django_nose',
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+HTTPS_ENABLED = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
