@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+   <url>
+      <loc>http://{{ request.get_host }}</loc>
+      <lastmod>{{ settings.LAST_DEPLOY_DATE|slice:":10" }}</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+   </url>
+
+{% for project in projects %}
+   <url>
+      <loc>http://{{ request.get_host }}/{{ project.owner.auth.username }}/{{ project.slug }}</loc>
+      <lastmod>{{ settings.LAST_DEPLOY_DATE|slice:":10" }}</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.8</priority>
+   </url>
+{% endfor %}
+
+</urlset>

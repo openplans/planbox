@@ -170,6 +170,19 @@ class NewProjectView (LoginRequired, SSLRequired, TemplateView):
         return super(NewProjectView, self).get(request, owner_name)
 
 
+# SEO
+class SiteMapView (AppMixin, TemplateView):
+    template_name = 'sitemap.xml'
+
+    def get_project_queryset(self):
+        return Project.objects.filter(public=True).select_related('owner__auth')
+
+    def get_context_data(self, **kwargs):
+        context = super(SiteMapView, self).get_context_data(**kwargs)
+        context['projects'] = self.get_project_queryset()
+        return context
+
+
 # App views
 index_view = IndexView.as_view()
 project_view = ProjectView.as_view()
@@ -177,3 +190,5 @@ new_project_view = NewProjectView.as_view()
 signup_view = SignupView.as_view()
 signin_view = SigninView.as_view()
 password_reset_view = PasswordResetView.as_view()
+robots_view = TemplateView.as_view(template_name='robots.txt', content_type='text/plain')
+sitemap_view = SiteMapView.as_view(content_type='text/xml')
