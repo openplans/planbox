@@ -18,3 +18,10 @@ application = Cling(application)
 
 from .gzip_middleware import GzipMiddleware
 application = GzipMiddleware(application)
+
+from .twinkie import ExpiresMiddleware
+application = ExpiresMiddleware(application, {
+    'application/javascript': 365*24*60*60,
+    'text/css':               365*24*60*60,
+    'image/png':              365*24*60*60,
+})
