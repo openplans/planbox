@@ -59,7 +59,7 @@ CACHES = {'default': django_cache_url.config()}
 ## ===========================================================================
 
 # For sitemaps and caching -- will be a new value every time the server starts
-LAST_DEPLOY_DATE = datetime.datetime.now().isoformat()
+LAST_DEPLOY_DATE = datetime.datetime.now().replace(second=0, microsecond=0).isoformat()
 
 LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO')
 LOGGING = {
