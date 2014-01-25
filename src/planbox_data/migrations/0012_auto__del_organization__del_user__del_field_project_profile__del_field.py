@@ -68,12 +68,12 @@ class Migration(SchemaMigration):
 
         # Adding field 'Project.owner_type'
         db.add_column(u'planbox_data_project', 'owner_type',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['contenttypes.ContentType']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['contenttypes.ContentType']),
                       keep_default=False)
 
         # Adding field 'Project.owner_id'
         db.add_column(u'planbox_data_project', 'owner_id',
-                      self.gf('django.db.models.fields.PositiveIntegerField')(default=0),
+                      self.gf('django.db.models.fields.PositiveIntegerField')(default=1),
                       keep_default=False)
 
         # Adding unique constraint on 'Project', fields ['owner_type', 'owner_id', 'slug']

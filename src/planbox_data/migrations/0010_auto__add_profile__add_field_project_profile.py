@@ -29,7 +29,7 @@ class Migration(SchemaMigration):
 
         # Adding field 'Project.profile'
         db.add_column(u'planbox_data_project', 'profile',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['planbox_data.Profile']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['planbox_data.Profile']),
                       keep_default=False)
 
 
