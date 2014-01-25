@@ -23,7 +23,7 @@ class EventSerializer (serializers.ModelSerializer):
 
 class ProjectSerializer (serializers.ModelSerializer):
     events = EventSerializer(many=True, allow_add_remove=True)
-    owner_type = serializers.SlugRelatedField(slug_field='model', queryset=ContentType.objects.filter(models.Project.OWNER_MODEL_CHOICES))
+    owner = serializers.SlugRelatedField(slug_field='slug')
 
     class Meta:
         model = models.Project
@@ -33,4 +33,4 @@ class UserSerializer (serializers.ModelSerializer):
     username = serializers.CharField(source='auth.username')
 
     class Meta:
-        model = models.User
+        model = models.Profile

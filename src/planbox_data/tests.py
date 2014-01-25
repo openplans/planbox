@@ -8,7 +8,7 @@ from nose.tools import assert_equal, assert_in, assert_raises, ok_
 from rest_framework.status import HTTP_200_OK, HTTP_204_NO_CONTENT, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
-from planbox_data.models import User, Project, Event
+from planbox_data.models import Profile, Project, Event
 from planbox_data.permissions import IsOwnerOrReadOnly
 from planbox_data.serializers import ProjectSerializer
 from planbox_data.views import router
@@ -26,7 +26,7 @@ class PlanBoxTestCase (TestCase):
 
     def tear_down(self):
         UserAuth.objects.all().delete()
-        User.objects.all().delete()
+        Profile.objects.all().delete()
         Project.objects.all().delete()
         Event.objects.all().delete()
 
@@ -114,10 +114,10 @@ class UserModelTests (PlanBoxTestCase):
         UserAuth.objects.create_user(username='atogle', password='456')
 
         with assert_num_queries(1):
-            users = User.objects.all()
-            user_strings = [str(u) for u in users]
+            profiles = Profile.objects.all()
+            profile_strings = [str(p) for p in profiles]
 
-        assert_equal(user_strings, ['mjumbewu', 'atogle'])
+        assert_equal(profile_strings, ['mjumbewu', 'atogle'])
 
 
 class EventModelTests (PlanBoxTestCase):
@@ -177,7 +177,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
 
     def test_events_are_created_from_nested_data(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        user = auth.profile
+        profile = auth.profile
 
         serializer = ProjectSerializer(data={
             'slug': 'test-slug',
@@ -189,8 +189,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
                 {'label': 'test label 2'},
                 {'label': 'test label 3'}
             ],
-            'owner_type': 'user',
-            'owner_id': user.pk
+            'owner': profile.slug
         })
 
         ok_(serializer.is_valid(), serializer.errors)
@@ -199,8 +198,8 @@ class ProjectSerializerTests (PlanBoxTestCase):
 
     def test_events_are_updated_from_nested_data(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        user = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=user)
+        profile = auth.profile
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=profile)
         events = [
             Event.objects.create(label='test label 1', project=project),
             Event.objects.create(label='test label 3', project=project),
@@ -217,8 +216,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
                 {'label': 'test label 2'},
                 {'label': 'test label 1', 'id': events[0].pk}
             ],
-            'owner_type': 'user',
-            'owner_id': user.pk
+            'owner': profile.slug
         })
 
         ok_(serializer.is_valid(), serializer.errors)
@@ -243,7 +241,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
 
     def test_null_events_are_invalid_for_new_project(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        user = auth.profile
+        profile = auth.profile
 
         serializer = ProjectSerializer(data={
             'slug': 'test-slug',
@@ -251,8 +249,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
             'location': 'test location',
             'description': 'test description',
             'events': None,
-            'owner_type': 'user',
-            'owner_id': user.pk
+            'owner': profile.slug
         })
 
         ok_(not serializer.is_valid())
@@ -260,8 +257,8 @@ class ProjectSerializerTests (PlanBoxTestCase):
 
     def test_null_events_are_invalid_for_existing_project(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        user = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=user)
+        profile = auth.profile
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=profile)
         Event.objects.create(label='test label 1', project=project),
         Event.objects.create(label='test label 3', project=project),
 
@@ -272,8 +269,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
             'location': 'test location',
             'description': 'test description',
             'events': None,
-            'owner_type': 'user',
-            'owner_id': user.pk
+            'owner': profile.slug
         })
 
         ok_(not serializer.is_valid())
@@ -399,7 +395,7 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
     def test_owner_can_PUT_detail(self):
         auth, owner, _, _, _, url = self.init_test_assets()
         self.client.login(username=auth.username, password='123')
-        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner_type": "user", "owner_id": %s}' % (owner.pk), content_type='application/json')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner": "%s"}' % (owner.slug), content_type='application/json')
         assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
 
     def test_owner_can_DELETE_detail(self):
@@ -444,7 +440,7 @@ class NonPublicProjectDetailViewAuthenticationTests (PlanBoxTestCase):
     def test_owner_can_PUT_detail(self):
         auth, owner, _, _, _, url = self.init_test_assets()
         self.client.login(username=auth.username, password='123')
-        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner_type": "user", "public": false, "owner_id": %s}' % (owner.pk), content_type='application/json')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "public": false, "owner": "%s"}' % (owner.slug), content_type='application/json')
         assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
 
     def test_owner_can_DELETE_detail(self):

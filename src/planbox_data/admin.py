@@ -1,15 +1,11 @@
 from django.contrib import admin
 from genericadmin.admin import GenericAdminModelAdmin
-from planbox_data.models import User, Organization, Project, Event
+from planbox_data.models import Profile, Project, Event
 
 
-class UserAdmin (admin.ModelAdmin):
+class ProfileAdmin (admin.ModelAdmin):
     filter_horizontal = ('organizations',)
     raw_id_fields = ('auth',)
-
-
-class OrganizationAdmin (admin.ModelAdmin):
-    pass
 
 
 class EventInline (admin.TabularInline):
@@ -28,6 +24,5 @@ class ProjectAdmin (GenericAdminModelAdmin):
     )
 
 
-admin.site.register(User, UserAdmin)
-admin.site.register(Organization, OrganizationAdmin)
+admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Project, ProjectAdmin)

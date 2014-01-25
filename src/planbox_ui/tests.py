@@ -5,7 +5,7 @@ from django.test import TestCase, RequestFactory
 from nose.tools import assert_equal, assert_raises
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
-from planbox_data.models import User, Project, Event
+from planbox_data.models import Profile, Project, Event
 from planbox_ui.views import project_view, new_project_view, signup_view, signin_view
 
 
@@ -18,7 +18,7 @@ class PlanBoxUITestCase (TestCase):
 
     def tear_down(self):
         UserAuth.objects.all().delete()
-        User.objects.all().delete()
+        Profile.objects.all().delete()
         Project.objects.all().delete()
         Event.objects.all().delete()
 
@@ -43,7 +43,7 @@ class SignupViewTests (PlanBoxUITestCase):
         assert_equal(response.status_code, 302)
         assert_equal(response.url, reverse('app-new-project', kwargs={'owner_name': 'mjumbewu'}))
 
-        user_profile = User.objects.get(auth__username='mjumbewu')
+        user_profile = Profile.objects.get(auth__username='mjumbewu')
         assert_equal(user_profile.affiliation, 'OpenPlans')
 
 

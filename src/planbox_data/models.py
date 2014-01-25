@@ -26,12 +26,15 @@ def uniquify_slug(slug, existing_slugs):
             uniquifier += 1
 
 
-def create_user_profile(sender, instance, created, **kwargs):
+def create_or_update_user_profile(sender, instance, created, **kwargs):
     auth = instance
-    if created:
-        profile = User(auth=auth, slug=auth.username)
-        profile.save()
-post_save.connect(create_user_profile, sender=UserAuth, dispatch_uid="user-profile-creation-signal")
+    try:
+        profile = Profile.objects.get(auth=auth)
+    except Profile.DoesNotExist:
+        profile = Profile(auth=auth)
+    profile.slug = auth.username
+    profile.save()
+post_save.connect(create_or_update_user_profile, sender=UserAuth, dispatch_uid="user-profile-create-signal")
 
 
 class ProjectQuerySet (models.query.QuerySet):
@@ -39,8 +42,7 @@ class ProjectQuerySet (models.query.QuerySet):
         if isinstance(owner, UserAuth):
             owner = owner.profile
 
-        owner_type = ContentType.objects.get_for_model(owner)
-        return models.Q(owner_type=owner_type, owner_id=owner.pk)
+        return models.Q(owner=owner)
 
     def filter_by_owner_or_public(self, owner):
         owner_query = self.Q_owner(owner)
@@ -64,11 +66,6 @@ class Project (models.Model):
         ('complete', _('Complete')),
     )
 
-    OWNER_MODEL_CHOICES = (
-        models.Q(app_label='planbox_data', model='user') |
-        models.Q(app_label='planbox_data', model='organization')
-    )
-
     title = models.CharField(max_length=1024)
     slug = models.CharField(max_length=128, blank=True)
     public = models.BooleanField(default=False)
@@ -76,16 +73,12 @@ class Project (models.Model):
     location = models.CharField(help_text=_("The general location of the project, e.g. \"Philadelphia, PA\", \"Clifton Heights, Louisville, KY\", \"4th St. Corridor, Brooklyn, NY\", etc."), max_length=256, default='', blank=True)
     description = models.TextField(help_text=_("An introductory description of the project"), default='', blank=True)
     contact = models.TextField(help_text=_("The contact information for the project"), default='', blank=True)
-
-    # An owner can be either a user or an organization
-    owner_type = models.ForeignKey(ContentType, limit_choices_to=OWNER_MODEL_CHOICES)
-    owner_id = models.PositiveIntegerField()
-    owner = generic.GenericForeignKey('owner_type', 'owner_id')
+    owner = models.ForeignKey('Profile', related_name='projects')
 
     objects = ProjectManager()
 
     class Meta:
-        unique_together = [('owner_type', 'owner_id', 'slug')]
+        unique_together = [('owner', 'slug')]
 
     def __str__(self):
         return self.title
@@ -100,15 +93,9 @@ class Project (models.Model):
 
     def owned_by(self, obj):
         if isinstance(obj, UserAuth):
-            try:
-                obj = obj.profile
-            except User.DoesNotExist:
-                return False
-
-        if isinstance(obj, self.owner_type.model_class()) and self.owner_id == obj.pk:
-            return True
-
-        return False
+            try: obj = obj.profile
+            except Profile.DoesNotExist: return False
+        return (self.owner == obj)
 
 
 @python_2_unicode_compatible
@@ -135,41 +122,26 @@ class Event (models.Model):
         return super(Event, self).save(*args, **kwargs)
 
 
-@python_2_unicode_compatible
-class Organization (models.Model):
-    name = models.CharField(max_length=128)
-    slug = models.CharField(max_length=128)
-    projects = generic.GenericRelation(Project, content_type_field='owner_type', object_id_field='owner_id')
-
-    class Meta:
-        verbose_name = 'Organization Profile'
-        verbose_name_plural = 'Organization Profiles'
-
-    def __str__(self):
-        return self.name
-
-
-class UserManager (models.Manager):
+class ProfileManager (models.Manager):
     def get_queryset(self):
-        return super(UserManager, self).get_queryset().select_related('auth')
+        return super(ProfileManager, self).get_queryset().select_related('auth')
 
 
 @python_2_unicode_compatible
-class User (models.Model):
-    auth = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='profile', help_text=_("The authentication account to use for this user"))
-    slug = models.CharField(max_length=128)
-    projects = generic.GenericRelation(Project, content_type_field='owner_type', object_id_field='owner_id')
-    organizations = models.ManyToManyField(Organization, related_name='members', blank=True)
+class Profile (models.Model):
+    name = models.CharField(max_length=128, blank=True)
+    slug = models.CharField(max_length=128, unique=True)
+    # projects (reverse, Project)
+
+    # User-profile specific
+    auth = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='profile', null=True, blank=True, on_delete=models.CASCADE)
     affiliation = models.CharField(max_length=256, blank=True, default='')
+    organizations = models.ManyToManyField('Profile', related_name='members', blank=True, limit_choices_to={'auth__isnull': True})
 
-    objects = UserManager()
+    # Organization-profile specific
+    # members (reverse, Profile)
 
-    class Meta:
-        verbose_name = 'User Profile'
-        verbose_name_plural = 'User Profiles'
+    objects = ProfileManager()
 
     def __str__(self):
-        if self.slug == self.auth.username:
-            return self.auth.username
-        else:
-            return '%s (slug="%s")' % (self.auth.username, self.slug)
+        return self.slug

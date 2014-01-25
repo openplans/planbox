@@ -13,7 +13,7 @@ from django.shortcuts import resolve_url
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
 from django.views.generic import TemplateView, FormView
-from planbox_data.models import Project, User as UserProfile, Organization as OrgProfile
+from planbox_data.models import Project, Profile
 from planbox_data.serializers import ProjectSerializer, UserSerializer
 from planbox_ui.decorators import ssl_required
 from planbox_ui.forms import UserCreationForm
@@ -26,8 +26,8 @@ class AppMixin (object):
 
         if isinstance(obj, UserAuth):
             owner_name = obj.username
-        elif isinstance(obj, UserProfile):
-            owner_name = obj.auth.username
+        elif isinstance(obj, Profile):
+            owner_name = obj.slug
         return resolve_url('app-new-project', owner_name=owner_name)
 
 
@@ -106,7 +106,7 @@ class ProjectView (SSLRequired, TemplateView):
         if (self.request.user.is_authenticated()):
             try:
                 user_profile = self.request.user.profile
-            except UserProfile.DoesNotExist:
+            except Profile.DoesNotExist:
                 user_profile = None
         else:
             user_profile = None
@@ -121,16 +121,7 @@ class ProjectView (SSLRequired, TemplateView):
         return context
 
     def get(self, request, owner_name, slug):
-        owner_types = ContentType.objects.get_for_models(UserProfile, OrgProfile)
-
-        try:
-            owner = UserProfile.objects.get(auth__username=owner_name)
-            owner_type = owner_types[UserProfile]
-        except UserProfile.DoesNotExist:
-            owner = get_object_or_404(OrgProfile, name=owner_name)
-            owner_type = owner_types[OrgProfile]
-
-        self.project = get_object_or_404(Project, owner_type=owner_type, owner_id=owner.pk, slug=slug)
+        self.project = get_object_or_404(Project, owner__slug=owner_name, slug=slug)
 
         if not (self.project.public or self.project.owned_by(self.request.user)):
             raise Http404
