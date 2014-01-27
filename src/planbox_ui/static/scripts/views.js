@@ -60,6 +60,10 @@ var Planbox = Planbox || {};
         respJSON = resp.responseJSON,
         title, subtitle, description;
 
+    ////
+    // TODO: Stick the strings below into templates, and mark them for
+    //       translation.
+    ////
     title = 'Unable to save.';
     if (statusCode === 0) {
       // No network connectivity
@@ -77,7 +81,7 @@ var Planbox = Planbox || {};
       // NOTE: you get a 404 when trying to access a private project, which
       // could belong to the user but they're now signed out for some reason.
       subtitle = 'It looks like you\'re no longer signed in.';
-      description = '<a href="" target="_blank">Click here</a> to sign back ' +
+      description = '<a href="/signin/" target="_blank">Click here</a> to sign back ' +
         'in. Then come back to this page and save again';
     } else if (statusCode >= 500) {
       // Unknown server error
