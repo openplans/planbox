@@ -6,18 +6,18 @@ You've been signed up for Plan In A Box with the email address {{ email }}. Plan
 
 What's Next
 -----------
-{% if not projects.exists %}
+{% if not projects.exists %} {# The user has no saved projects yet... #}
 Keep Communities Informed and Engaged
 * Information about proposed street changes is often hard for residents to find and track.
 * Sharing timely, helpful information is challenging for busy planners.
 * Being uninformed leads to frustration and unsatisfactory experiences, even for great projects. And unhappy people slow down the public process for everyone.
 
-{% elif not projects.0.public %}
+{% elif not projects.0.public %} {# The user's project is saved, but not public... #}
 Looks like you've gotten started on your project! Make sure to finish up and publish it.
 
 **Make sure to send them to the signin page, because if we send them straight to their project and they're not signed in they'll get a 404.**
 
-{% else %}
+{% else %} {# The user's project is public... #}
 Looks like you've already published your project! **Give some next steps for sharing**
 
 {% endif %}
