@@ -5,7 +5,7 @@ from rest_framework import permissions
 from planbox_data import models
 
 
-class IsOwnerOrReadOnly (permissions.BasePermission):
+class IsOwnerOrReadOnly (permissions.IsAuthenticatedOrReadOnly):
     def is_authed_as_owner(self, auth, obj):
         """
         Check whether the given authenticated user is the same same as the
