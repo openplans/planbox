@@ -145,10 +145,20 @@
 .content-editable {
   box-shadow: 0 0 0 0.25em transparent;
   min-width: 1em;
+  min-height: 1.5em;
   -webkit-transition: all 0.3s ease;
      -moz-transition: all 0.3s ease;
        -o-transition: all 0.3s ease;
           transition: all 0.3s ease;
+}
+h1.content-editable, 
+h2.content-editable, 
+h3.content-editable, 
+h4.content-editable, 
+h4.content-editable, 
+h5.content-editable, 
+h6.content-editable, {
+  min-height: 1.25em;
 }
 .content-editable:empty {
   background-color: #777;
