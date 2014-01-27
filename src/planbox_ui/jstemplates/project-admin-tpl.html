@@ -22,14 +22,14 @@
 
 <header class="site-header">
   <div class="container">
-    {{^if title }}<h2 class="step step-title">Let's give your project a title.</h2>{{/if}}
+    {{^if title }}<h2 class="step step-title"><span class="step-arrow-left-down"></span>Let's give your project a title.</h2>{{/if}}
     <h1 class="site-title content-editable" data-attr="title" contenteditable>{{ title }}</h1>
   </div>
 </header>
 
 <section class="project-details">
   <div class="container">
-    {{^if status}}<h2 class="step step-status">Set the current status.</h2>{{/if}}
+    {{^if status}}<h2 class="step step-status"><span class="step-arrow-right-up"></span>Set the current status.</h2>{{/if}}
     <p class="project-status content-editable">
       <strong>
         {{ status_label status }}
@@ -42,9 +42,9 @@
         {{/ select }}
       </select>
     </p>
-    {{^if location}}<h2 class="step step-location">Where is it located?</h2>{{/if}}
+    {{^if location}}<h2 class="step step-location"><span class="step-arrow-left-down"></span>Where is it located?</h2>{{/if}}
     <p class="project-location content-editable" data-attr="location" contenteditable>{{ location }}</p>
-    {{^if description}}<h2 class="step step-description">Give it a short description.</h2>{{/if}}
+    {{^if description}}<h2 class="step step-description"><span class="step-arrow-left-down"></span>Give it a short description.</h2>{{/if}}
     <p class="project-description content-editable" data-attr="description" contenteditable>{{ description }}</p>
   </div>
 </section>
@@ -52,7 +52,7 @@
 <section class="project-timeline">
   <div class="container">
     {{^if events.length }}
-    <h2 class="step step-timeline">Add to the timeline.</h2>
+    <h2 class="step step-timeline">Add to the timeline&hellip;</h2>
     {{/if}}
     <ol class="event-list unstyled-list"></ol>
     <br>
@@ -62,7 +62,7 @@
 
 <footer class="site-colophon">
   <div class="container">
-    {{^if contact}}<h2 class="step step-contact-info">Provide contact information.</h2>{{/if}}
+    {{^if contact}}<h2 class="step step-contact-info"><span class="step-arrow-left-down"></span>Provide contact information.</h2>{{/if}}
 
     <p class="project-contact-info content-editable" data-attr="contact" contenteditable>{{ contact }}</p>
 

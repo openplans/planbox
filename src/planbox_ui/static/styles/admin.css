@@ -219,6 +219,8 @@ h6.content-editable {
 	        box-sizing: border-box;
   position: relative;
   top: 2.25em;
+  padding: 0.625em 0.75em 0.5em;
+  text-align: right;
 }
 .project-status {
   position: relative;
@@ -232,25 +234,65 @@ h6.content-editable {
   border-radius: 0.25em 0.25em 0.25em 0;
 }
 
-.step-title:before,
-.step-location:before,
-.step-description:before,
-.step-contact-info:before,
-.step-copy-url:before {
-  content: '\2939';
+.step-arrow-left-down {
+  float: left;
+  width: 1em;
+  height: 1em;
   position: relative;
-  top: 0.25em;
-  margin-right: 0.25em;
+  top: 0.375em;
+  font-size: 1.25em;
+  margin-right: -0.625em;
+  border: 0.1em solid transparent;
+  border-left-color: #666;
+  border-radius: 1em;
+  -webkit-transform: rotate(20deg);
+      -ms-transform: rotate(20deg);
+          transform: rotate(20deg);
 }
-.step-status:after {
-  content: '\2934';
-  margin-left: 0.25em;
+.step-arrow-left-down:after {
+  content: '';
+  height: 0;
+  width: 0;
+  position: absolute;
+  top: 0.625em;
+  left: -0.125em;
+  border: 0.2em solid #666;
+  border-left-color: transparent;
+  border-top-color: transparent;
+}
+.step-arrow-right-up {
+  float: right;
+  width: 1em;
+  height: 1em;
+  position: relative;
+  top: -0.5em;
+  font-size: 1.25em;
+  margin-left: -0.625em;
+  border: 0.1em solid transparent;
+  border-right-color: #666;
+  border-radius: 1em;
+  -webkit-transform: rotate(20deg);
+      -ms-transform: rotate(20deg);
+          transform: rotate(20deg);
+}
+.step-arrow-right-up:after {
+  content: '';
+  height: 0;
+  width: 0;
+  position: absolute;
+  bottom: 0.625em;
+  right: -0.125em;
+  border: 0.2em solid #666;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+}
+.ie8 .step-arrow-left-down,
+.ie8 .step-arrow-right-up {
+  display: none;
 }
 .step-copy-url {
   float: left;
   padding-right: 1em;
-/*  background-color: #777;*/
-/*  color: #fff;*/
   font-size: 1em;
 }
 
