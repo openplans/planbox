@@ -157,7 +157,7 @@ h3.content-editable,
 h4.content-editable, 
 h4.content-editable, 
 h5.content-editable, 
-h6.content-editable, {
+h6.content-editable {
   min-height: 1.25em;
 }
 .content-editable:empty {
@@ -193,6 +193,7 @@ h6.content-editable, {
   cursor: pointer;
 }
 
+
 /* Project Steps */
 .step {
   clear: both;
@@ -211,12 +212,17 @@ h6.content-editable, {
 .step-status {
   margin-top: 0;
   margin-bottom: 0.5em;
-  border-radius: 0.25em 0 0.25em 0.25em;
-  float: right;
+  border-radius: 0 0 0.25em 0.25em;
   width: 100%;
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
+  position: relative;
+  top: 2.25em;
+}
+.project-status {
+  position: relative;
+  top: -2.25em;
 }
 .step-description {
   margin-top: 2.5em;
@@ -437,6 +443,20 @@ h6.content-editable, {
 /* =Media Queries for Responsive Layout
 -------------------------------------------------------------- */
 
+@media only screen and (min-width: 22em) {
+  .step-status {
+    float: right;
+    padding-left: 1.25em;
+    width: auto;
+    border-radius: 0.25em 0 0.25em 0.25em;
+    position: relative;
+    top: -0.75em;
+  }
+  .project-status {
+    position: absolute;
+  }
+}
+
 @media only screen and (min-width: 44em) {
   .beta-notice {
     margin-top: 4em;
@@ -483,11 +503,6 @@ h6.content-editable, {
   }
   .step {
     font-size: 1.25em;
-  }
-  .step-status {
-    float: right;
-    padding-left: 1.25em;
-    width: auto;
   }
 }
 
