@@ -70,9 +70,12 @@ var Planbox = Planbox || {};
       // Bad request (missing title, at this point)
       subtitle = 'You forgot to give your project a title.';
       description = 'Every good project needs a title. Give it a great ' +
-        'one and save again.';
-    } else if (statusCode === 403 || statusCode === 401) {
+        'one and save again. <small>Have a title? That\'s unexpected. ' +
+        'Please contact us so we can look into it.</small>';
+    } else if (statusCode === 401 || statusCode === 403 || statusCode === 404) {
       // Authentication error
+      // NOTE: you get a 404 when trying to access a private project, which
+      // could belong to the user but they're now signed out for some reason.
       subtitle = 'It looks like you\'re no longer signed in.';
       description = '<a href="" target="_blank">Click here</a> to sign back ' +
         'in. Then come back to this page and save again';
