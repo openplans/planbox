@@ -8,14 +8,12 @@
   </nav>
 
   {{#if public}}
-  <div class="project-visibility"><span class="checked-icon">&#10004;</span>&nbsp;Published.</div>
-  {{else}}
-  <div class="project-visibility"><span class="checked-icon unchecked">&#10004;</span>&nbsp;Unpublished.</div>
-  {{/if}}
-
-  {{#if public}}
+  <div class="project-visibility"><span class="checked-icon">&#10004;</span>&nbsp;Published</div>
   <a href="#" class="save-btn btn btn-secondary btn-disabled">Publish Changes</a>
   {{else}}
+  <div class="project-visibility">
+    <a href="#" class="btn-public">Publish this Project</a>
+  </div>
   <a href="#" class="save-btn btn btn-secondary btn-disabled">Save Draft</a>
   {{/if}}
  </div>
