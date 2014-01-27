@@ -1,0 +1,27 @@
+Welcome to Plan in a Box!
+
+Hello,
+
+You've been signed up for Plan In A Box with the email address {{ email }}. Plan In A Box provides a high quality website for your street improvement project, so everyone can find out what's happening, stay engaged, and be more informed participants.
+
+What's Next
+-----------
+{% if not projects.exists %}
+Keep Communities Informed and Engaged
+* Information about proposed street changes is often hard for residents to find and track.
+* Sharing timely, helpful information is challenging for busy planners.
+* Being uninformed leads to frustration and unsatisfactory experiences, even for great projects. And unhappy people slow down the public process for everyone.
+
+{% elif not projects.0.public %}
+Looks like you've gotten started on your project! Make sure to finish up and publish it.
+
+**Make sure to send them to the signin page, because if we send them straight to their project and they're not signed in they'll get a 404.**
+
+{% else %}
+Looks like you've already published your project! **Give some next steps for sharing**
+
+{% endif %}
+-------------------
+If you did not sign up for this account, please let us know at info@planinabox.org.
+-------------------
+Plan In A Box is a product of OpenPlans, with support from Knight Foundation.
