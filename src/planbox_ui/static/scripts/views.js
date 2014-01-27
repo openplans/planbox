@@ -110,19 +110,19 @@ var Planbox = Planbox || {};
     className: 'overlay',
     ui: {
       closeBtn: '.btn-close',
-      makePublicBtn: '.btn-public',
+      publishBtn: '.btn-public',
       makePublicContent: '.make-public-content',
       shareContent: '.share-content'
     },
     events: {
       'click @ui.closeBtn': 'handleClose',
-      'click @ui.makePublicBtn': 'handleMakePublic'
+      'click @ui.publishBtn': 'handlePublish'
     },
     handleClose: function(evt) {
       evt.preventDefault();
       this.close();
     },
-    handleMakePublic: function(evt) {
+    handlePublish: function(evt) {
       var self = this;
 
       evt.preventDefault();
@@ -183,7 +183,8 @@ var Planbox = Planbox || {};
       addBtn: '.add-event-btn',
       visibilityToggle: '[name=project-public]',
       userMenuLink: '.user-menu-link',
-      userMenu: '.user-menu'
+      userMenu: '.user-menu',
+      publishBtn: '.btn-public'
     },
     events: {
       'blur @ui.editables': 'handleEditableBlur',
@@ -191,7 +192,8 @@ var Planbox = Planbox || {};
       'change @ui.visibilityToggle': 'handleVisibilityChange',
       'click @ui.saveBtn': 'handleSave',
       'click @ui.addBtn': 'handleAddClick',
-      'click @ui.userMenuLink': 'handleUserMenuClick'
+      'click @ui.userMenuLink': 'handleUserMenuClick',
+      'click @ui.publishBtn': 'handlePublish'
     },
     modelEvents: {
       'change': 'dataChanged',
@@ -251,39 +253,53 @@ var Planbox = Planbox || {};
 
       this.model.set(attr, val);
     },
+    save: function(makePublic) {
+      var self = this,
+          data = null;
+
+      if (makePublic) {
+        data = {public: true};
+      }
+
+      this.model.save(data, {
+        // We are not interested in change events that come from the server,
+        // and it causes the save button to enable after saving a new project
+        silent: true,
+        success: function(model) {
+          var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
+
+          if (window.location.pathname !== path) {
+            if (Modernizr.history) {
+              window.history.pushState('', '', path);
+            } else {
+              window.location = path;
+            }
+          }
+
+          if (makePublic || !model.get('public')) {
+            // Show the modal if we're publishing this right now
+            NS.app.overlayRegion.show(new NS.ProjectAdminModalView({
+              model: model
+            }));
+          }
+        },
+        error: function(model, resp) {
+          NS.showErrorModal(resp);
+        }
+      });
+    },
     handleSave: function(evt) {
       evt.preventDefault();
       var self = this,
           $target = $(evt.target);
 
       if (!$target.hasClass('btn-disabled')) {
-        this.model.save(null, {
-          // We are not interested in change events that come from the server,
-          // and it causes the save button to enable after saving a new project
-          silent: true,
-          success: function(model) {
-            var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
-
-            if (window.location.pathname !== path) {
-              if (Modernizr.history) {
-                window.history.pushState('', '', path);
-              } else {
-                window.location = path;
-              }
-            }
-
-            if (!model.get('public')) {
-              // Don't show the model if the project is already public
-              NS.app.overlayRegion.show(new NS.ProjectAdminModalView({
-                model: model
-              }));
-            }
-          },
-          error: function(model, resp) {
-            NS.showErrorModal(resp);
-          }
-        });
+        this.save();
       }
+    },
+    handlePublish: function(evt) {
+      evt.preventDefault();
+      this.save(true);
     },
     handleAddClick: function(evt) {
       evt.preventDefault();
