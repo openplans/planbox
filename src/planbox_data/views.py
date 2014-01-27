@@ -14,6 +14,14 @@ class ProjectViewSet (viewsets.ModelViewSet):
     model = models.Project
 
     def get_queryset(self):
+        # For PUT/PATCH requests we need to refer to the complete set of
+        # projects to correctly identify the project being updated. Otherwise
+        # we may incorrectly assume that we are creating a new project.
+        if self.request.method.lower() in ('put', 'patch'):
+            return models.Project.objects.all()
+
+        # For other requests, limit the queryset to those project to whic the
+        # user has access.
         user = self.request.user
 
         if user.is_superuser:
