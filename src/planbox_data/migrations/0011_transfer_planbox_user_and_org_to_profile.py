@@ -9,8 +9,8 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
         user_profile_map = {}
-        user_ct = orm['contenttypes.ContentType'].objects.filter(model='User', app_label='planbox_data')
-        org_ct = orm['contenttypes.ContentType'].objects.filter(model='Organization', app_label='planbox_data')
+        user_ct = orm['contenttypes.ContentType'].objects.get(model='user', app_label='planbox_data')
+        org_ct = orm['contenttypes.ContentType'].objects.get(model='organization', app_label='planbox_data')
 
         for user_profile in orm.User.objects.all():
             profile = orm.Profile.objects.create(
@@ -19,7 +19,7 @@ class Migration(DataMigration):
                 affiliation=user_profile.affiliation,
             )
 
-            for project in orm.Project.objects.filter(owner_type=user_ct, owner_id=user_profile.pk):
+            for project in orm.Project.objects.filter(owner_type_id=user_ct.pk, owner_id=user_profile.pk):
                 project.profile = profile
                 project.save()
 
@@ -32,7 +32,7 @@ class Migration(DataMigration):
                 slug=org_profile.slug,
             )
 
-            for project in orm.Project.objects.filter(owner_type=org_ct, owner_id=user_profile.pk):
+            for project in orm.Project.objects.filter(owner_type_id=org_ct.pk, owner_id=user_profile.pk):
                 project.profile = profile
                 project.save()
 
@@ -43,6 +43,9 @@ class Migration(DataMigration):
         "Write your backwards methods here."
         user_profile_map = {}
 
+        user_type = orm['contenttypes.ContentType'].objects.get(app_label='planbox_data', model='user')
+        org_type = orm['contenttypes.ContentType'].objects.get(app_label='planbox_data', model='organization')
+
         for user_profile in orm.Profile.objects.filter(auth__isnull=False):
             profile = orm.User.objects.create(
                 slug=user_profile.slug,
@@ -51,20 +54,22 @@ class Migration(DataMigration):
             )
 
             for project in user_profile.projects.all():
-                project.owner = profile
+                project.owner_id = profile.pk
+                project.owner_type = user_type
                 project.save()
 
             # Map the profile for adding to organizations later
             user_profile_map[user_profile] = profile
 
         for org_profile in orm.Profile.objects.filter(auth__isnull=True):
-            orm.Organization.objects.create(
+            profile = orm.Organization.objects.create(
                 name=org_profile.name,
                 slug=org_profile.slug,
             )
 
             for project in org_profile.projects.all():
-                project.owner = profile
+                project.owner_id = profile.pk
+                project.owner_type = org_type
                 project.save()
 
             for member in org_profile.members.all():

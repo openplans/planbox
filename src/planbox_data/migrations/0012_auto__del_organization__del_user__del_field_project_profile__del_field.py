@@ -29,6 +29,9 @@ class Migration(SchemaMigration):
         # Renaming field 'Project.profile' to 'Project.owner'
         db.rename_column(u'planbox_data_project', 'profile_id', 'owner_id')
 
+        # Alter the owner column to not be null
+        db.alter_column(u'planbox_data_project', 'owner_id', models.ForeignKey(orm['planbox_data.Profile'], related_name='projects', null=False))
+
         # Adding unique constraint on 'Project', fields ['owner', 'slug']
         db.create_unique(u'planbox_data_project', ['owner_id', 'slug'])
 
@@ -36,6 +39,22 @@ class Migration(SchemaMigration):
     def backwards(self, orm):
         # Removing unique constraint on 'Project', fields ['owner', 'slug']
         db.delete_unique(u'planbox_data_project', ['owner_id', 'slug'])
+
+        # Alter the owner column to allow null values
+        db.alter_column(u'planbox_data_project', 'owner_id', models.ForeignKey(orm['planbox_data.Profile'], related_name='projects', null=True))
+
+        # Renaming field 'Project.owner' to 'Project.profile'
+        db.rename_column(u'planbox_data_project', 'owner_id', 'profile_id')
+
+        # Adding field 'Project.owner_id'
+        db.add_column(u'planbox_data_project', 'owner_id',
+                      self.gf('django.db.models.fields.PositiveIntegerField')(null=True),
+                      keep_default=False)
+
+        # Adding field 'Project.owner_type'
+        db.add_column(u'planbox_data_project', 'owner_type',
+                      self.gf('django.db.models.fields.related.ForeignKey')(null=True, to=orm['contenttypes.ContentType']),
+                      keep_default=False)
 
         # Adding model 'Organization'
         db.create_table(u'planbox_data_organization', (
@@ -62,19 +81,6 @@ class Migration(SchemaMigration):
             ('organization', models.ForeignKey(orm[u'planbox_data.organization'], null=False))
         ))
         db.create_unique(m2m_table_name, ['user_id', 'organization_id'])
-
-        # Renaming field 'Project.owner' to 'Project.profile'
-        db.rename_column(u'planbox_data_project', 'owner_id', 'profile_id')
-
-        # Adding field 'Project.owner_type'
-        db.add_column(u'planbox_data_project', 'owner_type',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['contenttypes.ContentType']),
-                      keep_default=False)
-
-        # Adding field 'Project.owner_id'
-        db.add_column(u'planbox_data_project', 'owner_id',
-                      self.gf('django.db.models.fields.PositiveIntegerField')(default=1),
-                      keep_default=False)
 
         # Adding unique constraint on 'Project', fields ['owner_type', 'owner_id', 'slug']
         db.create_unique(u'planbox_data_project', ['owner_type_id', 'owner_id', 'slug'])

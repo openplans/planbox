@@ -29,20 +29,23 @@ class Migration(SchemaMigration):
 
         # Adding field 'Project.profile'
         db.add_column(u'planbox_data_project', 'profile',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['planbox_data.Profile']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(null=True, to=orm['planbox_data.Profile']),
                       keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting model 'Profile'
-        db.delete_table(u'planbox_data_profile')
+        # Deleting field 'Project.profile'
+        db.delete_column(u'planbox_data_project', 'profile_id')
 
         # Removing M2M table for field members on 'Profile'
         db.delete_table(db.shorten_name(u'planbox_data_profile_members'))
 
-        # Deleting field 'Project.profile'
-        db.delete_column(u'planbox_data_project', 'profile_id')
+        # Deleting model 'Profile'
+        db.delete_table(u'planbox_data_profile')
 
+        # Alter Project.owner_type and Project.owner_id to not be null
+        db.alter_column(u'planbox_data_project', 'owner_type_id', models.ForeignKey(orm['contenttypes.ContentType'], null=False))
+        db.alter_column(u'planbox_data_project', 'owner_id', models.PositiveIntegerField(null=False))
 
     models = {
         u'auth.group': {
