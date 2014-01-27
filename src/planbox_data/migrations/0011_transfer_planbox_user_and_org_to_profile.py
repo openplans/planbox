@@ -8,10 +8,17 @@ class Migration(DataMigration):
 
     def forwards(self, orm):
         "Write your forwards methods here."
-        user_profile_map = {}
-        user_ct = orm['contenttypes.ContentType'].objects.get(model='user', app_label='planbox_data')
-        org_ct = orm['contenttypes.ContentType'].objects.get(model='organization', app_label='planbox_data')
 
+        ContentType = orm['contenttypes.ContentType']
+        try:
+            user_ct = ContentType.objects.get(model='user', app_label='planbox_data')
+            org_ct = ContentType.objects.get(model='organization', app_label='planbox_data')
+
+        except ContentType.DoesNotExist:
+            user_ct = ContentType.objects.create(model='user', app_label='planbox_data', name='User Profile')
+            org_ct = ContentType.objects.create(model='organization', app_label='planbox_data', name='Organization Profile')
+
+        user_profile_map = {}
         for user_profile in orm.User.objects.all():
             profile = orm.Profile.objects.create(
                 slug=user_profile.slug,
@@ -41,11 +48,17 @@ class Migration(DataMigration):
 
     def backwards(self, orm):
         "Write your backwards methods here."
+
+        ContentType = orm['contenttypes.ContentType']
+        try:
+            user_ct = ContentType.objects.get(model='user', app_label='planbox_data')
+            org_ct = ContentType.objects.get(model='organization', app_label='planbox_data')
+
+        except ContentType.DoesNotExist:
+            user_ct = ContentType.objects.create(model='user', app_label='planbox_data', name='User Profile')
+            org_ct = ContentType.objects.create(model='organization', app_label='planbox_data', name='Organization Profile')
+
         user_profile_map = {}
-
-        user_type = orm['contenttypes.ContentType'].objects.get(app_label='planbox_data', model='user')
-        org_type = orm['contenttypes.ContentType'].objects.get(app_label='planbox_data', model='organization')
-
         for user_profile in orm.Profile.objects.filter(auth__isnull=False):
             profile = orm.User.objects.create(
                 slug=user_profile.slug,
@@ -55,7 +68,7 @@ class Migration(DataMigration):
 
             for project in user_profile.projects.all():
                 project.owner_id = profile.pk
-                project.owner_type = user_type
+                project.owner_type = user_ct
                 project.save()
 
             # Map the profile for adding to organizations later
@@ -69,7 +82,7 @@ class Migration(DataMigration):
 
             for project in org_profile.projects.all():
                 project.owner_id = profile.pk
-                project.owner_type = org_type
+                project.owner_type = org_ct
                 project.save()
 
             for member in org_profile.members.all():
