@@ -11,6 +11,22 @@ var Planbox = Planbox || {};
   };
 
   // View =====================================================================
+  NS.ModalView = Backbone.Marionette.ItemView.extend({
+    template: '#modal-tpl',
+    className: 'overlay',
+    ui: {
+      closeBtn: '.btn-close',
+    },
+    events: {
+      'click @ui.closeBtn': 'handleClose'
+    },
+    handleClose: function(evt) {
+      evt.preventDefault();
+      this.close();
+    }
+  });
+
+
   NS.EventView = Backbone.Marionette.ItemView.extend({
     template: '#event-tpl',
     tagName: 'li',
@@ -37,6 +53,56 @@ var Planbox = Planbox || {};
       // value does not trigger a change event.
       this.model.set(attr, val);
     }
+  };
+
+  NS.showErrorModal = function(resp) {
+    var statusCode = resp.status,
+        respJSON = resp.responseJSON,
+        title, subtitle, description;
+
+    ////
+    // TODO: Stick the strings below into templates, and mark them for
+    //       translation.
+    ////
+    title = 'Unable to save.';
+    if (statusCode === 0) {
+      // No network connectivity
+      subtitle = 'We were unable to reach our server.';
+      description = 'It looks like your internet connection may have dropped. ' +
+        'Please check your connection and try again.';
+    } else if (statusCode === 400) {
+      // Bad request (missing title, at this point)
+      subtitle = 'You forgot to give your project a title.';
+      description = 'Every good project needs a title. Give it a great ' +
+        'one and save again. <small>Have a title? That\'s unexpected. ' +
+        'Please contact us so we can look into it.</small>';
+    } else if (statusCode === 401 || statusCode === 403 || statusCode === 404) {
+      // Authentication error
+      // NOTE: you get a 404 when trying to access a private project, which
+      // could belong to the user but they're now signed out for some reason.
+      subtitle = 'It looks like you\'re no longer signed in.';
+      description = '<a href="/signin/" target="_blank">Click here</a> to sign back ' +
+        'in. Then come back to this page and save again';
+    } else if (statusCode >= 500) {
+      // Unknown server error
+      subtitle = 'An unexpected error occurred on our server.';
+      description = 'This is usually a temporary problem. Wait a minute or ' +
+        'two, then try again. It will probably work.';
+    } else {
+      // No idea
+      subtitle = 'An unexpected error occurred on our server.';
+      description = 'This is usually a temporary problem. Wait a minute or ' +
+        'two, then try again. If you still have problems, please contact us ' +
+        'and we\'ll work to resolve the problem right away.';
+    }
+
+    NS.app.overlayRegion.show(new NS.ModalView({
+      model: new Backbone.Model({
+        title: title,
+        subtitle: subtitle,
+        description: description
+      })
+    }));
   };
 
   NS.ProjectAdminModalView = Backbone.Marionette.ItemView.extend({
@@ -70,8 +136,8 @@ var Planbox = Planbox || {};
           self.ui.makePublicContent.addClass('is-hidden');
           self.ui.shareContent.removeClass('is-hidden');
         },
-        error: function() {
-          window.alert('Unable to make this public. Please try again.');
+        error: function(model, resp) {
+          NS.showErrorModal(resp);
         }
       });
     }
@@ -213,8 +279,8 @@ var Planbox = Planbox || {};
               }));
             }
           },
-          error: function() {
-            window.alert('Unable to save your project. Please try again.');
+          error: function(model, resp) {
+            NS.showErrorModal(resp);
           }
         });
       }
@@ -235,6 +301,5 @@ var Planbox = Planbox || {};
       this.ui.saveBtn.removeClass('btn-disabled');
     }
   });
-
 
 }(Planbox, jQuery));

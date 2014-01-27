@@ -348,7 +348,15 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
 
     def test_anonymous_cannot_PUT_detail(self):
         _, owner, _, _, _, url = self.init_test_assets()
-        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner_type": "user", "owner_id": %s}' % (owner.pk), content_type='application/json')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner": "%s"}' % (owner.slug), content_type='application/json')
+        # Even though the user is unauthenticated and a 401 seems like it might
+        # be in order, we don't want a www-authenticate response header to be
+        # sent, so we'll send a 403.
+        assert_equal(response.status_code, HTTP_403_FORBIDDEN)
+
+    def test_anonymous_gets_403_with_duplicate(self):
+        _, owner, project, _, _, url = self.init_test_assets()
+        response = self.client.put(url, data='{"id": %s, "title": "%s", "slug": "%s", "description": "x", "events": [], "location": "x", "owner": "%s", "public": true}' % (project.pk, project.title, project.slug, owner.slug), content_type='application/json')
         # Even though the user is unauthenticated and a 401 seems like it might
         # be in order, we don't want a www-authenticate response header to be
         # sent, so we'll send a 403.
@@ -422,6 +430,16 @@ class NonPublicProjectDetailViewAuthenticationTests (PlanBoxTestCase):
         response = self.client.get(url)
         assert_equal(response.status_code, HTTP_404_NOT_FOUND)
 
+    def test_anonymous_cannot_PUT_detail(self):
+        _, owner, project, _, _, url = self.init_test_assets()
+        response = self.client.put(url, data='{"id": %s, "title": "%s", "slug": "%s", "description": "x", "events": [], "location": "x", "owner": "%s", "public": false}' % (project.pk, project.title, project.slug, owner.slug), content_type='application/json')
+        assert_equal(response.status_code, HTTP_403_FORBIDDEN, response.content)
+
+    def test_anonymous_cannot_DELETE_detail(self):
+        url = self.init_test_assets()[-1]
+        response = self.client.delete(url)
+        assert_equal(response.status_code, HTTP_403_FORBIDDEN)
+
     def test_non_owner_cannot_GET_detail(self):
         url = self.init_test_assets()[-1]
 
@@ -429,6 +447,33 @@ class NonPublicProjectDetailViewAuthenticationTests (PlanBoxTestCase):
         self.client.login(username='atogle', password='456')
 
         response = self.client.get(url)
+        assert_equal(response.status_code, HTTP_404_NOT_FOUND)
+
+    def test_non_owner_cannot_PUT_detail(self):
+        _, owner, project, _, _, url = self.init_test_assets()
+
+        UserAuth.objects.create_user(username='atogle', password='456')
+        self.client.login(username='atogle', password='456')
+
+        response = self.client.put(url, data='{"id": %s, "title": "%s", "slug": "%s", "description": "x", "events": [], "location": "x", "owner": "%s", "public": false}' % (project.pk, project.title, project.slug, owner.slug), content_type='application/json')
+        assert_equal(response.status_code, HTTP_403_FORBIDDEN, (response.status_code, str(response)))
+
+    def test_non_owner_cannot_assign_detail_to_themselves(self):
+        _, owner, project, _, _, url = self.init_test_assets()
+
+        nonowner = UserAuth.objects.create_user(username='atogle', password='456')
+        self.client.login(username='atogle', password='456')
+
+        response = self.client.put(url, data='{"id": %s, "title": "%s", "slug": "%s", "description": "x", "events": [], "location": "x", "owner": "%s", "public": false}' % (project.pk, project.title, project.slug, nonowner.username), content_type='application/json')
+        assert_equal(response.status_code, HTTP_403_FORBIDDEN, (response.status_code, str(response)))
+
+    def test_non_owner_cannot_DELETE_detail(self):
+        url = self.init_test_assets()[-1]
+
+        UserAuth.objects.create_user(username='atogle', password='456')
+        self.client.login(username='atogle', password='456')
+
+        response = self.client.delete(url)
         assert_equal(response.status_code, HTTP_404_NOT_FOUND)
 
     def test_owner_can_GET_detail(self):
