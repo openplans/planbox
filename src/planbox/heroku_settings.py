@@ -30,6 +30,8 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
 EMAIL_USE_TLS = True
 SERVER_EMAIL = EMAIL_HOST_USER
 
+PLANBOX_CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL', '')
+
 import dj_database_url
 DATABASES = {'default': dj_database_url.config()}
 

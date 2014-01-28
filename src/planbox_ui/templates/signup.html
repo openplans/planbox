@@ -5,9 +5,9 @@
 <section class="main">
   <div class="container">
     {% if form.errors.email %}
-    <div class="alert alert-error"><strong>{{ form.errors.email.as_text|slice:"2:" }}</strong></div>
+    <div class="alert alert-error"><strong>{{ form.errors.email.as_text|slice:"2:"|safe }}</strong></div>
     {% elif form.errors.username %}
-    <div class="alert alert-error"><strong>{{ form.errors.username.as_text|slice:"2:" }}</strong></div>
+    <div class="alert alert-error"><strong>{{ form.errors.username.as_text|slice:"2:"|safe }}</strong></div>
     {% endif %}
 
     <h3>Sign up for a Plan In A Box account!</h3>

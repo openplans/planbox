@@ -1,4 +1,7 @@
 from django import forms
+from django.conf import settings
+from django.template import Context
+from django.template.loader import get_template
 from django.utils.translation import ugettext as _
 
 from planbox_data.models import UserAuth, Profile
@@ -10,9 +13,9 @@ class UserCreationForm(forms.ModelForm):
     password. Adapted from django.contrib.auth.forms.UserCreationForm; this one
     requires a single password field, and also accepts an email address.
     """
-    error_messages = {
-        'duplicate_email': _("A user with the email address \"%s\" already exists. Please contact us if you've forgotten your login information."),
-        'duplicate_username': _("A user with the username \"%s\" already exists."),
+    error_message_templates = {
+        'duplicate_email': 'message-duplicate-email-error.html',
+        'duplicate_username': 'message-duplicate-username-error.html',
     }
     email = forms.EmailField(label=_("Email"), max_length=254)
     username = forms.RegexField(label=_("Username"), max_length=30,
@@ -39,8 +42,10 @@ class UserCreationForm(forms.ModelForm):
             UserAuth._default_manager.get(email__iexact=email)
         except UserAuth.DoesNotExist:
             return email
+
+        error_template = get_template(self.error_message_templates['duplicate_email'])
         raise forms.ValidationError(
-            self.error_messages['duplicate_email'] % email,
+            error_template.render(Context({'email': email, 'settings': settings})),
             code='duplicate_email',
         )
 
@@ -52,8 +57,10 @@ class UserCreationForm(forms.ModelForm):
             Profile.objects.get(slug=username)
         except Profile.DoesNotExist:
             return username
+
+        error_template = get_template(self.error_message_templates['duplicate_username'])
         raise forms.ValidationError(
-            self.error_messages['duplicate_username'] % username,
+            error_template.render(Context({'username': username, 'settings': settings})),
             code='duplicate_username',
         )
 
