@@ -61,39 +61,36 @@ var Planbox = Planbox || {};
         title, subtitle, description;
 
     ////
-    // TODO: Stick the strings below into templates, and mark them for
-    //       translation.
+    // TODO: We can have a single subtitle template and a description template
+    //       for ajax errors, and then pass in a status code.
     ////
     title = 'Unable to save.';
     if (statusCode === 0) {
       // No network connectivity
-      subtitle = 'We were unable to reach our server.';
-      description = 'It looks like your internet connection may have dropped. ' +
-        'Please check your connection and try again.';
+      subtitle = Handlebars.templates['message-ajax-no-status-error-subtitle']({});
+      description = Handlebars.templates['message-ajax-no-status-error-description']({});
+
     } else if (statusCode === 400) {
       // Bad request (missing title, at this point)
-      subtitle = 'You forgot to give your project a title.';
-      description = 'Every good project needs a title. Give it a great ' +
-        'one and save again. <small>Have a title? That\'s unexpected. ' +
-        'Please contact us so we can look into it.</small>';
+      subtitle = Handlebars.templates['message-ajax-bad-request-error-subtitle']({});
+      description = Handlebars.templates['message-ajax-bad-request-error-description']({});
+
     } else if (statusCode === 401 || statusCode === 403 || statusCode === 404) {
       // Authentication error
       // NOTE: you get a 404 when trying to access a private project, which
       // could belong to the user but they're now signed out for some reason.
-      subtitle = 'It looks like you\'re no longer signed in.';
-      description = '<a href="/signin/" target="_blank">Click here</a> to sign back ' +
-        'in. Then come back to this page and save again';
+      subtitle = Handlebars.templates['message-ajax-authentication-error-subtitle']({});
+      description = Handlebars.templates['message-ajax-authentication-error-description']({});
+
     } else if (statusCode >= 500) {
       // Unknown server error
-      subtitle = 'An unexpected error occurred on our server.';
-      description = 'This is usually a temporary problem. Wait a minute or ' +
-        'two, then try again. It will probably work.';
+      subtitle = Handlebars.templates['message-ajax-server-error-subtitle']({});
+      description = Handlebars.templates['message-ajax-server-error-description']({});
+
     } else {
       // No idea
-      subtitle = 'An unexpected error occurred on our server.';
-      description = 'This is usually a temporary problem. Wait a minute or ' +
-        'two, then try again. If you still have problems, please contact us ' +
-        'and we\'ll work to resolve the problem right away.';
+      subtitle = Handlebars.templates['message-ajax-unknown-error-subtitle']({});
+      description = Handlebars.templates['message-ajax-unknown-error-description']({});
     }
 
     NS.app.overlayRegion.show(new NS.ModalView({

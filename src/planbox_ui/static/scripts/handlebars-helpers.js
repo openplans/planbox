@@ -13,6 +13,10 @@ var Planbox = Planbox || {};
     return window.location.toString();
   });
 
+  Handlebars.registerHelper('contact_email', function() {
+    return NS.Data.contactEmail;
+  });
+
   Handlebars.registerHelper('user', function(attr, options) {
     // If there are two args, then we asked for a specific attribute
     if (options) {
