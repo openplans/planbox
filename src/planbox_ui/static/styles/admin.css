@@ -103,6 +103,44 @@
   color: #fff;
 }
 
+.print-btn {
+  margin: 0 0 0 -9999px;
+}
+.printer-icon {
+  float: left;
+  width: 1em;
+  height: 0.5em;
+  position: relative;
+  top: 0.625em;
+  background: #fff;
+  margin-right: 0.25em;
+  border-radius: 0.125em;
+}
+.printer-icon:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0.5em;
+  height: 0.875em;
+  top: -0.375em; 
+  left: 0.125em;
+  background: transparent; 
+  border: 0.125em solid #fff;
+  border-radius: 0.125em;
+}
+.printer-icon:after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 0.125em;
+  width: 0.125em;
+  top: 0.25em; 
+  left: 0.125em;
+  background: #268099; 
+  border-radius: 0.5em;
+  box-shadow: 0.2em 0 0 #268099; 
+}
+
 
 /* =Save Button
 -------------------------------------------------------------- */
@@ -210,7 +248,7 @@ h6.content-editable {
   margin-top: 0;
 }
 .step-status {
-  margin-top: 0;
+  margin-top: -0.5em;
   margin-bottom: 0.5em;
   border-radius: 0 0 0.25em 0.25em;
   width: 100%;
@@ -222,8 +260,7 @@ h6.content-editable {
   padding: 0.625em 0.75em 0.5em;
   text-align: right;
 }
-.project-status {
-  position: relative;
+.project-status.unset-status {
   top: -2.25em;
 }
 .step-description {
@@ -493,9 +530,9 @@ h6.content-editable {
     border-radius: 0.25em 0 0.25em 0.25em;
     position: relative;
     top: 0;
+    margin-top: 0;
   }
-  .project-status {
-    position: absolute;
+  .project-status.unset-status {
     top: -1.5em;
   }
 }
@@ -546,6 +583,9 @@ h6.content-editable {
   }
   .step {
     font-size: 1.25em;
+  }
+  .print-btn {
+    margin: 0 0 0 1em;
   }
 }
 
