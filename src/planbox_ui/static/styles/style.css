@@ -374,20 +374,21 @@ html, body {
 	        box-sizing: border-box;
 }
 
-.beta-notice {
+.software-phase-notice {
   background-color: #F5FF8C;
   background-color: rgba(245,255,140,0.5);
+  box-shadow: 0 0 1em rgba(245,255,140,0.5);
   color: #fff;
   font-size: 0.75em;
   font-weight: 800;
-  line-height: 3.75;
+  line-height: 4;
   text-transform: uppercase;
   text-align: center;
   text-shadow: 0 0 3px rgba(0,0,0,0.25);
-  width: 3em;
-  height: 3em;
+  width: 3.25em;
+  height: 3.25em;
   position: absolute;
-  top: -0.875em;
+  top: -1em;
   left: -0.125em;
   overflow: visible;
   -webkit-transform: rotate(-10deg);
@@ -395,24 +396,25 @@ html, body {
       -ms-transform: rotate(-10deg);
        -o-transform: rotate(-10deg);
 }
-.beta-notice:before, .beta-notice:after {
+.software-phase-notice:before, .software-phase-notice:after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  height: 3em;
-  width: 3em;
+  height: 3.25em;
+  width: 3.25em;
   background-color: #F5FF8C;
   background-color: rgba(245,255,140,0.5);
+  box-shadow: 0 0 1em rgba(245,255,140,0.5);
   z-index: -1;
 }
-.beta-notice:before {
+.software-phase-notice:before {
   -webkit-transform: rotate(30deg);
      -moz-transform: rotate(30deg);
       -ms-transform: rotate(30deg);
        -o-transform: rotate(30deg);
 }
-.beta-notice:after {
+.software-phase-notice:after {
   -webkit-transform: rotate(60deg);
      -moz-transform: rotate(60deg);
       -ms-transform: rotate(60deg);
@@ -504,7 +506,6 @@ a.login-link {
 .product-section--the-answer {}
 .the-answer h3 {
   font-size: 2.875em;
-/*  font-weight: 400;*/
   line-height: 1.25;
 }
 .the-answer p {
@@ -525,14 +526,48 @@ a.login-link {
 .product-pitch {
   padding-top: 1em;
 }
-.product-pitch h4 {
-  margin-bottom: 1em;
+.product-pitch h3 {
+  margin-bottom: 0.75em;
 }
 .product-pitch p {
   font-size: 1.125em;
 }
 .interest-form p.email {
   margin-bottom: 0.25em;
+}
+.product-demos {
+  background-color: #a1cbcf;
+}
+.product-demos .container {
+  padding-bottom: 0;
+}
+.the-demo-links {}
+.demo-image {
+  display: block;
+  float: right;
+  position: relative;
+}
+.demo-image-ipad {
+  float: left;
+  width: 36%;
+  margin-top: 8%;
+  z-index: 2;
+  -webkit-transform: rotate(-8deg);
+      -ms-transform: rotate(-8deg);
+          transform: rotate(-8deg);
+}
+.demo-image-iphone {
+  width: 17%;
+  margin-bottom: -13%;
+  margin-right: 8%;
+  z-index: 3;
+  -webkit-transform: rotate(15deg);
+      -ms-transform: rotate(15deg);
+          transform: rotate(15deg);
+}
+.demo-image-ff {
+  width: 63%;
+  z-index: 1;
 }
 
 
@@ -782,10 +817,45 @@ li.event {
   .modal {
     border-radius: 0.375em;
   }
-  .beta-notice {
+  .software-phase-notice {
     font-size: 1.25em;
     position: fixed;
   }
+
+
+  .demo-image {
+    -webkit-transition: -webkit-transform .2s ease;
+            -ms-transition: -ms-transform .2s ease;
+                    transition: transform .2s ease;
+    -webkit-transform-origin: 50% 50%;
+        -ms-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+  }
+  .demo-image-ipad:hover {
+    z-index: 4;
+    -webkit-transform: scale(1.25) rotate(-6deg);
+        -ms-transform: scale(1.25) rotate(-6deg);
+            transform: scale(1.25) rotate(-6deg);
+  }
+  .demo-image-iphone:hover {
+    z-index: 4;
+    -webkit-transform: scale(1.25) rotate(10deg);
+        -ms-transform: scale(1.25) rotate(10deg);
+            transform: scale(1.25) rotate(10deg);
+  }
+  .demo-image-ff {
+    -webkit-transform-origin: 60% 100%;
+        -ms-transform-origin: 60% 100%;
+            transform-origin: 60% 100%;
+  }
+  .demo-image-ff:hover {
+    z-index: 4;
+    -webkit-transform: scale(1.25);
+        -ms-transform: scale(1.25);
+            transform: scale(1.25);
+  }
+
+
 }
 
 @media only screen and (min-width: 52em) {
@@ -794,10 +864,13 @@ li.event {
   }
   .product-title {}
   a.login-link {
-/*    top: 1.75em;*/
   }
   .product-section--the-problem {
     padding-top: 3.5em;
     padding-bottom: 1.5em;
+  }
+  .the-demo-links {
+    margin-right: -2em;
+    margin-left: -2em;
   }
 }

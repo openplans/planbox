@@ -15,12 +15,6 @@
       <h3>Get useful, timely, engaging project info onto the web.</h3>
       <p><strong>Plan In A Box</strong> provides a high quality website for your street improvement project, so everyone can find out what's happening, stay engaged, and be more informed participants.</p>
 
-      <h4>Sign up for a Plan In A Box account!</h4>
-      <form class="interest-form clearfix" method="GET" action="{% url 'app-signup' %}">
-        <p class="email"><input required name="email" type="email" class="input-block" placeholder="email@example.org"></p>
-        <p class="submit"><button class="btn btn-block">Sign up!</button></p>
-      </form>
-
     </div>
   </div>
 </section>
@@ -29,12 +23,48 @@
   <div class="container">
     <div class="call-to-action">
       <div class="product-pitch">
-        <h4>Keep Communities Informed and Engaged</h4>
-        <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/search.png">Information about proposed street changes is often hard for residents to find and track.</p>
+
+        <h3>Keep Communities Informed &amp; Engaged</h3>
+        <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/search.png">Information about proposed street changes is difficult for residents to find and track.</p>
         <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/stopwatch.png">Sharing timely, helpful information is challenging for busy planners.</p>
         <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/headache.png">Being uninformed leads to frustration and unsatisfactory experiences, even for great projects. And unhappy people slow down the public process for everyone.</p>
+
+        <h4>Plan In A Box helps you create and publish a readable, informative web page about your project.</h4>
+
       </div>
     </div>
+  </div>
+</section>
+
+<section class="product-demos">
+  <div class="container">
+
+    <h3>Explore these demo sites&hellip;</h3>
+    <div class="the-demo-links clearfix">
+      <a href="https://planbox.herokuapp.com/demo/shopping-district-street-study/"><img class="demo-image demo-image-ipad" src="{{ STATIC_URL }}images/ipad-perryton.png"></a>
+      <a href="https://planbox.herokuapp.com/demo/perryton-school-district-sidewalk-improvements/"><img class="demo-image demo-image-iphone" src="{{ STATIC_URL }}images/iphone-shopping-district.png"></a>
+      <a href="https://planbox.herokuapp.com/demo/innovative-parking-strategies-for-the-village/"><img class="demo-image demo-image-ff" src="{{ STATIC_URL }}images/ff-parking.png"></a>
+    </div>
+
+  </div>
+</section>
+
+<section class="">
+  <div class="container">
+
+    <h2>Start using Plan In A Box</h2>
+    <h4>Create a project page with Plan In A Box&hellip;</h4>
+    <form class="interest-form clearfix" method="GET" action="{% url 'app-signup' %}">
+      <p class="email"><input required name="email" type="email" class="input-block" placeholder="email@example.org"></p>
+      <p class="submit"><button class="btn btn-block">Sign up!</button></p>
+    </form>
+
+    <p><strong>Plan In A Box is in alpha</strong>&mdash;we're just getting started. Expect some rough edges and lots of missing functionality. Your <a href=""><!-- TODO: add link here. -->feedback and comments</a> will help us improve the software.</p>
+
+    <p>As we continue to make improvements, you'll see new features rolled out to your account. Please help us <a href=""><!-- TODO: add link here. -->prioritize new features</a>!</p>
+
+    <p>Contact us any time at <a href="mailto:hello@openplans.org?Subject=Plan%20In%20A%20Box">hello@openplans.org</a>.</p>
+
   </div>
 </section>
 

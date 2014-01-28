@@ -1,4 +1,4 @@
-.beta-notice {
+.software-phase-notice {
   margin-top: 9em;
 }
 
@@ -500,7 +500,7 @@ h6.content-editable {
 }
 
 @media only screen and (min-width: 44em) {
-  .beta-notice {
+  .software-phase-notice {
     margin-top: 4em;
   }
   .project-visibility {
