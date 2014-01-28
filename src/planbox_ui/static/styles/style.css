@@ -374,6 +374,35 @@ html, body {
 	        box-sizing: border-box;
 }
 
+
+/* =Alpha/Beta/Etc, Help, and Feedback buttons
+-------------------------------------------------------------- */
+
+.software-help-links {
+  background-color: #407280;
+  background-color: #3D5D66;
+  box-shadow: 0 0 1em rgba(0,0,0,0.25);
+  color: #fff;
+  font-size: 0.75em;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: right;
+  position: absolute;
+  top: 0.25em;
+  left: 0;
+  padding: 0.5em;
+  border-radius: 0 0.5em 0.5em 0;
+}
+.software-help-links a {
+  display: block;
+  text-decoration: none;
+  color: LightBlue;
+  padding: 0.25em 0.5em;
+}
+.software-help-links a:hover {
+  color: #fff;
+}
+
 .software-phase-notice {
   background-color: #F5FF8C;
   background-color: rgba(245,255,140,0.5);
@@ -820,6 +849,17 @@ li.event {
   .software-phase-notice {
     font-size: 1.25em;
     position: fixed;
+    z-index: 201;
+  }
+  .software-help-links {
+    position: fixed;
+    font-size: 0.875em;
+    padding-left: 5.25em;
+    z-index: 200;
+  }
+  .software-help-links a {
+    display: inline;
+    padding: 0.25em 0.5em;
   }
 
 
