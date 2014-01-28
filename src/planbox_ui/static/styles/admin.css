@@ -492,10 +492,11 @@ h6.content-editable {
     width: auto;
     border-radius: 0.25em 0 0.25em 0.25em;
     position: relative;
-    top: -0.75em;
+    top: 0;
   }
   .project-status {
     position: absolute;
+    top: -1.5em;
   }
 }
 
