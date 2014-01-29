@@ -283,7 +283,7 @@ module.exports = function (grunt) {
           ],
           '<%= yeoman.app %>/styles/print.min.css': [
             '<%= yeoman.app %>/styles/print.css'
-          ]
+          ],
           '<%= yeoman.app %>/styles/admin.min.css': [
             '<%= yeoman.app %>/styles/admin.css'
           ]
