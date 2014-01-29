@@ -1,0 +1,34 @@
+{% extends 'product-base.html' %}
+
+{% block main %}
+
+<section class="">
+  <div class="container">
+
+    <div class="help-intro">
+      <p><strong>Plan In A Box is in alpha</strong>, so you may not yet see all the features you want.  As we continue to make improvements, you'll see them rolled out to your account&mdash;no updates needed! Keep an eye on <a href="http://openplans.org/category/planningtools/">our blog</a> for details as we continue adding features.</p>
+    </div>
+
+    <hr>
+
+    <h2>How does Plan In A Box work?</h2>
+    <ol>
+      <li>Create an account.</li>
+      <li>Edit &amp; save your project.</li>
+      <li>When you're ready, publish your project for the world to see.</li>
+      <li>Send people to your project online by sharing it on Facebook, Twitter, mailing lists, etc.</li>
+      <li>Print a beautiful flyer right from your project page.</li>
+    </ol>
+
+    <h5>Questions? Problems?</h5>
+    <p>Contact us any time at <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Plan%20In%20A%20Box">{{ settings.PLANBOX_CONTACT_EMAIL }}</a>. Or, give us a call at 917 388-9033 during East Coast office hours.</p>
+
+    <hr>
+
+    <h2>Help us make Plan In A Box better</h2>
+    <p>Your feedback and comments will enable us to make the software better. Please suggest new features and help us prioritize them on <a href="https://trello.com/b/94MT3WRQ/plan-in-a-box-features" target="_blank"><strong>our Trello board</strong></a>. Or <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Plan%20In%20A%20Box"><strong>email us</strong></a> your ideas and feedback directly.</p>
+
+  </div>
+</section>
+
+{% endblock %}

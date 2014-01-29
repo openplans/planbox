@@ -1,6 +1,10 @@
-.software-phase-notice {
-  margin-top: 9em;
+.software-help-link {
+  margin-top: 9.25em;
 }
+.software-phase-notice {
+  margin-top: 9.25em;
+}
+
 
 /* =Admin Bar
 -------------------------------------------------------------- */
@@ -538,6 +542,9 @@ h6.content-editable {
 }
 
 @media only screen and (min-width: 44em) {
+  .software-help-link {
+    margin-top: 5.75em;
+  }
   .software-phase-notice {
     margin-top: 4em;
   }

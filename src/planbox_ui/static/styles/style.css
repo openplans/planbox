@@ -4,8 +4,8 @@
 
 /* Typography */
 body {
-  background-color: #eee;
-  color: #666;
+  background: #407280;
+  color: #ddd;
   font-family: 'Alegreya Sans', sans-serif;
   font-weight: 400;
   line-height: 1.5;
@@ -363,6 +363,8 @@ html, body {
 #page {
   overflow: hidden;
   position: relative;
+  background-color: #eee;
+  color: #666;
 }
 .container {
   position: relative;
@@ -372,6 +374,32 @@ html, body {
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
+}
+
+
+/* =Alpha/Beta/Etc, Help, and Feedback buttons
+-------------------------------------------------------------- */
+
+a.software-help-link {
+  color: LightBlue;
+  font-size: 0.75em;
+  font-weight: 800;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: right;
+
+  background-color: #3D5D66;
+  box-shadow: 0 0 1em rgba(0,0,0,0.25);
+  border-radius: 0 0 0.625em 0;
+
+  display: block;
+  padding: 0.375em 0.75em 0.375em 3.875em;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+a.software-help-link:hover {
+  color: #fff;
 }
 
 .software-phase-notice {
@@ -568,6 +596,14 @@ a.login-link {
 .demo-image-ff {
   width: 63%;
   z-index: 1;
+}
+
+
+/* =Help Page
+-------------------------------------------------------------- */
+
+.help-intro {
+  font-size: 1.25em;
 }
 
 
@@ -820,6 +856,15 @@ li.event {
   .software-phase-notice {
     font-size: 1.25em;
     position: fixed;
+    z-index: 201;
+  }
+  a.software-help-link {
+    border-radius: 0 0.625em 0.625em 0;
+    top: 0.25em;
+    font-size: 0.875em;
+    position: fixed;
+    padding-left: 5.625em;
+    z-index: 200;
   }
 
 

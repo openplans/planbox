@@ -43,6 +43,7 @@
   {% block page %}{% endblock %}
   </div>
 
+  <a href="/help"{% if is_owner %} target="_blank"{% endif %} class="software-help-link">Help &amp; Feedback</a>
   <small class="software-phase-notice">Alpha</small>
 
   {% block scripts %}{% endblock %}
