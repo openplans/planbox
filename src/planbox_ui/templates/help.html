@@ -1,0 +1,33 @@
+{% extends 'product-base.html' %}
+
+{% block main %}
+
+<section class="">
+  <div class="container">
+
+    <h5>Plan In A Box is in alpha&mdash;we're just getting started. Expect some rough edges and lots of missing functionality.</h5>
+
+    <hr>
+
+    <h2>How does Plan In A Box work?</h2>
+    <ol>
+      <li>Create an account.</li>
+      <li>Edit &amp; save your project.</li>
+      <li>When you're ready, publish your project for the workd to see.</li>
+      <li>Publicize your project online by sharing it on Facebook, Twitter, and other social networks. Link to it from your own website &amp; mailing lists.</li>
+      <li>Print flyers to share your project offline.</li>
+    </ol>
+
+    <h5>Still having trouble?</h5>
+    <p>Contact us any time at <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Plan%20In%20A%20Box">{{ settings.PLANBOX_CONTACT_EMAIL }}</a>.</p>
+
+    <hr>
+
+    <h2>Feedback</h2>
+    <p>Your feedback and comments will help us improve the software. As we continue to make improvements, you'll see new features rolled out to your account. </p>
+    <p>Please suggest new features and help us prioritize them on <a href="https://trello.com/b/94MT3WRQ/plan-in-a-box-features" target="_blank"><strong>our Trello board</strong></a>.</p>
+
+  </div>
+</section>
+
+{% endblock %}

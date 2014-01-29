@@ -1,14 +1,10 @@
+.software-help-link {
+  margin-top: 9.25em;
+}
 .software-phase-notice {
-  margin-top: 9em;
+  margin-top: 9.25em;
 }
-.software-help-links {
-  margin-top: 9em;
-  padding-left: 3.75em;
-}
-.software-help-links a {
-  display: inline;
-  padding: 0.25em 0.5em;
-}
+
 
 /* =Admin Bar
 -------------------------------------------------------------- */
@@ -546,12 +542,11 @@ h6.content-editable {
 }
 
 @media only screen and (min-width: 44em) {
+  .software-help-link {
+    margin-top: 5.75em;
+  }
   .software-phase-notice {
     margin-top: 4em;
-  }
-  .software-help-links {
-    margin-top: 5.75em;
-    padding-left: 5.25em;
   }
   .project-visibility {
     padding-right: 0.5em;

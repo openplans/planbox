@@ -48,6 +48,10 @@ class IndexView (TemplateView):
     template_name = 'index.html'
 
 
+class HelpView (TemplateView):
+    template_name = 'help.html'
+
+
 class SignupView (AppMixin, SSLRequired, FormView):
     template_name = 'signup.html'
     form_class = UserCreationForm
@@ -181,5 +185,6 @@ new_project_view = NewProjectView.as_view()
 signup_view = SignupView.as_view()
 signin_view = SigninView.as_view()
 password_reset_view = PasswordResetView.as_view()
+help_view = HelpView.as_view()
 robots_view = TemplateView.as_view(template_name='robots.txt', content_type='text/plain')
 sitemap_view = SiteMapView.as_view(content_type='text/xml')

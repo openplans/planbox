@@ -4,8 +4,8 @@
 
 /* Typography */
 body {
-  background-color: #eee;
-  color: #666;
+  background: #407280;
+  color: #ddd;
   font-family: 'Alegreya Sans', sans-serif;
   font-weight: 400;
   line-height: 1.5;
@@ -363,6 +363,8 @@ html, body {
 #page {
   overflow: hidden;
   position: relative;
+  background-color: #eee;
+  color: #666;
 }
 .container {
   position: relative;
@@ -378,28 +380,25 @@ html, body {
 /* =Alpha/Beta/Etc, Help, and Feedback buttons
 -------------------------------------------------------------- */
 
-.software-help-links {
-  background-color: #407280;
-  background-color: #3D5D66;
-  box-shadow: 0 0 1em rgba(0,0,0,0.25);
-  color: #fff;
+a.software-help-link {
+  color: LightBlue;
   font-size: 0.75em;
   font-weight: 800;
+  text-decoration: none;
   text-transform: uppercase;
   text-align: right;
-  position: absolute;
-  top: 0.25em;
-  left: 0;
-  padding: 0.5em;
-  border-radius: 0 0.5em 0.5em 0;
-}
-.software-help-links a {
+
+  background-color: #3D5D66;
+  box-shadow: 0 0 1em rgba(0,0,0,0.25);
+  border-radius: 0 0 0.625em 0;
+
   display: block;
-  text-decoration: none;
-  color: LightBlue;
-  padding: 0.25em 0.5em;
+  padding: 0.375em 0.75em 0.375em 3.875em;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
-.software-help-links a:hover {
+a.software-help-link:hover {
   color: #fff;
 }
 
@@ -851,15 +850,13 @@ li.event {
     position: fixed;
     z-index: 201;
   }
-  .software-help-links {
-    position: fixed;
+  a.software-help-link {
+    border-radius: 0 0.625em 0.625em 0;
+    top: 0.25em;
     font-size: 0.875em;
-    padding-left: 5.25em;
+    position: fixed;
+    padding-left: 5.625em;
     z-index: 200;
-  }
-  .software-help-links a {
-    display: inline;
-    padding: 0.25em 0.5em;
   }
 
 
