@@ -364,6 +364,7 @@ h6.content-editable {
   position: absolute;
   bottom: 100%;
   left: 4em;
+  z-index: 150;
   width: 0;
   height: 0;
   margin: 0 0 -1em 0;
@@ -472,6 +473,9 @@ h6.content-editable {
   content: 'Drag to reorder';
 }
 
+li.event:last-child:before {
+  display: none;
+}
 .add-event-btn {
   padding-left: 2.5em !important;
   position: relative;
@@ -593,6 +597,13 @@ h6.content-editable {
   }
   .print-btn {
     margin: 0 0 0 1em;
+  }
+  .delete-event-btn {
+    position: absolute;
+    top: 4.75em;
+    right: 100%;
+    margin-right: -2em;
+    white-space: nowrap;
   }
 }
 

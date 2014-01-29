@@ -654,38 +654,45 @@ a.login-link {
   padding: 2em 0 0.5em;
   margin: -1em 0;
 }
+.event-list:before {
+  content: '';
+  background: #888;
+  width: 1em;
+  height: 3.25em;
+  position: absolute;
+  top: 0;
+  left: 0.75em;
+}
 li.event {
   padding-left: 1.5em;
   position: relative;
   clear: both;
 }
-.event:before {
+li.event:last-child:before {
   content: '';
+  background: #888;
+  width: 1em;
   position: absolute;
-  top: 0.5em;
-  left: -1em;
-  width: 1.5em;
-  height: 1.5em;
-  border-radius: 1em;
-  background: #eee;
+  top: 1.5em;
+  bottom: -1.75em;
+  left: -0.75em;
 }
 .event:after {
   content: '';
   position: absolute;
   top: 0.75em;
-  left: -0.75em;
+  left: -1em;
   width: 1em;
   height: 1em;
   border-radius: 1em;
   background: #888;
+  border: 0.25em solid #eee;
 }
 .event-title {
   text-shadow: 0 0 3px rgba(0,0,0,0.25);
   position: relative;
-/*  float: left;*/
 }
 .event-description {
-/*  clear: left;*/
   position: relative;
 }
 
