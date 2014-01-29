@@ -281,6 +281,9 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/normalize-css/normalize.css',
             '<%= yeoman.app %>/styles/style.css'
           ],
+          '<%= yeoman.app %>/styles/print.min.css': [
+            '<%= yeoman.app %>/styles/print.css'
+          ]
           '<%= yeoman.app %>/styles/admin.min.css': [
             '<%= yeoman.app %>/styles/admin.css'
           ]
