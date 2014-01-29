@@ -485,23 +485,13 @@ li.event:last-child:before {
 .add-event-btn:before {
   content: '';
   position: absolute;
-  top: 50%;
+  top: 0.25em;
   left: 0.5em;
-  margin-top: -0.75em;
-  width: 1.5em;
-  height: 1.5em;
-  border-radius: 1em;
-  background: #eee;
-}
-.add-event-btn:after {
-  content: '';
-  position: absolute;
-  top: 0.5em;
-  left: 0.75em;
   width: 1em;
   height: 1em;
   border-radius: 1em;
   background: #888;
+  border: 0.25em solid #eee;
 }
 
 .delete-event-btn {
