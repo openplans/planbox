@@ -10,6 +10,7 @@
 .add-event-btn,
 .save-btn,
 .status-selector,
+.software-help-link,
 .event-list + br {
   display: none;
 }
