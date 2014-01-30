@@ -809,6 +809,7 @@ li.event:last-child:before {
 .overlay {
   *background: #666;
   background: rgba(100,100,100,0.8);
+  color: #666;
   position: fixed;
   top: 0;
   right: 0;
