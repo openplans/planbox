@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load include_handlebars from djangobars %}
 
 {% block title %}
 Plan In A Box
@@ -41,8 +42,15 @@ Plan In A Box
 <header class="product-header">
   <div class="container clearfix">
     <!-- <h1 class="product-title"><a href="/"><span class="product-logo">&#9649;</span>&nbsp;Plan In A Box</a></h1> -->
-    <a href="/signin" class="login-link user-link nobreak">Sign In</a>
+  {% if user.is_authenticated %}
+    {% include_handlebars 'user-menu.html' %}
+  {% else %}
+    <nav class="user-nav">
+      <a href="/signin" class="login-link user-link nobreak">Sign In</a>
+    </nav>
+  {% endif %}
   </div>
+
 </header>
 
 {% block main %}{% endblock %}
@@ -54,4 +62,21 @@ Plan In A Box
   </div>
 </footer>
 
+{% endblock %}
+
+{% block scripts %}
+  {% if debug %}
+  <script src="{{ STATIC_URL }}bower_components/jquery/jquery.js"></script>
+  {% else %}
+  <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
+  {% endif %}
+
+  <script>
+    $(function() {
+      $('.user-menu-link').click(function(evt) {
+        evt.preventDefault();
+        $('.user-menu').toggleClass('is-open');
+      });
+    });
+  </script>
 {% endblock %}
