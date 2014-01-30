@@ -72,8 +72,8 @@ var Planbox = Planbox || {};
 
     } else if (statusCode === 400) {
       // Bad request (missing title, at this point)
-      subtitle = Handlebars.templates['message-ajax-bad-request-error-subtitle']({});
-      description = Handlebars.templates['message-ajax-bad-request-error-description']({});
+      subtitle = Handlebars.templates['message-ajax-bad-request-error-subtitle']({errors: respJSON});
+      description = Handlebars.templates['message-ajax-bad-request-error-description']({errors: respJSON});
 
     } else if (statusCode === 401 || statusCode === 403 || statusCode === 404) {
       // Authentication error

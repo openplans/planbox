@@ -1,1 +1,9 @@
+{{#if errors.title}}
 You forgot to give your project a title.
+{{^}}
+  {{#if errors.events}}
+  You forgot to give an event a title.
+  {{^}}
+  Something's not right...
+  {{/if}}
+{{/if}}

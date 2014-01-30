@@ -1,1 +1,11 @@
+{{#if errors.title}}
 Every good project needs a title. Give it a great one and save again. <small>Have a title? That's unexpected. Please <a href="mailto:{{ contact_email }}">contact us</a> so we can look into it.</small>
+{{^}}
+  {{#if errors.events}}
+  Every good event needs a title. Give all of yours great ones and save again. <small>All your events have titles? That's unexpected. Please <a href="mailto:{{ contact_email }}">contact us</a> so we can look into it.</small>
+  {{^}}
+  Hm, something is unexpectedly stopping us from saving your project. Please <a href="mailto:{{ contact_email }}">contact us</a> so we can look into it. Include the following information so that we can help you as quickly as possible:<br>
+  <br>
+  <small><code>{{ debug errors }}</code></small>
+  {{/if}}
+{{/if}}
