@@ -17,6 +17,14 @@ from planbox_data.models import Project, Profile
 from planbox_data.serializers import ProjectSerializer, UserSerializer
 from planbox_ui.decorators import ssl_required
 from planbox_ui.forms import UserCreationForm
+import pybars
+
+
+def register_helper(helper_name):
+    def _register(helper_callback):
+        pybars._compiler._pybars_['helpers'][helper_name] = helper_callback
+        return helper_callback
+    return _register
 
 
 class AppMixin (object):
@@ -30,6 +38,30 @@ class AppMixin (object):
             owner_name = obj.slug
         return resolve_url('app-new-project', owner_name=owner_name)
 
+    def get_context_data(self, **kwargs):
+        context = super(AppMixin, self).get_context_data(**kwargs)
+
+        if (self.request.user.is_authenticated()):
+            try:
+                user_profile = self.request.user.profile
+            except Profile.DoesNotExist:
+                user_profile = None
+        else:
+            user_profile = None
+
+        user_serializer = UserSerializer(user_profile)
+        context['user_data'] = None if user_profile is None else user_serializer.data
+
+        # Register handlebars helpers
+        @register_helper('user')
+        def user_attr_helper(this, attr):
+            return context['user_data'].get(attr)
+
+        @register_helper('window_location')
+        def window_location_helper(this):
+            return self.request.get_full_path()
+
+        return context
 
 class LoginRequired (object):
     @method_decorator(login_required)
@@ -44,11 +76,11 @@ class SSLRequired (object):
 
 
 # App
-class IndexView (TemplateView):
+class IndexView (AppMixin, TemplateView):
     template_name = 'index.html'
 
 
-class HelpView (TemplateView):
+class HelpView (AppMixin, TemplateView):
     template_name = 'help.html'
 
 
@@ -101,26 +133,15 @@ class SigninView (AppMixin, SSLRequired, FormView):
         return super(SigninView, self).form_valid(form)
 
 
-class ProjectView (SSLRequired, TemplateView):
+class ProjectView (AppMixin, SSLRequired, TemplateView):
     template_name = 'project.html'
 
     def get_context_data(self, **kwargs):
         context = super(ProjectView, self).get_context_data(**kwargs)
 
-        if (self.request.user.is_authenticated()):
-            try:
-                user_profile = self.request.user.profile
-            except Profile.DoesNotExist:
-                user_profile = None
-        else:
-            user_profile = None
-
-        user_serializer = UserSerializer(user_profile)
         project_serializer = ProjectSerializer(self.project)
-
-        context['user_data'] = None if user_profile is None else user_serializer.data
         context['project_data'] = project_serializer.data
-        context['is_owner'] = self.project.owned_by(user_profile)
+        context['is_owner'] = self.project.owned_by(self.request.user)
 
         return context
 
@@ -133,15 +154,13 @@ class ProjectView (SSLRequired, TemplateView):
         return super(ProjectView, self).get(request, pk=self.project.pk)
 
 
-class NewProjectView (LoginRequired, SSLRequired, TemplateView):
+class NewProjectView (AppMixin, LoginRequired, SSLRequired, TemplateView):
     template_name = 'project.html'
 
     def get_context_data(self, **kwargs):
         context = super(NewProjectView, self).get_context_data(**kwargs)
 
-        user_serializer = UserSerializer(self.request.user.profile)
         context['project_data'] = {}
-        context['user_data'] = user_serializer.data
         context['is_owner'] = True
 
         return context

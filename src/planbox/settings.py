@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'jstemplate',
+    'djangobars',
     'south',
     'genericadmin',
     'rest_framework',
@@ -46,6 +47,8 @@ INSTALLED_APPS = (
     'planbox_ui',
     'planbox_data',
 )
+
+HANDLEBARS_APP_DIRNAMES = ['jstemplates']
 
 LOGIN_URL = 'app-signin'
 SESSION_COOKIE_SECURE = True
