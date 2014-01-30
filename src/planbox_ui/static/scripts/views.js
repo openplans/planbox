@@ -258,6 +258,7 @@ var Planbox = Planbox || {};
         data = {public: true};
       }
 
+      this.model.clean();
       this.model.save(data, {
         // We are not interested in change events that come from the server,
         // and it causes the save button to enable after saving a new project

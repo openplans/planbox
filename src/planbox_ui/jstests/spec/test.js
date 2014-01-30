@@ -8,6 +8,27 @@
       assert.isDefined(Planbox);
     });
 
+    describe('ProjectModel', function () {
+      var p;
+
+      beforeEach(function(done) {
+        p = new Planbox.ProjectModel({label: 'My Project', events: []});
+        done();
+      });
+
+      it('has an events collection', function() {
+        assert.isDefined(p.get('events'));
+      });
+
+      describe('clean', function() {
+        it('should get rid of empty events', function() {
+          p.get('events').add([{label: 'Event 1'}, {}, {label: 'Event 3'}]);
+          p.clean();
+          assert.deepEqual(p.get('events').toJSON(), [{label: 'Event 1'}, {label: 'Event 3'}]);
+        });
+      });
+    });
+
     describe('EventCollection', function () {
       var c;
 
