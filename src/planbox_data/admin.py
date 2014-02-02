@@ -30,6 +30,10 @@ class ProjectAdmin (GenericAdminModelAdmin):
         EventInline,
     )
 
+    def get_queryset(self, request):
+        qs = super(ProjectAdmin, self).get_queryset(request)
+        return qs.select_related('owner')
+
     def _permalink(self, project):
         return format_html(
             '''<a href="{0}" target="_blank">&#8663</a>''',  # 8663 is the ⇗ character
