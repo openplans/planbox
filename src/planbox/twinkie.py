@@ -26,7 +26,7 @@ class ExpiresMiddleware (object):
         return format_date_time(expire_stamp)
 
     def start_response_with_expiration(self, start_response):
-        def patched_start_response(status, headers):
+        def patched_start_response(status, headers, exc_info=None):
             # if self._should_handle(headers)
             wsgi_headers = Headers(headers)
 
@@ -52,7 +52,7 @@ class ExpiresMiddleware (object):
                     log.debug('Adding expires header value: ' + expire_time)
                     headers.append(('Expires', expire_time))
 
-            return start_response(status, headers)
+            return start_response(status, headers, exc_info)
         return patched_start_response
 
     def __call__(self, environ, start_response):
