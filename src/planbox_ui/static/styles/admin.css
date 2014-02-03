@@ -213,6 +213,8 @@ h6.content-editable {
 .step-timeline {
   margin-bottom: 0.75em;
   border-radius: 0.25em 0.25em 0.25em 0;
+  position: relative;
+  z-index: 2;
 }
 
 .step-arrow-left-down {
