@@ -2,7 +2,7 @@
 
 Hello {# user name #}.
 
-Thanks for signing up with Plan In A Box. We're excited to see what you do with it. 
+Thanks for signing up with Plan In A Box. We're excited to see you create an informative project page. 
 
 Please let me know if you have any questions about getting started (you can just reply to this email). Your feedback is always welcome.
 
