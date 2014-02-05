@@ -26,6 +26,9 @@ var Planbox = Planbox || {};
     }
   });
 
+  NS.WelcomeModalView = NS.ModalView.extend({
+    template: '#welcome-modal-tpl'
+  });
 
   NS.EventView = Backbone.Marionette.ItemView.extend({
     template: '#event-tpl',
