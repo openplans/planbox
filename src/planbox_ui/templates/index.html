@@ -4,7 +4,7 @@
 
 <section class="product-section--the-problem has-cover-image">
   <div class="container">
-    <h3>Still using old-fashioned methods to promote your street improvement projects?</h3>
+    <h3>Still communicating with your constituents the old fashioned way? </h3>
   </div>
 </section>
 
@@ -12,8 +12,8 @@
   <div class="container">
     <div class="the-answer">
 
-      <h3>Get useful, timely, engaging project info onto the web.</h3>
-      <p><strong>Plan In A Box</strong> provides a high quality website for your street improvement project, so everyone can find out what's happening, stay engaged, and be more informed participants.</p>
+      <h3>Put timely, engaging information about your projects online in a matter of minutes.</h3>
+      <p><strong>Plan In A Box</strong> is one part town-hall one part project archive. It’s a place where people can come to find out what's already happened, what’s happening now, stay engaged, and be more informed participants.</p>
 
     </div>
   </div>
@@ -25,11 +25,12 @@
       <div class="product-pitch">
 
         <h3>Keep Communities Informed &amp; Engaged</h3>
-        <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/search.png">Information about proposed street changes is difficult for residents to find and track.</p>
+        <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/search.png">Information about  projects is difficult for residents to find and track.</p>
         <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/stopwatch.png">Sharing timely, helpful information is challenging for busy planners.</p>
-        <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/headache.png">Being uninformed leads to frustration and unsatisfactory experiences, even for great projects. And unhappy people slow down the public process for everyone.</p>
+        <p class="clearfix"><img class="illustration" src="{{ STATIC_URL }}images/headache.png">Not everyone has time to attend a public meeting, but people want to have access to information about their community.</p>
+        <p class="clearfix">Uninformed participants have an unsatisfactory experience, even on the greatest projects. And unhappy people slow down the public process for everyone else.</p>
 
-        <h4>Plan In A Box helps you create and publish a readable, informative web page about your project.</h4>
+        <h4>Plan In A Box helps you create and publish an easy to navigate, informative web page about your project.</h4>
 
       </div>
     </div>
@@ -52,17 +53,24 @@
 <section class="">
   <div class="container">
 
-    <h2>Create a project page with Plan In A Box&hellip;</h2>
+    <h2>Create a project page right now&hellip;</h2>
+    
+    <ol>
+      <li>Sign up.</li>
+      <li>Enter project details, like purpose, location, key events.</li>
+      <li>Publish your page.</li>
+      <li>Optionally, print project posters.</li>
+    </ol>
     <form class="interest-form clearfix" method="GET" action="{% url 'app-signup' %}">
       <p class="email"><input required name="email" type="email" class="input-block" placeholder="email@example.org"></p>
-      <p class="submit"><button class="btn btn-block">Sign up!</button></p>
+      <p class="submit"><button class="btn btn-block">Start</button></p>
     </form>
 
-    <p><strong>Plan In A Box is in alpha</strong>&mdash;we're just getting started. Expect some rough edges and lots of missing functionality. Your <a href="https://trello.com/b/94MT3WRQ/plan-in-a-box-features" target="_blank">feedback and comments</a> will help us improve the software.</p>
+    <p>Contact us any time at <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Plan%20In%20A%20Box">{{ settings.PLANBOX_CONTACT_EMAIL }}</a>.</p>
+    
+    <p>Your <a href="https://trello.com/b/94MT3WRQ/plan-in-a-box-features" target="_blank">feedback and comments</a> will help us improve the software.</p>
 
     <p>As we continue to make improvements, you'll see new features rolled out to your account. Please help us <a href="https://trello.com/b/94MT3WRQ/plan-in-a-box-features" target="_blank">prioritize new features</a>!</p>
-
-    <p>Contact us any time at <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Plan%20In%20A%20Box">{{ settings.PLANBOX_CONTACT_EMAIL }}</a>.</p>
 
   </div>
 </section>
