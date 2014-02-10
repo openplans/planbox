@@ -48,6 +48,7 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     except Profile.DoesNotExist:
         profile = Profile(auth=auth)
     profile.slug = auth.username
+    profile.email = auth.email
     profile.save()
 post_save.connect(create_or_update_user_profile, sender=UserAuth, dispatch_uid="user-profile-create-signal")
 
@@ -144,8 +145,9 @@ class ProfileManager (models.Manager):
 
 @python_2_unicode_compatible
 class Profile (TimeStampedModel):
-    name = models.CharField(max_length=128, blank=True)
-    slug = models.CharField(max_length=128, unique=True)
+    name = models.CharField(max_length=128, blank=True, help_text=_('The full name of the person or organization'))
+    slug = models.CharField(max_length=128, unique=True, help_text=_('A short name that will be used in URLs for projects owned by this profile'))
+    email = models.EmailField(blank=True, help_text=_('Contact email address of the profile holder'))
     # projects (reverse, Project)
 
     # User-profile specific
