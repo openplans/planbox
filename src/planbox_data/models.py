@@ -8,9 +8,24 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.utils.text import slugify
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.timezone import now
 from django.utils.translation import ugettext as _
 
 UserAuth = auth.get_user_model()
+
+
+class TimeStampedModel (models.Model):
+    created_at = models.DateTimeField(default=now, blank=True)
+    updated_at = models.DateTimeField(default=now, blank=True)
+
+    class Meta:
+        abstract = True
+
+    def save(self, update_times=True, *args, **kwargs):
+        if update_times:
+            if self.pk is None: self.created_at = now()
+            self.updated_at = now()
+        super(TimeStampedModel, self).save(*args, **kwargs)
 
 
 def uniquify_slug(slug, existing_slugs):
@@ -59,7 +74,7 @@ class ProjectManager (models.Manager):
 
 
 @python_2_unicode_compatible
-class Project (models.Model):
+class Project (TimeStampedModel):
     STATUS_CHOICES = (
         ('not-started', _('Not Started')),
         ('active', _('Active')),
@@ -128,7 +143,7 @@ class ProfileManager (models.Manager):
 
 
 @python_2_unicode_compatible
-class Profile (models.Model):
+class Profile (TimeStampedModel):
     name = models.CharField(max_length=128, blank=True)
     slug = models.CharField(max_length=128, unique=True)
     # projects (reverse, Project)
