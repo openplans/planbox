@@ -11,8 +11,17 @@ from planbox_data.models import Profile, Project, Event
 
 
 class ProfileAdmin (admin.ModelAdmin):
+    list_display = ('__unicode__', '_date_joined', '_email')
     filter_horizontal = ('organizations',)
     raw_id_fields = ('auth',)
+
+    def _date_joined(self, obj):
+        if obj.auth_id is not None:
+            return obj.auth.date_joined
+        else:
+            return ''
+    _date_joined.short_description = _('Date joined')
+    _date_joined.admin_order_field = 'auth__date_joined'
 
 
 class EventInline (admin.TabularInline):
