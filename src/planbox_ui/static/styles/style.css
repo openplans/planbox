@@ -267,6 +267,9 @@ textarea {
   margin: 0 0 1.25em;
   position: relative;
 }
+.alert a {
+  color: #fff;
+}
 .alert-error {
   background-color: #D91616;
   background-color: rgba(217,22,22,0.8);
@@ -315,6 +318,9 @@ textarea {
   text-shadow: none;
   border-color: #EEF788;
 }
+.alert-warning a {
+  color: #777;
+}
 .alert-dismissable {
   padding-right: 2em;
 }
@@ -329,6 +335,16 @@ textarea {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+/* Outdated Browser Alert */
+.outdated-browser-alert {
+  border-radius: 0;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  background-color: #D91616;
+  box-shadow: 0 0 0.75em rgba(0,0,0,0.75);
 }
 
 
@@ -359,6 +375,9 @@ textarea {
 
 html, body {
   min-height: 100%;
+}
+#site-wrapper {
+  position: relative;
 }
 #page {
   overflow: hidden;
@@ -590,17 +609,22 @@ a.login-link, .product-header .user-menu-link {
   padding: 1em 0;
 }
 .product-section--the-problem h3 {
-  font-size: 2.5em;
+  font-size: 1.625em;
   text-shadow: 0 0 3px rgba(0,0,0,0.25);
 }
 .product-section--the-answer {}
 .the-answer h3 {
-  font-size: 2.875em;
+  font-size: 1.875em;
   line-height: 1.25;
 }
 .the-answer p {
   font-size: 1.35em;
 }
+
+.feature-list {
+  display: none;
+}
+
 .product-overview {
   background-image: url(../images/workers.jpg);
   color: #666;
@@ -869,6 +893,12 @@ li.event:last-child:before {
     float: left;
     margin: 0 1em 0.5em 0;
   }
+  .product-section--the-problem h3 {
+    font-size: 2.5em;
+  }
+  .product-section--the-answer h3 {
+    font-size: 2.75em;
+  }
 }
 
 @media only screen and (min-width: 44em) {
@@ -887,7 +917,30 @@ li.event:last-child:before {
     padding-top: 2em;
   }
   .product-section--the-problem h3 {
-    font-size: 2.75em;
+    font-size: 3em;
+  }
+  .product-section--the-answer h3 {
+    font-size: 2.375em;
+  }
+
+  .feature-list {
+    display: block;
+    font-size: 1.375em;
+    font-weight: bold;
+    line-height: 1.25;
+    text-align: center;
+  }
+  .feature-list li {
+    float: left;
+    width: 33%;
+    padding: 0.5em;
+  	-webkit-box-sizing: border-box;
+  	   -moz-box-sizing: border-box;
+  	        box-sizing: border-box;
+  }
+  .feature-list img {
+    display: block;
+    margin: 0 auto;
   }
 
   .project-status strong {
@@ -936,6 +989,14 @@ li.event:last-child:before {
     position: fixed;
     padding-left: 5.625em;
     z-index: 200;
+  }
+  .ie8 a.software-help-link,
+  .ie8 .software-phase-notice,
+  .ie7 a.software-help-link,
+  .ie7 .software-phase-notice,
+  .ie6 a.software-help-link,
+  .ie6 .software-phase-notice {
+    position: absolute;
   }
 
   .user-menu:before,
