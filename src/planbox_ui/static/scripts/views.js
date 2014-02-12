@@ -26,6 +26,9 @@ var Planbox = Planbox || {};
     }
   });
 
+  NS.WelcomeModalView = NS.ModalView.extend({
+    template: '#welcome-modal-tpl'
+  });
 
   NS.EventView = Backbone.Marionette.ItemView.extend({
     template: '#event-tpl',
@@ -72,8 +75,8 @@ var Planbox = Planbox || {};
 
     } else if (statusCode === 400) {
       // Bad request (missing title, at this point)
-      subtitle = Handlebars.templates['message-ajax-bad-request-error-subtitle']({});
-      description = Handlebars.templates['message-ajax-bad-request-error-description']({});
+      subtitle = Handlebars.templates['message-ajax-bad-request-error-subtitle']({errors: respJSON});
+      description = Handlebars.templates['message-ajax-bad-request-error-description']({errors: respJSON});
 
     } else if (statusCode === 401 || statusCode === 403 || statusCode === 404) {
       // Authentication error
@@ -258,6 +261,7 @@ var Planbox = Planbox || {};
         data = {public: true};
       }
 
+      this.model.clean();
       this.model.save(data, {
         // We are not interested in change events that come from the server,
         // and it causes the save button to enable after saving a new project

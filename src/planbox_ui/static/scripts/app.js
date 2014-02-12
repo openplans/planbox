@@ -27,6 +27,11 @@ var Planbox = Planbox || {};
       model: projectModel,
       collection: projectModel.get('events')
     }));
+
+    if (window.location.pathname.indexOf('/new/') !== -1 && NS.Data.isOwner) {
+      NS.app.overlayRegion.show(new NS.WelcomeModalView());
+    }
+
   });
 
   // Init =====================================================================

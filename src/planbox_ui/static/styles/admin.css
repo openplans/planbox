@@ -30,10 +30,6 @@
 }
 
 /* User Navigation */
-.user-nav {
-  float: right;
-  position: relative;
-}
 .user-menu-link {
   margin: 0 0 0 0.625em;
   padding-right: 0.125em !important;
@@ -48,62 +44,6 @@
   text-indent: -9999px;
 }
 .user-menu-link:hover {
-  color: #fff;
-}
-.user-menu {
-  position: absolute;
-  z-index: 50;
-  top: 100%;
-  right: 9999px;
-  background: #18758f;
-  padding: 2px;
-  box-shadow: 0 0.5em 0.5em rgba(0,0,0,0.25);
-}
-.user-menu.is-open {
-  right: 0;
-}
-.user-menu:before {
-  content: "";
-  position: absolute;
-  top: -15px;
-  right: 0.875em;
-  width: 0;
-  height: 0;
-  border: 8px solid #18758f;
-  border-top-color: transparent;
-  border-right-color: transparent;
-  border-left-color: transparent;
-}
-.user-menu:after {
-  content: "";
-  position: absolute;
-  top: -12px;
-  right: 0.875em;
-  width: 0;
-  height: 0;
-  border: 8px solid #48a5bf;
-  border-top-color: transparent;
-  border-right-color: transparent;
-  border-left-color: transparent;
-}
-.user-menu li {
-  border-top: 2px solid #18758f;
-}
-.user-menu li:first-child {
-  border-top: 0;
-}
-.user-menu a {
-  display: block;
-  white-space: nowrap;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  line-height: 2;
-  padding: 0 1em;
-  background: #48a5bf;
-  color: #eee;
-}
-.user-menu a:hover {
   color: #fff;
 }
 
@@ -273,6 +213,8 @@ h6.content-editable {
 .step-timeline {
   margin-bottom: 0.75em;
   border-radius: 0.25em 0.25em 0.25em 0;
+  position: relative;
+  z-index: 2;
 }
 
 .step-arrow-left-down {
@@ -577,10 +519,6 @@ li.event:last-child:before {
   .user-menu-link strong {
     display: inline;
     text-indent: 0;
-  }
-  .user-menu:before,
-  .user-menu:after {
-    right: 2em;
   }
   .step {
     font-size: 1.25em;

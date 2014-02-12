@@ -1,11 +1,5 @@
 <div class="admin-bar clearfix">
-  <nav class="user-nav">
-    <a href="#" class="user-menu-link user-link"><strong>{{user 'username' }}</strong></a>
-    <ul class="user-menu unstyled-list">
-      <li><a href="/{{user 'username' }}/new/">My Project</a></li>
-      <li><a href="/signout?next={{ window_location }}">Sign Out</a></li>
-    </ul>
-  </nav>
+  {{> 'user-menu' }}
 
   {{#if public}}
   <div class="project-visibility"><span class="checked-icon">&#10004;</span>&nbsp;Published</div>

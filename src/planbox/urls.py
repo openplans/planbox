@@ -6,6 +6,9 @@ import planbox_ui.urls
 
 admin.autodiscover()
 
+def generate_error(request):
+    raise Exception('Successfully failed.')
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'planbox.views.home', name='home'),
@@ -13,5 +16,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/v1/', include(planbox_data.urls)),
+    url(r'^generate-error$', generate_error),
     url(r'^', include(planbox_ui.urls)),
 )

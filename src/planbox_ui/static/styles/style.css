@@ -490,7 +490,7 @@ a.software-help-link:hover {
   text-decoration: none;
   color: #fff;
 }
-a.login-link {
+a.login-link, .product-header .user-menu-link {
   float: right;
 /*  position: absolute;*/
 /*  top: -0.875em;*/
@@ -499,6 +499,68 @@ a.login-link {
   font-weight: 800;
   background-color: LightBlue;
   border-radius: 0.25em;
+}
+
+/* User Navigation */
+.user-nav {
+  float: right;
+  position: relative;
+}
+.user-menu {
+  position: absolute;
+  z-index: 50;
+  top: 100%;
+  right: 9999px;
+  background: #18758f;
+  padding: 2px;
+  box-shadow: 0 0.5em 0.5em rgba(0,0,0,0.25);
+}
+.user-menu.is-open {
+  right: 0;
+}
+.user-menu:before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  right: 0.875em;
+  width: 0;
+  height: 0;
+  border: 8px solid #18758f;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-left-color: transparent;
+}
+.user-menu:after {
+  content: "";
+  position: absolute;
+  top: -12px;
+  right: 0.875em;
+  width: 0;
+  height: 0;
+  border: 8px solid #48a5bf;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-left-color: transparent;
+}
+.user-menu li {
+  border-top: 2px solid #18758f;
+}
+.user-menu li:first-child {
+  border-top: 0;
+}
+.user-menu a {
+  display: block;
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  line-height: 2;
+  padding: 0 1em;
+  background: #48a5bf;
+  color: #eee;
+}
+.user-menu a:hover {
+  color: #fff;
 }
 
 
@@ -556,7 +618,7 @@ a.login-link {
   line-height: 1.25;
 }
 .the-answer p {
-  font-size: 1.375em;
+  font-size: 1.35em;
 }
 
 .feature-list {
@@ -570,10 +632,11 @@ a.login-link {
 }
 .call-to-action {
   background: #eee;
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.85);
   color: #444;
   padding: 1em;
-  border-radius: 0.25em;
+  border-radius: 0.375em;
+  box-shadow: 0 0 2em rgba(0,0,0,0.1);
 }
 .product-pitch {
   padding-top: 1em;
@@ -771,6 +834,7 @@ li.event:last-child:before {
 .overlay {
   *background: #666;
   background: rgba(100,100,100,0.8);
+  color: #666;
   position: fixed;
   top: 0;
   right: 0;
@@ -933,6 +997,11 @@ li.event:last-child:before {
   .ie6 a.software-help-link,
   .ie6 .software-phase-notice {
     position: absolute;
+  }
+
+  .user-menu:before,
+  .user-menu:after {
+    right: 2em;
   }
 
   .demo-image {

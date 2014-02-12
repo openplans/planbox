@@ -14,7 +14,21 @@ var Planbox = Planbox || {};
       relatedModel: 'EventModel',
       collectionType: 'EventCollection'
     }],
-    urlRoot: '/api/v1/projects'
+    urlRoot: '/api/v1/projects',
+
+    clean: function(options) {
+      // Remove empty events
+      var events = this.get('events'),
+          label, descr;
+      events.each(function(evt) {
+        label = evt.get('label');
+        descr = evt.get('description');
+        if ((_.isUndefined(label) || _.isNull(label) || label.trim() === '') &&
+            (_.isUndefined(descr) || _.isNull(descr) || descr.trim() === '')) {
+          events.remove(evt);
+        }
+      });
+    }
   });
 
   NS.EventModel = Backbone.RelationalModel.extend({});
