@@ -14,7 +14,7 @@ addons:
 
 install:
   # Django test requirements
-  - pip install -r requirements.txt --allow-all-external --allow-unverified pymeta
+  - pip install -r requirements.txt --allow-all-external --process-dependency-links --allow-unverified=pymeta --allow-unverified=pybars
   - pip install coverage selenium
   - cp src/planbox/local_settings.py.template src/planbox/local_settings.py
 
