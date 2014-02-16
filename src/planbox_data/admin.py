@@ -11,7 +11,7 @@ from planbox_data.models import Profile, Project, Event
 
 
 class ProfileAdmin (admin.ModelAdmin):
-    list_display = ('__unicode__', '_date_joined', 'email')
+    list_display = ('__str__', '_date_joined', 'email')
     filter_horizontal = ('organizations',)
     raw_id_fields = ('auth',)
 
@@ -28,7 +28,7 @@ class EventInline (admin.TabularInline):
 
 
 class ProjectAdmin (GenericAdminModelAdmin):
-    list_display = ('__unicode__', '_permalink', 'owner', 'slug', 'status', 'public')
+    list_display = ('__str__', '_permalink', 'owner', 'slug', 'status', 'public')
     list_filter = ('status',)
     prepopulated_fields = {"slug": ("title",)}
 
