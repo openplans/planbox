@@ -11,7 +11,7 @@ from planbox_data.models import Profile, Project, Event
 
 
 class ProfileAdmin (admin.ModelAdmin):
-    list_display = ('__str__', '_date_joined', 'email')
+    list_display = ('__str__', '_date_joined', 'affiliation', 'email')
     filter_horizontal = ('organizations',)
     raw_id_fields = ('auth',)
 
