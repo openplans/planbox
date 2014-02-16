@@ -31,7 +31,9 @@ djangorestframework==2.3.10
 # Routes and Templating
 # ==============================
 django-jstemplate==1.3.6
-djangobars==0.1.2
+git+git://github.com/mjumbewu/pymeta.git@master#egg=pymeta
+git+git://github.com/mjumbewu/pybars.git@master#egg=pybars
+djangobars==0.1.3
 
 
 
