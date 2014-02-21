@@ -28,6 +28,14 @@ var Planbox = Planbox || {};
     return options.fn(NS.Data.user);
   });
 
+  Handlebars.registerHelper('newline_to_br', function(str) {
+    if (_.isString(str)) {
+      return new Handlebars.SafeString(str.replace(/\n/g, '<br>'));
+    }
+
+    return '';
+  });
+
   Handlebars.registerHelper('status_label', function(status_value, options) {
     var status = _.findWhere(NS.Data.statuses, {'value': status_value});
     return status ? status.label : NS.Data.statuses[0].label;

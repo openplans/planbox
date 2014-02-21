@@ -48,7 +48,7 @@ var Planbox = Planbox || {};
     handleEditableBlur: function(evt) {
       var $target = $(evt.target),
           attr = $target.attr('data-attr'),
-          val = $target.text();
+          val = $target.html().replace(/<br>/g, '\n');
 
       evt.preventDefault();
 
@@ -204,6 +204,34 @@ var Planbox = Planbox || {};
       'add':     'dataChanged',
       'remove':  'dataChanged',
       'reorder': 'dataChanged'
+    },
+    initialize: function() {
+      // Hijack the enter key - consistently use <br> across browsers
+      this.$el.on('keydown', '[contenteditable]', function(evt) {
+        if( evt.which === 13 ){
+          evt.preventDefault();
+          NS.Utils.pasteHtmlAtCaret('<br>');
+        }
+      });
+
+      // Hijack paste and strip out the formatting
+      this.$el.on('paste', '[contenteditable]', function(evt) {
+        evt.preventDefault();
+
+        var pasted;
+        // WebKit and FF
+        if (evt && evt.originalEvent && evt.originalEvent.clipboardData &&
+            evt.originalEvent.clipboardData.getData) {
+          // This preserves line breaks, so don't worry about getting the HTML
+          pasted = evt.originalEvent.clipboardData.getData('text/plain');
+        } else if (window.clipboardData && window.clipboardData.getData)  {
+          // IE
+          pasted = window.clipboardData.getData('Text');
+        }
+
+        // Convert line breaks into <br> and paste
+        NS.Utils.pasteHtmlAtCaret(pasted.replace(/\n/g, '<br>'));
+      });
     },
     onRender: function() {
       var self = this;
