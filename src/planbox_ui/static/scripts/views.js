@@ -48,7 +48,7 @@ var Planbox = Planbox || {};
     handleEditableBlur: function(evt) {
       var $target = $(evt.target),
           attr = $target.attr('data-attr'),
-          val = $target.text();
+          val = $target.html().replace(/<br>/g, '\n');
 
       evt.preventDefault();
 
