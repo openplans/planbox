@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.utils.html import format_html
 from django.utils.translation import ugettext as _
 from genericadmin.admin import GenericAdminModelAdmin
-from planbox_data.models import Profile, Project, Event
+from planbox_data.models import Profile, Project, Event, Theme
 
 
 class ProfileAdmin (admin.ModelAdmin):
@@ -35,6 +35,7 @@ class ProjectAdmin (GenericAdminModelAdmin):
     inlines = (
         EventInline,
     )
+    raw_id_fields = ('theme',)
 
     def get_queryset(self, request):
         qs = super(ProjectAdmin, self).get_queryset(request)
@@ -49,5 +50,10 @@ class ProjectAdmin (GenericAdminModelAdmin):
     _permalink.short_description = _('Link')
 
 
+class ThemeAdmin (admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(Theme, ThemeAdmin)

@@ -90,6 +90,7 @@ class Project (TimeStampedModel):
     description = models.TextField(help_text=_("An introductory description of the project"), default='', blank=True)
     contact = models.TextField(help_text=_("The contact information for the project"), default='', blank=True)
     owner = models.ForeignKey('Profile', related_name='projects')
+    theme = models.ForeignKey('Theme', related_name='projects', null=True, blank=True)
 
     objects = ProjectManager()
 
@@ -162,3 +163,11 @@ class Profile (TimeStampedModel):
 
     def __str__(self):
         return self.slug
+
+
+@python_2_unicode_compatible
+class Theme (TimeStampedModel):
+    css_url = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.css_url
