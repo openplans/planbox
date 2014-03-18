@@ -140,13 +140,15 @@ class ProjectView (AppMixin, SSLRequired, TemplateView):
         context = super(ProjectView, self).get_context_data(**kwargs)
 
         project_serializer = ProjectSerializer(self.project)
+        context['project'] = self.project
         context['project_data'] = project_serializer.data
         context['is_owner'] = self.project.owned_by(self.request.user) or self.request.user.is_superuser
 
         return context
 
     def get(self, request, owner_name, slug):
-        self.project = get_object_or_404(Project, owner__slug=owner_name, slug=slug)
+        self.project = get_object_or_404(Project.objects.select_related('theme'),
+                                         owner__slug=owner_name, slug=slug)
 
         if not (request.user.is_superuser or self.project.public or self.project.owned_by(self.request.user)):
             raise Http404

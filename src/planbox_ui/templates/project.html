@@ -51,6 +51,11 @@
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" media="screen, projection" />
   {% endif %}
 
+  {% endif %} {# debug #}
+
+  {% if project.theme %}
+  {# NOTE: this is ripe for injection, so users should not be able to set this. #}
+  <link rel="stylesheet" href="{{ project.theme.css_url|safe }}">
   {% endif %}
 {% endblock %}
 

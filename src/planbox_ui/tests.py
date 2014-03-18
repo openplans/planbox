@@ -2,10 +2,10 @@ from django.contrib.sessions.backends.cache import SessionStore
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.test import TestCase, RequestFactory
-from nose.tools import assert_equal, assert_raises
+from nose.tools import assert_equal, assert_raises, assert_in, assert_not_in
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
-from planbox_data.models import Profile, Project, Event
+from planbox_data.models import Profile, Project, Event, Theme
 from planbox_ui.views import project_view, new_project_view, signup_view, signin_view
 
 
@@ -228,3 +228,45 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         assert_equal(response.status_code, 200)
         assert_equal(response.context_data.get('is_owner'), True)
 
+
+class ProjectThemeTests (PlanBoxUITestCase):
+    def test_can_render_project_with_theme(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        owner = auth.profile
+        theme = Theme.objects.create(css_url='http://example.com/style.css')
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, theme=theme, public=True)
+
+        kwargs = {
+            'owner_name': 'mjumbewu',
+            'slug': 'test-slug'
+        }
+
+        url = reverse('app-project', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = AnonymousUser()
+        response = project_view(request, **kwargs)
+
+        assert_equal(response.status_code, 200)
+        assert_equal(response.context_data.get('is_owner'), False)
+        response.render()
+        assert_in('<link rel="stylesheet" href="http://example.com/style.css">', response.content)
+
+    def test_can_render_project_without_theme(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        owner = auth.profile
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=True)
+
+        kwargs = {
+            'owner_name': 'mjumbewu',
+            'slug': 'test-slug'
+        }
+
+        url = reverse('app-project', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = AnonymousUser()
+        response = project_view(request, **kwargs)
+
+        assert_equal(response.status_code, 200)
+        assert_equal(response.context_data.get('is_owner'), False)
+        response.render()
+        assert_not_in('<link rel="stylesheet" href="http://example.com/style.css">', response.content)
