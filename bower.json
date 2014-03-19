@@ -14,7 +14,8 @@
     "backbone-relational": "~0.8.6",
     "jqueryui-touch-punch": "*",
     "jqueryui": "~1.10.3",
-    "django-csrf.js": "https://github.com/openplans/django-csrf.js.git#1.0"
+    "django-csrf.js": "https://github.com/openplans/django-csrf.js.git#1.0",
+    "pen": "https://github.com/sofish/pen.git#master"
   },
   "devDependencies": {}
 }

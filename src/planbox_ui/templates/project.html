@@ -41,6 +41,8 @@
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/print.css" type="text/css" media="print" />
   {% if is_owner %}
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pen/src/pen.css" type="text/css" media="screen, projection" />
+
   {% endif %}
 
   {% else %}
@@ -70,6 +72,7 @@
   <script src="{{ STATIC_URL }}bower_components/backbone.marionette/lib/backbone.marionette.js"></script>
   <script src="{{ STATIC_URL }}bower_components/backbone-relational/backbone-relational.js"></script>
   <script src="{{ STATIC_URL }}bower_components/django-csrf.js/django-csrf.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/pen/src/pen.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
