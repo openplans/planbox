@@ -49,6 +49,7 @@ INSTALLED_APPS = (
 )
 
 HANDLEBARS_APP_DIRNAMES = ['jstemplates']
+CANONICAL_ROOT = ''
 
 LOGIN_URL = 'app-signin'
 SESSION_COOKIE_SECURE = True
