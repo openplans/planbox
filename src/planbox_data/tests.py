@@ -74,6 +74,13 @@ class ProjectModelTests (TestCase):
         project2 = Project.objects.create(title='My Project', location='x', description='x', owner=user, public=True)
         assert_equal(project2.slug, 'my-project-2')
 
+    def test_auto_generated_slug_strips_html_tags(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        user = auth.profile
+
+        project1 = Project.objects.create(title='My <br> Project', location='x', description='x', owner=user, public=True)
+        assert_equal(project1.slug, 'my-project')
+
     def test_owner_owns_project(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
