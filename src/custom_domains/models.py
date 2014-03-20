@@ -1,5 +1,10 @@
+# coding: utf-8
+
+from __future__ import unicode_literals
+
 from django.conf import settings
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
 
 try:
@@ -10,6 +15,7 @@ except ImportError:
     from urllib.parse import urljoin
 
 
+@python_2_unicode_compatible
 class BaseDomainMappingMixin (object):
     def fix_url(self, url, default_root=settings.CANONICAL_ROOT):
         # If the URL doesn't start with a / then it isn't an absolute path and
@@ -31,6 +37,9 @@ class BaseDomainMappingMixin (object):
         # Otherwise, it should be considered an external URL and we should use
         # the canonical root to fix it.
         return urljoin(default_root, url)
+
+    def __str__(self):
+        return '%s → %s' % (self.domain, self.root_path)
 
 
 class DomainMapping (BaseDomainMappingMixin, models.Model):
