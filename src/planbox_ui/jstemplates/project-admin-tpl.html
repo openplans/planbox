@@ -16,7 +16,7 @@
 <header class="site-header">
   <div class="container">
     {{^if title }}<h2 class="step step-title"><span class="step-arrow-left-down"></span>Let's give your project a title.</h2>{{/if}}
-    <h1 class="site-title content-editable" data-attr="title" contenteditable>{{ title }}</h1>
+    <h1 class="site-title content-editable" data-attr="title" contenteditable>{{{ title }}}</h1>
   </div>
 </header>
 
@@ -36,9 +36,9 @@
       </select>
     </p>
     {{^if location}}<h2 class="step step-location"><span class="step-arrow-left-down"></span>Where is it located?</h2>{{/if}}
-    <p class="project-location content-editable" data-attr="location" contenteditable>{{newline_to_br location }}</p>
+    <p class="project-location content-editable" data-attr="location" contenteditable>{{{ location }}}</p>
     {{^if description}}<h2 class="step step-description"><span class="step-arrow-left-down"></span>Give it a short description.</h2>{{/if}}
-    <p class="project-description content-editable" data-attr="description" contenteditable>{{ newline_to_br description }}</p>
+    <div class="project-description content-editable" data-attr="description" contenteditable>{{{ description }}}</div>
   </div>
 </section>
 
@@ -57,7 +57,7 @@
   <div class="container">
     {{^if contact}}<h2 class="step step-contact-info"><span class="step-arrow-left-down"></span>Provide contact information.</h2>{{/if}}
 
-    <p class="project-contact-info content-editable" data-attr="contact" contenteditable>{{newline_to_br contact }}</p>
+    <p class="project-contact-info content-editable" data-attr="contact" contenteditable>{{{ contact }}}</p>
 
     <p>
       {{#if public}}

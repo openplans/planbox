@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Handlebars Modernizr _ */
+/*globals Backbone jQuery Handlebars Modernizr _ Pen */
 
 var Planbox = Planbox || {};
 
@@ -48,13 +48,20 @@ var Planbox = Planbox || {};
     handleEditableBlur: function(evt) {
       var $target = $(evt.target),
           attr = $target.attr('data-attr'),
-          val = $target.html().replace(/<br>/g, '\n');
+          val = $target.html();
 
       evt.preventDefault();
 
       // Set the value of what was just blurred. Setting an event to the same
       // value does not trigger a change event.
       this.model.set(attr, val);
+    },
+    initPen: function(el) {
+      this.pen = new Pen({
+        editor: el,
+        list: ['insertorderedlist', 'insertunorderedlist', 'bold', 'italic', 'createlink'],
+        stay: false
+      });
     }
   };
 
@@ -168,6 +175,11 @@ var Planbox = Planbox || {};
         // model. So we're just going to do the remove directly.
         this.model.collection.remove(this.model);
       }
+    },
+    onRender: function() {
+      this.$('.event-description').each(function(i, el) {
+        NS.ContentEditableMixin.initPen(el);
+      });
     }
   });
 
@@ -206,14 +218,6 @@ var Planbox = Planbox || {};
       'reorder': 'dataChanged'
     },
     initialize: function() {
-      // Hijack the enter key - consistently use <br> across browsers
-      this.$el.on('keydown', '[contenteditable]', function(evt) {
-        if( evt.which === 13 ){
-          evt.preventDefault();
-          NS.Utils.pasteHtmlAtCaret('<br>');
-        }
-      });
-
       // Hijack paste and strip out the formatting
       this.$el.on('paste', '[contenteditable]', function(evt) {
         evt.preventDefault();
@@ -246,6 +250,10 @@ var Planbox = Planbox || {};
           // Silent because we don't want the list to rerender
           self.collection.moveTo(model, index);
         }
+      });
+
+      this.$('.project-description').each(function(i, el) {
+        NS.ContentEditableMixin.initPen(el);
       });
     },
     onSync: function() {

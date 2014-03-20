@@ -1,6 +1,6 @@
 <header class="site-header">
   <div class="container">
-    <h1 class="site-title">{{ title }}</h1>
+    <h1 class="site-title">{{{ title }}}</h1>
   </div>
 </header>
 
@@ -8,8 +8,8 @@
   <div class="container">
     <p class="project-status"><strong>{{ status_label status }}
 </strong></p>
-    <p class="project-location">{{newline_to_br location }}</p>
-    <p class="project-description">{{newline_to_br description }}</p>
+    <p class="project-location">{{{ location }}}</p>
+    <div class="project-description">{{{ description }}}</div>
   </div>
 </section>
 
@@ -21,7 +21,7 @@
 
 <footer class="site-colophon">
   <div class="container">
-    <p class="project-contact-info">{{newline_to_br contact }}</p>
+    <p class="project-contact-info">{{{ contact }}}</p>
     <p class="powered-by">{{#_}}Powered by <a href="/">Plan In A Box</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
   </div>
 </footer>

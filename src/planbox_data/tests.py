@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.test import TestCase, RequestFactory
 from django_nose.tools import assert_num_queries
-from nose.tools import assert_equal, assert_in, assert_raises, ok_
+from nose.tools import assert_equal, assert_in, assert_raises, ok_, assert_not_equal
 from rest_framework.status import HTTP_200_OK, HTTP_204_NO_CONTENT, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
@@ -73,6 +73,13 @@ class ProjectModelTests (TestCase):
         # Ensure conflict resolution
         project2 = Project.objects.create(title='My Project', location='x', description='x', owner=user, public=True)
         assert_equal(project2.slug, 'my-project-2')
+
+    def test_auto_generated_slug_strips_html_tags(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        user = auth.profile
+
+        project1 = Project.objects.create(title='My <br> Project', location='x', description='x', owner=user, public=True)
+        assert_equal(project1.slug, 'my-project')
 
     def test_owner_owns_project(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
@@ -274,6 +281,20 @@ class ProjectSerializerTests (PlanBoxTestCase):
 
         ok_(not serializer.is_valid())
         assert_in('events', serializer.errors)
+
+    def test_project_with_invalid_markup_in_description(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        user = auth.profile
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=user)
+
+        description = """<div>oh</div> <b>hello</b> <script>alert('hacked');</script> <div class="hi">new line</div>"""
+        expected = """<br>oh <b>hello</b> alert('hacked'); <br>new line"""
+
+        serializer = ProjectSerializer(project, data={'slug': '', 'title': 'Test Title', 'description': description, 'owner': user.slug, 'events': []})
+
+        ok_(serializer.is_valid(), 'Project with markup should validate: %s' % (serializer.errors,))
+        assert_not_equal(serializer.object.description, description)
+        assert_equal(serializer.object.description, expected)
 
 
 class OwnerPermissionTests (PlanBoxTestCase):

@@ -8,6 +8,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.utils.text import slugify
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.html import strip_tags
 from django.utils.timezone import now
 from django.utils.translation import ugettext as _
 
@@ -103,7 +104,7 @@ class Project (TimeStampedModel):
     def save(self, *args, **kwargs):
         if self.title and not self.slug:
             self.slug = uniquify_slug(
-                slugify(self.title),
+                slugify(strip_tags((self.title))),
                 [p.slug for p in self.owner.projects.all()]
             )
         super(Project, self).save(*args, **kwargs)
