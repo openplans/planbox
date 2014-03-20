@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/normalize-css/normalize.css" type="text/css" media="screen, projection" />
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" type="text/css" media="screen, projection" />
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/print.css" type="text/css" media="print" />
-  {% if is_owner %}
+  {% if is_owner and not read_only %}
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.css" type="text/css" media="screen, projection" />
   {% endif %}
 
@@ -47,7 +47,7 @@
 
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" media="screen, projection" />
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/print.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" media="print" />
-  {% if is_owner %}
+  {% if is_owner and not read_only %}
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" media="screen, projection" />
   {% endif %}
 
@@ -85,7 +85,7 @@
     Planbox.Data = {
       project: {{ project_data|as_json }},
       user: {{ user_data|as_json }},
-      isOwner: {{ is_owner|as_json }},
+      isOwner: {% if read_only %}false{% else %}{{ is_owner|as_json }}{% endif %},
       statuses: [
         { 'value': 'not-started', 'label': 'Not Started'},
         { 'value': 'active', 'label': 'Active'},
