@@ -13,6 +13,7 @@ STATIC_URL = '/static/'
 
 SECRET_KEY = 'changemeloremipsumdolorsitametconsecteturadipisicingelit'
 ALLOWED_HOSTS = ['*']
+KNOWN_HOSTS = os.environ.get('KNOWN_HOSTS').split(',')
 
 # Get the list of administrators that get notified on 500 errors
 ADMINS = [
