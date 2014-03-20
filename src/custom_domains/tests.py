@@ -62,7 +62,7 @@ class CustomDomainMiddlewareTests (TestCase):
 
         middleware.process_request(request)
         self.assertEqual(request.domain_mapping.domain, request.META['HTTP_HOST'])
-        self.assert_(isinstance(request.domain_mapping, DefaultDomainMapping))
+        self.assertTrue(isinstance(request.domain_mapping, DefaultDomainMapping))
 
     @override_settings()
     def test_mapping_is_used_for_registered_host(self):
@@ -73,7 +73,7 @@ class CustomDomainMiddlewareTests (TestCase):
 
         middleware.process_request(request)
         self.assertEqual(request.domain_mapping.domain, request.META['HTTP_HOST'])
-        self.assert_(isinstance(request.domain_mapping, DomainMapping))
+        self.assertTrue(isinstance(request.domain_mapping, DomainMapping))
         self.assertEqual(request.path_info, '/root/path')
         self.assertEqual(request.actual_path_info, '/path')
 

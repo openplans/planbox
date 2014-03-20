@@ -249,7 +249,7 @@ class ProjectThemeTests (PlanBoxUITestCase):
         assert_equal(response.status_code, 200)
         assert_equal(response.context_data.get('is_owner'), False)
         response.render()
-        assert_in('<link rel="stylesheet" href="http://example.com/style.css">', response.content)
+        assert_in('<link rel="stylesheet" href="http://example.com/style.css">', response.content.decode('utf-8'))
 
     def test_can_render_project_without_theme(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
@@ -269,4 +269,4 @@ class ProjectThemeTests (PlanBoxUITestCase):
         assert_equal(response.status_code, 200)
         assert_equal(response.context_data.get('is_owner'), False)
         response.render()
-        assert_not_in('<link rel="stylesheet" href="http://example.com/style.css">', response.content)
+        assert_not_in('<link rel="stylesheet" href="http://example.com/style.css">', response.content.decode('utf-8'))
