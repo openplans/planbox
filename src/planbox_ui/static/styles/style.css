@@ -788,6 +788,7 @@ li.event:last-child:before {
 }
 .event-description {
   position: relative;
+  margin-bottom: 1.25em;
 }
 
 .event-complete:after {
