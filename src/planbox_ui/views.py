@@ -164,6 +164,8 @@ class BaseProjectView (AppMixin, TemplateView):
 
 
 class ProjectView (SSLRequired, BaseProjectView): pass
+
+
 class ReadOnlyProjectView (ReadOnlyMixin, BaseProjectView): pass
 
 
