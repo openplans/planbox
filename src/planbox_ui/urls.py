@@ -5,11 +5,11 @@ from .views import index_view, project_view, new_project_view, signup_view, sign
 
 urlpatterns = patterns('',
 
+    # Read-only resources
+    url(r'^~/(?P<owner_name>[^/]+)/(?P<slug>[^/]+)/', ro_project_view, name='app-ro-project'),
+
     # Creating a new project
     url(r'^(?P<owner_name>[^/]+)/new/', new_project_view, name='app-new-project'),
-
-    # Read-only version of the project page
-    url(r'^(?P<owner_name>[^/]+)/(?P<slug>[^/]+)/view/', ro_project_view, name='app-ro-project'),
 
     # Read-write version of the project page
     url(r'^(?P<owner_name>[^/]+)/(?P<slug>[^/]+)/', project_view, name='app-project'),
