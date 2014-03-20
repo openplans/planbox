@@ -1,12 +1,16 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import patterns, url
-from .views import index_view, project_view, new_project_view, signup_view, signin_view, password_reset_view, help_view, robots_view, sitemap_view
+from .views import index_view, project_view, new_project_view, signup_view, signin_view, password_reset_view, help_view, robots_view, sitemap_view, ro_project_view
 
 urlpatterns = patterns('',
 
     url(r'^(?P<owner_name>[^/]+)/new/', new_project_view, name='app-new-project'),
     url(r'^(?P<owner_name>[^/]+)/(?P<slug>[^/]+)/', project_view, name='app-project'),
+
+    # Read-only version of the project page
+    url(r'^(?P<owner_name>[^/]+)/(?P<slug>[^/]+)/view', ro_project_view, name='app-ro-project'),
+
     url(r'^signup/$', signup_view, name='app-signup'),
     url(r'^signin/$', signin_view, name='app-signin'),
     url(r'^signout/$', 'django.contrib.auth.views.logout', name='app-signout', kwargs={'next_page': '/'}),

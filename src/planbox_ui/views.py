@@ -27,6 +27,13 @@ def register_helper(helper_name):
     return _register
 
 
+class ReadOnlyMixin (object):
+    http_method_names = ['get', 'head', 'options', 'trace']
+
+    def get_context_data(self, **kwargs):
+        return super(ReadOnlyMixin, self).get_context_data(read_only=True, **kwargs)
+
+
 class AppMixin (object):
     def get_home_url(self, obj):
         if obj is None and self.request.user.is_authenticated():
@@ -133,11 +140,11 @@ class SigninView (AppMixin, SSLRequired, FormView):
         return super(SigninView, self).form_valid(form)
 
 
-class ProjectView (AppMixin, SSLRequired, TemplateView):
+class BaseProjectView (AppMixin, TemplateView):
     template_name = 'project.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ProjectView, self).get_context_data(**kwargs)
+        context = super(BaseProjectView, self).get_context_data(**kwargs)
 
         project_serializer = ProjectSerializer(self.project)
         context['project'] = self.project
@@ -153,7 +160,11 @@ class ProjectView (AppMixin, SSLRequired, TemplateView):
         if not (request.user.is_superuser or self.project.public or self.project.owned_by(self.request.user)):
             raise Http404
 
-        return super(ProjectView, self).get(request, pk=self.project.pk)
+        return super(BaseProjectView, self).get(request, pk=self.project.pk)
+
+
+class ProjectView (SSLRequired, BaseProjectView): pass
+class ReadOnlyProjectView (ReadOnlyMixin, BaseProjectView): pass
 
 
 class NewProjectView (AppMixin, LoginRequired, SSLRequired, TemplateView):
@@ -202,6 +213,7 @@ class SiteMapView (AppMixin, TemplateView):
 # App views
 index_view = IndexView.as_view()
 project_view = ProjectView.as_view()
+ro_project_view = ReadOnlyProjectView.as_view()
 new_project_view = NewProjectView.as_view()
 signup_view = SignupView.as_view()
 signin_view = SigninView.as_view()
