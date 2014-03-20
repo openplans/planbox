@@ -7,8 +7,8 @@ class CustomDomainResolvingMiddleware(object):
     def process_request(self, request):
         # Get the domain. If it's one of our explicitly known domains, then
         # proceed as normal.
-        domain = request.META['HTTP_HOST']
-        if domain in settings.KNOWN_HOSTS:
+        domain = request.META.get('HTTP_HOST', None)
+        if domain is None or domain in settings.KNOWN_HOSTS:
             request.domain_mapping = DefaultDomainMapping(domain)
             request.actual_path_info = request.path_info
             return
