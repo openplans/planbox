@@ -2,10 +2,9 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User as UserAuth
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.views import redirect_to_login
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
@@ -35,6 +34,18 @@ class ReadOnlyMixin (object):
 
 
 class AppMixin (object):
+    def get_profile(self):
+        if not hasattr(self, 'profile'):
+            auth = self.request.user
+            if auth.is_authenticated():
+                try:
+                    self.profile = auth.profile
+                except Profile.DoesNotExist:
+                    self.profile = None
+            else:
+                self.profile = None
+        return self.profile
+
     def get_home_url(self, obj):
         if obj is None and self.request.user.is_authenticated():
             obj = self.request.user
@@ -48,14 +59,7 @@ class AppMixin (object):
     def get_context_data(self, **kwargs):
         context = super(AppMixin, self).get_context_data(**kwargs)
 
-        if (self.request.user.is_authenticated()):
-            try:
-                user_profile = self.request.user.profile
-            except Profile.DoesNotExist:
-                user_profile = None
-        else:
-            user_profile = None
-
+        user_profile = self.get_profile()
         user_serializer = UserSerializer(user_profile)
         context['user_data'] = None if user_profile is None else user_serializer.data
 
@@ -71,9 +75,22 @@ class AppMixin (object):
         return context
 
 class LoginRequired (object):
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
+        if self.get_profile() is None:
+            path = request.get_full_path()
+            return redirect_to_login(path)
         return super(LoginRequired, self).dispatch(request, *args, **kwargs)
+
+
+class LogoutRequired (object):
+    """
+    Redirect a user to their profile home if they're already signed in
+    """
+    def dispatch(self, request, *args, **kwargs):
+        profile = self.get_profile()
+        if profile is not None:
+            return redirect(self.get_home_url(profile))
+        return super(LogoutRequired, self).dispatch(request, *args, **kwargs)
 
 
 class SSLRequired (object):
@@ -91,7 +108,7 @@ class HelpView (AppMixin, TemplateView):
     template_name = 'help.html'
 
 
-class SignupView (AppMixin, SSLRequired, FormView):
+class SignupView (AppMixin, LogoutRequired, SSLRequired, FormView):
     template_name = 'signup.html'
     form_class = UserCreationForm
 
@@ -117,7 +134,7 @@ class PasswordResetView (TemplateView):
     template_name = 'password-reset.html'
 
 
-class SigninView (AppMixin, SSLRequired, FormView):
+class SigninView (AppMixin, LogoutRequired, SSLRequired, FormView):
     template_name = 'signin.html'
     form_class = AuthenticationForm
 
