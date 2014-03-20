@@ -35,7 +35,7 @@ before_script:
 
 script:
   # Run tests and generate coverage statistics for Django
-  - python src/manage.py test --with-coverage --cover-package=planbox --cover-package=planbox_data --cover-package=planbox_ui
+  - python src/manage.py test --with-coverage --cover custom_domains --cover-package=planbox --cover-package=planbox_data --cover-package=planbox_ui
 
   # Run tests for JavaScript
   - grunt test

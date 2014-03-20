@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'genericadmin',
     'rest_framework',
 
+    'custom_domains',
     'planbox_ui',
     'planbox_data',
 )
@@ -63,6 +64,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'custom_domains.middleware.CustomDomainResolvingMiddleware',
 )
 
 ROOT_URLCONF = 'planbox.urls'
