@@ -736,6 +736,7 @@ a.login-link, .product-header .user-menu-link {
   position: relative;
   font-size: 1.25em;
   clear: left;
+  margin-bottom: 1.25em;
 }
 
 /* Project Timeline */
