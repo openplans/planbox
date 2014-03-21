@@ -39,7 +39,7 @@ class EventInline (admin.TabularInline):
     readonly_fields = ('index',)
 
 
-class ProjectAdmin (GenericAdminModelAdmin):
+class ProjectAdmin (admin.ModelAdmin):
     list_display = ('__str__', '_permalink', 'owner', 'slug', 'status', 'public')
     list_filter = ('status',)
     prepopulated_fields = {"slug": ("title",)}
