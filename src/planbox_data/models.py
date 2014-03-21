@@ -11,6 +11,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import strip_tags
 from django.utils.timezone import now
 from django.utils.translation import ugettext as _
+from jsonfield import JSONField
 
 UserAuth = auth.get_user_model()
 
@@ -172,3 +173,28 @@ class Theme (TimeStampedModel):
 
     def __str__(self):
         return self.css_url
+
+
+@python_2_unicode_compatible
+class Section (TimeStampedModel):
+    project = models.ForeignKey('Project', related_name='sections')
+    type = models.CharField(max_length=30)
+    slug = models.CharField(max_length=30)
+    index = models.PositiveIntegerField(blank=True)
+
+    label = models.TextField()
+    menu_label = models.TextField()
+    details = JSONField(blank=True)
+
+    class Meta:
+        ordering = ('project', 'index',)
+
+    def __str__(self):
+        return '%s section (%s)' % (self.type, self.slug)
+
+    def save(self, *args, **kwargs):
+        if self.index is None:
+            sections = self.project.sections.aggregate(max_index=models.Max('index'))
+            if sections['max_index'] is None: self.index = 0
+            else: self.index = sections['max_index'] + 1
+        return super(Section, self).save(*args, **kwargs)

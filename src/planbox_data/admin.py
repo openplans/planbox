@@ -6,8 +6,10 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.utils.html import format_html
 from django.utils.translation import ugettext as _
+from django_ace import AceWidget
 from genericadmin.admin import GenericAdminModelAdmin
-from planbox_data.models import Profile, Project, Event, Theme
+from jsonfield import JSONField
+from planbox_data.models import Profile, Project, Event, Theme, Section
 
 
 class ProfileAdmin (admin.ModelAdmin):
@@ -19,6 +21,16 @@ class ProfileAdmin (admin.ModelAdmin):
         return obj.created_at
     _date_joined.short_description = _('Date joined')
     _date_joined.admin_order_field = 'created_at'
+
+
+class SectionInline (admin.StackedInline):
+    model = Section
+    extra = 0
+    prepopulated_fields = {"slug": ("menu_label",)}
+
+    # formfield_overrides = {
+    #     JSONField: {'widget': AceWidget(mode='css')},
+    # }
 
 
 class EventInline (admin.TabularInline):
@@ -33,6 +45,7 @@ class ProjectAdmin (GenericAdminModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
     inlines = (
+        SectionInline,
         EventInline,
     )
     raw_id_fields = ('theme',)

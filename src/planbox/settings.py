@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'south',
     'genericadmin',
     'rest_framework',
+    'django_ace',
 
     'custom_domains',
     'planbox_ui',
