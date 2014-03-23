@@ -5,6 +5,17 @@ var Planbox = Planbox || {};
 (function(NS, $) {
   'use strict';
 
+  // Exceptions ===============================================================
+  NS.projectException = function(message, data) {
+    var exc = {
+      name: 'ProjectException',
+      message: message,
+      data: data,
+      toString: function() { return message; }
+    };
+    return exc;
+  };
+
   // App ======================================================================
   NS.app = new Backbone.Marionette.Application();
 

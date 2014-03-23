@@ -34,17 +34,27 @@ var Planbox = Planbox || {};
     template: '#project-tpl',
     itemViewContainer: '#section-list',
 
+    getItemViewOptions: function(item, index) {
+      var type = item.get('type'),
+          options = {parent: this};
+
+      if (type === 'timeline') {
+        options.collection = this.model.get('events');
+      } else {
+        throw NS.projectException('Section type "' + type + '" unrecognized.', this.model.toJSON());
+      }
+
+      return options;
+    },
     getItemView: function(item) {
       var type = item.get('type'),
           project = this.model,
           SectionView;
 
       if (type === 'timeline') {
-        SectionView = NS.TimelineView.extend({
-          initialize: function(options) {
-            this.collection = project.get('events');
-          }
-        });
+        SectionView = NS.TimelineView;
+      } else {
+        throw NS.projectException('Section type "' + type + '" unrecognized.', this.model.toJSON());
       }
 
       return SectionView;
