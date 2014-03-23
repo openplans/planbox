@@ -24,6 +24,7 @@ jsonfield==0.9.20
 # Data Admin and API
 # ========================================
 django-genericadmin==0.6.1
+django-ace==1.0.1
 djangorestframework==2.3.10
 
 
