@@ -52,6 +52,12 @@ var Planbox = Planbox || {};
   });
 
   // Sections =================================================================
+  NS.SectionMixin = {
+    id: function() {
+      return this.model.get('slug');
+    }
+  };
+
   NS.EventView = Backbone.Marionette.ItemView.extend({
     template: '#event-tpl',
     tagName: 'li',
@@ -62,6 +68,7 @@ var Planbox = Planbox || {};
     template: '#timeline-section-tpl',
     tagName: 'section',
     className: 'project-timeline',
+    id: NS.SectionMixin.id,
 
     itemView: NS.EventView,
     itemViewContainer: '.event-list'

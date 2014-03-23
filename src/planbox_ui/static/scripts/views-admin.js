@@ -287,6 +287,12 @@ var Planbox = Planbox || {};
   });
 
   // Sections =================================================================
+  NS.SectionAdminMixin = {
+    id: function() {
+      return this.model.get('slug');
+    }
+  };
+
   NS.EventAdminView = Backbone.Marionette.ItemView.extend({
     template: '#event-admin-tpl',
     tagName: 'li',
@@ -324,6 +330,7 @@ var Planbox = Planbox || {};
     template: '#timeline-section-admin-tpl',
     tagName: 'section',
     className: 'project-timeline',
+    id: NS.SectionAdminMixin.id,
     
     itemView: NS.EventAdminView,
     itemViewContainer: '.event-list',
