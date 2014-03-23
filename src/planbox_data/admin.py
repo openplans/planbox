@@ -27,15 +27,16 @@ class SectionInline (admin.StackedInline):
     model = Section
     extra = 0
     prepopulated_fields = {"slug": ("menu_label",)}
+    readonly_fields = ('created_at', 'updated_at')
 
     # formfield_overrides = {
-    #     JSONField: {'widget': AceWidget(mode='css')},
+    #     JSONField: {'widget': AceWidget(mode='json', theme='github')},
     # }
 
 
 class EventInline (admin.TabularInline):
     model = Event
-    extra = 2
+    extra = 0
     readonly_fields = ('index',)
 
 

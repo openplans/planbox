@@ -179,12 +179,13 @@ class Theme (TimeStampedModel):
 class Section (TimeStampedModel):
     project = models.ForeignKey('Project', related_name='sections')
     type = models.CharField(max_length=30)
-    slug = models.CharField(max_length=30)
-    index = models.PositiveIntegerField(blank=True)
 
     label = models.TextField()
     menu_label = models.TextField()
-    details = JSONField(blank=True)
+    slug = models.CharField(max_length=30)
+    details = JSONField(blank=True, default=lambda: '{}')
+
+    index = models.PositiveIntegerField(blank=True)
 
     class Meta:
         ordering = ('project', 'index',)
