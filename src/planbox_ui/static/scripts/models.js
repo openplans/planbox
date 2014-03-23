@@ -13,6 +13,15 @@ var Planbox = Planbox || {};
       key: 'events',
       relatedModel: 'EventModel',
       collectionType: 'EventCollection'
+    },
+    {
+      type: Backbone.HasMany,
+      key: 'sections',
+      relatedModel: 'SectionModel',
+      collectionType: 'SectionCollection',
+      reverseRelation: {
+        key: 'project'
+      }
     }],
     urlRoot: '/api/v1/projects',
 
@@ -28,6 +37,23 @@ var Planbox = Planbox || {};
           events.remove(evt);
         }
       });
+    }
+  });
+
+  NS.SectionModel = Backbone.RelationalModel.extend({});
+
+  NS.SectionCollection = Backbone.Collection.extend({
+    model: NS.SectionModel,
+    moveTo: function(model, index) {
+      var currentIndex = this.indexOf(model);
+
+      if (currentIndex === index) {
+        return;
+      }
+
+      this.remove(model, { silent: true});
+      this.add(model, {at: index, silent: true});
+      this.trigger('reorder');
     }
   });
 

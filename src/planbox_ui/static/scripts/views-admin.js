@@ -10,39 +10,6 @@ var Planbox = Planbox || {};
     return Handlebars.compile(rawTemplate);
   };
 
-  // View =====================================================================
-  NS.ModalView = Backbone.Marionette.ItemView.extend({
-    template: '#modal-tpl',
-    className: 'overlay',
-    ui: {
-      closeBtn: '.btn-close',
-    },
-    events: {
-      'click @ui.closeBtn': 'handleClose'
-    },
-    handleClose: function(evt) {
-      evt.preventDefault();
-      this.close();
-    }
-  });
-
-  NS.WelcomeModalView = NS.ModalView.extend({
-    template: '#welcome-modal-tpl'
-  });
-
-  NS.EventView = Backbone.Marionette.ItemView.extend({
-    template: '#event-tpl',
-    tagName: 'li',
-    className: 'event'
-  });
-
-  NS.ProjectView = Backbone.Marionette.CompositeView.extend({
-    template: '#project-tpl',
-    itemView: NS.EventView,
-    itemViewContainer: '.event-list'
-  });
-
-
   // Admin ====================================================================
   NS.ContentEditableMixin = {
     handleEditableBlur: function(evt) {
@@ -150,49 +117,14 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.EventAdminView = Backbone.Marionette.ItemView.extend({
-    template: '#event-admin-tpl',
-    tagName: 'li',
-    className: 'event',
-    ui: {
-      editables: '[contenteditable]',
-      deleteBtn: '.delete-event-btn'
-    },
-    events: {
-      'blur @ui.editables': 'handleEditableBlur',
-      'click @ui.deleteBtn': 'handleDeleteClick'
-    },
-    initialize: function() {
-      this.$el.attr('data-id', this.model.cid);
-    },
-    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
-    handleDeleteClick: function(evt) {
-      evt.preventDefault();
-
-      if (window.confirm('Really delete?')) {
-        // I know this is weird, but calling destroy on the model will sync,
-        // and there's no url to support that since it's related to the project
-        // model. So we're just going to do the remove directly.
-        this.model.collection.remove(this.model);
-      }
-    },
-    onRender: function() {
-      this.$('.event-description').each(function(i, el) {
-        NS.ContentEditableMixin.initPen(el);
-      });
-    }
-  });
-
   NS.ProjectAdminView = Backbone.Marionette.CompositeView.extend({
     template: '#project-admin-tpl',
-    itemView: NS.EventAdminView,
-    itemViewContainer: '.event-list',
+    itemViewContainer: '#section-list',
     ui: {
       editables: '[contenteditable]:not(.event [contenteditable])',
       saveBtn: '.save-btn',
       statusSelector: '.status-selector',
       statusLabel: '.project-status',
-      addBtn: '.add-event-btn',
       visibilityToggle: '[name=project-public]',
       userMenuLink: '.user-menu-link',
       userMenu: '.user-menu',
@@ -203,7 +135,6 @@ var Planbox = Planbox || {};
       'change @ui.statusSelector': 'handleStatusChange',
       'change @ui.visibilityToggle': 'handleVisibilityChange',
       'click @ui.saveBtn': 'handleSave',
-      'click @ui.addBtn': 'handleAddClick',
       'click @ui.userMenuLink': 'handleUserMenuClick',
       'click @ui.publishBtn': 'handlePublish'
     },
@@ -238,20 +169,6 @@ var Planbox = Planbox || {};
       });
     },
     onRender: function() {
-      var self = this;
-
-      this.$('.event-list').sortable({
-        handle: '.handle',
-        update: function(evt, ui) {
-          var id = $(ui.item).attr('data-id'),
-              model = self.collection.get(id),
-              index = $(ui.item).index();
-
-          // Silent because we don't want the list to rerender
-          self.collection.moveTo(model, index);
-        }
-      });
-
       this.$('.project-description').each(function(i, el) {
         NS.ContentEditableMixin.initPen(el);
       });
@@ -338,13 +255,6 @@ var Planbox = Planbox || {};
       evt.preventDefault();
       this.save(true);
     },
-    handleAddClick: function(evt) {
-      evt.preventDefault();
-
-      this.collection.add({});
-
-      this.$('.event-title.content-editable').focus();
-    },
     handleUserMenuClick: function(evt) {
       evt.preventDefault();
       this.ui.userMenu.toggleClass('is-open');
@@ -352,7 +262,110 @@ var Planbox = Planbox || {};
     dataChanged: function() {
       // Show the save button
       this.ui.saveBtn.removeClass('btn-disabled');
+    },
+
+    getItemViewOptions: function(item, index) {
+      var type = item.get('type'),
+          options = {parent: this};
+
+      if (type === 'timeline') {
+        options.collection = this.model.get('events');
+      }
+
+      return options;
+    },
+    getItemView: function(item) {
+      var type = item.get('type'),
+          SectionView;
+
+      if (type === 'timeline') {
+        SectionView = NS.TimelineAdminView;
+      }
+
+      return SectionView;
     }
+  });
+
+  // Sections =================================================================
+  NS.EventAdminView = Backbone.Marionette.ItemView.extend({
+    template: '#event-admin-tpl',
+    tagName: 'li',
+    className: 'event',
+    ui: {
+      editables: '[contenteditable]',
+      deleteBtn: '.delete-event-btn'
+    },
+    events: {
+      'blur @ui.editables': 'handleEditableBlur',
+      'click @ui.deleteBtn': 'handleDeleteClick'
+    },
+    initialize: function() {
+      this.$el.attr('data-id', this.model.cid);
+    },
+    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
+    handleDeleteClick: function(evt) {
+      evt.preventDefault();
+
+      if (window.confirm('Really delete?')) {
+        // I know this is weird, but calling destroy on the model will sync,
+        // and there's no url to support that since it's related to the project
+        // model. So we're just going to do the remove directly.
+        this.model.collection.remove(this.model);
+      }
+    },
+    onRender: function() {
+      this.$('.event-description').each(function(i, el) {
+        NS.ContentEditableMixin.initPen(el);
+      });
+    }
+  });
+
+  NS.TimelineAdminView = Backbone.Marionette.CompositeView.extend({
+    template: '#timeline-section-admin-tpl',
+    tagName: 'section',
+    className: 'project-timeline',
+    
+    itemView: NS.EventAdminView,
+    itemViewContainer: '.event-list',
+
+    ui: {
+      editables: '[contenteditable]:not(.event [contenteditable])',
+      addBtn: '.add-event-btn'
+    },
+    events: {
+      'click @ui.addBtn': 'handleAddClick'
+    },
+    collectionEvents: {
+      'change':  'dataChanged',
+      'add':     'dataChanged',
+      'remove':  'dataChanged',
+      'reorder': 'dataChanged'
+    },
+    onRender: function() {
+      var self = this;
+
+      this.$('.event-list').sortable({
+        handle: '.handle',
+        update: function(evt, ui) {
+          var id = $(ui.item).attr('data-id'),
+              model = self.collection.get(id),
+              index = $(ui.item).index();
+
+          // Silent because we don't want the list to rerender
+          self.collection.moveTo(model, index);
+        }
+      });
+    },
+    handleAddClick: function(evt) {
+      evt.preventDefault();
+
+      this.collection.add({});
+
+      this.$('.event-title.content-editable').focus();
+    },
+    dataChanged: function() {
+      this.options.parent.dataChanged();
+    },
   });
 
 }(Planbox, jQuery));

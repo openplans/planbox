@@ -1,7 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
 from planbox_data import models
-import bleach, re
+import bleach, re, json
 
 
 class CleanedHtmlField (serializers.CharField):
@@ -55,8 +55,18 @@ class EventSerializer (serializers.ModelSerializer):
                 event.index = index
 
 
+class SectionSerializer (serializers.ModelSerializer):
+    # DRF makes the wrong default decision for the details field, chosing a
+    # CharField. We want something more direct.
+    details = serializers.WritableField(required=False)
+
+    class Meta:
+        model = models.Section
+
+
 class ProjectSerializer (serializers.ModelSerializer):
     events = EventSerializer(many=True, allow_add_remove=True)
+    sections = SectionSerializer(many=True, allow_add_remove=True)
     owner = serializers.SlugRelatedField(slug_field='slug')
 
     title = CleanedHtmlField()
