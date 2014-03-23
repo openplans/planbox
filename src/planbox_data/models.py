@@ -177,8 +177,13 @@ class Theme (TimeStampedModel):
 
 @python_2_unicode_compatible
 class Section (TimeStampedModel):
+    SECTION_TYPE_CHOICES = (
+        ('text', _('Text')),
+        ('timeline', _('Timeline')),
+    )
+
     project = models.ForeignKey('Project', related_name='sections')
-    type = models.CharField(max_length=30)
+    type = models.CharField(max_length=30, choices=SECTION_TYPE_CHOICES)
 
     label = models.TextField()
     menu_label = models.TextField()

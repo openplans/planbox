@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 from django.core.urlresolvers import reverse
+from django.db.models import TextField
+from django.forms import TextInput, Textarea
 from django.utils.html import format_html
 from django.utils.translation import ugettext as _
 from django_ace import AceWidget
@@ -29,9 +31,11 @@ class SectionInline (admin.StackedInline):
     prepopulated_fields = {"slug": ("menu_label",)}
     readonly_fields = ('created_at', 'updated_at')
 
-    # formfield_overrides = {
-    #     JSONField: {'widget': AceWidget(mode='json', theme='github')},
-    # }
+    formfield_overrides = {
+        TextField: {'widget': TextInput(attrs={'class': 'vTextField'})},
+        JSONField: {'widget': Textarea(attrs={'class': 'vLargeTextField'})},
+        # JSONField: {'widget': AceWidget(mode='json', theme='github')},
+    }
 
 
 class EventInline (admin.TabularInline):
