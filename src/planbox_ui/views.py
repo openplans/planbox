@@ -192,14 +192,23 @@ class NewProjectView (AppMixin, LoginRequired, SSLRequired, TemplateView):
     def get_template_project(self):
         request = self.request
         if 'template' in request.GET:
-            try:
-                owner_slug, project_slug = request.GET['template'].strip('/').split('/')
-                project = Project.objects.get(owner__slug=owner_slug, slug=project_slug)
-                return project
-            except (ValueError, Project.DoesNotExist):
-                return None
+            template_string = request.GET['template']
+        elif hasattr(settings, 'DEFAULT_PROJECT_TEMPLATE'):
+            template_string = settings.DEFAULT_PROJECT_TEMPLATE
         else:
             return None
+
+        try:
+            owner_slug, project_slug = template_string.strip('/').split('/')
+        except ValueError:
+            return None
+
+        try:
+            project = Project.objects.get(owner__slug=owner_slug, slug=project_slug)
+            return project
+        except Project.DoesNotExist:
+            return None
+
 
     def get_context_data(self, **kwargs):
         context = super(NewProjectView, self).get_context_data(**kwargs)
