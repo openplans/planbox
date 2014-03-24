@@ -1,6 +1,16 @@
-<header class="site-header">
+<header id="home" class="site-header">
   <div class="container">
     <h1 class="site-title">{{{ title }}}</h1>
+    {{#gte sections.length 2}}
+    <nav class="project-nav clearfix">
+      <ul class="unstyled-list">
+        <li><a href="#home">Home</a></li>
+        {{#each sections}}
+          <li><a href="#{{ slug }}">{{ menu_label }}</a></li>
+        {{/each}}
+      </ul>
+    </nav>
+    {{/gte}}
   </div>
 </header>
 

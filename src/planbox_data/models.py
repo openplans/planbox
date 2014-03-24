@@ -215,12 +215,10 @@ class Section (TimeStampedModel):
 
     project = models.ForeignKey('Project', related_name='sections')
     type = models.CharField(max_length=30, choices=SECTION_TYPE_CHOICES)
-
-    label = models.TextField()
+    label = models.TextField(blank=True)
     menu_label = models.TextField()
     slug = models.CharField(max_length=30)
     details = JSONField(blank=True, default=lambda: '{}')
-
     index = models.PositiveIntegerField(blank=True)
 
     objects = SectionManager()

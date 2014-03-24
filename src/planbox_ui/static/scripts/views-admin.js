@@ -128,10 +128,12 @@ var Planbox = Planbox || {};
       visibilityToggle: '[name=project-public]',
       userMenuLink: '.user-menu-link',
       userMenu: '.user-menu',
+      editableNavMenuLinks: '.project-nav a[contenteditable]',
       publishBtn: '.btn-public'
     },
     events: {
       'blur @ui.editables': 'handleEditableBlur',
+      'blur @ui.editableNavMenuLinks': 'handleEditableNavMenuLinkBlur',
       'change @ui.statusSelector': 'handleStatusChange',
       'change @ui.visibilityToggle': 'handleVisibilityChange',
       'click @ui.saveBtn': 'handleSave',
@@ -179,6 +181,20 @@ var Planbox = Planbox || {};
       this.render();
     },
     handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
+    handleEditableNavMenuLinkBlur: function(evt) {
+      var $target = $(evt.target),
+          attr = $target.attr('data-attr') || 'menu_label',
+          sectionId = $target.attr('data-id'),
+          val = $target.text(),
+          sectionCollection = this.model.get('sections'),
+          sectionModel = sectionCollection.get(sectionId);
+
+      evt.preventDefault();
+
+      // Set the value of what was just blurred. Setting an event to the same
+      // value does not trigger a change event.
+      sectionModel.set(attr, val);
+    },
     handleStatusChange: function(evt) {
       var $target = $(evt.target),
           attr = $target.attr('data-attr'),
@@ -349,7 +365,8 @@ var Planbox = Planbox || {};
       addBtn: '.add-event-btn'
     },
     events: {
-      'click @ui.addBtn': 'handleAddClick'
+      'click @ui.addBtn': 'handleAddClick',
+      'blur @ui.editables': 'handleEditableBlur'
     },
     collectionEvents: {
       'change':  'dataChanged',
@@ -357,6 +374,7 @@ var Planbox = Planbox || {};
       'remove':  'dataChanged',
       'reorder': 'dataChanged'
     },
+    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
     onRender: function() {
       var self = this;
 

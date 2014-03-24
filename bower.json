@@ -15,7 +15,8 @@
     "jqueryui-touch-punch": "*",
     "jqueryui": "~1.10.3",
     "django-csrf.js": "https://github.com/openplans/django-csrf.js.git#1.0",
-    "pen": "https://github.com/sofish/pen.git#master"
+    "pen": "https://github.com/sofish/pen.git#master",
+    "swag": "~0.6.1"
   },
   "devDependencies": {}
 }

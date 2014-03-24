@@ -704,6 +704,23 @@ a.login-link, .product-header .user-menu-link {
 /* =Project Content
 -------------------------------------------------------------- */
 
+.project-nav {
+  margin-top: 0.75em;
+}
+.project-nav a {
+  float: left;
+  padding: 0.25em 0.5em;
+  margin: 0 0.25em 0.25em 0;
+  background-color: #ddd;
+  color: #268099;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.project-nav a:hover {
+  background-color: #268099;
+  color: #fff;
+}
+
 .project-details {}
 .project-details .container {
   position: relative;
@@ -918,8 +935,31 @@ li.event:last-child:before {
     max-width: 36em;
   }
   .site-header {
-    padding-top: 3em;
+    padding-top: 5em;
     padding-bottom: 1.5em;
+  }
+  .project-nav {
+    margin-top: 0;
+    padding-top: 0.5em;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #268099;
+    z-index: 199;
+  }
+  .project-nav ul {
+    max-width: 36em;
+    margin: 0 auto;
+  }
+  .project-nav a {
+    color: white;
+    background-color: #268099;
+    line-height: 2em;
+  }
+  .project-nav a:hover {
+    background-color: #eee;
+    color: #666;
   }
 
   .product-section--the-problem {
@@ -951,6 +991,16 @@ li.event:last-child:before {
     display: block;
     margin: 0 auto;
   }
+
+  /* TODO: find a better way of dealing with #links to the sections
+     http://nicolasgallagher.com/jump-links-and-viewport-positioning/demo/#method-D */
+  section, footer {
+    border-top: 2.5em solid transparent;
+    border-bottom: 2.5em solid transparent;
+    margin-top: -2.5em;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;  }
 
   .project-status strong {
     padding: 0 0.25em;
