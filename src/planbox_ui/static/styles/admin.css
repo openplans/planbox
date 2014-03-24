@@ -66,9 +66,9 @@
   position: absolute;
   width: 0.5em;
   height: 0.875em;
-  top: -0.375em; 
+  top: -0.375em;
   left: 0.125em;
-  background: transparent; 
+  background: transparent;
   border: 0.125em solid #fff;
   border-radius: 0.125em;
 }
@@ -78,11 +78,11 @@
   position: absolute;
   height: 0.125em;
   width: 0.125em;
-  top: 0.25em; 
+  top: 0.25em;
   left: 0.125em;
-  background: #268099; 
+  background: #268099;
   border-radius: 0.5em;
-  box-shadow: 0.2em 0 0 #268099; 
+  box-shadow: 0.2em 0 0 #268099;
 }
 
 
@@ -140,12 +140,12 @@
        -o-transition: all 0.3s ease;
           transition: all 0.3s ease;
 }
-h1.content-editable, 
-h2.content-editable, 
-h3.content-editable, 
-h4.content-editable, 
-h4.content-editable, 
-h5.content-editable, 
+h1.content-editable,
+h2.content-editable,
+h3.content-editable,
+h4.content-editable,
+h4.content-editable,
+h5.content-editable,
 h6.content-editable {
   min-height: 1.25em;
 }
@@ -161,7 +161,7 @@ h6.content-editable {
 }
 .content-editable:focus {
   outline: 0;
-  box-shadow: -0.25em -0.25em #fff, 0.25em -0.25em #fff, -0.25em 0.25em #fff, 0.25em 0.25em #fff, 
+  box-shadow: -0.25em -0.25em #fff, 0.25em -0.25em #fff, -0.25em 0.25em #fff, 0.25em 0.25em #fff,
               -0.35em -0.35em #00B4E6, 0.35em -0.35em #00B4E6, -0.35em 0.35em #00B4E6, 0.35em 0.35em #00B4E6;
   background-color: #fff;
   color: #666;
@@ -511,7 +511,7 @@ li.event:last-child:before {
   line-height: 1em;
   margin-left: .2em;
 }
- 
+
 .pen-menu .icon-location:before { content: '\e815'; }
 .pen-menu .icon-fit:before { content: '\e80f'; }
 .pen-menu .icon-bold:before { content: '\e805'; }
