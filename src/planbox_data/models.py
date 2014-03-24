@@ -31,6 +31,22 @@ class TimeStampedModel (models.Model):
 
 
 def uniquify_slug(slug, existing_slugs):
+    """
+    Create a unique version of the given slug with respect to the given list
+    of slugs. Do this by appending integers to the end of slug until a string
+    not in the existing list is found.
+
+    Arguments:
+
+    slug -- An initial version of the slug string to be uniquified.
+    existing_slugs -- Other slug strings to be compared against.
+
+    Example:
+
+    >>> uniquify_slug('my-section', ['my-section', 'my-other-section'])
+    'my-section-2'
+
+    """
     if slug not in existing_slugs:
         return slug
 
@@ -44,6 +60,43 @@ def uniquify_slug(slug, existing_slugs):
 
 
 def create_or_update_user_profile(sender, instance, created, **kwargs):
+    """
+    Update the corresponding profile for a user authentication object with the
+    auth object's username as the slug, and the email address as the profile
+    email. Create the user profile object for the authentication object if it
+    doesn't already exist.
+
+    Connect as a post-save signal on the user authentication model, so that
+    the above process is done every time a user authentication object is saved.
+
+    Arguments:
+
+    sender -- The user authentication model class.
+    instance -- The user authentication model object that has been saved.
+    created -- True if called as a result of the authentication model object
+        being created; False otherwise.
+
+    Example:
+
+    >>> ## Create a user...
+    >>>
+    >>> user = UserAuth.objects.create_user(
+    ...     username='my-user',
+    ...     email='my-user@example.com',
+    ...     password='123')
+    >>> user.profile.slug
+    'my-user'
+    >>> user.profile.email
+    'my-user@example.com'
+    >>>
+    >>> ## Update the user...
+    >>>
+    >>> user.username = 'my-new-username'
+    >>> user.save()
+    >>> user.profile.slug
+    'my-new-username'
+
+    """
     auth = instance
     try:
         profile = Profile.objects.get(auth=auth)
