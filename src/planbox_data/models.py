@@ -84,7 +84,7 @@ class Project (TimeStampedModel):
         ('complete', _('Complete')),
     )
 
-    title = models.CharField(max_length=1024)
+    title = models.CharField(max_length=1024, blank=True)
     slug = models.CharField(max_length=128, blank=True)
     public = models.BooleanField(default=False, blank=True)
     status = models.CharField(help_text=_("A string representing the project's status"), choices=STATUS_CHOICES, default='not-started', max_length=32, blank=True)

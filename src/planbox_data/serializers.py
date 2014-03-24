@@ -72,7 +72,7 @@ class ProjectSerializer (serializers.ModelSerializer):
     sections = SectionSerializer(many=True, allow_add_remove=True)
     owner = serializers.SlugRelatedField(slug_field='slug')
 
-    title = CleanedHtmlField()
+    title = CleanedHtmlField(required=True)
     location = CleanedHtmlField(required=False)
     description = CleanedHtmlField(required=False)
     contact = CleanedHtmlField(required=False)
