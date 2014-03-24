@@ -51,7 +51,7 @@ var Planbox = Planbox || {};
 
       switch (type) {
       case 'timeline':
-        SectionView = NS.TimelineView;
+        SectionView = NS.TimelineSectionView;
         break;
 
       case 'text':
@@ -79,7 +79,7 @@ var Planbox = Planbox || {};
     className: 'event'
   });
 
-  NS.TimelineView = Backbone.Marionette.CompositeView.extend({
+  NS.TimelineSectionView = Backbone.Marionette.CompositeView.extend({
     template: '#timeline-section-tpl',
     tagName: 'section',
     className: 'project-timeline',

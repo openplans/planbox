@@ -280,7 +280,7 @@ var Planbox = Planbox || {};
 
       switch (type) {
       case 'timeline':
-        SectionView = NS.TimelineAdminView;
+        SectionView = NS.TimelineSectionAdminView;
         break;
 
       case 'text':
@@ -335,7 +335,7 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.TimelineAdminView = Backbone.Marionette.CompositeView.extend({
+  NS.TimelineSectionAdminView = Backbone.Marionette.CompositeView.extend({
     template: '#timeline-section-admin-tpl',
     tagName: 'section',
     className: 'project-timeline',
