@@ -128,17 +128,16 @@ class ProjectManager (models.Manager):
     def filter_by_owner_or_public(self, owner):
         return self.get_queryset().filter_by_owner_or_public(owner)
 
-    def get_by_natural_key(self, owner_key, slug):
+    def get_by_natural_key(self, owner, slug):
         """
         Build a project from its natural key.
 
         Arguments:
 
-        owner_key -- An array consisting only of the owner profile slug.
-        slug -- The project slug string.
+        owner -- The owner profile's slug.
+        slug -- The project's slug.
 
         """
-        owner = owner_key[0]
         return self.get(owner__slug=owner, slug=slug)
 
 
@@ -170,7 +169,7 @@ class Project (TimeStampedModel):
         return self.title
 
     def natural_key(self):
-        return (self.owner.natural_key(), self.slug)
+        return self.owner.natural_key() + (self.slug,)
 
     def save(self, *args, **kwargs):
         if self.title and not self.slug:
@@ -188,18 +187,17 @@ class Project (TimeStampedModel):
 
 
 class EventManager (models.Manager):
-    def get_by_natural_key(self, project_key, index):
+    def get_by_natural_key(self, owner, project, index):
         """
         Build an event from its natural key.
 
         Arguments:
 
-        project_key -- An array consisting of the slug of the event's project's
-            owner, and the slug of the event's containing project.
+        owner -- The slug of the event's project's owner.
+        project -- The slug of the event's containing project.
         index -- The index of the event within the project.
 
         """
-        owner, project = project_key
         return self.get(project__owner__slug=owner, project__slug=project, index=index)
 
 
@@ -222,7 +220,7 @@ class Event (models.Model):
             return self.label
 
     def natural_key(self):
-        return (self.project.natural_key(), self.index)
+        return self.project.natural_key() + (self.index,)
 
     def save(self, *args, **kwargs):
         if self.index is None:
@@ -237,6 +235,14 @@ class ProfileManager (models.Manager):
         return super(ProfileManager, self).get_queryset().select_related('auth')
 
     def get_by_natural_key(self, slug):
+        """
+        Build a profile from its natural key.
+
+        Arguments:
+
+        slug -- The slug of the profile.
+
+        """
         return self.get(slug=slug)
 
 
@@ -273,18 +279,17 @@ class Theme (TimeStampedModel):
 
 
 class SectionManager (models.Manager):
-    def get_by_natural_key(self, project_key, index):
+    def get_by_natural_key(self, owner, project, index):
         """
         Build a project section from its natural key.
 
         Arguments:
 
-        project_key -- An array consisting of the slug of the section's
-            project's owner, and the slug of the section's project.
+        owner -- The slug of the section's project's owner.
+        project -- The slug of the section's project.
         index -- The index of the section within the project.
 
         """
-        owner, project = project_key
         return self.get(project__owner__slug=owner, project__slug=project, index=index)
 
 
@@ -300,7 +305,7 @@ class Section (TimeStampedModel):
     label = models.TextField(blank=True)
     menu_label = models.TextField()
     slug = models.CharField(max_length=30)
-    details = JSONField(blank=True, default=lambda: '{}')
+    details = JSONField(blank=True, default=dict)
     index = models.PositiveIntegerField(blank=True)
 
     objects = SectionManager()
@@ -312,7 +317,7 @@ class Section (TimeStampedModel):
         return '%s section (%s)' % (self.type, self.slug)
 
     def natural_key(self):
-        return (self.project.natural_key(), self.index)
+        return self.project.natural_key() + (self.index,)
 
     def save(self, *args, **kwargs):
         if self.index is None:
