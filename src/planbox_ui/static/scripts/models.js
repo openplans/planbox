@@ -40,7 +40,38 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.SectionModel = Backbone.RelationalModel.extend({});
+  NS.SectionModel = Backbone.RelationalModel.extend({
+    baseAttrs: ['details', 'id', 'created_at', 'updated_at', 'type', 'label', 'menu_label', 'slug'],
+    set: function(key, val, options) {
+      var attr, attrs, details;
+
+      // Process the initial arguments.
+      if (typeof key === 'object') {
+        attrs = key;
+        options = val;
+      } else {
+        (attrs = {})[key] = val;
+      }
+
+      options = options || {};
+
+      // Build up the details document if there are any attributes being set
+      // that belong there.
+      for (attr in attrs) {
+        if (!_.contains(this.baseAttrs, attr)) {
+          details = details || attrs.details || _.clone(this.get('details')) || {};
+          details[attr] = attrs[attr];
+          delete attrs[attr];
+        }
+      }
+
+      // If we have built a details document, then set it on the attributes.
+      if (details) {
+        attrs.details = details;
+      }
+      return Backbone.RelationalModel.prototype.set.call(this, attrs, options);
+    }
+  });
 
   NS.SectionCollection = Backbone.Collection.extend({
     model: NS.SectionModel,

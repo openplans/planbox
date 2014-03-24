@@ -121,7 +121,7 @@ var Planbox = Planbox || {};
     template: '#project-admin-tpl',
     itemViewContainer: '#section-list',
     ui: {
-      editables: '[contenteditable]:not(.event [contenteditable])',
+      editables: '[contenteditable]:not(#section-list [contenteditable])',
       saveBtn: '.save-btn',
       statusSelector: '.status-selector',
       statusLabel: '.project-status',
@@ -278,8 +278,17 @@ var Planbox = Planbox || {};
       var type = item.get('type'),
           SectionView;
 
-      if (type === 'timeline') {
+      switch (type) {
+      case 'timeline':
         SectionView = NS.TimelineAdminView;
+        break;
+
+      case 'text':
+        SectionView = NS.TextSectionAdminView;
+        break;
+
+      default:
+        throw NS.projectException('Section type "' + type + '" unrecognized.', this.model.toJSON());
       }
 
       return SectionView;
@@ -331,7 +340,7 @@ var Planbox = Planbox || {};
     tagName: 'section',
     className: 'project-timeline',
     id: NS.SectionAdminMixin.id,
-    
+
     itemView: NS.EventAdminView,
     itemViewContainer: '.event-list',
 
@@ -373,6 +382,21 @@ var Planbox = Planbox || {};
     dataChanged: function() {
       this.options.parent.dataChanged();
     },
+  });
+
+  NS.TextSectionAdminView = Backbone.Marionette.ItemView.extend({
+    template: '#text-section-admin-tpl',
+    tagName: 'section',
+    className: 'project-text',
+    id: NS.SectionMixin.id,
+
+    ui: {
+      editables: '[contenteditable]'
+    },
+    events: {
+      'blur @ui.editables': 'handleEditableBlur'
+    },
+    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur
   });
 
 }(Planbox, jQuery));

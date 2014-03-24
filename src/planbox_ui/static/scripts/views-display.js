@@ -40,8 +40,6 @@ var Planbox = Planbox || {};
 
       if (type === 'timeline') {
         options.collection = this.model.get('events');
-      } else {
-        throw NS.projectException('Section type "' + type + '" unrecognized.', this.model.toJSON());
       }
 
       return options;
@@ -51,9 +49,16 @@ var Planbox = Planbox || {};
           project = this.model,
           SectionView;
 
-      if (type === 'timeline') {
+      switch (type) {
+      case 'timeline':
         SectionView = NS.TimelineView;
-      } else {
+        break;
+
+      case 'text':
+        SectionView = NS.TextSectionView;
+        break;
+
+      default:
         throw NS.projectException('Section type "' + type + '" unrecognized.', this.model.toJSON());
       }
 
@@ -82,6 +87,13 @@ var Planbox = Planbox || {};
 
     itemView: NS.EventView,
     itemViewContainer: '.event-list'
+  });
+
+  NS.TextSectionView = Backbone.Marionette.ItemView.extend({
+    template: '#text-section-tpl',
+    tagName: 'section',
+    className: 'project-text',
+    id: NS.SectionMixin.id
   });
 
 }(Planbox, jQuery));
