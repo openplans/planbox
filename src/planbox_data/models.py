@@ -129,6 +129,15 @@ class ProjectManager (models.Manager):
         return self.get_queryset().filter_by_owner_or_public(owner)
 
     def get_by_natural_key(self, owner_key, slug):
+        """
+        Build a project from its natural key.
+
+        Arguments:
+
+        owner_key -- An array consisting only of the owner profile slug.
+        slug -- The project slug string.
+
+        """
         owner = owner_key[0]
         return self.get(owner__slug=owner, slug=slug)
 
@@ -180,6 +189,16 @@ class Project (TimeStampedModel):
 
 class EventManager (models.Manager):
     def get_by_natural_key(self, project_key, index):
+        """
+        Build an event from its natural key.
+
+        Arguments:
+
+        project_key -- An array consisting of the slug of the event's project's
+            owner, and the slug of the event's containing project.
+        index -- The index of the event within the project.
+
+        """
         owner, project = project_key
         return self.get(project__owner__slug=owner, project__slug=project, index=index)
 
@@ -255,6 +274,16 @@ class Theme (TimeStampedModel):
 
 class SectionManager (models.Manager):
     def get_by_natural_key(self, project_key, index):
+        """
+        Build a project section from its natural key.
+
+        Arguments:
+
+        project_key -- An array consisting of the slug of the section's
+            project's owner, and the slug of the section's project.
+        index -- The index of the section within the project.
+
+        """
         owner, project = project_key
         return self.get(project__owner__slug=owner, project__slug=project, index=index)
 
