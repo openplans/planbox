@@ -86,3 +86,32 @@ class UserSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = models.Profile
+
+
+# ==========
+# Template serializers, which render objects without their identifying
+# information (ids, slugs, etc.). These are output only.
+
+class TemplateEventSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.Event
+        exclude = ('project', 'index', 'id')
+
+
+class TemplateSectionSerializer (serializers.ModelSerializer):
+    # DRF makes the wrong default decision for the details field, chosing a
+    # CharField. We want something more direct.
+    details = serializers.WritableField()
+
+    class Meta:
+        model = models.Section
+        exclude = ('project', 'index', 'id')
+
+
+class TemplateProjectSerializer (serializers.ModelSerializer):
+    events = TemplateEventSerializer(many=True)
+    sections = TemplateSectionSerializer(many=True)
+
+    class Meta:
+        model = models.Project
+        exclude = ('owner', 'slug', 'id', 'public')

@@ -13,7 +13,7 @@ from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
 from django.views.generic import TemplateView, FormView
 from planbox_data.models import Project, Profile
-from planbox_data.serializers import ProjectSerializer, UserSerializer
+from planbox_data.serializers import ProjectSerializer, UserSerializer, TemplateProjectSerializer
 from planbox_ui.decorators import ssl_required
 from planbox_ui.forms import UserCreationForm
 import pybars
@@ -189,10 +189,24 @@ class ReadOnlyProjectView (ReadOnlyMixin, BaseProjectView): pass
 class NewProjectView (AppMixin, LoginRequired, SSLRequired, TemplateView):
     template_name = 'project.html'
 
+    def get_template_project(self):
+        request = self.request
+        if 'template' in request.GET:
+            try:
+                owner_slug, project_slug = request.GET['template'].strip('/').split('/')
+                project = Project.objects.get(owner__slug=owner_slug, slug=project_slug)
+                return project
+            except (ValueError, Project.DoesNotExist):
+                return None
+        else:
+            return None
+
     def get_context_data(self, **kwargs):
         context = super(NewProjectView, self).get_context_data(**kwargs)
 
-        context['project_data'] = {}
+        project = self.get_template_project()
+        serializer = TemplateProjectSerializer(project)
+        context['project_data'] = serializer.data
         context['is_owner'] = True
 
         return context
