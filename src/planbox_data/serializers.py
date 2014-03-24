@@ -34,16 +34,9 @@ class CleanedHtmlField (serializers.CharField):
         return super(CleanedHtmlField, self).from_native(data)
 
 
-class EventSerializer (serializers.ModelSerializer):
-    label = CleanedHtmlField()
-    description = CleanedHtmlField(required=False)
-
-    class Meta:
-        model = models.Event
-        exclude = ('project', 'index')
-
+class OrderedSerializerMixin (object):
     def field_from_native(self, data, files, field_name, into):
-        super(EventSerializer, self).field_from_native(data, files, field_name, into)
+        super(OrderedSerializerMixin, self).field_from_native(data, files, field_name, into)
 
         # If this is being used as a field, respect the order of the items.
         # Renumber the index values to reflect the incoming order.
@@ -51,17 +44,27 @@ class EventSerializer (serializers.ModelSerializer):
             if not isinstance(into.get(field_name), (list, tuple)):
                 raise serializers.ValidationError("must be an array")
 
-            for index, event in enumerate(into[field_name]):
-                event.index = index
+            for index, obj in enumerate(into[field_name]):
+                obj.index = index
 
 
-class SectionSerializer (serializers.ModelSerializer):
+class EventSerializer (OrderedSerializerMixin, serializers.ModelSerializer):
+    label = CleanedHtmlField()
+    description = CleanedHtmlField(required=False)
+
+    class Meta:
+        model = models.Event
+        exclude = ('project', 'index')
+
+
+class SectionSerializer (OrderedSerializerMixin, serializers.ModelSerializer):
     # DRF makes the wrong default decision for the details field, chosing a
     # CharField. We want something more direct.
     details = serializers.WritableField(required=False)
 
     class Meta:
         model = models.Section
+        exclude = ('project', 'index')
 
 
 class ProjectSerializer (serializers.ModelSerializer):
