@@ -75,6 +75,10 @@ class ProjectManager (models.Manager):
     def filter_by_owner_or_public(self, owner):
         return self.get_queryset().filter_by_owner_or_public(owner)
 
+    def get_by_natural_key(self, owner_key, slug):
+        owner = owner_key[0]
+        return self.get(owner__slug=owner, slug=slug)
+
 
 @python_2_unicode_compatible
 class Project (TimeStampedModel):
@@ -103,6 +107,9 @@ class Project (TimeStampedModel):
     def __str__(self):
         return self.title
 
+    def natural_key(self):
+        return (self.owner.natural_key(), self.slug)
+
     def save(self, *args, **kwargs):
         if self.title and not self.slug:
             self.slug = uniquify_slug(
@@ -118,12 +125,20 @@ class Project (TimeStampedModel):
         return (self.owner == obj)
 
 
+class EventManager (models.Manager):
+    def get_by_natural_key(self, project_key, index):
+        owner, project = project_key
+        return self.get(project__owner__slug=owner, project__slug=project, index=index)
+
+
 @python_2_unicode_compatible
 class Event (models.Model):
     label = models.CharField(help_text=_("The time label for the event, e.g. \"January 15th, 2015\", \"Spring 2015 Phase\", \"Phase II, Summer 2015\", etc."), max_length=1024)
     description = models.TextField(help_text=_("A summary description of the timeline item"), default='', blank=True)
     index = models.PositiveIntegerField(help_text=_("Leave this field blank; it will be filled in automatically"))
     project = models.ForeignKey(Project, related_name='events')
+
+    objects = EventManager()
 
     class Meta:
         ordering = ('project', 'index',)
@@ -133,6 +148,9 @@ class Event (models.Model):
             return '%s. %s' % (self.index + 1, self.label)
         else:
             return self.label
+
+    def natural_key(self):
+        return (self.project.natural_key(), self.index)
 
     def save(self, *args, **kwargs):
         if self.index is None:
@@ -145,6 +163,9 @@ class Event (models.Model):
 class ProfileManager (models.Manager):
     def get_queryset(self):
         return super(ProfileManager, self).get_queryset().select_related('auth')
+
+    def get_by_natural_key(self, slug):
+        return self.get(slug=slug)
 
 
 @python_2_unicode_compatible
@@ -167,6 +188,9 @@ class Profile (TimeStampedModel):
     def __str__(self):
         return self.slug
 
+    def natural_key(self):
+        return (self.slug,)
+
 
 @python_2_unicode_compatible
 class Theme (TimeStampedModel):
@@ -174,6 +198,12 @@ class Theme (TimeStampedModel):
 
     def __str__(self):
         return self.css_url
+
+
+class SectionManager (models.Manager):
+    def get_by_natural_key(self, project_key, index):
+        owner, project = project_key
+        return self.get(project__owner__slug=owner, project__slug=project, index=index)
 
 
 @python_2_unicode_compatible
@@ -193,11 +223,16 @@ class Section (TimeStampedModel):
 
     index = models.PositiveIntegerField(blank=True)
 
+    objects = SectionManager()
+
     class Meta:
         ordering = ('project', 'index',)
 
     def __str__(self):
         return '%s section (%s)' % (self.type, self.slug)
+
+    def natural_key(self):
+        return (self.project.natural_key(), self.index)
 
     def save(self, *args, **kwargs):
         if self.index is None:
