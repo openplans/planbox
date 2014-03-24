@@ -53,7 +53,7 @@ class ProjectAdmin (admin.ModelAdmin):
         SectionInline,
         EventInline,
     )
-    raw_id_fields = ('theme',)
+    raw_id_fields = ('theme', 'template')
 
     def get_queryset(self, request):
         qs = super(ProjectAdmin, self).get_queryset(request)

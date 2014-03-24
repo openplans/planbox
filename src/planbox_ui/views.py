@@ -205,6 +205,8 @@ class NewProjectView (AppMixin, LoginRequired, SSLRequired, TemplateView):
         context = super(NewProjectView, self).get_context_data(**kwargs)
 
         project = self.get_template_project()
+        if project:
+            project.template = project
         serializer = TemplateProjectSerializer(project)
         context['project_data'] = serializer.data
         context['is_owner'] = True
