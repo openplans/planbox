@@ -5,44 +5,202 @@ var Planbox = Planbox || {};
 (function(NS, $) {
   'use strict';
 
-    // Handlebars support for Marionette
+  // Handlebars support for Marionette
   Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
     return Handlebars.compile(rawTemplate);
   };
 
-  // Admin ====================================================================
-  NS.ContentEditableMixin = {
-    handleEditableBlur: function(evt) {
-      var $target = $(evt.target),
-          attr = $target.attr('data-attr'),
-          val = $target.html();
-
-      evt.preventDefault();
-
-      // Set the value of what was just blurred. Setting an event to the same
-      // value does not trigger a change event.
-      this.model.set(attr, val);
-    },
-    onRender: function() {
-      this.initRichEditables();
-    },
-    initRichEditable: function(el) {
-      this.pen = new Pen({
-        editor: el,
-        list: ['insertorderedlist', 'insertunorderedlist', 'bold', 'italic', 'createlink'],
-        stay: false
-      });
-    },
-    initRichEditables: function() {
-      var self = this;
-      if (this.ui.richEditables) {
-        // Init the Pen editor for each richEditable element
-        this.ui.richEditables.each(function(i, el) {
-          self.initRichEditable(el);
-        });
-      }
+  // Sections =================================================================
+  NS.SectionAdminMixin = {
+    id: function() {
+      return this.model.get('slug');
     }
   };
+
+  NS.EventAdminView = Backbone.Marionette.ItemView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
+      template: '#event-admin-tpl',
+      tagName: 'li',
+      className: 'event',
+      ui: {
+        editables: '[contenteditable]',
+        richEditables: '.event-description',
+        deleteBtn: '.delete-event-btn'
+      },
+      events: {
+        'blur @ui.editables': 'handleEditableBlur',
+        'click @ui.deleteBtn': 'handleDeleteClick'
+      },
+      initialize: function() {
+        this.$el.attr('data-id', this.model.cid);
+      },
+      handleDeleteClick: function(evt) {
+        evt.preventDefault();
+
+        if (window.confirm('Really delete?')) {
+          // I know this is weird, but calling destroy on the model will sync,
+          // and there's no url to support that since it's related to the project
+          // model. So we're just going to do the remove directly.
+          this.model.collection.remove(this.model);
+        }
+      }
+    })
+  );
+
+  NS.TimelineSectionAdminView = Backbone.Marionette.CompositeView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
+      template: '#timeline-section-admin-tpl',
+      tagName: 'section',
+      className: 'project-timeline',
+      id: NS.SectionAdminMixin.id,
+
+      itemView: NS.EventAdminView,
+      itemViewContainer: '.event-list',
+
+      ui: {
+        editables: '[contenteditable]:not(.event [contenteditable])',
+        addBtn: '.add-event-btn'
+      },
+      events: {
+        'click @ui.addBtn': 'handleAddClick',
+        'blur @ui.editables': 'handleEditableBlur'
+      },
+      collectionEvents: {
+        'change':  'dataChanged',
+        'add':     'dataChanged',
+        'remove':  'dataChanged',
+        'reorder': 'dataChanged'
+      },
+      onRender: function() {
+        var self = this;
+
+        this.$('.event-list').sortable({
+          handle: '.handle',
+          update: function(evt, ui) {
+            var id = $(ui.item).attr('data-id'),
+                model = self.collection.get(id),
+                index = $(ui.item).index();
+
+            // Silent because we don't want the list to rerender
+            self.collection.moveTo(model, index);
+          }
+        });
+      },
+      handleAddClick: function(evt) {
+        evt.preventDefault();
+
+        this.collection.add({});
+
+        this.$('.event-title.content-editable').focus();
+      },
+      dataChanged: function() {
+        this.options.parent.dataChanged();
+      }
+    })
+  );
+
+  NS.TextSectionAdminView = Backbone.Marionette.ItemView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
+      template: '#text-section-admin-tpl',
+      tagName: 'section',
+      className: 'project-text',
+      id: NS.SectionAdminMixin.id,
+
+      ui: {
+        editables: '[contenteditable]',
+        richEditables: '.project-text-content'
+      },
+      events: {
+        'blur @ui.editables': 'handleEditableBlur'
+      }
+    })
+  );
+
+  NS.FaqAdminView = Backbone.Marionette.ItemView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
+      template: '#faq-admin-tpl',
+      tagName: 'div',
+      className: 'faq',
+
+      ui: {
+        editables: '[contenteditable]',
+        richEditables: '.faq-answer',
+        deleteBtn: '.delete-faq-btn'
+      },
+      events: {
+        'blur @ui.editables': 'handleEditableBlur',
+        'click @ui.deleteBtn': 'handleDeleteClick'
+      },
+      initialize: function() {
+        this.$el.attr('data-id', this.model.cid);
+      },
+      handleDeleteClick: function(evt) {
+        evt.preventDefault();
+
+        if (window.confirm('Really delete?')) {
+          // I know this is weird, but calling destroy on the model will sync,
+          // and there's no url to support that since it's related to the project
+          // model. So we're just going to do the remove directly.
+          this.model.collection.remove(this.model);
+        }
+      }
+    })
+  );
+
+  NS.FaqsSectionAdminView = Backbone.Marionette.CompositeView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
+      template: '#faqs-section-admin-tpl',
+      tagName: 'section',
+      className: 'project-faqs',
+      id: NS.SectionAdminMixin.id,
+
+      itemView: NS.FaqAdminView,
+      itemViewContainer: '.faq-list',
+
+      ui: {
+        editables: '[contenteditable]:not(.faq [contenteditable])',
+        addBtn: '.add-faq-btn'
+      },
+      events: {
+        'click @ui.addBtn': 'handleAddClick',
+        'blur @ui.editables': 'handleEditableBlur'
+      },
+      collectionEvents: {
+        'change':  'dataChanged',
+        'add':     'dataChanged',
+        'remove':  'dataChanged',
+        'reorder': 'dataChanged'
+      },
+      onRender: function() {
+        var self = this;
+
+        this.$('.faq-list').sortable({
+          handle: '.handle',
+          update: function(evt, ui) {
+            var id = $(ui.item).attr('data-id'),
+                model = self.collection.get(id),
+                index = $(ui.item).index();
+
+            // Silent because we don't want the list to rerender
+            self.collection.moveTo(model, index);
+          }
+        });
+      },
+      handleAddClick: function(evt) {
+        evt.preventDefault();
+
+        this.collection.add({});
+
+        this.$('.event-title.content-editable').focus();
+      },
+      dataChanged: function() {
+        this.options.parent.dataChanged();
+      }
+    })
+  );
+
+
+  // Admin ====================================================================
 
   NS.showErrorModal = function(resp) {
     var statusCode = resp.status,
@@ -129,10 +287,9 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.ProjectAdminView = Backbone.Marionette.CompositeView.extend(
+  NS.ProjectAdminView = NS.BaseProjectView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#project-admin-tpl',
-      itemViewContainer: '#section-list',
       ui: {
         editables: '[contenteditable]:not(#section-list [contenteditable])',
         richEditables: '.project-description',
@@ -163,6 +320,11 @@ var Planbox = Planbox || {};
         'add':     'dataChanged',
         'remove':  'dataChanged',
         'reorder': 'dataChanged'
+      },
+      sectionViews: {
+        'timeline': NS.TimelineSectionAdminView,
+        'text': NS.TextSectionAdminView,
+        'faqs': NS.FaqsSectionAdminView
       },
       initialize: function() {
         // Hijack paste and strip out the formatting
@@ -286,239 +448,7 @@ var Planbox = Planbox || {};
       dataChanged: function() {
         // Show the save button
         this.ui.saveBtn.removeClass('btn-disabled');
-      },
-
-      getItemViewOptions: function(section, index) {
-        var type = section.get('type'),
-            options = {parent: this};
-
-        if (type === 'timeline') {
-          options.collection = this.model.get('events');
-        }
-
-        if (type === 'faqs') {
-          var faqCollection = new NS.FaqCollection(section.get('details'));
-          faqCollection.on('change add remove reorder', function() {
-            section.set('details', faqCollection.toJSON());
-          });
-          options.collection = faqCollection;
-        }
-
-        return options;
-      },
-      getItemView: function(section) {
-        var type = section.get('type'),
-            SectionView;
-
-        switch (type) {
-        case 'timeline':
-          SectionView = NS.TimelineSectionAdminView;
-          break;
-
-        case 'text':
-          SectionView = NS.TextSectionAdminView;
-          break;
-
-        case 'faqs':
-          SectionView = NS.FaqsSectionAdminView;
-          break;
-
-        default:
-          throw NS.projectException('Section type "' + type + '" unrecognized.', this.model.toJSON());
-        }
-
-        return SectionView;
       }
     })
   );
-
-  // Sections =================================================================
-  NS.SectionAdminMixin = {
-    id: function() {
-      return this.model.get('slug');
-    }
-  };
-
-  NS.EventAdminView = Backbone.Marionette.ItemView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
-      template: '#event-admin-tpl',
-      tagName: 'li',
-      className: 'event',
-      ui: {
-        editables: '[contenteditable]',
-        richEditables: '.event-description',
-        deleteBtn: '.delete-event-btn'
-      },
-      events: {
-        'blur @ui.editables': 'handleEditableBlur',
-        'click @ui.deleteBtn': 'handleDeleteClick'
-      },
-      initialize: function() {
-        this.$el.attr('data-id', this.model.cid);
-      },
-      handleDeleteClick: function(evt) {
-        evt.preventDefault();
-
-        if (window.confirm('Really delete?')) {
-          // I know this is weird, but calling destroy on the model will sync,
-          // and there's no url to support that since it's related to the project
-          // model. So we're just going to do the remove directly.
-          this.model.collection.remove(this.model);
-        }
-      }
-    })
-  );
-
-  NS.TimelineSectionAdminView = Backbone.Marionette.CompositeView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
-      template: '#timeline-section-admin-tpl',
-      tagName: 'section',
-      className: 'project-timeline',
-      id: NS.SectionAdminMixin.id,
-
-      itemView: NS.EventAdminView,
-      itemViewContainer: '.event-list',
-
-      ui: {
-        editables: '[contenteditable]:not(.event [contenteditable])',
-        addBtn: '.add-event-btn'
-      },
-      events: {
-        'click @ui.addBtn': 'handleAddClick',
-        'blur @ui.editables': 'handleEditableBlur'
-      },
-      collectionEvents: {
-        'change':  'dataChanged',
-        'add':     'dataChanged',
-        'remove':  'dataChanged',
-        'reorder': 'dataChanged'
-      },
-      onRender: function() {
-        var self = this;
-
-        this.$('.event-list').sortable({
-          handle: '.handle',
-          update: function(evt, ui) {
-            var id = $(ui.item).attr('data-id'),
-                model = self.collection.get(id),
-                index = $(ui.item).index();
-
-            // Silent because we don't want the list to rerender
-            self.collection.moveTo(model, index);
-          }
-        });
-      },
-      handleAddClick: function(evt) {
-        evt.preventDefault();
-
-        this.collection.add({});
-
-        this.$('.event-title.content-editable').focus();
-      },
-      dataChanged: function() {
-        this.options.parent.dataChanged();
-      }
-    })
-  );
-
-  NS.TextSectionAdminView = Backbone.Marionette.ItemView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
-      template: '#text-section-admin-tpl',
-      tagName: 'section',
-      className: 'project-text',
-      id: NS.SectionMixin.id,
-
-      ui: {
-        editables: '[contenteditable]',
-        richEditables: '.project-text-content'
-      },
-      events: {
-        'blur @ui.editables': 'handleEditableBlur'
-      }
-    })
-  );
-
-  NS.FaqAdminView = Backbone.Marionette.ItemView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
-      template: '#faq-admin-tpl',
-      tagName: 'div',
-      className: 'faq',
-
-      ui: {
-        editables: '[contenteditable]',
-        richEditables: '.faq-answer',
-        deleteBtn: '.delete-faq-btn'
-      },
-      events: {
-        'blur @ui.editables': 'handleEditableBlur',
-        'click @ui.deleteBtn': 'handleDeleteClick'
-      },
-      initialize: function() {
-        this.$el.attr('data-id', this.model.cid);
-      },
-      handleDeleteClick: function(evt) {
-        evt.preventDefault();
-
-        if (window.confirm('Really delete?')) {
-          // I know this is weird, but calling destroy on the model will sync,
-          // and there's no url to support that since it's related to the project
-          // model. So we're just going to do the remove directly.
-          this.model.collection.remove(this.model);
-        }
-      }
-    })
-  );
-
-  NS.FaqsSectionAdminView = Backbone.Marionette.CompositeView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
-      template: '#faqs-section-admin-tpl',
-      tagName: 'section',
-      className: 'project-faqs',
-      id: NS.SectionMixin.id,
-
-      itemView: NS.FaqAdminView,
-      itemViewContainer: '.faq-list',
-
-      ui: {
-        editables: '[contenteditable]:not(.faq [contenteditable])',
-        addBtn: '.add-faq-btn'
-      },
-      events: {
-        'click @ui.addBtn': 'handleAddClick',
-        'blur @ui.editables': 'handleEditableBlur'
-      },
-      collectionEvents: {
-        'change':  'dataChanged',
-        'add':     'dataChanged',
-        'remove':  'dataChanged',
-        'reorder': 'dataChanged'
-      },
-      onRender: function() {
-        var self = this;
-
-        this.$('.faq-list').sortable({
-          handle: '.handle',
-          update: function(evt, ui) {
-            var id = $(ui.item).attr('data-id'),
-                model = self.collection.get(id),
-                index = $(ui.item).index();
-
-            // Silent because we don't want the list to rerender
-            self.collection.moveTo(model, index);
-          }
-        });
-      },
-      handleAddClick: function(evt) {
-        evt.preventDefault();
-
-        this.collection.add({});
-
-        this.$('.event-title.content-editable').focus();
-      },
-      dataChanged: function() {
-        this.options.parent.dataChanged();
-      }
-    })
-  );
-
 }(Planbox, jQuery));
