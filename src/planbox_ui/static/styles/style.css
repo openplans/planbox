@@ -807,6 +807,13 @@ li.event:last-child:before {
   text-shadow: 0 0 3px rgba(0,0,0,0.25);
   position: relative;
 }
+.event-datetime-container {}
+.event-datetime {
+  position: relative;
+  float: left;
+  font-size: 1.5em;
+  margin-bottom: 0.25em;
+}
 .event-description {
   position: relative;
   margin-bottom: 1.25em;
