@@ -17,7 +17,7 @@ var Planbox = Planbox || {};
     }
   };
 
-  NS.EventAdminView = NS.ListItemAdminView.extend(
+  NS.EventAdminView = NS.SectionListItemAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#event-admin-tpl',
       tagName: 'li',
@@ -34,7 +34,7 @@ var Planbox = Planbox || {};
     })
   );
 
-  NS.TimelineSectionAdminView = Backbone.Marionette.CompositeView.extend(
+  NS.TimelineSectionAdminView = NS.SectionListAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#timeline-section-admin-tpl',
       tagName: 'section',
@@ -46,42 +46,13 @@ var Planbox = Planbox || {};
 
       ui: {
         editables: '[contenteditable]:not(.event [contenteditable])',
+        itemList: '.event-list',
+        newItemFocus: '.event-title:last',
         addBtn: '.add-event-btn'
       },
       events: {
         'click @ui.addBtn': 'handleAddClick',
         'blur @ui.editables': 'handleEditableBlur'
-      },
-      collectionEvents: {
-        'change':  'dataChanged',
-        'add':     'dataChanged',
-        'remove':  'dataChanged',
-        'reorder': 'dataChanged'
-      },
-      onRender: function() {
-        var self = this;
-
-        this.$('.event-list').sortable({
-          handle: '.handle',
-          update: function(evt, ui) {
-            var id = $(ui.item).attr('data-id'),
-                model = self.collection.get(id),
-                index = $(ui.item).index();
-
-            // Silent because we don't want the list to rerender
-            self.collection.moveTo(model, index);
-          }
-        });
-      },
-      handleAddClick: function(evt) {
-        evt.preventDefault();
-
-        this.collection.add({});
-
-        this.$('.event-title.content-editable').focus();
-      },
-      dataChanged: function() {
-        this.options.parent.dataChanged();
       }
     })
   );
@@ -103,7 +74,7 @@ var Planbox = Planbox || {};
     })
   );
 
-  NS.FaqAdminView = NS.ListItemAdminView.extend(
+  NS.FaqAdminView = NS.SectionListItemAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#faq-admin-tpl',
       tagName: 'div',
@@ -121,7 +92,7 @@ var Planbox = Planbox || {};
     })
   );
 
-  NS.FaqsSectionAdminView = Backbone.Marionette.CompositeView.extend(
+  NS.FaqsSectionAdminView = NS.SectionListAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#faqs-section-admin-tpl',
       tagName: 'section',
@@ -133,42 +104,13 @@ var Planbox = Planbox || {};
 
       ui: {
         editables: '[contenteditable]:not(.faq [contenteditable])',
+        itemList: '.faq-list',
+        newItemFocus: '.faq-question:last',
         addBtn: '.add-faq-btn'
       },
       events: {
         'click @ui.addBtn': 'handleAddClick',
         'blur @ui.editables': 'handleEditableBlur'
-      },
-      collectionEvents: {
-        'change':  'dataChanged',
-        'add':     'dataChanged',
-        'remove':  'dataChanged',
-        'reorder': 'dataChanged'
-      },
-      onRender: function() {
-        var self = this;
-
-        this.$('.faq-list').sortable({
-          handle: '.handle',
-          update: function(evt, ui) {
-            var id = $(ui.item).attr('data-id'),
-                model = self.collection.get(id),
-                index = $(ui.item).index();
-
-            // Silent because we don't want the list to rerender
-            self.collection.moveTo(model, index);
-          }
-        });
-      },
-      handleAddClick: function(evt) {
-        evt.preventDefault();
-
-        this.collection.add({});
-
-        this.$('.event-title.content-editable').focus();
-      },
-      dataChanged: function() {
-        this.options.parent.dataChanged();
       }
     })
   );

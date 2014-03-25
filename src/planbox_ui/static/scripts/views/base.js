@@ -39,7 +39,7 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.ListItemAdminView = Backbone.Marionette.ItemView.extend({
+  NS.SectionListItemAdminView = Backbone.Marionette.ItemView.extend({
     initialize: function() {
       // cid is not accessible in the toJSON output
       this.$el.attr('data-id', this.model.cid);
@@ -55,7 +55,40 @@ var Planbox = Planbox || {};
         this.model.collection.remove(this.model);
       }
     }
+  });
 
+  NS.SectionListAdminView = Backbone.Marionette.CompositeView.extend({
+    collectionEvents: {
+      'change':  'dataChanged',
+      'add':     'dataChanged',
+      'remove':  'dataChanged',
+      'reorder': 'dataChanged'
+    },
+    onRender: function() {
+      var self = this;
+
+      this.ui.itemList.sortable({
+        handle: '.handle',
+        update: function(evt, ui) {
+          var id = $(ui.item).attr('data-id'),
+              model = self.collection.get(id),
+              index = $(ui.item).index();
+
+          // Silent because we don't want the list to rerender
+          self.collection.moveTo(model, index);
+        }
+      });
+    },
+    handleAddClick: function(evt) {
+      evt.preventDefault();
+
+      this.collection.add({});
+
+      this.$(this.ui.newItemFocus.selector).focus();
+    },
+    dataChanged: function() {
+      this.options.parent.dataChanged();
+    }
   });
 
 }(Planbox, jQuery));
