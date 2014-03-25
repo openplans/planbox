@@ -42,7 +42,27 @@ var Planbox = Planbox || {};
 
   NS.SectionModel = Backbone.RelationalModel.extend({
     baseAttrs: ['details', 'id', 'created_at', 'updated_at', 'type', 'label', 'menu_label', 'slug'],
+
     set: function(key, val, options) {
+      /*
+      Assign a value on the model (as Backbone.Model.set). If the attribute
+      being set is not one of the top-level attributes listed in baseAttrs,
+      assume it belongs in the details document for the section.
+
+      Example:
+
+      > model = new NS.SectionModel();
+      > model.set('label', 'Hello!');
+      > model.toJSON();
+        {"label": "Hello!"}
+      > model.set('content', '<p>Hello, world.</p>');
+      > model.toJSON();
+        {
+          "label": "Hello!",
+          "details": {"content": "<p>Hello, world.</p>"}
+        }
+
+      */
       var attr, attrs, details;
 
       // Process the initial arguments.
