@@ -116,21 +116,8 @@ var Planbox = Planbox || {};
     }]
   });
 
-  NS.sectionModelFactory = function(attributes) {
-    if (!attributes) {
-      return new NS.SectionModel.apply(this, arguments);
-    }
-
-    switch (attributes.type) {
-    case 'faqs':
-      return new NS.FaqsSectionModel.apply(this, arguments);
-    default:
-      return new NS.SectionModel.apply(this, arguments);
-    }
-  };
-
   NS.SectionCollection = NS.ReorderableCollection.extend({
-    model: NS.sectionModelFactory
+    model: NS.SectionModel
   });
 
   NS.EventModel = Backbone.RelationalModel.extend({});

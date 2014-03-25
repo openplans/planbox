@@ -280,18 +280,26 @@ var Planbox = Planbox || {};
       this.ui.saveBtn.removeClass('btn-disabled');
     },
 
-    getItemViewOptions: function(item, index) {
-      var type = item.get('type'),
+    getItemViewOptions: function(section, index) {
+      var type = section.get('type'),
           options = {parent: this};
 
       if (type === 'timeline') {
         options.collection = this.model.get('events');
       }
 
+      if (type === 'faqs') {
+        var faqCollection = new NS.FaqCollection(section.get('details'));
+        faqCollection.on('change add remove reorder', function() {
+          section.set('details', faqCollection.toJSON());
+        });
+        options.collection = faqCollection;
+      }
+
       return options;
     },
-    getItemView: function(item) {
-      var type = item.get('type'),
+    getItemView: function(section) {
+      var type = section.get('type'),
           SectionView;
 
       switch (type) {
@@ -301,6 +309,10 @@ var Planbox = Planbox || {};
 
       case 'text':
         SectionView = NS.TextSectionAdminView;
+        break;
+
+      case 'faqs':
+        SectionView = NS.FaqsSectionAdminView;
         break;
 
       default:
@@ -399,7 +411,7 @@ var Planbox = Planbox || {};
     },
     dataChanged: function() {
       this.options.parent.dataChanged();
-    },
+    }
   });
 
   NS.TextSectionAdminView = Backbone.Marionette.ItemView.extend({
@@ -415,6 +427,91 @@ var Planbox = Planbox || {};
       'blur @ui.editables': 'handleEditableBlur'
     },
     handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur
+  });
+
+  NS.FaqAdminView = Backbone.Marionette.ItemView.extend({
+    template: '#faq-admin-tpl',
+    tagName: 'div',
+    className: 'faq',
+
+    ui: {
+      editables: '[contenteditable]',
+      deleteBtn: '.delete-faq-btn'
+    },
+    events: {
+      'blur @ui.editables': 'handleEditableBlur',
+      'click @ui.deleteBtn': 'handleDeleteClick'
+    },
+    initialize: function() {
+      this.$el.attr('data-id', this.model.cid);
+    },
+    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
+    handleDeleteClick: function(evt) {
+      evt.preventDefault();
+
+      if (window.confirm('Really delete?')) {
+        // I know this is weird, but calling destroy on the model will sync,
+        // and there's no url to support that since it's related to the project
+        // model. So we're just going to do the remove directly.
+        this.model.collection.remove(this.model);
+      }
+    },
+    onRender: function() {
+      this.$('.faq-answer').each(function(i, el) {
+        NS.ContentEditableMixin.initPen(el);
+      });
+    }
+  });
+  
+  NS.FaqsSectionAdminView = Backbone.Marionette.CompositeView.extend({
+    template: '#faqs-section-admin-tpl',
+    tagName: 'section',
+    className: 'project-faqs',
+    id: NS.SectionMixin.id,
+
+    itemView: NS.FaqAdminView,
+    itemViewContainer: '.faq-list',
+
+    ui: {
+      editables: '[contenteditable]:not(.faq [contenteditable])',
+      addBtn: '.add-faq-btn'
+    },
+    events: {
+      'click @ui.addBtn': 'handleAddClick',
+      'blur @ui.editables': 'handleEditableBlur'
+    },
+    collectionEvents: {
+      'change':  'dataChanged',
+      'add':     'dataChanged',
+      'remove':  'dataChanged',
+      'reorder': 'dataChanged'
+    },
+    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
+    onRender: function() {
+      var self = this;
+
+      this.$('.faq-list').sortable({
+        handle: '.handle',
+        update: function(evt, ui) {
+          var id = $(ui.item).attr('data-id'),
+              model = self.collection.get(id),
+              index = $(ui.item).index();
+
+          // Silent because we don't want the list to rerender
+          self.collection.moveTo(model, index);
+        }
+      });
+    },
+    handleAddClick: function(evt) {
+      evt.preventDefault();
+
+      this.collection.add({});
+
+      this.$('.event-title.content-editable').focus();
+    },
+    dataChanged: function() {
+      this.options.parent.dataChanged();
+    }
   });
 
 }(Planbox, jQuery));

@@ -34,8 +34,8 @@ var Planbox = Planbox || {};
     template: '#project-tpl',
     itemViewContainer: '#section-list',
 
-    getItemViewOptions: function(item, index) {
-      var type = item.get('type'),
+    getItemViewOptions: function(section, index) {
+      var type = section.get('type'),
           options = {parent: this};
 
       if (type === 'timeline') {
@@ -43,13 +43,14 @@ var Planbox = Planbox || {};
       }
 
       if (type === 'faqs') {
-        options.collection = item.get('details');
+        var faqCollection = new NS.FaqCollection(section.get('details'));
+        options.collection = faqCollection;
       }
 
       return options;
     },
-    getItemView: function(item) {
-      var type = item.get('type'),
+    getItemView: function(section) {
+      var type = section.get('type'),
           project = this.model,
           SectionView;
 
@@ -106,8 +107,19 @@ var Planbox = Planbox || {};
 
   NS.FaqView = Backbone.Marionette.ItemView.extend({
     template: '#faq-tpl',
-    tagName: 'li',
-    className: 'faq'
+    tagName: 'div',
+    className: 'faq',
+    ui: {
+      'question': 'dt'
+    },
+    events: {
+      'click @ui.question': 'handleQuestionClick'
+    },
+
+    handleQuestionClick: function(evt) {
+      evt.preventDefault();
+      this.ui.question.toggleClass('is-selected');
+    }
   });
   
   NS.FaqsSectionView = Backbone.Marionette.CompositeView.extend({
