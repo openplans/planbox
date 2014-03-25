@@ -23,12 +23,24 @@ var Planbox = Planbox || {};
       // value does not trigger a change event.
       this.model.set(attr, val);
     },
-    initPen: function(el) {
+    onRender: function() {
+      this.initRichEditables();
+    },
+    initRichEditable: function(el) {
       this.pen = new Pen({
         editor: el,
         list: ['insertorderedlist', 'insertunorderedlist', 'bold', 'italic', 'createlink'],
         stay: false
       });
+    },
+    initRichEditables: function() {
+      var self = this;
+      if (this.ui.richEditables) {
+        // Init the Pen editor for each richEditable element
+        this.ui.richEditables.each(function(i, el) {
+          self.initRichEditable(el);
+        });
+      }
     }
   };
 
@@ -117,11 +129,13 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.ProjectAdminView = Backbone.Marionette.CompositeView.extend({
+  NS.ProjectAdminView = Backbone.Marionette.CompositeView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
     template: '#project-admin-tpl',
     itemViewContainer: '#section-list',
     ui: {
       editables: '[contenteditable]:not(#section-list [contenteditable])',
+        richEditables: '.project-description',
       saveBtn: '.save-btn',
       statusSelector: '.status-selector',
       statusLabel: '.project-status',
@@ -170,17 +184,11 @@ var Planbox = Planbox || {};
         NS.Utils.pasteHtmlAtCaret(pasted.replace(/\n/g, '<br>'));
       });
     },
-    onRender: function() {
-      this.$('.project-description').each(function(i, el) {
-        NS.ContentEditableMixin.initPen(el);
-      });
-    },
     onSync: function() {
       // When the model is synced with the server, we're going to rerender
       // the view to match the data.
       this.render();
     },
-    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
     handleEditableNavMenuLinkBlur: function(evt) {
       var $target = $(evt.target),
           attr = $target.attr('data-attr') || 'menu_label',
@@ -321,7 +329,8 @@ var Planbox = Planbox || {};
 
       return SectionView;
     }
-  });
+    })
+  );
 
   // Sections =================================================================
   NS.SectionAdminMixin = {
@@ -330,12 +339,14 @@ var Planbox = Planbox || {};
     }
   };
 
-  NS.EventAdminView = Backbone.Marionette.ItemView.extend({
+  NS.EventAdminView = Backbone.Marionette.ItemView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
     template: '#event-admin-tpl',
     tagName: 'li',
     className: 'event',
     ui: {
       editables: '[contenteditable]',
+        richEditables: '.event-description',
       deleteBtn: '.delete-event-btn'
     },
     events: {
@@ -345,7 +356,6 @@ var Planbox = Planbox || {};
     initialize: function() {
       this.$el.attr('data-id', this.model.cid);
     },
-    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
     handleDeleteClick: function(evt) {
       evt.preventDefault();
 
@@ -355,15 +365,12 @@ var Planbox = Planbox || {};
         // model. So we're just going to do the remove directly.
         this.model.collection.remove(this.model);
       }
-    },
-    onRender: function() {
-      this.$('.event-description').each(function(i, el) {
-        NS.ContentEditableMixin.initPen(el);
-      });
     }
-  });
+    })
+  );
 
-  NS.TimelineSectionAdminView = Backbone.Marionette.CompositeView.extend({
+  NS.TimelineSectionAdminView = Backbone.Marionette.CompositeView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
     template: '#timeline-section-admin-tpl',
     tagName: 'section',
     className: 'project-timeline',
@@ -386,7 +393,6 @@ var Planbox = Planbox || {};
       'remove':  'dataChanged',
       'reorder': 'dataChanged'
     },
-    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
     onRender: function() {
       var self = this;
 
@@ -412,30 +418,35 @@ var Planbox = Planbox || {};
     dataChanged: function() {
       this.options.parent.dataChanged();
     }
-  });
+    })
+  );
 
-  NS.TextSectionAdminView = Backbone.Marionette.ItemView.extend({
+  NS.TextSectionAdminView = Backbone.Marionette.ItemView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
     template: '#text-section-admin-tpl',
     tagName: 'section',
     className: 'project-text',
     id: NS.SectionMixin.id,
 
     ui: {
-      editables: '[contenteditable]'
+        editables: '[contenteditable]',
+        richEditables: '.project-text-content'
     },
     events: {
       'blur @ui.editables': 'handleEditableBlur'
-    },
-    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur
-  });
+      }
+    })
+  );
 
-  NS.FaqAdminView = Backbone.Marionette.ItemView.extend({
+  NS.FaqAdminView = Backbone.Marionette.ItemView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
     template: '#faq-admin-tpl',
     tagName: 'div',
     className: 'faq',
 
     ui: {
       editables: '[contenteditable]',
+        richEditables: '.faq-answer',
       deleteBtn: '.delete-faq-btn'
     },
     events: {
@@ -445,7 +456,6 @@ var Planbox = Planbox || {};
     initialize: function() {
       this.$el.attr('data-id', this.model.cid);
     },
-    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
     handleDeleteClick: function(evt) {
       evt.preventDefault();
 
@@ -455,15 +465,12 @@ var Planbox = Planbox || {};
         // model. So we're just going to do the remove directly.
         this.model.collection.remove(this.model);
       }
-    },
-    onRender: function() {
-      this.$('.faq-answer').each(function(i, el) {
-        NS.ContentEditableMixin.initPen(el);
-      });
     }
-  });
+    })
+  );
   
-  NS.FaqsSectionAdminView = Backbone.Marionette.CompositeView.extend({
+  NS.FaqsSectionAdminView = Backbone.Marionette.CompositeView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
     template: '#faqs-section-admin-tpl',
     tagName: 'section',
     className: 'project-faqs',
@@ -486,7 +493,6 @@ var Planbox = Planbox || {};
       'remove':  'dataChanged',
       'reorder': 'dataChanged'
     },
-    handleEditableBlur: NS.ContentEditableMixin.handleEditableBlur,
     onRender: function() {
       var self = this;
 
@@ -512,6 +518,7 @@ var Planbox = Planbox || {};
     dataChanged: function() {
       this.options.parent.dataChanged();
     }
-  });
+    })
+  );
 
 }(Planbox, jQuery));
