@@ -832,17 +832,29 @@ li.event:last-child:before {
 }
 
 /* FAQs Section */
+.faq-list {
+  margin-bottom: 1.5em;
+}
 div.faq {
   position: relative;
 }
+.faq-question {
+  position: relative;
+  margin-bottom: 0.25em;
+}
+.faq-answer {
+  position: relative;
+  margin-bottom: 0.75em;
+}
 .faq-list dt {
-  color: #268099;
   font-weight: 800;
   font-size: 1.25em;
-  cursor: pointer;
-  margin: 0 0 0.5em;
 }
-.faq-list dd {
+.faq-list-collapsed dt {
+  color: #268099;
+  cursor: pointer;
+}
+.faq-list-collapsed dd {
   display: none;
 }
 .faq-list dt.is-selected {
@@ -850,8 +862,10 @@ div.faq {
 } 
 .faq-list dt.is-selected + dd {
   display: block;
-} 
-
+}
+.faq .faq {
+  border-top: 1px solid #fff;
+}
 
 
 /* =Colophon
