@@ -1,4 +1,4 @@
-/*globals Backbone */
+/*globals Backbone _ */
 
 var Planbox = Planbox || {};
 
@@ -105,15 +105,6 @@ var Planbox = Planbox || {};
       }
       return Backbone.RelationalModel.prototype.set.call(this, attrs, options);
     }
-  });
-
-  NS.FaqsSectionModel = NS.SectionModel.extend({
-    relations: [{
-      type: Backbone.HasMany,
-      key: 'details',
-      relatedModel: 'FaqModel',
-      collectionType: 'FaqCollection'
-    }]
   });
 
   NS.SectionCollection = NS.ReorderableCollection.extend({
