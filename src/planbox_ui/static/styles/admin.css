@@ -343,6 +343,10 @@ h6.content-editable {
 .project-contact-info:focus:before {
   content: 'Contact Info';
 }
+.project-timeline-label:hover:before,
+.project-timeline-label:focus:before {
+  content: 'Timeline Title';
+}
 .event-title:hover:before,
 .event-title:focus:before {
   content: 'Event Title';

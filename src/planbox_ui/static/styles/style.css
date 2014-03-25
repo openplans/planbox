@@ -761,19 +761,22 @@ a.login-link, .product-header .user-menu-link {
   background: #888;
   color: #fff;
 }
-.event-list {
-  border-left: 0.5em solid #eee;
-  padding: 2em 0 0.5em;
-  margin: -1em 0;
+.project-timeline-label {
+  position: relative;
+  z-index: 2;
+  background-color: #eee;
+  color: #666;
+  padding: 0.25em 0.5em;
+  margin: 0;
+  border-radius: 0.125em 0.125em 0.125em 0 ;
+  float: left;
+  font-size: 1.5em;
 }
-.event-list:before {
-  content: '';
-  background: #888;
-  width: 1em;
-  height: 3.25em;
-  position: absolute;
-  top: 0;
-  left: 0.75em;
+.event-list {
+  clear: both;
+  border-left: 0.5em solid #eee;
+  padding: 1.5em 0 0.5em;
+  margin: 0 0 -1em 0;
 }
 li.event {
   padding-left: 1.5em;
