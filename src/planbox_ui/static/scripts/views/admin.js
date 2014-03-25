@@ -17,7 +17,7 @@ var Planbox = Planbox || {};
     }
   };
 
-  NS.EventAdminView = Backbone.Marionette.ItemView.extend(
+  NS.EventAdminView = NS.ListItemAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#event-admin-tpl',
       tagName: 'li',
@@ -30,19 +30,6 @@ var Planbox = Planbox || {};
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'click @ui.deleteBtn': 'handleDeleteClick'
-      },
-      initialize: function() {
-        this.$el.attr('data-id', this.model.cid);
-      },
-      handleDeleteClick: function(evt) {
-        evt.preventDefault();
-
-        if (window.confirm('Really delete?')) {
-          // I know this is weird, but calling destroy on the model will sync,
-          // and there's no url to support that since it's related to the project
-          // model. So we're just going to do the remove directly.
-          this.model.collection.remove(this.model);
-        }
       }
     })
   );
@@ -116,7 +103,7 @@ var Planbox = Planbox || {};
     })
   );
 
-  NS.FaqAdminView = Backbone.Marionette.ItemView.extend(
+  NS.FaqAdminView = NS.ListItemAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#faq-admin-tpl',
       tagName: 'div',
@@ -130,19 +117,6 @@ var Planbox = Planbox || {};
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'click @ui.deleteBtn': 'handleDeleteClick'
-      },
-      initialize: function() {
-        this.$el.attr('data-id', this.model.cid);
-      },
-      handleDeleteClick: function(evt) {
-        evt.preventDefault();
-
-        if (window.confirm('Really delete?')) {
-          // I know this is weird, but calling destroy on the model will sync,
-          // and there's no url to support that since it's related to the project
-          // model. So we're just going to do the remove directly.
-          this.model.collection.remove(this.model);
-        }
       }
     })
   );
