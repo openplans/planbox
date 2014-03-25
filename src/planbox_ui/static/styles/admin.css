@@ -366,12 +366,17 @@ h6.content-editable {
   display: block;
 }
 
+/* FAQs Section */
+.faq-list dd {
+  display: block;
+} 
 
 /* =Events Controls
 -------------------------------------------------------------- */
 
 .ui-sortable {}
-.ui-sortable .event {
+.ui-sortable .event,
+.ui-sortable .faq {
   padding-right: 2.25em;
 }
 .handle {
@@ -389,7 +394,8 @@ h6.content-editable {
 .handle:hover {
 	color: #ccc;
 }
-.event:first-child.event:last-child .handle {
+.event:first-child.event:last-child .handle,
+.faq:first-child.faq:last-child .handle {
   display: none;
 }
 .handle:hover:before {
@@ -430,16 +436,19 @@ h6.content-editable {
   content: 'Drag to reorder';
 }
 
-li.event:last-child:before {
+li.event:last-child:before,
+div.faq:last-child:before {
   display: none;
 }
-.add-event-btn {
+.add-event-btn,
+.add-faq-btn {
   padding-left: 2.5em !important;
   position: relative;
   left: -1.25em;
   top: -0.5em;
 }
-.add-event-btn:before {
+.add-event-btn:before,
+.add-faq-btn:before {
   content: '';
   position: absolute;
   top: 0.25em;
@@ -451,7 +460,8 @@ li.event:last-child:before {
   border: 0.25em solid #eee;
 }
 
-.delete-event-btn {
+.delete-event-btn,
+.delete-faq-btn {
   position: relative;
   top: -1.5em;
 }

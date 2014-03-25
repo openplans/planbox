@@ -831,6 +831,28 @@ li.event:last-child:before {
   position: relative;
 }
 
+/* FAQs Section */
+div.faq {
+  position: relative;
+}
+.faq-list dt {
+  color: #268099;
+  font-weight: 800;
+  font-size: 1.25em;
+  cursor: pointer;
+  margin: 0 0 0.5em;
+}
+.faq-list dd {
+  display: none;
+}
+.faq-list dt.is-selected {
+  color: #555;
+} 
+.faq-list dt.is-selected + dd {
+  display: block;
+} 
+
+
 
 /* =Colophon
 -------------------------------------------------------------- */
