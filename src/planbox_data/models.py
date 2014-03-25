@@ -298,6 +298,7 @@ class Section (TimeStampedModel):
     SECTION_TYPE_CHOICES = (
         ('text', _('Text')),
         ('timeline', _('Timeline')),
+        ('faqs', _('FAQ'))
     )
 
     project = models.ForeignKey('Project', related_name='sections')

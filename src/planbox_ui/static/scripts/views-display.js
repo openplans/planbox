@@ -42,6 +42,10 @@ var Planbox = Planbox || {};
         options.collection = this.model.get('events');
       }
 
+      if (type === 'faqs') {
+        options.collection = item.get('details');
+      }
+
       return options;
     },
     getItemView: function(item) {
@@ -56,6 +60,10 @@ var Planbox = Planbox || {};
 
       case 'text':
         SectionView = NS.TextSectionView;
+        break;
+
+      case 'faqs':
+        SectionView = NS.FaqsSectionView;
         break;
 
       default:
@@ -94,6 +102,22 @@ var Planbox = Planbox || {};
     tagName: 'section',
     className: 'project-text',
     id: NS.SectionMixin.id
+  });
+
+  NS.FaqView = Backbone.Marionette.ItemView.extend({
+    template: '#faq-tpl',
+    tagName: 'li',
+    className: 'faq'
+  });
+  
+  NS.FaqsSectionView = Backbone.Marionette.CompositeView.extend({
+    template: '#faqs-section-tpl',
+    tagName: 'section',
+    className: 'project-faqs',
+    id: NS.SectionMixin.id,
+
+    itemView: NS.FaqView,
+    itemViewContainer: '.faq-list'
   });
 
 }(Planbox, jQuery));

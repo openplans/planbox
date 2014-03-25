@@ -7,6 +7,20 @@ var Planbox = Planbox || {};
 
   Backbone.Relational.store.addModelScope(NS);
 
+  NS.ReorderableCollection = Backbone.Collection.extend({
+    moveTo: function(model, index) {
+      var currentIndex = this.indexOf(model);
+
+      if (currentIndex === index) {
+        return;
+      }
+
+      this.remove(model, { silent: true});
+      this.add(model, {at: index, silent: true});
+      this.trigger('reorder');
+    }
+  });
+
   NS.ProjectModel = Backbone.RelationalModel.extend({
     relations: [{
       type: Backbone.HasMany,
