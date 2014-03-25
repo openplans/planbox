@@ -107,36 +107,42 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.SectionCollection = Backbone.Collection.extend({
-    model: NS.SectionModel,
-    moveTo: function(model, index) {
-      var currentIndex = this.indexOf(model);
+  NS.FaqsSectionModel = NS.SectionModel.extend({
+    relations: [{
+      type: Backbone.HasMany,
+      key: 'details',
+      relatedModel: 'FaqModel',
+      collectionType: 'FaqCollection'
+    }]
+  });
 
-      if (currentIndex === index) {
-        return;
-      }
-
-      this.remove(model, { silent: true});
-      this.add(model, {at: index, silent: true});
-      this.trigger('reorder');
+  NS.sectionModelFactory = function(attributes) {
+    if (!attributes) {
+      return new NS.SectionModel.apply(this, arguments);
     }
+
+    switch (attributes.type) {
+    case 'faqs':
+      return new NS.FaqsSectionModel.apply(this, arguments);
+    default:
+      return new NS.SectionModel.apply(this, arguments);
+    }
+  };
+
+  NS.SectionCollection = NS.ReorderableCollection.extend({
+    model: NS.sectionModelFactory
   });
 
   NS.EventModel = Backbone.RelationalModel.extend({});
 
-  NS.EventCollection = Backbone.Collection.extend({
-    model: NS.EventModel,
-    moveTo: function(model, index) {
-      var currentIndex = this.indexOf(model);
+  NS.EventCollection = NS.ReorderableCollection.extend({
+    model: NS.EventModel
+  });
 
-      if (currentIndex === index) {
-        return;
-      }
+  NS.FaqModel = Backbone.RelationalModel.extend({});
 
-      this.remove(model, { silent: true});
-      this.add(model, {at: index, silent: true});
-      this.trigger('reorder');
-    }
+  NS.FaqCollection = NS.ReorderableCollection.extend({
+    model: NS.FaqModel
   });
 
 }(Planbox));
