@@ -101,6 +101,9 @@ class TemplateEventSerializer (serializers.ModelSerializer):
 class TemplateSectionSerializer (serializers.ModelSerializer):
     # DRF makes the wrong default decision for the details field, chosing a
     # CharField. We want something more direct.
+    #
+    # TODO: This will have to clean the HTML on all the attributes, or
+    #       something, when applicable.
     details = serializers.WritableField()
 
     class Meta:
