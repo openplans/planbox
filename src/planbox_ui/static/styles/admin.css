@@ -370,6 +370,15 @@ h6.content-editable {
 .event-description:focus:before {
   content: 'Description';
 }
+.faq-question:hover:before,
+.faq-question:focus:before {
+  content: 'Question';
+}
+.faq-answer:hover:before,
+.faq-answer:focus:before {
+  content: 'Answer';
+}
+
 .content-editable:hover:before,
 .content-editable:focus:before,
 .content-editable:hover:after,
@@ -380,7 +389,15 @@ h6.content-editable {
 /* FAQs Section */
 .faq-list dd {
   display: block;
+  margin-left: 4.25em;
+  min-height: 1.5em;
 }
+.delete-faq-btn {
+  float: left;
+  position: relative;
+  top: 0.375em;
+}
+
 
 /* =Events Controls
 -------------------------------------------------------------- */
@@ -447,19 +464,16 @@ h6.content-editable {
   content: 'Drag to reorder';
 }
 
-li.event:last-child:before,
-div.faq:last-child:before {
+li.event:last-child:before {
   display: none;
 }
-.add-event-btn,
-.add-faq-btn {
+.add-event-btn {
   padding-left: 2.5em !important;
   position: relative;
   left: -1.25em;
   top: -0.5em;
 }
-.add-event-btn:before,
-.add-faq-btn:before {
+.add-event-btn:before {
   content: '';
   position: absolute;
   top: 0.25em;
@@ -471,8 +485,7 @@ div.faq:last-child:before {
   border: 0.25em solid #eee;
 }
 
-.delete-event-btn,
-.delete-faq-btn {
+.delete-event-btn {
   position: relative;
   top: -1.5em;
 }

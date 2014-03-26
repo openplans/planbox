@@ -53,6 +53,15 @@ var Planbox = Planbox || {};
       events: {
         'click @ui.addBtn': 'handleAddClick',
         'blur @ui.editables': 'handleEditableBlur'
+      },
+      onRender: function() {
+        // We need to do this since SectionListAdminView and ContentEditableMixin
+        // both override onRender.
+
+        // ContentEditableMixin
+        this.initRichEditables();
+        // SectionListAdminView
+        this.initSortableItemList();
       }
     })
   );
@@ -111,6 +120,15 @@ var Planbox = Planbox || {};
       events: {
         'click @ui.addBtn': 'handleAddClick',
         'blur @ui.editables': 'handleEditableBlur'
+      },
+      onRender: function() {
+        // We need to do this since SectionListAdminView and ContentEditableMixin
+        // both override onRender.
+
+        // ContentEditableMixin
+        this.initRichEditables();
+        // SectionListAdminView
+        this.initSortableItemList();
       }
     })
   );

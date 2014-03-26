@@ -27,9 +27,15 @@ var Planbox = Planbox || {};
         stay: false
       });
     },
+    canUsePen: function() {
+      // Pen requires access to the classList attribute on DOM elements (see
+      // https://developer.mozilla.org/en-US/docs/Web/API/Element.classList).
+      // Check whether this feature is available.
+      return ('classList' in document.createElement('a'));
+    },
     initRichEditables: function() {
       var self = this;
-      if (this.ui.richEditables) {
+      if (this.canUsePen() && this.ui.richEditables) {
         // Init the Pen editor for each richEditable element
         this.ui.richEditables.each(function(i, el) {
           self.initRichEditable(el);
