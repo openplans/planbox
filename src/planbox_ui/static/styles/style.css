@@ -992,20 +992,21 @@ div.faq {
     right: 0;
     left: 0;
     background-color: #268099;
+    background-color: rgba(90,90,90,0.8);
     z-index: 199;
   }
   .project-nav ul {
-    max-width: 36em;
+    max-width: 34em;
     margin: 0 auto;
   }
   .project-nav a {
     color: white;
-    background-color: #268099;
-    line-height: 2em;
+    background-color: transparent;
   }
   .project-nav a:hover {
-    background-color: #eee;
-    color: #666;
+    background-color: #fff;
+    color: #268099;
+    border-radius: 0.25em;
   }
 
   .product-section--the-problem {

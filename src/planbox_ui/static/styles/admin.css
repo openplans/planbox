@@ -184,14 +184,38 @@ h6.content-editable {
 
 /* File Uploads */
 .file-upload {
-  margin-top: 2em;
+  display: none;
+  margin: 2em 1em 1em;
   text-align: center;
   padding: 1em;
-  border: 1px dashed #444;
+  border: 2px dashed #eee;
+  border-radius: 0.5em;
+  opacity: 0.2;
 }
-
-.file-upload input[type="file"] {
-  float: right;
+.file-upload:hover,
+.file-upload.over {
+  opacity: 1;
+  background-color: rgba(255,255,255,0.1);
+}
+.file-upload p {
+  margin-bottom: 0.5em;
+}
+.file-upload-input-container {
+	position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.file-upload-input {
+  position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
 }
 
 /* Project Steps */
@@ -751,6 +775,9 @@ li.event:last-child:before {
     right: 100%;
     margin-right: -2em;
     white-space: nowrap;
+  }
+  .file-upload {
+    display: block;
   }
 }
 
