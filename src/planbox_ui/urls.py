@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import patterns, url
-from .views import index_view, project_view, new_project_view, signup_view, signin_view, password_reset_view, help_view, robots_view, sitemap_view, ro_project_view
+from .views import index_view, project_view, new_project_view, signup_view, signin_view, password_reset_view, help_view, robots_view, sitemap_view, ro_project_view, s3_success_view
 
 urlpatterns = patterns('',
 
@@ -21,5 +21,6 @@ urlpatterns = patterns('',
     url(r'^help/$', help_view, name='app-help'),
     url(r'^robots.txt$', robots_view, name='app-robots'),
     url(r'^sitemap.xml$', sitemap_view, name='app-sitemap'),
+    url(r'^upload-success$', s3_success_view, name='app-s3-upload-success'),
     url(r'^$', index_view, name='app-index'),
 )

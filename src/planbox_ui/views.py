@@ -1,17 +1,20 @@
 from __future__ import unicode_literals
 
+import json
 from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User as UserAuth
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import redirect_to_login
-from django.http import Http404
+from django.core.urlresolvers import reverse
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import resolve_url
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
-from django.views.generic import TemplateView, FormView
+from django.utils.timezone import now, timedelta
+from django.views.generic import TemplateView, FormView, View
 from planbox_data.models import Project, Profile
 from planbox_data.serializers import ProjectSerializer, UserSerializer, TemplateProjectSerializer
 from planbox_ui.decorators import ssl_required
@@ -73,6 +76,69 @@ class AppMixin (object):
             return self.request.get_full_path()
 
         return context
+
+
+class S3UploadMixin (object):
+    DEFAULT_S3_UPLOAD_ACL = 'public-read'
+    DEFAULT_S3_UPLOAD_EXP = timedelta(hours=1)
+
+    def get_s3_upload_path(self):
+        raise NotImplementedError('You must specify an S3 upload path')
+
+    def get_s3_upload_success_url(self):
+        url = reverse('app-s3-upload-success')
+        return self.request.build_absolute_uri(url)
+
+    def get_s3_upload_bucket(self):
+        return settings.S3_MEDIA_BUCKET
+
+    def get_s3_upload_acl(self):
+        return self.DEFAULT_S3_UPLOAD_ACL
+
+    def get_s3_upload_expiration(self):
+        return (now() + self.DEFAULT_S3_UPLOAD_EXP).isoformat()
+
+    def get_s3_upload_encoded_policy(self):
+        policy_document = json.dumps({
+            'expiration': self.get_s3_upload_expiration(),
+            'conditions': [
+                {'bucket': self.get_s3_upload_bucket()},
+                {'acl': self.get_s3_upload_acl()},
+                {'success_action_redirect': self.get_s3_upload_success_url()},
+                ['starts-with', '$key', self.get_s3_upload_path()]
+            ]
+        })
+
+        import base64
+        policy = base64.b64encode(policy_document)
+        return policy
+
+    def get_s3_upload_signature(self, encoded_policy, aws_secret_key):
+        """
+        Constructs a secure token to upload directly to S3, using our upload
+        policy and our secret access key. See the AWS documentation for more
+        detail: http://aws.amazon.com/articles/1434#signyours3postform.
+        """
+        import base64, hmac, hashlib
+        signature = base64.b64encode(hmac.new(aws_secret_key, encoded_policy, hashlib.sha1).digest())
+        return signature
+
+    def get_s3_upload_form_data(self):
+        encoded_policy = self.get_s3_upload_encoded_policy()
+        return {
+            'key': '/'.join([self.get_s3_upload_path(), '${filename}']),
+            'AWSAccessKeyId': settings.AWS_ACCESS_KEY,
+            'acl': self.get_s3_upload_acl(),
+            'success_action_redirect': self.get_s3_upload_success_url(),
+            'policy': encoded_policy,
+            'signature': self.get_s3_upload_signature(encoded_policy, settings.AWS_SECRET_KEY),
+        }
+
+    def get_context_data(self, **kwargs):
+        context = super(S3UploadMixin, self).get_context_data(**kwargs)
+        context['s3_upload_form_data'] = self.get_s3_upload_form_data()
+        return context
+
 
 class LoginRequired (object):
     def dispatch(self, request, *args, **kwargs):
@@ -160,18 +226,24 @@ class SigninView (AppMixin, LogoutRequired, SSLRequired, FormView):
 class BaseProjectView (AppMixin, TemplateView):
     template_name = 'project.html'
 
+    def get_project_serialized_data(self):
+        project_serializer = ProjectSerializer(self.project)
+        return project_serializer.data
+
+    def get_project_is_owner(self):
+        return self.project.owned_by(self.request.user) or self.request.user.is_superuser
+
     def get_context_data(self, **kwargs):
         context = super(BaseProjectView, self).get_context_data(**kwargs)
 
-        project_serializer = ProjectSerializer(self.project)
         context['project'] = self.project
-        context['project_data'] = project_serializer.data
-        context['is_owner'] = self.project.owned_by(self.request.user) or self.request.user.is_superuser
+        context['project_data'] = self.get_project_serialized_data()
+        context['is_owner'] = self.get_project_is_owner()
 
         return context
 
     def get(self, request, owner_name, slug):
-        self.project = get_object_or_404(Project.objects.select_related('theme'),
+        self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
                                          owner__slug=owner_name, slug=slug)
 
         if not (request.user.is_superuser or self.project.public or self.project.owned_by(self.request.user)):
@@ -180,13 +252,17 @@ class BaseProjectView (AppMixin, TemplateView):
         return super(BaseProjectView, self).get(request, pk=self.project.pk)
 
 
-class ProjectView (SSLRequired, BaseProjectView): pass
+class ProjectView (SSLRequired, S3UploadMixin, BaseProjectView):
+    def get_s3_upload_path(self):
+        owner_slug = self.kwargs['owner_name']
+        project_slug = self.kwargs['slug']
+        return '/'.join([owner_slug, project_slug])
 
 
 class ReadOnlyProjectView (ReadOnlyMixin, BaseProjectView): pass
 
 
-class NewProjectView (AppMixin, LoginRequired, SSLRequired, TemplateView):
+class NewProjectView (SSLRequired, LoginRequired, AppMixin, TemplateView):
     template_name = 'project.html'
 
     def get_template_project(self):
@@ -241,6 +317,12 @@ class NewProjectView (AppMixin, LoginRequired, SSLRequired, TemplateView):
         return super(NewProjectView, self).get(request, owner_name)
 
 
+# File Uploads
+class S3FileUploadSuccess (AppMixin, View):
+    def get(self, request):
+        return HttpResponse(status_code=204)
+
+
 # SEO
 class SiteMapView (AppMixin, TemplateView):
     template_name = 'sitemap.xml'
@@ -265,3 +347,4 @@ password_reset_view = PasswordResetView.as_view()
 help_view = HelpView.as_view()
 robots_view = TemplateView.as_view(template_name='robots.txt', content_type='text/plain')
 sitemap_view = SiteMapView.as_view(content_type='text/xml')
+s3_success_view = S3FileUploadSuccess.as_view()

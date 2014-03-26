@@ -93,7 +93,8 @@
         { 'value': 'active', 'label': 'Active'},
         { 'value': 'complete', 'label': 'Complete'}
       ],
-      contactEmail: {{ settings.PLANBOX_CONTACT_EMAIL|as_json }}
+      contactEmail: {{ settings.PLANBOX_CONTACT_EMAIL|as_json }},
+      s3UploadData: {{ s3_upload_form_data|as_json }}
     };
   </script>
 
