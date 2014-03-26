@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Handlebars Modernizr _ Pen */
+/*globals Backbone jQuery Handlebars Modernizr _ Pen FileAPI */
 
 var Planbox = Planbox || {};
 
@@ -216,7 +216,8 @@ var Planbox = Planbox || {};
         userMenuLink: '.user-menu-link',
         userMenu: '.user-menu',
         editableNavMenuLinks: '.project-nav a[contenteditable]',
-        publishBtn: '.btn-public'
+        publishBtn: '.btn-public',
+        fileInputs: 'input[type="file"]'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
@@ -225,7 +226,8 @@ var Planbox = Planbox || {};
         'change @ui.visibilityToggle': 'handleVisibilityChange',
         'click @ui.saveBtn': 'handleSave',
         'click @ui.userMenuLink': 'handleUserMenuClick',
-        'click @ui.publishBtn': 'handlePublish'
+        'click @ui.publishBtn': 'handlePublish',
+        'change @ui.fileInputs': 'handleFileInputChange'
       },
       modelEvents: {
         'change': 'dataChanged',
@@ -261,7 +263,45 @@ var Planbox = Planbox || {};
           // Convert line breaks into <br> and paste
           NS.Utils.pasteHtmlAtCaret(pasted.replace(/\n/g, '<br>'));
         });
+
       },
+      onRender: function() {
+        this.initRichEditables();
+        this.initDropZone(this.$('#cover-image-dnd').get(0));
+      },
+
+      // File Uploads
+      uploadImage: function(files, el) {
+        console.log('uploadImage', files, el);
+      },
+      handleFileInputChange: function(evt) {
+        evt.preventDefault();
+
+        // Get the files
+        var files = FileAPI.getFiles(evt),
+            el = $(evt.currentTarget).parent('.file-upload').get(0);
+        FileAPI.reset(evt.currentTarget);
+
+        this.uploadImage(files, el);
+      },
+      initDropZone: function(el) {
+        var self = this;
+        if( FileAPI.support.dnd ){
+          console.log('dropzone', this.$('#cover-image-dnd').get(0));
+          FileAPI.event.dnd(el,
+            // onFileHover
+            function (over){
+              console.log('onFileHover', arguments);
+            },
+            // onFileDrop
+            function(files) {
+              self.uploadImage(files, el);
+            }
+          );
+        }
+      },
+
+
       onSync: function() {
         // When the model is synced with the server, we're going to rerender
         // the view to match the data.
