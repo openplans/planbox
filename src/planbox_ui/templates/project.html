@@ -95,6 +95,7 @@
         { 'value': 'complete', 'label': 'Complete'}
       ],
       contactEmail: {{ settings.PLANBOX_CONTACT_EMAIL|as_json }},
+      s3UploadBucket: {{ settings.S3_MEDIA_BUCKET|as_json }},
       s3UploadData: {{ s3_upload_form_data|as_json }}
     };
   </script>
