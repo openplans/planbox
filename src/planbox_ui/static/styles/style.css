@@ -85,8 +85,8 @@ img {
 
 .has-cover-image {
   background-position: center center;
-  background-repeat: repeat;
-  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: cover !important;
 }
 
 /* Dingbats */
