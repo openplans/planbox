@@ -65,6 +65,9 @@ var Planbox = Planbox || {};
       'reorder': 'dataChanged'
     },
     onRender: function() {
+      this.initSortableItemList();
+    },
+    initSortableItemList: function() {
       var self = this;
 
       this.ui.itemList.sortable({
