@@ -122,9 +122,10 @@ class UserModelTests (PlanBoxTestCase):
 
         with assert_num_queries(1):
             profiles = Profile.objects.all()
-            profile_strings = [str(p) for p in profiles]
+            profile_strings = set([str(p) for p in profiles])
 
-        assert_equal(profile_strings, ['mjumbewu', 'atogle'])
+        # NOTE: The templates profile is created via a migration.
+        assert_equal(profile_strings, set(['mjumbewu', 'atogle', 'templates']))
 
 
 class EventModelTests (PlanBoxTestCase):
