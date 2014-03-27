@@ -4,17 +4,31 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
+
+def get_or_create(Model, **kwargs):
+    try:
+        obj = Model.objects.get(**kwargs)
+    except Model.DoesNotExist:
+        obj = Model.objects.create(**kwargs)
+    return obj
+
+
 class Migration(DataMigration):
 
     def forwards(self, orm):
         "Write your forwards methods here."
-        templates_profile, _ = orm.Profile.objects.get_or_create(
+        # We would use the managers' get_or_create, but South, SQLite3, and
+        # atomic don't play well together.
+        templates_profile = get_or_create(
+            orm.Profile,
             name='Project Templates',
             slug='templates')
-        default_template, _ = orm.Project.objects.get_or_create(
+        default_template = get_or_create(
+            orm.Project,
             owner=templates_profile,
             slug='default')
-        orm.Section.objects.get_or_create(
+        get_or_create(
+            orm.Section,
             project=default_template,
             index=0,
             type='timeline',
