@@ -943,19 +943,17 @@ div.faq {
 -------------------------------------------------------------- */
 
 @media only screen and (min-width: 22em) {
-  .site-header {
-    padding-bottom: 0.75em;
-  }
   .site-title {
     font-size: 2.5em;
   }
   .project-status {
-    position: absolute;
-    top: -1.5em;
-    right: 1em;
+/*    position: absolute;*/
+/*    top: -1.5em;*/
+/*    right: 1em;*/
     border-radius: 0.875em 0.125em;
     padding: 0.5em 1.25em;
-    margin: 0;
+    margin: 0 0 1em;
+    float: right;
   }
   .project-colophon {
     padding-top: 2em;
@@ -982,10 +980,18 @@ div.faq {
   }
   .site-header {
     padding-top: 5em;
-    padding-bottom: 1.5em;
   }
   .site-header.has-cover-image {
     padding-top: 13.625em;
+  }
+  .site-header .container {
+    background-color: #fff;
+    padding-bottom: 0;
+  }
+  .site-title {
+    line-height: 1.2;
+    color: #666;
+    text-shadow: none;
   }
   .project-nav {
     margin-top: 0;
@@ -1010,6 +1016,10 @@ div.faq {
     background-color: #fff;
     color: #268099;
     border-radius: 0.25em;
+  }
+  .project-details .container {
+    background-color: #fff;
+    margin-top: -1.5em;
   }
 
   .product-section--the-problem {
