@@ -1039,15 +1039,15 @@ div.faq {
     margin: 0 auto;
   }
 
-  /* TODO: find a better way of dealing with #links to the sections
-     http://nicolasgallagher.com/jump-links-and-viewport-positioning/demo/#method-D */
   section, footer {
-    border-top: 2.5em solid transparent;
-    border-bottom: 2.5em solid transparent;
-    margin-top: -2.5em;
-    -webkit-background-clip: padding-box;
-    -moz-background-clip: padding;
-    background-clip: padding-box;  }
+    padding-top: 1.5em;
+  }
+  .section-anchor {
+    display: block;
+    height: 0;
+    position: relative;
+    top: -4.25em;
+  }
 
   .project-status strong {
     padding: 0 0.25em;
