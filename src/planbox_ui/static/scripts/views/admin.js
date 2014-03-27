@@ -127,7 +127,7 @@ var Planbox = Planbox || {};
 
   // Admin ====================================================================
 
-  NS.showErrorModal = function(resp) {
+  NS.showProjectSaveErrorModal = function(resp) {
     var statusCode = resp.status,
         respJSON = resp.responseJSON,
         title, subtitle, description;
@@ -206,7 +206,7 @@ var Planbox = Planbox || {};
           self.ui.shareContent.removeClass('is-hidden');
         },
         error: function(model, resp) {
-          NS.showErrorModal(resp);
+          NS.showProjectSaveErrorModal(resp);
         }
       });
     }
@@ -440,7 +440,7 @@ var Planbox = Planbox || {};
             }
           },
           error: function(model, resp) {
-            NS.showErrorModal(resp);
+            NS.showProjectSaveErrorModal(resp);
           }
         });
       },
