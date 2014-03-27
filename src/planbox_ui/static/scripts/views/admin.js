@@ -11,12 +11,6 @@ var Planbox = Planbox || {};
   };
 
   // Sections =================================================================
-  NS.SectionAdminMixin = {
-    id: function() {
-      return this.model.get('slug');
-    }
-  };
-
   NS.EventAdminView = NS.SectionListItemAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#event-admin-tpl',
@@ -39,7 +33,6 @@ var Planbox = Planbox || {};
       template: '#timeline-section-admin-tpl',
       tagName: 'section',
       className: 'project-timeline',
-      id: NS.SectionAdminMixin.id,
 
       itemView: NS.EventAdminView,
       itemViewContainer: '.event-list',
@@ -71,7 +64,6 @@ var Planbox = Planbox || {};
       template: '#text-section-admin-tpl',
       tagName: 'section',
       className: 'project-text',
-      id: NS.SectionAdminMixin.id,
 
       ui: {
         editables: '[contenteditable]',
@@ -106,7 +98,6 @@ var Planbox = Planbox || {};
       template: '#faqs-section-admin-tpl',
       tagName: 'section',
       className: 'project-faqs',
-      id: NS.SectionAdminMixin.id,
 
       itemView: NS.FaqAdminView,
       itemViewContainer: '.faq-list',

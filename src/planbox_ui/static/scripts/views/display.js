@@ -11,12 +11,6 @@ var Planbox = Planbox || {};
   };
 
   // Sections =================================================================
-  NS.SectionMixin = {
-    id: function() {
-      return this.model.get('slug');
-    }
-  };
-
   NS.EventView = Backbone.Marionette.ItemView.extend({
     template: '#event-tpl',
     tagName: 'li',
@@ -27,7 +21,6 @@ var Planbox = Planbox || {};
     template: '#timeline-section-tpl',
     tagName: 'section',
     className: 'project-timeline',
-    id: NS.SectionMixin.id,
 
     itemView: NS.EventView,
     itemViewContainer: '.event-list'
@@ -36,8 +29,7 @@ var Planbox = Planbox || {};
   NS.TextSectionView = Backbone.Marionette.ItemView.extend({
     template: '#text-section-tpl',
     tagName: 'section',
-    className: 'project-text',
-    id: NS.SectionMixin.id
+    className: 'project-text'
   });
 
   NS.FaqView = Backbone.Marionette.ItemView.extend({
@@ -61,7 +53,6 @@ var Planbox = Planbox || {};
     template: '#faqs-section-tpl',
     tagName: 'section',
     className: 'project-faqs',
-    id: NS.SectionMixin.id,
 
     itemView: NS.FaqView,
     itemViewContainer: '.faq-list'
