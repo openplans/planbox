@@ -325,7 +325,7 @@ var Planbox = Planbox || {};
             bucketUrl = 'https://' + NS.Data.s3UploadBucket + '.s3.amazonaws.com/',
             data = _.clone(NS.Data.s3UploadData),
             file = files[0],
-            imageUrl = bucketUrl + data.key.replace('${filename}', file.name);
+            imageUrl = window.encodeURI(bucketUrl + data.key.replace('${filename}', file.name));
 
         // Make sure this is an image before continuing
         if (file.type.indexOf('image/') !== 0) {
