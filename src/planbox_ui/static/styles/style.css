@@ -83,7 +83,7 @@ img {
   opacity: 0.625;
 }
 
-.has-cover-image {
+.has-image {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover !important;
@@ -859,7 +859,7 @@ div.faq {
 }
 .faq-list dt.is-selected {
   color: #555;
-} 
+}
 .faq-list dt.is-selected + dd {
   display: block;
 }
@@ -981,7 +981,7 @@ div.faq {
   .site-header {
     padding-top: 5em;
   }
-  .site-header.has-cover-image {
+  .site-header.has-image {
     padding-top: 13.625em;
   }
   .site-header .container {

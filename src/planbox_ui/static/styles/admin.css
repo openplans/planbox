@@ -197,7 +197,7 @@ h6.content-editable {
 }
 .file-upload:hover,
 .over .file-upload,
-.file-uploading .file-upload {
+.file-uploading > .file-upload {
   opacity: 1;
   background-color: #888;
   background-color: rgba(90,90,90,0.5);
@@ -223,7 +223,7 @@ h6.content-editable {
   filter: alpha(opacity=0);
 }
 .uploading-message,
-.file-uploading .drop-instructions {
+.file-uploading > .file-upload > .drop-instructions {
   display: none;
 }
 @keyframes uploading {
@@ -236,7 +236,7 @@ h6.content-editable {
 	 50% { color: #fff; }
 	100% { color: #888; }
 }
-.file-uploading .uploading-message {
+.file-uploading > .file-upload > .uploading-message {
   display: block;
   position: relative;
   top: 1.25em;
@@ -245,7 +245,7 @@ h6.content-editable {
   -webkit-animation: uploading 1.5s infinite ease-in-out;
           animation: uploading 1.5s infinite ease-in-out;
 }
-.file-uploading .file-upload-input-container {
+.file-uploading > .file-upload > .file-upload-input-container {
   visibility: hidden;
 }
 .remove-img-btn {
@@ -254,7 +254,7 @@ h6.content-editable {
   float: right;
   margin-right: 2em;
 }
-.has-cover-image .remove-img-btn {
+.has-image > .remove-img-btn {
   visibility: visible;
 }
 
@@ -787,7 +787,7 @@ li.event:last-child:before {
     padding-bottom: 2em;
   }
   .site-header,
-  .site-header.has-cover-image {
+  .site-header.has-image {
     padding-top: 6em;
   }
   .admin-bar {

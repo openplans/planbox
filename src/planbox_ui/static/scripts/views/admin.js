@@ -231,9 +231,9 @@ var Planbox = Planbox || {};
         editableNavMenuLinks: '.project-nav a[contenteditable]',
         publishBtn: '.btn-public',
         fileInputs: 'input[type="file"]',
-        coverImg: '.site-header',
-        coverImgDropZone: '#cover-image-dnd',
-        removeCoverImgLink: '.remove-img-btn'
+        imageHolders: '.image-holder',
+        imageDropZones: '.image-dnd',
+        removeImageLinks: '.remove-img-btn'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
@@ -244,7 +244,7 @@ var Planbox = Planbox || {};
         'click @ui.userMenuLink': 'handleUserMenuClick',
         'click @ui.publishBtn': 'handlePublish',
         'change @ui.fileInputs': 'handleFileInputChange',
-        'click @ui.removeCoverImgLink': 'handleRemoveImage'
+        'click @ui.removeImageLinks': 'handleRemoveImage'
       },
       modelEvents: {
         'change': 'dataChanged',
@@ -284,7 +284,7 @@ var Planbox = Planbox || {};
       },
       onRender: function() {
         this.initRichEditables();
-        this.initDropZone(this.ui.coverImgDropZone.get(0));
+        this.initDropZones();
       },
 
       // Prefetches an image file for a url to speed up load time
@@ -304,7 +304,7 @@ var Planbox = Planbox || {};
             url = img.toDataURL(file.type); //FileAPI.toDataURL(img);
 
             // TODO: don't hardcode this.
-            $el.addClass('has-cover-image');
+            $el.addClass('has-image');
             $el.css('background-image', 'url(' + url + ')');
           }
         });
@@ -312,11 +312,15 @@ var Planbox = Planbox || {};
 
       handleRemoveImage: function(evt) {
         evt.preventDefault();
+        var $target = $(evt.currentTarget),
+            $imgContainer = $target.closest('.image-holder'),
+            confirmMsg = $target.attr('data-confirm-msg'),
+            attrName = $imgContainer.attr('data-attr');
 
-        if (window.confirm('Are you sure you want to remove your cover image?')) {
-          this.ui.coverImg.css('background-image', 'none');
-          this.ui.coverImg.removeClass('has-cover-image');
-          this.model.set('cover_img_url', '');
+        if (window.confirm(confirmMsg)) {
+          $imgContainer.css('background-image', 'none');
+          $imgContainer.removeClass('has-image');
+          this.model.set(attrName, '');
         }
       },
 
@@ -325,6 +329,7 @@ var Planbox = Planbox || {};
             bucketUrl = 'https://' + NS.Data.s3UploadBucket + '.s3.amazonaws.com/',
             data = _.clone(NS.Data.s3UploadData),
             file = files[0],
+            attrName = $el.attr('data-attr'),
             imageUrl = window.encodeURI(bucketUrl + data.key.replace('${filename}', file.name));
 
         // Make sure this is an image before continuing
@@ -369,7 +374,7 @@ var Planbox = Planbox || {};
             self.prefetchImage(imageUrl);
 
             // On success, apply the attribute to the project.
-            self.model.set('cover_img_url', imageUrl);
+            self.model.set(attrName, imageUrl);
           }
         });
 
@@ -377,25 +382,35 @@ var Planbox = Planbox || {};
       },
       handleFileInputChange: function(evt) {
         evt.preventDefault();
+        var $imgContainer = $(evt.currentTarget).closest('.image-holder'),
+            files;
 
         // Get the files
-        var files = FileAPI.getFiles(evt);
+        files = FileAPI.getFiles(evt);
         FileAPI.reset(evt.currentTarget);
 
-        this.uploadImage(files, this.ui.coverImg);
+        this.uploadImage(files, $imgContainer);
+      },
+      initDropZones: function() {
+        var self = this;
+        self.ui.imageDropZones.each(function(i, imageDropZone) {
+          self.initDropZone(imageDropZone);
+        });
       },
       initDropZone: function(el) {
-        var self = this;
+        var self = this,
+            $imgContainer = $(el).closest('.image-holder');
+
         if( FileAPI.support.dnd ){
           FileAPI.event.dnd(el,
             // onFileHover
             function (over){
-              self.ui.coverImg.toggleClass('over', over);
+              $imgContainer.toggleClass('over', over);
             },
             // onFileDrop
             function(files) {
-              self.ui.coverImg.removeClass('over');
-              self.uploadImage(files, self.ui.coverImg);
+              $imgContainer.removeClass('over');
+              self.uploadImage(files, $imgContainer);
             }
           );
         }
