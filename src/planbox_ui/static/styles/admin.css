@@ -193,6 +193,7 @@ h6.content-editable {
   border: 2px dashed #eee;
   border-radius: 0.5em;
   opacity: 0.2;
+  position: relative;
 }
 .file-upload:hover,
 .file-upload.over,
@@ -245,6 +246,15 @@ h6.content-editable {
 }
 .file-uploading .file-upload-input-container {
   visibility: hidden;
+}
+.remove-img-btn {
+  display: none;
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+}
+.has-cover-image .remove-img-btn {
+  display: block;
 }
 
 /* Project Steps */
