@@ -786,7 +786,8 @@ li.event:last-child:before {
     padding-top: 3em;
     padding-bottom: 2em;
   }
-  .site-header {
+  .site-header,
+  .site-header.has-cover-image {
     padding-top: 6em;
   }
   .admin-bar {

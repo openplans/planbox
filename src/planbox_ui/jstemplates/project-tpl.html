@@ -1,4 +1,8 @@
-<header id="home" class="site-header has-cover-image">
+{{#if cover_img_url}}
+<header id="home" class="site-header has-cover-image" style="background-image: url({{ cover_img_url }})">
+{{else }}
+<header id="home" class="site-header">
+{{/if}}
   <div class="container">
     <h1 class="site-title">{{{ title }}}</h1>
     {{#gte sections.length 2}}

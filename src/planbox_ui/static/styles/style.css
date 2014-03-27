@@ -984,6 +984,9 @@ div.faq {
     padding-top: 5em;
     padding-bottom: 1.5em;
   }
+  .site-header.has-cover-image {
+    padding-top: 13.625em;
+  }
   .project-nav {
     margin-top: 0;
     padding-top: 0.5em;
