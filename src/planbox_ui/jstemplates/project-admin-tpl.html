@@ -18,17 +18,17 @@
   {{else }}
   <header id="home" class="site-header">
   {{/if}}
-  <div id="cover-image-dnd" class="file-upload">
+  <div id="cover-image-dnd" class="file-upload hide-for-print">
     <p class="drop-instructions">Drop cover photo here or&hellip;</p>
     <p class="uploading-message">Uploading&hellip;</p>
     <span class="file-upload-input-container btn btn-small"><span>Choose File</span><input name="cover-image" class="file-upload-input" type="file" accept="image/*" /></span>
   </div>
-  <p class="clearfix"><button class="remove-img-btn btn btn-mini btn-secondary"><span class="delete-icon">&#10005;</span> Remove Cover Photo</button></p>
+  <p class="clearfix hide-for-print"><button class="remove-img-btn btn btn-mini btn-secondary"><span class="delete-icon">&#10005;</span> Remove Cover Photo</button></p>
   <div class="container">
     {{^if title }}<h2 class="step step-title"><span class="step-arrow-left-down"></span>Let's give your project a title.</h2>{{/if}}
     <h1 class="site-title content-editable" data-attr="title" contenteditable>{{{ title }}}</h1>
     {{#gte sections.length 2}}
-    <nav class="project-nav clearfix">
+    <nav class="project-nav clearfix hide-for-print">
       <ul class="unstyled-list">
         <li><a href="#home">Home</a></li>
         {{#each sections}}

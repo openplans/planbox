@@ -11,7 +11,9 @@
 .save-btn,
 .status-selector,
 .software-help-link,
-.event-list + br {
+.event-list + br,
+.project-faqs,
+.hide-for-print {
   display: none;
 }
 
