@@ -254,7 +254,7 @@ h6.content-editable {
   float: right;
   margin-right: 2em;
 }
-.has-image > .remove-img-btn {
+.has-image > p > .remove-img-btn {
   visibility: visible;
 }
 
