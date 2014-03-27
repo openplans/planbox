@@ -127,6 +127,16 @@ var Planbox = Planbox || {};
 
   // Admin ====================================================================
 
+  NS.showErrorModal = function(title, subtitle, description) {
+    NS.app.overlayRegion.show(new NS.ModalView({
+      model: new Backbone.Model({
+        title: title,
+        subtitle: subtitle,
+        description: description
+      })
+    }));
+  };
+
   NS.showProjectSaveErrorModal = function(resp) {
     var statusCode = resp.status,
         respJSON = resp.responseJSON,
@@ -165,13 +175,7 @@ var Planbox = Planbox || {};
       description = Handlebars.templates['message-ajax-unknown-error-description']({});
     }
 
-    NS.app.overlayRegion.show(new NS.ModalView({
-      model: new Backbone.Model({
-        title: title,
-        subtitle: subtitle,
-        description: description
-      })
-    }));
+    NS.showErrorModal(title, subtitle, description);
   };
 
   NS.ProjectAdminModalView = Backbone.Marionette.ItemView.extend({
@@ -309,6 +313,18 @@ var Planbox = Planbox || {};
             file = files[0],
             imageUrl = bucketUrl + data.key.replace('${filename}', file.name);
 
+        // Make sure this is an image before continuing
+        if (file.type.indexOf('image/') !== 0) {
+          NS.showErrorModal(
+            'Unable to save that file.',
+            'This file doesn\'t seem to be an image file.',
+            'Make sure the file you\'re trying to upload is a valid image file ' +
+            'and try again.'
+          );
+
+          return;
+        }
+
         // Apply the uploading class.
         $el.addClass('file-uploading');
 
@@ -320,14 +336,26 @@ var Planbox = Planbox || {};
           files: {file: file},
           cache: true,
           complete: function (err, xhr){
+            // Remove the uploading class.
+            $el.removeClass('file-uploading');
+
+            if (err) {
+              NS.showErrorModal(
+                'Unable to save that file.',
+                'We were unable to save your image.',
+                'Sorry about that. Please save your changes, reload the page, ' +
+                'and try again. Please email us at ' + NS.Data.contactEmail + ' ' +
+                'if you have any more trouble.'
+              );
+
+              return;
+            }
+
             // Fetch the image to make loading faster
             self.prefetchImage(imageUrl);
 
             // On success, apply the attribute to the project.
             self.model.set('cover_img_url', imageUrl);
-
-            // Remove the uploading class.
-            $el.removeClass('file-uploading');
           }
         });
 
