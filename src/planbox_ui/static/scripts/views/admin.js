@@ -290,7 +290,8 @@ var Planbox = Planbox || {};
 
       // File Uploads
       uploadImage: function(files, el) {
-        var bucketUrl = 'https://' + NS.Data.s3UploadBucket + '.s3.amazonaws.com/',
+        var self = this,
+            bucketUrl = 'https://' + NS.Data.s3UploadBucket + '.s3.amazonaws.com/',
             $el = $(el),
             data = _.clone(NS.Data.s3UploadData),
             file = files[0],
@@ -307,18 +308,26 @@ var Planbox = Planbox || {};
           files: {file: file},
           cache: true,
           progress: function (evt){ console.log('progress: ', arguments); },
-          complete: function (err, xhr){ console.log('complete: ', arguments, imageUrl); }
+          complete: function (err, xhr){
+            // On success, apply the attribute to the project.
+
+            // Remove the uploading class.
+            $el.removeClass('uploading');
+            console.log('complete: ', arguments, imageUrl);
+          }
         });
 
         // Display the image preview.
         FileAPI.Image(file).get(function(err, img) {
           console.log('preview:', arguments);
-          url = img.toDataUrl(file.type); //FileAPI.toDataUrl(img);
-          // $el.css('background-image', 'url(' + url + ')');//append(img);
+          var url;
+          if (!err) {
+            url = img.toDataURL(file.type); //FileAPI.toDataURL(img);
+            $el.css('background-image', 'url(' + url + ')');
+          }
         });
 
-        // On success, apply the attribute to the project.
-        // Remove the uploading class.
+
         console.log('uploadImage', files, el);
       },
       handleFileInputChange: function(evt) {
@@ -326,23 +335,27 @@ var Planbox = Planbox || {};
 
         // Get the files
         var files = FileAPI.getFiles(evt),
-            el = $(evt.currentTarget).parent('.file-upload').get(0);
+            bgEl = this.$('.site-header').get(0);
         FileAPI.reset(evt.currentTarget);
 
-        this.uploadImage(files, el);
+        this.uploadImage(files, bgEl);
       },
       initDropZone: function(el) {
-        var self = this;
+        var self = this,
+            $el = $(el),
+            bgEl = this.$('.site-header');
         if( FileAPI.support.dnd ){
           console.log('dropzone', this.$('#cover-image-dnd').get(0));
           FileAPI.event.dnd(el,
             // onFileHover
             function (over){
               console.log('onFileHover', arguments);
+              $el.toggleClass('over', over);
             },
             // onFileDrop
             function(files) {
-              self.uploadImage(files, el);
+              $el.removeClass('over');
+              self.uploadImage(files, bgEl);
             }
           );
         }
