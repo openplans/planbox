@@ -111,7 +111,8 @@ class S3UploadMixin (object):
             ]
         })
 
-        policy = base64.b64encode(policy_document)
+        policy_bytes = policy_document.encode('utf-8')
+        policy = base64.b64encode(policy_bytes)
         return policy
 
     def get_s3_upload_signature(self, encoded_policy, aws_secret_key):
@@ -120,7 +121,8 @@ class S3UploadMixin (object):
         policy and our secret access key. See the AWS documentation for more
         detail: http://aws.amazon.com/articles/1434#signyours3postform.
         """
-        signature = base64.b64encode(hmac.new(aws_secret_key, encoded_policy, hashlib.sha1).digest())
+        key_bytes = aws_secret_key.encode('utf-8')
+        signature = base64.b64encode(hmac.new(key_bytes, encoded_policy, hashlib.sha1).digest())
         return signature
 
     def get_s3_upload_form_data(self):
