@@ -291,11 +291,13 @@ var Planbox = Planbox || {};
       // File Uploads
       uploadImage: function(files, el) {
         var bucketUrl = 'https://' + NS.Data.s3UploadBucket + '.s3.amazonaws.com/',
+            $el = $(el),
             data = _.clone(NS.Data.s3UploadData),
             file = files[0],
             imageUrl = bucketUrl + data.key.replace('${filename}', file.name);
 
         // Apply the uploading class.
+        $el.addClass('uploading');
 
         // Start the upload.
         data['Content-Type'] = file.type;
@@ -309,6 +311,12 @@ var Planbox = Planbox || {};
         });
 
         // Display the image preview.
+        FileAPI.Image(file).get(function(err, img) {
+          console.log('preview:', arguments);
+          url = img.toDataUrl(file.type); //FileAPI.toDataUrl(img);
+          // $el.css('background-image', 'url(' + url + ')');//append(img);
+        });
+
         // On success, apply the attribute to the project.
         // Remove the uploading class.
         console.log('uploadImage', files, el);
