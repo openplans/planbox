@@ -195,7 +195,8 @@ h6.content-editable {
   opacity: 0.2;
 }
 .file-upload:hover,
-.file-upload.over {
+.file-upload.over,
+.file-uploading {
   opacity: 1;
   background-color: rgba(255,255,255,0.1);
 }
@@ -218,6 +219,32 @@ h6.content-editable {
 	cursor: pointer;
   opacity: 0;
   filter: alpha(opacity=0);
+}
+.uploading-message,
+.file-uploading .drop-instructions {
+  display: none;
+}
+@keyframes uploading {
+    0% { color: #888; }
+   50% { color: #fff; }
+  100% { color: #888; }
+}
+@-webkit-keyframes uploading {
+    0% { color: #888; }
+	 50% { color: #fff; }
+	100% { color: #888; }
+}
+.file-uploading .uploading-message {
+  display: block;
+  position: relative;
+  top: 1.25em;
+  text-transform: uppercase;
+  font-weight: 800;
+  -webkit-animation: uploading 1.5s infinite ease-in-out;
+          animation: uploading 1.5s infinite ease-in-out;
+}
+.file-uploading .file-upload-input-container {
+  visibility: hidden;
 }
 
 /* Project Steps */
