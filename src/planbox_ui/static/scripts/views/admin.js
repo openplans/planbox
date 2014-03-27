@@ -279,6 +279,8 @@ var Planbox = Planbox || {};
         this.initDropZone(this.$('#cover-image-dnd').get(0));
       },
 
+      // Prefetches an image file for a url to speed up load time
+      // Takes an optional callback.
       prefetchImage: function(url, callback) {
         var img = new Image();   // Create new img element
         img.addEventListener('load', callback, false);
@@ -286,10 +288,23 @@ var Planbox = Planbox || {};
       },
 
       // File Uploads
-      uploadImage: function(files, el) {
+      previewImage: function(file, $el) {
+        // Display the image preview.
+        FileAPI.Image(file).get(function(err, img) {
+          var url;
+          if (!err) {
+            url = img.toDataURL(file.type); //FileAPI.toDataURL(img);
+
+            // TODO: don't hardcode this.
+            $el.addClass('has-cover-image');
+            $el.css('background-image', 'url(' + url + ')');
+          }
+        });
+      },
+
+      uploadImage: function(files, $el) {
         var self = this,
             bucketUrl = 'https://' + NS.Data.s3UploadBucket + '.s3.amazonaws.com/',
-            $el = $(el),
             data = _.clone(NS.Data.s3UploadData),
             file = files[0],
             imageUrl = bucketUrl + data.key.replace('${filename}', file.name);
@@ -304,7 +319,6 @@ var Planbox = Planbox || {};
           data: data,
           files: {file: file},
           cache: true,
-          progress: function (evt){ console.log('progress: ', arguments); },
           complete: function (err, xhr){
             // Fetch the image to make loading faster
             self.prefetchImage(imageUrl);
@@ -314,50 +328,34 @@ var Planbox = Planbox || {};
 
             // Remove the uploading class.
             $el.removeClass('file-uploading');
-
-            console.log('complete: ', arguments, imageUrl);
           }
         });
 
-        // Display the image preview.
-        FileAPI.Image(file).get(function(err, img) {
-          console.log('preview:', arguments);
-          var url;
-          if (!err) {
-            url = img.toDataURL(file.type); //FileAPI.toDataURL(img);
-            $el.addClass('has-cover-image');
-            $el.css('background-image', 'url(' + url + ')');
-          }
-        });
-
-        console.log('uploadImage', files, el);
+        this.previewImage(file, $el);
       },
       handleFileInputChange: function(evt) {
         evt.preventDefault();
 
         // Get the files
         var files = FileAPI.getFiles(evt),
-            bgEl = this.$('.site-header').get(0);
+            $bgEl = this.$('.site-header');
         FileAPI.reset(evt.currentTarget);
 
-        this.uploadImage(files, bgEl);
+        this.uploadImage(files, $bgEl);
       },
       initDropZone: function(el) {
         var self = this,
-            $el = $(el),
-            bgEl = this.$('.site-header');
+            $bgEl = this.$('.site-header');
         if( FileAPI.support.dnd ){
-          console.log('dropzone', this.$('#cover-image-dnd').get(0));
           FileAPI.event.dnd(el,
             // onFileHover
             function (over){
-              console.log('onFileHover', arguments);
-              $el.toggleClass('over', over);
+              $bgEl.toggleClass('over', over);
             },
             // onFileDrop
             function(files) {
-              $el.removeClass('over');
-              self.uploadImage(files, bgEl);
+              $bgEl.removeClass('over');
+              self.uploadImage(files, $bgEl);
             }
           );
         }
