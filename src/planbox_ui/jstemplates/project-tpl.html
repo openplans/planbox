@@ -1,9 +1,17 @@
 {{#if cover_img_url}}
-<header id="home" class="site-header has-cover-image" style="background-image: url({{ cover_img_url }})">
+<header id="home" class="site-header has-image" style="background-image: url({{ cover_img_url }})">
 {{else }}
 <header id="home" class="site-header">
 {{/if}}
   <div class="container">
+
+    {{#if logo_img_url}}
+    <div class="logo has-image" style="background-image: url({{ logo_img_url }});">
+    {{else}}
+    <div class="logo">
+    {{/if}}
+    </div>
+
     <h1 class="site-title">{{{ title }}}</h1>
     {{#gte sections.length 2}}
     <nav class="project-nav clearfix">
