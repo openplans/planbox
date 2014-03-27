@@ -250,12 +250,12 @@ h6.content-editable {
 }
 .remove-img-btn {
   display: none;
-  position: absolute;
-  bottom: 1em;
-  right: 1em;
+  visibility: hidden;
+  float: right;
+  margin-right: 2em;
 }
 .has-cover-image .remove-img-btn {
-  display: block;
+  visibility: visible;
 }
 
 /* Project Steps */
@@ -816,7 +816,8 @@ li.event:last-child:before {
     margin-right: -2em;
     white-space: nowrap;
   }
-  .file-upload {
+  .file-upload,
+  .remove-img-btn {
     display: block;
   }
 }
