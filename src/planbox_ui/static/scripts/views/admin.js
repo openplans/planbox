@@ -289,7 +289,7 @@ var Planbox = Planbox || {};
             imageUrl = bucketUrl + data.key.replace('${filename}', file.name);
 
         // Apply the uploading class.
-        $el.addClass('uploading');
+        $el.addClass('file-uploading');
 
         // Start the upload.
         data['Content-Type'] = file.type;
@@ -303,7 +303,8 @@ var Planbox = Planbox || {};
             // On success, apply the attribute to the project.
 
             // Remove the uploading class.
-            $el.removeClass('uploading');
+            $el.removeClass('file-uploading');
+
             console.log('complete: ', arguments, imageUrl);
           }
         });
