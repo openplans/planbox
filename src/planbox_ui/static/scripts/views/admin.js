@@ -314,10 +314,10 @@ var Planbox = Planbox || {};
           var url;
           if (!err) {
             url = img.toDataURL(file.type); //FileAPI.toDataURL(img);
+            $el.addClass('has-cover-image');
             $el.css('background-image', 'url(' + url + ')');
           }
         });
-
 
         console.log('uploadImage', files, el);
       },
