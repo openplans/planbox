@@ -1,6 +1,20 @@
-<header class="site-header">
+{{#if cover_img_url}}
+<header id="home" class="site-header has-cover-image" style="background-image: url({{ cover_img_url }})">
+{{else }}
+<header id="home" class="site-header">
+{{/if}}
   <div class="container">
     <h1 class="site-title">{{{ title }}}</h1>
+    {{#gte sections.length 2}}
+    <nav class="project-nav clearfix">
+      <ul class="unstyled-list">
+        <li><a href="#home">Home</a></li>
+        {{#each sections}}
+          <li><a href="#{{ slug }}">{{ menu_label }}</a></li>
+        {{/each}}
+      </ul>
+    </nav>
+    {{/gte}}
   </div>
 </header>
 
@@ -13,11 +27,7 @@
   </div>
 </section>
 
-<section class="project-timeline">
-  <div class="container">
-    <ol class="event-list unstyled-list"></ol>
-  </div>
-</section>
+<div class="orderable-container" id="section-list"></div>
 
 <footer class="site-colophon">
   <div class="container">

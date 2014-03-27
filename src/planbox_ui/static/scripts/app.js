@@ -5,6 +5,17 @@ var Planbox = Planbox || {};
 (function(NS, $) {
   'use strict';
 
+  // Exceptions ===============================================================
+  NS.projectException = function(message, data) {
+    var exc = {
+      name: 'ProjectException',
+      message: message,
+      data: data,
+      toString: function() { return message; }
+    };
+    return exc;
+  };
+
   // App ======================================================================
   NS.app = new Backbone.Marionette.Application();
 
@@ -23,9 +34,12 @@ var Planbox = Planbox || {};
     projectModel = new NS.ProjectModel(NS.Data.project);
     ProjectView = NS.Data.isOwner ? NS.ProjectAdminView : NS.ProjectView;
 
+    window.projectModel = projectModel;
+
     NS.app.mainRegion.show(new ProjectView({
       model: projectModel,
-      collection: projectModel.get('events')
+      collection: projectModel.get('sections'),
+      itemViewOptions: ProjectView.prototype.getItemViewOptions
     }));
 
     if (window.location.pathname.indexOf('/new/') !== -1 && NS.Data.isOwner) {

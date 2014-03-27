@@ -1,5 +1,10 @@
 from __future__ import unicode_literals
 
+import base64
+import hmac
+import hashlib
+import json
+from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User as UserAuth
@@ -13,7 +18,7 @@ from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
 from django.views.generic import TemplateView, FormView
 from planbox_data.models import Project, Profile
-from planbox_data.serializers import ProjectSerializer, UserSerializer
+from planbox_data.serializers import ProjectSerializer, UserSerializer, TemplateProjectSerializer
 from planbox_ui.decorators import ssl_required
 from planbox_ui.forms import UserCreationForm
 import pybars
@@ -73,6 +78,71 @@ class AppMixin (object):
             return self.request.get_full_path()
 
         return context
+
+
+class S3UploadMixin (object):
+    DEFAULT_S3_UPLOAD_ACL = 'public-read'
+    DEFAULT_S3_UPLOAD_EXP = timedelta(hours=1)
+
+    def get_s3_upload_path(self):
+        try:
+            return super(S3UploadMixin, self).get_s3_upload_path()
+        except AttributeError:
+            raise NotImplementedError('You must specify an S3 upload path')
+
+    def get_s3_upload_bucket(self):
+        return settings.S3_MEDIA_BUCKET
+
+    def get_s3_upload_acl(self):
+        return self.DEFAULT_S3_UPLOAD_ACL
+
+    def get_s3_upload_expiration(self):
+        format = '%Y-%m-%dT%H:%M:%SZ'
+        return (datetime.utcnow() + self.DEFAULT_S3_UPLOAD_EXP).strftime(format)
+
+    def get_s3_upload_encoded_policy(self):
+        policy_document = json.dumps({
+            'expiration': self.get_s3_upload_expiration(),
+            'conditions': [
+                {'bucket': self.get_s3_upload_bucket()},
+                {'acl': self.get_s3_upload_acl()},
+                ['starts-with', '$key', self.get_s3_upload_path()],
+                ['starts-with', '$Content-Type', 'image/'],
+            ]
+        })
+
+        policy_bytes = policy_document.encode('utf-8')
+        policy = base64.b64encode(policy_bytes)
+        return policy
+
+    def get_s3_upload_signature(self, encoded_policy, aws_secret_key):
+        """
+        Constructs a secure token to upload directly to S3, using our upload
+        policy and our secret access key. See the AWS documentation for more
+        detail: http://aws.amazon.com/articles/1434#signyours3postform.
+        """
+        key_bytes = aws_secret_key.encode('utf-8')
+        signature = base64.b64encode(hmac.new(key_bytes, encoded_policy, hashlib.sha1).digest())
+        return signature
+
+    def get_s3_upload_form_data(self):
+        if self.get_project_is_owner():
+            encoded_policy = self.get_s3_upload_encoded_policy()
+            return {
+                'key': '/'.join([self.get_s3_upload_path(), '${filename}']),
+                'AWSAccessKeyId': settings.AWS_ACCESS_KEY,
+                'acl': self.get_s3_upload_acl(),
+                'policy': encoded_policy,
+                'signature': self.get_s3_upload_signature(encoded_policy, settings.AWS_SECRET_KEY),
+            }
+        else:
+            return None
+
+    def get_context_data(self, **kwargs):
+        context = super(S3UploadMixin, self).get_context_data(**kwargs)
+        context['s3_upload_form_data'] = self.get_s3_upload_form_data()
+        return context
+
 
 class LoginRequired (object):
     def dispatch(self, request, *args, **kwargs):
@@ -157,51 +227,117 @@ class SigninView (AppMixin, LogoutRequired, SSLRequired, FormView):
         return super(SigninView, self).form_valid(form)
 
 
-class BaseProjectView (AppMixin, TemplateView):
+class ProjectMixin (AppMixin):
     template_name = 'project.html'
 
     def get_context_data(self, **kwargs):
-        context = super(BaseProjectView, self).get_context_data(**kwargs)
+        context = super(ProjectMixin, self).get_context_data(**kwargs)
 
-        project_serializer = ProjectSerializer(self.project)
+        # The project model on which we are currently operating (maybe None)
         context['project'] = self.project
-        context['project_data'] = project_serializer.data
-        context['is_owner'] = self.project.owned_by(self.request.user) or self.request.user.is_superuser
+
+        # The serialized representation of the project. This is used to
+        # construct the project page for edit and/or display.
+        context['project_data'] = self.get_project_serialized_data()
+
+        # A flag denoting whether the current user is the project owner. Used
+        # to determine whether an editable interface should be presented.
+        context['is_owner'] = self.get_project_is_owner()
 
         return context
 
+
+class BaseExisingProjectView (ProjectMixin, TemplateView):
+    def get_project_serialized_data(self):
+        project_serializer = ProjectSerializer(self.project)
+        return project_serializer.data
+
+    def get_s3_upload_path(self):
+        owner_slug = self.kwargs['owner_name']
+        project_slug = self.kwargs['slug']
+        return '/'.join([owner_slug, project_slug])
+
     def get(self, request, owner_name, slug):
-        self.project = get_object_or_404(Project.objects.select_related('theme'),
+        self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
                                          owner__slug=owner_name, slug=slug)
 
         if not (request.user.is_superuser or self.project.public or self.project.owned_by(self.request.user)):
             raise Http404
 
-        return super(BaseProjectView, self).get(request, pk=self.project.pk)
+        return super(BaseExisingProjectView, self).get(request, pk=self.project.pk)
 
 
-class ProjectView (SSLRequired, BaseProjectView): pass
+class ProjectView (SSLRequired, S3UploadMixin, BaseExisingProjectView):
+    """
+    A view on an existing project that presents an editable template when the
+    authenticated user is the owner of the project.
+    """
+
+    def get_project_is_owner(self):
+        return self.request.user.is_superuser or self.project.owned_by(self.request.user)
 
 
-class ReadOnlyProjectView (ReadOnlyMixin, BaseProjectView): pass
+class ReadOnlyProjectView (ReadOnlyMixin, BaseExisingProjectView):
+    """
+    A view on an existing project where that always presumes the user is NOT
+    the project owner (thus it is always in read-only mode).
+    """
+
+    def get_project_is_owner(self):
+        return False
 
 
-class NewProjectView (AppMixin, LoginRequired, SSLRequired, TemplateView):
-    template_name = 'project.html'
+class NewProjectView (SSLRequired, LoginRequired, S3UploadMixin, ProjectMixin, TemplateView):
+    """
+    A project view for a project that does not yet exist. The project
+    attribute is always None for objects of this class. A template project
+    may be specified, which the view will render with a template project
+    serializer, which strips any identifying information (ids, slugs, etc.)
+    from the project data.
 
-    def get_context_data(self, **kwargs):
-        context = super(NewProjectView, self).get_context_data(**kwargs)
+    The current user is always assumed to be the owner of the project in this
+    view.
+    """
+    def get_template_project(self):
+        request = self.request
+        if 'template' in request.GET:
+            template_string = request.GET['template']
+        elif hasattr(settings, 'DEFAULT_PROJECT_TEMPLATE'):
+            template_string = settings.DEFAULT_PROJECT_TEMPLATE
+        else:
+            return None
 
-        context['project_data'] = {}
-        context['is_owner'] = True
+        try:
+            owner_slug, project_slug = template_string.strip('/').split('/')
+        except ValueError:
+            return None
 
-        return context
+        try:
+            project = Project.objects.get(owner__slug=owner_slug, slug=project_slug)
+            return project
+        except Project.DoesNotExist:
+            return None
+
+    def get_project_serialized_data(self):
+        project = self.get_template_project()
+        if project:
+            project.template = project
+        serializer = TemplateProjectSerializer(project)
+        return serializer.data
+
+    def get_project_is_owner(self):
+        return True
+
+    def get_s3_upload_path(self):
+        owner_slug = self.kwargs['owner_name']
+        return '/'.join([owner_slug, 'new'])
 
     def get(self, request, owner_name):
         # Check whether this page is for the auth'd user
         if owner_name != request.user.username:
             return redirect('app-new-project', owner_name=self.request.user.username)
 
+        self.project = None
         owner_auth = get_object_or_404(UserAuth, username=owner_name)
 
         if 'force_new' not in request.GET:

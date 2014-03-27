@@ -4,10 +4,14 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 from django.core.urlresolvers import reverse
+from django.db.models import TextField
+from django.forms import TextInput, Textarea
 from django.utils.html import format_html
 from django.utils.translation import ugettext as _
+from django_ace import AceWidget
 from genericadmin.admin import GenericAdminModelAdmin
-from planbox_data.models import Profile, Project, Event, Theme
+from jsonfield import JSONField
+from planbox_data.models import Profile, Project, Event, Theme, Section
 
 
 class ProfileAdmin (admin.ModelAdmin):
@@ -21,21 +25,35 @@ class ProfileAdmin (admin.ModelAdmin):
     _date_joined.admin_order_field = 'created_at'
 
 
+class SectionInline (admin.StackedInline):
+    model = Section
+    extra = 0
+    prepopulated_fields = {"slug": ("menu_label",)}
+    readonly_fields = ('created_at', 'updated_at')
+
+    formfield_overrides = {
+        TextField: {'widget': TextInput(attrs={'class': 'vTextField'})},
+        JSONField: {'widget': Textarea(attrs={'class': 'vLargeTextField'})},
+        # JSONField: {'widget': AceWidget(mode='json', theme='github')},
+    }
+
+
 class EventInline (admin.TabularInline):
     model = Event
-    extra = 2
+    extra = 0
     readonly_fields = ('index',)
 
 
-class ProjectAdmin (GenericAdminModelAdmin):
+class ProjectAdmin (admin.ModelAdmin):
     list_display = ('__str__', '_permalink', 'owner', 'slug', 'status', 'public')
     list_filter = ('status',)
     prepopulated_fields = {"slug": ("title",)}
 
     inlines = (
+        SectionInline,
         EventInline,
     )
-    raw_id_fields = ('theme',)
+    raw_id_fields = ('theme', 'template')
 
     def get_queryset(self, request):
         qs = super(ProjectAdmin, self).get_queryset(request)

@@ -1,0 +1,11 @@
+<span id="{{ slug }}" class="section-anchor"></span>
+<div class="container">
+  <h2 class="project-timeline-label content-editable" data-attr="label" contenteditable>{{{ label }}}</h2>
+
+  {{^if project.events.length }}
+  <h2 class="step step-timeline">Add to the timeline&hellip;</h2>
+  {{/if}}
+  <ol class="event-list unstyled-list"></ol>
+  <br>
+  <a href="#" class="btn add-event-btn">Add Event</a>
+</div>

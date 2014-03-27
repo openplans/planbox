@@ -85,8 +85,8 @@ img {
 
 .has-cover-image {
   background-position: center center;
-  background-repeat: repeat;
-  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: cover !important;
 }
 
 /* Dingbats */
@@ -704,6 +704,23 @@ a.login-link, .product-header .user-menu-link {
 /* =Project Content
 -------------------------------------------------------------- */
 
+.project-nav {
+  margin-top: 0.75em;
+}
+.project-nav a {
+  float: left;
+  padding: 0.25em 0.5em;
+  margin: 0 0.25em 0.25em 0;
+  background-color: #ddd;
+  color: #268099;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.project-nav a:hover {
+  background-color: #268099;
+  color: #fff;
+}
+
 .project-details {}
 .project-details .container {
   position: relative;
@@ -744,19 +761,22 @@ a.login-link, .product-header .user-menu-link {
   background: #888;
   color: #fff;
 }
-.event-list {
-  border-left: 0.5em solid #eee;
-  padding: 2em 0 0.5em;
-  margin: -1em 0;
+.project-timeline-label {
+  position: relative;
+  z-index: 2;
+  background-color: #eee;
+  color: #666;
+  padding: 0.25em 0.5em;
+  margin: 0;
+  border-radius: 0.125em 0.125em 0.125em 0 ;
+  float: left;
+  font-size: 1.5em;
 }
-.event-list:before {
-  content: '';
-  background: #888;
-  width: 1em;
-  height: 3.25em;
-  position: absolute;
-  top: 0;
-  left: 0.75em;
+.event-list {
+  clear: both;
+  border-left: 0.5em solid #eee;
+  padding: 1.5em 0 0.5em;
+  margin: 0 0 -1em 0;
 }
 li.event {
   padding-left: 1.5em;
@@ -787,6 +807,13 @@ li.event:last-child:before {
   text-shadow: 0 0 3px rgba(0,0,0,0.25);
   position: relative;
 }
+.event-datetime-container {}
+.event-datetime {
+  position: relative;
+  float: left;
+  font-size: 1.5em;
+  margin-bottom: 0.25em;
+}
 .event-description {
   position: relative;
   margin-bottom: 1.25em;
@@ -802,6 +829,42 @@ li.event:last-child:before {
 /* Project Footer */
 .project-contact-info {
   position: relative;
+}
+
+/* FAQs Section */
+.faq-list {
+  margin-bottom: 1.5em;
+}
+div.faq {
+  position: relative;
+}
+.faq-question {
+  position: relative;
+  margin-bottom: 0.25em;
+}
+.faq-answer {
+  position: relative;
+  margin-bottom: 0.75em;
+}
+.faq-list dt {
+  font-weight: 800;
+  font-size: 1.25em;
+}
+.faq-list-collapsed dt {
+  color: #268099;
+  cursor: pointer;
+}
+.faq-list-collapsed dd {
+  display: none;
+}
+.faq-list dt.is-selected {
+  color: #555;
+} 
+.faq-list dt.is-selected + dd {
+  display: block;
+}
+.faq .faq {
+  border-top: 1px solid #fff;
 }
 
 
@@ -872,7 +935,7 @@ li.event:last-child:before {
 .modal-header {
   margin-bottom: 0;
 }
-.modal-body {  
+.modal-body {
 }
 
 
@@ -880,19 +943,17 @@ li.event:last-child:before {
 -------------------------------------------------------------- */
 
 @media only screen and (min-width: 22em) {
-  .site-header {
-    padding-bottom: 0.75em;
-  }
   .site-title {
     font-size: 2.5em;
   }
   .project-status {
-    position: absolute;
-    top: -1.5em;
-    right: 1em;
+/*    position: absolute;*/
+/*    top: -1.5em;*/
+/*    right: 1em;*/
     border-radius: 0.875em 0.125em;
     padding: 0.5em 1.25em;
-    margin: 0;
+    margin: 0 0 1em;
+    float: right;
   }
   .project-colophon {
     padding-top: 2em;
@@ -918,8 +979,47 @@ li.event:last-child:before {
     max-width: 36em;
   }
   .site-header {
-    padding-top: 3em;
-    padding-bottom: 1.5em;
+    padding-top: 5em;
+  }
+  .site-header.has-cover-image {
+    padding-top: 13.625em;
+  }
+  .site-header .container {
+    background-color: #fff;
+    padding-bottom: 0;
+  }
+  .site-title {
+    line-height: 1.2;
+    color: #666;
+    text-shadow: none;
+  }
+  .project-nav {
+    margin-top: 0;
+    padding-top: 0.5em;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #268099;
+    background-color: rgba(90,90,90,0.8);
+    z-index: 199;
+  }
+  .project-nav ul {
+    max-width: 34em;
+    margin: 0 auto;
+  }
+  .project-nav a {
+    color: white;
+    background-color: transparent;
+  }
+  .project-nav a:hover {
+    background-color: #fff;
+    color: #268099;
+    border-radius: 0.25em;
+  }
+  .project-details .container {
+    background-color: #fff;
+    margin-top: -1.5em;
   }
 
   .product-section--the-problem {
@@ -950,6 +1050,16 @@ li.event:last-child:before {
   .feature-list img {
     display: block;
     margin: 0 auto;
+  }
+
+  section, footer {
+    padding-top: 1.5em;
+  }
+  .section-anchor {
+    display: block;
+    height: 0;
+    position: relative;
+    top: -4.25em;
   }
 
   .project-status strong {

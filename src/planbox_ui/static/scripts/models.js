@@ -1,4 +1,4 @@
-/*globals Backbone */
+/*globals Backbone _ */
 
 var Planbox = Planbox || {};
 
@@ -7,12 +7,35 @@ var Planbox = Planbox || {};
 
   Backbone.Relational.store.addModelScope(NS);
 
+  NS.ReorderableCollection = Backbone.Collection.extend({
+    moveTo: function(model, index) {
+      var currentIndex = this.indexOf(model);
+
+      if (currentIndex === index) {
+        return;
+      }
+
+      this.remove(model, { silent: true});
+      this.add(model, {at: index, silent: true});
+      this.trigger('reorder');
+    }
+  });
+
   NS.ProjectModel = Backbone.RelationalModel.extend({
     relations: [{
       type: Backbone.HasMany,
       key: 'events',
       relatedModel: 'EventModel',
       collectionType: 'EventCollection'
+    },
+    {
+      type: Backbone.HasMany,
+      key: 'sections',
+      relatedModel: 'SectionModel',
+      collectionType: 'SectionCollection',
+      reverseRelation: {
+        key: 'project'
+      }
     }],
     urlRoot: '/api/v1/projects',
 
@@ -31,21 +54,73 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.EventModel = Backbone.RelationalModel.extend({});
+  NS.SectionModel = Backbone.RelationalModel.extend({
+    baseAttrs: ['details', 'id', 'created_at', 'updated_at', 'type', 'label', 'menu_label', 'slug'],
 
-  NS.EventCollection = Backbone.Collection.extend({
-    model: NS.EventModel,
-    moveTo: function(model, index) {
-      var currentIndex = this.indexOf(model);
+    set: function(key, val, options) {
+      /*
+      Assign a value on the model (as Backbone.Model.set). If the attribute
+      being set is not one of the top-level attributes listed in baseAttrs,
+      assume it belongs in the details document for the section.
 
-      if (currentIndex === index) {
-        return;
+      Example:
+
+      > model = new NS.SectionModel();
+      > model.set('label', 'Hello!');
+      > model.toJSON();
+        {"label": "Hello!"}
+      > model.set('content', '<p>Hello, world.</p>');
+      > model.toJSON();
+        {
+          "label": "Hello!",
+          "details": {"content": "<p>Hello, world.</p>"}
+        }
+
+      */
+      var attr, attrs, details;
+
+      // Process the initial arguments.
+      if (typeof key === 'object') {
+        attrs = key;
+        options = val;
+      } else {
+        (attrs = {})[key] = val;
       }
 
-      this.remove(model, { silent: true});
-      this.add(model, {at: index, silent: true});
-      this.trigger('reorder');
+      options = options || {};
+
+      // Build up the details document if there are any attributes being set
+      // that belong there.
+      for (attr in attrs) {
+        if (!_.contains(this.baseAttrs, attr)) {
+          details = details || attrs.details || _.clone(this.get('details')) || {};
+          details[attr] = attrs[attr];
+          delete attrs[attr];
+        }
+      }
+
+      // If we have built a details document, then set it on the attributes.
+      if (details) {
+        attrs.details = details;
+      }
+      return Backbone.RelationalModel.prototype.set.call(this, attrs, options);
     }
+  });
+
+  NS.SectionCollection = NS.ReorderableCollection.extend({
+    model: NS.SectionModel
+  });
+
+  NS.EventModel = Backbone.RelationalModel.extend({});
+
+  NS.EventCollection = NS.ReorderableCollection.extend({
+    model: NS.EventModel
+  });
+
+  NS.FaqModel = Backbone.RelationalModel.extend({});
+
+  NS.FaqCollection = NS.ReorderableCollection.extend({
+    model: NS.FaqModel
   });
 
 }(Planbox));

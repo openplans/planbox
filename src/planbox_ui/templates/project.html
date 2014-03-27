@@ -76,9 +76,12 @@
   <script src="{{ STATIC_URL }}bower_components/backbone-relational/backbone-relational.js"></script>
   <script src="{{ STATIC_URL }}bower_components/django-csrf.js/django-csrf.js"></script>
   <script src="{{ STATIC_URL }}bower_components/pen/src/pen.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/swag/lib/swag.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/FileAPI/dist/FileAPI.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
+  <script>Swag.registerHelpers(Handlebars);</script>
 
   <script>
     var Planbox = Planbox || {}
@@ -91,7 +94,9 @@
         { 'value': 'active', 'label': 'Active'},
         { 'value': 'complete', 'label': 'Complete'}
       ],
-      contactEmail: {{ settings.PLANBOX_CONTACT_EMAIL|as_json }}
+      contactEmail: {{ settings.PLANBOX_CONTACT_EMAIL|as_json }},
+      s3UploadBucket: {{ settings.S3_MEDIA_BUCKET|as_json }},
+      s3UploadData: {{ s3_upload_form_data|as_json }}
     };
   </script>
 
@@ -99,7 +104,10 @@
   <script src="{{ STATIC_URL }}scripts/utils.js"></script>
   <script src="{{ STATIC_URL }}scripts/handlebars-helpers.js"></script>
   <script src="{{ STATIC_URL }}scripts/models.js"></script>
-  <script src="{{ STATIC_URL }}scripts/views.js"></script>
+  <script src="{{ STATIC_URL }}scripts/views/mixins.js"></script>
+  <script src="{{ STATIC_URL }}scripts/views/base.js"></script>
+  <script src="{{ STATIC_URL }}scripts/views/display.js"></script>
+  <script src="{{ STATIC_URL }}scripts/views/admin.js"></script>
   <script src="{{ STATIC_URL }}scripts/app.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/app.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>

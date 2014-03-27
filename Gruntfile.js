@@ -309,13 +309,15 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/backbone.marionette/lib/backbone.marionette.js',
             '<%= yeoman.app %>/bower_components/backbone-relational/backbone-relational.js',
             '<%= yeoman.app %>/bower_components/django-csrf.js/django-csrf.js',
-            '<%= yeoman.app %>/bower_components/pen/src/pen.js'
+            '<%= yeoman.app %>/bower_components/pen/src/pen.js',
+            '<%= yeoman.app %>/bower_components/swag/lib/swag.js'
           ],
           '<%= yeoman.app %>/scripts/app.min.js': [
             '<%= yeoman.app %>/scripts/utils.js',
             '<%= yeoman.app %>/scripts/handlebars-helpers.js',
             '<%= yeoman.app %>/scripts/models.js',
-            '<%= yeoman.app %>/scripts/views.js',
+            '<%= yeoman.app %>/scripts/views-display.js',
+            '<%= yeoman.app %>/scripts/views-admin.js',
             '<%= yeoman.app %>/scripts/app.js'
           ],
           '<%= yeoman.app %>/scripts/modernizr.min.js': [

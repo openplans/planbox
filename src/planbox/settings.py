@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'south',
     'genericadmin',
     'rest_framework',
+    'django_ace',
 
     'custom_domains',
     'planbox_ui',
@@ -52,6 +53,7 @@ INSTALLED_APPS = (
 
 HANDLEBARS_APP_DIRNAMES = ['jstemplates']
 CANONICAL_ROOT = ''
+DEFAULT_PROJECT_TEMPLATE = 'templates/default'
 
 LOGIN_URL = 'app-signin'
 SESSION_COOKIE_SECURE = True

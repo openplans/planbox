@@ -122,9 +122,10 @@ class UserModelTests (PlanBoxTestCase):
 
         with assert_num_queries(1):
             profiles = Profile.objects.all()
-            profile_strings = [str(p) for p in profiles]
+            profile_strings = set([str(p) for p in profiles])
 
-        assert_equal(profile_strings, ['mjumbewu', 'atogle'])
+        # NOTE: The templates profile is created via a migration.
+        assert_equal(profile_strings, set(['mjumbewu', 'atogle', 'templates']))
 
 
 class EventModelTests (PlanBoxTestCase):
@@ -196,6 +197,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
                 {'label': 'test label 2'},
                 {'label': 'test label 3'}
             ],
+            'sections': [],
             'owner': profile.slug
         })
 
@@ -223,6 +225,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
                 {'label': 'test label 2'},
                 {'label': 'test label 1', 'id': events[0].pk}
             ],
+            'sections': [],
             'owner': profile.slug
         })
 
@@ -290,7 +293,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
         description = """<div>oh</div> <b>hello</b> <script>alert('hacked');</script> <div class="hi">new line</div>"""
         expected = """<br>oh <b>hello</b> alert('hacked'); <br>new line"""
 
-        serializer = ProjectSerializer(project, data={'slug': '', 'title': 'Test Title', 'description': description, 'owner': user.slug, 'events': []})
+        serializer = ProjectSerializer(project, data={'slug': '', 'title': 'Test Title', 'description': description, 'owner': user.slug, 'events': [], 'sections': []})
 
         ok_(serializer.is_valid(), 'Project with markup should validate: %s' % (serializer.errors,))
         assert_not_equal(serializer.object.description, description)
@@ -424,7 +427,7 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
     def test_owner_can_PUT_detail(self):
         auth, owner, _, _, _, url = self.init_test_assets()
         self.client.login(username=auth.username, password='123')
-        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner": "%s"}' % (owner.slug), content_type='application/json')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "sections": [], "location": "x", "owner": "%s"}' % (owner.slug), content_type='application/json')
         assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
 
     def test_owner_can_DELETE_detail(self):
@@ -506,7 +509,7 @@ class NonPublicProjectDetailViewAuthenticationTests (PlanBoxTestCase):
     def test_owner_can_PUT_detail(self):
         auth, owner, _, _, _, url = self.init_test_assets()
         self.client.login(username=auth.username, password='123')
-        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "public": false, "owner": "%s"}' % (owner.slug), content_type='application/json')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "sections": [], "location": "x", "public": false, "owner": "%s"}' % (owner.slug), content_type='application/json')
         assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
 
     def test_owner_can_DELETE_detail(self):
