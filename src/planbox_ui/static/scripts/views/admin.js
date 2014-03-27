@@ -279,6 +279,12 @@ var Planbox = Planbox || {};
         this.initDropZone(this.$('#cover-image-dnd').get(0));
       },
 
+      prefetchImage: function(url, callback) {
+        var img = new Image();   // Create new img element
+        img.addEventListener('load', callback, false);
+        img.src = url;
+      },
+
       // File Uploads
       uploadImage: function(files, el) {
         var self = this,
@@ -300,7 +306,11 @@ var Planbox = Planbox || {};
           cache: true,
           progress: function (evt){ console.log('progress: ', arguments); },
           complete: function (err, xhr){
+            // Fetch the image to make loading faster
+            self.prefetchImage(imageUrl);
+
             // On success, apply the attribute to the project.
+            self.model.set('cover_img_url', imageUrl);
 
             // Remove the uploading class.
             $el.removeClass('file-uploading');
