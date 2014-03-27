@@ -230,7 +230,10 @@ var Planbox = Planbox || {};
         userMenu: '.user-menu',
         editableNavMenuLinks: '.project-nav a[contenteditable]',
         publishBtn: '.btn-public',
-        fileInputs: 'input[type="file"]'
+        fileInputs: 'input[type="file"]',
+        coverImg: '.site-header',
+        coverImgDropZone: '#cover-image-dnd',
+        removeCoverImgLink: '.remove-img-btn'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
@@ -240,7 +243,8 @@ var Planbox = Planbox || {};
         'click @ui.saveBtn': 'handleSave',
         'click @ui.userMenuLink': 'handleUserMenuClick',
         'click @ui.publishBtn': 'handlePublish',
-        'change @ui.fileInputs': 'handleFileInputChange'
+        'change @ui.fileInputs': 'handleFileInputChange',
+        'click @ui.removeCoverImgLink': 'handleRemoveImage'
       },
       modelEvents: {
         'change': 'dataChanged',
@@ -280,7 +284,7 @@ var Planbox = Planbox || {};
       },
       onRender: function() {
         this.initRichEditables();
-        this.initDropZone(this.$('#cover-image-dnd').get(0));
+        this.initDropZone(this.ui.coverImgDropZone.get(0));
       },
 
       // Prefetches an image file for a url to speed up load time
@@ -304,6 +308,16 @@ var Planbox = Planbox || {};
             $el.css('background-image', 'url(' + url + ')');
           }
         });
+      },
+
+      handleRemoveImage: function(evt) {
+        evt.preventDefault();
+
+        if (window.confirm('Are you sure you want to remove your cover image?')) {
+          this.ui.coverImg.css('background-image', 'none');
+          this.ui.coverImg.removeClass('has-cover-image');
+          this.model.set('cover_img_url', '');
+        }
       },
 
       uploadImage: function(files, $el) {
@@ -365,25 +379,23 @@ var Planbox = Planbox || {};
         evt.preventDefault();
 
         // Get the files
-        var files = FileAPI.getFiles(evt),
-            $bgEl = this.$('.site-header');
+        var files = FileAPI.getFiles(evt);
         FileAPI.reset(evt.currentTarget);
 
-        this.uploadImage(files, $bgEl);
+        this.uploadImage(files, this.ui.coverImg);
       },
       initDropZone: function(el) {
-        var self = this,
-            $bgEl = this.$('.site-header');
+        var self = this;
         if( FileAPI.support.dnd ){
           FileAPI.event.dnd(el,
             // onFileHover
             function (over){
-              $bgEl.toggleClass('over', over);
+              self.ui.coverImg.toggleClass('over', over);
             },
             // onFileDrop
             function(files) {
-              $bgEl.removeClass('over');
-              self.uploadImage(files, $bgEl);
+              self.ui.coverImg.removeClass('over');
+              self.uploadImage(files, self.ui.coverImg);
             }
           );
         }
