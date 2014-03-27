@@ -158,7 +158,9 @@ class Project (TimeStampedModel):
     contact = models.TextField(help_text=_("The contact information for the project"), default='', blank=True)
     owner = models.ForeignKey('Profile', related_name='projects')
     theme = models.ForeignKey('Theme', related_name='projects', null=True, blank=True)
-    template = models.ForeignKey('Project', null=True, blank=True)
+    cover_img_url = models.URLField(_('Cover Image URL'), blank=True, max_length=2048)
+    logo_img_url = models.URLField(_('Logo Image URL'), blank=True, max_length=2048)
+    template = models.ForeignKey('Project', help_text=_("The project, if any, that this one is based off of"), null=True, blank=True)
 
     objects = ProjectManager()
 
