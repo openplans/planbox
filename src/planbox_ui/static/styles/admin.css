@@ -195,13 +195,6 @@ h6.content-editable {
   opacity: 0.2;
   position: relative;
 }
-.logo .file-upload {
-  margin: 0;
-  padding: 0.5em;
-  border-color: #888;
-  color: #888;
-  background-color: #fff !important;
-}
 .file-upload:hover,
 .over .file-upload,
 .file-uploading > .file-upload {
@@ -211,9 +204,6 @@ h6.content-editable {
 }
 .file-upload p {
   margin-bottom: 0.5em;
-}
-.logo .file-upload p {
-  margin-bottom: 0.25em;
 }
 .file-upload-input-container {
 	position: relative;
@@ -263,6 +253,26 @@ h6.content-editable {
   visibility: hidden;
   float: right;
   margin-right: 2em;
+}
+
+.logo .file-upload {
+  margin: 0;
+  padding: 0.5em;
+  border-color: #888;
+  color: #888;
+  background-color: #fff !important;
+}
+.logo .file-upload p {
+  margin-bottom: 0.25em;
+}
+.logo .image-target {
+  display: none;
+}
+.logo.has-image .image-target {
+  display: block;
+}
+.logo.has-image .image-dnd {
+  display: none;
 }
 .logo p.clearfix {
   margin: 0.5em 0 0;

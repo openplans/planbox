@@ -566,6 +566,12 @@ a.login-link, .product-header .user-menu-link {
   color: #fff;
 }
 
+.logo img {
+  max-height: 8em;
+  height: auto;
+  width: auto;
+}
+
 
 /* =Product
 -------------------------------------------------------------- */
@@ -1179,7 +1185,8 @@ div.faq {
     padding: 0; 
     vertical-align: top;
   }
-  .logo-table-row > div.image-holder {
+  .logo-table-row > div.image-holder,
+  .logo-table-row > div.has-image {
     padding-right: 1em;
   }
 
