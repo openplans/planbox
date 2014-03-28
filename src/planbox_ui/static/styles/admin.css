@@ -248,8 +248,10 @@ h6.content-editable {
 .file-uploading > .file-upload > .file-upload-input-container {
   visibility: hidden;
 }
-.remove-img-btn {
+.remove-cover-img-btn-container {
   display: none;
+}
+.remove-img-btn {
   visibility: hidden;
   float: right;
   margin-right: 2em;
@@ -844,7 +846,7 @@ li.event:last-child:before {
     white-space: nowrap;
   }
   .file-upload,
-  .remove-img-btn {
+  .remove-cover-img-btn-container {
     display: block;
   }
 }
