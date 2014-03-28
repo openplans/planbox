@@ -989,6 +989,7 @@ div.faq {
   }
   .site-header.has-image {
     padding-top: 13.625em;
+    background-position: center center;
   }
   .site-header .container {
     background-color: #fff;
