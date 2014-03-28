@@ -14,10 +14,10 @@
  </div>
 
   {{#if cover_img_url}}
-  <header id="home" data-attr="cover_img_url" class="site-header image-holder has-image"
+  <header id="home" data-attr="cover_img_url" class="site-header image-holder image-as-background has-image"
     style="background-image: url({{ cover_img_url }});">
   {{else }}
-  <header id="home" data-attr="cover_img_url" class="site-header image-holder">
+  <header id="home" data-attr="cover_img_url" class="site-header image-holder image-as-background">
   {{/if}}
   <div id="cover-image-dnd" class="image-dnd file-upload">
     <p class="drop-instructions">Drop cover photo here or&hellip;</p>
@@ -32,11 +32,11 @@
       <div class="logo-table-row">
 
         {{#if logo_img_url}}
-        <div data-attr="logo_img_url" class="logo image-holder has-image"
-          style="background-image: url({{ logo_img_url }});">
+        <div data-attr="logo_img_url" class="logo image-holder has-image">
         {{else}}
         <div data-attr="logo_img_url" class="logo image-holder">
         {{/if}}
+          <img class="image-target" src="{{ logo_img_url }}" alt="{{ title }}">
           <div id="logo-image-dnd" class="image-dnd file-upload">
             <p class="drop-instructions nobreak">Drop logo here or&hellip;</p>
             <p class="uploading-message">Uploading&hellip;</p>

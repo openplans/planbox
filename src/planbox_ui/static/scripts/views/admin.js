@@ -295,17 +295,32 @@ var Planbox = Planbox || {};
         img.src = url;
       },
 
+      setImageOnContainer: function($el, url) {
+        $el.addClass('has-image');
+        if ($el.hasClass('image-as-background')) {
+          $el.css('background-image', 'url(' + url + ')');
+        } else {
+          $el.find('img.image-target').attr('src', url);
+        }
+      },
+
+      removeImageFromContainer: function($el) {
+        if ($el.hasClass('image-as-background')) {
+          $el.css('background-image', 'none');
+        }
+        $el.removeClass('has-image');
+      },
+
       // File Uploads
       previewImage: function(file, $el) {
+        var self = this;
+
         // Display the image preview.
         FileAPI.Image(file).get(function(err, img) {
           var url;
           if (!err) {
             url = img.toDataURL(file.type); //FileAPI.toDataURL(img);
-
-            // TODO: don't hardcode this.
-            $el.addClass('has-image');
-            $el.css('background-image', 'url(' + url + ')');
+            self.setImageOnContainer($el, url);
           }
         });
       },
@@ -318,8 +333,7 @@ var Planbox = Planbox || {};
             attrName = $imgContainer.attr('data-attr');
 
         if (window.confirm(confirmMsg)) {
-          $imgContainer.css('background-image', 'none');
-          $imgContainer.removeClass('has-image');
+          this.removeImageFromContainer($imgContainer);
           this.model.set(attrName, '');
         }
       },

@@ -9,7 +9,8 @@
       <div class="logo-table-row">
 
         {{#if logo_img_url}}
-        <div class="logo has-image" style="background-image: url({{ logo_img_url }});">
+        <div class="logo has-image">
+          <img src="{{ logo_img_url }}" alt="{{ title }}">
         {{else}}
         <div class="logo">
         {{/if}}
