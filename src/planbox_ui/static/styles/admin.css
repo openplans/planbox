@@ -196,7 +196,7 @@ h6.content-editable {
   position: relative;
 }
 .file-upload:hover,
-.over .file-upload,
+.over > .file-upload,
 .file-uploading > .file-upload {
   opacity: 1;
   background-color: #888;
