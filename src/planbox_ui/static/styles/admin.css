@@ -192,7 +192,7 @@ h6.content-editable {
   padding: 1em;
   border: 2px dashed #eee;
   border-radius: 0.5em;
-  opacity: 0.2;
+  opacity: 0.8;
   position: relative;
 }
 .file-upload:hover,

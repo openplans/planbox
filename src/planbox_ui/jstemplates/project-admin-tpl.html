@@ -19,12 +19,12 @@
   {{else }}
   <header id="home" data-attr="cover_img_url" class="site-header image-holder image-as-background">
   {{/if}}
-  <div id="cover-image-dnd" class="image-dnd file-upload">
+  <div id="cover-image-dnd" class="image-dnd file-upload hide-for-print">
     <p class="drop-instructions">Drop cover photo here or&hellip;</p>
     <p class="uploading-message">Uploading&hellip;</p>
     <span class="file-upload-input-container btn btn-small"><span>Choose File</span><input name="cover-image" class="file-upload-input" type="file" accept="image/*" /></span>
   </div>
-  <p class="remove-cover-img-btn-container clearfix"><button class="remove-img-btn btn btn-mini btn-secondary" data-confirm-msg="Are you sure you want to remove your cover image?"><span class="delete-icon">&#10005;</span> Remove Cover Photo</button></p>
+  <p class="remove-cover-img-btn-container clearfix hide-for-print"><button class="remove-img-btn btn btn-mini btn-secondary" data-confirm-msg="Are you sure you want to remove your cover image?"><span class="delete-icon">&#10005;</span> Remove Cover Photo</button></p>
 
   <div class="container">
 
@@ -54,7 +54,7 @@
     </div><!-- end .logo-table -->
 
     {{#gte sections.length 2}}
-    <nav class="project-nav clearfix">
+    <nav class="project-nav clearfix hide-for-print">
       <ul class="unstyled-list">
         <li><a href="#home">Home</a></li>
         {{#each sections}}
@@ -68,6 +68,7 @@
 
 <section class="project-details">
   <div class="container">
+    <!--
     {{^if status}}<h2 class="step step-status"><span class="step-arrow-right-up"></span>Set the current status.</h2>{{/if}}
     <p class="project-status content-editable{{^if status}} unset-status{{/if}}">
       <strong>
@@ -81,6 +82,7 @@
         {{/ select }}
       </select>
     </p>
+    -->
     {{^if location}}<h2 class="step step-location"><span class="step-arrow-left-down"></span>Where is it located?</h2>{{/if}}
     <p class="project-location content-editable" data-attr="location" contenteditable>{{{ location }}}</p>
     {{^if description}}<h2 class="step step-description"><span class="step-arrow-left-down"></span>Give it a short description.</h2>{{/if}}
