@@ -298,7 +298,7 @@ var Planbox = Planbox || {};
       setImageOnContainer: function($el, url) {
         $el.addClass('has-image');
         if ($el.hasClass('image-as-background')) {
-          $el.css('background-image', 'url(' + url + ')');
+          $el.css('background-image', 'url("' + url + '")');
         } else {
           $el.find('img.image-target').attr('src', url);
         }
