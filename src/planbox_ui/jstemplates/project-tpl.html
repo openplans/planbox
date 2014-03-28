@@ -5,14 +5,21 @@
 {{/if}}
   <div class="container">
 
-    {{#if logo_img_url}}
-    <div class="logo has-image" style="background-image: url({{ logo_img_url }});">
-    {{else}}
-    <div class="logo">
-    {{/if}}
-    </div>
+    <div class="logo-table">
+      <div class="logo-table-row">
 
-    <h1 class="site-title">{{{ title }}}</h1>
+        {{#if logo_img_url}}
+        <div class="logo has-image" style="background-image: url({{ logo_img_url }});">
+        {{else}}
+        <div class="logo">
+        {{/if}}
+        </div>
+
+        <h1 class="site-title">{{{ title }}}</h1>
+
+      </div>
+    </div><!-- end .logo-table -->
+
     {{#gte sections.length 2}}
     <nav class="project-nav clearfix">
       <ul class="unstyled-list">

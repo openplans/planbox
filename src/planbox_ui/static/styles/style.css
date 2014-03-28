@@ -504,10 +504,6 @@ a.login-link, .product-header .user-menu-link {
   border-radius: 0.25em;
 }
 
-.logo {
-  height: 150px;
-}
-
 /* User Navigation */
 .user-nav {
   float: right;
@@ -1159,6 +1155,22 @@ div.faq {
             transform: scale(1.25);
   }
 
+  .logo-table {
+    display: table; 
+    border-collapse: collapse; 
+    border-spacing: 0;
+  }
+  .logo-table-row {
+    display: table-row;
+  }
+  .logo-table-row > div {
+    display: table-cell; 
+    padding: 0; 
+    vertical-align: top;
+  }
+  .logo-table-row > div.image-holder {
+    padding-right: 1em;
+  }
 
 }
 
