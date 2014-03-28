@@ -1100,22 +1100,33 @@ div.faq {
     font-size: 1.25em;
     position: fixed;
     z-index: 201;
+    top: auto;
+    bottom: -1.125em;
+    line-height: 2.5;
   }
   a.software-help-link {
     border-radius: 0 0.625em 0.625em 0;
-    top: 0.25em;
     font-size: 0.875em;
     position: fixed;
     padding-left: 5.625em;
     z-index: 200;
+    top: auto;
+    bottom: 0.25em;
   }
-  .ie8 a.software-help-link,
   .ie8 .software-phase-notice,
-  .ie7 a.software-help-link,
   .ie7 .software-phase-notice,
-  .ie6 a.software-help-link,
   .ie6 .software-phase-notice {
     position: absolute;
+    top: -1em;
+    bottom: auto;
+    line-height: 4;
+  }
+  .ie8 a.software-help-link,
+  .ie7 a.software-help-link,
+  .ie6 a.software-help-link {
+    position: absolute;
+    top: 0.25em;
+    bottom: auto;
   }
 
   .user-menu:before,
