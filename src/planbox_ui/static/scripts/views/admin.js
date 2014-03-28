@@ -307,6 +307,8 @@ var Planbox = Planbox || {};
       removeImageFromContainer: function($el) {
         if ($el.hasClass('image-as-background')) {
           $el.css('background-image', 'none');
+        } else {
+          $el.find('img.image-target').attr('src', '');
         }
         $el.removeClass('has-image');
       },
