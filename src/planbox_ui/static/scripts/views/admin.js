@@ -281,6 +281,17 @@ var Planbox = Planbox || {};
           NS.Utils.pasteHtmlAtCaret(pasted.replace(/\n/g, '<br>'));
         });
 
+        // Do simple protection against accidental drops of images outside of
+        // drop areas (http://stackoverflow.com/a/6756680).
+        window.addEventListener('dragover', function(e) {
+          e = e || event;
+          e.preventDefault();
+        }, false);
+        window.addEventListener('drop', function(e) {
+          e = e || event;
+          e.preventDefault();
+        }, false);
+
       },
       onRender: function() {
         this.initRichEditables();
