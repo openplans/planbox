@@ -6,15 +6,15 @@
 {% block title %}{{ project_data.title }}{% endblock %}
 
 {% block meta %}
-  <meta name="description" content="{{ project_data.description }}">
+  <meta name="description" content="{{ project_data.description|striptags }}">
   {# TODO: Fill this in with project's owner name #}
   <meta name="author" content="OpenPlans">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@planinabox">
-  <meta name="twitter:title" content="{{ project_data.title }}">
-  <meta name="twitter:description" content="{{ project_data.description }}">
+  <meta name="twitter:title" content="{{ project_data.title|striptags }}">
+  <meta name="twitter:description" content="{{ project_data.description|striptags }}">
   {% comment %} TODO: Fill this in with project owner's twitter name
   <meta name="twitter:creator" content="">
   {% endcomment %}
@@ -24,8 +24,8 @@
 
   <!-- Facebook -->
   <meta property="og:site_name" content="Plan In A Box"/>
-  <meta property="og:title" content="{{ project_data.title }}" />
-  <meta property="og:description" content="{{ project_data.description }}" />
+  <meta property="og:title" content="{{ project_data.title|striptags }}" />
+  <meta property="og:description" content="{{ project_data.description|striptags }}" />
   {% comment %} TODO: Fill this in with Planbox logo or project image
   <meta property="og:image" content="" />
   {% endcomment %}
