@@ -41,6 +41,7 @@ class SectionInline (admin.StackedInline):
 class EventInline (admin.TabularInline):
     model = Event
     extra = 0
+    prepopulated_fields = {"slug": ("label",)}
     readonly_fields = ('index',)
 
 

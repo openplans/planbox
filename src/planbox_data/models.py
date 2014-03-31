@@ -2,8 +2,6 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.contrib import auth
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.text import slugify
@@ -141,12 +139,51 @@ class ProjectManager (models.Manager):
         return self.get(owner__slug=owner, slug=slug)
 
 
+class ModelWithSlugMixin (object):
+    """
+    A model that adds a slug on save if one does not exist. This model needs
+    the following methods:
+
+    get_slug_basis -- Get the string off that will be slugified to construct the slug.
+    get_all_slugs -- Generate the set of all mututally unique slugs with
+        respect to this model.
+
+    """
+    def ensure_slug(self, force=False):
+        """
+        Determines a slug based on the slug's basis if no slug is set. When
+        force is True, the slug is set even if it already has a value.
+        """
+        basis = self.get_slug_basis()
+        if basis and (force or not self.slug):
+            max_length = self._meta.get_field('slug').max_length
+
+            # Leave some room in the slug length for the uniquifier.
+            max_length -= 16
+
+            self.slug = uniquify_slug(
+                slugify(strip_tags(basis))[:max_length],
+                self.get_all_slugs()
+            )
+        return self.slug
+
+    def save(self, *args, **kwargs):
+        self.ensure_slug()
+        return super(ModelWithSlugMixin, self).save(*args, **kwargs)
+
+
 @python_2_unicode_compatible
-class Project (TimeStampedModel):
+class Project (ModelWithSlugMixin, TimeStampedModel):
     STATUS_CHOICES = (
         ('not-started', _('Not Started')),
         ('active', _('Active')),
         ('complete', _('Complete')),
+    )
+
+    LINK_TYPE_CHOICES = (
+        ('event', _('Event')),
+        ('section', _('Section')),
+        ('external', _('External URL')),
     )
 
     title = models.TextField(max_length=1024, blank=True)
@@ -173,18 +210,18 @@ class Project (TimeStampedModel):
     def natural_key(self):
         return self.owner.natural_key() + (self.slug,)
 
-    def save(self, *args, **kwargs):
-        if self.title and not self.slug:
-            max_length = self._meta.get_field('slug').max_length
+    def get_slug_basis(self):
+        """
+        Get the string off that will be slugified to construct the slug.
+        """
+        return self.title
 
-            # Leave some room in the slug length for the uniquifier.
-            max_length -= 16
-
-            self.slug = uniquify_slug(
-                slugify(strip_tags((self.title)))[:max_length],
-                [p.slug for p in self.owner.projects.all()]
-            )
-        super(Project, self).save(*args, **kwargs)
+    def get_all_slugs(self):
+        """
+        Generate the set of all mututally unique slugs with respect to this
+        model.
+        """
+        return [p.slug for p in self.owner.projects.all()]
 
     def owned_by(self, obj):
         if isinstance(obj, UserAuth):
@@ -209,8 +246,9 @@ class EventManager (models.Manager):
 
 
 @python_2_unicode_compatible
-class Event (models.Model):
+class Event (ModelWithSlugMixin, models.Model):
     label = models.TextField(help_text=_("The time label for the event, e.g. \"January 15th, 2015\", \"Spring 2015 Phase\", \"Phase II, Summer 2015\", etc."), max_length=1024)
+    slug = models.CharField(max_length=64, blank=True)
     description = models.TextField(help_text=_("A summary description of the timeline item"), default='', blank=True)
     index = models.PositiveIntegerField(help_text=_("Leave this field blank; it will be filled in automatically"))
     project = models.ForeignKey(Project, related_name='events')
@@ -228,6 +266,12 @@ class Event (models.Model):
 
     def natural_key(self):
         return self.project.natural_key() + (self.index,)
+
+    def get_slug_basis(self):
+        return self.label
+
+    def get_all_slugs(self):
+        return [e.slug for e in self.project.events.all()]
 
     def save(self, *args, **kwargs):
         if self.index is None:
@@ -301,7 +345,7 @@ class SectionManager (models.Manager):
 
 
 @python_2_unicode_compatible
-class Section (TimeStampedModel):
+class Section (ModelWithSlugMixin, TimeStampedModel):
     SECTION_TYPE_CHOICES = (
         ('text', _('Text')),
         ('timeline', _('Timeline')),
@@ -326,6 +370,12 @@ class Section (TimeStampedModel):
 
     def natural_key(self):
         return self.project.natural_key() + (self.index,)
+
+    def get_slug_basis(self):
+        return self.menu_label
+
+    def get_all_slugs(self):
+        return [s.slug for s in self.project.sections.all()]
 
     def save(self, *args, **kwargs):
         if self.index is None:
