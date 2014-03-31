@@ -77,7 +77,7 @@
          --       the same code
          --}}
       <h3>Happening Now!</h3>
-      <div class="content-editable" data-attr="happening_now_description" contenteditable>{{{ happening_now_description }}}</div>
+      <div class="highlight-description content-editable" data-attr="happening_now_description" contenteditable>{{{ happening_now_description }}}</div>
       <select class="highlight-link-selector" name="happening_now_link_url" data-link-type-name="happening_now_link_type">
         {{#select_highlight happening_now_link_type happening_now_link_url }}
         <option value="" data-link-type="">Link to...</option>
@@ -97,7 +97,7 @@
 
     <div class="highlight">
       <h3>Get Involved!</h3>
-      <div class="content-editable" data-attr="get_involved_description" contenteditable>{{{ get_involved_description }}}</div>
+      <div class="highlight-description content-editable" data-attr="get_involved_description" contenteditable>{{{ get_involved_description }}}</div>
       <select class="highlight-link-selector" name="get_involved_link_url" data-link-type-name="get_involved_link_type">
         {{#select_highlight get_involved_link_type get_involved_link_url }}
         <option value="" data-link-type="">Link to...</option>
