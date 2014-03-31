@@ -298,19 +298,21 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.app %>/scripts/components.min.js': [
             '<%= yeoman.app %>/bower_components/jquery/jquery.js',
-            '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.core.js',
-            '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.widget.js',
-            '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.mouse.js',
-            '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.sortable.js',
-            '<%= yeoman.app %>/bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js',
             '<%= yeoman.app %>/bower_components/handlebars/handlebars.js',
             '<%= yeoman.app %>/bower_components/underscore/underscore.js',
             '<%= yeoman.app %>/bower_components/backbone/backbone.js',
             '<%= yeoman.app %>/bower_components/backbone.marionette/lib/backbone.marionette.js',
             '<%= yeoman.app %>/bower_components/backbone-relational/backbone-relational.js',
+            '<%= yeoman.app %>/bower_components/swag/lib/swag.js'
+          ],
+          '<%= yeoman.app %>/scripts/components-admin.min.js': [
+            '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.core.js',
+            '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.widget.js',
+            '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.mouse.js',
+            '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.sortable.js',
+            '<%= yeoman.app %>/bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js',
             '<%= yeoman.app %>/bower_components/django-csrf.js/django-csrf.js',
             '<%= yeoman.app %>/bower_components/pen/src/pen.js',
-            '<%= yeoman.app %>/bower_components/swag/lib/swag.js',
             '<%= yeoman.app %>/bower_components/FileAPI/dist/FileAPI.js'
           ],
           '<%= yeoman.app %>/scripts/app.min.js': [
