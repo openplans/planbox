@@ -199,6 +199,16 @@ class Project (ModelWithSlugMixin, TimeStampedModel):
     logo_img_url = models.URLField(_('Logo Image URL'), blank=True, max_length=2048)
     template = models.ForeignKey('Project', help_text=_("The project, if any, that this one is based off of"), null=True, blank=True, on_delete=models.SET_NULL)
 
+    # NOTE: These may belong in a separate model, but are on the project for
+    #       now. I think the model would be called a Highlight.
+    happening_now_description = models.TextField(blank=True)
+    happening_now_link_type = models.CharField(max_length=16, choices=LINK_TYPE_CHOICES, blank=True)
+    happening_now_link_url = models.CharField(max_length=2048, blank=True)
+
+    get_involved_description = models.TextField(blank=True)
+    get_involved_link_type = models.CharField(max_length=16, choices=LINK_TYPE_CHOICES, blank=True)
+    get_involved_link_url = models.CharField(max_length=2048, blank=True)
+
     objects = ProjectManager()
 
     class Meta:
