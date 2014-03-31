@@ -75,31 +75,26 @@
     <div class="highlight">
       <h3>Happening Now!</h3>
       <div class="content-editable" data-attr="happening_now_description" contenteditable>{{ happening_now_description }}</div>
-      <select>
+      <select class="highlight-link-selector" name="happening_now_link_url" data-link-type-name="happening_now_link_type">
         {{#select_highlight happening_now_link_type happening_now_link_url }}
         <option value="">Link to...</option>
           {{#each sections }}
-            {{>project-highlight-link-options-tpl }}
+            <option data-link-type="section" data-id="{{ id }}" value="#section-{{ slug }}">{{ label }}</option>
+            {{#is type 'timeline'}}
+              {{#each ../../events}}
+                <option data-link-type="event" data-id="{{ id }}" value="#event-{{ slug }}">{{ label }}</option>
+              {{/each}}
+            {{/is}}
           {{/each }}
-        <option data-type="link" value="">External Link...</option>
+        <option data-link-type="link" value="external-link">External Link...</option>
         {{/select_highlight }}
       </select>
-      <input class="external-link" type="text" placeholder="http://" name="happening_now_link_url">
+      <input name="happening_now_link_url" class="highlight-external-link {{#isnt happening_now_link_type 'link' }}is-hidden{{/isnt}}" type="text" placeholder="http://" data-attr="happening_now_link_url" value="{{#is happening_now_link_type 'link' }}{{happening_now_link_url}}{{/is}}">
     </div>
 
     <div class="highlight">
       <h3>Get Involved!</h3>
-      <div class="content-editable" data-attr="get_involved_description" contenteditable>{{ get_involved_description }}</div>
-      <select>
-        <option value="">Link to...</option>
-        {{# select_highlight get_involved_link_type get_involved_link_url }}
-          {{#each sections}}
-            {{> project-highlight-link-options-tpl }}
-          {{/each }}
-        {{/ select_highlight }}
-        <option data-type="link" value="">External Link...</option>
-      </select>
-      <input class="external-link" type="text" placeholder="http://" name="get_involved_link_url">
+      <!-- TODO: clone from Happening Now when it works -->
     </div>
 
     {{^if location}}<h2 class="step step-location"><span class="step-arrow-left-down"></span>Where is it located?</h2>{{/if}}

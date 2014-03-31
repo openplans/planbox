@@ -76,7 +76,7 @@ var Planbox = Planbox || {};
       };
 
     if (type === 'link') {
-      $el.find('[data-type="link"]').attr({checked: 'checked', selected: 'selected'});
+      $el.find('[data-link-type="link"]').attr({checked: 'checked', selected: 'selected'});
     } else {
       selectValue(url);
     }
