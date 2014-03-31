@@ -74,10 +74,10 @@
   <div class="container">
     <div class="highlight">
       <h3>Happening Now!</h3>
-      <div class="content-editable" data-attr="happening_now_description" contenteditable>{{ happening_now_description }}</div>
+      <div class="content-editable" data-attr="happening_now_description" contenteditable>{{{ happening_now_description }}}</div>
       <select class="highlight-link-selector" name="happening_now_link_url" data-link-type-name="happening_now_link_type">
         {{#select_highlight happening_now_link_type happening_now_link_url }}
-        <option value="">Link to...</option>
+        <option value="" data-link-type="">Link to...</option>
           {{#each sections }}
             <option data-link-type="section" data-id="{{ id }}" value="#section-{{ slug }}">{{ label }}</option>
             {{#is type 'timeline'}}
@@ -86,10 +86,10 @@
               {{/each}}
             {{/is}}
           {{/each }}
-        <option data-link-type="link" value="external-link">External Link...</option>
+        <option data-link-type="external" value="external-link">External Link...</option>
         {{/select_highlight }}
       </select>
-      <input name="happening_now_link_url" class="highlight-external-link {{#isnt happening_now_link_type 'link' }}is-hidden{{/isnt}}" type="text" placeholder="http://" data-attr="happening_now_link_url" value="{{#is happening_now_link_type 'link' }}{{happening_now_link_url}}{{/is}}">
+      <input name="happening_now_link_url" class="highlight-external-link {{#isnt happening_now_link_type 'external' }}is-hidden{{/isnt}}" type="text" placeholder="http://" data-attr="happening_now_link_url" value="{{#is happening_now_link_type 'external' }}{{happening_now_link_url}}{{/is}}">
     </div>
 
     <div class="highlight">

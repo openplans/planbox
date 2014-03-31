@@ -75,8 +75,8 @@ var Planbox = Planbox || {};
         });
       };
 
-    if (type === 'link') {
-      $el.find('[data-link-type="link"]').attr({checked: 'checked', selected: 'selected'});
+    if (type === 'external') {
+      $el.find('[data-link-type="external"]').attr({checked: 'checked', selected: 'selected'});
     } else {
       selectValue(url);
     }

@@ -458,7 +458,7 @@ var Planbox = Planbox || {};
         // Handle external link  visibility
         this.model.set(linkTypeModelProp, linkType);
 
-        if (linkType === 'link') {
+        if (linkType === 'external') {
           this.ui.hightlightExternalLink.removeClass('is-hidden');
           this.model.set($target.attr('name'), '');
         } else {
