@@ -1,8 +1,8 @@
-/*globals Handlebars _ */
+/*globals Handlebars _ jQuery FileAPI */
 
 var Planbox = Planbox || {};
 
-(function(NS) {
+(function(NS, $) {
   'use strict';
 
   Handlebars.registerHelper('debug', function(obj) {
@@ -75,10 +75,14 @@ var Planbox = Planbox || {};
         });
       };
 
+    if (type === 'link') {
+      $el.find('[data-type="link"]').attr({checked: 'checked', selected: 'selected'});
+    } else {
+      selectValue(url);
+    }
 
-    return options.fn(this);
     return $el.html();
   });
 
 
-}(Planbox));
+}(Planbox, jQuery));
