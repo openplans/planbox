@@ -452,6 +452,7 @@ var Planbox = Planbox || {};
 
         var $target = $(evt.currentTarget),
             $selected = $target.find('option:selected'),
+            $externalLinkInput = $target.siblings('.highlight-external-link'),
             linkType = $selected.attr('data-link-type'),
             linkTypeModelProp = $target.attr('data-link-type-name');
 
@@ -459,10 +460,10 @@ var Planbox = Planbox || {};
         this.model.set(linkTypeModelProp, linkType);
 
         if (linkType === 'external') {
-          this.ui.hightlightExternalLink.removeClass('is-hidden');
-          this.model.set($target.attr('name'), '');
+          $externalLinkInput.removeClass('is-hidden');
+          this.model.set($target.attr('name'), $externalLinkInput.val());
         } else {
-          this.ui.hightlightExternalLink.addClass('is-hidden');
+          $externalLinkInput.addClass('is-hidden');
           this.model.set($target.attr('name'), $selected.val());
         }
       },
