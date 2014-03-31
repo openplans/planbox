@@ -74,12 +74,32 @@
   <div class="container">
     <div class="highlight">
       <h3>Happening Now!</h3>
-      {{> project-highlight-admin-tpl }}
+      <div class="content-editable" data-attr="happening_now_description" contenteditable>{{ happening_now_description }}</div>
+      <select>
+        <option value="">Link to...</option>
+        {{#select_highlight happening_now_link_type happening_now_link_url }}
+          {{#each sections }}
+            {{>project-highlight-link-options-tpl }}
+          {{/each }}
+        {{/select_highlight }}
+        <option data-type="link" value="">External Link...</option>
+      </select>
+      <input class="external-link" type="text" placeholder="http://" name="happening_now_link_url">
     </div>
 
     <div class="highlight">
       <h3>Get Involved!</h3>
-      {{> project-highlight-admin-tpl }}
+      <div class="content-editable" data-attr="get_involved_description" contenteditable>{{ get_involved_description }}</div>
+      <select>
+        <option value="">Link to...</option>
+        {{# select_highlight get_involved_link_type get_involved_link_url }}
+          {{#each sections}}
+            {{> project-highlight-link-options-tpl }}
+          {{/each }}
+        {{/ select_highlight }}
+        <option data-type="link" value="">External Link...</option>
+      </select>
+      <input class="external-link" type="text" placeholder="http://" name="get_involved_link_url">
     </div>
 
     {{^if location}}<h2 class="step step-location"><span class="step-arrow-left-down"></span>Where is it located?</h2>{{/if}}

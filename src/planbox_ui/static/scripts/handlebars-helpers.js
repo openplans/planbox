@@ -66,4 +66,19 @@ var Planbox = Planbox || {};
     return $el.html();
   });
 
+  Handlebars.registerHelper('select_highlight', function(type, url, options) {
+    var $el = $('<div/>').html(options.fn(this)),
+      selectValue = function(v) {
+        $el.find('[value="'+v+'"]').attr({
+          checked: 'checked',
+          selected: 'selected'
+        });
+      };
+
+
+    return options.fn(this);
+    return $el.html();
+  });
+
+
 }(Planbox));
