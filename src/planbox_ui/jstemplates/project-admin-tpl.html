@@ -72,21 +72,16 @@
 
 <section class="project-details">
   <div class="container">
-    <!--
-    {{^if status}}<h2 class="step step-status"><span class="step-arrow-right-up"></span>Set the current status.</h2>{{/if}}
-    <p class="project-status content-editable{{^if status}} unset-status{{/if}}">
-      <strong>
-        {{ status_label status }}
-      </strong>
-      <select class="status-selector" data-attr="status">
-        {{# select status }}
-          {{# each_status}}
-            <option value="{{ value }}">{{ label }}</option>
-          {{/ each_status}}
-        {{/ select }}
-      </select>
-    </p>
-    -->
+    <div class="highlight">
+      <h3>Happening Now!</h3>
+      {{> project-highlight-admin-tpl }}
+    </div>
+
+    <div class="highlight">
+      <h3>Get Involved!</h3>
+      {{> project-highlight-admin-tpl }}
+    </div>
+
     {{^if location}}<h2 class="step step-location"><span class="step-arrow-left-down"></span>Where is it located?</h2>{{/if}}
     <p class="project-location content-editable" data-attr="location" contenteditable>{{{ location }}}</p>
     {{^if description}}<h2 class="step step-description"><span class="step-arrow-left-down"></span>Give it a short description.</h2>{{/if}}

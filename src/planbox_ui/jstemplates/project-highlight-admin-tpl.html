@@ -1,0 +1,16 @@
+  <div class="content-editable" contenteditable></div>
+  <select>
+    <option value="">Link to...</option>
+    {{# select status }}
+      {{#each sections}}
+        <option data-type="section" data-id="{{ id }}" value="{{ slug }}">{{ label }}</option>
+        {{#is type 'timeline'}}
+          {{#each ../../events}}
+            <option data-type="event" data-id="{{ id }}" value="event-{{ id }}">{{ label }}</option>
+          {{/each}}
+        {{/is}}
+      {{/each }}
+    {{/ select }}
+    <option data-type="link" value="">External Link...</option>
+  </select>
+  <div class="content-editable" contenteditable></div>
