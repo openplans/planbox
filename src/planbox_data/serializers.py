@@ -77,6 +77,9 @@ class ProjectSerializer (serializers.ModelSerializer):
     description = CleanedHtmlField(required=False)
     contact = CleanedHtmlField(required=False)
 
+    happening_now_description = CleanedHtmlField(required=False)
+    get_involved_description = CleanedHtmlField(required=False)
+
     class Meta:
         model = models.Project
 
