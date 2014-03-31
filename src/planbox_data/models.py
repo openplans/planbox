@@ -149,11 +149,11 @@ class Project (TimeStampedModel):
         ('complete', _('Complete')),
     )
 
-    title = models.CharField(max_length=1024, blank=True)
+    title = models.TextField(max_length=1024, blank=True)
     slug = models.CharField(max_length=128, blank=True)
     public = models.BooleanField(default=False, blank=True)
     status = models.CharField(help_text=_("A string representing the project's status"), choices=STATUS_CHOICES, default='not-started', max_length=32, blank=True)
-    location = models.CharField(help_text=_("The general location of the project, e.g. \"Philadelphia, PA\", \"Clifton Heights, Louisville, KY\", \"4th St. Corridor, Brooklyn, NY\", etc."), max_length=256, default='', blank=True)
+    location = models.TextField(help_text=_("The general location of the project, e.g. \"Philadelphia, PA\", \"Clifton Heights, Louisville, KY\", \"4th St. Corridor, Brooklyn, NY\", etc."), max_length=256, default='', blank=True)
     description = models.TextField(help_text=_("An introductory description of the project"), default='', blank=True)
     contact = models.TextField(help_text=_("The contact information for the project"), default='', blank=True)
     owner = models.ForeignKey('Profile', related_name='projects')
@@ -175,8 +175,13 @@ class Project (TimeStampedModel):
 
     def save(self, *args, **kwargs):
         if self.title and not self.slug:
+            max_length = self._meta.get_field('slug').max_length
+
+            # Leave some room in the slug length for the uniquifier.
+            max_length -= 16
+
             self.slug = uniquify_slug(
-                slugify(strip_tags((self.title))),
+                slugify(strip_tags((self.title)))[:max_length],
                 [p.slug for p in self.owner.projects.all()]
             )
         super(Project, self).save(*args, **kwargs)
@@ -205,7 +210,7 @@ class EventManager (models.Manager):
 
 @python_2_unicode_compatible
 class Event (models.Model):
-    label = models.CharField(help_text=_("The time label for the event, e.g. \"January 15th, 2015\", \"Spring 2015 Phase\", \"Phase II, Summer 2015\", etc."), max_length=1024)
+    label = models.TextField(help_text=_("The time label for the event, e.g. \"January 15th, 2015\", \"Spring 2015 Phase\", \"Phase II, Summer 2015\", etc."), max_length=1024)
     description = models.TextField(help_text=_("A summary description of the timeline item"), default='', blank=True)
     index = models.PositiveIntegerField(help_text=_("Leave this field blank; it will be filled in automatically"))
     project = models.ForeignKey(Project, related_name='events')

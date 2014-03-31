@@ -81,6 +81,25 @@ class ProjectModelTests (TestCase):
         project1 = Project.objects.create(title='My <br> Project', location='x', description='x', owner=user, public=True)
         assert_equal(project1.slug, 'my-project')
 
+    def test_long_titles_generate_truncated_slugs(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        user = auth.profile
+
+        project1 = Project.objects.create(title='A B C D E F G H '*16, location='x', description='x', owner=user, public=True)
+        # The field's max length is 128, and we leave a 16 character buffer
+        # for uniquification.
+        assert_equal(project1.slug, 'a-b-c-d-e-f-g-h-'*7)
+
+    def test_long_slugs_leave_room_for_uniquification(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        user = auth.profile
+
+        project1 = Project.objects.create(title='A B C D E F G H '*16, location='x', description='x', owner=user, public=True)
+        assert_equal(project1.slug, 'a-b-c-d-e-f-g-h-'*7)
+
+        project2 = Project.objects.create(title='A B C D E F G H '*16, location='x', description='x', owner=user, public=True)
+        assert_equal(project2.slug, 'a-b-c-d-e-f-g-h-'*7 + '-2')
+
     def test_owner_owns_project(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
