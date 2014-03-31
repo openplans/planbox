@@ -41,14 +41,14 @@ var Planbox = Planbox || {};
             sel.addRange(range);
           }
         }
-      } else if ( (sel = document.selection) && sel.type !== "Control") {
+      } else if ( (sel = document.selection) && sel.type !== 'Control') {
         // IE < 9
         var originalRange = sel.createRange();
         originalRange.collapse(true);
         sel.createRange().pasteHTML(html);
         if (selectPastedContent) {
           range = sel.createRange();
-          range.setEndPoint("StartToStart", originalRange);
+          range.setEndPoint('StartToStart', originalRange);
           range.select();
         }
       }

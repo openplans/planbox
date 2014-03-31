@@ -80,6 +80,9 @@
   <script src="{{ STATIC_URL }}bower_components/FileAPI/dist/FileAPI.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
+    {% if is_owner and not read_only %}
+  <script src="{{ STATIC_URL }}scripts/components-admin.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
+    {% endif %}
   {% endif %}
   <script>Swag.registerHelpers(Handlebars);</script>
 
