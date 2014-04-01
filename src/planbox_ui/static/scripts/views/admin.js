@@ -233,7 +233,7 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.ProjectAdminView = Backbone.Marionette.Layout.extend(
+  NS.ProjectAdminView = NS.BaseProjectView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#project-admin-tpl',
       ui: {
@@ -254,11 +254,6 @@ var Planbox = Planbox || {};
         hightlightLinkSelector: '.highlight-link-selector',
         hightlightExternalLink: '.highlight-external-link'
       },
-      regions: {
-        highlightHappeningNow: '#highlight-happening-now',
-        highlightGetInvolved: '#highlight-get-involved',
-        sectionList: '#section-list'
-      },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'blur @ui.editableNavMenuLinks': 'handleEditableNavMenuLinkBlur',
@@ -276,6 +271,8 @@ var Planbox = Planbox || {};
         'change': 'dataChanged',
         'sync': 'onSync'
       },
+      sectionListView: NS.ProjectSectionListAdminView,
+
       initialize: function() {
         // Hijack paste and strip out the formatting
         this.$el.on('paste', '[contenteditable]', function(evt) {
@@ -296,14 +293,6 @@ var Planbox = Planbox || {};
           NS.Utils.pasteHtmlAtCaret(pasted.replace(/\n/g, '<br>'));
         });
 
-        // Create the regions' views
-        this.sectionListView = new NS.ProjectSectionListAdminView({
-          model: this.model,
-          collection: this.collection,
-          itemViewOptions: NS.ProjectSectionListAdminView.prototype.getItemViewOptions,
-          parent: this
-        });
-
         // Do simple protection against accidental drops of images outside of
         // drop areas (http://stackoverflow.com/a/6756680).
         window.addEventListener('dragover', function(e) {
@@ -315,9 +304,7 @@ var Planbox = Planbox || {};
           e.preventDefault();
         }, false);
 
-      },
-      showRegions: function() {
-        this.sectionList.show(this.sectionListView);
+        this.initRegions();
       },
 
       onRender: function() {
