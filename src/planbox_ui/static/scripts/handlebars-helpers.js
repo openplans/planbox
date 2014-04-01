@@ -1,8 +1,8 @@
-/*globals Handlebars _ */
+/*globals Handlebars _ jQuery FileAPI */
 
 var Planbox = Planbox || {};
 
-(function(NS) {
+(function(NS, $) {
   'use strict';
 
   Handlebars.registerHelper('debug', function(obj) {
@@ -66,4 +66,23 @@ var Planbox = Planbox || {};
     return $el.html();
   });
 
-}(Planbox));
+  Handlebars.registerHelper('select_highlight', function(type, url, options) {
+    var $el = $('<div/>').html(options.fn(this)),
+      selectValue = function(v) {
+        $el.find('[value="'+v+'"]').attr({
+          checked: 'checked',
+          selected: 'selected'
+        });
+      };
+
+    if (type === 'external') {
+      $el.find('[data-link-type="external"]').attr({checked: 'checked', selected: 'selected'});
+    } else {
+      selectValue(url);
+    }
+
+    return $el.html();
+  });
+
+
+}(Planbox, jQuery));

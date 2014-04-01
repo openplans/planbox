@@ -216,6 +216,23 @@ var Planbox = Planbox || {};
     }
   });
 
+  NS.ProjectSectionListAdminView = NS.BaseProjectSectionListView.extend({
+    collectionEvents: {
+      'change':  'dataChanged',
+      'add':     'dataChanged',
+      'remove':  'dataChanged',
+      'reorder': 'dataChanged'
+    },
+    sectionViews: {
+      'timeline': NS.TimelineSectionAdminView,
+      'text': NS.TextSectionAdminView,
+      'faqs': NS.FaqsSectionAdminView
+    },
+    dataChanged: function() {
+      this.options.parent.dataChanged();
+    }
+  });
+
   NS.ProjectAdminView = NS.BaseProjectView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#project-admin-tpl',
@@ -233,7 +250,9 @@ var Planbox = Planbox || {};
         fileInputs: 'input[type="file"]',
         imageHolders: '.image-holder',
         imageDropZones: '.image-dnd',
-        removeImageLinks: '.remove-img-btn'
+        removeImageLinks: '.remove-img-btn',
+        hightlightLinkSelector: '.highlight-link-selector',
+        hightlightExternalLink: '.highlight-external-link'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
@@ -244,23 +263,16 @@ var Planbox = Planbox || {};
         'click @ui.userMenuLink': 'handleUserMenuClick',
         'click @ui.publishBtn': 'handlePublish',
         'change @ui.fileInputs': 'handleFileInputChange',
-        'click @ui.removeImageLinks': 'handleRemoveImage'
+        'click @ui.removeImageLinks': 'handleRemoveImage',
+        'change @ui.hightlightLinkSelector': 'handleHighlightLinkChange',
+        'blur @ui.hightlightExternalLink': 'handleHighlightExternalLinkBlur'
       },
       modelEvents: {
         'change': 'dataChanged',
         'sync': 'onSync'
       },
-      collectionEvents: {
-        'change':  'dataChanged',
-        'add':     'dataChanged',
-        'remove':  'dataChanged',
-        'reorder': 'dataChanged'
-      },
-      sectionViews: {
-        'timeline': NS.TimelineSectionAdminView,
-        'text': NS.TextSectionAdminView,
-        'faqs': NS.FaqsSectionAdminView
-      },
+      sectionListView: NS.ProjectSectionListAdminView,
+
       initialize: function() {
         // Hijack paste and strip out the formatting
         this.$el.on('paste', '[contenteditable]', function(evt) {
@@ -292,10 +304,13 @@ var Planbox = Planbox || {};
           e.preventDefault();
         }, false);
 
+        this.initRegions();
       },
+
       onRender: function() {
         this.initRichEditables();
         this.initDropZones();
+        this.showRegions();
       },
 
       // Prefetches an image file for a url to speed up load time
@@ -443,6 +458,38 @@ var Planbox = Planbox || {};
         }
       },
 
+      handleHighlightLinkChange: function(evt) {
+        evt.preventDefault();
+
+        var $target = $(evt.currentTarget),
+            $selected = $target.find('option:selected'),
+            $externalLinkInput = $target.siblings('.highlight-external-link'),
+            linkType = $selected.attr('data-link-type'),
+            linkTypeModelProp = $target.attr('data-link-type-name');
+
+        // Handle external link  visibility
+        this.model.set(linkTypeModelProp, linkType);
+
+        if (linkType === 'external') {
+          $externalLinkInput.removeClass('is-hidden');
+          this.model.set($target.attr('name'), $externalLinkInput.val());
+        } else {
+          $externalLinkInput.addClass('is-hidden');
+          this.model.set($target.attr('name'), $selected.val());
+        }
+      },
+
+      handleHighlightExternalLinkBlur: function(evt) {
+        var $target = $(evt.currentTarget),
+            attr = $target.attr('data-attr'),
+            val = $target.val();
+
+        evt.preventDefault();
+
+        // Set the value of what was just blurred. Setting an event to the same
+        // value does not trigger a change event.
+        this.model.set(attr, val);
+      },
 
       onSync: function() {
         // When the model is synced with the server, we're going to rerender

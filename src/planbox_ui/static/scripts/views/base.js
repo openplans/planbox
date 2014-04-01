@@ -5,8 +5,37 @@ var Planbox = Planbox || {};
 (function(NS, $) {
   'use strict';
 
-  NS.BaseProjectView = Backbone.Marionette.CompositeView.extend({
-    itemViewContainer: '#section-list',
+  NS.BaseProjectView = Backbone.Marionette.Layout.extend({
+    regions: {
+      highlightHappeningNow: '#highlight-happening-now',
+      highlightGetInvolved: '#highlight-get-involved',
+      sectionList: '#section-list'
+    },
+
+    initRegions: function() {
+      this._sectionListView = new this.sectionListView({
+        model: this.model,
+        collection: this.collection,
+        parent: this
+      });
+    },
+
+    showRegions: function() {
+      this.sectionList.show(this._sectionListView);
+    },
+
+    initialize: function() {
+      this.initRegions();
+    },
+    onRender: function() {
+      this.showRegions();
+    }
+  });
+
+  NS.BaseProjectSectionListView = Backbone.Marionette.CollectionView.extend({
+    initialize: function() {
+      this.options.itemViewOptions = this.getItemViewOptions;
+    },
 
     getItemViewOptions: function(section, index) {
       var type = section.get('type'),
