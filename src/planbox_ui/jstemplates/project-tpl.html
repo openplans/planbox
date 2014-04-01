@@ -38,6 +38,8 @@
 
 <section class="project-details">
   <div class="container">
+
+    {{#if happening_now_description}}
     <div class="highlight">
       {{!-- TODO: Abstract this out so that happening_now and get_involved use
          --       the same code
@@ -51,7 +53,9 @@
       </a>
       {{/if}}
     </div>
+    {{/if}}
 
+    {{#if get_involved_description}}
     <div class="highlight">
       {{#if get_involved_link_url}}
       <a href="{{ get_involved_link_url }}"{{#is get_involved_link_type 'external'}} target="_blank"{{/is}}>
@@ -62,6 +66,7 @@
       </a>
       {{/if}}
     </div>
+    {{/if}}
 
     <!-- <p class="project-status"><strong>{{ status_label status }}</strong></p> -->
     <p class="project-location">{{{ location }}}</p>
