@@ -5,9 +5,7 @@ var Planbox = Planbox || {};
 (function(NS, $) {
   'use strict';
 
-  NS.BaseProjectView = Backbone.Marionette.CompositeView.extend({
-    itemViewContainer: '#section-list',
-
+  NS.BaseProjectSectionListView = Backbone.Marionette.CollectionView.extend({
     getItemViewOptions: function(section, index) {
       var type = section.get('type'),
           options = {parent: this};

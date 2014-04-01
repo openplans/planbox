@@ -38,8 +38,7 @@ var Planbox = Planbox || {};
 
     NS.app.mainRegion.show(new ProjectView({
       model: projectModel,
-      collection: projectModel.get('sections'),
-      itemViewOptions: ProjectView.prototype.getItemViewOptions
+      collection: projectModel.get('sections')
     }));
 
     if (window.location.pathname.indexOf('/new/') !== -1 && NS.Data.isOwner) {

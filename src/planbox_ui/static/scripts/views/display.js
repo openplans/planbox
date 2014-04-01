@@ -79,7 +79,7 @@ var Planbox = Planbox || {};
     template: '#welcome-modal-tpl'
   });
 
-  NS.ProjectView = NS.BaseProjectView.extend({
+  NS.ProjectView = NS.BaseProjectSectionListView.extend({
     template: '#project-tpl',
     sectionViews: {
       'timeline': NS.TimelineSectionView,

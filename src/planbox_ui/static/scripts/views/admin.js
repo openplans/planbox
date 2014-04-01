@@ -216,7 +216,24 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.ProjectAdminView = NS.BaseProjectView.extend(
+  NS.ProjectSectionListAdminView = NS.BaseProjectSectionListView.extend({
+    collectionEvents: {
+      'change':  'dataChanged',
+      'add':     'dataChanged',
+      'remove':  'dataChanged',
+      'reorder': 'dataChanged'
+    },
+    sectionViews: {
+      'timeline': NS.TimelineSectionAdminView,
+      'text': NS.TextSectionAdminView,
+      'faqs': NS.FaqsSectionAdminView
+    },
+    dataChanged: function() {
+      this.options.parent.dataChanged();
+    }
+  });
+
+  NS.ProjectAdminView = Backbone.Marionette.Layout.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#project-admin-tpl',
       ui: {
@@ -237,6 +254,11 @@ var Planbox = Planbox || {};
         hightlightLinkSelector: '.highlight-link-selector',
         hightlightExternalLink: '.highlight-external-link'
       },
+      regions: {
+        highlightHappeningNow: '#highlight-happening-now',
+        highlightGetInvolved: '#highlight-get-involved',
+        sectionList: '#section-list'
+      },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'blur @ui.editableNavMenuLinks': 'handleEditableNavMenuLinkBlur',
@@ -253,17 +275,6 @@ var Planbox = Planbox || {};
       modelEvents: {
         'change': 'dataChanged',
         'sync': 'onSync'
-      },
-      collectionEvents: {
-        'change':  'dataChanged',
-        'add':     'dataChanged',
-        'remove':  'dataChanged',
-        'reorder': 'dataChanged'
-      },
-      sectionViews: {
-        'timeline': NS.TimelineSectionAdminView,
-        'text': NS.TextSectionAdminView,
-        'faqs': NS.FaqsSectionAdminView
       },
       initialize: function() {
         // Hijack paste and strip out the formatting
@@ -285,6 +296,14 @@ var Planbox = Planbox || {};
           NS.Utils.pasteHtmlAtCaret(pasted.replace(/\n/g, '<br>'));
         });
 
+        // Create the regions' views
+        this.sectionListView = new NS.ProjectSectionListAdminView({
+          model: this.model,
+          collection: this.collection,
+          itemViewOptions: NS.ProjectSectionListAdminView.prototype.getItemViewOptions,
+          parent: this
+        });
+
         // Do simple protection against accidental drops of images outside of
         // drop areas (http://stackoverflow.com/a/6756680).
         window.addEventListener('dragover', function(e) {
@@ -297,9 +316,14 @@ var Planbox = Planbox || {};
         }, false);
 
       },
+      showRegions: function() {
+        this.sectionList.show(this.sectionListView);
+      },
+
       onRender: function() {
         this.initRichEditables();
         this.initDropZones();
+        this.showRegions();
       },
 
       // Prefetches an image file for a url to speed up load time
