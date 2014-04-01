@@ -255,6 +255,9 @@ textarea {
   height: 6.5em;
   resize: none;
 }
+select {
+  max-width: 100%;
+}
 
 /* Alerts*/
 .alert {
@@ -754,19 +757,34 @@ a.login-link, .product-header .user-menu-link {
   background-color: #fff;
   clear: both;
 }
-.project-status {
-  text-align: center;
+
+.highlight {
+  background-color: #eee;
+  margin: 0 0 0.75em;
+  padding: 0.5em;
   line-height: 1.25;
-  padding: 0.375em 0;
-  background-color: #E65CA1;
-  margin: -0.5em -0.5em 1em -0.5em;
-  position: relative;
+  border-radius: 0.125em;
 }
-.project-status strong {
-  text-transform: uppercase;
-  text-shadow: 0 0 3px rgba(0,0,0,0.25);
-  font-size: 1.25em;
+.highlight a {
+  display: block;
+  background-color: LightBlue;
+  color: #18758f;
+  text-decoration: none;
+  margin: -0.5em;
+  padding: 0.5em;
+  border-radius: 0.125em;
+}
+.highlight a:hover {
+  background-color: #48a5bf;
   color: #fff;
+}
+.highlight h3 {
+  font-size: 1.25em;
+  text-shadow: none;
+  margin-bottom: 0;
+}
+.highlight p {
+  margin-bottom: 0.125em;
 }
 
 .project-location {
@@ -975,15 +993,6 @@ div.faq {
   .site-title {
     font-size: 2.5em;
   }
-  .project-status {
-/*    position: absolute;*/
-/*    top: -1.5em;*/
-/*    right: 1em;*/
-    border-radius: 0.875em 0.125em;
-    padding: 0.5em 1.25em;
-    margin: 0 0 1em;
-    float: right;
-  }
   .project-colophon {
     padding-top: 2em;
     padding-bottom: 1em;
@@ -1050,6 +1059,14 @@ div.faq {
     border-radius: 0.25em;
   }
 
+  .highlights {
+    float: right;
+    max-width: 35%;
+    margin: 0 0 0 0.75em;
+    position: relative;
+    z-index: 1;
+  }
+
   .product-section--the-problem {
     padding-top: 2em;
   }
@@ -1090,9 +1107,6 @@ div.faq {
     top: -4.25em;
   }
 
-  .project-status strong {
-    padding: 0 0.25em;
-  }
   .project-colophon {
     padding-top: 3em;
     padding-bottom: 2em;

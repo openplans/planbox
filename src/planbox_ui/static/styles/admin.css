@@ -305,9 +305,6 @@ h6.content-editable {
   padding: 0.625em 0.75em 0.5em;
   text-align: right;
 }
-.project-status.unset-status {
-  top: -2.25em;
-}
 .step-description {
   margin-top: 2.5em;
 }
@@ -420,10 +417,6 @@ h6.content-editable {
 .site-title:hover:before,
 .site-title:focus:before {
   content: 'Project Title';
-}
-.project-status:hover:before,
-.project-status:focus:before {
-  content: 'Project Status';
 }
 .project-location:hover:before,
 .project-location:focus:before {
@@ -774,9 +767,6 @@ li.event:last-child:before {
     top: 0;
     margin-top: 0;
   }
-  .project-status.unset-status {
-    top: -1.5em;
-  }
 }
 
 @media only screen and (min-width: 44em) {
@@ -798,9 +788,6 @@ li.event:last-child:before {
   	        box-sizing: content-box;
   }
 
-  .project-status strong {
-    padding: 0 0.25em;
-  }
   .project-colophon {
     padding-top: 3em;
     padding-bottom: 2em;
