@@ -37,6 +37,8 @@
   {% if debug %}
 
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/normalize-css/normalize.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pickadate/lib/themes/classic.css" id="theme_base">
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pickadate/lib/themes/classic.date.css" id="theme_date">
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" type="text/css" media="screen, projection" />
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/print.css" type="text/css" media="print" />
   {% if is_owner and not read_only %}
@@ -80,6 +82,8 @@
   <script src="{{ STATIC_URL }}bower_components/FileAPI/dist/FileAPI.js"></script>
   <script src="{{ STATIC_URL }}bower_components/moment/moment.js"></script>
   <script src="{{ STATIC_URL }}bower_components/chrono/chrono.min.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/pickadate/lib/picker.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/pickadate/lib/picker.date.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
     {% if is_owner and not read_only %}

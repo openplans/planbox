@@ -32,19 +32,36 @@ var Planbox = Planbox || {};
         evt.preventDefault();
 
         var $target = $(evt.currentTarget),
-            val = $target.text(),
+            val = $target.val(),
             results = chrono.parse(val, new Date()),
             result, start, end;
 
+        this.model.set('datetime_label', val || '');
         if (results.length > 0) {
           result = results[0];
 
           this.model.set({
-            datetime_label: val || '',
             start_datetime: result.startDate || '',
             end_datetime: result.endDate || ''
           });
+        } else  {
+          this.model.set({
+            start_datetime: '',
+            end_datetime: ''
+          });
         }
+      },
+      onRender: function() {
+        // ContentEditableMixin
+        this.initRichEditables();
+
+        // Init the date picker
+        this.ui.datetimeInput.pickadate({
+          format: 'mmm d, yyyy',
+          editable: true,
+          selectYears: true,
+          selectMonths: true
+        });
       }
     })
   );
