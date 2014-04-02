@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Handlebars Modernizr _ Pen FileAPI */
+/*globals Backbone jQuery Handlebars Modernizr _ Pen FileAPI chrono */
 
 var Planbox = Planbox || {};
 
@@ -19,11 +19,32 @@ var Planbox = Planbox || {};
       ui: {
         editables: '[contenteditable]',
         richEditables: '.event-description',
-        deleteBtn: '.delete-event-btn'
+        deleteBtn: '.delete-event-btn',
+        datetimeInput: '.event-datetime'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
-        'click @ui.deleteBtn': 'handleDeleteClick'
+        'click @ui.deleteBtn': 'handleDeleteClick',
+        'blur @ui.datetimeInput': 'handleDatetimeChange',
+        'input @ui.datetimeInput': 'handleDatetimeChange'
+      },
+      handleDatetimeChange: function(evt) {
+        evt.preventDefault();
+
+        var $target = $(evt.currentTarget),
+            val = $target.text(),
+            results = chrono.parse(val, new Date()),
+            result, start, end;
+
+        if (results.length > 0) {
+          result = results[0];
+
+          this.model.set({
+            datetime_label: val || '',
+            start_datetime: result.startDate || '',
+            end_datetime: result.endDate || ''
+          });
+        }
       }
     })
   );

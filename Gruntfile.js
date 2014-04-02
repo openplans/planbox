@@ -313,7 +313,9 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js',
             '<%= yeoman.app %>/bower_components/django-csrf.js/django-csrf.js',
             '<%= yeoman.app %>/bower_components/pen/src/pen.js',
-            '<%= yeoman.app %>/bower_components/FileAPI/dist/FileAPI.js'
+            '<%= yeoman.app %>/bower_components/FileAPI/dist/FileAPI.js',
+            '<%= yeoman.app %>/bower_components/moment/moment.js',
+            '<%= yeoman.app %>/bower_components/chrono/chrono.min.js'
           ],
           '<%= yeoman.app %>/scripts/app.min.js': [
             '<%= yeoman.app %>/scripts/utils.js',
