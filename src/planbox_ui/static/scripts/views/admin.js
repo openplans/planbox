@@ -44,6 +44,11 @@ var Planbox = Planbox || {};
             start_datetime: result.startDate || '',
             end_datetime: result.endDate || ''
           });
+
+          // TODO: Set the data-value attribute on this.ui.datetimeInput to
+          //       the ISO string representing the start date, so that the
+          //       picker input will be initialized to that value.
+
         } else  {
           this.model.set({
             start_datetime: '',
@@ -58,6 +63,7 @@ var Planbox = Planbox || {};
         // Init the date picker
         this.ui.datetimeInput.pickadate({
           format: 'mmm d, yyyy',
+          formatSubmit: 'yyyy-mm-dd',
           editable: true,
           selectYears: true,
           selectMonths: true
