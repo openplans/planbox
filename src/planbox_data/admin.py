@@ -38,7 +38,7 @@ class SectionInline (admin.StackedInline):
     }
 
 
-class EventInline (admin.TabularInline):
+class EventInline (admin.StackedInline):
     model = Event
     extra = 0
     prepopulated_fields = {"slug": ("label",)}
