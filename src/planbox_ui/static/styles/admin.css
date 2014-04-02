@@ -611,6 +611,11 @@ li.event:last-child:before {
 }
 
 /* Date picker widget */
+.event-datetime.content-editable { background-color: inherit; }
+.event-datetime:invalid { background-color: #777; }
+.event-datetime:hover { background-color: #00B4E6; }
+.event-datetime:focus { background-color: #fff; }
+
 .picker {
   margin-top: 3em;
 }
