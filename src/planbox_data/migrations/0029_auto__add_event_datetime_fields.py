@@ -8,41 +8,6 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Project.happening_now_description'
-        db.add_column(u'planbox_data_project', 'happening_now_description',
-                      self.gf('django.db.models.fields.TextField')(default='', blank=True),
-                      keep_default=False)
-
-        # Adding field 'Project.happening_now_link_type'
-        db.add_column(u'planbox_data_project', 'happening_now_link_type',
-                      self.gf('django.db.models.fields.CharField')(default='', max_length=16, blank=True),
-                      keep_default=False)
-
-        # Adding field 'Project.happening_now_link_url'
-        db.add_column(u'planbox_data_project', 'happening_now_link_url',
-                      self.gf('django.db.models.fields.CharField')(default='', max_length=2048, blank=True),
-                      keep_default=False)
-
-        # Adding field 'Project.get_involved_description'
-        db.add_column(u'planbox_data_project', 'get_involved_description',
-                      self.gf('django.db.models.fields.TextField')(default='', blank=True),
-                      keep_default=False)
-
-        # Adding field 'Project.get_involved_link_type'
-        db.add_column(u'planbox_data_project', 'get_involved_link_type',
-                      self.gf('django.db.models.fields.CharField')(default='', max_length=16, blank=True),
-                      keep_default=False)
-
-        # Adding field 'Project.get_involved_link_url'
-        db.add_column(u'planbox_data_project', 'get_involved_link_url',
-                      self.gf('django.db.models.fields.CharField')(default='', max_length=2048, blank=True),
-                      keep_default=False)
-
-        # Adding field 'Event.slug'
-        db.add_column(u'planbox_data_event', 'slug',
-                      self.gf('django.db.models.fields.CharField')(default='', max_length=64, blank=True),
-                      keep_default=False)
-
         # Adding field 'Event.datetime_label'
         db.add_column(u'planbox_data_event', 'datetime_label',
                       self.gf('django.db.models.fields.TextField')(default=''),
@@ -60,27 +25,6 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
-        # Deleting field 'Project.happening_now_description'
-        db.delete_column(u'planbox_data_project', 'happening_now_description')
-
-        # Deleting field 'Project.happening_now_link_type'
-        db.delete_column(u'planbox_data_project', 'happening_now_link_type')
-
-        # Deleting field 'Project.happening_now_link_url'
-        db.delete_column(u'planbox_data_project', 'happening_now_link_url')
-
-        # Deleting field 'Project.get_involved_description'
-        db.delete_column(u'planbox_data_project', 'get_involved_description')
-
-        # Deleting field 'Project.get_involved_link_type'
-        db.delete_column(u'planbox_data_project', 'get_involved_link_type')
-
-        # Deleting field 'Project.get_involved_link_url'
-        db.delete_column(u'planbox_data_project', 'get_involved_link_url')
-
-        # Deleting field 'Event.slug'
-        db.delete_column(u'planbox_data_event', 'slug')
-
         # Deleting field 'Event.datetime_label'
         db.delete_column(u'planbox_data_event', 'datetime_label')
 
