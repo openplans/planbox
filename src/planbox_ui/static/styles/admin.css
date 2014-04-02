@@ -569,8 +569,10 @@ li.event:last-child:before {
 
 .event-datetime {
   min-width: 5em;
+  border: none;
   padding-right: 1.75em;
 }
+
 .event-datepicker {
   background-color: #eee;
   border-top: 0.375em solid #E65CA1;
@@ -606,6 +608,11 @@ li.event:last-child:before {
 .event-datepicker:after {
   left: auto;
   right: 0.125em;
+}
+
+/* Date picker widget */
+.picker {
+  margin-top: 3em;
 }
 
 
