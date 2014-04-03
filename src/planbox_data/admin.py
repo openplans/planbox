@@ -46,9 +46,9 @@ class EventInline (admin.StackedInline):
 
 
 class ProjectAdmin (admin.ModelAdmin):
-    list_display = ('__str__', '_permalink', 'owner', 'slug', 'status', 'public')
-    list_filter = ('status',)
+    list_display = ('_title', 'public', 'owner', '_owner_email', '_owner_affiliation', 'location', '_updated_at', '_created_at', '_permalink')
     prepopulated_fields = {"slug": ("title",)}
+    ordering = ('-updated_at',)
 
     inlines = (
         SectionInline,
@@ -62,11 +62,41 @@ class ProjectAdmin (admin.ModelAdmin):
 
     def _permalink(self, project):
         return format_html(
-            '''<a href="{0}" target="_blank">&#8663</a>''',  # 8663 is the ⇗ character
+            '''<a href="{0}" target="_blank">Link &#8663</a>''',  # 8663 is the ⇗ character
             reverse('app-project', kwargs={'owner_name': project.owner.slug, 'slug': project.slug})
         )
     _permalink.allow_tags = True
     _permalink.short_description = _('Link')
+
+    def _title(self, project):
+        return format_html(
+            '{0} <small style="white-space:nowrap">({1})</small>',
+            project.title if project.title != '' else '[No Title]',
+            project.slug
+        )
+    _title.short_description = _('Project')
+    _title.admin_order_field = 'title'
+
+    def _owner_email(self, project):
+        return  project.owner.email
+    _owner_email.short_description = _('Email')
+    _owner_email.admin_order_field = 'owner__email'
+
+    def _owner_affiliation(self, project):
+        return project.owner.affiliation
+    _owner_affiliation.short_description = _('Affiliation')
+    _owner_affiliation.admin_order_field = 'owner__affiliation'
+
+    # Format datetimes
+    def _updated_at(self, project):
+        return project.updated_at.strftime('%Y-%m-%d %H:%M')
+    _updated_at.short_description = _('Updated')
+    _updated_at.admin_order_field = 'updated_at'
+
+    def _created_at(self, project):
+        return project.created_at.strftime('%Y-%m-%d %H:%M')
+    _created_at.short_description = _('Created')
+    _created_at.admin_order_field = 'created_at'
 
 
 class ThemeAdmin (admin.ModelAdmin):
