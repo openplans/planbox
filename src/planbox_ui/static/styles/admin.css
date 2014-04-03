@@ -813,6 +813,9 @@ li.event:last-child:before {
   .step {
     font-size: 1.25em;
   }
+  .step-location {
+    display: inline-block;
+  }
   .print-btn {
     margin: 0 0 0 1em;
   }
