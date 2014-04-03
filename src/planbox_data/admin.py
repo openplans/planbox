@@ -46,7 +46,7 @@ class EventInline (admin.TabularInline):
 
 
 class ProjectAdmin (admin.ModelAdmin):
-    list_display = ('_title', 'public', 'owner', '_owner_email', 'location', '_updated_at', '_created_at', '_permalink')
+    list_display = ('_title', 'public', 'owner', '_owner_email', '_owner_affiliation', 'location', '_updated_at', '_created_at', '_permalink')
     prepopulated_fields = {"slug": ("title",)}
     ordering = ('-updated_at',)
 
@@ -69,13 +69,8 @@ class ProjectAdmin (admin.ModelAdmin):
     _permalink.short_description = _('Link')
 
     def _title(self, project):
-        if (len(project.title) + len(project.slug)) > 80:
-            template = '{0}<br><small>({1})</small>'
-        else:
-            template = '{0} <small>({1})</small>'
-
         return format_html(
-            template,
+            '{0} <small style="white-space:nowrap">({1})</small>',
             project.title if project.title != '' else '[No Title]',
             project.slug
         )
@@ -85,6 +80,12 @@ class ProjectAdmin (admin.ModelAdmin):
     def _owner_email(self, project):
         return  project.owner.email
     _owner_email.short_description = _('Email')
+    _owner_email.admin_order_field = 'owner__email'
+
+    def _owner_affiliation(self, project):
+        return project.owner.affiliation
+    _owner_affiliation.short_description = _('Affiliation')
+    _owner_affiliation.admin_order_field = 'owner__affiliation'
 
     # Format datetimes
     def _updated_at(self, project):
