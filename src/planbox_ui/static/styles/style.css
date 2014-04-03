@@ -807,10 +807,7 @@ a.login-link, .product-header .user-menu-link {
 .project-timeline {
   background: #888;
 }
-.project-timeline, 
-.project-timeline select, 
-.project-timeline input, 
-.project-timeline textarea {
+.project-timeline {
   color: #fff;
 }
 .project-timeline-label {
@@ -883,10 +880,6 @@ li.event:last-child:before {
   -webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
-}
-.calendar-icon:hover {
-/*  background-color: #fff;*/
-/*  border-top-color: #FF66B3;*/
 }
 .calendar-icon:before,
 .calendar-icon:after {
