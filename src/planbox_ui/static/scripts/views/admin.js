@@ -20,13 +20,24 @@ var Planbox = Planbox || {};
         editables: '[contenteditable]',
         richEditables: '.event-description',
         deleteBtn: '.delete-event-btn',
-        datetimeInput: '.event-datetime'
+        datetimeInput: '.event-datetime',
+        calendarIcon: '.calendar-icon'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'click @ui.deleteBtn': 'handleDeleteClick',
         'blur @ui.datetimeInput': 'handleDatetimeChange',
-        'input @ui.datetimeInput': 'handleDatetimeChange'
+        'input @ui.datetimeInput': 'handleDatetimeChange',
+        'click @ui.calendarIcon': 'handleCalendarIconClick'
+      },
+      handleCalendarIconClick: function(evt) {
+        evt.preventDefault();
+        this.ui.datetimeInput.pickadate('open');
+        console.log('clicked datepicker icon');
+
+        // Stop further propagation, because the picker widget is rigged to
+        // close if you click anywhere besides its attached input.
+        evt.stopPropagation();
       },
       handleDatetimeChange: function(evt) {
         evt.preventDefault();
