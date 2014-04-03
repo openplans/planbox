@@ -123,4 +123,27 @@
   {% endif %}
 
   {% handlebarsjs '(.*)' precompile register_partials %}
+
+  {% comment %}
+  For all the event microdata attributes, see
+  http://diveintohtml5.info/extensibility.html
+  and search for "Event Vocabulary".
+  {% endcomment %}
+
+  <ul class="is-hidden">
+    {% for event in project_data.events %}
+
+    {% if event.datetime_label %}
+    <li itemscope itemtype="http://data-vocabulary.org/Event">
+      <header itemprop="summary">{{ event.label|safe }}</header>
+      <a itemprop="url" href="{{ request.build_absolute_uri }}#event-{{ event.slug }}"></a>
+      <time itemprop="startDate" datetime="{{ event.start_datetime }}"></time>
+      <time itemprop="endDate" datetime="{{ event.end_datetime }}"></time>
+      <div itemprop="description">{{ event.description|safe }}</div>
+    </li>
+    {% endif %}
+
+    {% endfor %}
+  </ul>
+
 {% endblock %}
