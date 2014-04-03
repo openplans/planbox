@@ -55,7 +55,6 @@ var Planbox = Planbox || {};
       handleCalendarIconClick: function(evt) {
         evt.preventDefault();
         this.ui.datetimeInput.pickadate('open');
-        console.debug('clicked datepicker icon');
 
         // Stop further propagation, because the picker widget is rigged to
         // close if you click anywhere besides its attached input.
@@ -73,7 +72,6 @@ var Planbox = Planbox || {};
 
         newDate = this.model.get('start_datetime');
         if (newDate) {
-          console.debug('setting date in picker to', newDate);
           picker.set('select', newDate, {muted: true});
         }
       },
@@ -82,7 +80,6 @@ var Planbox = Planbox || {};
             val = $target.val();
 
         this.setEventDate(val);
-        console.debug('date picker set to', val);
         this.ui.datetimeEditable.html(val);
       },
       onRender: function() {
