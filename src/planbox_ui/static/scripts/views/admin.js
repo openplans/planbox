@@ -95,7 +95,8 @@ var Planbox = Planbox || {};
         var picker;
 
         this.ui.datetimeInput.pickadate({
-          format: 'yyyy-mm-dd',
+          format: 'mmmm d, yyyy',
+          formatSubmit: 'yyyy-mm-dd',
           editable: true,
           selectYears: true,
           selectMonths: true
