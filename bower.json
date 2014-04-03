@@ -17,7 +17,9 @@
     "django-csrf.js": "https://github.com/openplans/django-csrf.js.git#1.0",
     "pen": "https://github.com/sofish/pen.git#46b75828f7d1bd4e112907c1033f41d2551f342f",
     "swag": "~0.6.1",
-    "FileAPI": "99130c0229aa077fb464c7b955a068e1f37847fb"
+    "FileAPI": "99130c0229aa077fb464c7b955a068e1f37847fb",
+    "chrono": "~0.1.9",
+    "pickadate": "~3.4.0"
   },
   "devDependencies": {}
 }

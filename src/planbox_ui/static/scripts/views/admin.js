@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Handlebars Modernizr _ Pen FileAPI */
+/*globals Backbone jQuery Handlebars Modernizr _ Pen FileAPI chrono */
 
 var Planbox = Planbox || {};
 
@@ -19,11 +19,88 @@ var Planbox = Planbox || {};
       ui: {
         editables: '[contenteditable]',
         richEditables: '.event-description',
-        deleteBtn: '.delete-event-btn'
+        deleteBtn: '.delete-event-btn',
+        datetimeEditable: '.event-datetime',
+        datetimeInput: '.event-datetime-picker',
+        calendarIcon: '.calendar-icon'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
-        'click @ui.deleteBtn': 'handleDeleteClick'
+        'click @ui.deleteBtn': 'handleDeleteClick',
+        'blur @ui.datetimeEditable': 'handleDatetimeChange',
+        'input @ui.datetimeEditable': 'handleDatetimeChange',
+        'click @ui.calendarIcon': 'handleCalendarIconClick'
+      },
+      setEventDate: function(val) {
+        var results = chrono.parse(val, new Date()),
+            result, start, end;
+
+        this.model.set('datetime_label', val || '');
+        if (results.length > 0) {
+          result = results[0];
+
+          this.model.set({
+            start_datetime: result.startDate || '',
+            end_datetime: result.endDate || ''
+          });
+
+          return result.startDate;
+        } else  {
+          this.model.set({
+            start_datetime: '',
+            end_datetime: ''
+          });
+        }
+      },
+      handleCalendarIconClick: function(evt) {
+        evt.preventDefault();
+        this.ui.datetimeInput.pickadate('open');
+
+        // Stop further propagation, because the picker widget is rigged to
+        // close if you click anywhere besides its attached input.
+        evt.stopPropagation();
+      },
+      handleDatetimeChange: function(evt) {
+        evt.preventDefault();
+
+        var $target = $(evt.currentTarget),
+            val = $target.text(),
+            picker = this.ui.datetimeInput.pickadate('picker'),
+            newDate;
+
+        this.setEventDate(val);
+
+        newDate = this.model.get('start_datetime');
+        if (newDate) {
+          picker.set('select', newDate, {muted: true});
+        }
+      },
+      handleDatetimePickerChange: function(evt) {
+        var $target = this.ui.datetimeInput,
+            val = $target.val();
+
+        this.setEventDate(val);
+        this.ui.datetimeEditable.html(val);
+      },
+      onRender: function() {
+        // ContentEditableMixin
+        this.initRichEditables();
+        // Init the date picker
+        this.initDatepicker();
+      },
+      initDatepicker: function() {
+        var picker;
+
+        this.ui.datetimeInput.pickadate({
+          format: 'mmmm d, yyyy',
+          formatSubmit: 'yyyy-mm-dd',
+          editable: true,
+          selectYears: true,
+          selectMonths: true
+        });
+
+        picker = this.ui.datetimeInput.pickadate('picker');
+        picker.on('set', _.bind(this.handleDatetimePickerChange, this));
       }
     })
   );

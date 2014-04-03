@@ -263,6 +263,10 @@ class Event (ModelWithSlugMixin, models.Model):
     index = models.PositiveIntegerField(help_text=_("Leave this field blank; it will be filled in automatically"))
     project = models.ForeignKey(Project, related_name='events')
 
+    datetime_label = models.TextField(blank=True, help_text=_("A description of this event's date and time, preferably in a parsable format."))
+    start_datetime = models.DateTimeField(null=True, blank=True)
+    end_datetime = models.DateTimeField(null=True, blank=True)
+
     objects = EventManager()
 
     class Meta:

@@ -806,6 +806,8 @@ a.login-link, .product-header .user-menu-link {
 /* Project Timeline */
 .project-timeline {
   background: #888;
+}
+.project-timeline {
   color: #fff;
 }
 .project-timeline-label {
@@ -858,9 +860,45 @@ li.event:last-child:before {
 .event-datetime {
   position: relative;
   float: left;
-  font-size: 1.5em;
+  font-size: 1.375em;
+  font-weight: 100;
   margin-bottom: 0.25em;
+  padding-right: 1.75em;
 }
+
+.calendar-icon {
+  background-color: #eee;
+  border-top: 0.375em solid #E65CA1;
+  border-radius: 0.125em;
+  float: left;
+  width: 1em;
+  height: 1em;
+  font-size: 1.25em;
+  margin: 0.375em 0 0 -1.375em;
+  position: relative;
+  z-index: 2;
+  -webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.calendar-icon:before,
+.calendar-icon:after {
+  content: '';
+  display: block;
+  background-color: #ddd;
+  position: absolute;
+  width: 3px;
+  height: 0.25em;
+  top: -0.375em;
+  left: 0.125em;
+  border-radius: 1em;
+  margin-top: -2px;
+}
+.calendar-icon:after {
+  left: auto;
+  right: 0.125em;
+}
+
 .event-description {
   position: relative;
   margin-bottom: 1.25em;

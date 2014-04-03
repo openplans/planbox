@@ -37,6 +37,8 @@
   {% if debug %}
 
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/normalize-css/normalize.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pickadate/lib/themes/classic.css" id="theme_base">
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pickadate/lib/themes/classic.date.css" id="theme_date">
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" type="text/css" media="screen, projection" />
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/print.css" type="text/css" media="print" />
   {% if is_owner and not read_only %}
@@ -78,6 +80,10 @@
   <script src="{{ STATIC_URL }}bower_components/pen/src/pen.js"></script>
   <script src="{{ STATIC_URL }}bower_components/swag/lib/swag.js"></script>
   <script src="{{ STATIC_URL }}bower_components/FileAPI/dist/FileAPI.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/moment/moment.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/chrono/chrono.min.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/pickadate/lib/picker.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/pickadate/lib/picker.date.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
     {% if is_owner and not read_only %}
@@ -117,4 +123,27 @@
   {% endif %}
 
   {% handlebarsjs '(.*)' precompile register_partials %}
+
+  {% comment %}
+  For all the event microdata attributes, see
+  http://diveintohtml5.info/extensibility.html
+  and search for "Event Vocabulary".
+  {% endcomment %}
+
+  <ul class="is-hidden">
+    {% for event in project_data.events %}
+
+    {% if event.datetime_label %}
+    <li itemscope itemtype="http://data-vocabulary.org/Event">
+      <header itemprop="summary">{{ event.label|safe }}</header>
+      <a itemprop="url" href="{{ request.build_absolute_uri }}#event-{{ event.slug }}"></a>
+      <time itemprop="startDate" datetime="{{ event.start_datetime }}"></time>
+      <time itemprop="endDate" datetime="{{ event.end_datetime }}"></time>
+      <div itemprop="description">{{ event.description|safe }}</div>
+    </li>
+    {% endif %}
+
+    {% endfor %}
+  </ul>
+
 {% endblock %}

@@ -569,43 +569,22 @@ li.event:last-child:before {
 
 .event-datetime {
   min-width: 5em;
-  padding-right: 1.75em;
+  border: none;
 }
-.event-datepicker {
-  background-color: #eee;
-  border-top: 0.375em solid #E65CA1;
-  border-radius: 0.125em;
-  float: left;
-  width: 1em;
-  height: 1em;
-  font-size: 1.25em;
-  margin: 0.375em 0 0 -1.375em;
-  position: relative;
-  z-index: 2;
-  -webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
+
+/* Date picker widget */
+.event-datetime.content-editable {}
+.event-datetime:invalid { background-color: #777; }
+.event-datetime:hover { background-color: #00B4E6; }
+.event-datetime:focus { background-color: #fff; }
+
+.picker {
+  margin-top: 3em;
 }
-.event-datepicker:hover {
+.calendar-icon:hover {
+  cursor: pointer;
   background-color: #fff;
   border-top-color: #FF66B3;
-}
-.event-datepicker:before,
-.event-datepicker:after {
-  content: '';
-  display: block;
-  background-color: #ddd;
-  position: absolute;
-  width: 3px;
-  height: 0.25em;
-  top: -0.375em;
-  left: 0.125em;
-  border-radius: 1em;
-  margin-top: -2px;
-}
-.event-datepicker:after {
-  left: auto;
-  right: 0.125em;
 }
 
 
