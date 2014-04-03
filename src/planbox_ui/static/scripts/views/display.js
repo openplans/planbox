@@ -14,7 +14,11 @@ var Planbox = Planbox || {};
   NS.EventView = Backbone.Marionette.ItemView.extend({
     template: '#event-tpl',
     tagName: 'li',
-    className: 'event'
+    className: 'event',
+    attributes: {
+      itemscope: '',
+      itemtype: 'http://data-vocabulary.org/Event'
+    }
   });
 
   NS.TimelineSectionView = Backbone.Marionette.CompositeView.extend({
