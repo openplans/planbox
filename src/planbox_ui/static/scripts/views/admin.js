@@ -20,31 +20,19 @@ var Planbox = Planbox || {};
         editables: '[contenteditable]',
         richEditables: '.event-description',
         deleteBtn: '.delete-event-btn',
-        datetimeInput: '.event-datetime',
+        datetimeEditable: '.event-datetime',
+        datetimeInput: '.event-datetime-picker',
         calendarIcon: '.calendar-icon'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'click @ui.deleteBtn': 'handleDeleteClick',
-        'blur @ui.datetimeInput': 'handleDatetimeChange',
-        'input @ui.datetimeInput': 'handleDatetimeChange',
+        'blur @ui.datetimeEditable': 'handleDatetimeChange',
+        'input @ui.datetimeEditable': 'handleDatetimeChange',
         'click @ui.calendarIcon': 'handleCalendarIconClick'
       },
-      handleCalendarIconClick: function(evt) {
-        evt.preventDefault();
-        this.ui.datetimeInput.pickadate('open');
-        console.log('clicked datepicker icon');
-
-        // Stop further propagation, because the picker widget is rigged to
-        // close if you click anywhere besides its attached input.
-        evt.stopPropagation();
-      },
-      handleDatetimeChange: function(evt) {
-        evt.preventDefault();
-
-        var $target = $(evt.currentTarget),
-            val = $target.val(),
-            results = chrono.parse(val, new Date()),
+      setEventDate: function(val) {
+        var results = chrono.parse(val, new Date()),
             result, start, end;
 
         this.model.set('datetime_label', val || '');
@@ -56,10 +44,7 @@ var Planbox = Planbox || {};
             end_datetime: result.endDate || ''
           });
 
-          // TODO: Set the data-value attribute on this.ui.datetimeInput to
-          //       the ISO string representing the start date, so that the
-          //       picker input will be initialized to that value.
-
+          return result.startDate;
         } else  {
           this.model.set({
             start_datetime: '',
@@ -67,18 +52,57 @@ var Planbox = Planbox || {};
           });
         }
       },
+      handleCalendarIconClick: function(evt) {
+        evt.preventDefault();
+        this.ui.datetimeInput.pickadate('open');
+        console.debug('clicked datepicker icon');
+
+        // Stop further propagation, because the picker widget is rigged to
+        // close if you click anywhere besides its attached input.
+        evt.stopPropagation();
+      },
+      handleDatetimeChange: function(evt) {
+        evt.preventDefault();
+
+        var $target = $(evt.currentTarget),
+            val = $target.text(),
+            picker = this.ui.datetimeInput.pickadate('picker'),
+            newDate;
+
+        this.setEventDate(val);
+
+        newDate = this.model.get('start_datetime');
+        if (newDate) {
+          console.debug('setting date in picker to', newDate);
+          picker.set('select', newDate, {muted: true});
+        }
+      },
+      handleDatetimePickerChange: function(evt) {
+        var $target = this.ui.datetimeInput,
+            val = $target.val();
+
+        this.setEventDate(val);
+        console.debug('date picker set to', val);
+        this.ui.datetimeEditable.html(val);
+      },
       onRender: function() {
         // ContentEditableMixin
         this.initRichEditables();
-
         // Init the date picker
+        this.initDatepicker();
+      },
+      initDatepicker: function() {
+        var picker;
+
         this.ui.datetimeInput.pickadate({
-          format: 'mmm d, yyyy',
-          formatSubmit: 'yyyy-mm-dd',
+          format: 'yyyy-mm-dd',
           editable: true,
           selectYears: true,
           selectMonths: true
         });
+
+        picker = this.ui.datetimeInput.pickadate('picker');
+        picker.on('set', _.bind(this.handleDatetimePickerChange, this));
       }
     })
   );

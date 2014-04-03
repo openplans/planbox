@@ -6,7 +6,8 @@
      --       actual bearing on form validity, since no form is not actually
      --       being submitted.
      --}}
-  <input type="text" class="event-datetime content-editable" required data-attr="datetime_label" data-value="{{ start_datetime }}" value="{{ datetime_label }}"></input>
+  <span class="event-datetime content-editable" contenteditable data-attr="datetime_label">{{ datetime_label }}</span>
+  <input type="text" style="display: none;" class="event-datetime-picker" value="{{ start_datetime }}"></input>
   <span class="calendar-icon"></span>
 </div>
 <div class="event-description content-editable" data-attr="description" contenteditable>{{{ description }}}</div>
