@@ -24,7 +24,10 @@
         it('should get rid of empty events', function() {
           p.get('events').add([{label: 'Event 1'}, {}, {label: 'Event 3'}]);
           p.clean();
-          assert.deepEqual(p.get('events').toJSON(), [{label: 'Event 1'}, {label: 'Event 3'}]);
+          assert.deepEqual(p.get('events').toJSON(), [
+            {label: 'Event 1', attachments: []},
+            {label: 'Event 3', attachments: []}
+          ]);
         });
       });
     });
