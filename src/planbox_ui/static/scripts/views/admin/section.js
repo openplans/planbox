@@ -135,10 +135,10 @@ var Planbox = Planbox || {};
           parent: this.options.parent,
           model: this.model,
           // TODO: remove this test data
-          collection: this.model.get('attachments') || new NS.ReorderableCollection([
-            {id: 1, index: 0, label: 'Meeting Minutes', description: 'The minutes of the meeting', preview_url: 'http://www.agrability.org/toolbox/img/pdf_icon.png'},
-            {id: 2, index: 1, label: 'Meeting Hours', description: 'The hours of the meeting', preview_url: 'http://www.agrability.org/toolbox/img/pdf_icon.png'},
-            {id: 3, index: 2, label: 'Meeting Days', description: 'The days of the meeting', preview_url: 'http://www.agrability.org/toolbox/img/pdf_icon.png'}
+          collection: this.model.get('attachments').size() ? this.model.get('attachments').size() : new NS.AttachmentCollection([
+            {id: 1, index: 0, label: 'Meeting Minutes', description: 'The minutes of the meeting', url: 'http://www.agrability.org/toolbox/img/pdf_icon.png'},
+            {id: 2, index: 1, label: 'Meeting Hours', description: 'The hours of the meeting', url: 'http://www.agrability.org/toolbox/img/pdf_icon.png'},
+            {id: 3, index: 2, label: 'Meeting Days', description: 'The days of the meeting', url: 'http://www.agrability.org/toolbox/img/pdf_icon.png'}
           ])
         }));
       },
