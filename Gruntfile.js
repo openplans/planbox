@@ -328,7 +328,8 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/views/mixins.js',
             '<%= yeoman.app %>/scripts/views/base.js',
             '<%= yeoman.app %>/scripts/views/display.js',
-            '<%= yeoman.app %>/scripts/views/admin.js',
+            '<%= yeoman.app %>/scripts/views/admin/section.js',
+            '<%= yeoman.app %>/scripts/views/admin/project.js',
             '<%= yeoman.app %>/scripts/app.js'
           ],
           '<%= yeoman.app %>/scripts/modernizr.min.js': [
