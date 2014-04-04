@@ -126,7 +126,7 @@ class S3UploadMixin (object):
         return signature
 
     def get_s3_upload_form_data(self):
-        if self.get_project_is_owner():
+        if self.get_project_is_editable():
             encoded_policy = self.get_s3_upload_encoded_policy()
             return {
                 'key': '/'.join([self.get_s3_upload_path(), '${filename}']),
@@ -242,12 +242,19 @@ class ProjectMixin (AppMixin):
 
         # A flag denoting whether the current user is the project owner. Used
         # to determine whether an editable interface should be presented.
-        context['is_owner'] = self.get_project_is_owner()
+        context['is_owner'] = self.get_project_is_editable()
 
         return context
 
 
 class BaseExisingProjectView (ProjectMixin, TemplateView):
+    def get_project_is_visible(self):
+        return (
+            self.request.user.is_superuser or
+            self.project.public or
+            self.project.owned_by(self.request.user)
+        )
+
     def get_project_serialized_data(self):
         project_serializer = ProjectSerializer(self.project)
         return project_serializer.data
@@ -261,7 +268,7 @@ class BaseExisingProjectView (ProjectMixin, TemplateView):
         self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
                                          owner__slug=owner_name, slug=slug)
 
-        if not (request.user.is_superuser or self.project.public or self.project.owned_by(self.request.user)):
+        if not self.get_project_is_visible():
             raise Http404
 
         return super(BaseExisingProjectView, self).get(request, pk=self.project.pk)
@@ -273,8 +280,8 @@ class ProjectView (SSLRequired, S3UploadMixin, BaseExisingProjectView):
     authenticated user is the owner of the project.
     """
 
-    def get_project_is_owner(self):
-        return self.request.user.is_superuser or self.project.owned_by(self.request.user)
+    def get_project_is_editable(self):
+        return self.project.owned_by(self.request.user)
 
 
 class ReadOnlyProjectView (ReadOnlyMixin, BaseExisingProjectView):
@@ -283,7 +290,7 @@ class ReadOnlyProjectView (ReadOnlyMixin, BaseExisingProjectView):
     the project owner (thus it is always in read-only mode).
     """
 
-    def get_project_is_owner(self):
+    def get_project_is_editable(self):
         return False
 
 
@@ -325,7 +332,7 @@ class NewProjectView (SSLRequired, LoginRequired, S3UploadMixin, ProjectMixin, T
         serializer = TemplateProjectSerializer(project)
         return serializer.data
 
-    def get_project_is_owner(self):
+    def get_project_is_editable(self):
         return True
 
     def get_s3_upload_path(self):
