@@ -242,7 +242,7 @@ class ProjectMixin (AppMixin):
 
         # A flag denoting whether the current user is the project owner. Used
         # to determine whether an editable interface should be presented.
-        context['is_owner'] = self.get_project_is_editable()
+        context['is_editable'] = self.get_project_is_editable()
 
         return context
 

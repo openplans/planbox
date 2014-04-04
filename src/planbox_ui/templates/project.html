@@ -41,7 +41,7 @@
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pickadate/lib/themes/classic.date.css" id="theme_date">
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" type="text/css" media="screen, projection" />
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/print.css" type="text/css" media="print" />
-  {% if is_owner and not read_only %}
+  {% if is_editable %}
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.css" type="text/css" media="screen, projection" />
   {% endif %}
 
@@ -49,7 +49,7 @@
 
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" media="screen, projection" />
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/print.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" media="print" />
-  {% if is_owner and not read_only %}
+  {% if is_editable %}
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" media="screen, projection" />
   {% endif %}
 
@@ -86,7 +86,7 @@
   <script src="{{ STATIC_URL }}bower_components/pickadate/lib/picker.date.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
-    {% if is_owner and not read_only %}
+    {% if is_editable %}
   <script src="{{ STATIC_URL }}scripts/components-admin.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
     {% endif %}
   {% endif %}
@@ -97,7 +97,7 @@
     Planbox.Data = {
       project: {{ project_data|as_json }},
       user: {{ user_data|as_json }},
-      isOwner: {% if read_only %}false{% else %}{{ is_owner|as_json }}{% endif %},
+      isEditable: {{ is_editable|as_json }},
       statuses: [
         { 'value': 'not-started', 'label': 'Not Started'},
         { 'value': 'active', 'label': 'Active'},

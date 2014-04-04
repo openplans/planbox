@@ -27,12 +27,12 @@ var Planbox = Planbox || {};
   NS.app.addInitializer(function(options){
     var projectModel, ProjectView;
 
-    if (NS.Data.isOwner && !NS.Data.project.owner_id) {
+    if (NS.Data.isEditable && !NS.Data.project.owner_id) {
       NS.Data.project.owner = NS.Data.user.username;
     }
 
     projectModel = new NS.ProjectModel(NS.Data.project);
-    ProjectView = NS.Data.isOwner ? NS.ProjectAdminView : NS.ProjectView;
+    ProjectView = NS.Data.isEditable ? NS.ProjectAdminView : NS.ProjectView;
 
     window.projectModel = projectModel;
 
@@ -41,7 +41,7 @@ var Planbox = Planbox || {};
       collection: projectModel.get('sections')
     }));
 
-    if (window.location.pathname.indexOf('/new/') !== -1 && NS.Data.isOwner) {
+    if (window.location.pathname.indexOf('/new/') !== -1 && NS.Data.isEditable) {
       NS.app.overlayRegion.show(new NS.WelcomeModalView());
     }
   });
