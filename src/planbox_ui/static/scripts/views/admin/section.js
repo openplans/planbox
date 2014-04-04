@@ -6,6 +6,51 @@ var Planbox = Planbox || {};
   'use strict';
 
   // Sections =================================================================
+  NS.AttachmentAdminView = NS.SectionListItemAdminView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
+      template: '#attachment-admin-tpl',
+      tagName: 'li',
+      className: 'attachment',
+      ui: {
+        editables: '[contenteditable]',
+        richEditables: '.attachment-description',
+        deleteBtn: '.delete-attachment-btn'
+      },
+      events: {
+        'blur @ui.editables': 'handleEditableBlur',
+        'click @ui.deleteBtn': 'handleDeleteClick'
+      }
+    })
+  );
+
+  NS.AttachmentListAdminView = NS.SectionListAdminView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
+      template: '#attachments-section-admin-tpl',
+      tagName: 'section',
+      className: '',
+      itemView: NS.AttachmentAdminView,
+      itemViewContainer: '.attachment-list',
+
+      ui: {
+        editables: '[contenteditable]:not(.event [contenteditable])',
+        itemList: '.attachment-list'
+      },
+
+      events: {
+        'blur @ui.editables': 'handleEditableBlur'
+      },
+      onRender: function() {
+        // We need to do this since SectionListAdminView and ContentEditableMixin
+        // both override onRender.
+
+        // ContentEditableMixin
+        this.initRichEditables();
+        // SectionListAdminView
+        this.initSortableItemList();
+      }
+    })
+  );
+
   NS.EventAdminView = NS.SectionListItemAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#event-admin-tpl',
@@ -25,6 +70,9 @@ var Planbox = Planbox || {};
         'blur @ui.datetimeEditable': 'handleDatetimeChange',
         'input @ui.datetimeEditable': 'handleDatetimeChange',
         'click @ui.calendarIcon': 'handleCalendarIconClick'
+      },
+      regions: {
+        attachmentList: '.attachments-region'
       },
       setEventDate: function(val) {
         var results = chrono.parse(val, new Date()),
@@ -82,6 +130,17 @@ var Planbox = Planbox || {};
         this.initRichEditables();
         // Init the date picker
         this.initDatepicker();
+
+        this.attachmentList.show(new NS.AttachmentListAdminView({
+          parent: this.options.parent,
+          model: this.model,
+          // TODO: remove this test data
+          collection: this.model.get('attachments') || new NS.ReorderableCollection([
+            {id: 1, index: 0, label: 'Meeting Minutes', description: 'The minutes of the meeting', preview_url: 'http://www.agrability.org/toolbox/img/pdf_icon.png'},
+            {id: 2, index: 1, label: 'Meeting Hours', description: 'The hours of the meeting', preview_url: 'http://www.agrability.org/toolbox/img/pdf_icon.png'},
+            {id: 3, index: 2, label: 'Meeting Days', description: 'The days of the meeting', preview_url: 'http://www.agrability.org/toolbox/img/pdf_icon.png'}
+          ])
+        }));
       },
       initDatepicker: function() {
         var picker;

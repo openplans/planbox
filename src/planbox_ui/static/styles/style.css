@@ -911,6 +911,10 @@ li.event:last-child:before {
   background: #57D982;
 }
 
+li.attachment {
+  position: relative;
+}
+
 /* Project Footer */
 .project-contact-info {
   position: relative;
@@ -1247,16 +1251,16 @@ div.faq {
   }
 
   .logo-table {
-    display: table; 
-    border-collapse: collapse; 
+    display: table;
+    border-collapse: collapse;
     border-spacing: 0;
   }
   .logo-table-row {
     display: table-row;
   }
   .logo-table-row > div {
-    display: table-cell; 
-    padding: 0; 
+    display: table-cell;
+    padding: 0;
     vertical-align: top;
   }
   .logo-table-row > div.image-holder,

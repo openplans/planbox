@@ -1,0 +1,14 @@
+<div class="container">
+  <ol class="attachment-list unstyled-list"></ol>
+  <br>
+
+  {{#if_fileapi_support 'cors'}}
+  <div id="cover-image-dnd" class="image-dnd file-upload hide-for-print">
+    <p class="drop-instructions">Drop attachments here or&hellip;</p>
+    <p class="uploading-message">Uploading&hellip;</p>
+    <label for="cover-image-file-chooser" class="file-upload-input-container btn btn-small"><span class="file-upload-label">Choose File</span><input name="cover-image" id="cover-image-file-chooser" class="file-upload-input" type="file" accept="image/*" /></label>
+  </div>
+  <p class="remove-cover-img-btn-container clearfix hide-for-print"><button class="remove-img-btn btn btn-mini btn-secondary" data-confirm-msg="Are you sure you want to remove your cover image?"><span class="delete-icon">&#10005;</span> Remove Cover Photo</button></p>
+  {{/if_fileapi_support}}
+
+</div>
