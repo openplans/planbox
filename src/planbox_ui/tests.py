@@ -133,7 +133,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         response = project_view(request, **kwargs)
 
         assert_equal(response.status_code, 200)
-        assert_equal(response.context_data.get('is_owner'), False)
+        assert_equal(response.context_data.get('is_editable'), False)
 
     def test_non_owner_gets_non_editable_details(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
@@ -154,7 +154,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         response = project_view(request, **kwargs)
 
         assert_equal(response.status_code, 200)
-        assert_equal(response.context_data.get('is_owner'), False)
+        assert_equal(response.context_data.get('is_editable'), False)
 
     def test_owner_gets_editable_details(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
@@ -172,7 +172,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         response = project_view(request, **kwargs)
 
         assert_equal(response.status_code, 200)
-        assert_equal(response.context_data.get('is_owner'), True)
+        assert_equal(response.context_data.get('is_editable'), True)
 
     def test_anon_gets_404_on_non_public_project(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
@@ -226,7 +226,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         response = project_view(request, **kwargs)
 
         assert_equal(response.status_code, 200)
-        assert_equal(response.context_data.get('is_owner'), True)
+        assert_equal(response.context_data.get('is_editable'), True)
 
 
 class ProjectThemeTests (PlanBoxUITestCase):
@@ -247,7 +247,7 @@ class ProjectThemeTests (PlanBoxUITestCase):
         response = project_view(request, **kwargs)
 
         assert_equal(response.status_code, 200)
-        assert_equal(response.context_data.get('is_owner'), False)
+        assert_equal(response.context_data.get('is_editable'), False)
         response.render()
         assert_in('<link rel="stylesheet" href="http://example.com/style.css">', response.content.decode('utf-8'))
 
@@ -267,6 +267,6 @@ class ProjectThemeTests (PlanBoxUITestCase):
         response = project_view(request, **kwargs)
 
         assert_equal(response.status_code, 200)
-        assert_equal(response.context_data.get('is_owner'), False)
+        assert_equal(response.context_data.get('is_editable'), False)
         response.render()
         assert_not_in('<link rel="stylesheet" href="http://example.com/style.css">', response.content.decode('utf-8'))
