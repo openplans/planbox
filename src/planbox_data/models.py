@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.contrib import auth
+from django.contrib.contenttypes.generic import GenericForeignKey, GenericRelation
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.text import slugify
@@ -139,6 +140,15 @@ class ProjectManager (models.Manager):
         return self.get(owner__slug=owner, slug=slug)
 
 
+class OrderedModelMixin (object):
+    def save(self, *args, **kwargs):
+        if self.index is None:
+            siblings = self.get_siblings()
+            if siblings['max_index'] is None: self.index = 0
+            else: self.index = siblings['max_index'] + 1
+        return super(OrderedModelMixin, self).save(*args, **kwargs)
+
+
 class ModelWithSlugMixin (object):
     """
     A model that adds a slug on save if one does not exist. This model needs
@@ -256,7 +266,7 @@ class EventManager (models.Manager):
 
 
 @python_2_unicode_compatible
-class Event (ModelWithSlugMixin, models.Model):
+class Event (OrderedModelMixin, ModelWithSlugMixin, models.Model):
     label = models.TextField(help_text=_("The time label for the event, e.g. \"January 15th, 2015\", \"Spring 2015 Phase\", \"Phase II, Summer 2015\", etc."))
     slug = models.CharField(max_length=64, blank=True)
     description = models.TextField(help_text=_("A summary description of the timeline item"), default='', blank=True)
@@ -266,6 +276,10 @@ class Event (ModelWithSlugMixin, models.Model):
     datetime_label = models.TextField(blank=True, help_text=_("A description of this event's date and time, preferably in a parsable format."))
     start_datetime = models.DateTimeField(null=True, blank=True)
     end_datetime = models.DateTimeField(null=True, blank=True)
+
+    attachments = GenericRelation('Attachment',
+                                  object_id_field='attached_to_id',
+                                  content_type_field='attached_to_type')
 
     objects = EventManager()
 
@@ -287,12 +301,8 @@ class Event (ModelWithSlugMixin, models.Model):
     def get_all_slugs(self):
         return [e.slug for e in self.project.events.all()]
 
-    def save(self, *args, **kwargs):
-        if self.index is None:
-            events = self.project.events.aggregate(max_index=models.Max('index'))
-            if events['max_index'] is None: self.index = 0
-            else: self.index = events['max_index'] + 1
-        return super(Event, self).save(*args, **kwargs)
+    def get_siblings(self):
+        return self.project.events.aggregate(max_index=models.Max('index'))
 
 
 class ProfileManager (models.Manager):
@@ -359,7 +369,7 @@ class SectionManager (models.Manager):
 
 
 @python_2_unicode_compatible
-class Section (ModelWithSlugMixin, TimeStampedModel):
+class Section (OrderedModelMixin, ModelWithSlugMixin, TimeStampedModel):
     SECTION_TYPE_CHOICES = (
         ('text', _('Text')),
         ('timeline', _('Timeline')),
@@ -391,9 +401,19 @@ class Section (ModelWithSlugMixin, TimeStampedModel):
     def get_all_slugs(self):
         return [s.slug for s in self.project.sections.all()]
 
-    def save(self, *args, **kwargs):
-        if self.index is None:
-            sections = self.project.sections.aggregate(max_index=models.Max('index'))
-            if sections['max_index'] is None: self.index = 0
-            else: self.index = sections['max_index'] + 1
-        return super(Section, self).save(*args, **kwargs)
+    def get_siblings(self):
+        return self.project.sections.aggregate(max_index=models.Max('index'))
+
+
+class Attachment (OrderedModelMixin, TimeStampedModel):
+    url = models.URLField(max_length=2048)
+    label = models.TextField(blank=True)
+    description = models.TextField(blank=True)
+    index = models.PositiveIntegerField(blank=True)
+
+    attached_to_type = models.ForeignKey('contenttypes.ContentType')
+    attached_to_id = models.PositiveIntegerField()
+    attached_to = GenericForeignKey('attached_to_type', 'attached_to_id')
+
+    def get_siblings(self):
+        return self.attached_to.attachments.aggregate(max_index=models.Max('index'))
