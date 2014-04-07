@@ -8,7 +8,7 @@ from nose.tools import assert_equal, assert_in, assert_raises, ok_, assert_not_e
 from rest_framework.status import HTTP_200_OK, HTTP_204_NO_CONTENT, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
-from planbox_data.models import Profile, Project, Event
+from planbox_data.models import Profile, Project, Event, Attachment
 from planbox_data.permissions import IsOwnerOrReadOnly
 from planbox_data.serializers import ProjectSerializer
 from planbox_data.views import router
@@ -29,6 +29,7 @@ class PlanBoxTestCase (TestCase):
         Profile.objects.all().delete()
         Project.objects.all().delete()
         Event.objects.all().delete()
+        Attachment.objects.all().delete()
 
     def get_view_callback(self, name):
         for urlpattern in self.urlconf.urlpatterns:
@@ -255,6 +256,73 @@ class ProjectSerializerTests (PlanBoxTestCase):
         assert_equal([int(e.label.split()[-1]) for e in project.events.all()], [3, 2, 1])
         assert_equal(project.events.all()[0].pk, events[1].pk)
         assert_equal(project.events.all()[2].pk, events[0].pk)
+
+    def test_events_attachments_are_created_from_nested_data(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        profile = auth.profile
+
+        serializer = ProjectSerializer(data={
+            'slug': 'test-slug',
+            'title': 'test title',
+            'location': 'test location',
+            'description': 'test description',
+            'events': [
+                {
+                    'label': 'test label',
+                    'attachments': [
+                        {'label': 'attachment 1', 'url': 'http://example.com/1'},
+                        {'label': 'attachment 2', 'url': 'http://example.com/1'}
+                    ]
+                },
+            ],
+            'sections': [],
+            'owner': profile.slug
+        })
+
+        ok_(serializer.is_valid(), serializer.errors)
+        project = serializer.save()
+        assert_equal([int(a.label.split()[-1]) for a in project.events.all()[0].attachments.all()], [1, 2])
+
+    def test_events_attachments_are_updated_from_nested_data(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        profile = auth.profile
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=profile)
+        event = Event.objects.create(label='test label', project=project)
+        attachments = [
+            Attachment.objects.create(attached_to=event, label='attachment 1'),
+            Attachment.objects.create(attached_to=event, label='attachment 2'),
+        ]
+
+        serializer = ProjectSerializer(project, data={
+            'id': project.pk,
+            'slug': 'test-slug',
+            'title': 'test new title',
+            'location': 'test location',
+            'description': 'test description',
+            'events': [
+                {
+                    'label': 'test label',
+                    'attachments': [
+                        {'label': 'attachment 1', 'url': 'http://example.com/1', 'id': attachments[1].pk},
+                        {'label': 'attachment 3', 'url': 'http://example.com/2'},
+                        {'label': 'attachment 2', 'url': 'http://example.com/3', 'id': attachments[0].pk},
+                    ],
+                    'id': event.pk,
+                },
+            ],
+            'sections': [],
+            'owner': profile.slug
+        })
+
+        ok_(serializer.is_valid(), serializer.errors)
+        new_project = serializer.save()
+        assert_equal(project.pk, new_project.pk)
+        assert_equal(new_project.title, 'test new title')
+        new_event = new_project.events.all()[0]
+        assert_equal([int(a.label.split()[-1]) for a in new_event.attachments.all()], [1, 3, 2])
+        assert_equal([int(a.url.split('/')[-1]) for a in new_event.attachments.all()], [1, 2, 3])
+        assert_equal(new_event.attachments.all()[0].pk, attachments[1].pk)
+        assert_equal(new_event.attachments.all()[2].pk, attachments[0].pk)
 
     def test_invalid_project_does_not_raise_exception(self):
         serializer = ProjectSerializer(data={

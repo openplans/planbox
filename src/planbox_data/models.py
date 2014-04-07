@@ -415,5 +415,8 @@ class Attachment (OrderedModelMixin, TimeStampedModel):
     attached_to_id = models.PositiveIntegerField()
     attached_to = GenericForeignKey('attached_to_type', 'attached_to_id')
 
+    class Meta:
+        ordering = ('attached_to_type', 'attached_to_id', 'index',)
+
     def get_siblings(self):
         return self.attached_to.attachments.aggregate(max_index=models.Max('index'))
