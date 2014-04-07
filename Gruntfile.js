@@ -324,6 +324,7 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/scripts/app.min.js': [
             '<%= yeoman.app %>/scripts/utils.js',
             '<%= yeoman.app %>/scripts/handlebars-helpers.js',
+            '<%= yeoman.app %>/scripts/file-upload.js',
             '<%= yeoman.app %>/scripts/models.js',
             '<%= yeoman.app %>/scripts/views/mixins.js',
             '<%= yeoman.app %>/scripts/views/base.js',
