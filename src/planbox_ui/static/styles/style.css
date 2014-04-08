@@ -918,7 +918,7 @@ li.event:last-child:before {
 li.attachment {
   position: relative;
   clear: both;
-  padding-left: 75px;
+  padding-left: 60px;
   margin-left: 0.75em;
   padding-top: 1em;
   top: -1em;
@@ -932,11 +932,11 @@ a.attachment-link:hover {
 }
 .attachment-icon {
   float: left;
-  margin-left: -75px;
+  margin-left: -60px;
   position: relative;
   right: 0.75em;
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
 }
 .attachment-title {
   text-shadow: none;

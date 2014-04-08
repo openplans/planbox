@@ -298,9 +298,9 @@ li.attachment {
 }
 .delete-attachment-btn {
   position: absolute;
-  top: 75px;
-  left: 0;
-  margin: 2.75em 0 0 -0.5em;
+  top: 60px;
+  left: 0px;
+  margin: 2.75em 0 0 -1.5em;
 }
 
 /* Project Steps */
