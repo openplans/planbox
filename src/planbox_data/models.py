@@ -410,6 +410,7 @@ class Attachment (OrderedModelMixin, TimeStampedModel):
     thumbnail_url = models.URLField(max_length=2048, blank=True, null=True)
     label = models.TextField(blank=True)
     description = models.TextField(blank=True)
+    type = models.CharField(max_length=256, blank=True)
     index = models.PositiveIntegerField(blank=True)
 
     attached_to_type = models.ForeignKey('contenttypes.ContentType')
