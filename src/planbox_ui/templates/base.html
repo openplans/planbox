@@ -26,12 +26,12 @@
   <link href='//fonts.googleapis.com/css?family=Alegreya+Sans:100,400,800,400italic,800italic,100italic' rel='stylesheet' type='text/css'>
 
   {% if debug %}
-  <script src="{{ STATIC_URL }}bower_components/foundation/css/normalize.css"></script>
-  <script src="{{ STATIC_URL }}bower_components/foundation/css/foundation.css"></script>
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/foundation/css/normalize.css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/foundation/css/foundation.css" />
   {% else %}
   <!-- TODO: Merge and minimize -->
-  <script src="{{ STATIC_URL }}bower_components/foundation/css/normalize.css"></script>
-  <script src="{{ STATIC_URL }}bower_components/foundation/css/foundation.min.css"></script>
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/foundation/css/normalize.css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/foundation/css/foundation.min.css /">
   {% endif %}
 
 
