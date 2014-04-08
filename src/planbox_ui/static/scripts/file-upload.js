@@ -77,12 +77,7 @@
 
   FileUpload.prototype.handleFileInputChange = function(evt) {
     evt.preventDefault();
-    var files;
-
-    // Get the files
-    files = FileAPI.getFiles(evt);
-    FileAPI.reset(evt.currentTarget);
-
+    var files = FileAPI.getFiles(evt);
     this.upload(files[0]);
   };
 
