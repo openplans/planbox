@@ -59,18 +59,18 @@ var Planbox = Planbox || {};
             $this.data('fileUpload').upload(files);
           },
           validate: function(files) {
-            // Make sure this is an image before continuing
-            // if (false) {
-            //   NS.showErrorModal(
-            //     'Unable to save that file.',
-            //     'This file doesn\'t seem to be an image file.',
-            //     'Make sure the file you\'re trying to upload is a valid image file ' +
-            //     'and try again.'
-            //   );
+            // Files less than 5mb (in bytes)
+            if (files[0].size > 5242880) {
+              NS.showErrorModal(
+                'Unable to save that file.',
+                'This file is too large.',
+                'This file is bigger than the file size limit of 5mb. Upload ' +
+                'a smaller file and try again.'
+              );
 
-            //   // Return false to prevent the upload from starting
-            //   return false;
-            // }
+              // Return false to prevent the upload from starting
+              return false;
+            }
             return true;
           },
           start: function(xhr, options) {
@@ -83,7 +83,7 @@ var Planbox = Planbox || {};
           complete: function(err, xhr, options) {
             // When the upload is complete
             var $container = $(this),
-                hasThumbnail = !!$(this).data('fileUpload').options.thumbnail,
+                hasThumbnail = !!options.files.file[1],
                 fileUrl = window.encodeURI(
                   options.url + options.data.key.replace('${filename}',
                   options.files.file[0].name)
@@ -111,6 +111,7 @@ var Planbox = Planbox || {};
 
             // On success, create a new attachment model on the event.
             newModel = view.collection.add({
+              type: options.files.file[0].type,
               thumbnail_url: thumbnailUrl,
               url: fileUrl
             });

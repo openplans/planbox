@@ -107,7 +107,7 @@ class S3UploadMixin (object):
                 {'bucket': self.get_s3_upload_bucket()},
                 {'acl': self.get_s3_upload_acl()},
                 ['starts-with', '$key', self.get_s3_upload_path()],
-                ['starts-with', '$Content-Type', 'image/'],
+                ['starts-with', '$Content-Type', ''],
             ]
         })
 
