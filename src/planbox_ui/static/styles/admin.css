@@ -277,6 +277,19 @@ h6.content-editable {
   visibility: visible;
 }
 
+.event-attachment-dnd {
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 2.5em;
+  padding: 0.5em;
+  font-size: 0.875em;
+}
+.event-attachment-dnd .drop-instructions {
+  display: inline;
+  margin: 0 0.25em 0 0;
+}
+
 /* Project Steps */
 .step {
   clear: both;

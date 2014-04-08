@@ -26,7 +26,6 @@ var Planbox = Planbox || {};
   NS.AttachmentListAdminView = NS.SortableListAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#attachments-section-admin-tpl',
-      tagName: 'section',
       className: '',
       itemView: NS.AttachmentAdminView,
       itemViewContainer: '.attachment-list',

@@ -142,6 +142,9 @@ img {
 .btn-small {
   font-size: 0.875em;
 }
+.btn-smaller {
+  font-size: 0.75em;
+}
 .btn-xsmall {
   font-size: 0.5em;
 }
