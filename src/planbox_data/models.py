@@ -407,6 +407,7 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, TimeStampedModel):
 
 class Attachment (OrderedModelMixin, TimeStampedModel):
     url = models.URLField(max_length=2048)
+    thumbnail_url = models.URLField(max_length=2048, blank=True, null=True)
     label = models.TextField(blank=True)
     description = models.TextField(blank=True)
     index = models.PositiveIntegerField(blank=True)
