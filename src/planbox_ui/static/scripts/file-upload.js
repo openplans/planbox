@@ -15,7 +15,8 @@
     progress: $.noop,
     complete: $.noop,
     validate: function() { return true; },
-    imagePreview: null
+    imagePreview: null,
+    thumbnail: false
   };
 
   // The actual plugin constructor
@@ -57,37 +58,41 @@
   };
 
   FileUpload.prototype.upload = function(files) {
-    var data, contentType, i;
+    var upload = $.proxy(function(files, data) {
+      FileAPI.upload({
+        url: this.options.url,
+        data: data,
+        files: {file: files}, // 'file' is was AWS expects
+        cache: true,
+        upload: $.proxy(this.options.start, this.element),
+        progress: $.proxy(this.options.progress, this.element),
+        complete: $.proxy(this.options.complete, this.element)
+      });
+    }, this);
 
-    // content type must be the same for all of the files
-    if (!files || files.length === 0) {
-      //bad things
-    }
-
-    for (i=0; i<files.length; i++) {
-      if (!contentType) {
-        contentType = files[i].type;
-      } else if (contentType !== files[i].type) {
-        // bad things
-      }
-    }
-
-    data = $.extend({'Content-Type': files[0].type}, this.options.data);
+    var file = files[0],
+        data = $.extend({'Content-Type': file.type}, this.options.data),
+        filesToUpload = [file],
+        image;
 
     if (!this.options.validate(files)) {
       return;
     }
 
-    // Start the upload.
-    FileAPI.upload({
-      url: this.options.url,
-      data: data,
-      files: {file: files}, // 'file' is was AWS expects
-      cache: true,
-      upload: $.proxy(this.options.start, this.element),
-      progress: $.proxy(this.options.progress, this.element),
-      complete: $.proxy(this.options.complete, this.element)
-    });
+    if (this.options.thumbnail && file.type.indexOf('image/') === 0) {
+      // make a thumb
+      image = FileAPI.Image(file);
+      image.preview(this.options.thumbnail.width, this.options.thumbnail.height);
+      image.get(function (err, canvas) {
+        canvas.toBlob(function(blob) {
+          blob.name = 'thumbnail_' + file.name;
+          filesToUpload.push(blob);
+          upload(filesToUpload, data);
+        }, 'image/png');
+      });
+    } else {
+      upload(filesToUpload, data);
+    }
   };
 
   FileUpload.prototype.handleFileInputChange = function(evt) {

@@ -46,6 +46,10 @@ var Planbox = Planbox || {};
         this.ui.dropZones.fileUpload({
           url: 'https://' + NS.Data.s3UploadBucket + '.s3.amazonaws.com/',
           data: _.clone(NS.Data.s3UploadData),
+          thumbnail: {
+            width: 100,
+            height: 100
+          },
           dndOver: function(isOver) {
             $(this).toggleClass('file-dragging', isOver);
           },
@@ -54,19 +58,19 @@ var Planbox = Planbox || {};
             $this.removeClass('file-dragging');
             $this.data('fileUpload').upload(files);
           },
-          validate: function(file) {
+          validate: function(files) {
             // Make sure this is an image before continuing
-            if (file.type.indexOf('image/') !== 0) {
-              NS.showErrorModal(
-                'Unable to save that file.',
-                'This file doesn\'t seem to be an image file.',
-                'Make sure the file you\'re trying to upload is a valid image file ' +
-                'and try again.'
-              );
+            // if (false) {
+            //   NS.showErrorModal(
+            //     'Unable to save that file.',
+            //     'This file doesn\'t seem to be an image file.',
+            //     'Make sure the file you\'re trying to upload is a valid image file ' +
+            //     'and try again.'
+            //   );
 
-              // Return false to prevent the upload from starting
-              return false;
-            }
+            //   // Return false to prevent the upload from starting
+            //   return false;
+            // }
             return true;
           },
           start: function(xhr, options) {
@@ -79,10 +83,15 @@ var Planbox = Planbox || {};
           complete: function(err, xhr, options) {
             // When the upload is complete
             var $container = $(this),
+                hasThumbnail = !!$(this).data('fileUpload').options.thumbnail,
                 fileUrl = window.encodeURI(
                   options.url + options.data.key.replace('${filename}',
-                  options.files.file.name)
+                  options.files.file[0].name)
                 ),
+                thumbnailUrl = hasThumbnail ? window.encodeURI(
+                  options.url + options.data.key.replace('${filename}',
+                  options.files.file[1].name)
+                ) : null,
                 newModel;
 
             // Remove the uploading class.
@@ -102,6 +111,7 @@ var Planbox = Planbox || {};
 
             // On success, create a new attachment model on the event.
             newModel = view.collection.add({
+              thumbnail_url: thumbnailUrl,
               url: fileUrl
             });
           }

@@ -242,7 +242,7 @@ var Planbox = Planbox || {};
             $this.data('fileUpload').upload(files);
           },
           validate: function(files) {
-            var valid = true, i;
+            var i;
             // Make sure this is an image before continuing
             for (i=0; i<files.length; i++) {
               if (files[i].type.indexOf('image/') !== 0) {
