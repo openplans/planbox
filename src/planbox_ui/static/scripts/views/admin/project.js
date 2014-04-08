@@ -128,6 +128,8 @@ var Planbox = Planbox || {};
         statusSelector: '.status-selector',
         statusLabel: '.project-status',
         visibilityToggle: '[name=project-public]',
+        customDomainMessage: '.custom-domain-message',
+        customDomainMessageBtn: '.custom-domain-message-btn',
         userMenuLink: '.user-menu-link',
         userMenu: '.user-menu',
         editableNavMenuLinks: '.project-nav a[contenteditable]',
@@ -144,6 +146,7 @@ var Planbox = Planbox || {};
         'change @ui.statusSelector': 'handleStatusChange',
         'change @ui.visibilityToggle': 'handleVisibilityChange',
         'click @ui.saveBtn': 'handleSave',
+        'click @ui.customDomainMessageBtn': 'handleCustomDomainMessageBtn',
         'click @ui.userMenuLink': 'handleUserMenuClick',
         'click @ui.publishBtn': 'handlePublish',
         'click @ui.removeImageLinks': 'handleRemoveImage',
@@ -435,6 +438,10 @@ var Planbox = Planbox || {};
       handlePublish: function(evt) {
         evt.preventDefault();
         this.save(true);
+      },
+      handleCustomDomainMessageBtn: function(evt) {
+        evt.preventDefault();
+        this.ui.customDomainMessage.toggleClass('is-open');
       },
       handleUserMenuClick: function(evt) {
         evt.preventDefault();

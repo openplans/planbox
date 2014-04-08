@@ -85,6 +85,15 @@
   box-shadow: 0.2em 0 0 #268099;
 }
 
+/* Custom Domain Request */
+.custom-domain-message {
+  display: none;
+}
+.custom-domain-message-btn {}
+.custom-domain-message-text {
+  display: none;
+}
+
 
 /* =Save Button
 -------------------------------------------------------------- */
@@ -869,4 +878,43 @@ li.event:last-child:before {
     border-right-color: transparent;
     border-bottom-color: transparent;
   }
+
+  .custom-domain-message {
+    margin-left: 1.0em;
+    display: inline-block;
+    position: relative;
+  }
+  .custom-domain-message.is-open .custom-domain-message-text {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 15em;
+    z-index: 50;
+    background-color: #fff;
+    color: #666;
+    font-size: 0.875em;
+    line-height: 1.25;
+    margin: 0 0 0 -7.5em;
+    padding: 0.875em 1em;
+    border-radius: 0.25em;
+    box-shadow: 0 0.5em 0.5em rgba(0,0,0,0.25);
+  	-webkit-box-sizing: border-box;
+  	   -moz-box-sizing: border-box;
+  	        box-sizing: border-box;
+  }
+  .custom-domain-message-text:before {
+    content: "";
+    position: absolute;
+    top: -16px;
+    right: 50%;
+    width: 0;
+    height: 0;
+    border: 8px solid #fff;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    margin-right: -8px;
+  }
+
 }
