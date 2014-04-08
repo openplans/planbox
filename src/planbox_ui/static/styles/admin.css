@@ -277,6 +277,9 @@ h6.content-editable {
   visibility: visible;
 }
 
+li.attachment {
+  padding-right: 2.25em;
+}
 .event-attachment-dnd {
   margin-top: 0;
   margin-right: 0;
@@ -284,10 +287,20 @@ h6.content-editable {
   margin-bottom: 2.5em;
   padding: 0.5em;
   font-size: 0.875em;
+  clear: both;
 }
 .event-attachment-dnd .drop-instructions {
   display: inline;
   margin: 0 0.25em 0 0;
+}
+.attachment-icon {
+  margin-bottom: 1.5em;
+}
+.delete-attachment-btn {
+  position: absolute;
+  top: 75px;
+  left: 0;
+  margin: 2.75em 0 0 -0.5em;
 }
 
 /* Project Steps */
@@ -457,6 +470,14 @@ h6.content-editable {
 }
 .event-description:hover:before,
 .event-description:focus:before {
+  content: 'Description';
+}
+.attachment-title:hover:before,
+.attachment-title:focus:before {
+  content: 'Title';
+}
+.attachment-description:hover:before,
+.attachment-description:focus:before {
   content: 'Description';
 }
 .faq-question:hover:before,

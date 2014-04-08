@@ -1,10 +1,13 @@
-{{#if thumbnail_url}}
-  <img src="{{ thumbnail_url }}">
-{{else}}
-  <img src="http://usg.baruchconnect.com/wp-content/plugins/ringo-fileposts/images/document_file_icon.png">
-{{/if}}
-<h4 class="attachment-title content-editable" data-attr="label" contenteditable>{{{ label }}}</h4>
-<div class="attachment-description content-editable" data-attr="description" contenteditable>{{{ description }}}</div>
-
-<span class="handle">&#9776;</span>
-<span class="delete-attachment-btn btn btn-mini btn-secondary"><span class="delete-icon">&#10005;</span> Delete</span>
+<a href="{{ url }}" class="attachment-link" target="_blank">
+  {{#if thumbnail_url}}
+  <div class="attachment-icon image">
+    <img src="{{ thumbnail_url }}">
+  </div>
+  {{else}}
+  <div class="attachment-icon">
+    <img src="http://usg.baruchconnect.com/wp-content/plugins/ringo-fileposts/images/document_file_icon.png">
+  </div>
+  {{/if}}
+  <h4 class="attachment-title" data-attr="label">{{{ label }}}</h4>
+  <div class="attachment-description" data-attr="description">{{{ description }}}</div>
+</a>

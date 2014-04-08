@@ -914,8 +914,43 @@ li.event:last-child:before {
   background: #57D982;
 }
 
+.attachment-list {}
 li.attachment {
   position: relative;
+  clear: both;
+  padding-left: 75px;
+  margin-left: 0.75em;
+  padding-top: 1em;
+  top: -1em;
+}
+a.attachment-link {
+  color: LightBlue;
+  text-decoration: none;
+}
+a.attachment-link:hover {
+  color: SkyBlue;
+}
+.attachment-icon {
+  float: left;
+  margin-left: -75px;
+  position: relative;
+  right: 0.75em;
+  width: 75px;
+  height: 75px;
+}
+.attachment-title {
+  text-shadow: none;
+  margin-bottom: 0.125em;
+  font-size: 1em;
+  position: relative;
+}
+.attachment-description {
+  font-size: 0.75em;
+  line-height: 1.25;
+  color: #fff;
+}
+a.attachment-link:hover .attachment-description {
+  color: LightBlue;
 }
 
 /* Project Footer */
