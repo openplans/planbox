@@ -94,6 +94,11 @@
 
   <script>
     var Planbox = Planbox || {}
+
+    Planbox.bootstrapped = {
+      staticUrl: '{{ STATIC_URL }}'
+    };
+
     Planbox.Data = {
       project: {{ project_data|as_json }},
       user: {{ user_data|as_json }},
