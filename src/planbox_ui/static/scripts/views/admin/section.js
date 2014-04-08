@@ -33,7 +33,7 @@ var Planbox = Planbox || {};
 
       ui: {
         editables: '[contenteditable]:not(.event [contenteditable])',
-        dropZones: '.image-dnd',
+        dropZones: '.event-attachment-dnd',
         itemList: '.attachment-list'
       },
 
@@ -52,7 +52,7 @@ var Planbox = Planbox || {};
           dndDrop: function(files) {
             var $this = $(this);
             $this.removeClass('file-dragging');
-            $this.data('fileUpload').upload(files[0]);
+            $this.data('fileUpload').upload(files);
           },
           validate: function(file) {
             // Make sure this is an image before continuing
@@ -79,12 +79,11 @@ var Planbox = Planbox || {};
           complete: function(err, xhr, options) {
             // When the upload is complete
             var $container = $(this),
-                attrName = $container.attr('data-attr'),
                 fileUrl = window.encodeURI(
                   options.url + options.data.key.replace('${filename}',
                   options.files.file.name)
                 ),
-                newModel, attrs = {};
+                newModel;
 
             // Remove the uploading class.
             $container.removeClass('file-uploading');
@@ -102,8 +101,9 @@ var Planbox = Planbox || {};
             }
 
             // On success, create a new attachment model on the event.
-            attrs[attrName] = fileUrl;
-            newModel = view.collection.add(attrs);
+            newModel = view.collection.add({
+              url: fileUrl
+            });
           }
         });
       },

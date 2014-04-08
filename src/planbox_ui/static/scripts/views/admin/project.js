@@ -132,7 +132,6 @@ var Planbox = Planbox || {};
         userMenu: '.user-menu',
         editableNavMenuLinks: '.project-nav a[contenteditable]',
         publishBtn: '.btn-public',
-        fileInputs: 'input[type="file"]',
         imageHolders: '.image-holder',
         imageDropZones: '.image-dnd',
         removeImageLinks: '.remove-img-btn',
@@ -240,20 +239,23 @@ var Planbox = Planbox || {};
           dndDrop: function(files) {
             var $this = $(this);
             $this.removeClass('file-dragging');
-            $this.data('fileUpload').upload(files[0]);
+            $this.data('fileUpload').upload(files);
           },
-          validate: function(file) {
+          validate: function(files) {
+            var valid = true, i;
             // Make sure this is an image before continuing
-            if (file.type.indexOf('image/') !== 0) {
-              NS.showErrorModal(
-                'Unable to save that file.',
-                'This file doesn\'t seem to be an image file.',
-                'Make sure the file you\'re trying to upload is a valid image file ' +
-                'and try again.'
-              );
+            for (i=0; i<files.length; i++) {
+              if (files[i].type.indexOf('image/') !== 0) {
+                NS.showErrorModal(
+                  'Unable to save that file.',
+                  'This file doesn\'t seem to be an image file.',
+                  'Make sure the file you\'re trying to upload is a valid image file ' +
+                  'and try again.'
+                );
 
-              // Return false to prevent the upload from starting
-              return false;
+                // Return false to prevent the upload from starting
+                return false;
+              }
             }
             return true;
           },
@@ -266,7 +268,8 @@ var Planbox = Planbox || {};
             $this.addClass('file-uploading');
 
             // Show a preview
-            $this.data('fileUpload').previewImage(options.files.file, function(dataUrl) {
+            // TODO: file[0] is not great
+            $this.data('fileUpload').previewImage(options.files.file[0], function(dataUrl) {
               view.setImageOnContainer($imageContainer, dataUrl);
             });
           },
@@ -277,7 +280,8 @@ var Planbox = Planbox || {};
                 attrName = $imageContainer.attr('data-attr'),
                 imageUrl = window.encodeURI(
                   options.url + options.data.key.replace('${filename}',
-                  options.files.file.name)
+                  // TODO: file[0] is not great
+                  options.files.file[0].name)
                 );
 
             // Remove the uploading class.

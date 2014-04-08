@@ -56,10 +56,25 @@
     });
   };
 
-  FileUpload.prototype.upload = function(file) {
-    var data = $.extend({'Content-Type': file.type}, this.options.data);
+  FileUpload.prototype.upload = function(files) {
+    var data, contentType, i;
 
-    if (!this.options.validate(file)) {
+    // content type must be the same for all of the files
+    if (!files || files.length === 0) {
+      //bad things
+    }
+
+    for (i=0; i<files.length; i++) {
+      if (!contentType) {
+        contentType = files[i].type;
+      } else if (contentType !== files[i].type) {
+        // bad things
+      }
+    }
+
+    data = $.extend({'Content-Type': files[0].type}, this.options.data);
+
+    if (!this.options.validate(files)) {
       return;
     }
 
@@ -67,7 +82,7 @@
     FileAPI.upload({
       url: this.options.url,
       data: data,
-      files: {file: file},
+      files: {file: files}, // 'file' is was AWS expects
       cache: true,
       upload: $.proxy(this.options.start, this.element),
       progress: $.proxy(this.options.progress, this.element),
@@ -78,7 +93,7 @@
   FileUpload.prototype.handleFileInputChange = function(evt) {
     evt.preventDefault();
     var files = FileAPI.getFiles(evt);
-    this.upload(files[0]);
+    this.upload(files);
   };
 
   FileUpload.prototype.initDropZone = function(el) {
@@ -95,7 +110,7 @@
     // the options via the instance, e.g. this.element
     // and this.options
 
-    $(this.element).on('change', $.proxy(this.handleFileInputChange, this));
+    $(this.element).find('input[type="file"]').on('change', $.proxy(this.handleFileInputChange, this));
     this.initDropZone(this.element);
   };
 
