@@ -6,7 +6,7 @@ var Planbox = Planbox || {};
   'use strict';
 
   // Sections =================================================================
-  NS.AttachmentAdminView = NS.SectionListItemAdminView.extend(
+  NS.AttachmentAdminView = NS.SortableListItemAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#attachment-admin-tpl',
       tagName: 'li',
@@ -23,7 +23,7 @@ var Planbox = Planbox || {};
     })
   );
 
-  NS.AttachmentListAdminView = NS.SectionListAdminView.extend(
+  NS.AttachmentListAdminView = NS.SortableListAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#attachments-section-admin-tpl',
       tagName: 'section',
@@ -40,18 +40,18 @@ var Planbox = Planbox || {};
         'blur @ui.editables': 'handleEditableBlur'
       },
       onRender: function() {
-        // We need to do this since SectionListAdminView and ContentEditableMixin
+        // We need to do this since SortableListAdminView and ContentEditableMixin
         // both override onRender.
 
         // ContentEditableMixin
         this.initRichEditables();
-        // SectionListAdminView
+        // SortableListAdminView
         this.initSortableItemList();
       }
     })
   );
 
-  NS.EventAdminView = NS.SectionListItemAdminView.extend(
+  NS.EventAdminView = NS.SortableListItemAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#event-admin-tpl',
       tagName: 'li',
@@ -159,7 +159,7 @@ var Planbox = Planbox || {};
     })
   );
 
-  NS.TimelineSectionAdminView = NS.SectionListAdminView.extend(
+  NS.TimelineSectionAdminView = NS.SortableListAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#timeline-section-admin-tpl',
       tagName: 'section',
@@ -179,12 +179,12 @@ var Planbox = Planbox || {};
         'blur @ui.editables': 'handleEditableBlur'
       },
       onRender: function() {
-        // We need to do this since SectionListAdminView and ContentEditableMixin
+        // We need to do this since SortableListAdminView and ContentEditableMixin
         // both override onRender.
 
         // ContentEditableMixin
         this.initRichEditables();
-        // SectionListAdminView
+        // SortableListAdminView
         this.initSortableItemList();
       }
     })
@@ -206,7 +206,7 @@ var Planbox = Planbox || {};
     })
   );
 
-  NS.FaqAdminView = NS.SectionListItemAdminView.extend(
+  NS.FaqAdminView = NS.SortableListItemAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#faq-admin-tpl',
       tagName: 'div',
@@ -224,7 +224,7 @@ var Planbox = Planbox || {};
     })
   );
 
-  NS.FaqsSectionAdminView = NS.SectionListAdminView.extend(
+  NS.FaqsSectionAdminView = NS.SortableListAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#faqs-section-admin-tpl',
       tagName: 'section',
@@ -244,12 +244,12 @@ var Planbox = Planbox || {};
         'blur @ui.editables': 'handleEditableBlur'
       },
       onRender: function() {
-        // We need to do this since SectionListAdminView and ContentEditableMixin
+        // We need to do this since SortableListAdminView and ContentEditableMixin
         // both override onRender.
 
         // ContentEditableMixin
         this.initRichEditables();
-        // SectionListAdminView
+        // SortableListAdminView
         this.initSortableItemList();
       }
     })
