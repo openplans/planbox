@@ -235,11 +235,11 @@ var Planbox = Planbox || {};
           url: 'https://' + NS.Data.s3UploadBucket + '.s3.amazonaws.com/',
           data: _.clone(NS.Data.s3UploadData),
           dndOver: function(isOver) {
-            $(this).closest('.image-holder').toggleClass('over', isOver);
+            $(this).toggleClass('file-dragging', isOver);
           },
           dndDrop: function(files) {
             var $this = $(this);
-            $this.closest('.image-holder').removeClass('over');
+            $this.removeClass('file-dragging');
             $this.data('fileUpload').upload(files[0]);
           },
           validate: function(file) {
@@ -259,20 +259,21 @@ var Planbox = Planbox || {};
           },
           start: function(xhr, options) {
             // When the upload starts
-            var $imageContainer = $(this).closest('.image-holder');
+            var $this = $(this),
+                $imageContainer = $this.closest('.image-holder');
 
             // Apply the uploading class.
-            $imageContainer.addClass('file-uploading');
+            $this.addClass('file-uploading');
 
             // Show a preview
-            // TODO: data is empty when called from the input selector. Why?
-            $(this).data('fileUpload').previewImage(options.files.file, function(dataUrl) {
+            $this.data('fileUpload').previewImage(options.files.file, function(dataUrl) {
               view.setImageOnContainer($imageContainer, dataUrl);
             });
           },
           complete: function(err, xhr, options) {
             // When the upload is complete
-            var $imageContainer = $(this).closest('.image-holder'),
+            var $this = $(this),
+                $imageContainer = $this.closest('.image-holder'),
                 attrName = $imageContainer.attr('data-attr'),
                 imageUrl = window.encodeURI(
                   options.url + options.data.key.replace('${filename}',
@@ -280,7 +281,7 @@ var Planbox = Planbox || {};
                 );
 
             // Remove the uploading class.
-            $imageContainer.removeClass('file-uploading');
+            $this.removeClass('file-uploading');
 
             if (err) {
               NS.showErrorModal(
@@ -295,7 +296,7 @@ var Planbox = Planbox || {};
             }
 
             // Fetch the image to make loading faster
-            $(this).data('fileUpload').prefetchImage(imageUrl);
+            $this.data('fileUpload').prefetchImage(imageUrl);
 
             // On success, apply the attribute to the project.
             view.model.set(attrName, imageUrl);

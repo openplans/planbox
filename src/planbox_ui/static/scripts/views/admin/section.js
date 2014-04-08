@@ -33,11 +33,79 @@ var Planbox = Planbox || {};
 
       ui: {
         editables: '[contenteditable]:not(.event [contenteditable])',
+        dropZones: '.image-dnd',
         itemList: '.attachment-list'
       },
 
       events: {
         'blur @ui.editables': 'handleEditableBlur'
+      },
+      initDropZones: function() {
+        var view = this;
+
+        this.ui.dropZones.fileUpload({
+          url: 'https://' + NS.Data.s3UploadBucket + '.s3.amazonaws.com/',
+          data: _.clone(NS.Data.s3UploadData),
+          dndOver: function(isOver) {
+            $(this).toggleClass('file-dragging', isOver);
+          },
+          dndDrop: function(files) {
+            var $this = $(this);
+            $this.removeClass('file-dragging');
+            $this.data('fileUpload').upload(files[0]);
+          },
+          validate: function(file) {
+            // Make sure this is an image before continuing
+            if (file.type.indexOf('image/') !== 0) {
+              NS.showErrorModal(
+                'Unable to save that file.',
+                'This file doesn\'t seem to be an image file.',
+                'Make sure the file you\'re trying to upload is a valid image file ' +
+                'and try again.'
+              );
+
+              // Return false to prevent the upload from starting
+              return false;
+            }
+            return true;
+          },
+          start: function(xhr, options) {
+            // When the upload starts
+            var $container = $(this);
+
+            // Apply the uploading class.
+            $container.addClass('file-uploading');
+          },
+          complete: function(err, xhr, options) {
+            // When the upload is complete
+            var $container = $(this),
+                attrName = $container.attr('data-attr'),
+                fileUrl = window.encodeURI(
+                  options.url + options.data.key.replace('${filename}',
+                  options.files.file.name)
+                ),
+                newModel, attrs = {};
+
+            // Remove the uploading class.
+            $container.removeClass('file-uploading');
+
+            if (err) {
+              NS.showErrorModal(
+                'Unable to save that file.',
+                'We were unable to save your image.',
+                'Sorry about that. Please save your changes, reload the page, ' +
+                'and try again. Please email us at ' + NS.Data.contactEmail + ' ' +
+                'if you have any more trouble.'
+              );
+
+              return;
+            }
+
+            // On success, create a new attachment model on the event.
+            attrs[attrName] = fileUrl;
+            newModel = view.collection.add(attrs);
+          }
+        });
       },
       onRender: function() {
         // We need to do this since SortableListAdminView and ContentEditableMixin
@@ -47,6 +115,8 @@ var Planbox = Planbox || {};
         this.initRichEditables();
         // SortableListAdminView
         this.initSortableItemList();
+
+        this.initDropZones();
       }
     })
   );
@@ -57,7 +127,7 @@ var Planbox = Planbox || {};
       tagName: 'li',
       className: 'event',
       ui: {
-        editables: '[contenteditable]',
+        editables: '[contenteditable]:not(.attachment-list [contenteditable])',
         richEditables: '.event-description',
         deleteBtn: '.delete-event-btn',
         datetimeEditable: '.event-datetime',
@@ -134,12 +204,7 @@ var Planbox = Planbox || {};
         this.attachmentList.show(new NS.AttachmentListAdminView({
           parent: this.options.parent,
           model: this.model,
-          // TODO: remove this test data
-          collection: this.model.get('attachments').size() ? this.model.get('attachments').size() : new NS.AttachmentCollection([
-            {id: 1, index: 0, label: 'Meeting Minutes', description: 'The minutes of the meeting', url: 'http://www.agrability.org/toolbox/img/pdf_icon.png'},
-            {id: 2, index: 1, label: 'Meeting Hours', description: 'The hours of the meeting', url: 'http://www.agrability.org/toolbox/img/pdf_icon.png'},
-            {id: 3, index: 2, label: 'Meeting Days', description: 'The days of the meeting', url: 'http://www.agrability.org/toolbox/img/pdf_icon.png'}
-          ])
+          collection: this.model.get('attachments')
         }));
       },
       initDatepicker: function() {
