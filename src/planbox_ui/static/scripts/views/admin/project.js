@@ -10,198 +10,6 @@ var Planbox = Planbox || {};
     return Handlebars.compile(rawTemplate);
   };
 
-  // Sections =================================================================
-  NS.EventAdminView = NS.SectionListItemAdminView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
-      template: '#event-admin-tpl',
-      tagName: 'li',
-      className: 'event',
-      ui: {
-        editables: '[contenteditable]',
-        richEditables: '.event-description',
-        deleteBtn: '.delete-event-btn',
-        datetimeEditable: '.event-datetime',
-        datetimeInput: '.event-datetime-picker',
-        calendarIcon: '.calendar-icon'
-      },
-      events: {
-        'blur @ui.editables': 'handleEditableBlur',
-        'click @ui.deleteBtn': 'handleDeleteClick',
-        'blur @ui.datetimeEditable': 'handleDatetimeChange',
-        'input @ui.datetimeEditable': 'handleDatetimeChange',
-        'click @ui.calendarIcon': 'handleCalendarIconClick'
-      },
-      setEventDate: function(val) {
-        var results = chrono.parse(val, new Date()),
-            result, start, end;
-
-        this.model.set('datetime_label', val || '');
-        if (results.length > 0) {
-          result = results[0];
-
-          this.model.set({
-            start_datetime: result.startDate || '',
-            end_datetime: result.endDate || ''
-          });
-
-          return result.startDate;
-        } else  {
-          this.model.set({
-            start_datetime: '',
-            end_datetime: ''
-          });
-        }
-      },
-      handleCalendarIconClick: function(evt) {
-        evt.preventDefault();
-        this.ui.datetimeInput.pickadate('open');
-
-        // Stop further propagation, because the picker widget is rigged to
-        // close if you click anywhere besides its attached input.
-        evt.stopPropagation();
-      },
-      handleDatetimeChange: function(evt) {
-        evt.preventDefault();
-
-        var $target = $(evt.currentTarget),
-            val = $target.text(),
-            picker = this.ui.datetimeInput.pickadate('picker'),
-            newDate;
-
-        this.setEventDate(val);
-
-        newDate = this.model.get('start_datetime');
-        if (newDate) {
-          picker.set('select', newDate, {muted: true});
-        }
-      },
-      handleDatetimePickerChange: function(evt) {
-        var $target = this.ui.datetimeInput,
-            val = $target.val();
-
-        this.setEventDate(val);
-        this.ui.datetimeEditable.html(val);
-      },
-      onRender: function() {
-        // ContentEditableMixin
-        this.initRichEditables();
-        // Init the date picker
-        this.initDatepicker();
-      },
-      initDatepicker: function() {
-        var picker;
-
-        this.ui.datetimeInput.pickadate({
-          format: 'mmmm d, yyyy',
-          formatSubmit: 'yyyy-mm-dd',
-          editable: true,
-          selectYears: true,
-          selectMonths: true
-        });
-
-        picker = this.ui.datetimeInput.pickadate('picker');
-        picker.on('set', _.bind(this.handleDatetimePickerChange, this));
-      }
-    })
-  );
-
-  NS.TimelineSectionAdminView = NS.SectionListAdminView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
-      template: '#timeline-section-admin-tpl',
-      tagName: 'section',
-      className: 'project-timeline',
-
-      itemView: NS.EventAdminView,
-      itemViewContainer: '.event-list',
-
-      ui: {
-        editables: '[contenteditable]:not(.event [contenteditable])',
-        itemList: '.event-list',
-        newItemFocus: '.event-title:last',
-        addBtn: '.add-event-btn'
-      },
-      events: {
-        'click @ui.addBtn': 'handleAddClick',
-        'blur @ui.editables': 'handleEditableBlur'
-      },
-      onRender: function() {
-        // We need to do this since SectionListAdminView and ContentEditableMixin
-        // both override onRender.
-
-        // ContentEditableMixin
-        this.initRichEditables();
-        // SectionListAdminView
-        this.initSortableItemList();
-      }
-    })
-  );
-
-  NS.TextSectionAdminView = Backbone.Marionette.ItemView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
-      template: '#text-section-admin-tpl',
-      tagName: 'section',
-      className: 'project-text',
-
-      ui: {
-        editables: '[contenteditable]',
-        richEditables: '.project-text-content'
-      },
-      events: {
-        'blur @ui.editables': 'handleEditableBlur'
-      }
-    })
-  );
-
-  NS.FaqAdminView = NS.SectionListItemAdminView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
-      template: '#faq-admin-tpl',
-      tagName: 'div',
-      className: 'faq',
-
-      ui: {
-        editables: '[contenteditable]',
-        richEditables: '.faq-answer',
-        deleteBtn: '.delete-faq-btn'
-      },
-      events: {
-        'blur @ui.editables': 'handleEditableBlur',
-        'click @ui.deleteBtn': 'handleDeleteClick'
-      }
-    })
-  );
-
-  NS.FaqsSectionAdminView = NS.SectionListAdminView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
-      template: '#faqs-section-admin-tpl',
-      tagName: 'section',
-      className: 'project-faqs',
-
-      itemView: NS.FaqAdminView,
-      itemViewContainer: '.faq-list',
-
-      ui: {
-        editables: '[contenteditable]:not(.faq [contenteditable])',
-        itemList: '.faq-list',
-        newItemFocus: '.faq-question:last',
-        addBtn: '.add-faq-btn'
-      },
-      events: {
-        'click @ui.addBtn': 'handleAddClick',
-        'blur @ui.editables': 'handleEditableBlur'
-      },
-      onRender: function() {
-        // We need to do this since SectionListAdminView and ContentEditableMixin
-        // both override onRender.
-
-        // ContentEditableMixin
-        this.initRichEditables();
-        // SectionListAdminView
-        this.initSortableItemList();
-      }
-    })
-  );
-
-
   // Admin ====================================================================
 
   NS.showErrorModal = function(title, subtitle, description) {
@@ -326,7 +134,6 @@ var Planbox = Planbox || {};
         userMenu: '.user-menu',
         editableNavMenuLinks: '.project-nav a[contenteditable]',
         publishBtn: '.btn-public',
-        fileInputs: 'input[type="file"]',
         imageHolders: '.image-holder',
         imageDropZones: '.image-dnd',
         removeImageLinks: '.remove-img-btn',
@@ -342,7 +149,6 @@ var Planbox = Planbox || {};
         'click @ui.customDomainMessageBtn': 'handleCustomDomainMessageBtn',
         'click @ui.userMenuLink': 'handleUserMenuClick',
         'click @ui.publishBtn': 'handlePublish',
-        'change @ui.fileInputs': 'handleFileInputChange',
         'click @ui.removeImageLinks': 'handleRemoveImage',
         'change @ui.hightlightLinkSelector': 'handleHighlightLinkChange',
         'blur @ui.hightlightExternalLink': 'handleHighlightExternalLinkBlur'
@@ -393,14 +199,6 @@ var Planbox = Planbox || {};
         this.showRegions();
       },
 
-      // Prefetches an image file for a url to speed up load time
-      // Takes an optional callback.
-      prefetchImage: function(url, callback) {
-        var img = new Image();   // Create new img element
-        img.addEventListener('load', callback, false);
-        img.src = url;
-      },
-
       setImageOnContainer: function($el, url) {
         $el.addClass('has-image');
         if ($el.hasClass('image-as-background')) {
@@ -419,20 +217,6 @@ var Planbox = Planbox || {};
         $el.removeClass('has-image');
       },
 
-      // File Uploads
-      previewImage: function(file, $el) {
-        var self = this;
-
-        // Display the image preview.
-        FileAPI.Image(file).get(function(err, img) {
-          var url;
-          if (!err) {
-            url = img.toDataURL(file.type); //FileAPI.toDataURL(img);
-            self.setImageOnContainer($el, url);
-          }
-        });
-      },
-
       handleRemoveImage: function(evt) {
         evt.preventDefault();
         var $target = $(evt.currentTarget),
@@ -446,39 +230,65 @@ var Planbox = Planbox || {};
         }
       },
 
-      uploadImage: function(files, $el) {
-        var self = this,
-            bucketUrl = 'https://' + NS.Data.s3UploadBucket + '.s3.amazonaws.com/',
-            data = _.clone(NS.Data.s3UploadData),
-            file = files[0],
-            attrName = $el.attr('data-attr'),
-            imageUrl = window.encodeURI(bucketUrl + data.key.replace('${filename}', file.name));
+      initDropZones: function() {
+        var view = this;
 
-        // Make sure this is an image before continuing
-        if (file.type.indexOf('image/') !== 0) {
-          NS.showErrorModal(
-            'Unable to save that file.',
-            'This file doesn\'t seem to be an image file.',
-            'Make sure the file you\'re trying to upload is a valid image file ' +
-            'and try again.'
-          );
+        this.ui.imageDropZones.fileUpload({
+          url: 'https://' + NS.Data.s3UploadBucket + '.s3.amazonaws.com/',
+          data: _.clone(NS.Data.s3UploadData),
+          dndOver: function(isOver) {
+            $(this).toggleClass('file-dragging', isOver);
+          },
+          dndDrop: function(files) {
+            var $this = $(this);
+            $this.removeClass('file-dragging');
+            $this.data('fileUpload').upload(files);
+          },
+          validate: function(files) {
+            var i;
+            // Make sure this is an image before continuing
+            for (i=0; i<files.length; i++) {
+              if (files[i].type.indexOf('image/') !== 0) {
+                NS.showErrorModal(
+                  'Unable to save that file.',
+                  'This file doesn\'t seem to be an image file.',
+                  'Make sure the file you\'re trying to upload is a valid image file ' +
+                  'and try again.'
+                );
 
-          return;
-        }
+                // Return false to prevent the upload from starting
+                return false;
+              }
+            }
+            return true;
+          },
+          start: function(xhr, options) {
+            // When the upload starts
+            var $this = $(this),
+                $imageContainer = $this.closest('.image-holder');
 
-        // Apply the uploading class.
-        $el.addClass('file-uploading');
+            // Apply the uploading class.
+            $this.addClass('file-uploading');
 
-        // Start the upload.
-        data['Content-Type'] = file.type;
-        FileAPI.upload({
-          url: bucketUrl,
-          data: data,
-          files: {file: file},
-          cache: true,
-          complete: function (err, xhr){
+            // Show a preview
+            // TODO: file[0] is not great
+            $this.data('fileUpload').previewImage(options.files.file[0], function(dataUrl) {
+              view.setImageOnContainer($imageContainer, dataUrl);
+            });
+          },
+          complete: function(err, xhr, options) {
+            // When the upload is complete
+            var $this = $(this),
+                $imageContainer = $this.closest('.image-holder'),
+                attrName = $imageContainer.attr('data-attr'),
+                imageUrl = window.encodeURI(
+                  options.url + options.data.key.replace('${filename}',
+                  // TODO: file[0] is not great
+                  options.files.file[0].name)
+                );
+
             // Remove the uploading class.
-            $el.removeClass('file-uploading');
+            $this.removeClass('file-uploading');
 
             if (err) {
               NS.showErrorModal(
@@ -493,49 +303,12 @@ var Planbox = Planbox || {};
             }
 
             // Fetch the image to make loading faster
-            self.prefetchImage(imageUrl);
+            $this.data('fileUpload').prefetchImage(imageUrl);
 
             // On success, apply the attribute to the project.
-            self.model.set(attrName, imageUrl);
+            view.model.set(attrName, imageUrl);
           }
         });
-
-        this.previewImage(file, $el);
-      },
-      handleFileInputChange: function(evt) {
-        evt.preventDefault();
-        var $imgContainer = $(evt.currentTarget).closest('.image-holder'),
-            files;
-
-        // Get the files
-        files = FileAPI.getFiles(evt);
-        FileAPI.reset(evt.currentTarget);
-
-        this.uploadImage(files, $imgContainer);
-      },
-      initDropZones: function() {
-        var self = this;
-        self.ui.imageDropZones.each(function(i, imageDropZone) {
-          self.initDropZone(imageDropZone);
-        });
-      },
-      initDropZone: function(el) {
-        var self = this,
-            $imgContainer = $(el).closest('.image-holder');
-
-        if( FileAPI.support.dnd ){
-          FileAPI.event.dnd(el,
-            // onFileHover
-            function (over){
-              $imgContainer.toggleClass('over', over);
-            },
-            // onFileDrop
-            function(files) {
-              $imgContainer.removeClass('over');
-              self.uploadImage(files, $imgContainer);
-            }
-          );
-        }
       },
 
       handleHighlightLinkChange: function(evt) {

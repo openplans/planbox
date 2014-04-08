@@ -1,4 +1,4 @@
-/*globals Backbone _ window */
+/*globals Backbone _ window jQuery */
 
 var Planbox = Planbox || {};
 
@@ -13,6 +13,7 @@ var Planbox = Planbox || {};
     },
 
     initRegions: function() {
+      // this.sectionListView for display vs base
       this._sectionListView = new this.sectionListView({
         model: this.model,
         collection: this.collection,
@@ -68,7 +69,7 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.SectionListItemAdminView = Backbone.Marionette.ItemView.extend({
+  NS.SortableListItemAdminView = Backbone.Marionette.Layout.extend({
     initialize: function() {
       // cid is not accessible in the toJSON output
       this.$el.attr('data-id', this.model.cid);
@@ -86,12 +87,16 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.SectionListAdminView = Backbone.Marionette.CompositeView.extend({
+  NS.SortableListAdminView = Backbone.Marionette.CompositeView.extend({
     collectionEvents: {
       'change':  'dataChanged',
       'add':     'dataChanged',
       'remove':  'dataChanged',
       'reorder': 'dataChanged'
+    },
+    itemViewOptions: function() {
+      // Pass the parent to the itemViews in case they need to call dataChanged
+      return { parent: this.options.parent };
     },
     onRender: function() {
       this.initSortableItemList();

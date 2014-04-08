@@ -1,48 +1,23 @@
 # -*- coding: utf-8 -*-
 from south.utils import datetime_utils as datetime
 from south.db import db
-from south.v2 import DataMigration
+from south.v2 import SchemaMigration
 from django.db import models
 
 
-def get_or_create(Model, **kwargs):
-    try:
-        obj = Model.objects.get(**kwargs)
-    except Model.DoesNotExist:
-        obj = Model.objects.create(**kwargs)
-    return obj
-
-
-class Migration(DataMigration):
+class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        "Write your forwards methods here."
-        # Note: Don't use "from appname.models import ModelName".
-        # Use orm.ModelName to refer to models in this application,
-        # and orm['appname.ModelName'] for models in other applications.
-        templates_profile = get_or_create(
-            orm.Profile,
-            slug='templates')
-        default_template = get_or_create(
-            orm.Project,
-            owner=templates_profile,
-            slug='default')
+        # Adding field 'Attachment.index'
+        db.add_column(u'planbox_data_attachment', 'index',
+                      self.gf('django.db.models.fields.PositiveIntegerField')(default=1, blank=True),
+                      keep_default=False)
 
-        default_template.description = '''
-            <b>What is the problem?</b><br>In a sentence or two, describe the
-            problem this project will address. Explain it from a resident's
-            perspective. Avoid jargon!<br><br><b>How are we addressing the problem?
-            </b><br>In a sentence or two, describe how this project addresses the
-            problem.<br><br><b>How can you get involved?</b><br>Briefly describe
-            how people can be involved in the project, such as public meetings and
-            workshops.<br><br><b>What is the schedule?</b><br>Briefly describe the
-            schedule, even if it is tentative, to give readers a high level
-            understanding of the timeline.
-            '''
-        default_template.save()
 
     def backwards(self, orm):
-        "Write your backwards methods here."
+        # Deleting field 'Attachment.index'
+        db.delete_column(u'planbox_data_attachment', 'index')
+
 
     models = {
         u'auth.group': {
@@ -81,9 +56,21 @@ class Migration(DataMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        u'planbox_data.attachment': {
+            'Meta': {'object_name': 'Attachment'},
+            'attached_to_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
+            'attached_to_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'index': ('django.db.models.fields.PositiveIntegerField', [], {'blank': 'True'}),
+            'label': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'updated_at': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
+            'url': ('django.db.models.fields.URLField', [], {'max_length': '2048'})
+        },
         u'planbox_data.event': {
             'Meta': {'ordering': "(u'project', u'index')", 'object_name': 'Event'},
-            'datetime_label': ('django.db.models.fields.TextField', [], {}),
+            'datetime_label': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'description': ('django.db.models.fields.TextField', [], {'default': "u''", 'blank': 'True'}),
             'end_datetime': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -152,4 +139,3 @@ class Migration(DataMigration):
     }
 
     complete_apps = ['planbox_data']
-    symmetrical = True

@@ -142,6 +142,9 @@ img {
 .btn-small {
   font-size: 0.875em;
 }
+.btn-smaller {
+  font-size: 0.75em;
+}
 .btn-xsmall {
   font-size: 0.5em;
 }
@@ -911,6 +914,45 @@ li.event:last-child:before {
   background: #57D982;
 }
 
+.attachment-list {}
+li.attachment {
+  position: relative;
+  clear: both;
+  padding-left: 60px;
+  margin-left: 0.75em;
+  padding-top: 1em;
+  top: -1em;
+}
+a.attachment-link {
+  color: LightBlue;
+  text-decoration: none;
+}
+a.attachment-link:hover {
+  color: SkyBlue;
+}
+.attachment-icon {
+  float: left;
+  margin-left: -60px;
+  position: relative;
+  right: 0.75em;
+  width: 60px;
+  height: 60px;
+}
+.attachment-title {
+  text-shadow: none;
+  margin-bottom: 0.125em;
+  font-size: 1em;
+  position: relative;
+}
+.attachment-description {
+  font-size: 0.75em;
+  line-height: 1.25;
+  color: #fff;
+}
+a.attachment-link:hover .attachment-description {
+  color: LightBlue;
+}
+
 /* Project Footer */
 .project-contact-info {
   position: relative;
@@ -1247,16 +1289,16 @@ div.faq {
   }
 
   .logo-table {
-    display: table; 
-    border-collapse: collapse; 
+    display: table;
+    border-collapse: collapse;
     border-spacing: 0;
   }
   .logo-table-row {
     display: table-row;
   }
   .logo-table-row > div {
-    display: table-cell; 
-    padding: 0; 
+    display: table-cell;
+    padding: 0;
     vertical-align: top;
   }
   .logo-table-row > div.image-holder,

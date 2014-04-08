@@ -111,7 +111,20 @@ var Planbox = Planbox || {};
     model: NS.SectionModel
   });
 
-  NS.EventModel = Backbone.RelationalModel.extend({});
+  NS.AttachmentModel = Backbone.RelationalModel.extend({});
+
+  NS.AttachmentCollection = NS.ReorderableCollection.extend({
+    model: NS.AttachmentModel
+  });
+
+  NS.EventModel = Backbone.RelationalModel.extend({
+    relations: [{
+      type: Backbone.HasMany,
+      key: 'attachments',
+      relatedModel: 'AttachmentModel',
+      collectionType: 'AttachmentCollection'
+    }]
+  });
 
   NS.EventCollection = NS.ReorderableCollection.extend({
     model: NS.EventModel

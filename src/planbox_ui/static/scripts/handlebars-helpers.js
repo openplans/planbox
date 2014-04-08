@@ -13,6 +13,10 @@ var Planbox = Planbox || {};
     return window.location.toString();
   });
 
+  Handlebars.registerHelper('static_url', function() {
+    return NS.bootstrapped.staticUrl;
+  });
+
   Handlebars.registerHelper('if_fileapi_support', function(featureName, options) {
     return (FileAPI.support[featureName] ? options.fn(this) : options.inverse(this));
   });
