@@ -6,17 +6,17 @@
   <a href="#" class="save-btn btn btn-secondary btn-disabled">Publish Changes</a>
   <a href="javascript:window.print()" class="print-btn btn"><span class="printer-icon"></span>Print Poster</a>
 
-  <div class="custom-domain-message">
-    <a href="#" class="custom-domain-message-btn btn"><strong>+ Custom Domain</strong></a>
-    <div class="custom-domain-message-text">Want a custom domain name for your project? No problem! Email us at <a href="mailto:{{contact_email}}">{{contact_email}}</a> to get started.</div>
-  </div>
-
   {{else}}
   <div class="project-visibility">
     <a href="#" class="btn-public">Publish this Project</a>
   </div>
   <a href="#" class="save-btn btn btn-secondary btn-disabled">Save Draft</a>
   {{/if}}
+
+  <div class="custom-domain-message">
+    <a href="#" class="custom-domain-message-btn btn"><strong>+ Custom Domain</strong></a>
+    <div class="custom-domain-message-text">Want a custom domain name for your project? No problem! Email us at <a href="mailto:{{contact_email}}">{{contact_email}}</a> to get started.</div>
+  </div>
 </div>
 
 {{#if cover_img_url}}

@@ -846,6 +846,7 @@ li.event:last-child:before {
   }
 
   .custom-domain-message {
+    margin-left: 1.0em;
     display: inline-block;
     position: relative;
   }
