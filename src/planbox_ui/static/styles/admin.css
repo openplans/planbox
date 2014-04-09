@@ -194,6 +194,24 @@ h6.content-editable {
 }
 
 /* File Uploads */
+.no-file-upload-message {
+  clear: both;
+  font-size: 0.75em;
+  background-color: #E65CA1;
+  background-color: rgba(230, 92, 161, 0.25); 
+  color: #fff;
+  color: rgba(255, 255, 255, 0.75); 
+  float: left;
+  padding: 0.125em 0.5em;
+  border-radius: 0.25em;
+}
+.no-file-upload-message a {
+  color: #fff;
+  color: rgba(255, 255, 255, 0.75); 
+}
+.no-file-upload-message a:hover {
+  color: #fff;
+}
 .file-upload {
   display: none;
   margin: 2em 1em 1em;
@@ -302,7 +320,16 @@ li.attachment {
   display: inline;
   margin: 0 0.25em 0 0;
 }
-.attachment-icon {
+.event-attachment-dnd.file-uploading .uploading-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -0.75em 0 0 -3.5em;
+}
+.event-attachment-dnd.file-uploading .drop-instructions {
+  display: none;
+}
+ .attachment-icon {
   margin-bottom: 1.5em;
 }
 .delete-attachment-btn {
@@ -344,8 +371,9 @@ li.attachment {
   margin-top: 2.5em;
 }
 .step-timeline {
-  margin-bottom: 0.75em;
-  border-radius: 0.25em 0.25em 0.25em 0;
+  margin-bottom: 0.375em;
+  border-radius: 0.25em;
+  padding-bottom: 0.5em;
   position: relative;
   z-index: 2;
 }

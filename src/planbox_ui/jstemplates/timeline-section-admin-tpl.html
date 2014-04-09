@@ -1,10 +1,17 @@
 <span id="section-{{ slug }}" class="section-anchor"></span>
 <div class="container">
-  <h2 class="project-timeline-label content-editable" data-attr="label" contenteditable>{{{ label }}}</h2>
-
+  {{^if_fileapi_support 'cors'}}
+  <p class="clearfix">
+    <small class="no-file-upload-message">
+      Your browser doesn't support adding event attachments. Please <a href="http://browsehappy.com/">upgrade</a> to use this feature.
+    </small>
+  </p>
+  {{/if_fileapi_support}}
   {{^if project.events.length }}
   <h2 class="step step-timeline">Add to the timeline&hellip;</h2>
   {{/if}}
+  <h2 class="project-timeline-label content-editable" data-attr="label" contenteditable>{{{ label }}}</h2>
+
   <ol class="event-list unstyled-list"></ol>
   <br>
   <a href="#" class="btn add-event-btn">Add Event</a>
