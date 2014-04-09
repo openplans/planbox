@@ -199,6 +199,10 @@ var Planbox = Planbox || {};
         this.showRegions();
       },
 
+      onShow: function() {
+        $(document).foundation();
+      },
+
       setImageOnContainer: function($el, url) {
         $el.addClass('has-image');
         if ($el.hasClass('image-as-background')) {

@@ -45,21 +45,18 @@
 </head>
 <body>
 
+  <!-- TODO: Make sure this is the right place in the layout for this message. -->
   <!--[if lt IE 9]>
-    <div class="alert alert-error outdated-browser-alert">You are using an outdated browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+    <div class="alert-box alert">You are using an outdated browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
   <![endif]-->
 
-  <div id="site-wrapper">
+  <div id="overlay-container"></div>
+  <div id="page">
+    {% block page %}{% endblock %}
+  </div>
 
-    <div id="overlay-container"></div>
-    <div id="page">
-      {% block page %}{% endblock %}
-    </div>
-
-    <a href="/help"{% if is_editable %} target="_blank"{% endif %} class="software-help-link">Help &amp; Feedback</a>
-    <small class="software-phase-notice">Alpha</small>
-
-  </div><!-- end #site-wrapper -->
+  <a href="/help"{% if is_editable %} target="_blank"{% endif %} class="software-help-link">Help &amp; Feedback</a>
+  <small class="software-phase-notice">Alpha</small>
 
   {% if debug %}
   <script src="{{ STATIC_URL }}bower_components/jquery/dist/jquery.js"></script>

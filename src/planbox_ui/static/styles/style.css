@@ -1,4 +1,18 @@
-/* Forms */
+body {
+  background: #407280;
+}
+#page {
+  background: #eee;
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.container {
+  background: #fff;
+}
+
+/* =Forms
+-------------------------------------------------------------- */
 form p {
   position: relative;
 }
@@ -50,3 +64,17 @@ select {
   max-width: 100%;
 }
 
+
+/* =Projects
+-------------------------------------------------------------- */
+.project-header {
+  border-radius: 0.375em 0.375em 0 0;
+}
+[data-magellan-expedition], 
+[data-magellan-expedition-clone] {
+  background-color: transparent;
+  padding: 0;
+}
+.project-menu .row {
+  padding-top: 1em;
+}
