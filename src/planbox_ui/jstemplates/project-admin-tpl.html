@@ -11,8 +11,7 @@
         <li><a href="#" class="save-btn button disabled">Publish Changes</a></li>
         <li><a href="javascript:window.print()" class="print-btn btn"><span class="printer-icon"></span>Print Poster</a></li>
         {{else}}
-        <li><a href="#" class="btn-public">Publish this Project</a></li>
-        <li><a href="#" class="save-btn btn btn-secondary btn-disabled">Save Draft</a></li>
+        <li><a href="#" class="save-btn button disabled">Save Draft</a></li>
         {{/if}}
         <li>
           <a href="#" data-reveal-id="customdomainmessage">Custom Domain</a>
@@ -156,9 +155,9 @@
       <p class="project-contact-info content-editable" data-attr="contact" contenteditable>{{{ contact }}}</p>
       <p>
         {{#if public}}
-        <a href="#" class="save-btn btn btn-secondary btn-disabled">Publish Changes</a>
+        <a href="#" class="save-btn button disabled">Publish Changes</a>
         {{else}}
-        <a href="#" class="save-btn btn btn-secondary btn-disabled">Save Draft</a>
+        <a href="#" class="save-btn button disabled">Save Draft</a>
         {{/if}}
       </p>
       <p class="powered-by">{{#_}}Powered by <a href="/">Plan In A Box</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
