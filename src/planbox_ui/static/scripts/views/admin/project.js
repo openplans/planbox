@@ -91,8 +91,8 @@ var Planbox = Planbox || {};
         silent: true,
 
         success: function() {
-          self.ui.makePublicContent.addClass('is-hidden');
-          self.ui.shareContent.removeClass('is-hidden');
+          self.ui.makePublicContent.addClass('hide');
+          self.ui.shareContent.removeClass('hide');
         },
         error: function(model, resp) {
           NS.showProjectSaveErrorModal(resp);
@@ -328,10 +328,10 @@ var Planbox = Planbox || {};
         this.model.set(linkTypeModelProp, linkType);
 
         if (linkType === 'external') {
-          $externalLinkInput.removeClass('is-hidden');
+          $externalLinkInput.removeClass('hide');
           this.model.set($target.attr('name'), $externalLinkInput.val());
         } else {
-          $externalLinkInput.addClass('is-hidden');
+          $externalLinkInput.addClass('hide');
           this.model.set($target.attr('name'), $selected.val());
         }
       },
