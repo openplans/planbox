@@ -273,3 +273,22 @@ li.attachment {
 .pen.hinted a { text-decoration: none; }
 .pen.hinted a:before {content: "["; color: #ddd; }
 .pen.hinted a:after { content: "](" attr(href) ")"; color: #ddd; }
+
+
+/* =Events
+-------------------------------------------------------------- */
+
+/* Date picker widget */
+.event-datetime.content-editable {}
+.event-datetime:invalid { background-color: #777; }
+.event-datetime:hover { background-color: #00B4E6; }
+.event-datetime:focus { background-color: #fff; }
+
+.picker {
+  margin-top: 3em;
+}
+.calendar-icon:hover {
+  cursor: pointer;
+  background-color: #fff;
+  border-top-color: #FF66B3;
+}
