@@ -1,3 +1,16 @@
+
+/* =Foundation-specific Overrides & Deficiencies 
+-------------------------------------------------------------- */
+
+/* .hide's specificity isn't high enough */
+input.hide {
+  display: none;
+}
+
+
+/* =Layout
+-------------------------------------------------------------- */
+
 body {
   background: #407280;
 }
@@ -11,8 +24,10 @@ body {
   background: #fff;
 }
 
+
 /* =Forms
 -------------------------------------------------------------- */
+
 form p {
   position: relative;
 }
