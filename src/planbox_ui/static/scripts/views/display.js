@@ -93,6 +93,10 @@ var Planbox = Planbox || {};
     handleClose: function(evt) {
       evt.preventDefault();
       this.close();
+    },
+    onShow: function() {
+      // This is gross. We should encourage Foundation to fix this.
+      this.$('.reveal-modal').foundation().foundation('reveal', 'open');
     }
   });
 

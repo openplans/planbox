@@ -20,8 +20,6 @@ var Planbox = Planbox || {};
         description: description
       })
     }));
-    // TODO: Open the reveal, either here or in the ModalView onShow method
-    // NS.app.modalRegion.$el.find('.reveal-modal').foundation('reveal', 'open');
   };
 
   NS.showProjectSaveErrorModal = function(resp) {

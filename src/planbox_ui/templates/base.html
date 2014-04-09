@@ -60,7 +60,7 @@
 
   {% if debug %}
   <script src="{{ STATIC_URL }}bower_components/jquery/dist/jquery.js"></script>
-  <script src="{{ STATIC_URL }}bower_components/foundation/js/foundation.min.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/foundation/js/foundation.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/components-base.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
