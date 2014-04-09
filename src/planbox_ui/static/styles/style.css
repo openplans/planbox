@@ -1,0 +1,52 @@
+/* Forms */
+form p {
+  position: relative;
+}
+label.float-label {
+  background: #268099;
+  float: left;
+  padding: 0.25em 1em 0 0.75em;
+  color: #fff;
+  font-size: 0.875em;
+  border-radius: 0 0.75em 0 0;
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  opacity: 0.25;
+  line-height: 1.5em;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: height 0.1s ease, opacity 0.5s ease;
+     -moz-transition: height 0.1s ease, opacity 0.5s ease;
+       -o-transition: height 0.1s ease, opacity 0.5s ease;
+          transition: height 0.1s ease, opacity 0.5s ease;
+}
+input:focus + label {
+  visibility: visible;
+  opacity: 1;
+  height: 1.5em;
+}
+input.input-block,
+textarea {
+  width: 100%;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+  border: 0.25em solid #a1cbcf;
+  padding: 0.5em;
+  outline: 0;
+  line-height: 1.5;
+}
+.input-block:focus,
+textarea:focus {
+  outline: 2px solid #268099;
+}
+textarea {
+  height: 6.5em;
+  resize: none;
+}
+select {
+  max-width: 100%;
+}
+
