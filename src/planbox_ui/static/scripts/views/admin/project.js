@@ -435,7 +435,7 @@ var Planbox = Planbox || {};
         var self = this,
             $target = $(evt.target);
 
-        if (!$target.hasClass('btn-disabled')) {
+        if (!$target.hasClass('disabled')) {
           this.save();
         }
       },
@@ -453,7 +453,7 @@ var Planbox = Planbox || {};
       },
       dataChanged: function() {
         // Show the save button
-        this.ui.saveBtn.removeClass('btn-disabled');
+        this.ui.saveBtn.removeClass('disabled');
       }
     })
   );
