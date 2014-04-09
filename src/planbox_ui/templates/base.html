@@ -50,10 +50,10 @@
     <div class="alert-box alert">You are using an outdated browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
   <![endif]-->
 
-  <div id="overlay-container"></div>
   <div id="page">
     {% block page %}{% endblock %}
   </div>
+  <div id="modal-container"></div>
 
   <a href="/help"{% if is_editable %} target="_blank"{% endif %} class="software-help-link">Help &amp; Feedback</a>
   <small class="software-phase-notice">Alpha</small>

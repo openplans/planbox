@@ -13,13 +13,15 @@ var Planbox = Planbox || {};
   // Admin ====================================================================
 
   NS.showErrorModal = function(title, subtitle, description) {
-    NS.app.overlayRegion.show(new NS.ModalView({
+    NS.app.modalRegion.show(new NS.ModalView({
       model: new Backbone.Model({
         title: title,
         subtitle: subtitle,
         description: description
       })
     }));
+    // TODO: Open the reveal, either here or in the ModalView onShow method
+    // NS.app.modalRegion.$el.find('.reveal-modal').foundation('reveal', 'open');
   };
 
   NS.showProjectSaveErrorModal = function(resp) {

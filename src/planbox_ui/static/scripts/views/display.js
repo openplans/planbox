@@ -96,10 +96,6 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.WelcomeModalView = NS.ModalView.extend({
-    template: '#welcome-modal-tpl'
-  });
-
   NS.ProjectSectionListView = NS.BaseProjectSectionListView.extend({
     sectionViews: {
       'timeline': NS.TimelineSectionView,
