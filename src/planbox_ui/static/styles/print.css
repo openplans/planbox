@@ -13,7 +13,8 @@
 .software-help-link,
 .event-list + br,
 .project-faqs,
-.hide-for-print {
+.hide-for-print,
+.is-hidden {
   display: none;
 }
 
@@ -42,6 +43,7 @@ p {
   margin: 0 0 1em 0;
 }
 .site-header {
+  background-image: none !important;
   background-color: #000;
   color: #fff;
   margin: 0;

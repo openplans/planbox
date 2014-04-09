@@ -40,9 +40,9 @@
       <div class="logo-table-row">
 
         {{#if logo_img_url}}
-        <div data-attr="logo_img_url" class="logo image-holder has-image">
+        <div data-attr="logo_img_url" class="logo image-holder has-image hide-for-print">
         {{else}}
-        <div data-attr="logo_img_url" class="logo image-holder">
+        <div data-attr="logo_img_url" class="logo image-holder hide-for-print">
         {{/if}}
           <img class="image-target" src="{{ logo_img_url }}" alt="{{ title }}">
           {{#if_fileapi_support 'cors'}}
@@ -79,7 +79,7 @@
 <section class="project-details">
   <div class="container clearfix">
 
-    <div class="highlights">
+    <div class="highlights hide-for-print">
 
       <div class="highlight">
         {{!-- TODO: Abstract this out so that happening_now and get_involved use
