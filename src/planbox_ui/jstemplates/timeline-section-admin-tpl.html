@@ -1,5 +1,12 @@
 <span data-magellan-destination="section-{{ slug }}" id="section-{{ slug }}" class="section-anchor"></span>
 <div class="row container">
+  {{^if_fileapi_support 'cors'}}
+  <p class="clearfix">
+    <small class="no-file-upload-message">
+      Your browser doesn't support adding event attachments. Please <a href="http://browsehappy.com/">upgrade</a> to use this feature.
+    </small>
+  </p>
+  {{/if_fileapi_support}}
   <div class="small-12 columns">
     <h2 class="project-timeline-label content-editable" data-attr="label" contenteditable>{{{ label }}}</h2>
     <ol class="event-list unstyled-list"></ol>
