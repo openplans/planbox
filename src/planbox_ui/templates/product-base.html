@@ -38,26 +38,36 @@ Plan In A Box
 
 {% block page %}
 
-<header class="product-header">
-  <div class="container clearfix">
-    <!-- <h1 class="product-title"><a href="/"><span class="product-logo">&#9649;</span>&nbsp;Plan In A Box</a></h1> -->
-  {% if user.is_authenticated %}
-    {% include_handlebars 'user-menu.html' %}
-  {% else %}
-    <nav class="user-nav">
-      <a href="/signin" class="login-link user-link nobreak">Sign In</a>
-    </nav>
-  {% endif %}
-  </div>
+<header class="">
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="/">Plan In A Box</a></h1>
+      </li>
+    </ul>
 
+    <section class="top-bar-section">
+      {% if user.is_authenticated %}
+        {% include_handlebars 'user-menu.html' %}
+      {% else %}
+      <ul class="right">
+        <li class="active"><a href="/signin" class="login-link user-link nobreak">Sign In</a></li>
+      </ul>
+      {% endif %}
+    </section>
+  </nav>
 </header>
 
 {% block main %}{% endblock %}
 
 <footer class="site-colophon">
-  <div class="container">
-    <a href="http://openplans.org/"><img src="{{ STATIC_URL }}images/OpenPlans-logo-whitetxt.png" class="openplans-logo"></a>
-    <p class="funding-info"><small>Plan In A Box is a product of <a href="http://openplans.org/">OpenPlans</a>, with support from <a href="http://www.knightfoundation.org/">Knight Foundation</a>.</small></p>
+  <div class="row">
+    <div class="small-3 columns">
+      <a href="http://openplans.org/"><img src="{{ STATIC_URL }}images/OpenPlans-logo-whitetxt.png" class="openplans-logo"></a>
+    </div>
+    <div class="small-9 columns">
+      <p class="funding-info">Plan In A Box is a product of <a href="http://openplans.org/">OpenPlans</a>, with support from <a href="http://www.knightfoundation.org/">Knight Foundation</a>.</p>
+    </div>
   </div>
 </footer>
 

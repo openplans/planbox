@@ -64,7 +64,6 @@
 
 {% block scripts %}
   {% if debug %}
-  <script src="{{ STATIC_URL }}bower_components/jquery/dist/jquery.js"></script>
   <script src="{{ STATIC_URL }}bower_components/jqueryui/ui/jquery.ui.core.js"></script>
   <script src="{{ STATIC_URL }}bower_components/jqueryui/ui/jquery.ui.widget.js"></script>
   <script src="{{ STATIC_URL }}bower_components/jqueryui/ui/jquery.ui.mouse.js"></script>
@@ -85,6 +84,7 @@
   <script src="{{ STATIC_URL }}bower_components/pickadate/lib/picker.js"></script>
   <script src="{{ STATIC_URL }}bower_components/pickadate/lib/picker.date.js"></script>
   {% else %}
+</script>
   <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
     {% if is_editable %}
   <script src="{{ STATIC_URL }}scripts/components-admin.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
