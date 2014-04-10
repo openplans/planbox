@@ -12,9 +12,9 @@
       <h3>Sign In</h3>
       <form method="POST">
         {% csrf_token %}
-        <p><input required type="text" name="username" id="my-username" class="input-block" placeholder="Username" pattern="[A-Za-z0-9-_]{1,30}" max="30" tabindex="1"> <label for="my-username" class="float-label"><strong>Username</strong></label></p>
-        <p><input required type="password" name="password" id="my-password" class="input-block" placeholder="Password" max="30" tabindex="2"><label for="my-password" class="float-label"><strong>Password</strong></label></p>
-        <p><input type="submit" value="Sign In" class="button large" tabindex="3"></p>
+        <p class="float-label-container"><input required type="text" name="username" id="my-username" class="float-label-input" placeholder="Username" pattern="[A-Za-z0-9-_]{1,30}" max="30" tabindex="1"> <label for="my-username" class="float-label">Username</label></p>
+        <p class="float-label-container"><input required type="password" name="password" id="my-password" class="float-label-input" placeholder="Password" max="30" tabindex="2"><label for="my-password" class="float-label">Password</label></p>
+        <p><input type="submit" value="Sign In" class="button large radius" tabindex="3"></p>
 
         {% if next_url %}
         <input type="hidden" name="next" value="{{ next_url }}">

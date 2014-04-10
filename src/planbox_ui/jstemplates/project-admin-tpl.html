@@ -66,8 +66,9 @@
             <p class="clearfix"><button class="remove-img-btn btn btn-mini btn-secondary" data-confirm-msg="Are you sure you want to remove your logo?"><span class="delete-icon">&#10005;</span> Remove</button></p>
             {{/if_fileapi_support}}
           </div>
-          <div>
-            <h1 class="site-title content-editable" data-attr="title" contenteditable>{{{ title }}}</h1>
+          <div class="float-label-container">
+            <h1 class="site-title content-editable float-label-input" data-attr="title" contenteditable>{{{ title }}}</h1>
+            <span class="float-label">Project Title</span>
           </div>
         </div>
       </div><!-- end .logo-table -->
@@ -102,7 +103,7 @@
            --       the same code
            --}}
         <h3>Happening Now!</h3>
-        <p class="highlight-description content-editable" data-attr="happening_now_description" contenteditable>{{{ happening_now_description }}}</p>
+        <p class="highlight-description content-editable float-label-input" data-attr="happening_now_description" contenteditable>{{{ happening_now_description }}}</p>
         <select class="highlight-link-selector" name="happening_now_link_url" data-link-type-name="happening_now_link_type">
           {{#select_highlight happening_now_link_type happening_now_link_url }}
           <option value="" data-link-type="">Link to...</option>
@@ -122,7 +123,7 @@
 
       <div class="highlight">
         <h3>Get Involved!</h3>
-        <p class="highlight-description content-editable" data-attr="get_involved_description" contenteditable>{{{ get_involved_description }}}</p>
+        <p class="highlight-description content-editable float-label-input" data-attr="get_involved_description" contenteditable>{{{ get_involved_description }}}</p>
         <select class="highlight-link-selector" name="get_involved_link_url" data-link-type-name="get_involved_link_type">
           {{#select_highlight get_involved_link_type get_involved_link_url }}
           <option value="" data-link-type="">Link to...</option>
@@ -142,8 +143,14 @@
     </div>
 
     <div class="medium-8 medium-pull-4 columns">
-      <p class="project-location content-editable" data-attr="location" contenteditable>{{{ location }}}</p>
-      <div class="project-description content-editable" data-attr="description" contenteditable>{{{ description }}}</div>
+      <div class="float-label-container">
+        <p class="project-location content-editable float-label-input" data-attr="location" contenteditable>{{{ location }}}</p>
+        <span class="float-label">Project Location</span>
+      </div>
+      <div class="float-label-container">
+        <div class="project-description content-editable float-label-input" data-attr="description" contenteditable>{{{ description }}}</div>
+        <span class="float-label">Project Description</span>
+      </div>
     </div>
 
   </div>
@@ -154,7 +161,10 @@
 <footer class="site-colophon">
   <div class="row">
     <div class="small-12 columns">
-      <p class="project-contact-info content-editable" data-attr="contact" contenteditable>{{{ contact }}}</p>
+      <div class="float-label-container">
+        <p class="project-contact-info content-editable float-label-input" data-attr="contact" contenteditable>{{{ contact }}}</p>
+        <span class="float-label">Contact Information</span>
+      </div>
       <p>
         {{#if public}}
         <a href="#" class="save-btn button disabled">Publish Changes</a>

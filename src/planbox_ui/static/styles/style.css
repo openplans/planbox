@@ -7,6 +7,12 @@ input.hide {
   display: none;
 }
 
+.unstyled-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 
 /* =Layout
 -------------------------------------------------------------- */
@@ -22,6 +28,7 @@ body {
 }
 .container {
   background: #fff;
+  padding-top: 0.9375rem;
 }
 .site-header {
   background-color: #268099;
@@ -32,16 +39,25 @@ body {
 /* =Forms
 -------------------------------------------------------------- */
 
-form p {
+textarea {
+  height: 6.5em;
+  resize: none;
+}
+select {
+  max-width: 100%;
+}
+
+/* Float Label Pattern */
+.float-label-container {
   position: relative;
 }
-label.float-label {
-  background: #268099;
+.float-label {
+  background: #999;
   float: left;
-  padding: 0.25em 1em 0 0.75em;
+  padding: 0.25rem 0.75rem;
   color: #fff;
-  font-size: 0.875em;
-  border-radius: 0 0.75em 0 0;
+  font-size: 0.75em;
+  border-radius: 0.25rem 0.25rem 0 0;
   visibility: hidden;
   position: absolute;
   left: 0;
@@ -55,32 +71,37 @@ label.float-label {
        -o-transition: height 0.1s ease, opacity 0.5s ease;
           transition: height 0.1s ease, opacity 0.5s ease;
 }
-input:focus + label {
+.float-label-input:focus + .float-label {
   visibility: visible;
   opacity: 1;
-  height: 1.5em;
+  height: 2em;
 }
-input.input-block,
-textarea {
+.float-label-input {
+  -webkit-appearance: none;
+  background-color: #fff;
+  background-color: inherit;
+  font-family: inherit;
+  border: 1px solid #cccccc;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.75);
+  display: block;
+  margin: 0 0 1rem 0;
+  padding: 0.5rem;
   width: 100%;
-	-webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
-  border: 0.25em solid #a1cbcf;
-  padding: 0.5em;
-  outline: 0;
-  line-height: 1.5;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
 }
-.input-block:focus,
-textarea:focus {
-  outline: 2px solid #268099;
+.float-label-input:focus {
+  background: #fafafa;
+  border-color: #999999;
+  outline: none;
+  box-shadow: 0 0 5px #999999;
+  border-color: #999999;
 }
-textarea {
-  height: 6.5em;
-  resize: none;
-}
-select {
-  max-width: 100%;
+.float-label-input:focus {
+/*  outline: 2px solid #268099;*/
 }
 
 
@@ -102,39 +123,3 @@ select {
   padding-top: 3.5em;
 }
 
-
-/* =Events
--------------------------------------------------------------- */
-
-.calendar-icon {
-  background-color: #eee;
-  border-top: 0.375em solid #E65CA1;
-  border-radius: 0.125em;
-  float: left;
-  width: 1em;
-  height: 1em;
-  font-size: 1.25em;
-  margin: 0.375em 0 0 -1.375em;
-  position: relative;
-  z-index: 2;
-  -webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
-}
-.calendar-icon:before,
-.calendar-icon:after {
-  content: '';
-  display: block;
-  background-color: #ddd;
-  position: absolute;
-  width: 3px;
-  height: 0.25em;
-  top: -0.375em;
-  left: 0.125em;
-  border-radius: 1em;
-  margin-top: -2px;
-}
-.calendar-icon:after {
-  left: auto;
-  right: 0.125em;
-}

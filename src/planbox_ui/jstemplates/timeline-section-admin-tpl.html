@@ -8,7 +8,10 @@
   </div>
   {{/if_fileapi_support}}
   <div class="small-12 columns">
-    <h2 class="project-timeline-label content-editable" data-attr="label" contenteditable>{{{ label }}}</h2>
+    <div class="float-label-container">
+      <h2 class="project-timeline-label content-editable float-label-input" data-attr="label" contenteditable>{{{ label }}}</h2>
+      <span class="float-label">Timeline Title</span>
+    </div>
     <ol class="event-list unstyled-list"></ol>
     <br>
     <a href="#" class="button small add-event-btn">Add Event</a>
