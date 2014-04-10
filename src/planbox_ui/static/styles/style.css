@@ -66,12 +66,13 @@ select {
   line-height: 1.5em;
   height: 0;
   overflow: hidden;
-  -webkit-transition: height 0.1s ease, opacity 0.5s ease;
-     -moz-transition: height 0.1s ease, opacity 0.5s ease;
-       -o-transition: height 0.1s ease, opacity 0.5s ease;
-          transition: height 0.1s ease, opacity 0.5s ease;
+  -webkit-transition: height 0.1s ease, opacity 0.45s ease, background-color 0.45s ease-in-out;
+     -moz-transition: height 0.1s ease, opacity 0.45s ease, background-color 0.45s ease-in-out;
+       -o-transition: height 0.1s ease, opacity 0.45s ease, background-color 0.45s ease-in-out;
+          transition: height 0.1s ease, opacity 0.45s ease, background-color 0.45s ease-in-out;
 }
-.float-label-input:focus + .float-label {
+.float-label-input:focus + .float-label,
+.float-label-input:empty + .float-label {
   visibility: visible;
   opacity: 1;
   height: 2em;
@@ -91,7 +92,10 @@ select {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
-  transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
+  -webkit-transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
+     -moz-transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
+       -o-transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
+          transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
 }
 .float-label-input:focus {
   background: #fafafa;

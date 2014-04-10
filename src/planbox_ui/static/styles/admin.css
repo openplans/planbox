@@ -1,6 +1,19 @@
 
+/* =ContentEditable Elements
+-------------------------------------------------------------- */
+
+.content-editable {}
+.content-editable:empty {
+  background-color: rgba(230, 92, 161, 0.25);
+  border-color: #E65CA1;
+}
+.content-editable:empty + .float-label {
+  background-color: #E65CA1;
+}
+
 /* =File Uploads
 -------------------------------------------------------------- */
+
 .no-file-upload-message {
   clear: both;
   font-size: 0.75em;
