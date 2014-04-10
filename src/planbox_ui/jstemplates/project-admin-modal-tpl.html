@@ -1,4 +1,4 @@
-<div class="modal {{#if public}}hide{{/if}} make-public-content">
+<div class="{{#if public}}hide{{/if}} make-public-content">
   <div class="modal-head">
     <h3 class="modal-header"><span class="checked-icon">&#10004;</span> Draft Saved.</h3>
   </div>
@@ -7,11 +7,11 @@
     <p>This project is only visible to you when you're signed in. When you're ready for everyone to see it&hellip;</p>
     <p><a href="#" class="btn btn-large btn-block btn-public">Publish This Project</a></p>
     <hr>
-    <p style="text-align:right;"><a href="#" class="btn btn-small btn-secondary btn-close">Continue Editing</a></p>
+    <p style="text-align:right;"><a href="#" class="btn-close">Continue Editing</a></p>
   </div>
 </div>
 
-<div class="modal {{^if public}}hide{{/if}} share-content">
+<div class="{{^if public}}hide{{/if}} share-content">
   <div class="modal-head">
     <h3 class="modal-header"><span class="checked-icon">&#10004;</span> Project Published.</h3>
   </div>
@@ -21,6 +21,6 @@
     <input type="text" class="copy-url-input" onClick="this.select();" readonly="readonly" value="{{ window_location }}" />
     <p>Share this project on Facebook, Twitter, Google+, and other social networks. Link to it from your own website &amp; mailing lists.</p>
     <hr>
-    <p style="text-align:right;"><a href="#" class="btn btn-small btn-secondary btn-close">Continue Editing</a></p>
+    <p style="text-align:right;"><a href="#" class="btn-close">Continue Editing</a></p>
   </div>
 </div>

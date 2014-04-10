@@ -83,20 +83,17 @@ var Planbox = Planbox || {};
   // View =====================================================================
   NS.ModalView = Backbone.Marionette.ItemView.extend({
     template: '#modal-tpl',
-    className: 'overlay',
-    ui: {
-      closeBtn: '.btn-close',
-    },
-    events: {
-      'click @ui.closeBtn': 'handleClose'
-    },
-    handleClose: function(evt) {
-      evt.preventDefault();
-      this.close();
+    className: 'reveal-modal medium',
+    attributes: {
+      'data-reveal': ''
     },
     onShow: function() {
       // This is gross. We should encourage Foundation to fix this.
-      this.$('.reveal-modal').foundation().foundation('reveal', 'open');
+      this.$el.foundation().foundation('reveal', 'open');
+    },
+    onClose: function() {
+      // This is gross. We should encourage Foundation to fix this.
+      this.$el.foundation().foundation('reveal', 'close');
     }
   });
 

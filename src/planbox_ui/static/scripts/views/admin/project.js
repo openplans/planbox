@@ -65,7 +65,10 @@ var Planbox = Planbox || {};
 
   NS.ProjectAdminModalView = Backbone.Marionette.ItemView.extend({
     template: '#project-admin-modal-tpl',
-    className: 'overlay',
+    className: 'reveal-modal medium',
+    attributes: {
+      'data-reveal': ''
+    },
     ui: {
       closeBtn: '.btn-close',
       publishBtn: '.btn-public',
@@ -98,6 +101,14 @@ var Planbox = Planbox || {};
           NS.showProjectSaveErrorModal(resp);
         }
       });
+    },
+    onShow: function() {
+      // This is gross. We should encourage Foundation to fix this.
+      this.$el.foundation().foundation('reveal', 'open');
+    },
+    onClose: function() {
+      // This is gross. We should encourage Foundation to fix this.
+      this.$el.foundation().foundation('reveal', 'close');
     }
   });
 
@@ -420,7 +431,7 @@ var Planbox = Planbox || {};
 
             if (makePublic || !model.get('public')) {
               // Show the modal if we're publishing this right now
-              NS.app.overlayRegion.show(new NS.ProjectAdminModalView({
+              NS.app.modalRegion.show(new NS.ProjectAdminModalView({
                 model: model
               }));
             }
