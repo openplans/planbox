@@ -74,7 +74,6 @@
   visibility: hidden;
 }
 .remove-cover-img-btn-container {
-  display: none;
 }
 .remove-img-btn {
   visibility: hidden;
@@ -101,13 +100,14 @@
 .logo.has-image .image-dnd {
   display: none;
 }
-.logo p.clearfix {
+.logo .remove-logo-btn-container {
   margin: 0.5em 0 0;
 }
 .logo .remove-img-btn {
   float: none;
 }
-.has-image > p > .remove-img-btn {
+.site-header.has-image .remove-cover-img-btn-container .remove-img-btn,
+.logo.has-image .remove-logo-btn-container .remove-img-btn {
   visibility: visible;
 }
 
