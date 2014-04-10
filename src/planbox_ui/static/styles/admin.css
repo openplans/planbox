@@ -38,15 +38,6 @@
 	color: #444;
 }
 
-.attachment {
-  position: relative;
-  padding-left: 2.5rem;
-}
-.attachment .handle {
-	right: auto;
-	left: 0;
-}
-
 
 /* =File Uploads
 -------------------------------------------------------------- */
@@ -301,6 +292,9 @@
 .event-datetime {
   padding-right: 3em;
 }
+.delete-event-btn {
+  cursor: pointer;
+}
 
 .add-event-btn {
   margin-left: 2.75rem;
@@ -385,15 +379,25 @@
 
 /* Event Attachments */
 li.attachment {
-  padding-right: 2.25em;
+  position: relative;
+  padding-right: 0;
+  padding-left: 2.5rem;
+}
+.attachment-title {
+  margin-bottom: 0.75rem;
+}
+.attachment .handle {
+	right: auto;
+	left: 0;
+}
+.delete-attachment-btn {
+  display: block;
+  width: 90%;
+  cursor: pointer;
 }
 .event-attachment-dnd {
-  margin-top: 0;
-  margin-right: 2.25rem;
-  margin-left: 0;
-  margin-bottom: 2.5em;
-  padding: 0.5em;
-  font-size: 0.875em;
+  margin: 0;
+  padding: 0.5rem;
   clear: both;
 }
 .event-attachment-dnd .drop-instructions {
@@ -408,15 +412,6 @@ li.attachment {
 }
 .event-attachment-dnd.file-uploading .drop-instructions {
   display: none;
-}
- .attachment-icon {
-  margin-bottom: 1.5em;
-}
-.delete-attachment-btn {
-  position: absolute;
-  top: 60px;
-  left: 0px;
-  margin: 2.75em 0 0 -1.5em;
 }
 
 

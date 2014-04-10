@@ -196,6 +196,7 @@ select {
 }
 .event {
   padding-left: 2rem;
+  margin-bottom: 2rem;
   position: relative;
 }
 .event:last-child:before {
@@ -220,8 +221,9 @@ select {
 }
 
 /* Event Attachments */
-.attachment {
-  font-size: 0.875rem;
+.attachment {}
+.attachment-icon img {
+  width: 90%;
 }
 .attachment-title {
   margin-bottom: 0.125rem;
