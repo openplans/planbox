@@ -85,6 +85,15 @@
   box-shadow: 0.2em 0 0 #268099;
 }
 
+/* Custom Domain Request */
+.custom-domain-message {
+  display: none;
+}
+.custom-domain-message-btn {}
+.custom-domain-message-text {
+  display: none;
+}
+
 
 /* =Save Button
 -------------------------------------------------------------- */
@@ -185,6 +194,24 @@ h6.content-editable {
 }
 
 /* File Uploads */
+.no-file-upload-message {
+  clear: both;
+  font-size: 0.75em;
+  background-color: #E65CA1;
+  background-color: rgba(230, 92, 161, 0.25); 
+  color: #fff;
+  color: rgba(255, 255, 255, 0.75); 
+  float: left;
+  padding: 0.125em 0.5em;
+  border-radius: 0.25em;
+}
+.no-file-upload-message a {
+  color: #fff;
+  color: rgba(255, 255, 255, 0.75); 
+}
+.no-file-upload-message a:hover {
+  color: #fff;
+}
 .file-upload {
   display: none;
   margin: 2em 1em 1em;
@@ -196,8 +223,8 @@ h6.content-editable {
   position: relative;
 }
 .file-upload:hover,
-.over > .file-upload,
-.file-uploading > .file-upload {
+.file-dragging,
+.file-uploading {
   opacity: 1;
   background-color: #888;
   background-color: rgba(90,90,90,0.5);
@@ -214,7 +241,7 @@ h6.content-editable {
   display:none;
 }
 .uploading-message,
-.file-uploading > .file-upload > .drop-instructions {
+.file-uploading > .drop-instructions {
   display: none;
 }
 @keyframes uploading {
@@ -227,7 +254,7 @@ h6.content-editable {
 	 50% { color: #fff; }
 	100% { color: #888; }
 }
-.file-uploading > .file-upload > .uploading-message {
+.file-uploading > .uploading-message {
   display: block;
   position: relative;
   top: 1.25em;
@@ -236,7 +263,7 @@ h6.content-editable {
   -webkit-animation: uploading 1.5s infinite ease-in-out;
           animation: uploading 1.5s infinite ease-in-out;
 }
-.file-uploading > .file-upload > .file-upload-input-container {
+.file-uploading > .file-upload-input-container {
   visibility: hidden;
 }
 .remove-cover-img-btn-container {
@@ -277,6 +304,41 @@ h6.content-editable {
   visibility: visible;
 }
 
+li.attachment {
+  padding-right: 2.25em;
+}
+.event-attachment-dnd {
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 2.5em;
+  padding: 0.5em;
+  font-size: 0.875em;
+  clear: both;
+}
+.event-attachment-dnd .drop-instructions {
+  display: inline;
+  margin: 0 0.25em 0 0;
+}
+.event-attachment-dnd.file-uploading .uploading-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -0.75em 0 0 -3.5em;
+}
+.event-attachment-dnd.file-uploading .drop-instructions {
+  display: none;
+}
+ .attachment-icon {
+  margin-bottom: 1.5em;
+}
+.delete-attachment-btn {
+  position: absolute;
+  top: 60px;
+  left: 0px;
+  margin: 2.75em 0 0 -1.5em;
+}
+
 /* Project Steps */
 .step {
   clear: both;
@@ -309,8 +371,9 @@ h6.content-editable {
   margin-top: 2.5em;
 }
 .step-timeline {
-  margin-bottom: 0.75em;
-  border-radius: 0.25em 0.25em 0.25em 0;
+  margin-bottom: 0.375em;
+  border-radius: 0.25em;
+  padding-bottom: 0.5em;
   position: relative;
   z-index: 2;
 }
@@ -444,6 +507,14 @@ h6.content-editable {
 }
 .event-description:hover:before,
 .event-description:focus:before {
+  content: 'Description';
+}
+.attachment-title:hover:before,
+.attachment-title:focus:before {
+  content: 'Title';
+}
+.attachment-description:hover:before,
+.attachment-description:focus:before {
   content: 'Description';
 }
 .faq-question:hover:before,
@@ -835,4 +906,43 @@ li.event:last-child:before {
     border-right-color: transparent;
     border-bottom-color: transparent;
   }
+
+  .custom-domain-message {
+    margin-left: 1.0em;
+    display: inline-block;
+    position: relative;
+  }
+  .custom-domain-message.is-open .custom-domain-message-text {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 15em;
+    z-index: 50;
+    background-color: #fff;
+    color: #666;
+    font-size: 0.875em;
+    line-height: 1.25;
+    margin: 0 0 0 -7.5em;
+    padding: 0.875em 1em;
+    border-radius: 0.25em;
+    box-shadow: 0 0.5em 0.5em rgba(0,0,0,0.25);
+  	-webkit-box-sizing: border-box;
+  	   -moz-box-sizing: border-box;
+  	        box-sizing: border-box;
+  }
+  .custom-domain-message-text:before {
+    content: "";
+    position: absolute;
+    top: -16px;
+    right: 50%;
+    width: 0;
+    height: 0;
+    border: 8px solid #fff;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    margin-right: -8px;
+  }
+
 }

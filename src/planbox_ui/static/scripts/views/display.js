@@ -11,10 +11,31 @@ var Planbox = Planbox || {};
   };
 
   // Sections =================================================================
-  NS.EventView = Backbone.Marionette.ItemView.extend({
+  NS.AttachmentView = Backbone.Marionette.Layout.extend({
+    template: '#attachment-tpl',
+    tagName: 'li',
+    className: 'attachment',
+  });
+
+  NS.AttachmentListView = Backbone.Marionette.CompositeView.extend({
+    template: '#attachments-section-tpl',
+    itemView: NS.AttachmentView,
+    itemViewContainer: '.attachment-list'
+  });
+
+  NS.EventView = Backbone.Marionette.Layout.extend({
     template: '#event-tpl',
     tagName: 'li',
-    className: 'event'
+    className: 'event',
+    regions: {
+      attachmentList: '.attachments-region'
+    },
+    onRender: function() {
+      this.attachmentList.show(new NS.AttachmentListView({
+        model: this.model,
+        collection: this.model.get('attachments')
+      }));
+    }
   });
 
   NS.TimelineSectionView = Backbone.Marionette.CompositeView.extend({

@@ -6,12 +6,17 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.db.models import TextField
 from django.forms import TextInput, Textarea
+from django.forms.models import inlineformset_factory, modelform_factory
 from django.utils.html import format_html
 from django.utils.translation import ugettext as _
 from django_ace import AceWidget
-from genericadmin.admin import GenericAdminModelAdmin
+from genericadmin.admin import GenericAdminModelAdmin, GenericTabularInline
 from jsonfield import JSONField
-from planbox_data.models import Profile, Project, Event, Theme, Section
+from planbox_data.models import Profile, Project, Event, Theme, Section, Attachment
+
+
+class AttachmentAdmin (GenericAdminModelAdmin):
+    pass
 
 
 class ProfileAdmin (admin.ModelAdmin):
@@ -38,11 +43,40 @@ class SectionInline (admin.StackedInline):
     }
 
 
+class AttachmentInline (GenericTabularInline):
+    model = Attachment
+    extra = 0
+    readonly_fields = ('index',)
+    ct_field = 'attached_to_type'
+    ct_fk_field = 'attached_to_id'
+    exclude = ('created_at', 'updated_at')
+    form = modelform_factory(Attachment, widgets={
+        'label': TextInput(),
+    })
+
+
+class EventAdmin (admin.ModelAdmin):
+    list_display = ('label', 'project', 'index')
+    inlines = (
+        AttachmentInline,
+    )
+    raw_id_fields = ('project',)
+    form = modelform_factory(Event, widgets={
+        'label': TextInput(attrs={'class': 'vTextField'}),
+        'datetime_label': TextInput(attrs={'class': 'vTextField'})
+    })
+
+
 class EventInline (admin.StackedInline):
     model = Event
     extra = 0
     prepopulated_fields = {"slug": ("label",)}
     readonly_fields = ('index',)
+
+    form = modelform_factory(Event, widgets={
+        'label': TextInput(attrs={'class': 'vTextField'}),
+        'datetime_label': TextInput(attrs={'class': 'vTextField'})
+    })
 
 
 class ProjectAdmin (admin.ModelAdmin):
@@ -55,6 +89,12 @@ class ProjectAdmin (admin.ModelAdmin):
         EventInline,
     )
     raw_id_fields = ('theme', 'template')
+    form = modelform_factory(Project, widgets={
+        'title': TextInput(attrs={'class': 'vTextField'}),
+        'location': TextInput(attrs={'class': 'vTextField'}),
+        'happening_now_description': TextInput(attrs={'class': 'vTextField'}),
+        'get_involved_description': TextInput(attrs={'class': 'vTextField'}),
+    })
 
     def get_queryset(self, request):
         qs = super(ProjectAdmin, self).get_queryset(request)
@@ -106,3 +146,5 @@ class ThemeAdmin (admin.ModelAdmin):
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Theme, ThemeAdmin)
+admin.site.register(Event, EventAdmin)
+admin.site.register(Attachment, AttachmentAdmin)

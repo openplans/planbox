@@ -1,0 +1,13 @@
+<a href="{{ url }}" class="attachment-link" target="_blank">
+  {{#if thumbnail_url}}
+  <div class="attachment-icon image">
+    <img src="{{ thumbnail_url }}">
+  </div>
+  {{else}}
+  <div class="attachment-icon">
+    <img src="{{ static_url }}/images/document_generic.png">
+  </div>
+  {{/if}}
+  <h4 class="attachment-title" data-attr="label">{{{ label }}}</h4>
+  <div class="attachment-description" data-attr="description">{{{ description }}}</div>
+</a>

@@ -48,9 +48,19 @@ class OrderedSerializerMixin (object):
                 obj.index = index
 
 
+class AttachmentSerializer (OrderedSerializerMixin, serializers.ModelSerializer):
+    label = CleanedHtmlField()
+    description = CleanedHtmlField(required=False)
+
+    class Meta:
+        model = models.Attachment
+        exclude = ('attached_to_type', 'attached_to_id', 'index')
+
+
 class EventSerializer (OrderedSerializerMixin, serializers.ModelSerializer):
     label = CleanedHtmlField()
     description = CleanedHtmlField(required=False)
+    attachments = AttachmentSerializer(many=True, required=False, allow_add_remove=True)
 
     class Meta:
         model = models.Event

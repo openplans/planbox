@@ -94,6 +94,11 @@
 
   <script>
     var Planbox = Planbox || {}
+
+    Planbox.bootstrapped = {
+      staticUrl: '{{ STATIC_URL }}'
+    };
+
     Planbox.Data = {
       project: {{ project_data|as_json }},
       user: {{ user_data|as_json }},
@@ -112,11 +117,13 @@
   {% if debug %}
   <script src="{{ STATIC_URL }}scripts/utils.js"></script>
   <script src="{{ STATIC_URL }}scripts/handlebars-helpers.js"></script>
+  <script src="{{ STATIC_URL }}scripts/file-upload.js"></script>
   <script src="{{ STATIC_URL }}scripts/models.js"></script>
   <script src="{{ STATIC_URL }}scripts/views/mixins.js"></script>
   <script src="{{ STATIC_URL }}scripts/views/base.js"></script>
   <script src="{{ STATIC_URL }}scripts/views/display.js"></script>
-  <script src="{{ STATIC_URL }}scripts/views/admin.js"></script>
+  <script src="{{ STATIC_URL }}scripts/views/admin/section.js"></script>
+  <script src="{{ STATIC_URL }}scripts/views/admin/project.js"></script>
   <script src="{{ STATIC_URL }}scripts/app.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/app.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
