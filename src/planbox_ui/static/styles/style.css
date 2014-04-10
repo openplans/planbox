@@ -228,3 +228,14 @@ select {
 .attachment-title {
   margin-bottom: 0.125rem;
 }
+
+/* FAQs Section */
+.faq {
+  margin-bottom: 0.9375rem;
+}
+.faq-question {
+  margin-bottom: 0.25rem;
+}
+.faq-answer {
+  margin-bottom: 0;
+}
