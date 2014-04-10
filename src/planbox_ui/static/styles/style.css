@@ -16,12 +16,16 @@ body {
 }
 #page {
   background: #eee;
-  font-family: 'Alegreya Sans', sans-serif;
+/*  font-family: 'Alegreya Sans', sans-serif;*/
   font-weight: 400;
   line-height: 1.5;
 }
 .container {
   background: #fff;
+}
+.site-header {
+  background-color: #268099;
+  color: #fff;
 }
 
 
@@ -84,6 +88,10 @@ select {
 -------------------------------------------------------------- */
 .project-header {
   border-radius: 0.375em 0.375em 0 0;
+}
+.project-menu-container {}
+.project-menu-container.has-project-menu {
+  margin-top: -3em;
 }
 [data-magellan-expedition], 
 [data-magellan-expedition-clone] {
