@@ -11,6 +11,35 @@
   background-color: #E65CA1;
 }
 
+
+/* =Sortable UI 
+-------------------------------------------------------------- */
+
+.ui-sortable > li, .event, .attachment, .faq {
+  padding-right: 2.75rem;
+  position: relative;
+}
+.handle {
+	cursor: move;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 1.75rem;
+	line-height: 2rem;
+	width: 2rem;
+	height: 2rem;
+	text-align: center;
+	color: #bbb;
+}
+.handle:hover {
+	color: #fff;
+}
+.container .handle:hover {
+	color: #444;
+}
+
+
+
 /* =File Uploads
 -------------------------------------------------------------- */
 
@@ -257,8 +286,38 @@
 /* =Events
 -------------------------------------------------------------- */
 
+.event:last-child:before {
+  display: none;
+}
+
 .event-datetime {
   padding-right: 3em;
+}
+
+.add-event-btn {
+  margin-left: 2.75rem;
+}
+.add-event-btn:before {
+  content: '';
+  background-color: #888;
+  border-left: 0.75rem dotted #eee;
+  width: 0;
+  height: 5.25rem;
+  position: absolute;
+  bottom: 75%;
+  left: -2.75rem;
+}
+.add-event-btn:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -3.375rem;
+  margin-top: -1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+  background-color: #888;
+  border: 0.5rem solid #eee;
 }
 
 /* Date picker widget */

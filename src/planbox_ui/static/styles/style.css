@@ -20,35 +20,47 @@ body {
 h1, h2, h3, h4, h5, h6 {
   color: inherit;
 }
+.site-title {
+  margin: 0;
+}
+.section-header {
+  padding: 0.5rem;
+}
+.section-header h2 {
+  margin: 0;
+}
 
   
 /* =Layout
 -------------------------------------------------------------- */
 
 body {
-  background: #407280;
+  background-color: #407280;
 }
 #page {
-  background: #eee;
-/*  font-family: 'Alegreya Sans', sans-serif;*/
+  background-color: #eee;
   font-weight: 400;
   line-height: 1.5;
 }
 .container {
-  background: #fff;
+  background-color: #fff;
   color: #444;
   padding-top: 0.9375rem;
   padding-bottom: 0.9375rem;
+  /* prevent overflowing float-labels from being overlapped by previous sections */
+  position: relative;
+  z-index: 10;
 }
 
-/* Footer */
 .site-header {
   background-color: #268099;
   color: #fff;
 }
+
+/* Footer */
 .site-colophon {
   padding-top: 0.9375rem;
-  background: #407280;
+  background-color: #407280;
   color: #ddd;
 }
 .site-colophon a {
@@ -78,7 +90,7 @@ select {
   position: relative;
 }
 .float-label {
-  background: #999;
+  background-color: #999;
   float: left;
   padding: 0.25rem 0.75rem;
   color: #fff;
@@ -124,7 +136,7 @@ select {
           transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
 }
 .float-label-input:focus {
-  background: #fafafa;
+  background-color: #fafafa;
   color: #444;
   border-color: #999999;
   outline: none;
@@ -141,7 +153,8 @@ select {
 }
 .project-menu-container {}
 .project-menu-container.has-project-menu {
-  margin-top: -3em;
+  margin-top: -3.5em;
+  position: relative;
 }
 [data-magellan-expedition], 
 [data-magellan-expedition-clone] {
@@ -149,12 +162,59 @@ select {
   padding: 0;
 }
 .project-menu .row {
+  position: relative;
+  z-index: 2;
   padding-top: 3.5em;
+  padding-bottom: 0;
+}
+.project-menu .columns:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  background-color: #fff;
+  height: 0.5em;
+  border-radius: 0 0 0.25rem 0.25rem;
+  margin: 0 0 0 -0.9375rem;
+  box-shadow: 0 0.25em 0 rgba(0, 0, 0, 0.08);
 }
 
 /* Project Timeline */
 .project-timeline {
-  background: #888;
+  background-color: #888;
   color: #fff;
   padding-top: 0.9375rem;
+}
+.project-timeline .section-header {
+  background-color: #eee;
+  color: #444;
+}
+.event-list {
+  border-left: 0.75rem solid #eee;
+  padding: 2rem 0 0.9375rem;
+}
+.event {
+  padding-left: 2rem;
+  position: relative;
+}
+.event:last-child:before {
+  content: '';
+  background-color: #888;
+  width: 1.5rem;
+  position: absolute;
+  top: 1.25rem;
+  bottom: -0.9375rem;
+  left: -1.125rem;
+}
+.event:after {
+  content: '';
+  position: absolute;
+  top: 0.25rem;
+  left: -1.375rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+  background-color: #888;
+  border: 0.5rem solid #eee;
 }
