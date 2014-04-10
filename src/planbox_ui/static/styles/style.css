@@ -218,3 +218,11 @@ select {
   background-color: #888;
   border: 0.5rem solid #eee;
 }
+
+/* Event Attachments */
+.attachment {
+  font-size: 0.875rem;
+}
+.attachment-title {
+  margin-bottom: 0.125rem;
+}

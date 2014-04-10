@@ -15,7 +15,7 @@
 /* =Sortable UI 
 -------------------------------------------------------------- */
 
-.ui-sortable > li, .event, .attachment, .faq {
+.ui-sortable > li, .event, .faq {
   padding-right: 2.75rem;
   position: relative;
 }
@@ -38,6 +38,14 @@
 	color: #444;
 }
 
+.attachment {
+  position: relative;
+  padding-left: 2.5rem;
+}
+.attachment .handle {
+	right: auto;
+	left: 0;
+}
 
 
 /* =File Uploads
@@ -381,7 +389,7 @@ li.attachment {
 }
 .event-attachment-dnd {
   margin-top: 0;
-  margin-right: 0;
+  margin-right: 2.25rem;
   margin-left: 0;
   margin-bottom: 2.5em;
   padding: 0.5em;
@@ -418,6 +426,6 @@ li.attachment {
 .highlight {}
 .highlight-description,
 .highlight-link-selector {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.125rem;
 }
 
