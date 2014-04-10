@@ -22,6 +22,14 @@ var Planbox = Planbox || {};
     }));
   };
 
+  NS.showProjectSetupModal = function(project) {
+    // === YOU ARE HERE === //
+    NS.app.overlayRegion.show(new NS.ProjectSetupModalView({
+      model: project
+    }));
+    $('#project-setup-modal').foundation('reveal', 'open');
+  };
+
   NS.showProjectSaveErrorModal = function(resp) {
     var statusCode = resp.status,
         respJSON = resp.responseJSON,
@@ -126,6 +134,21 @@ var Planbox = Planbox || {};
     },
     dataChanged: function() {
       this.options.parent.dataChanged();
+    }
+  });
+
+  NS.ProjectSetupModalView = NS.ModalView.extend({
+    template: '#project-setup-tpl',
+    className: 'overlay',
+    ui: {
+      closeBtn: '.btn-close',
+    },
+    events: {
+      'click @ui.closeBtn': 'handleClose'
+    },
+    handleClose: function(evt) {
+      evt.preventDefault();
+      this.close();
     }
   });
 

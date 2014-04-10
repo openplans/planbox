@@ -39,6 +39,10 @@ var Planbox = Planbox || {};
       collection: projectModel.get('sections')
     }));
 
+    if (window.location.pathname.indexOf('/new/') !== -1 && NS.Data.isEditable) {
+      NS.showProjectSetupModal(projectModel);
+      // NS.app.overlayRegion.show(new NS.WelcomeModalView());
+    }
   });
 
   // Init =====================================================================
