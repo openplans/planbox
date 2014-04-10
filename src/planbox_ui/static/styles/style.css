@@ -20,8 +20,9 @@ body {
 h1, h2, h3, h4, h5, h6 {
   color: inherit;
 }
-.site-title {
+.project-title {
   margin: 0;
+  min-width: 4em;
 }
 .section-header {
   padding: 0.5rem;
@@ -71,6 +72,9 @@ body {
 }
 .site-colophon .button:hover {
   text-decoration: none;
+}
+.powered-by {
+  margin-top: 4rem;
 }
 
 
@@ -151,6 +155,24 @@ select {
 .project-header {
   border-radius: 0.375em 0.375em 0 0;
 }
+.logo-table {
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.logo-table-row {
+  display: table-row;
+}
+.logo-table-row > div {
+  display: table-cell;
+  padding: 0;
+  vertical-align: top;
+}
+.logo-table-row > div.image-holder,
+.logo-table-row > div.has-image {
+  padding-right: 1em;
+}
+
 .project-menu-container {}
 .project-menu-container.has-project-menu {
   margin-top: -3.5em;
@@ -192,7 +214,8 @@ select {
 }
 .event-list {
   border-left: 0.75rem solid #eee;
-  padding: 2rem 0 0.9375rem;
+  padding: 2rem 0 0;
+  margin-bottom: 0.9375rem;
 }
 .event {
   padding-left: 2rem;

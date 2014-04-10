@@ -4,7 +4,7 @@
 <header id="home" class="site-header">
 {{/if}}
 
-  <div class="row">
+  <div class="row project-header container">
     <div class="small-12 columns">
 
       <div class="logo-table">
@@ -28,20 +28,22 @@
     </div>
   </div>
 
-  {{#gte sections.length 2}}
-  <div data-magellan-expedition="fixed" class="project-menu">
-    <div class="row container">
-      <div class="small-12 columns">
-        <ul class="sub-nav">
-          <li data-magellan-arrival="home"><a href="#home">Home</a></li>
-          {{#each sections}}
-          <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
-          {{/each}}
-        </ul>
+  <div class="project-menu-container {{#gte sections.length 2}} has-project-menu{{/gte}}">
+    {{#gte sections.length 2}}
+    <div data-magellan-expedition="fixed" class="project-menu">
+      <div class="row container">
+        <div class="small-12 columns">
+          <ul class="sub-nav">
+            <li data-magellan-arrival="home"><a href="#home">Home</a></li>
+            {{#each sections}}
+            <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
+            {{/each}}
+          </ul>
+        </div>
       </div>
     </div>
+    {{/gte}}
   </div>
-  {{/gte}}
 
 </header>
 
@@ -84,7 +86,7 @@
       <div class="project-description">{{{ description }}}</div>
     </div>
 
-  </div>  
+  </div>
 </section>
 
 <div class="orderable-container" id="section-list"></div>
@@ -94,7 +96,7 @@
     <div class="small-12 columns">
       <p class="project-contact-info">{{{ contact }}}</p>
       {{! NOTE: These URLs is hardcoded for the sake of pages with custom URLs. Should maybe be passed in as context? }}
-      <p class="powered-by">{{#_}}Powered by <a href="https://planinabox.org/">Plan In A Box</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
+      <p class="powered-by text-right">{{#_}}Powered by <a href="https://planinabox.org/">Plan In A Box</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
     </div>
   </div>
 </footer>

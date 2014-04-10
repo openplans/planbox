@@ -119,7 +119,7 @@
 .remove-img-btn {
   visibility: hidden;
   float: right;
-  margin-right: 2em;
+/*  margin-right: 2em;*/
 }
 
 .logo .file-upload {
