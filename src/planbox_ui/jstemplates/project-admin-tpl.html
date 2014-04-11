@@ -80,13 +80,15 @@
 
     <div class="project-menu-container {{#gte sections.length 2}} has-project-menu{{/gte}}">
       {{#gte sections.length 2}}
-      <div data-magellan-expedition="fixed" class="project-menu">
+      <div class="project-menu"><!-- <div data-magellan-expedition="fixed" class="project-menu"> -->
         <div class="row container">
           <div class="small-12 columns">
             <ul class="sub-nav">
-              <li data-magellan-arrival="home"><a href="#home">Home</a></li>
+              <!-- <li data-magellan-arrival="home"><a href="#home" class="disabled">Home</a></li> -->
+              <li><a href="#home" class="home-link">Home</a></li>
               {{#each sections}}
-              <li data-magellan-arrival="section-{{ slug }}"><a href="#{{ slug }}" class="content-editable" data-id="{{ id }}" contenteditable>{{ menu_label }}</a></li>
+              <!-- <li data-magellan-arrival="section-{{ slug }}"><a href="#{{ slug }}" class="content-editable button radius" data-id="{{ id }}" contenteditable>{{ menu_label }}</a></li> -->
+              <li><a href="" class="content-editable float-label-input" data-id="{{ id }}" contenteditable>{{ menu_label }}</a></li>
               {{/each}}
             </ul>
           </div>

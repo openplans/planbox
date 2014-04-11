@@ -16,6 +16,14 @@
   margin-top: -3.5em;
 }
 
+.project-menu a {
+  cursor: default;
+}
+.project-menu .home-link {
+  line-height: 2;
+  cursor: pointer;
+}
+
 
 /* =ContentEditable Elements
 -------------------------------------------------------------- */
