@@ -60,11 +60,17 @@ section, footer {
 }
 
 .site-header {
-  background-color: #268099;
-  color: #fff;
+  background-color: #fff;
 }
 .site-header.has-image {
+  /* if there's a cover image, give the header room for it */
   padding-top: 40%;
+}
+.site-header.has-image .site-header-content {
+  /* if there's a cover image, push the logo & title out of the header */
+  float: left;
+  width: 100%;
+  border-top: 0;
 }
 
 .section-header {
@@ -300,6 +306,11 @@ select {
 
 /* min-width 641px, medium screens */
 @media only screen and (min-width: 40.063em) {
+
+  .site-header.has-image {
+    padding-top: 30%;
+  }
+
 }
 
 /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
@@ -311,6 +322,25 @@ select {
 
 /* min-width 1025px, large screens */
 @media only screen and (min-width: 64.063em) {
+
+  .site-header {
+    background-color: #268099;
+    color: #fff;
+    padding-top: 4rem;
+  }
+  .site-header.has-image {
+    padding-top: 15.25em;
+    background-position: center center;
+  }
+  .site-header .site-header-content {
+    border-top: 0;
+    border-radius: 0.25em 0.25em 0 0;
+  }
+  .site-header.has-image .site-header-content {
+    float: none;
+    width: auto;
+  }
+
 }
 
 /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */

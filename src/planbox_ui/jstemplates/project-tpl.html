@@ -4,46 +4,50 @@
 <header id="home" class="site-header">
 {{/if}}
 
-  <div class="row project-header container">
-    <div class="small-12 columns">
+  <div class="site-header-content">
 
-      <div class="logo-table">
-        <div class="logo-table-row">
+    <div class="row project-header container">
+      <div class="small-12 columns">
 
-          {{#if logo_img_url}}
-          <div class="logo has-image">
-            <img src="{{ logo_img_url }}" alt="{{ title }}">
-          {{else}}
-          <div class="logo">
-          {{/if}}
+        <div class="logo-table">
+          <div class="logo-table-row">
+
+            {{#if logo_img_url}}
+            <div class="logo has-image">
+              <img src="{{ logo_img_url }}" alt="{{ title }}">
+            {{else}}
+            <div class="logo">
+            {{/if}}
+            </div>
+
+            <div>
+              <h1 class="site-title">{{{ title }}}</h1>
+            </div>
+
           </div>
+        </div><!-- end .logo-table -->
 
-          <div>
-            <h1 class="site-title">{{{ title }}}</h1>
-          </div>
-
-        </div>
-      </div><!-- end .logo-table -->
-
-    </div>
-  </div>
-
-  <div class="project-menu-container {{#gte sections.length 2}} has-project-menu{{/gte}}">
-    {{#gte sections.length 2}}
-    <div data-magellan-expedition="fixed" class="project-menu">
-      <div class="row container">
-        <div class="small-12 columns">
-          <ul class="sub-nav">
-            <li data-magellan-arrival="home"><a href="#home">Home</a></li>
-            {{#each sections}}
-            <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
-            {{/each}}
-          </ul>
-        </div>
       </div>
     </div>
-    {{/gte}}
-  </div>
+
+    <div class="project-menu-container {{#gte sections.length 2}} has-project-menu{{/gte}}">
+      {{#gte sections.length 2}}
+      <div data-magellan-expedition="fixed" class="project-menu">
+        <div class="row container">
+          <div class="small-12 columns">
+            <ul class="sub-nav">
+              <li data-magellan-arrival="home"><a href="#home">Home</a></li>
+              {{#each sections}}
+              <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {{/gte}}
+    </div>
+
+  </div><!-- end .site-header-content -->
 
 </header>
 
