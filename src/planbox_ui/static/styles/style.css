@@ -24,11 +24,15 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   min-width: 4em;
 }
-.section-header {
-  padding: 0.5rem;
-}
-.section-header h2 {
-  margin: 0;
+
+
+/* =Utility Classes
+-------------------------------------------------------------- */
+
+.has-image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover !important;
 }
 
   
@@ -48,15 +52,34 @@ body {
   color: #444;
   padding-top: 0.9375rem;
   padding-bottom: 0.9375rem;
+}
+section, footer {
   /* prevent overflowing float-labels from being overlapped by previous sections */
   position: relative;
   z-index: 10;
 }
 
 .site-header {
-  background-color: #268099;
-  color: #fff;
+  background-color: #fff;
 }
+.site-header.has-image {
+  /* if there's a cover image, give the header room for it */
+  padding-top: 40%;
+}
+.site-header.has-image .site-header-content {
+  /* if there's a cover image, push the logo & title out of the header */
+  float: left;
+  width: 100%;
+  border-top: 0;
+}
+
+.section-header {
+  padding: 0.5rem;
+}
+.section-header h2 {
+  margin: 0;
+}
+
 
 /* Footer */
 .site-colophon {
@@ -159,6 +182,8 @@ select {
   display: table;
   border-collapse: collapse;
   border-spacing: 0;
+  position: relative;
+  z-index: 50;
 }
 .logo-table-row {
   display: table-row;
@@ -261,4 +286,81 @@ select {
 }
 .faq-answer {
   margin-bottom: 0;
+}
+
+
+
+/* =Foundation Media Queries
+-------------------------------------------------------------- */
+
+/* Define mobile styles */
+@media only screen {
+}
+
+/* max-width 640px, mobile-only styles, use when QAing mobile issues */
+@media only screen and (max-width: 40em) {
+}
+
+
+/* ----- Medium screens ----- */
+
+/* min-width 641px, medium screens */
+@media only screen and (min-width: 40.063em) {
+
+  .site-header.has-image {
+    padding-top: 30%;
+  }
+
+}
+
+/* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+}
+
+
+/* ----- Large screens ----- */
+
+/* min-width 1025px, large screens */
+@media only screen and (min-width: 64.063em) {
+
+  .site-header {
+    background-color: #268099;
+    color: #fff;
+    padding-top: 4rem;
+  }
+  .site-header.has-image {
+    padding-top: 15.25em;
+    background-position: center center;
+  }
+  .site-header .site-header-content {
+    border-top: 0;
+    border-radius: 0.25em 0.25em 0 0;
+  }
+  .site-header.has-image .site-header-content {
+    float: none;
+    width: auto;
+  }
+
+}
+
+/* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
+@media only screen and (min-width: 64.063em) and (max-width: 90em) {
+}
+
+
+/* ----- XLarge screens ----- */
+
+/* min-width 1441px, xlarge screens */
+@media only screen and (min-width: 90.063em) {
+}
+
+/* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
+@media only screen and (min-width: 90.063em) and (max-width: 120em) {
+}
+
+
+/* ----- XXLarge screens ----- */
+
+/* min-width 1921px, xlarge screens */
+@media only screen and (min-width: 120.063em) {
 }

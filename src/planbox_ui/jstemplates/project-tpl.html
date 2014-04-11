@@ -4,46 +4,50 @@
 <header id="home" class="site-header">
 {{/if}}
 
-  <div class="row project-header container">
-    <div class="small-12 columns">
+  <div class="site-header-content">
 
-      <div class="logo-table">
-        <div class="logo-table-row">
+    <div class="row project-header container">
+      <div class="small-12 columns">
 
-          {{#if logo_img_url}}
-          <div class="logo has-image">
-            <img src="{{ logo_img_url }}" alt="{{ title }}">
-          {{else}}
-          <div class="logo">
-          {{/if}}
+        <div class="logo-table">
+          <div class="logo-table-row">
+
+            {{#if logo_img_url}}
+            <div class="logo has-image">
+              <img src="{{ logo_img_url }}" alt="{{ title }}">
+            {{else}}
+            <div class="logo">
+            {{/if}}
+            </div>
+
+            <div>
+              <h1 class="site-title">{{{ title }}}</h1>
+            </div>
+
           </div>
+        </div><!-- end .logo-table -->
 
-          <div>
-            <h1 class="site-title">{{{ title }}}</h1>
-          </div>
-
-        </div>
-      </div><!-- end .logo-table -->
-
-    </div>
-  </div>
-
-  <div class="project-menu-container {{#gte sections.length 2}} has-project-menu{{/gte}}">
-    {{#gte sections.length 2}}
-    <div data-magellan-expedition="fixed" class="project-menu">
-      <div class="row container">
-        <div class="small-12 columns">
-          <ul class="sub-nav">
-            <li data-magellan-arrival="home"><a href="#home">Home</a></li>
-            {{#each sections}}
-            <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
-            {{/each}}
-          </ul>
-        </div>
       </div>
     </div>
-    {{/gte}}
-  </div>
+
+    <div class="project-menu-container {{#gte sections.length 2}} has-project-menu{{/gte}}">
+      {{#gte sections.length 2}}
+      <div data-magellan-expedition="fixed" class="project-menu">
+        <div class="row container">
+          <div class="small-12 columns">
+            <ul class="sub-nav">
+              <li data-magellan-arrival="home"><a href="#home">Home</a></li>
+              {{#each sections}}
+              <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {{/gte}}
+    </div>
+
+  </div><!-- end .site-header-content -->
 
 </header>
 
@@ -57,11 +61,17 @@
            --}}
         {{#if happening_now_link_url}}
         <a href="{{ happening_now_link_url }}"{{#is happening_now_link_type 'external'}} target="_blank"{{/is}}>
+          <div class="panel callout radius">
+        {{else}}
+          <div class="panel radius">
         {{/if}}
-          <h3>Happening Now!</h3>
-          <p class="highlight-description">{{{ happening_now_description }}}</p>
+            <h3>Happening Now!</h3>
+            <p class="highlight-description">{{{ happening_now_description }}}</p>
         {{#if happening_now_link_url}}
+          </div>
         </a>
+        {{else}}
+          </div>
         {{/if}}
       </div>
       {{/if}}
@@ -70,11 +80,17 @@
       <div class="highlight">
         {{#if get_involved_link_url}}
         <a href="{{ get_involved_link_url }}"{{#is get_involved_link_type 'external'}} target="_blank"{{/is}}>
+          <div class="panel callout radius">
+        {{else}}
+          <div class="panel radius">
         {{/if}}
-          <h3>Get Involved!</h3>
-          <p class="highlight-description">{{{ get_involved_description }}}</p>
+            <h3>Get Involved!</h3>
+            <p class="highlight-description">{{{ get_involved_description }}}</p>
         {{#if get_involved_link_url}}
+          </div>
         </a>
+        {{else}}
+          </div>
         {{/if}}
       </div>
       {{/if}}
