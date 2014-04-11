@@ -143,7 +143,7 @@ var Planbox = Planbox || {};
         customDomainMessageBtn: '.custom-domain-message-btn',
         userMenuLink: '.user-menu-link',
         userMenu: '.user-menu',
-        editableNavMenuLinks: '.project-nav a[contenteditable]',
+        editableNavMenuLinks: '.sub-nav a[contenteditable]',
         publishBtn: '.btn-public',
         imageHolders: '.image-holder',
         imageDropZones: '.image-dnd',
