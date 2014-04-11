@@ -48,6 +48,8 @@ body {
   color: #444;
   padding-top: 0.9375rem;
   padding-bottom: 0.9375rem;
+}
+section, footer {
   /* prevent overflowing float-labels from being overlapped by previous sections */
   position: relative;
   z-index: 10;
