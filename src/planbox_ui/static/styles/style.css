@@ -24,11 +24,15 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   min-width: 4em;
 }
-.section-header {
-  padding: 0.5rem;
-}
-.section-header h2 {
-  margin: 0;
+
+
+/* =Utility Classes
+-------------------------------------------------------------- */
+
+.has-image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover !important;
 }
 
   
@@ -59,6 +63,17 @@ section, footer {
   background-color: #268099;
   color: #fff;
 }
+.site-header.has-image {
+  padding-top: 40%;
+}
+
+.section-header {
+  padding: 0.5rem;
+}
+.section-header h2 {
+  margin: 0;
+}
+
 
 /* Footer */
 .site-colophon {
@@ -265,4 +280,57 @@ select {
 }
 .faq-answer {
   margin-bottom: 0;
+}
+
+
+
+/* =Foundation Media Queries
+-------------------------------------------------------------- */
+
+/* Define mobile styles */
+@media only screen {
+}
+
+/* max-width 640px, mobile-only styles, use when QAing mobile issues */
+@media only screen and (max-width: 40em) {
+}
+
+
+/* ----- Medium screens ----- */
+
+/* min-width 641px, medium screens */
+@media only screen and (min-width: 40.063em) {
+}
+
+/* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+}
+
+
+/* ----- Large screens ----- */
+
+/* min-width 1025px, large screens */
+@media only screen and (min-width: 64.063em) {
+}
+
+/* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
+@media only screen and (min-width: 64.063em) and (max-width: 90em) {
+}
+
+
+/* ----- XLarge screens ----- */
+
+/* min-width 1441px, xlarge screens */
+@media only screen and (min-width: 90.063em) {
+}
+
+/* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
+@media only screen and (min-width: 90.063em) and (max-width: 120em) {
+}
+
+
+/* ----- XXLarge screens ----- */
+
+/* min-width 1921px, xlarge screens */
+@media only screen and (min-width: 120.063em) {
 }
