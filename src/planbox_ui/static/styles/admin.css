@@ -9,6 +9,13 @@
   color: #fff;
 }
 
+.project-menu .row {
+  padding-top: 3.5em;
+}
+.project-menu-container.has-project-menu {
+  margin-top: -3.5em;
+}
+
 
 /* =ContentEditable Elements
 -------------------------------------------------------------- */

@@ -200,7 +200,6 @@ select {
 
 .project-menu-container {}
 .project-menu-container.has-project-menu {
-  margin-top: -3.5em;
   position: relative;
 }
 [data-magellan-expedition], 
@@ -211,7 +210,6 @@ select {
 .project-menu .row {
   position: relative;
   z-index: 2;
-  padding-top: 3.5em;
   padding-bottom: 0;
 }
 .project-menu .columns:after {
