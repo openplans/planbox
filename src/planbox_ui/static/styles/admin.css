@@ -143,6 +143,10 @@
 }
 .logo .remove-logo-btn-container {
   margin: 0.5em 0 0;
+  display: none;
+}
+.logo.has-image .remove-logo-btn-container  {
+  display: block;
 }
 .logo .remove-img-btn {
   float: none;
