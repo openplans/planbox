@@ -86,7 +86,7 @@
             <ul class="sub-nav">
               <li data-magellan-arrival="home"><a href="#home">Home</a></li>
               {{#each sections}}
-              <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
+              <li data-magellan-arrival="section-{{ slug }}"><a href="#{{ slug }}" class="content-editable" data-id="{{ id }}" contenteditable>{{ menu_label }}</a></li>
               {{/each}}
             </ul>
           </div>
