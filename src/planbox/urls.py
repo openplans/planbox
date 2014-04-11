@@ -16,7 +16,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include(password_reset.urls)),
     url(r'^api/v1/', include(planbox_data.urls)),
     url(r'^generate-error$', generate_error),
     url(r'^', include(planbox_ui.urls)),

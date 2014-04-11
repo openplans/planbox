@@ -18,7 +18,7 @@ class PasswordResetRequest (models.Model):
     expires_at = models.DateTimeField(default=lambda: (now() + PasswordResetRequest.DEFAULT_EXPIRATION))
 
     def __str__(self):
-        return str(self.profile)
+        return str(self.auth)
 
     def is_expired(self):
         return self.expires_at <= now()
