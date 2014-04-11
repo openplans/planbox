@@ -15,6 +15,20 @@ SECRET_KEY = 'changemeloremipsumdolorsitametconsecteturadipisicingelit'
 ALLOWED_HOSTS = ['*']
 KNOWN_HOSTS = os.environ.get('KNOWN_HOSTS').split(',')
 
+# Emailing
+if 'EMAIL_ADDRESS' in os.environ:
+    EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
+
+if any(email_setting in os.environ
+       for email_setting in ['EMAIL_HOST', 'EMAIL_HOST_PASSWORD',
+                             'EMAIL_HOST_USER', 'EMAIL_PORT', 'EMAIL_USE_TLS']):
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+    EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '25'))
+    EMAIL_USE_TLS = (os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true')
+
 # Get the list of administrators that get notified on 500 errors
 ADMINS = [
     (admin.split('@')[0], admin)

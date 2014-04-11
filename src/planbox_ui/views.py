@@ -16,7 +16,7 @@ from django.shortcuts import redirect
 from django.shortcuts import resolve_url
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, View
 from planbox_data.models import Project, Profile
 from planbox_data.serializers import ProjectSerializer, UserSerializer, TemplateProjectSerializer
 from planbox_ui.decorators import ssl_required
@@ -51,7 +51,7 @@ class AppMixin (object):
                 self.profile = None
         return self.profile
 
-    def get_home_url(self, obj):
+    def get_home_url(self, obj=None):
         if obj is None and self.request.user.is_authenticated():
             obj = self.request.user
 
@@ -176,6 +176,12 @@ class IndexView (AppMixin, TemplateView):
 
 class HelpView (AppMixin, TemplateView):
     template_name = 'help.html'
+
+
+class ProfileView (AppMixin, LoginRequired, SSLRequired, View):
+    def get(self, request):
+        home_url = self.get_home_url()
+        return redirect(home_url)
 
 
 class SignupView (AppMixin, LogoutRequired, SSLRequired, FormView):
@@ -376,6 +382,7 @@ class SiteMapView (AppMixin, TemplateView):
 index_view = IndexView.as_view()
 project_view = ProjectView.as_view()
 ro_project_view = ReadOnlyProjectView.as_view()
+profile_view = ProfileView.as_view()
 new_project_view = NewProjectView.as_view()
 signup_view = SignupView.as_view()
 signin_view = SigninView.as_view()

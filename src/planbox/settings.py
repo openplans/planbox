@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'django_ace',
 
     'custom_domains',
+    'password_reset',
     'planbox_ui',
     'planbox_data',
 )
@@ -56,6 +57,7 @@ CANONICAL_ROOT = ''
 DEFAULT_PROJECT_TEMPLATE = 'templates/default'
 
 LOGIN_URL = 'app-signin'
+LOGIN_REDIRECT_URL = 'app-profile'
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
@@ -98,6 +100,13 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# Email
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_ADDRESS = 'info@example.com'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
