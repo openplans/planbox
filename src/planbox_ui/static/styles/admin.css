@@ -1,4 +1,15 @@
 
+/* =Layout
+-------------------------------------------------------------- */
+
+.site-header,
+.site-header.has-image {
+  padding-top: 0;
+  background-color: #268099;
+  color: #fff;
+}
+
+
 /* =ContentEditable Elements
 -------------------------------------------------------------- */
 

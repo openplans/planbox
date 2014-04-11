@@ -46,52 +46,56 @@
     </div>
   </div>
 
-  <div class="row project-header container">
-    <div class="small-12 columns">
+  <div class="site-header-content">
 
-      <div class="logo-table">
-        <div class="logo-table-row">
-          {{#if logo_img_url}}
-          <div data-attr="logo_img_url" class="logo image-holder has-image">
-          {{else}}
-          <div data-attr="logo_img_url" class="logo image-holder">
-          {{/if}}
-            <img class="image-target" src="{{ logo_img_url }}" alt="{{ title }}">
-            {{#if_fileapi_support 'cors'}}
-            <div id="logo-image-dnd" class="image-dnd file-upload">
-              <p class="drop-instructions nobreak">Drop logo here or&hellip;</p>
-              <p class="uploading-message">Uploading&hellip;</p>
-              <label for="logo-image-file-chooser" class="file-upload-input-container button tiny radius"><span class="file-upload-label">Choose Logo</span><input id="logo-image-file-chooser" name="logo-image" class="file-upload-input" type="file" accept="image/*" /></label>
+    <div class="row project-header container">
+      <div class="small-12 columns">
+
+        <div class="logo-table">
+          <div class="logo-table-row">
+            {{#if logo_img_url}}
+            <div data-attr="logo_img_url" class="logo image-holder has-image">
+            {{else}}
+            <div data-attr="logo_img_url" class="logo image-holder">
+            {{/if}}
+              <img class="image-target" src="{{ logo_img_url }}" alt="{{ title }}">
+              {{#if_fileapi_support 'cors'}}
+              <div id="logo-image-dnd" class="image-dnd file-upload">
+                <p class="drop-instructions nobreak">Drop logo here or&hellip;</p>
+                <p class="uploading-message">Uploading&hellip;</p>
+                <label for="logo-image-file-chooser" class="file-upload-input-container button tiny radius"><span class="file-upload-label">Choose Logo</span><input id="logo-image-file-chooser" name="logo-image" class="file-upload-input" type="file" accept="image/*" /></label>
+              </div>
+              <p class="remove-logo-btn-container"><button class="remove-img-btn label alert" data-confirm-msg="Are you sure you want to remove your logo?"><span class="delete-icon">&#10005;</span> Remove Logo</button></p>
+              {{/if_fileapi_support}}
             </div>
-            <p class="remove-logo-btn-container"><button class="remove-img-btn label alert" data-confirm-msg="Are you sure you want to remove your logo?"><span class="delete-icon">&#10005;</span> Remove Logo</button></p>
-            {{/if_fileapi_support}}
+            <div class="float-label-container">
+              <h1 class="project-title content-editable float-label-input" data-attr="title" contenteditable>{{{ title }}}</h1>
+              <span class="float-label">Project Title</span>
+            </div>
           </div>
-          <div class="float-label-container">
-            <h1 class="project-title content-editable float-label-input" data-attr="title" contenteditable>{{{ title }}}</h1>
-            <span class="float-label">Project Title</span>
-          </div>
-        </div>
-      </div><!-- end .logo-table -->
+        </div><!-- end .logo-table -->
 
-    </div>
-  </div>
-
-  <div class="project-menu-container {{#gte sections.length 2}} has-project-menu{{/gte}}">
-    {{#gte sections.length 2}}
-    <div data-magellan-expedition="fixed" class="project-menu">
-      <div class="row container">
-        <div class="small-12 columns">
-          <ul class="sub-nav">
-            <li data-magellan-arrival="home"><a href="#home">Home</a></li>
-            {{#each sections}}
-            <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
-            {{/each}}
-          </ul>
-        </div>
       </div>
     </div>
-    {{/gte}}
-  </div>
+
+    <div class="project-menu-container {{#gte sections.length 2}} has-project-menu{{/gte}}">
+      {{#gte sections.length 2}}
+      <div data-magellan-expedition="fixed" class="project-menu">
+        <div class="row container">
+          <div class="small-12 columns">
+            <ul class="sub-nav">
+              <li data-magellan-arrival="home"><a href="#home">Home</a></li>
+              {{#each sections}}
+              <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {{/gte}}
+    </div>
+
+  </div><!-- end .site-header-content -->
 
 </header>
 
