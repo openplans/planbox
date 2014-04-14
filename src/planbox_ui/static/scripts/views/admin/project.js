@@ -23,11 +23,9 @@ var Planbox = Planbox || {};
   };
 
   NS.showProjectSetupModal = function(project) {
-    // === YOU ARE HERE === //
-    NS.app.overlayRegion.show(new NS.ProjectSetupModalView({
+    NS.app.modalRegion.show(new NS.ProjectSetupModalView({
       model: project
     }));
-    $('#project-setup-modal').foundation('reveal', 'open');
   };
 
   NS.showProjectSaveErrorModal = function(resp) {
@@ -134,21 +132,6 @@ var Planbox = Planbox || {};
     },
     dataChanged: function() {
       this.options.parent.dataChanged();
-    }
-  });
-
-  NS.ProjectSetupModalView = NS.ModalView.extend({
-    template: '#project-setup-tpl',
-    className: 'overlay',
-    ui: {
-      closeBtn: '.btn-close',
-    },
-    events: {
-      'click @ui.closeBtn': 'handleClose'
-    },
-    handleClose: function(evt) {
-      evt.preventDefault();
-      this.close();
     }
   });
 
@@ -483,6 +466,143 @@ var Planbox = Planbox || {};
       dataChanged: function() {
         // Show the save button
         this.ui.saveBtn.removeClass('disabled');
+      }
+    })
+  );
+
+  // == Project Setup ========================================================
+  NS.ProjectSetupModalView = Backbone.Marionette.Layout.extend(
+    _.extend({}, NS.ContentEditableMixin, {
+      template: '#project-setup-tpl',
+      className: 'reveal-modal medium',
+      attributes: {
+        'data-reveal': ''
+      },
+
+      regions: {
+        descriptionRegion: '.project-description-region',
+        timelineRegion: '.project-timeline-region',
+        highlightsRegion: '.project-highlights-region'
+      },
+      ui: {
+        editables: '[contenteditable]:not(#section-list [contenteditable])',
+        nextBtn: '.next-step-button',
+        closeBtn: '.btn-close'
+      },
+      events: {
+        'blur @ui.editables': 'handleEditableBlur',
+        'click @ui.nextBtn': 'handleNext',
+        'click @ui.closeBtn': 'handleClose'
+      },
+      handleClose: function(evt) {
+        evt.preventDefault();
+        this.close();
+      },
+      handleNext: function(evt) {
+        var activeTab, nextTab;
+        evt.preventDefault();
+
+        // Get the currently active tab
+        activeTab = this.$('.tabs .active');
+
+        // Click the link in the next tab (a bit of a hack, but it works)
+        nextTab = activeTab.next();
+        if (nextTab.length > 0) {
+          nextTab.find('a').click();
+        }
+      },
+      onShow: function() {
+        window.projectModel = this.model;
+        // This is gross. We should encourage Foundation to fix this.
+        this.$el.foundation().foundation('reveal', 'open');
+      },
+      onRender: function() {
+        var timeline = this.model.get('sections').find(function(section) { return section.get('type') === 'timeline'; }),
+            events = this.model.get('events');
+
+        this.descriptionRegion.show(new NS.StructuredProjectDescriptionView({model: this.model, parent: this}));
+        this.timelineRegion.show(new NS.TimelineSectionAdminView({model: timeline, collection: events, parent: this}));
+        this.highlightsRegion.show(new NS.ProjectHighlightsAdminView({model: this.model, parent: this}));
+      },
+      onClose: function() {
+        // This is gross. We should encourage Foundation to fix this.
+        this.$el.foundation().foundation('reveal', 'close');
+      },
+      dataChanged: function() {}
+    })
+  );
+
+  NS.StructuredProjectDescriptionView = Backbone.Marionette.ItemView.extend({
+    template: '#project-admin-description-pieces-tpl',
+    ui: {
+      pieces: '.project-description-piece'
+    },
+    events: {
+      'blur @ui.pieces': 'handlePieceBlur'
+    },
+    handlePieceBlur: function(evt) {
+      var description = '';
+      evt.preventDefault();
+
+      // Assuming the pieces are arranged in the order they should appear in
+      // (which may be a wrong assumption), join them together.
+      this.ui.pieces.each(function(i, piece) {
+        if (!!description && description.slice(-1) !== '\n') {
+          description += ' ';
+        }
+        description += $(piece).val();
+      });
+
+      description = NS.Utils.htmlEscape(description);
+      description = description.replace(/\n/g, '<br>');
+      console.log('set description:', description);
+      this.model.set('description', description);
+    }
+  });
+
+  NS.ProjectHighlightsAdminView = Backbone.Marionette.ItemView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
+      template: '#project-admin-highlights-tpl',
+      ui: {
+        hightlightLinkSelector: '.highlight-link-selector',
+        hightlightExternalLink: '.highlight-external-link'
+      },
+      events: {
+        'change @ui.hightlightLinkSelector': 'handleHighlightLinkChange',
+        'blur @ui.hightlightExternalLink': 'handleHighlightExternalLinkBlur'
+      },
+
+      handleHighlightLinkChange: function(evt) {
+        evt.preventDefault();
+
+        var $target = $(evt.currentTarget),
+            $selected = $target.find('option:selected'),
+            $externalLinkInput = $target.siblings('.highlight-external-link'),
+            linkType = $selected.attr('data-link-type'),
+            linkTypeModelProp = $target.attr('data-link-type-name');
+
+        // Handle external link  visibility
+        this.model.set(linkTypeModelProp, linkType);
+
+        if (linkType === 'external') {
+          $externalLinkInput.removeClass('hide');
+          this.model.set($target.attr('name'), $externalLinkInput.val());
+        } else {
+          $externalLinkInput.addClass('hide');
+          this.model.set($target.attr('name'), $selected.val());
+        }
+      },
+
+      handleHighlightExternalLinkBlur: function(evt) {
+        var $target = $(evt.currentTarget),
+            attr = $target.attr('data-attr'),
+            val = $target.val();
+
+        evt.preventDefault();
+
+        // Set the value of what was just blurred. Setting an event to the same
+        // value does not trigger a change event.
+        this.model.set(attr, val);
       }
     })
   );

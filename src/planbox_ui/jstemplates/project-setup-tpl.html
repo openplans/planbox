@@ -19,95 +19,51 @@
         <p>Set up your OpenPlans project page now. Over the next few steps we'll gyide you through entering information about the project scope and benefits. Create a timeline to show key events&mdash;what's happened, what is coming up next.</p>
         <p>At any time, you can <a href="mailto:{{ contact_email }}">contact us</a> for assistance or to give feedback.</p>
 
-        <a href="#project-setup-step-1" class="btn">Get Started &gt;</a>
+        <a href="#project-setup-step-1" class="next-step-button button">Get Started &gt;</a>
       </div>
 
       <div class="content" id="project-setup-step-1">
         <h5>Title</h5>
         <p>Enter a short, descriptive title for the project.</p>
-        <input type="text" placeholder="e.g. Main Street Sidewalk Refurbishment">
+        <p class="project-title content-editable float-label-input" data-attr="title" contenteditable>{{{ title }}}</p>
 
-        <a href="#project-setup-step-2" class="btn">Next &gt;</a>
+        <a href="#project-setup-step-2" class="next-step-button button">Next &gt;</a>
       </div>
 
       <div class="content" id="project-setup-step-2">
         <h5>Location</h5>
-        <p>Where is the project happening?</p>
-        <input type="text" placeholder="e.g. Anytown, USA">
+        <p>Where is the project happening (e.g. &quot;Anytown, USA&quot;)?</p>
+        <p class="project-location content-editable float-label-input" data-attr="location" contenteditable>{{{ location }}}</p>
 
-        <a href="#project-setup-step-3" class="btn">Next &gt;</a>
+        <a href="#project-setup-step-3" class="next-step-button button">Next &gt;</a>
       </div>
 
       <div class="content" id="project-setup-step-3">
-        <h5>Description</h5>
-        <p>This information is essential in helping people understand your project. Keep each answer short, limites to a sentence or two. Avoid jargon!</p>
 
-        <label>
-          <strong>What is the problem?</strong>
-          <textarea name="project-description-problem"></textarea>
-        </label>
+        {{!-- The project description, in the project-admin-description-pieces-tpl --}}
+        <div class="project-description-region"></div>
 
-        <label>
-          <strong>How are we addressing the problem?</strong>
-          <textarea name="project-description-solution"></textarea>
-        </label>
-
-        <label>
-          <strong>How can you get involved?</strong>
-          <p>Explain how public input will guide the project.</p>
-          <textarea name="project-description-involved"></textarea>
-        </label>
-
-        <label>
-          <strong>What is the schedule?</strong>
-          <p>Give readers a high-level understanding of when key steps will happen, even if the information is tentative.</p>
-          <textarea name="project-description-schedule"></textarea>
-        </label>
-
-        <a href="#project-setup-step-4" class="btn">Next &gt;</a>
+        <a href="#project-setup-step-4" class="next-step-button button">Next &gt;</a>
       </div>
 
       <div class="content" id="project-setup-step-4">
         <h5>Timeline</h5>
-        <p>Create a timeline to tell people when the key stages of the project are taking place , and when specific meetings will happen. For each timeline event, you can add a date and location.</p>
+        <p>Create a timeline to tell people when the key stages of the project are taking place, and when specific meetings will happen. For each timeline event, you can add a date and location.</p>
 
-        <div>
-          <fieldset>
-            <input type="text" placeholder="Event Title">
-            <input type="text" placeholder="Event Date">
-            <input type="text" placeholder="Event Location">
-            <textarea placeholder="Event Description"></textarea>
-          </fieldset>
+        {{!-- The project timeline, which reuses the TimelineSectionAdminView --}}
+        <div class="project-timeline-region"></div>
 
-          <a href="#">Add Event</a>
-        </div>
-
-        <a href="#project-setup-step-5" class="btn">Next &gt;</a>
+        <a href="#project-setup-step-5" class="next-step-button button">Next &gt;</a>
       </div>
 
       <div class="content" id="project-setup-step-5">
         <h5>Coming Up</h5>
         <p>Two common questions for people visiting your project page: What's hapening? What can I do? As the project develops, keep these sections up to date.</p>
 
-        <div>
-          <strong>Happening Now!</strong>
-          <p>What is currently happening with the project?</p>
-          <textarea name="project-highlight-happening-label"></textarea>
-          <select>
-            <option>Link to...</option>
-          </select>
-        </div>
+        {{!-- The project highlights, in project-admin-highlights-tpl --}}
+        <div class="project-highlights-region"></div>
 
-        <div>
-          <strong>Get Involved!</strong>
-          <p>What can people do today (or soon) to get involved? If you have an upcoming event, choose it from the list.</p>
-          <textarea name="project-highlight-involved-label"></textarea>
-          <select>
-            <option>Link to...</option>
-          </select>
-        </div>
-
-        <a href="#project-setup-step-done" class="btn">Finish</a>
+        <a href="#project-setup-step-done" class="next-step-button button">Finish</a>
       </div>
 
       <div class="content" id="project-setup-step-done">
@@ -119,6 +75,6 @@
     </div>
 
     <hr>
-    <p style="text-align:right;"><a href="#" class="btn btn-small btn-secondary btn-close">Close</a></p>
+    <p style="text-align:right;"><a href="#" class="button btn-small btn-secondary btn-close">Close</a></p>
   </div>
 </div>
