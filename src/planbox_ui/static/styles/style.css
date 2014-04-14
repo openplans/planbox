@@ -308,14 +308,36 @@ select {
 /* FAQs Section */
 .faq {
   margin-bottom: 0.9375rem;
+  position: relative;
 }
 .faq-question {
+  position: relative;
   margin-bottom: 0.25rem;
 }
 .faq-answer {
+  position: relative;
   margin-bottom: 0;
 }
-
+.faq-list {
+  margin-bottom: 1.5em;
+}
+.faq-list dt {
+  font-weight: 800;
+  font-size: 1.25em;
+}
+.faq-list-collapsed dt {
+  color: #268099;
+  cursor: pointer;
+}
+.faq-list-collapsed dd {
+  display: none;
+}
+.faq-list dt.is-selected {
+  color: #555;
+}
+.faq-list dt.is-selected + dd {
+  display: block;
+}
 
 
 /* =Foundation Media Queries
