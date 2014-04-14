@@ -21,6 +21,10 @@ var Planbox = Planbox || {};
     return (FileAPI.support[featureName] ? options.fn(this) : options.inverse(this));
   });
 
+  Handlebars.registerHelper('has_key', function(object, key, options) {
+    return (object[key] ? options.fn(this) : options.inverse(this));
+  });
+
   Handlebars.registerHelper('contact_email', function() {
     return NS.Data.contactEmail;
   });
