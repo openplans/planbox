@@ -1,7 +1,13 @@
 <span data-magellan-destination="section-{{ slug }}" id="section-{{ slug }}" class="section-anchor"></span>
 <div class="row container">
   <div class="small-12 columns">
-    <h3 class="project-text-label content-editable float-label-input" data-attr="label" contenteditable>{{{ label }}}</h3>
-    <div class="project-text-content content-editable float-label-input" data-attr="content" contenteditable>{{{ details.content }}}</div>
+    <div class="float-label-container">
+      <h3 class="project-text-label content-editable float-label-input" data-attr="label" contenteditable>{{{ label }}}</h3>
+      <span class="float-label">Text Section Header</span>
+    </div>
+    <div class="float-label-container">
+      <div class="project-text-content content-editable float-label-input" data-attr="content" contenteditable>{{{ details.content }}}</div>
+      <span class="float-label">Text Section Body</span>
+    </div>
   </div>
 </div>
