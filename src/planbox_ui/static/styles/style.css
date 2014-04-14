@@ -24,6 +24,20 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   min-width: 4em;
 }
+.project-timeline a {
+  color: #ACD8E6;
+}
+.project-timeline a:hover, 
+.project-timeline a:focus {
+  color: #B6E4F2;
+}
+.float-label-input:focus a {
+  color: #008CBA;
+}
+.float-label-input:focus a:hover,
+.float-label-input:focus a:focus {
+  color: #007ba0;
+}
 
 
 /* =Utility Classes
