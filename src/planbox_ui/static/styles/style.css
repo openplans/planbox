@@ -35,6 +35,15 @@ h1, h2, h3, h4, h5, h6 {
   background-size: cover !important;
 }
 
+/* Dingbats */
+.checked-icon {
+  color: #57D982;
+}
+.checked-icon.unchecked {
+  color: #777;
+  color: rgba(100,100,100,0.8);
+}
+
   
 /* =Layout
 -------------------------------------------------------------- */
