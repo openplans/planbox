@@ -215,7 +215,7 @@ select {
   border-collapse: collapse;
   border-spacing: 0;
   position: relative;
-  z-index: 50;
+  z-index: 5;
 }
 .logo-table-row {
   display: table-row;

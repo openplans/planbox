@@ -24,6 +24,39 @@
   cursor: pointer;
 }
 
+/* Save Button */
+@keyframes pulse {
+    0% { background-color: #E65CA1; }
+   50% { background-color: #FF80BF; }
+  100% { background-color: #E65CA1; }
+}
+@-webkit-keyframes pulse {
+    0% { background-color: #E65CA1; }
+	 50% { background-color: #FF80BF; }
+	100% { background-color: #E65CA1; }
+}
+.save-btn {
+  position: fixed !important;
+  bottom: 0.9375rem;
+  right: 0.9375rem;
+  left: 0.9375rem;
+  z-index: 9999;
+  margin: 0;
+  box-shadow: 0 1rem 0 2rem rgba(51, 51, 51, 0.8), inset 0 0 1em #E65CA1;
+  -webkit-animation: pulse 1.5s infinite ease-in-out;
+          animation: pulse 1.5s infinite ease-in-out;
+}
+.save-btn.disabled {
+  display: none;
+}
+.save-btn.btn-disabled,
+.save-btn:hover {
+  background-color: #E65CA1;
+  -webkit-animation: none;
+          animation: none;
+}
+
+
 
 /* =ContentEditable Elements
 -------------------------------------------------------------- */
