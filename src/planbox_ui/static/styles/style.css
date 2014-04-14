@@ -229,6 +229,11 @@ select {
 .logo-table-row > div.has-image {
   padding-right: 1em;
 }
+.logo-table img {
+  max-height: 8em;
+  height: auto;
+  width: auto;
+}
 
 .project-menu-container {}
 .project-menu-container.has-project-menu {
