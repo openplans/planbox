@@ -1,5 +1,5 @@
 
-/* =Foundation-specific Overrides & Deficiencies 
+/* =Foundation-specific Overrides & Deficiencies
 -------------------------------------------------------------- */
 
 /* .hide's specificity isn't high enough */
@@ -30,7 +30,7 @@ h1, h2, h3, h4, h5, h6 {
 .project-timeline a {
   color: #ACD8E6;
 }
-.project-timeline a:hover, 
+.project-timeline a:hover,
 .project-timeline a:focus {
   color: #B6E4F2;
 }
@@ -61,7 +61,7 @@ h1, h2, h3, h4, h5, h6 {
   color: rgba(100,100,100,0.8);
 }
 
-  
+
 /* =Layout
 -------------------------------------------------------------- */
 
@@ -227,7 +227,7 @@ select {
 .project-menu-container.has-project-menu {
   position: relative;
 }
-[data-magellan-expedition], 
+[data-magellan-expedition],
 [data-magellan-expedition-clone] {
   background-color: transparent;
   padding: 0;
