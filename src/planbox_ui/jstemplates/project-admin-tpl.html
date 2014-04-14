@@ -70,7 +70,7 @@
               {{/if_fileapi_support}}
             </div>
             <div class="float-label-container">
-              <h1 class="project-title content-editable float-label-input" data-attr="title" contenteditable>{{{ title }}}</h1>
+              <div class="h1 project-title content-editable float-label-input" data-attr="title" contenteditable>{{{ title }}}</div>
               <span class="float-label">Project Title</span>
             </div>
           </div>
@@ -110,7 +110,7 @@
            --       the same code
            --}}
         <h3>Happening Now!</h3>
-        <p class="highlight-description content-editable float-label-input" data-attr="happening_now_description" contenteditable>{{{ happening_now_description }}}</p>
+        <div class="highlight-description content-editable float-label-input" data-attr="happening_now_description" contenteditable>{{{ happening_now_description }}}</div>
         <select class="highlight-link-selector" name="happening_now_link_url" data-link-type-name="happening_now_link_type">
           {{#select_highlight happening_now_link_type happening_now_link_url }}
           <option value="" data-link-type="">Link to...</option>
@@ -130,7 +130,7 @@
 
       <div class="highlight">
         <h3>Get Involved!</h3>
-        <p class="highlight-description content-editable float-label-input" data-attr="get_involved_description" contenteditable>{{{ get_involved_description }}}</p>
+        <div class="highlight-description content-editable float-label-input" data-attr="get_involved_description" contenteditable>{{{ get_involved_description }}}</div>
         <select class="highlight-link-selector" name="get_involved_link_url" data-link-type-name="get_involved_link_type">
           {{#select_highlight get_involved_link_type get_involved_link_url }}
           <option value="" data-link-type="">Link to...</option>
@@ -151,7 +151,7 @@
 
     <div class="medium-8 medium-pull-4 columns">
       <div class="float-label-container">
-        <p class="project-location content-editable float-label-input" data-attr="location" contenteditable>{{{ location }}}</p>
+        <div class="project-location content-editable float-label-input" data-attr="location" contenteditable>{{{ location }}}</div>
         <span class="float-label">Project Location</span>
       </div>
       <div class="float-label-container">
@@ -169,7 +169,7 @@
   <div class="row">
     <div class="small-12 columns">
       <div class="float-label-container">
-        <p class="project-contact-info content-editable float-label-input" data-attr="contact" contenteditable>{{{ contact }}}</p>
+        <div class="project-contact-info content-editable float-label-input" data-attr="contact" contenteditable>{{{ contact }}}</div>
         <span class="float-label">Contact Information</span>
       </div>
       <p>
