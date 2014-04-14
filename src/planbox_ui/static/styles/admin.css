@@ -35,7 +35,11 @@
 }
 .content-editable:empty + .float-label {
   background-color: #E65CA1;
+  visibility: visible;
+  opacity: 1;
+  height: 2em;
 }
+
 
 
 /* =Sortable UI 

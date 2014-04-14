@@ -4,13 +4,14 @@
 
 <section class="main">
   <div class="row">
-    <div class="small-12 columns">
+    <div class="small-12 medium-8 medium-centered columns">
       {% if form.non_field_errors %}
       <div class="alert-box alert"><strong>{{ form.non_field_errors.as_text|slice:"2:" }}</strong></div>
       {% endif %}
 
-      <h3>Sign In</h3>
-      <form method="POST">
+      <h3 class="page-header">Sign In</h3>
+
+      <form method="POST" class="panel">
         {% csrf_token %}
         <p class="float-label-container"><input required type="text" name="username" id="my-username" class="float-label-input" placeholder="Username" pattern="[A-Za-z0-9-_]{1,30}" max="30" tabindex="1"> <label for="my-username" class="float-label">Username</label></p>
         <p class="float-label-container"><input required type="password" name="password" id="my-password" class="float-label-input" placeholder="Password" max="30" tabindex="2"><label for="my-password" class="float-label">Password</label></p>
@@ -20,6 +21,9 @@
         <input type="hidden" name="next" value="{{ next_url }}">
         {% endif %}
       </form>
+
+      <br>
+
     </div>
   </div>
 </section>

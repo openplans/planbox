@@ -20,6 +20,9 @@ body {
 h1, h2, h3, h4, h5, h6 {
   color: inherit;
 }
+.page-header {
+  margin-top: 2rem;
+}
 .project-title {
   margin: 0;
   min-width: 4em;
@@ -159,8 +162,7 @@ select {
        -o-transition: height 0.1s ease, opacity 0.45s ease, background-color 0.45s ease-in-out;
           transition: height 0.1s ease, opacity 0.45s ease, background-color 0.45s ease-in-out;
 }
-.float-label-input:focus + .float-label,
-.float-label-input:empty + .float-label {
+.float-label-input:focus + .float-label {
   visibility: visible;
   opacity: 1;
   height: 2em;
