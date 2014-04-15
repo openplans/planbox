@@ -623,6 +623,13 @@ var Planbox = Planbox || {};
         'blur @ui.hightlightExternalLink': 'handleHighlightExternalLinkBlur'
       },
 
+      initialize: function() {
+        var self = this;
+        self.model.get('events').on('change', function() {
+          self.render();
+        });
+      },
+
       handleHighlightLinkChange: function(evt) {
         evt.preventDefault();
 
