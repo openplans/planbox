@@ -506,6 +506,13 @@ var Planbox = Planbox || {};
         'click @ui.saveBtn': 'handleSave',
         'click @ui.closeBtn': 'handleClose'
       },
+
+      initialize: function() {
+        NS.ProjectAdminView.prototype.initialize.call(this);
+
+        // Add an empty event to the timeline
+        this.model.get('events').add({});
+      },
       gotoStep: function(tab) {
         var $tab = this.$(tab);
         $tab.find('a').click();
