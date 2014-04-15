@@ -95,6 +95,12 @@
 	text-align: center;
 	color: #bbb;
 }
+/* TODO: apply a class to sortable child elements */
+.ui-sortable > li:first-child:last-child .handle,
+.ui-sortable > .faq:first-child:last-child .handle {
+  display: none;
+}
+
 .handle:hover {
 	color: #fff;
 }
@@ -467,6 +473,7 @@ li.attachment {
   margin: 0;
   padding: 0.5rem;
   clear: both;
+  color: inherit;
 }
 .event-attachment-dnd .drop-instructions {
   display: inline;
@@ -490,5 +497,42 @@ li.attachment {
 .highlight-description,
 .highlight-link-selector {
   margin-bottom: 0.125rem;
+}
+
+
+/* =Walkthrough
+-------------------------------------------------------------- */
+
+.walkthrough {}
+.walkthrough .project-timeline {
+  background-color: inherit;
+}
+.walkthrough .project-timeline .section-header {
+  display: none;
+}
+
+.walkthrough .event-list {
+  color: #444;
+  border-left-color: #888;
+}
+
+.walkthrough .event:last-child:before {
+  background-color: #eee;
+}
+.walkthrough .event:after {
+  background-color: #eee;
+  border-color: #888;
+}
+.add-event-btn:before {
+  background-color: #eee;
+  border-left-color: #888;
+}
+.add-event-btn:after {
+  background-color: #eee;
+  border-color: #888;
+}
+
+.walkthrough .float-label-input {
+  background-color: #fff;
 }
 

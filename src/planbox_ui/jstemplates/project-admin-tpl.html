@@ -1,29 +1,4 @@
-<div class="contain-to-grid fixed">
-  <nav class="top-bar" data-topbar>
-    <ul class="title-area">
-      <li class="name"></li>
-      <li class="toggle-topbar menu-icon"><a href="#"></a></li>
-    </ul>
-    <section class="top-bar-section">
-      <ul class="left">
-        {{#if public}}
-        <li><a href="#" class="btn-public"><span class="checked-icon">&#10004;</span>&nbsp;Published</a></li>
-        <li><a href="javascript:window.print()" class="print-btn btn"><span class="printer-icon"></span>Print Poster</a></li>
-        {{else}}
-        <li><a href="#" class="save-btn button disabled">Save Draft</a></li>
-        {{/if}}
-        <li>
-          <a href="#" data-reveal-id="customdomainmessage">Custom Domain</a>
-          <div id="customdomainmessage" class="reveal-modal small" data-reveal>
-            <p>Want a custom domain name for your project? No problem! Email us at <a href="mailto:{{contact_email}}">{{contact_email}}</a> to get started.</p>
-            <a href="#" class="close-reveal-modal">&#215</a>
-          </div>
-        </li>
-      </ul>
-      {{> 'user-menu' }}
-    </section>
-  </nav>
-</div>
+{{> 'project-admin-top-bar-tpl' }}
 
 <div class="overlay reveal-modal" id="project-setup-modal" data-reveal>
   {{> 'project-setup-tpl' }}
