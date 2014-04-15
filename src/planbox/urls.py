@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+import password_reset.urls
 import planbox_data.urls
 import planbox_ui.urls
 

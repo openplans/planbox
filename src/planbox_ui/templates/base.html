@@ -29,9 +29,7 @@
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/foundation/css/normalize.css" />
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/foundation/css/foundation.css" />
   {% else %}
-  <!-- TODO: Merge and minimize -->
-  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/foundation/css/normalize.css" />
-  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/foundation/css/foundation.min.css /">
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/base.min.css" />
   {% endif %}
 
 
@@ -54,9 +52,6 @@
     {% block page %}{% endblock %}
   </div>
   <div id="modal-container"></div>
-
-  <a href="/help"{% if is_editable %} target="_blank"{% endif %} class="software-help-link">Help &amp; Feedback</a>
-  <small class="software-phase-notice">Alpha</small>
 
   {% if debug %}
   <script src="{{ STATIC_URL }}bower_components/jquery/dist/jquery.js"></script>

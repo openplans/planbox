@@ -1,9 +1,5 @@
 {{> 'project-admin-top-bar-tpl' }}
 
-<div class="overlay reveal-modal" id="project-setup-modal" data-reveal>
-  {{> 'project-setup-tpl' }}
-</div>
-
 {{#if cover_img_url}}
 <header data-magellan-destination="home" id="home" data-attr="cover_img_url" class="site-header image-holder image-as-background has-image"
   style="background-image: url(&quot;{{ cover_img_url }}&quot;);">
@@ -157,7 +153,7 @@
       <a href="#" class="save-btn button small disabled">Save Draft</a>
       {{/if}}
 
-      <p class="powered-by text-right">{{#_}}Powered by <a href="/">Plan In A Box</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
+      <p class="powered-by text-right">{{#_}}Powered by <a href="http://openplans.org/">OpenPlans.org</a>.{{/_}}</p>
     </div>
   </div>
 </footer>
