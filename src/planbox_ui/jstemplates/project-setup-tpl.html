@@ -1,0 +1,78 @@
+{{> 'project-admin-top-bar-tpl' }}
+
+<div class="row walkthrough">
+
+  <div class="small-12 medium-10 large-9 columns small-centered">
+
+    <div class="page-header">
+      <h2 class="modal-header">Create a new Project</h2>
+    </div>
+
+    <dl class="tabs progress-tabs" data-tab>
+      <dd class="active hide"><a href="#project-setup-step-intro">Intro</a></dd>
+      <dd class="step title-step"><a href="#project-setup-step-1">1</a></dd>
+      <dd class="step"><a href="#project-setup-step-2">2</a></dd>
+      <dd class="step"><a href="#project-setup-step-3">3</a></dd>
+      <dd class="step timeline-step"><a href="#project-setup-step-4">4</a></dd>
+      <dd class="step"><a href="#project-setup-step-5">5</a></dd>
+    </dl>
+
+    <div class="tabs-content">
+
+      <div class="content active" id="project-setup-step-intro">
+        <h3>Welcome</h3>
+        <p>Set up your OpenPlans project page now. Over the next few steps we'll gyide you through entering information about the project scope and benefits. Create a timeline to show key events&mdash;what's happened, what is coming up next.</p>
+        <p>At any time, you can <a href="mailto:{{ contact_email }}">contact us</a> for assistance or to give feedback.</p>
+        <hr>
+        <a href="#project-setup-step-1" class="next-step-button button right">Get Started &gt;</a>
+      </div>
+
+      <div class="content" id="project-setup-step-1">
+        <h3>Title</h3>
+        <p>Enter a short, descriptive title for the project.</p>
+        <p class="project-title float-label-input" data-attr="title" contenteditable>{{{ title }}}</p>
+        <hr>
+        <a href="#project-setup-step-2" class="next-step-button button small right">Next &gt;</a>
+      </div>
+
+      <div class="content" id="project-setup-step-2">
+        <h3>Location</h3>
+        <p>Where is the project happening (e.g. &quot;Anytown, USA&quot;)?</p>
+        <p class="project-location float-label-input" data-attr="location" contenteditable>{{{ location }}}</p>
+        <hr>
+        <a href="#project-setup-step-3" class="next-step-button button small right">Next &gt;</a>
+      </div>
+
+      <div class="content" id="project-setup-step-3">
+
+        {{!-- The project description, in the project-admin-description-pieces-tpl --}}
+        <div class="project-description-region"></div>
+        <hr>
+        <a href="#project-setup-step-4" class="next-step-button button small right">Next &gt;</a>
+      </div>
+
+      <div class="content" id="project-setup-step-4">
+        <h3>Timeline</h3>
+        <p>Create a timeline to tell people when the key stages of the project are taking place, and when specific meetings will happen. For each timeline event, you can add a date and location.</p>
+
+        {{!-- The project timeline, which reuses the TimelineSectionAdminView --}}
+        <div class="project-timeline-region"></div>
+        <hr>
+        <a href="#project-setup-step-5" class="next-step-button button small right">Next &gt;</a>
+      </div>
+
+      <div class="content" id="project-setup-step-5">
+        <h3>Coming Up</h3>
+        <p>Two common questions for people visiting your project page: What's hapening? What can I do? As the project develops, keep these sections up to date.</p>
+
+        {{!-- The project highlights, in project-admin-highlights-tpl --}}
+        <div class="project-highlights-region"></div>
+        <hr>
+        <a href="#project-setup-step-done" class="finish-button button right">Create Project</a>
+      </div>
+
+    </div><!-- end .tabs-content -->
+
+  </div>
+
+</div>

@@ -95,6 +95,12 @@
 	text-align: center;
 	color: #bbb;
 }
+/* TODO: apply a class to sortable child elements */
+.ui-sortable > li:first-child:last-child .handle,
+.ui-sortable > .faq:first-child:last-child .handle {
+  display: none;
+}
+
 .handle:hover {
 	color: #fff;
 }
@@ -467,6 +473,7 @@ li.attachment {
   margin: 0;
   padding: 0.5rem;
   clear: both;
+  color: inherit;
 }
 .event-attachment-dnd .drop-instructions {
   display: inline;
@@ -492,3 +499,94 @@ li.attachment {
   margin-bottom: 0.125rem;
 }
 
+
+/* =Walkthrough
+-------------------------------------------------------------- */
+
+.walkthrough {}
+.walkthrough .project-timeline {
+  background-color: inherit;
+}
+.walkthrough .project-timeline .section-header {
+  display: none;
+}
+
+.walkthrough .event-list {
+  color: #444;
+  border-left-color: #888;
+}
+
+.walkthrough .event:last-child:before {
+  background-color: #eee;
+}
+.walkthrough .event:after {
+  background-color: #eee;
+  border-color: #888;
+}
+.add-event-btn:before {
+  background-color: #eee;
+  border-left-color: #888;
+}
+.add-event-btn:after {
+  background-color: #eee;
+  border-color: #888;
+}
+
+.walkthrough .float-label-input {
+  background-color: #fff;
+}
+
+.tabs.progress-tabs .step {
+  position: relative;  
+  margin: 0 1.5rem 0 0;
+}
+.tabs.progress-tabs a {
+  border-radius: 100%;
+  width: 2.5em;
+  height: 2.5em;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  line-height: 2.5em;
+  position: relative;
+  z-index: 1;
+}
+.tabs.progress-tabs .step:after {
+  content: '';
+  position: absolute;
+  width: 2rem;
+  height: 1rem;
+  top: 50%;
+  left: 100%;
+  margin: -0.5rem 0 0 -0.25rem;
+  background-color: #268099;
+}
+.tabs.progress-tabs .step:last-child:after {
+  display: none;
+}
+.tabs.progress-tabs a,
+.tabs.progress-tabs .active a,
+.tabs.progress-tabs a:hover {
+  background-color: #268099;
+  color: #ddd;
+}
+.tabs.progress-tabs .active + .step a,
+.tabs.progress-tabs .active + .step + .step a,
+.tabs.progress-tabs .active + .step + .step + .step a,
+.tabs.progress-tabs .active + .step + .step + .step + .step a,
+.tabs.progress-tabs .active + .step + .step + .step + .step + .step a,
+.tabs.progress-tabs .active + .step + .step + .step + .step + .step + .step a {
+  background-color: #ccc;
+}
+.tabs.progress-tabs .active a {
+  color: #fff;
+  font-weight: bold;
+}
+.tabs.progress-tabs .active:after,
+.tabs.progress-tabs .active + .step:after,
+.tabs.progress-tabs .active + .step + .step:after,
+.tabs.progress-tabs .active + .step + .step + .step:after,
+.tabs.progress-tabs .active + .step + .step + .step + .step:after,
+.tabs.progress-tabs .active + .step + .step + .step + .step + .step:after {
+  background-color: #ccc;
+}
