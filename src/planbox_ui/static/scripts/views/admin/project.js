@@ -420,25 +420,10 @@ var Planbox = Planbox || {};
           // and it causes the save button to enable after saving a new project
           silent: true,
           success: function(model) {
-            var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
-
-            if (window.location.pathname !== path) {
-              if (Modernizr.history) {
-                window.history.pushState('', '', path);
-              } else {
-                window.location = path;
-              }
-            }
-
-            if (makePublic || !model.get('public')) {
-              // Show the modal if we're publishing this right now
-              NS.app.modalRegion.show(new NS.ProjectAdminModalView({
-                model: model
-              }));
-            }
+            self.onSaveSuccess(model, makePublic);
           },
           error: function(model, resp) {
-            NS.showProjectSaveErrorModal(resp);
+            self.onSaveError(model, resp);
           }
         });
       },
@@ -463,6 +448,27 @@ var Planbox = Planbox || {};
         evt.preventDefault();
         this.ui.userMenu.toggleClass('is-open');
       },
+      onSaveSuccess: function(model, makePublic) {
+        var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
+
+        if (window.location.pathname !== path) {
+          if (Modernizr.history) {
+            window.history.pushState('', '', path);
+          } else {
+            window.location = path;
+          }
+        }
+
+        if (makePublic || !model.get('public')) {
+          // Show the modal if we're publishing this right now
+          NS.app.modalRegion.show(new NS.ProjectAdminModalView({
+            model: model
+          }));
+        }
+      },
+      onSaveError: function(model, resp) {
+        NS.showProjectSaveErrorModal(resp);
+      },
       dataChanged: function() {
         // Show the save button
         this.ui.saveBtn.removeClass('disabled');
@@ -471,13 +477,9 @@ var Planbox = Planbox || {};
   );
 
   // == Project Setup ========================================================
-  NS.ProjectSetupModalView = Backbone.Marionette.Layout.extend(
+  NS.ProjectSetupView = NS.ProjectAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#project-setup-tpl',
-      className: 'reveal-modal medium',
-      attributes: {
-        'data-reveal': ''
-      },
 
       regions: {
         descriptionRegion: '.project-description-region',
@@ -487,12 +489,18 @@ var Planbox = Planbox || {};
       ui: {
         editables: '[contenteditable]:not(#section-list [contenteditable])',
         nextBtn: '.next-step-button',
-        closeBtn: '.btn-close'
+        saveBtn: '.finish-button',
+        closeBtn: '.view-project-button'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'click @ui.nextBtn': 'handleNext',
+        'click @ui.saveBtn': 'handleSave',
         'click @ui.closeBtn': 'handleClose'
+      },
+      gotoStep: function(tab) {
+        var $tab = this.$(tab);
+        $tab.find('a').click();
       },
       handleClose: function(evt) {
         evt.preventDefault();
@@ -508,13 +516,11 @@ var Planbox = Planbox || {};
         // Click the link in the next tab (a bit of a hack, but it works)
         nextTab = activeTab.next();
         if (nextTab.length > 0) {
-          nextTab.find('a').click();
+          this.gotoStep(nextTab);
         }
       },
       onShow: function() {
         window.projectModel = this.model;
-        // This is gross. We should encourage Foundation to fix this.
-        this.$el.foundation().foundation('reveal', 'open');
       },
       onRender: function() {
         var timeline = this.model.get('sections').find(function(section) { return section.get('type') === 'timeline'; }),
@@ -524,9 +530,35 @@ var Planbox = Planbox || {};
         this.timelineRegion.show(new NS.TimelineSectionAdminView({model: timeline, collection: events, parent: this}));
         this.highlightsRegion.show(new NS.ProjectHighlightsAdminView({model: this.model, parent: this}));
       },
-      onClose: function() {
-        // This is gross. We should encourage Foundation to fix this.
-        this.$el.foundation().foundation('reveal', 'close');
+      onSaveSuccess: function(model, makePublic) {
+        var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
+
+        if (window.location.pathname !== path) {
+          if (Modernizr.history) {
+            window.history.pushState('', '', path);
+          } else {
+            window.location = path;
+          }
+        }
+
+        if (makePublic || !model.get('public')) {
+          // NS.app.modalRegion.show(new NS.ProjectSetupDoneModalView({
+          //   model: model
+          // }));
+
+          NS.app.mainRegion.show(new NS.ProjectAdminView({
+            model: this.model,
+            collection: this.collection
+          }));
+        }
+      },
+      onSaveError: function(model, resp) {
+        NS.showProjectSaveErrorModal(resp);
+        if (resp.responseJSON) {
+          if ('title' in resp.responseJSON) {
+            this.gotoStep('.tabs .title-step');
+          }
+        }
       },
       dataChanged: function() {}
     })

@@ -32,7 +32,14 @@ var Planbox = Planbox || {};
     }
 
     projectModel = new NS.ProjectModel(NS.Data.project);
-    ProjectView = NS.Data.isEditable ? NS.ProjectAdminView : NS.ProjectView;
+
+    if (!NS.Data.isEditable) {
+      ProjectView = NS.ProjectView;
+    } else if (projectModel.isNew()) {
+      ProjectView = NS.ProjectSetupView;
+    } else {
+      ProjectView = NS.ProjectAdminView;
+    }
 
     NS.app.mainRegion.show(new ProjectView({
       model: projectModel,
@@ -40,7 +47,7 @@ var Planbox = Planbox || {};
     }));
 
     if (window.location.pathname.indexOf('/new/') !== -1 && NS.Data.isEditable) {
-      NS.showProjectSetupModal(projectModel);
+      // NS.showProjectSetupModal(projectModel);
       // NS.app.overlayRegion.show(new NS.WelcomeModalView());
     }
   });
