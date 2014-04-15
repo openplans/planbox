@@ -574,6 +574,8 @@ var Planbox = Planbox || {};
         if (resp.responseJSON) {
           if ('title' in resp.responseJSON) {
             this.gotoStep('.tabs .title-step');
+          } else if ('events' in resp.responseJSON) {
+            this.gotoStep('.tabs .timeline-step');
           }
         }
       },
