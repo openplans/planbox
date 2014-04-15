@@ -22,9 +22,17 @@ var Planbox = Planbox || {};
     }));
   };
 
-  NS.showProjectSetupModal = function(project) {
-    NS.app.modalRegion.show(new NS.ProjectSetupModalView({
-      model: project
+  NS.showProjectSetupDoneModal = function(project) {
+    NS.app.modalRegion.show(new NS.ModalView({
+      model: new Backbone.Model({
+        title: 'Done!',
+        subtitle: 'Your project has been created.',
+        description: 'We\'ve arranged all the information you entered into ' +
+          'an easy-to-read page. Want to change or update the text? Click ' +
+          'anywhere in the page to edit. Customize it further with a header ' +
+          'image and your logo. Pick a theme to style it. Once you\'re ' +
+          'happy, click publish to share your page online.'
+      })
     }));
   };
 
@@ -550,6 +558,8 @@ var Planbox = Planbox || {};
             model: this.model,
             collection: this.collection
           }));
+
+          NS.showProjectSetupDoneModal(this.model);
         }
       },
       onSaveError: function(model, resp) {
