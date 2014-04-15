@@ -1,14 +1,34 @@
-{{#if thumbnail_url}}
-<div class="attachment-icon image">
-  <img src="{{ thumbnail_url }}">
-</div>
-{{else}}
-<div class="attachment-icon">
-  <img src="{{ static_url }}/images/document_generic.png">
-</div>
-{{/if}}
-<h4 class="attachment-title content-editable" data-attr="label" contenteditable>{{{ label }}}</h4>
-<div class="attachment-description content-editable" data-attr="description" contenteditable>{{{ description }}}</div>
+<div class="row collapse">
 
-<span class="handle">&#9776;</span>
-<span class="delete-attachment-btn btn btn-mini btn-secondary"><span class="delete-icon">&#10005;</span> Delete</span>
+  <div class="small-4 large-3 columns">
+
+    {{#if thumbnail_url}}
+    <div class="attachment-icon image">
+      <img src="{{ thumbnail_url }}">
+    </div>
+    {{else}}
+    <div class="attachment-icon">
+      <img src="{{ static_url }}/images/document_generic.png">
+    </div>
+    {{/if}}
+
+    <span class="delete-attachment-btn label alert">&#10005;&nbsp;Delete</span>
+
+  </div>
+
+  <div class="small-8 large-9 columns">
+
+    <div class="float-label-container">
+      <div class="h6 attachment-title content-editable float-label-input" data-attr="label" contenteditable>{{{ label }}}</div>
+      <span class="float-label">Attachment Title</span>
+    </div>
+    <div class="float-label-container">
+      <div class="attachment-description content-editable float-label-input" data-attr="description" contenteditable>{{{ description }}}</div>
+      <span class="float-label">Attachment Description</span>
+    </div>
+
+  </div>
+
+</div>
+
+<span class="handle">&#9783;</span>

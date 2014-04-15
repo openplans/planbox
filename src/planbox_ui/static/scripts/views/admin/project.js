@@ -13,7 +13,7 @@ var Planbox = Planbox || {};
   // Admin ====================================================================
 
   NS.showErrorModal = function(title, subtitle, description) {
-    NS.app.overlayRegion.show(new NS.ModalView({
+    NS.app.modalRegion.show(new NS.ModalView({
       model: new Backbone.Model({
         title: title,
         subtitle: subtitle,
@@ -65,7 +65,10 @@ var Planbox = Planbox || {};
 
   NS.ProjectAdminModalView = Backbone.Marionette.ItemView.extend({
     template: '#project-admin-modal-tpl',
-    className: 'overlay',
+    className: 'reveal-modal medium',
+    attributes: {
+      'data-reveal': ''
+    },
     ui: {
       closeBtn: '.btn-close',
       publishBtn: '.btn-public',
@@ -91,13 +94,21 @@ var Planbox = Planbox || {};
         silent: true,
 
         success: function() {
-          self.ui.makePublicContent.addClass('is-hidden');
-          self.ui.shareContent.removeClass('is-hidden');
+          self.ui.makePublicContent.addClass('hide');
+          self.ui.shareContent.removeClass('hide');
         },
         error: function(model, resp) {
           NS.showProjectSaveErrorModal(resp);
         }
       });
+    },
+    onShow: function() {
+      // This is gross. We should encourage Foundation to fix this.
+      this.$el.foundation().foundation('reveal', 'open');
+    },
+    onClose: function() {
+      // This is gross. We should encourage Foundation to fix this.
+      this.$el.foundation().foundation('reveal', 'close');
     }
   });
 
@@ -132,7 +143,7 @@ var Planbox = Planbox || {};
         customDomainMessageBtn: '.custom-domain-message-btn',
         userMenuLink: '.user-menu-link',
         userMenu: '.user-menu',
-        editableNavMenuLinks: '.project-nav a[contenteditable]',
+        editableNavMenuLinks: '.sub-nav a[contenteditable]',
         publishBtn: '.btn-public',
         imageHolders: '.image-holder',
         imageDropZones: '.image-dnd',
@@ -198,7 +209,6 @@ var Planbox = Planbox || {};
         this.initDropZones();
         this.showRegions();
       },
-
       setImageOnContainer: function($el, url) {
         $el.addClass('has-image');
         if ($el.hasClass('image-as-background')) {
@@ -324,10 +334,10 @@ var Planbox = Planbox || {};
         this.model.set(linkTypeModelProp, linkType);
 
         if (linkType === 'external') {
-          $externalLinkInput.removeClass('is-hidden');
+          $externalLinkInput.removeClass('hide');
           this.model.set($target.attr('name'), $externalLinkInput.val());
         } else {
-          $externalLinkInput.addClass('is-hidden');
+          $externalLinkInput.addClass('hide');
           this.model.set($target.attr('name'), $selected.val());
         }
       },
@@ -416,7 +426,7 @@ var Planbox = Planbox || {};
 
             if (makePublic || !model.get('public')) {
               // Show the modal if we're publishing this right now
-              NS.app.overlayRegion.show(new NS.ProjectAdminModalView({
+              NS.app.modalRegion.show(new NS.ProjectAdminModalView({
                 model: model
               }));
             }
@@ -431,7 +441,7 @@ var Planbox = Planbox || {};
         var self = this,
             $target = $(evt.target);
 
-        if (!$target.hasClass('btn-disabled')) {
+        if (!$target.hasClass('disabled')) {
           this.save();
         }
       },
@@ -449,7 +459,7 @@ var Planbox = Planbox || {};
       },
       dataChanged: function() {
         // Show the save button
-        this.ui.saveBtn.removeClass('btn-disabled');
+        this.ui.saveBtn.removeClass('disabled');
       }
     })
   );

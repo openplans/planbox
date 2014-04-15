@@ -1,46 +1,59 @@
 {{#if cover_img_url}}
-<header id="home" class="site-header has-image" style="background-image: url(&quot;{{ cover_img_url }}&quot;)">
+<header data-magellan-destination="home" id="home" class="site-header has-image" style="background-image: url(&quot;{{ cover_img_url }}&quot;)">
 {{else }}
-<header id="home" class="site-header">
+<header data-magellan-destination="home" id="home" class="site-header">
 {{/if}}
-  <div class="container">
 
-    <div class="logo-table">
-      <div class="logo-table-row">
+  <div class="site-header-content">
 
-        {{#if logo_img_url}}
-        <div class="logo has-image">
-          <img src="{{ logo_img_url }}" alt="{{ title }}">
-        {{else}}
-        <div class="logo">
-        {{/if}}
-        </div>
+    <div class="row project-header container">
+      <div class="small-12 columns">
 
-        <div>
-          <h1 class="site-title">{{{ title }}}</h1>
-        </div>
+        <div class="logo-table">
+          <div class="logo-table-row">
+
+            {{#if logo_img_url}}
+            <div class="logo has-image">
+              <img src="{{ logo_img_url }}" alt="{{ title }}">
+            {{else}}
+            <div class="logo">
+            {{/if}}
+            </div>
+
+            <div>
+              <h1 class="project-title">{{{ title }}}</h1>
+            </div>
+
+          </div>
+        </div><!-- end .logo-table -->
 
       </div>
-    </div><!-- end .logo-table -->
+    </div>
 
-    {{#gte sections.length 2}}
-    <nav class="project-nav clearfix">
-      <ul class="unstyled-list">
-        <li><a href="#home">Home</a></li>
-        {{#each sections}}
-          <li><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
-        {{/each}}
-      </ul>
-    </nav>
-    {{/gte}}
-  </div>
+    <div class="project-menu-container {{#gte sections.length 2}} has-project-menu{{/gte}}">
+      {{#gte sections.length 2}}
+      <div data-magellan-expedition="fixed" class="project-menu">
+        <div class="row container">
+          <div class="small-12 columns">
+            <ul class="sub-nav">
+              <li data-magellan-arrival="home"><a href="#home">Home</a></li>
+              {{#each sections}}
+              <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {{/gte}}
+    </div>
+
+  </div><!-- end .site-header-content -->
+
 </header>
 
 <section class="project-details">
-  <div class="container clearfix">
-
-    <div class="highlights">
-
+  <div class="row container">
+    <div class="medium-4 medium-push-8 columns">
       {{#if happening_now_description}}
       <div class="highlight">
         {{!-- TODO: Abstract this out so that happening_now and get_involved use
@@ -48,11 +61,17 @@
            --}}
         {{#if happening_now_link_url}}
         <a href="{{ happening_now_link_url }}"{{#is happening_now_link_type 'external'}} target="_blank"{{/is}}>
+          <div class="panel callout radius">
+        {{else}}
+          <div class="panel radius">
         {{/if}}
-          <h3>Happening Now!</h3>
-          <p class="highlight-description">{{{ happening_now_description }}}</p>
+            <h3>Happening Now!</h3>
+            <p class="highlight-description">{{{ happening_now_description }}}</p>
         {{#if happening_now_link_url}}
+          </div>
         </a>
+        {{else}}
+          </div>
         {{/if}}
       </div>
       {{/if}}
@@ -61,28 +80,39 @@
       <div class="highlight">
         {{#if get_involved_link_url}}
         <a href="{{ get_involved_link_url }}"{{#is get_involved_link_type 'external'}} target="_blank"{{/is}}>
+          <div class="panel callout radius">
+        {{else}}
+          <div class="panel radius">
         {{/if}}
-          <h3>Get Involved!</h3>
-          <p class="highlight-description">{{{ get_involved_description }}}</p>
+            <h3>Get Involved!</h3>
+            <p class="highlight-description">{{{ get_involved_description }}}</p>
         {{#if get_involved_link_url}}
+          </div>
         </a>
+        {{else}}
+          </div>
         {{/if}}
       </div>
       {{/if}}
 
-    </div><!-- end .highlights -->
+    </div>
 
-    <p class="project-location">{{{ location }}}</p>
-    <div class="project-description">{{{ description }}}</div>
+    <div class="medium-8 medium-pull-4 columns">
+      <p class="project-location">{{{ location }}}</p>
+      <div class="project-description">{{{ description }}}</div>
+    </div>
+
   </div>
 </section>
 
 <div class="orderable-container" id="section-list"></div>
 
 <footer class="site-colophon">
-  <div class="container">
-    <p class="project-contact-info">{{{ contact }}}</p>
-    {{! NOTE: These URLs is hardcoded for the sake of pages with custom URLs. Should maybe be passed in as context? }}
-    <p class="powered-by">{{#_}}Powered by <a href="https://planinabox.org/">Plan In A Box</a>, a product of <a href="http://openplans.org/">OpenPlans</a>.{{/_}}</p>
+  <div class="row">
+    <div class="small-12 columns">
+      <p class="project-contact-info">{{{ contact }}}</p>
+      {{! NOTE: These URLs is hardcoded for the sake of pages with custom URLs. Should maybe be passed in as context? }}
+      <p class="powered-by text-right">{{#_}}Powered by <a href="http://openplans.org/">OpenPlans.org</a>.{{/_}}</p>
+    </div>
   </div>
 </footer>

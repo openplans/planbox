@@ -39,18 +39,18 @@
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/normalize-css/normalize.css" type="text/css" media="screen, projection" />
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pickadate/lib/themes/classic.css" id="theme_base">
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pickadate/lib/themes/classic.date.css" id="theme_date">
-  <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" type="text/css" />
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/print.css" type="text/css" media="print" />
   {% if is_editable %}
-  <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.css" type="text/css" />
   {% endif %}
 
   {% else %}
 
-  <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" />
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/print.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" media="print" />
   {% if is_editable %}
-  <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" />
   {% endif %}
 
   {% endif %} {# debug #}
@@ -64,7 +64,6 @@
 
 {% block scripts %}
   {% if debug %}
-  <script src="{{ STATIC_URL }}bower_components/jquery/jquery.js"></script>
   <script src="{{ STATIC_URL }}bower_components/jqueryui/ui/jquery.ui.core.js"></script>
   <script src="{{ STATIC_URL }}bower_components/jqueryui/ui/jquery.ui.widget.js"></script>
   <script src="{{ STATIC_URL }}bower_components/jqueryui/ui/jquery.ui.mouse.js"></script>
@@ -85,6 +84,7 @@
   <script src="{{ STATIC_URL }}bower_components/pickadate/lib/picker.js"></script>
   <script src="{{ STATIC_URL }}bower_components/pickadate/lib/picker.date.js"></script>
   {% else %}
+</script>
   <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
     {% if is_editable %}
   <script src="{{ STATIC_URL }}scripts/components-admin.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
@@ -137,7 +137,7 @@
   and search for "Event Vocabulary".
   {% endcomment %}
 
-  <ul class="is-hidden">
+  <ul class="hide">
     {% for event in project_data.events %}
 
     {% if event.datetime_label %}
