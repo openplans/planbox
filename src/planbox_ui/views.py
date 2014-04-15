@@ -16,7 +16,12 @@ from django.shortcuts import redirect
 from django.shortcuts import resolve_url
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, View
+from password_reset.views import (
+    PasswordResetView as BasePasswordResetView,
+    PasswordResetRequestView as BasePasswordResetRequestView,
+    PasswordResetInstructionsView as BasePasswordResetInstructionsView,
+    PasswordChangeView as BasePasswordChangeView)
 from planbox_data.models import Project, Profile
 from planbox_data.serializers import ProjectSerializer, UserSerializer, TemplateProjectSerializer
 from planbox_ui.decorators import ssl_required
@@ -51,7 +56,7 @@ class AppMixin (object):
                 self.profile = None
         return self.profile
 
-    def get_home_url(self, obj):
+    def get_home_url(self, obj=None):
         if obj is None and self.request.user.is_authenticated():
             obj = self.request.user
 
@@ -178,6 +183,18 @@ class HelpView (AppMixin, TemplateView):
     template_name = 'help.html'
 
 
+class PasswordChangeView (AppMixin, LoginRequired, SSLRequired, BasePasswordChangeView): pass
+class PasswordResetView (AppMixin, SSLRequired, BasePasswordResetView): pass
+class PasswordResetRequestView (AppMixin, SSLRequired, BasePasswordResetRequestView): pass
+class PasswordResetInstructionsView (AppMixin, SSLRequired, BasePasswordResetInstructionsView): pass
+
+
+class ProfileView (AppMixin, LoginRequired, SSLRequired, View):
+    def get(self, request):
+        home_url = self.get_home_url()
+        return redirect(home_url)
+
+
 class SignupView (AppMixin, LogoutRequired, SSLRequired, FormView):
     template_name = 'signup.html'
     form_class = UserCreationForm
@@ -198,10 +215,6 @@ class SignupView (AppMixin, LogoutRequired, SSLRequired, FormView):
         self.auth = authenticate(username=username, password=password)
         login(self.request, self.auth)
         return super(SignupView, self).form_valid(form)
-
-
-class PasswordResetView (TemplateView):
-    template_name = 'password-reset.html'
 
 
 class SigninView (AppMixin, LogoutRequired, SSLRequired, FormView):
@@ -376,7 +389,14 @@ class SiteMapView (AppMixin, TemplateView):
 index_view = IndexView.as_view()
 project_view = ProjectView.as_view()
 ro_project_view = ReadOnlyProjectView.as_view()
+profile_view = ProfileView.as_view()
 new_project_view = NewProjectView.as_view()
+
+password_reset_view = PasswordResetView.as_view()
+password_change_view = PasswordChangeView.as_view()
+password_reset_request_view = PasswordResetRequestView.as_view()
+password_reset_instructions_view = PasswordResetInstructionsView.as_view()
+
 signup_view = SignupView.as_view()
 signin_view = SigninView.as_view()
 password_reset_view = PasswordResetView.as_view()
