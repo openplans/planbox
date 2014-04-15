@@ -19,9 +19,9 @@
                     {{#each sections }}
                       <option data-link-type="section" data-id="{{ id }}" value="#section-{{ slug }}">{{ label }}</option>
                       {{#is type 'timeline'}}
-                        {{#each ../../events}}
+                        {{#each ../../events}}{{#if label }}
                           <option data-link-type="event" data-id="{{ id }}" value="#event-{{ slug }}">{{ label }}</option>
-                        {{/each}}
+                        {{/if}}{{/each}}
                       {{/is}}
                     {{/each }}
                   <option data-link-type="external" value="external-link">External Link...</option>
@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="highlight row">
         <div class="small-12 columns">
           <div class="panel clearfix">
