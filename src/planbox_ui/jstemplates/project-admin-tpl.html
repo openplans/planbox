@@ -11,12 +11,12 @@
     <div class="small-12 columns">
 
       {{#if_fileapi_support 'cors'}}
-      <div id="cover-image-dnd" class="image-dnd file-upload hide-for-print">
+      <div id="cover-image-dnd" class="image-dnd file-upload">
         <p class="drop-instructions">Drop cover photo here or&hellip;</p>
         <p class="uploading-message">Uploading&hellip;</p>
         <label for="cover-image-file-chooser" class="file-upload-input-container button tiny radius"><span class="file-upload-label">Choose Cover Photo</span><input name="cover-image" id="cover-image-file-chooser" class="file-upload-input" type="file" accept="image/*" /></label>
       </div>
-      <p class="remove-cover-img-btn-container hide-for-print"><button class="remove-img-btn label alert" data-confirm-msg="Are you sure you want to remove your cover image?"><span class="delete-icon">&#10005;</span> Remove Cover Photo</button></p>
+      <p class="remove-cover-img-btn-container"><button class="remove-img-btn label alert" data-confirm-msg="Are you sure you want to remove your cover image?"><span class="delete-icon">&#10005;</span> Remove Cover Photo</button></p>
       {{/if_fileapi_support}}
     </div>
   </div>

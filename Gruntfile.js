@@ -284,9 +284,6 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/styles/style.min.css': [
             '<%= yeoman.app %>/styles/style.css'
           ],
-          '<%= yeoman.app %>/styles/print.min.css': [
-            '<%= yeoman.app %>/styles/print.css'
-          ],
           '<%= yeoman.app %>/styles/admin.min.css': [
             '<%= yeoman.app %>/styles/admin.css',
             '<%= yeoman.app %>/bower_components/pickadate/lib/themes/classic.css',
