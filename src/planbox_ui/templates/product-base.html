@@ -48,29 +48,19 @@ Plan In A Box
     </ul>
 
     <section class="top-bar-section">
-      {% if user.is_authenticated %}
-        {% include_handlebars 'user-menu.html' %}
-      {% else %}
       <ul class="right">
+        <li><a href="/help" class="software-help-link">Help &amp; Feedback</a></li>
+        {% if user.is_authenticated %}
+        {% include_handlebars 'user-menu.html' %}
+        {% else %}
         <li class="active"><a href="/signin" class="login-link user-link nobreak">Sign In</a></li>
+        {% endif %}
       </ul>
-      {% endif %}
     </section>
   </nav>
 </div>
 
 {% block main %}{% endblock %}
-
-<footer class="site-colophon">
-  <div class="row">
-    <div class="small-3 columns">
-      <a href="http://openplans.org/"><img src="{{ STATIC_URL }}images/OpenPlans-logo-whitetxt.png" class="openplans-logo"></a>
-    </div>
-    <div class="small-9 columns">
-      <p class="funding-info">Plan In A Box is a product of <a href="http://openplans.org/">OpenPlans</a>, with support from <a href="http://www.knightfoundation.org/">Knight Foundation</a>.</p>
-    </div>
-  </div>
-</footer>
 
 {% endblock %}
 
