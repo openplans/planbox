@@ -215,8 +215,6 @@ var Planbox = Planbox || {};
           e = e || event;
           e.preventDefault();
         }, false);
-
-        this.initRegions();
       },
 
       onRender: function() {
