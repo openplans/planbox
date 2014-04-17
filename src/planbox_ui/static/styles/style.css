@@ -310,6 +310,14 @@ select {
   opacity: 0.75;
 }
 .hearts {
+  margin: 0 0.375em;
+  display: inline-block;
+  -webkit-transform-origin: 50% 65%;
+      -ms-transform-origin: 50% 65%;
+          transform-origin: 50% 65%;
+  -webkit-transform: scale(1.5);
+      -ms-transform: scale(1.5);
+          transform: scale(1.5);
 }
 .slogan {
   margin: 0;
