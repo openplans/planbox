@@ -125,8 +125,15 @@ section, footer {
   position: fixed;
 }
 .openplans-top-bar .top-bar {
-  background: transparent url(../images/orange-ff8b38-2000x500.gif) 100px 0 no-repeat scroll;
+  background: transparent url(../images/orange-ff8b38-2000x65.gif) 0 0 no-repeat scroll;
   box-shadow: 62.5rem 0 #ff8b38, -62.5rem 0 #ff8b38;
+}
+.openplans-top-bar,
+.openplans-top-bar.contain-to-grid,
+.openplans-top-bar .top-bar, 
+.openplans-top-bar .name {
+  height: 65px;
+  line-height: 65px;
 }
 .openplans-top-bar .name h1,
 .openplans-top-bar .name h1 a {
@@ -154,12 +161,20 @@ section, footer {
 .openplans-top-bar .top-bar-section li.active:not(.has-form) a:not(.button):hover {
   background-color: #3db6f2;
 }
-.openplans-top-bar,
-.openplans-top-bar.contain-to-grid,
-.openplans-top-bar .top-bar, 
-.openplans-top-bar .name {
-  height: 65px;
-  line-height: 65px;
+.openplans-top-bar .top-bar-section .dropdown li:not(.has-form) a:not(.button) {
+  background: #308fbf;
+}
+.openplans-top-bar .top-bar-section li:not(.has-form) a:not(.button):hover {
+  background: #3db6f2;
+}
+.openplans-top-bar .top-bar.expanded .title-area {
+  background-color: transparent;
+}
+.openplans-top-bar .top-bar.expanded {
+  height: auto;
+}
+.openplans-top-bar .top-bar.expanded .top-bar-section {
+  padding-top: 0;
 }
 
 /* Site Header */

@@ -51,7 +51,12 @@ Plan In A Box
       <ul class="right">
         <li><a href="/help" class="software-help-link">Help &amp; Feedback</a></li>
         {% if user.is_authenticated %}
-        {% include_handlebars 'user-menu.html' %}
+        <li class="active has-dropdown">
+          <a href="/{{ user.username }}/new/">{{ user.username }}</a>
+          <ul class="dropdown">
+            {% include_handlebars 'user-menu.html' %}
+          </ul>
+        </li>
         {% else %}
         <li class="active"><a href="/signin" class="login-link user-link nobreak">Sign In</a></li>
         {% endif %}
