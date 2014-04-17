@@ -2,66 +2,90 @@
 
 {% block main %}
 
-<section class="product-section--the-problem has-image">
+<hgroup class="product-tagline-section has-image">
+  <h3 class="tagline"><span class="nowrap">Community Engagement</span> <span class="hearts">&hearts;</span> <span class="nowrap">Better Places</span></h3>
+  <h4 class="slogan">Our web tools help you manage communications <span class="nowrap">&amp; constructive</span> <span class="nowrap">public input.</span></h4>
+</hgroup>
+
+<section class="product-get-started" id="get-started">
   <div class="row">
     <div class="small-12 columns">
-      <h3>Still communicating with your constituents the old fashioned way? </h3>
+      <form method="GET" action="{% url 'app-signup' %}">
+        <div class="row">
+          <div class="small-12 medium-8 large-12 medium-centered columns">
+            <div class="row collapse">
+              <div class="small-12 large-5 columns text-center">
+                <h4>Create Your Project Website:</h4>
+              </div>
+              <div class="small-8 large-5 columns">
+                <div class="float-label-container">
+                  <input required name="email" type="email" class="float-label-input" placeholder="email@example.org">
+                  <label for="email" class="float-label">Email Address</label>
+                </div>
+              </div>
+              <div class="small-4 large-2 columns">
+                <button class="button postfix">Get Started</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </section>
 
-<section class="product-section--the-answer">
+<section class="product-features" id="features">
   <div class="row">
-    <div class="small-12 columns">
-      <h3>Put timely, engaging information about your projects online in a matter of minutes.&nbsp; <a href="#get-started" class="button tiny">Get Started!</a></h3>
-      <p><strong>Plan In A Box</strong> is one part town-hall one part project archive. It’s a place where people can come to find out what's already happened, what’s happening now, stay engaged, and be more informed participants.</p>
-      <div class="row">
-        <div class="medium-4 columns"><img class="" src="{{ STATIC_URL }}images/feature-edit.png"><p>Easily create &amp; edit a project.</p></div>
-        <div class="medium-4 columns"><img class="" src="{{ STATIC_URL }}images/feature-devices.png"><p>Publish it online for all to see.</p></div>
-        <div class="medium-4 columns"><img class="" src="{{ STATIC_URL }}images/feature-poster.png"><p>Print out handy posters.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="small-12 large-10 large-centered columns">
 
-<section class="product-overview has-image">
-  <div class="row">
-    <div class="small-12 columns">
-      <h3>Keep Communities Informed &amp; Engaged</h3>
       <div class="row">
-        <div class="small-2 columns">
-          <img class="illustration" src="{{ STATIC_URL }}images/search.png">
+        <div class="small-6 medium-3 medium-push-9 small-centered medium-uncentered columns">
+          <img class="feature-illustration" src="{{ STATIC_URL }}images/feature-edit.gif">
         </div>
-        <div class="small-10 columns">
-          <p>Information about  projects is difficult for residents to find and track.</p>
+        <div class="small-12 medium-9 medium-pull-3 columns">
+          <h3>Easily create &amp; edit a project.</h3>
+          <p>It's super easy to create projects and edit its information. We walk you through the steps of making a good planning website, giving you the tools you need to broadcast and collect information.</p>
         </div>
       </div>
+
       <div class="row">
-        <div class="small-2 columns">
-          <img class="illustration" src="{{ STATIC_URL }}images/stopwatch.png">
+        <div class="small-6 medium-3 small-centered medium-uncentered columns">
+          <img class="feature-illustration" src="{{ STATIC_URL }}images/feature-publish.gif">
         </div>
-        <div class="small-10 columns">
-          <p>Sharing timely, helpful information is challenging for busy planners.</p>
+        <div class="small-12 medium-9 columns">
+          <h3>Publish it online for all to see.</h3>
+          <p>Share information about your project's scope, timeline, and ways to get involved. Your OpenPlans website enables informed participation. It's where people find out what's happening, give their input, and stay engaged throughout the whole project.</p>
         </div>
       </div>
+
       <div class="row">
-        <div class="small-2 columns">
-          <img class="illustration" src="{{ STATIC_URL }}images/headache.png">
+        <div class="small-6 medium-3 medium-push-9 small-centered medium-uncentered columns">
+          <img class="feature-illustration" src="{{ STATIC_URL }}images/feature-map.gif">
         </div>
-        <div class="small-10 columns">
-          <p>Not everyone has time to attend a public meeting, but people want to have access to information about their community.</p>
+        <div class="small-12 medium-9 medium-pull-3 columns">
+          <h3>Collect input with Shareabouts.</h3>
+          <p>Gathering place-based public input through a user-friendly map interface. Shareabouts maps collect rich, informative local data from a wide range of participants from neighborhood to state-scales.</p>
         </div>
       </div>
-      <p>Uninformed participants have an unsatisfactory experience, even on the greatest projects. And unhappy people slow down the public process for everyone else.</p>
-      <h4>Plan In A Box helps you create and publish an easy to navigate, informative web page about your project.</h4>
+
+      <div class="row">
+        <div class="small-6 medium-3 small-centered medium-uncentered columns">
+          <img class="feature-illustration" src="{{ STATIC_URL }}images/feature-print.gif">
+        </div>
+        <div class="small-12 medium-9 columns">
+          <h3>Print out handy posters.</h3>
+          <p>Use the information on your OpenPlans website to produce informative project posters. This feature needs to be better, ’cause it don’t really work as a one-size-fits-all solution for printing.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <section class="product-demos" id="demos">
   <div class="row">
-    <div class="small-12 columns">
-      <h2>Explore these demo sites&hellip;</h2>
+    <div class="small-12 medium-10 large-11 medium-centered columns">
+      <h3>Explore these demo sites&hellip;</h3>
       <div class="the-demo-links clearfix">
         <a href="https://planinabox.org/demo/perryton-school-district-sidewalk-improvements/"><img class="demo-image demo-image-ipad" src="{{ STATIC_URL }}images/ipad-perryton.png"></a>
         <a href="https://planinabox.org/demo/shopping-district-street-study/"><img class="demo-image demo-image-iphone" src="{{ STATIC_URL }}images/iphone-shopping-district.png"></a>
@@ -71,35 +95,15 @@
   </div>
 </section>
 
-<section class="" id="get-started">
+<section class="product-feedback text-center">
   <div class="row">
-    <div class="small-12 columns">
-      <h2>Create a project page right now&hellip;</h2>    
-      <ol>
-        <li>Sign up.</li>
-        <li>Enter project details, like purpose, location, key events.</li>
-        <li>Publish your page.</li>
-        <li>Optionally, print project posters.</li>
-      </ol>
-      <form class="interest-form clearfix" method="GET" action="{% url 'app-signup' %}">
-        <div class="row">
-          <div class="large-12 columns">
-            <div class="row collapse">
-              <div class="small-10 columns">
-                <div class="float-label-container">
-                  <input required name="email" type="email" class="float-label-input" placeholder="email@example.org">
-                  <label for="email" class="float-label">Email Address</label>
-                </div>
-              </div>
-              <div class="small-2 columns">
-                <button class="button postfix">Start</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
+    <div class="small-12 large-3 columns">
       <p>Contact us any time at <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Plan%20In%20A%20Box">{{ settings.PLANBOX_CONTACT_EMAIL }}</a>.</p>
+    </div>
+    <div class="small-12 large-3 columns">
       <p>Your <a href="https://trello.com/b/94MT3WRQ/plan-in-a-box-features" target="_blank">feedback and comments</a> will help us improve the software.</p>
+    </div>
+    <div class="small-12 large-6 columns">
       <p>As we continue to make improvements, you'll see new features rolled out to your account. Please help us <a href="https://trello.com/b/94MT3WRQ/plan-in-a-box-features" target="_blank">prioritize new features</a>!</p>
     </div>
   </div>
