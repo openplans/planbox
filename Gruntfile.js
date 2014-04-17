@@ -279,7 +279,8 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.app %>/styles/base.min.css': [
             '<%= yeoman.app %>/bower_components/foundation/css/normalize.css',
-            '<%= yeoman.app %>/bower_components/foundation/css/foundation.css'
+            '<%= yeoman.app %>/bower_components/foundation/css/foundation.css',
+            '<%= yeoman.app %>/bower_components/leaflet-0.7.2/leaflet.css'
           ],
           '<%= yeoman.app %>/styles/style.min.css': [
             '<%= yeoman.app %>/styles/style.css'
@@ -308,7 +309,8 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/backbone/backbone.js',
             '<%= yeoman.app %>/bower_components/backbone.marionette/lib/backbone.marionette.js',
             '<%= yeoman.app %>/bower_components/backbone-relational/backbone-relational.js',
-            '<%= yeoman.app %>/bower_components/swag/lib/swag.js'
+            '<%= yeoman.app %>/bower_components/swag/lib/swag.js',
+            '<%= yeoman.app %>/bower_components/leaflet-0.7.2/leaflet-src.js'
           ],
           '<%= yeoman.app %>/scripts/components-admin.min.js': [
             '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.core.js',
