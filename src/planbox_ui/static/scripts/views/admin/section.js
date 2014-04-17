@@ -281,6 +281,46 @@ var Planbox = Planbox || {};
     })
   );
 
+  NS.ShareaboutsSectionAdminView = Backbone.Marionette.ItemView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
+      template: '#shareabouts-section-admin-tpl',
+      tagName: 'section',
+      className: 'project-shareabouts',
+
+      ui: {
+        editables: '[contenteditable]',
+        richEditables: '.project-shareabouts-description',
+        map: '.map'
+      },
+      events: {
+        'blur @ui.editables': 'handleEditableBlur'
+      },
+
+      onShow: function() {
+        var options = this.model.get('details'),
+            i, layerOptions;
+
+        this.map = L.map(this.ui.map.get(0), options.map);
+        for (i = 0; i < options.layers.length; ++i) {
+          layerOptions = options.layers[i];
+          L.tileLayer(layerOptions.url, layerOptions).addTo(this.map);
+        }
+
+        this.map.on('moveend', _.bind(this.handleMapMoveEnd, this));
+      },
+
+      handleMapMoveEnd: function() {
+        var center = this.map.getCenter(),
+            zoom = this.map.getZoom();
+
+        this.model.set('map', {
+          center: [center.lat, center.lng],
+          zoom: zoom
+        });
+      },
+    })
+  );
+
   NS.FaqAdminView = NS.SortableListItemAdminView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#faq-admin-tpl',

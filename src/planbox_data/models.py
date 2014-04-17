@@ -373,6 +373,7 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, TimeStampedModel):
     SECTION_TYPE_CHOICES = (
         ('text', _('Text')),
         ('timeline', _('Timeline')),
+        ('shareabouts', _('Shareabouts')),
         ('faqs', _('FAQ'))
     )
 

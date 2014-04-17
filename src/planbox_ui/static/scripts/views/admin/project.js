@@ -136,7 +136,8 @@ var Planbox = Planbox || {};
     sectionViews: {
       'timeline': NS.TimelineSectionAdminView,
       'text': NS.TextSectionAdminView,
-      'faqs': NS.FaqsSectionAdminView
+      'faqs': NS.FaqsSectionAdminView,
+      'shareabouts': NS.ShareaboutsSectionAdminView
     },
     dataChanged: function() {
       this.options.parent.dataChanged();
