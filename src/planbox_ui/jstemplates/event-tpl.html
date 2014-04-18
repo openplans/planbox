@@ -1,11 +1,20 @@
 <span id="event-{{ slug }}" class="event-anchor"></span>
-<h3 class="event-title">{{{ label }}}</h3>
-{{#if datetime_label }}
-<div class="event-datetime-container clearfix">
-  <span class="event-datetime">{{ datetime_label }}</span>
-  <span class="calendar-icon"></span>
-</div>
-{{/if}}
-<div class="event-description">{{{ description }}}</div>
 
-<div class="attachments-region"></div>
+<h3 class="event-title">{{{ label }}}</h3>
+
+<div class="row">
+
+  <div class="medium-7 columns">
+    {{#if datetime_label }}
+    <div class="event-datetime-container clearfix">
+      <span class="event-datetime">{{ datetime_label }}</span>
+    </div>
+    {{/if}}
+    <div class="event-description">{{{ description }}}</div>
+  </div>
+
+  <div class="medium-5 columns">
+    <div class="attachments-region"></div>
+  </div>
+
+</div>

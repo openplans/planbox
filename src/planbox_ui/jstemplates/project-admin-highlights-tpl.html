@@ -1,0 +1,68 @@
+      <div class="highlight row">
+        <div class="small-12 columns">
+          <div class="panel clearfix">
+            <div class="row">
+
+              <div class="small-12 medium-4 columns">
+                {{!-- TODO: Abstract this out so that happening_now and get_involved use
+                   --       the same code
+                   --}}
+                <strong>Happening Now!</strong>
+                <p>What is currently happening with the project?</p>
+              </div>
+
+              <div class="small-12 medium-8 columns">
+                <p class="highlight-description float-label-input" data-attr="happening_now_description" contenteditable>{{{ happening_now_description }}}</p>
+                <select class="highlight-link-selector" name="happening_now_link_url" data-link-type-name="happening_now_link_type">
+                  {{#select_highlight happening_now_link_type happening_now_link_url }}
+                  <option value="" data-link-type="">Link to...</option>
+                    {{#each sections }}
+                      <option data-link-type="section" data-id="{{ id }}" value="#section-{{ slug }}">{{ label }}</option>
+                      {{#is type 'timeline'}}
+                        {{#each ../../events}}{{#if label }}
+                          <option data-link-type="event" data-id="{{ id }}" value="#event-{{ slug }}">{{ label }}</option>
+                        {{/if}}{{/each}}
+                      {{/is}}
+                    {{/each }}
+                  <option data-link-type="external" value="external-link">External Link...</option>
+                  {{/select_highlight }}
+                </select>
+                <input name="happening_now_link_url" class="highlight-external-link {{#isnt happening_now_link_type 'external' }}hide{{/isnt}}" type="text" placeholder="http://" data-attr="happening_now_link_url" value="{{#is happening_now_link_type 'external' }}{{happening_now_link_url}}{{/is}}">
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight row">
+        <div class="small-12 columns">
+          <div class="panel clearfix">
+            <div class="row">
+
+              <div class="small-12 medium-4 columns">
+                <strong>Get Involved!</strong>
+                <p>What can people do today (or soon) to get involved? If you have an upcoming event, choose it from the list.</p>
+              </div>
+              <div class="small-12 medium-8 columns">
+                <p class="highlight-description float-label-input" data-attr="get_involved_description" contenteditable>{{{ get_involved_description }}}</p>
+                <select class="highlight-link-selector" name="get_involved_link_url" data-link-type-name="get_involved_link_type">
+                  {{#select_highlight get_involved_link_type get_involved_link_url }}
+                  <option value="" data-link-type="">Link to...</option>
+                    {{#each sections }}
+                      <option data-link-type="section" data-id="{{ id }}" value="#section-{{ slug }}">{{ label }}</option>
+                      {{#is type 'timeline'}}
+                        {{#each ../../events}}
+                          <option data-link-type="event" data-id="{{ id }}" value="#event-{{ slug }}">{{ label }}</option>
+                        {{/each}}
+                      {{/is}}
+                    {{/each }}
+                  <option data-link-type="external" value="external-link">External Link...</option>
+                  {{/select_highlight }}
+                </select>
+                <input name="get_involved_link_url" class="highlight-external-link {{#isnt get_involved_link_type 'external' }}hide{{/isnt}}" type="text" placeholder="http://" data-attr="get_involved_link_url" value="{{#is get_involved_link_type 'external' }}{{get_involved_link_url}}{{/is}}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

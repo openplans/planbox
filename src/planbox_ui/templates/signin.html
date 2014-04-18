@@ -2,26 +2,31 @@
 
 {% block main %}
 
-<p style="margin:0 0 -1.25em;padding:0.5em 1em 0"><a href="/" style="text-decoration:none;">&#8592; <small>Plan In A Box</small></a></p>
-
 <section class="main">
-  <div class="container">
-    {% if form.non_field_errors %}
-    <div class="alert alert-error"><strong>{{ form.non_field_errors.as_text|slice:"2:" }}</strong></div>
-    {% endif %}
-
-    <h3>Sign In</h3>
-    <form method="POST">
-      {% csrf_token %}
-      <p><input required type="text" name="username" id="my-username" class="input-block" placeholder="Username" pattern="[A-Za-z0-9-_]{1,30}" max="30" tabindex="1"> <label for="my-username" class="float-label"><strong>Username</strong></label></p>
-      <p><input required type="password" name="password" id="my-password" class="input-block" placeholder="Password" max="30" tabindex="2"><label for="my-password" class="float-label"><strong>Password</strong></label></p>
-      <p style="margin:0 0 -1.25em;padding:1em 1em 0;float:right;z-index:100;"><small>Forgot your password? <a href="{% url 'password-reset-request' %}" style="text-decoration:none;">Request a reset &#8594;</a></small></p>
-      <p><input type="submit" value="Sign In" class="btn btn-large" tabindex="3"></p>
-
-      {% if next_url %}
-      <input type="hidden" name="next" value="{{ next_url }}">
+  <div class="row">
+    <div class="small-12 medium-10 medium-centered large-8 columns">
+      {% if form.non_field_errors %}
+      <div class="alert-box alert"><strong>{{ form.non_field_errors.as_text|slice:"2:" }}</strong></div>
       {% endif %}
-    </form>
+
+      <h3 class="page-header">Sign In</h3>
+
+      <form method="POST" class="panel">
+        {% csrf_token %}
+        <p class="float-label-container"><input required type="text" name="username" id="my-username" class="float-label-input" placeholder="Username" pattern="[A-Za-z0-9-_]{1,30}" max="30" tabindex="1"> <label for="my-username" class="float-label">Username</label></p>
+        <p class="float-label-container"><input required type="password" name="password" id="my-password" class="float-label-input" placeholder="Password" max="30" tabindex="2"><label for="my-password" class="float-label">Password</label></p>
+        <p style="margin:0 0 -1.25em;padding:1em 1em 0;float:right;z-index:100;"><small>Forgot your password? <a href="{% url 'password-reset-request' %}" style="text-decoration:none;">Request a reset &#8594;</a></small></p>
+
+        <p><input type="submit" value="Sign In" class="button radius" tabindex="3"></p>
+
+        {% if next_url %}
+        <input type="hidden" name="next" value="{{ next_url }}">
+        {% endif %}
+      </form>
+
+      <br>
+
+    </div>
   </div>
 </section>
 

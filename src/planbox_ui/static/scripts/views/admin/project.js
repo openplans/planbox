@@ -13,11 +13,25 @@ var Planbox = Planbox || {};
   // Admin ====================================================================
 
   NS.showErrorModal = function(title, subtitle, description) {
-    NS.app.overlayRegion.show(new NS.ModalView({
+    NS.app.modalRegion.show(new NS.ModalView({
       model: new Backbone.Model({
         title: title,
         subtitle: subtitle,
         description: description
+      })
+    }));
+  };
+
+  NS.showProjectSetupDoneModal = function(project) {
+    NS.app.modalRegion.show(new NS.ModalView({
+      model: new Backbone.Model({
+        title: 'Done!',
+        subtitle: 'Your project has been created.',
+        description: 'We\'ve arranged all the information you entered into ' +
+          'an easy-to-read page. Want to change or update the text? Click ' +
+          'anywhere in the page to edit. Customize it further with a header ' +
+          'image and your logo. Pick a theme to style it. Once you\'re ' +
+          'happy, click publish to share your page online.'
       })
     }));
   };
@@ -65,7 +79,10 @@ var Planbox = Planbox || {};
 
   NS.ProjectAdminModalView = Backbone.Marionette.ItemView.extend({
     template: '#project-admin-modal-tpl',
-    className: 'overlay',
+    className: 'reveal-modal medium',
+    attributes: {
+      'data-reveal': ''
+    },
     ui: {
       closeBtn: '.btn-close',
       publishBtn: '.btn-public',
@@ -91,13 +108,21 @@ var Planbox = Planbox || {};
         silent: true,
 
         success: function() {
-          self.ui.makePublicContent.addClass('is-hidden');
-          self.ui.shareContent.removeClass('is-hidden');
+          self.ui.makePublicContent.addClass('hide');
+          self.ui.shareContent.removeClass('hide');
         },
         error: function(model, resp) {
           NS.showProjectSaveErrorModal(resp);
         }
       });
+    },
+    onShow: function() {
+      // This is gross. We should encourage Foundation to fix this.
+      this.$el.foundation().foundation('reveal', 'open');
+    },
+    onClose: function() {
+      // This is gross. We should encourage Foundation to fix this.
+      this.$el.foundation().foundation('reveal', 'close');
     }
   });
 
@@ -132,7 +157,7 @@ var Planbox = Planbox || {};
         customDomainMessageBtn: '.custom-domain-message-btn',
         userMenuLink: '.user-menu-link',
         userMenu: '.user-menu',
-        editableNavMenuLinks: '.project-nav a[contenteditable]',
+        editableNavMenuLinks: '.sub-nav a[contenteditable]',
         publishBtn: '.btn-public',
         imageHolders: '.image-holder',
         imageDropZones: '.image-dnd',
@@ -198,7 +223,6 @@ var Planbox = Planbox || {};
         this.initDropZones();
         this.showRegions();
       },
-
       setImageOnContainer: function($el, url) {
         $el.addClass('has-image');
         if ($el.hasClass('image-as-background')) {
@@ -324,10 +348,10 @@ var Planbox = Planbox || {};
         this.model.set(linkTypeModelProp, linkType);
 
         if (linkType === 'external') {
-          $externalLinkInput.removeClass('is-hidden');
+          $externalLinkInput.removeClass('hide');
           this.model.set($target.attr('name'), $externalLinkInput.val());
         } else {
-          $externalLinkInput.addClass('is-hidden');
+          $externalLinkInput.addClass('hide');
           this.model.set($target.attr('name'), $selected.val());
         }
       },
@@ -404,25 +428,10 @@ var Planbox = Planbox || {};
           // and it causes the save button to enable after saving a new project
           silent: true,
           success: function(model) {
-            var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
-
-            if (window.location.pathname !== path) {
-              if (Modernizr.history) {
-                window.history.pushState('', '', path);
-              } else {
-                window.location = path;
-              }
-            }
-
-            if (makePublic || !model.get('public')) {
-              // Show the modal if we're publishing this right now
-              NS.app.overlayRegion.show(new NS.ProjectAdminModalView({
-                model: model
-              }));
-            }
+            self.onSaveSuccess(model, makePublic);
           },
           error: function(model, resp) {
-            NS.showProjectSaveErrorModal(resp);
+            self.onSaveError(model, resp);
           }
         });
       },
@@ -431,7 +440,7 @@ var Planbox = Planbox || {};
         var self = this,
             $target = $(evt.target);
 
-        if (!$target.hasClass('btn-disabled')) {
+        if (!$target.hasClass('disabled')) {
           this.save();
         }
       },
@@ -447,9 +456,214 @@ var Planbox = Planbox || {};
         evt.preventDefault();
         this.ui.userMenu.toggleClass('is-open');
       },
+      onSaveSuccess: function(model, makePublic) {
+        var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
+
+        if (window.location.pathname !== path) {
+          if (Modernizr.history) {
+            window.history.pushState('', '', path);
+          } else {
+            window.location = path;
+          }
+        }
+
+        if (makePublic || !model.get('public')) {
+          // Show the modal if we're publishing this right now
+          NS.app.modalRegion.show(new NS.ProjectAdminModalView({
+            model: model
+          }));
+        }
+      },
+      onSaveError: function(model, resp) {
+        NS.showProjectSaveErrorModal(resp);
+      },
       dataChanged: function() {
         // Show the save button
-        this.ui.saveBtn.removeClass('btn-disabled');
+        this.ui.saveBtn.removeClass('disabled');
+      }
+    })
+  );
+
+  // == Project Setup ========================================================
+  NS.ProjectSetupView = NS.ProjectAdminView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
+      template: '#project-setup-tpl',
+
+      regions: {
+        descriptionRegion: '.project-description-region',
+        timelineRegion: '.project-timeline-region',
+        highlightsRegion: '.project-highlights-region'
+      },
+      ui: {
+        editables: '[contenteditable]:not(#section-list [contenteditable])',
+        nextBtn: '.next-step-button',
+        saveBtn: '.finish-button',
+        closeBtn: '.view-project-button'
+      },
+      events: {
+        'blur @ui.editables': 'handleEditableBlur',
+        'click @ui.nextBtn': 'handleNext',
+        'click @ui.saveBtn': 'handleSave',
+        'click @ui.closeBtn': 'handleClose'
+      },
+
+      initialize: function() {
+        NS.ProjectAdminView.prototype.initialize.call(this);
+
+        // Add an empty event to the timeline
+        this.model.get('events').add({});
+      },
+      gotoStep: function(tab) {
+        var $tab = this.$(tab);
+        $tab.find('a').click();
+      },
+      handleClose: function(evt) {
+        evt.preventDefault();
+        this.close();
+      },
+      handleNext: function(evt) {
+        var activeTab, nextTab;
+        evt.preventDefault();
+
+        // Get the currently active tab
+        activeTab = this.$('.tabs .active');
+
+        // Click the link in the next tab (a bit of a hack, but it works)
+        nextTab = activeTab.next();
+        if (nextTab.length > 0) {
+          this.gotoStep(nextTab);
+        }
+      },
+      onShow: function() {
+        window.projectModel = this.model;
+      },
+      onRender: function() {
+        var timeline = this.model.get('sections').find(function(section) { return section.get('type') === 'timeline'; }),
+            events = this.model.get('events');
+
+        this.descriptionRegion.show(new NS.StructuredProjectDescriptionView({model: this.model, parent: this}));
+        this.timelineRegion.show(new NS.TimelineSectionAdminView({model: timeline, collection: events, parent: this}));
+        this.highlightsRegion.show(new NS.ProjectHighlightsAdminView({model: this.model, parent: this}));
+      },
+      onSaveSuccess: function(model, makePublic) {
+        var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
+
+        if (window.location.pathname !== path) {
+          if (Modernizr.history) {
+            window.history.pushState('', '', path);
+          } else {
+            window.location = path;
+          }
+        }
+
+        if (makePublic || !model.get('public')) {
+          // NS.app.modalRegion.show(new NS.ProjectSetupDoneModalView({
+          //   model: model
+          // }));
+
+          NS.app.mainRegion.show(new NS.ProjectAdminView({
+            model: this.model,
+            collection: this.collection
+          }));
+
+          NS.showProjectSetupDoneModal(this.model);
+        }
+      },
+      onSaveError: function(model, resp) {
+        NS.showProjectSaveErrorModal(resp);
+        if (resp.responseJSON) {
+          if ('title' in resp.responseJSON) {
+            this.gotoStep('.tabs .title-step');
+          } else if ('events' in resp.responseJSON) {
+            this.gotoStep('.tabs .timeline-step');
+          }
+        }
+      },
+      dataChanged: function() {}
+    })
+  );
+
+  NS.StructuredProjectDescriptionView = Backbone.Marionette.ItemView.extend({
+    template: '#project-admin-description-pieces-tpl',
+    ui: {
+      pieces: '.project-description-piece'
+    },
+    events: {
+      'blur @ui.pieces': 'handlePieceBlur'
+    },
+    handlePieceBlur: function(evt) {
+      var description = '';
+      evt.preventDefault();
+
+      // Assuming the pieces are arranged in the order they should appear in
+      // (which may be a wrong assumption), join them together.
+      this.ui.pieces.each(function(i, piece) {
+        var $piece = $(piece),
+            value = $piece.val().trim(), //.replace(/^<br>|<br>$/g, ''),
+            heading = $piece.attr('data-heading');
+
+        if (value) {
+          if (description) { description += '<br><br>'; }
+          value = NS.Utils.htmlEscape(value).replace(/\n/g, '<br>');
+          description += '<strong>' + heading + '</strong><br>' + value;
+        }
+      });
+
+      console.log('set description:', description);
+      this.model.set('description', description);
+    }
+  });
+
+  NS.ProjectHighlightsAdminView = Backbone.Marionette.ItemView.extend(
+    _.extend({}, NS.ContentEditableMixin, {
+      template: '#project-admin-highlights-tpl',
+      ui: {
+        hightlightLinkSelector: '.highlight-link-selector',
+        hightlightExternalLink: '.highlight-external-link'
+      },
+      events: {
+        'change @ui.hightlightLinkSelector': 'handleHighlightLinkChange',
+        'blur @ui.hightlightExternalLink': 'handleHighlightExternalLinkBlur'
+      },
+
+      initialize: function() {
+        var self = this;
+        self.model.get('events').on('change', function() {
+          self.render();
+        });
+      },
+
+      handleHighlightLinkChange: function(evt) {
+        evt.preventDefault();
+
+        var $target = $(evt.currentTarget),
+            $selected = $target.find('option:selected'),
+            $externalLinkInput = $target.siblings('.highlight-external-link'),
+            linkType = $selected.attr('data-link-type'),
+            linkTypeModelProp = $target.attr('data-link-type-name');
+
+        // Handle external link  visibility
+        this.model.set(linkTypeModelProp, linkType);
+
+        if (linkType === 'external') {
+          $externalLinkInput.removeClass('hide');
+          this.model.set($target.attr('name'), $externalLinkInput.val());
+        } else {
+          $externalLinkInput.addClass('hide');
+          this.model.set($target.attr('name'), $selected.val());
+        }
+      },
+
+      handleHighlightExternalLinkBlur: function(evt) {
+        var $target = $(evt.currentTarget),
+            attr = $target.attr('data-attr'),
+            val = $target.val();
+
+        evt.preventDefault();
+
+        // Set the value of what was just blurred. Setting an event to the same
+        // value does not trigger a change event.
+        this.model.set(attr, val);
       }
     })
   );

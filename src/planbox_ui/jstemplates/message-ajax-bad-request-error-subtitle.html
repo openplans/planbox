@@ -2,7 +2,13 @@
 You forgot to give your project a title.
 {{^}}
   {{#if errors.events}}
-  You forgot to give an event a title.
+    {{#withFirst errors.events }}
+      {{#has_key . 'attachments'}}
+        You forgot to give an event attachment a title.
+      {{else}}
+        You forgot to give an event a title.
+      {{/has_key}}
+    {{/withFirst}}
   {{^}}
   Something's not right...
   {{/if}}

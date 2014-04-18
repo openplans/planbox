@@ -30,6 +30,10 @@ var Planbox = Planbox || {};
     },
     onRender: function() {
       this.showRegions();
+    },
+    onDomRefresh: function() {
+      // The dom changed. Make sure that any Foundation plugins are init'd.
+      $(document).foundation();
     }
   });
 

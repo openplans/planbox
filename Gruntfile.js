@@ -277,12 +277,12 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-          '<%= yeoman.app %>/styles/style.min.css': [
-            '<%= yeoman.app %>/bower_components/normalize-css/normalize.css',
-            '<%= yeoman.app %>/styles/style.css'
+          '<%= yeoman.app %>/styles/base.min.css': [
+            '<%= yeoman.app %>/bower_components/foundation/css/normalize.css',
+            '<%= yeoman.app %>/bower_components/foundation/css/foundation.css'
           ],
-          '<%= yeoman.app %>/styles/print.min.css': [
-            '<%= yeoman.app %>/styles/print.css'
+          '<%= yeoman.app %>/styles/style.min.css': [
+            '<%= yeoman.app %>/styles/style.css'
           ],
           '<%= yeoman.app %>/styles/admin.min.css': [
             '<%= yeoman.app %>/styles/admin.css',
@@ -298,8 +298,11 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
+          '<%= yeoman.app %>/scripts/components-base.min.js': [
+            '<%= yeoman.app %>/bower_components/jquery/dist/jquery.js',
+            '<%= yeoman.app %>/bower_components/foundation/js/foundation.min.js'
+          ],
           '<%= yeoman.app %>/scripts/components.min.js': [
-            '<%= yeoman.app %>/bower_components/jquery/jquery.js',
             '<%= yeoman.app %>/bower_components/handlebars/handlebars.js',
             '<%= yeoman.app %>/bower_components/underscore/underscore.js',
             '<%= yeoman.app %>/bower_components/backbone/backbone.js',

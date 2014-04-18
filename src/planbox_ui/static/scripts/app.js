@@ -21,7 +21,7 @@ var Planbox = Planbox || {};
 
   NS.app.addRegions({
     mainRegion: '#page',
-    overlayRegion: '#overlay-container'
+    modalRegion: '#modal-container'
   });
 
   NS.app.addInitializer(function(options){
@@ -32,9 +32,14 @@ var Planbox = Planbox || {};
     }
 
     projectModel = new NS.ProjectModel(NS.Data.project);
-    ProjectView = NS.Data.isEditable ? NS.ProjectAdminView : NS.ProjectView;
 
-    window.projectModel = projectModel;
+    if (!NS.Data.isEditable) {
+      ProjectView = NS.ProjectView;
+    } else if (projectModel.isNew()) {
+      ProjectView = NS.ProjectSetupView;
+    } else {
+      ProjectView = NS.ProjectAdminView;
+    }
 
     NS.app.mainRegion.show(new ProjectView({
       model: projectModel,
@@ -42,7 +47,8 @@ var Planbox = Planbox || {};
     }));
 
     if (window.location.pathname.indexOf('/new/') !== -1 && NS.Data.isEditable) {
-      NS.app.overlayRegion.show(new NS.WelcomeModalView());
+      // NS.showProjectSetupModal(projectModel);
+      // NS.app.overlayRegion.show(new NS.WelcomeModalView());
     }
   });
 
