@@ -34,6 +34,9 @@ h1, h2, h3, h4, h5, h6,
 h3, .h3 { font-weight: 400; }
 h4, .h4 { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-weight: 500; }
 
+.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6, .panel p {
+  color: inherit;
+}
 
 .page-header {
   margin-top: 2rem;
