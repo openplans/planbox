@@ -55,7 +55,7 @@ var Planbox = Planbox || {};
   });
 
   NS.SectionModel = Backbone.RelationalModel.extend({
-    baseAttrs: ['details', 'id', 'created_at', 'updated_at', 'type', 'label', 'menu_label', 'slug'],
+    baseAttrs: ['details', 'id', 'created_at', 'updated_at', 'type', 'label', 'menu_label', 'slug', 'active'],
 
     set: function(key, val, options) {
       /*

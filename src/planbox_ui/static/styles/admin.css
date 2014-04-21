@@ -76,7 +76,7 @@
 
 
 
-/* =Sortable UI 
+/* =Sortable UI
 -------------------------------------------------------------- */
 
 .ui-sortable > li, .event, .faq {
@@ -489,6 +489,30 @@ li.attachment {
   display: none;
 }
 
+/* =Sections
+-------------------------------------------------------------- */
+.section-inactive-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1001;
+}
+
+.active .section-inactive-overlay {
+  display: none;
+}
+
+.section-activation-toggle {
+  z-index: 1002;
+}
+
+/* =Shareabouts
+-------------------------------------------------------------- */
+.map {
+  height: 300px;
+}
+
 
 /* =Highlights
 -------------------------------------------------------------- */
@@ -537,7 +561,7 @@ li.attachment {
 }
 
 .tabs.progress-tabs .step {
-  position: relative;  
+  position: relative;
   margin: 0 1.5rem 0 0;
 }
 .tabs.progress-tabs a {
@@ -592,7 +616,7 @@ li.attachment {
 }
 
 
-/* =Print Poster 
+/* =Print Poster
 -------------------------------------------------------------- */
 
 @media print {

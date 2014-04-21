@@ -1,6 +1,20 @@
 <span data-magellan-destination="section-{{ slug }}" id="section-{{ slug }}" class="section-anchor"></span>
+
+<div class="section-inactive-overlay"></div>
+
 <div class="row container">
   <div class="small-12 columns">
+
+    <div class="switch small small-3 medium-2 large-1 right section-activation-toggle">
+      <input name="active" type="radio" value="" {{^if active}}checked{{/if}}>
+      <label>Inactive</label>
+
+      <input name="active" type="radio" value="on" {{#if active}}checked{{/if}}>
+      <label>Active</label>
+
+      <span></span>
+    </div>
+
     <div class="float-label-container">
       <div class="h3 project-shareabouts-label content-editable float-label-input" data-attr="label" contenteditable>{{{ label }}}</div>
       <span class="float-label">Shareabouts Map Header</span>
@@ -13,7 +27,7 @@
         Zoom and center the map to your preferred default location.
       </div>
 
-      <div class="map" style="height: 300px;"></div>
+      <div class="map"></div>
     </div>
   </div>
 </div>

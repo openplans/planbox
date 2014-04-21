@@ -282,18 +282,19 @@ var Planbox = Planbox || {};
   );
 
   NS.ShareaboutsSectionAdminView = Backbone.Marionette.ItemView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
+    _.extend({}, NS.ContentEditableMixin, NS.SectionAdminMixin, {
       template: '#shareabouts-section-admin-tpl',
       tagName: 'section',
-      className: 'project-shareabouts',
 
       ui: {
         editables: '[contenteditable]',
         richEditables: '.project-shareabouts-description',
+        activeToggle: '[name="active"]',
         map: '.map'
       },
       events: {
-        'blur @ui.editables': 'handleEditableBlur'
+        'blur @ui.editables': 'handleEditableBlur',
+        'change @ui.activeToggle': 'handleActivationChange'
       },
 
       onShow: function() {
