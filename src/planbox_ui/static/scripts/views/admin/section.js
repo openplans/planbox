@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Handlebars Modernizr _ Pen FileAPI chrono */
+/*globals Backbone jQuery Handlebars Modernizr _ Pen FileAPI chrono L */
 
 var Planbox = Planbox || {};
 
@@ -311,12 +311,15 @@ var Planbox = Planbox || {};
 
       handleMapMoveEnd: function() {
         var center = this.map.getCenter(),
-            zoom = this.map.getZoom();
+            zoom = this.map.getZoom(),
+            mapOptions = _.defaults({
+                center: [center.lat, center.lng],
+                zoom: zoom
+              },
+              this.model.get('details').map
+            );
 
-        this.model.set('map', {
-          center: [center.lat, center.lng],
-          zoom: zoom
-        });
+        this.model.set('map', mapOptions);
       },
     })
   );
