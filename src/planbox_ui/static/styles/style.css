@@ -38,6 +38,9 @@ h4, .h4 { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-weig
   color: inherit;
 }
 
+.small-big-paragraph { font-size: 1.25rem; }
+.small-small-paragraph { font-size: 0.75rem; }
+
 .page-header {
   margin-top: 2rem;
 }
@@ -66,6 +69,11 @@ h4, .h4 { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-weig
   font-weight: 700;
   margin: -0.25em 0 0.25em;
 /*  opacity: 0.7;*/
+}
+
+.vcard .email .button {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 
@@ -114,6 +122,12 @@ section, footer {
   /* prevent overflowing float-labels from being overlapped by previous sections */
   position: relative;
   z-index: 10;
+}
+
+.offset-anchor {
+  display: block;
+  position: absolute;
+  top: -65px;
 }
 
 /* OpenPlans Top Bar */
@@ -399,6 +413,40 @@ select {
 }
 
 
+/* =About Page
+-------------------------------------------------------------- */
+
+.team-section {
+  margin-top: 2rem;
+  padding: 2rem 0;
+  background-color: #ccc;
+}
+.team-section a {
+}
+.team-section a:hover, 
+.team-section a:focus {
+}
+img.avatar {
+  display: block;
+  padding-right: 0.9375rem;
+}
+.clients-section {
+  padding: 2rem 0;
+  background-color: #ddd;
+}
+.clients-list {
+  text-align: center;
+}
+.clients-list img {
+  display: block;
+  margin: 0.9375rem auto;
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+}
+
+
 /* =Projects
 -------------------------------------------------------------- */
 
@@ -608,6 +656,9 @@ select {
   h3, .h3 { font-size: 1.6875rem; }
   h4, .h4 { font-size: 1.4375rem; }
 
+  .medium-big-paragraph { font-size: 1.25rem; }
+  .medium-small-paragraph { font-size: 0.75rem; }
+
   .demo-image {
     -webkit-transition: -webkit-transform .2s ease;
             -ms-transition: -ms-transform .2s ease;
@@ -678,6 +729,20 @@ select {
     float: none;
     width: auto;
   }
+
+  #get-started h4 {
+    line-height: 2.25em;
+  }
+  #get-started input,
+  #get-started button {
+    height: 2.75em;
+    font-size: 1.25em;
+    line-height: 2.75em;
+    padding-left: 0.5em;
+  }
+
+  .large-big-paragraph  { font-size: 1.25rem; }
+  .large-small-paragraph { font-size: 0.75rem; }
 
 }
 
