@@ -34,11 +34,11 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   min-width: 4em;
 }
-.project-timeline a {
+.project-section-timeline a {
   color: #ACD8E6;
 }
-.project-timeline a:hover,
-.project-timeline a:focus {
+.project-section-timeline a:hover,
+.project-section-timeline a:focus {
   color: #B6E4F2;
 }
 .float-label-input:focus a {
@@ -269,12 +269,12 @@ select {
 }
 
 /* Project Timeline */
-.project-timeline {
+.project-section-timeline {
   background-color: #888;
   color: #fff;
   padding-top: 0.9375rem;
 }
-.project-timeline .section-header {
+.project-section-timeline .section-header {
   background-color: #eee;
   color: #444;
 }

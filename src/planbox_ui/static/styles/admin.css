@@ -528,10 +528,10 @@ li.attachment {
 -------------------------------------------------------------- */
 
 .walkthrough {}
-.walkthrough .project-timeline {
+.walkthrough .project-section-timeline {
   background-color: inherit;
 }
-.walkthrough .project-timeline .section-header {
+.walkthrough .project-section-timeline .section-header {
   display: none;
 }
 
@@ -630,15 +630,15 @@ li.attachment {
   .status-selector,
   .software-help-link,
   .event-list + br,
-  .project-faqs,
+  .project-section-faqs,
   .hide-for-print,
   .is-hidden,
   .remove-logo-btn-container,
   .image-dnd,
   .project-menu-container,
   .highlight,
-  .project-timeline .section-header,
-  .project-text,
+  .project-section-timeline .section-header,
+  .project-section-text,
   .project-faq,
   .calendar-icon,
   .logo {
@@ -710,7 +710,7 @@ li.attachment {
     font-size: 2em;
     margin-bottom: 0.5em;
   }
-  .project-timeline {
+  .project-section-timeline {
     padding: 1em;
     padding-top: 0;
   }
@@ -732,7 +732,7 @@ li.attachment {
     padding-top: 0;
   }
 
-  .project-timeline,
+  .project-section-timeline,
   .project-location {
     float: left;
     width: 70%;

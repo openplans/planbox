@@ -235,10 +235,9 @@ var Planbox = Planbox || {};
   );
 
   NS.TimelineSectionAdminView = NS.SortableListAdminView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
+    _.extend({}, NS.ContentEditableMixin, NS.SectionAdminMixin, {
       template: '#timeline-section-admin-tpl',
       tagName: 'section',
-      className: 'project-timeline',
 
       itemView: NS.EventAdminView,
       itemViewContainer: '.event-list',
@@ -247,11 +246,13 @@ var Planbox = Planbox || {};
         editables: '[contenteditable]:not(.event [contenteditable])',
         itemList: '.event-list',
         newItemFocus: '.event-title:last',
-        addBtn: '.add-event-btn'
+        addBtn: '.add-event-btn',
+        activeToggle: '.active-toggle'
       },
       events: {
         'click @ui.addBtn': 'handleAddClick',
-        'blur @ui.editables': 'handleEditableBlur'
+        'blur @ui.editables': 'handleEditableBlur',
+        'change @ui.activeToggle': 'handleActivationChange'
       },
       onRender: function() {
         // We need to do this since SortableListAdminView and ContentEditableMixin
@@ -266,17 +267,18 @@ var Planbox = Planbox || {};
   );
 
   NS.TextSectionAdminView = Backbone.Marionette.ItemView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
+    _.extend({}, NS.ContentEditableMixin, NS.SectionAdminMixin, {
       template: '#text-section-admin-tpl',
       tagName: 'section',
-      className: 'project-text',
 
       ui: {
         editables: '[contenteditable]',
-        richEditables: '.project-text-content'
+        richEditables: '.project-text-content',
+        activeToggle: '.active-toggle'
       },
       events: {
-        'blur @ui.editables': 'handleEditableBlur'
+        'blur @ui.editables': 'handleEditableBlur',
+        'change @ui.activeToggle': 'handleActivationChange'
       }
     })
   );
@@ -289,7 +291,7 @@ var Planbox = Planbox || {};
       ui: {
         editables: '[contenteditable]',
         richEditables: '.project-shareabouts-description',
-        activeToggle: '[name="active"]',
+        activeToggle: '.active-toggle',
         map: '.map'
       },
       events: {
@@ -344,10 +346,9 @@ var Planbox = Planbox || {};
   );
 
   NS.FaqsSectionAdminView = NS.SortableListAdminView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
+    _.extend({}, NS.ContentEditableMixin, NS.SectionAdminMixin, {
       template: '#faqs-section-admin-tpl',
       tagName: 'section',
-      className: 'project-faqs',
 
       itemView: NS.FaqAdminView,
       itemViewContainer: '.faq-list',
@@ -356,11 +357,13 @@ var Planbox = Planbox || {};
         editables: '[contenteditable]:not(.faq [contenteditable])',
         itemList: '.faq-list',
         newItemFocus: '.faq-question:last',
-        addBtn: '.add-faq-btn'
+        addBtn: '.add-faq-btn',
+        activeToggle: '.active-toggle'
       },
       events: {
         'click @ui.addBtn': 'handleAddClick',
-        'blur @ui.editables': 'handleEditableBlur'
+        'blur @ui.editables': 'handleEditableBlur',
+        'change @ui.activeToggle': 'handleActivationChange'
       },
       onRender: function() {
         // We need to do this since SortableListAdminView and ContentEditableMixin

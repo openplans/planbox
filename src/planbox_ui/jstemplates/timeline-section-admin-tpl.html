@@ -1,4 +1,7 @@
 <span data-magellan-destination="section-{{ slug }}" id="section-{{ slug }}" class="section-anchor"></span>
+
+<div class="section-inactive-overlay"></div>
+
 <div class="row">
   {{^if_fileapi_support 'cors'}}
   <div class="small-12 columns">
@@ -8,6 +11,9 @@
   </div>
   {{/if_fileapi_support}}
   <div class="small-12 columns">
+
+    {{> activation-toggle-tpl }}
+
     <header class="section-header">
       <div class="float-label-container">
         <div class="h2 project-timeline-label content-editable float-label-input" data-attr="label" contenteditable>{{{ label }}}</div>

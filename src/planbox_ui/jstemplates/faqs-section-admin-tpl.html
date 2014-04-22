@@ -1,6 +1,12 @@
 <span data-magellan-destination="section-{{ slug }}" id="section-{{ slug }}" class="section-anchor"></span>
+
+<div class="section-inactive-overlay"></div>
+
 <div class="row container">
   <div class="small-12 columns">
+
+    {{> activation-toggle-tpl }}
+
     <div class="float-label-container">
       <div class="h3 project-faqs-label content-editable float-label-input" data-attr="label" contenteditable>{{{ label }}}</div>
       <span class="float-label">FAQ Section Header</span>
