@@ -18,5 +18,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/v1/', include(planbox_data.urls)),
     url(r'^generate-error$', generate_error),
+    url(r'^shareabouts/create-dataset$', 'shareabouts_integration.views.create_dataset'),
     url(r'^', include(planbox_ui.urls)),
 )
