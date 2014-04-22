@@ -25,6 +25,25 @@ var Planbox = Planbox || {};
     return (object[key] ? options.fn(this) : options.inverse(this));
   });
 
+  Handlebars.registerHelper('each_active_section', function(sections, options) {
+    var result = '',
+        context = this;
+
+    _.each(sections, function(section) {
+      if (section.active) {
+        result += options.fn(_.extend(context, section));
+      }
+    });
+
+    return result;
+  });
+
+  Handlebars.registerHelper('gte_active_section_length', function(sections, len, options) {
+    var activeLength = _.filter(sections, function(s){ return s.active; }).length;
+    return (activeLength >= len ? options.fn(this) : options.inverse(this));
+  });
+
+
   Handlebars.registerHelper('contact_email', function() {
     return NS.Data.contactEmail;
   });
