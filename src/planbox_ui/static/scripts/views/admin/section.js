@@ -324,6 +324,44 @@ var Planbox = Planbox || {};
 
         this.model.set('map', mapOptions);
       },
+
+      handleActivationChange: function(evt) {
+        evt.preventDefault();
+        var self = this,
+            $target = $(evt.currentTarget),
+            isActive = !!$target.val();
+
+        if (this.model.get('details').dataset_url || isActive === false) {
+          NS.SectionAdminMixin.handleActivationChange.call(self, evt);
+        } else {
+          // Create the dataset and set the dataset url on the section model
+          $.ajax({
+            url: '/shareabouts/create-dataset',
+            type: 'POST',
+            data: {
+              dataset_slug: NS.Data.user.username + '-' + NS.Data.project.slug
+            },
+            success: function(data) {
+              console.log('yay', arguments);
+
+              self.model.set('dataset_url', data.url);
+              NS.SectionAdminMixin.handleActivationChange.call(self, evt);
+            },
+            error: function(xhr, status, error) {
+              var name = $target.attr('name'),
+                  inactiveRadio = $('[name="'+name+'"][value=""]');
+
+              inactiveRadio.prop('checked', true);
+
+              NS.showErrorModal('Unable to activate Shareabouts',
+                'There was a temporary problem while we were setting up your ' +
+                'Shareabouts map.',
+                'We\'ve been notified and will investigate it right away. ' +
+                'This is likely a temporary issue so please try again shortly.');
+            }
+          });
+        }
+      }
     })
   );
 
