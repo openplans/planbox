@@ -60,7 +60,6 @@ Plan In A Box
           </ul>
         </li>
         {% if user.is_authenticated %}
-        <li><a href="/help" class="software-help-link">Help &amp; Feedback</a></li>
         <li class="active has-dropdown">
           <a href="/{{ user.username }}/new/">{{ user.username }}</a>
           <ul class="dropdown">
