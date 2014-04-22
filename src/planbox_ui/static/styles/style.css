@@ -447,6 +447,19 @@ img.avatar {
 }
 
 
+/* =Shareabouts Page
+-------------------------------------------------------------- */
+
+.shareabouts-instances .img {
+  margin-right: -110px;
+  width: 100px;
+  height: 100px;
+}
+.shareabouts-instances .description {
+  margin-left: 110px ;
+}
+
+
 /* =Projects
 -------------------------------------------------------------- */
 
