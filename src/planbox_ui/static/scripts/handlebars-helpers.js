@@ -1,4 +1,4 @@
-/*globals Handlebars _ jQuery FileAPI */
+/*globals Handlebars _ jQuery FileAPI moment */
 
 var Planbox = Planbox || {};
 
@@ -109,6 +109,23 @@ var Planbox = Planbox || {};
     }
 
     return $el.html();
+  });
+
+
+  // Date and time ------------------------------------------------------------
+
+  Handlebars.registerHelper('formatdatetime', function(datetime, format) {
+    if (datetime) {
+      return moment(datetime).format(format);
+    }
+    return datetime;
+  });
+
+  Handlebars.registerHelper('fromnow', function(datetime) {
+    if (datetime) {
+      return moment(datetime).fromNow();
+    }
+    return '';
   });
 
 
