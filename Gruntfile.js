@@ -280,7 +280,8 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/styles/base.min.css': [
             '<%= yeoman.app %>/bower_components/foundation/css/normalize.css',
             '<%= yeoman.app %>/bower_components/foundation/css/foundation.css',
-            '<%= yeoman.app %>/bower_components/leaflet-0.7.2/leaflet.css'
+            '<%= yeoman.app %>/bower_components/leaflet-0.7.2/leaflet.css',
+            '<%= yeoman.app %>/bower_components/shareabouts-js/src/styles/shareabouts.css'
           ],
           '<%= yeoman.app %>/styles/style.min.css': [
             '<%= yeoman.app %>/styles/style.css'
