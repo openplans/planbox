@@ -27,27 +27,28 @@ class Migration(DataMigration):
             orm.Project,
             owner=templates_profile,
             slug='default')
-        get_or_create(
+        section = get_or_create(
             orm.Section,
             project=default_template,
             index=0,
             type='shareabouts',
             slug='map',
             menu_label='Interactive Map',
-            label='We want to hear from you!',
-            details={
-              "description": "Give us your input on the project location. Your input will share the plan. Anyone can post an idea.",
-              "layers": [
+            label='We want to hear from you!')
+        section.details = {
+            "description": "Give us your input on the project location. Your input will share the plan. Anyone can post an idea.",
+            "layers": [
                 {
-                  "url": "http://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png"
+                    "url": "http://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png"
                 }
-              ],
-              "map": {
+            ],
+            "map": {
                 "center": [38.993572, -96.196289],  # The center of the US
                 "zoom": 4,
                 "scrollWheelZoom": False
-              }
-            })
+            }
+        }
+        section.save()
 
     def backwards(self, orm):
         "Write your backwards methods here."

@@ -4,11 +4,12 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
-def get_or_create(Model, **kwargs):
+def get_or_create(Model, commit=True, **kwargs):
     try:
         obj = Model.objects.get(**kwargs)
     except Model.DoesNotExist:
-        obj = Model.objects.create(**kwargs)
+        obj = Model(**kwargs)
+        if commit: obj.save()
     return obj
 
 
@@ -33,22 +34,26 @@ class Migration(DataMigration):
         shareabouts_section = get_or_create(
             orm.Section,
             project=default_template,
-            type='shareabouts')
+            type='shareabouts',
+            commit=False)
 
         shareabouts_section.active = False
         shareabouts_section.index = 1
         shareabouts_section.save()
 
-        get_or_create(
+        faqs_section = get_or_create(
             orm.Section,
             project=default_template,
             type='faqs',
             slug='faq',
             menu_label='FAQ',
             active=False,
-            index=2,
             label='Frequently Asked Questions',
-            details=[])
+            commit=False)
+
+        faqs_section.details = []
+        faqs_section.index = 2
+        faqs_section.save()
 
     def backwards(self, orm):
         "Write your backwards methods here."
