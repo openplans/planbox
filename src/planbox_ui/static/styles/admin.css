@@ -495,7 +495,7 @@ li.attachment {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(125,125,125,0.75);
+  background-color: rgba(238,238,238,0.75);
   z-index: 1001;
   right: 0px;
   opacity: 1;
@@ -517,6 +517,7 @@ li.attachment {
 }
 .section-activation-toggle .button-group {
   background-color: #fff;
+  color: #333;
   padding: 0.5rem;
   margin: 0 0 0.9375rem;
   border-radius: 1rem;
