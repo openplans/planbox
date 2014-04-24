@@ -97,13 +97,13 @@ var Planbox = Planbox || {};
           {
             condition: 'true',
             icon: {
-              iconUrl: 'images/dot-blue.png',
+              iconUrl: NS.bootstrapped.staticUrl + 'images/markers/dot-blue.png',
               iconSize: [18, 18],
               iconAnchor: [9, 9]
             },
             focusIcon: {
-              iconUrl: 'images/marker-blue.png',
-              shadowUrl: 'images/marker-shadow.png',
+              iconUrl: NS.bootstrapped.staticUrl + 'images/markers/marker-blue.png',
+              shadowUrl: NS.bootstrapped.staticUrl + 'images/markers/marker-shadow.png',
               iconSize: [25, 41],
               shadowSize: [41, 41],
               iconAnchor: [12, 41]
