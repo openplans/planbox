@@ -597,14 +597,17 @@ var Planbox = Planbox || {};
       // Assuming the pieces are arranged in the order they should appear in
       // (which may be a wrong assumption), join them together.
       this.ui.pieces.each(function(i, piece) {
-        if (!!description && description.slice(-1) !== '\n') {
-          description += ' ';
+        var $piece = $(piece),
+            value = $piece.val().trim(), //.replace(/^<br>|<br>$/g, ''),
+            heading = $piece.attr('data-heading');
+
+        if (value) {
+          if (description) { description += '<br><br>'; }
+          value = NS.Utils.htmlEscape(value).replace(/\n/g, '<br>');
+          description += '<strong>' + heading + '</strong><br>' + value;
         }
-        description += $(piece).val();
       });
 
-      description = NS.Utils.htmlEscape(description);
-      description = description.replace(/\n/g, '<br>');
       console.log('set description:', description);
       this.model.set('description', description);
     }

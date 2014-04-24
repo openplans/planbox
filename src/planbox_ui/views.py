@@ -178,6 +178,15 @@ class SSLRequired (object):
 class IndexView (AppMixin, TemplateView):
     template_name = 'index.html'
 
+class AboutView (AppMixin, TemplateView):
+    template_name = 'about.html'
+
+class ShareaboutsView (AppMixin, TemplateView):
+    template_name = 'shareabouts.html'
+
+class OpenSourceView (AppMixin, TemplateView):
+    template_name = 'open-source.html'
+
 
 class HelpView (AppMixin, TemplateView):
     template_name = 'help.html'
@@ -387,6 +396,10 @@ class SiteMapView (AppMixin, TemplateView):
 
 # App views
 index_view = IndexView.as_view()
+about_view = AboutView.as_view()
+shareabouts_view = ShareaboutsView.as_view()
+open_source_view = OpenSourceView.as_view()
+
 project_view = ProjectView.as_view()
 ro_project_view = ReadOnlyProjectView.as_view()
 profile_view = ProfileView.as_view()

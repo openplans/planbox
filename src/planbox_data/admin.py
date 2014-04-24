@@ -101,6 +101,12 @@ class ProjectAdmin (admin.ModelAdmin):
         return qs.select_related('owner')
 
     def _permalink(self, project):
+        if len(project.slug) == 0:
+            return '(bad project slug)'
+
+        if len(project.owner.slug) == 0:
+            return '(bad owner slug)'
+
         return format_html(
             '''<a href="{0}" target="_blank">Link &#8663</a>''',  # 8663 is the ⇗ character
             reverse('app-project', kwargs={'owner_name': project.owner.slug, 'slug': project.slug})
