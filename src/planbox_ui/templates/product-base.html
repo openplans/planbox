@@ -49,7 +49,16 @@ Plan In A Box
 
     <section class="top-bar-section">
       <ul class="right">
-        <li><a href="/help" class="software-help-link">Help &amp; Feedback</a></li>
+        <li><a href="http://blog.openplans.org/">Blog</a></li>
+        <li><a href="http://community.openplans.org/">Community</a></li>
+        <li class="has-dropdown">
+          <a href="/about/">About</a>
+          <ul class="dropdown">
+            <li><a href="/about/">About OpenPlans</a></li>
+            <li><a href="/shareabouts/">Shareabouts</a></li>
+            <li><a href="/open-source/">Open Source</a></li>
+          </ul>
+        </li>
         {% if user.is_authenticated %}
         <li class="active has-dropdown">
           <a href="/{{ user.username }}/new/">{{ user.username }}</a>
@@ -58,7 +67,7 @@ Plan In A Box
           </ul>
         </li>
         {% else %}
-        <li class="active"><a href="/signin" class="login-link user-link nobreak">Sign In</a></li>
+        <li class="active"><a href="/signin">Sign In</a></li>
         {% endif %}
       </ul>
     </section>
