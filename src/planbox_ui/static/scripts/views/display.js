@@ -110,7 +110,8 @@ var Planbox = Planbox || {};
             }
           },
         ],
-        datasetUrl: details.dataset_url + '/places'
+        datasetUrl: details.dataset_url + '/places',
+        templates: Handlebars.templates
       });
 
     }

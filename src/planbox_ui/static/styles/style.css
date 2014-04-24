@@ -151,7 +151,7 @@ section, footer {
 }
 .openplans-top-bar,
 .openplans-top-bar.contain-to-grid,
-.openplans-top-bar .top-bar, 
+.openplans-top-bar .top-bar,
 .openplans-top-bar .name {
   height: 65px;
   line-height: 65px;
@@ -427,7 +427,7 @@ select {
 }
 .team-section a {
 }
-.team-section a:hover, 
+.team-section a:hover,
 .team-section a:focus {
 }
 img.avatar {
@@ -581,7 +581,7 @@ img.avatar {
 .faq {
   margin-bottom: 0.9375rem;
   position: relative;
-  clear: left; 
+  clear: left;
 }
 .faq-question {
   position: relative;
@@ -606,7 +606,7 @@ img.avatar {
 }
 .faq-list-collapsed dd {
   display: none;
-  clear: left; 
+  clear: left;
 }
 .faq-list dt.is-selected {
   color: #555;
@@ -635,6 +635,12 @@ img.avatar {
 .project-section-shareabouts {
 }
 
+.project-shareabouts {
+  width: 100%;
+  max-width: 64.063em;
+  margin: 0 auto;
+  overflow: hidden;
+}
 
 /* =Foundation Media Queries
 -------------------------------------------------------------- */
@@ -659,7 +665,7 @@ img.avatar {
   .slogan {
     font-size: 1rem;
   }
-  
+
   .product-features {
     padding: 3rem 0 1rem;
   }
@@ -712,6 +718,10 @@ img.avatar {
             transform: scale(1.25);
   }
 
+  /* Shareabouts Section */
+  .project-shareabouts {
+    height: 350px;
+  }
 }
 
 /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
