@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Handlebars Modernizr _ Pen */
+/*globals Backbone jQuery Handlebars Modernizr _ Pen Shareabouts*/
 
 var Planbox = Planbox || {};
 
@@ -82,7 +82,38 @@ var Planbox = Planbox || {};
   NS.ShareaboutsSectionView = Backbone.Marionette.ItemView.extend({
     template: '#shareabouts-section-tpl',
     tagName: 'section',
-    className: 'project-section-shareabouts'
+    className: 'project-section-shareabouts',
+    ui: {
+      shareabouts: '.project-shareabouts'
+    },
+    onShow: function() {
+      var details = this.model.get('details');
+
+      new Shareabouts.Map({
+        el: this.ui.shareabouts,
+        map: details.map,
+        layers: details.layers,
+        placeStyles: [
+          {
+            condition: 'true',
+            icon: {
+              iconUrl: 'images/dot-blue.png',
+              iconSize: [18, 18],
+              iconAnchor: [9, 9]
+            },
+            focusIcon: {
+              iconUrl: 'images/marker-blue.png',
+              shadowUrl: 'images/marker-shadow.png',
+              iconSize: [25, 41],
+              shadowSize: [41, 41],
+              iconAnchor: [12, 41]
+            }
+          },
+        ],
+        datasetUrl: details.dataset_url + '/places'
+      });
+
+    }
   });
 
   // View =====================================================================
