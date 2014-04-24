@@ -302,7 +302,8 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.app %>/scripts/components-base.min.js': [
             '<%= yeoman.app %>/bower_components/jquery/dist/jquery.js',
-            '<%= yeoman.app %>/bower_components/foundation/js/foundation.min.js'
+            '<%= yeoman.app %>/bower_components/foundation/js/foundation.min.js',
+            '<%= yeoman.app %>/bower_components/moment/moment.js',
           ],
           '<%= yeoman.app %>/scripts/components.min.js': [
             '<%= yeoman.app %>/bower_components/handlebars/handlebars.js',
@@ -325,7 +326,6 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/django-csrf.js/django-csrf.js',
             '<%= yeoman.app %>/bower_components/pen/src/pen.js',
             '<%= yeoman.app %>/bower_components/FileAPI/dist/FileAPI.js',
-            '<%= yeoman.app %>/bower_components/moment/moment.js',
             '<%= yeoman.app %>/bower_components/chrono/chrono.min.js',
             '<%= yeoman.app %>/bower_components/pickadate/lib/picker.js',
             '<%= yeoman.app %>/bower_components/pickadate/lib/picker.date.js'
