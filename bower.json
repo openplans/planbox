@@ -5,7 +5,7 @@
     "jquery": "~2.1.0",
     "normalize-css": "~2.1.3",
     "modernizr": "~2.7.1",
-    "underscore": "~1.6.x",
+    "underscore": "~1.5",
     "backbone": "~1.1.0",
     "backbone.marionette": "~1.4.1",
     "moment": "~2.5.0",
@@ -22,7 +22,7 @@
     "pickadate": "~3.4.0",
     "foundation": "~5.2.2",
     "leaflet-0.7.2": "http://leaflet-cdn.s3.amazonaws.com/build/leaflet-0.7.2.zip",
-    "shareabouts-js": "https://github.com/openplans/shareabouts.js.git#1f46237b0afcfd4b99e1ac209881aee835f523a7"
+    "shareabouts-js": "https://github.com/openplans/shareabouts.js.git#gh-pages"
   },
   "devDependencies": {}
 }
