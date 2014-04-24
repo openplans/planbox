@@ -1,9 +1,8 @@
-    <div class="switch small small-3 medium-2 large-1 right section-activation-toggle">
-      <input name="active-{{id}}" class="active-toggle" type="radio" value="" {{^if active}}checked{{/if}}>
-      <label>Inactive</label>
-
-      <input name="active-{{id}}" class="active-toggle" type="radio" value="on" {{#if active}}checked{{/if}}>
-      <label>Active</label>
-
-      <span></span>
+    <div class="button-bar section-activation-toggle clearfix">
+      <ul class="button-group round right">
+        <li><span class="arrow-left-down">&#10553;</span> This section is: 
+          <label class="tiny button section-off">OFF<input name="active-{{id}}" class="hide active-toggle" type="radio" value="" {{^if active}}checked{{/if}}></label></li>
+        <li>
+          <label class="tiny button section-on">ON<input name="active-{{id}}" class="hide active-toggle" type="radio" value="on" {{#if active}}checked{{/if}}></label></li>
+      </ul>
     </div>

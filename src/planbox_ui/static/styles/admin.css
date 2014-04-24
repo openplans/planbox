@@ -495,17 +495,63 @@ li.attachment {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(125,125,125,0.75);
   z-index: 1001;
+  right: 0px;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s;
+          transition: opacity 0.3s;
 }
 
 .active .section-inactive-overlay {
-  display: none;
+  right: 9999px;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s, right 0 0.5s;
+          transition: opacity 0.3s, right 0 0.5s;
 }
 
+/* Section Activation */
 .section-activation-toggle {
+  position: relative;
   z-index: 1002;
 }
+.section-activation-toggle .button-group {
+  background-color: #fff;
+  padding: 0.5rem;
+  margin: 0 0 0.9375rem;
+  border-radius: 1rem;
+  cursor: default;
+}
+.section-activation-toggle .button {
+  margin-bottom: 0;
+  background-color: #ddd;
+  color: #999;
+  cursor: pointer;
+}
+.section-activation-toggle .button:hover {
+  color: #333;
+}
+.section-activation-toggle .button.section-off,
+.section-activation-toggle .button.section-off:hover  {
+  background-color: #008CBA;
+  color: #fff;
+  cursor: default;
+}
+.active .button.section-off  {
+  background-color: #ddd;
+  color: #999;
+}
+.active .button.section-off:hover  {
+  background-color: #ddd;
+  color: #333;
+  cursor: pointer;
+}
+.active .button.section-on  {
+  background-color: #008CBA;
+  color: #fff;
+  cursor: default;
+}
+
 
 /* =Shareabouts
 -------------------------------------------------------------- */
