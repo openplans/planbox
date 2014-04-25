@@ -491,7 +491,6 @@ var Planbox = Planbox || {};
 
       regions: {
         descriptionRegion: '.project-description-region',
-        timelineRegion: '.project-timeline-region',
         highlightsRegion: '.project-highlights-region'
       },
       ui: {
@@ -507,12 +506,6 @@ var Planbox = Planbox || {};
         'click @ui.closeBtn': 'handleClose'
       },
 
-      initialize: function() {
-        NS.ProjectAdminView.prototype.initialize.call(this);
-
-        // Add an empty event to the timeline
-        this.model.get('events').add({});
-      },
       gotoStep: function(tab) {
         var $tab = this.$(tab);
         $tab.find('a').click();
@@ -538,11 +531,7 @@ var Planbox = Planbox || {};
         window.projectModel = this.model;
       },
       onRender: function() {
-        var timeline = this.model.get('sections').find(function(section) { return section.get('type') === 'timeline'; }),
-            events = this.model.get('events');
-
         this.descriptionRegion.show(new NS.StructuredProjectDescriptionView({model: this.model, parent: this}));
-        this.timelineRegion.show(new NS.TimelineSectionAdminView({model: timeline, collection: events, parent: this}));
         this.highlightsRegion.show(new NS.ProjectHighlightsAdminView({model: this.model, parent: this}));
       },
       onSaveSuccess: function(model, makePublic) {
@@ -574,8 +563,6 @@ var Planbox = Planbox || {};
         if (resp.responseJSON) {
           if ('title' in resp.responseJSON) {
             this.gotoStep('.tabs .title-step');
-          } else if ('events' in resp.responseJSON) {
-            this.gotoStep('.tabs .timeline-step');
           }
         }
       },
