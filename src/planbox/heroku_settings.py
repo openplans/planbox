@@ -76,6 +76,11 @@ S3_MEDIA_BUCKET = os.environ.get('S3_MEDIA_BUCKET')
 AWS_ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY')
 AWS_SECRET_KEY = os.environ.get('AWS_SECRET_KEY')
 
+# Shareabouts integration
+SHAREABOUTS_HOST = os.environ.get('SHAREABOUTS_HOST')
+SHAREABOUTS_USERNAME = os.environ.get('SHAREABOUTS_USERNAME')
+SHAREABOUTS_PASSWORD = os.environ.get('SHAREABOUTS_PASSWORD')
+
 LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO')
 LOGGING = {
     'version': 1,
