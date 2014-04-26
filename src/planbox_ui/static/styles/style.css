@@ -642,6 +642,25 @@ img.avatar {
   overflow: hidden;
 }
 
+.shareabouts-geometry-set .form-instructions {
+  display: none;
+}
+
+/* NOTE: use these selectors to style invalid form elements on non-HTML5 browsers */
+.project-shareabouts .form-submitted input:invalid,
+.project-shareabouts .form-submitted textarea:invalid,
+.project-shareabouts .form-submitted select:invalid {
+  border: 1px solid #f04124;
+}
+
+.project-section-shareabouts .shareabouts-panel-content {
+  padding: 0 1em;
+}
+
+.shareabouts-submit-button {
+  margin-top: 0.5em;
+}
+
 /* =Foundation Media Queries
 -------------------------------------------------------------- */
 
