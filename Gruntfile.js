@@ -355,6 +355,20 @@ module.exports = function (grunt) {
 
     // Copies remaining files to places other tasks can use
     copy: {
+      shareabouts: {
+        files: [{
+          src: ['<%= yeoman.app %>/bower_components/shareabouts-js/src/images/marker-plus.png'],
+          dest: '<%= yeoman.app %>/images/marker-plus.png'
+        },
+        {
+          src: ['<%= yeoman.app %>/bower_components/shareabouts-js/src/images/marker-shadow.png'],
+          dest: '<%= yeoman.app %>/images/marker-shadow.png'
+        },
+        {
+          src: ['<%= yeoman.app %>/bower_components/shareabouts-js/src/images/marker-x.png'],
+          dest: '<%= yeoman.app %>/images/marker-x.png'
+        }]
+      },
       dist: {
         files: [{
           expand: true,
@@ -442,7 +456,7 @@ module.exports = function (grunt) {
     'concat',
     'cssmin',
     'uglify',
-    // 'copy:dist',
+    'copy:shareabouts',
     // 'rev',
     // 'usemin',
     // 'htmlmin'
