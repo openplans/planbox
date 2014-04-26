@@ -653,10 +653,6 @@ img.avatar {
   border: 1px solid #f04124;
 }
 
-.project-section-shareabouts .shareabouts-panel-content {
-  padding: 0 1em;
-}
-
 .shareabouts-submit-button {
   margin-top: 0.5em;
 }
@@ -739,7 +735,11 @@ img.avatar {
 
   /* Shareabouts Section */
   .project-shareabouts {
-    height: 350px;
+    height: 400px;
+  }
+
+  .project-section-shareabouts .shareabouts-panel-content {
+    padding: 0 1em;
   }
 }
 
