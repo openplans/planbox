@@ -11,7 +11,7 @@ admin.autodiscover()
 def generate_error(request):
     raise Exception('Successfully failed.')
 
-def redirect_to_blog(request, path):
+def redirect_to_blog(request, path=''):
     return redirect('http://blog.openplans.org/' + path, permanent=True)
 
 def redirect_to_root(request):
@@ -25,6 +25,9 @@ def redirect_to_about(request):
 
 urlpatterns = patterns('',
     # Permanently redirect old URLs to new locations.
+    url(r'^blog/?$', redirect_to_blog),
+    url(r'^(author/.*/?)$', redirect_to_blog),
+    url(r'^(category/.*/?)$', redirect_to_blog),
     url(r'^(\d{4}/\d{1,2}/.*)$', redirect_to_blog),
     url(r'^work/?$', redirect_to_root),
     url(r'^team_cpt/?$', redirect_to_team),
