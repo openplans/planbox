@@ -38,12 +38,11 @@ def create_dataset(request):
     ds_response = requests.get(dataset_url, auth=planbox_auth)
 
     if ds_response.status_code == 200:
-        # Check whether we can write to the dataset from this origin.
         if current_origin:
-            origins_response = requests.get(origins_url, auth=planbox_auth)
-
+            # Check whether the dataset  can write to the dataset from this origin.
             # TODO: Retry request if not 200
-            patterns = [origin.pattern for origin in origins_response.json()['results']]
+            origins_response = requests.get(origins_url, auth=planbox_auth)
+            patterns = [origin['pattern'] for origin in origins_response.json()['results']]
 
             # If not, then register this
             if current_origin not in patterns:

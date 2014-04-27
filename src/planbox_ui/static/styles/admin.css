@@ -503,6 +503,10 @@ li.attachment {
           transition: opacity 0.3s;
 }
 
+.project-section-timeline .section-inactive-overlay {
+  background-color: rgba(136,136,136,0.75);
+}
+
 .active .section-inactive-overlay {
   right: 9999px;
   opacity: 0;
