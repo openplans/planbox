@@ -136,7 +136,8 @@ var Planbox = Planbox || {};
     sectionViews: {
       'timeline': NS.TimelineSectionAdminView,
       'text': NS.TextSectionAdminView,
-      'faqs': NS.FaqsSectionAdminView
+      'faqs': NS.FaqsSectionAdminView,
+      'shareabouts': NS.ShareaboutsSectionAdminView
     },
     dataChanged: function() {
       this.options.parent.dataChanged();
@@ -214,8 +215,6 @@ var Planbox = Planbox || {};
           e = e || event;
           e.preventDefault();
         }, false);
-
-        this.initRegions();
       },
 
       onRender: function() {

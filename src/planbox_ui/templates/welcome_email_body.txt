@@ -2,7 +2,7 @@
 
 Hello {# user name #}.
 
-Thanks for signing up with OpenPlans. We're excited to see you create an informative project page. 
+Thanks for signing up with OpenPlans. We're excited to see you create an informative project page.
 
 Please let me know if you have any questions about getting started (you can just reply to this email). Your feedback is always welcome.
 
@@ -36,4 +36,4 @@ Looks like you've already published your project! **Give some next steps for sha
 -------------------
 If you did not sign up for this account, please let us know at hello@openplans.org.
 -------------------
-Empowered by OpenPlans, with support from Knight Foundation.
+Powered by OpenPlans, with support from Knight Foundation.

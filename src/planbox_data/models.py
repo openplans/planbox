@@ -373,6 +373,7 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, TimeStampedModel):
     SECTION_TYPE_CHOICES = (
         ('text', _('Text')),
         ('timeline', _('Timeline')),
+        ('shareabouts', _('Shareabouts')),
         ('faqs', _('FAQ'))
     )
 
@@ -381,6 +382,7 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, TimeStampedModel):
     label = models.TextField(blank=True)
     menu_label = models.TextField()
     slug = models.CharField(max_length=30)
+    active = models.BooleanField(default=True)
     details = JSONField(blank=True, default=dict)
     index = models.PositiveIntegerField(blank=True)
 

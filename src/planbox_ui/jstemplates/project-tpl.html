@@ -31,20 +31,22 @@
     </div>
 
     <div class="project-menu-container {{#gte sections.length 2}} has-project-menu{{/gte}}">
-      {{#gte sections.length 2}}
+      {{! Think of a more general solution when you have time }}
+      {{#gte_active_section_length sections 2}}
       <div data-magellan-expedition="fixed" class="project-menu">
         <div class="row container">
           <div class="small-12 columns">
             <ul class="sub-nav">
               <li data-magellan-arrival="home"><a href="#home">Home</a></li>
-              {{#each sections}}
+              {{#each_active_section sections}}
+
               <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
-              {{/each}}
+              {{/each_active_section}}
             </ul>
           </div>
         </div>
       </div>
-      {{/gte}}
+      {{/gte_active_section_length}}
     </div>
 
   </div><!-- end .site-header-content -->
@@ -112,7 +114,7 @@
     <div class="small-12 columns">
       <p class="project-contact-info">{{{ contact }}}</p>
       {{! NOTE: These URLs is hardcoded for the sake of pages with custom URLs. Should maybe be passed in as context? }}
-      <p class="powered-by text-right">{{#_}}Empowered by <a href="http://openplans.org/">OpenPlans.org</a>.{{/_}}</p>
+      <p class="powered-by text-right">{{#_}}Powered by <a href="http://openplans.org/">OpenPlans.org</a>.{{/_}}</p>
     </div>
   </div>
 </footer>
