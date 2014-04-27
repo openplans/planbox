@@ -279,7 +279,9 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.app %>/styles/base.min.css': [
             '<%= yeoman.app %>/bower_components/foundation/css/normalize.css',
-            '<%= yeoman.app %>/bower_components/foundation/css/foundation.css'
+            '<%= yeoman.app %>/bower_components/foundation/css/foundation.css',
+            '<%= yeoman.app %>/bower_components/leaflet-0.7.2/leaflet.css',
+            '<%= yeoman.app %>/bower_components/shareabouts-js/src/styles/shareabouts.css'
           ],
           '<%= yeoman.app %>/styles/style.min.css': [
             '<%= yeoman.app %>/styles/style.css'
@@ -300,7 +302,8 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.app %>/scripts/components-base.min.js': [
             '<%= yeoman.app %>/bower_components/jquery/dist/jquery.js',
-            '<%= yeoman.app %>/bower_components/foundation/js/foundation.min.js'
+            '<%= yeoman.app %>/bower_components/foundation/js/foundation.min.js',
+            '<%= yeoman.app %>/bower_components/moment/moment.js',
           ],
           '<%= yeoman.app %>/scripts/components.min.js': [
             '<%= yeoman.app %>/bower_components/handlebars/handlebars.js',
@@ -308,7 +311,12 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/backbone/backbone.js',
             '<%= yeoman.app %>/bower_components/backbone.marionette/lib/backbone.marionette.js',
             '<%= yeoman.app %>/bower_components/backbone-relational/backbone-relational.js',
-            '<%= yeoman.app %>/bower_components/swag/lib/swag.js'
+            '<%= yeoman.app %>/bower_components/swag/lib/swag.js',
+            '<%= yeoman.app %>/bower_components/leaflet-0.7.2/leaflet-src.js',
+            '<%= yeoman.app %>/bower_components/gatekeeper/gatekeeper.js',
+            '<%= yeoman.app %>/bower_components/shareabouts-js/src/utils.js',
+            '<%= yeoman.app %>/bower_components/shareabouts-js/src/models.js',
+            '<%= yeoman.app %>/bower_components/shareabouts-js/src/map.js'
           ],
           '<%= yeoman.app %>/scripts/components-admin.min.js': [
             '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.core.js',
@@ -319,7 +327,6 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/django-csrf.js/django-csrf.js',
             '<%= yeoman.app %>/bower_components/pen/src/pen.js',
             '<%= yeoman.app %>/bower_components/FileAPI/dist/FileAPI.js',
-            '<%= yeoman.app %>/bower_components/moment/moment.js',
             '<%= yeoman.app %>/bower_components/chrono/chrono.min.js',
             '<%= yeoman.app %>/bower_components/pickadate/lib/picker.js',
             '<%= yeoman.app %>/bower_components/pickadate/lib/picker.date.js'
@@ -348,6 +355,20 @@ module.exports = function (grunt) {
 
     // Copies remaining files to places other tasks can use
     copy: {
+      shareabouts: {
+        files: [{
+          src: ['<%= yeoman.app %>/bower_components/shareabouts-js/src/images/marker-plus.png'],
+          dest: '<%= yeoman.app %>/images/marker-plus.png'
+        },
+        {
+          src: ['<%= yeoman.app %>/bower_components/shareabouts-js/src/images/marker-shadow.png'],
+          dest: '<%= yeoman.app %>/images/marker-shadow.png'
+        },
+        {
+          src: ['<%= yeoman.app %>/bower_components/shareabouts-js/src/images/marker-x.png'],
+          dest: '<%= yeoman.app %>/images/marker-x.png'
+        }]
+      },
       dist: {
         files: [{
           expand: true,
@@ -435,7 +456,7 @@ module.exports = function (grunt) {
     'concat',
     'cssmin',
     'uglify',
-    // 'copy:dist',
+    'copy:shareabouts',
     // 'rev',
     // 'usemin',
     // 'htmlmin'

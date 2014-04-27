@@ -48,11 +48,11 @@ h4, .h4 { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-weig
   margin: 0;
   min-width: 4em;
 }
-.project-timeline a {
+.project-section-timeline a {
   color: #ACD8E6;
 }
-.project-timeline a:hover,
-.project-timeline a:focus {
+.project-section-timeline a:hover,
+.project-section-timeline a:focus {
   color: #B6E4F2;
 }
 .float-label-input:focus a {
@@ -97,6 +97,10 @@ h4, .h4 { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-weig
 .checked-icon.unchecked {
   color: #777;
   color: rgba(100,100,100,0.8);
+}
+.arrow-left-down {
+  position: relative;
+  top: 0.375em;
 }
 
 
@@ -147,7 +151,7 @@ section, footer {
 }
 .openplans-top-bar,
 .openplans-top-bar.contain-to-grid,
-.openplans-top-bar .top-bar, 
+.openplans-top-bar .top-bar,
 .openplans-top-bar .name {
   height: 65px;
   line-height: 65px;
@@ -423,7 +427,7 @@ select {
 }
 .team-section a {
 }
-.team-section a:hover, 
+.team-section a:hover,
 .team-section a:focus {
 }
 img.avatar {
@@ -524,12 +528,12 @@ img.avatar {
 }
 
 /* Project Timeline */
-.project-timeline {
+.project-section-timeline {
   background-color: #888;
   color: #fff;
   padding-top: 0.9375rem;
 }
-.project-timeline .section-header {
+.project-section-timeline .section-header {
   background-color: #eee;
   color: #444;
 }
@@ -577,7 +581,7 @@ img.avatar {
 .faq {
   margin-bottom: 0.9375rem;
   position: relative;
-  clear: left; 
+  clear: left;
 }
 .faq-question {
   position: relative;
@@ -602,7 +606,7 @@ img.avatar {
 }
 .faq-list-collapsed dd {
   display: none;
-  clear: left; 
+  clear: left;
 }
 .faq-list dt.is-selected {
   color: #555;
@@ -627,6 +631,31 @@ img.avatar {
   top: 0.5em;
 }
 
+/* Shareabouts Section */
+.project-section-shareabouts {
+}
+
+.project-shareabouts {
+  width: 100%;
+  max-width: 64.063em;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.shareabouts-geometry-set .form-instructions {
+  display: none;
+}
+
+/* NOTE: use these selectors to style invalid form elements on non-HTML5 browsers */
+.project-shareabouts .form-submitted input:invalid,
+.project-shareabouts .form-submitted textarea:invalid,
+.project-shareabouts .form-submitted select:invalid {
+  border: 1px solid #f04124;
+}
+
+.shareabouts-submit-button {
+  margin-top: 0.5em;
+}
 
 /* =Foundation Media Queries
 -------------------------------------------------------------- */
@@ -651,7 +680,7 @@ img.avatar {
   .slogan {
     font-size: 1rem;
   }
-  
+
   .product-features {
     padding: 3rem 0 1rem;
   }
@@ -704,6 +733,14 @@ img.avatar {
             transform: scale(1.25);
   }
 
+  /* Shareabouts Section */
+  .project-shareabouts {
+    height: 400px;
+  }
+
+  .project-section-shareabouts .shareabouts-panel-content {
+    padding: 0 1em;
+  }
 }
 
 /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */

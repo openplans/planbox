@@ -16,3 +16,8 @@ CSRF_COOKIE_SECURE = False
 S3_MEDIA_BUCKET = 'planbox-media'
 AWS_ACCESS_KEY = '12345'
 AWS_SECRET_KEY = '67890'
+
+# Shareabouts integration
+SHAREABOUTS_HOST = 'data.shareabouts.org'
+SHAREABOUTS_USERNAME = 'planbox-dev'
+SHAREABOUTS_PASSWORD = '[Insert correct password here]'

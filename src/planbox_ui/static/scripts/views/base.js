@@ -12,23 +12,18 @@ var Planbox = Planbox || {};
       sectionList: '#section-list'
     },
 
-    initRegions: function() {
-      // this.sectionListView for display vs base
-      this._sectionListView = new this.sectionListView({
+    showRegions: function() {
+      // You must set sectionListView in the derived view class to the view
+      // for displaying the list of sections.
+      this.sectionList.show(new this.sectionListView({
         model: this.model,
         collection: this.collection,
         parent: this
-      });
+      }));
     },
 
-    showRegions: function() {
-      this.sectionList.show(this._sectionListView);
-    },
-
-    initialize: function() {
-      this.initRegions();
-    },
-    onRender: function() {
+    onShow: function() {
+      // After the project is in the DOM, show the project sections
       this.showRegions();
     },
     onDomRefresh: function() {

@@ -25,16 +25,20 @@ var Planbox = Planbox || {};
   });
 
   NS.app.addInitializer(function(options){
-    var projectModel, ProjectView;
+    var projectModel, ProjectView, sectionCollection;
 
     if (NS.Data.isEditable && !NS.Data.project.owner_id) {
       NS.Data.project.owner = NS.Data.user.username;
     }
 
     projectModel = new NS.ProjectModel(NS.Data.project);
+    sectionCollection = projectModel.get('sections');
 
     if (!NS.Data.isEditable) {
       ProjectView = NS.ProjectView;
+      sectionCollection = new Backbone.Collection(projectModel.get('sections').filter(function(model) {
+        return model.get('active');
+      }));
     } else if (projectModel.isNew()) {
       ProjectView = NS.ProjectSetupView;
     } else {
@@ -43,7 +47,7 @@ var Planbox = Planbox || {};
 
     NS.app.mainRegion.show(new ProjectView({
       model: projectModel,
-      collection: projectModel.get('sections')
+      collection: sectionCollection
     }));
 
     if (window.location.pathname.indexOf('/new/') !== -1 && NS.Data.isEditable) {
