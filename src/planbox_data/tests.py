@@ -185,6 +185,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
 
         serializer = ProjectSerializer(project, data={'slug': '', 'title': ''})
         ok_(not serializer.is_valid(), 'Project with empty slug and title should not validate')
+        assert_in('title', serializer.errors)
 
     def test_events_are_nested_in_data(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
