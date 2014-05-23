@@ -76,6 +76,14 @@ h4, .h4 { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-weig
   margin-bottom: 0.5rem;
 }
 
+.pricing-table {
+  border: 0;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+}
+.pricing-table .title {
+  background-color: #666;
+}
+
 
 /* =Utility Classes
 -------------------------------------------------------------- */
@@ -461,6 +469,31 @@ img.avatar {
 }
 .shareabouts-instances .description {
   margin-left: 110px ;
+}
+.pricing-matrix {
+  margin-bottom: 2rem !important;
+}
+.pricing-matrix .pricing-table {
+  margin-bottom: 0;
+}
+.pricing-matrix .pricing-table li:last-child {
+  border-bottom: 0;
+}
+.extra-pricing-info {
+  display: none;
+  border-top: dotted 1px #ddd;
+}
+.details-revealed .extra-pricing-info,
+.all-details-revealed .extra-pricing-info {
+  display: block;
+}
+.details-revealed + .show-details {
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.extra-pricing-info + .extra-pricing-info {
+  border-top: 0;
 }
 
 
