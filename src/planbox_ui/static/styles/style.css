@@ -78,7 +78,7 @@ h4, .h4 { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-weig
 
 .pricing-table {
   border: 0;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
 }
 .pricing-table .title {
   background-color: #666;
@@ -472,6 +472,7 @@ img.avatar {
 }
 .pricing-matrix {
   margin-bottom: 2rem !important;
+  overflow: hidden;
 }
 .pricing-matrix .pricing-table {
   margin-bottom: 0;
@@ -482,6 +483,14 @@ img.avatar {
 .extra-pricing-info {
   display: none;
   border-top: dotted 1px #ddd;
+  box-shadow: 
+    0 1px 0 #fff, 
+    0 10rem 0 2px #fff, 
+    0 8rem 0 2px rgba(255,255,255,0.5),
+    0 6rem 0 2px rgba(255,255,255,0.3);
+}
+.extra-pricing-info p {
+  font-size: 0.875rem;
 }
 .details-revealed .extra-pricing-info,
 .all-details-revealed .extra-pricing-info {
@@ -494,6 +503,9 @@ img.avatar {
 }
 .extra-pricing-info + .extra-pricing-info {
   border-top: 0;
+}
+.show-details-all {
+  margin-bottom: 0;
 }
 
 
@@ -827,6 +839,9 @@ img.avatar {
   .large-big-paragraph  { font-size: 1.25rem; }
   .large-small-paragraph { font-size: 0.75rem; }
 
+  .pricing-matrix {
+    background-color: #fff;
+  }
 }
 
 /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
