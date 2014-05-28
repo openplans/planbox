@@ -87,10 +87,18 @@ OpenPlans
 
   <script>
     $(function() {
+
       $('.user-menu-link').click(function(evt) {
         evt.preventDefault();
         $('.user-menu').toggleClass('is-open');
       });
+
+      $('.show-details-all').click(function(evt) {
+        evt.preventDefault();
+        $('.pricing-matrix').addClass('all-details-revealed');
+        $(this).remove();
+      });
+
     });
   </script>
 {% endblock %}
