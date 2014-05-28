@@ -484,8 +484,11 @@ img.avatar {
   overflow: hidden;
 }
 .extra-pricing-info {
-  display: none;
-  border: 0;
+  height: 0;
+  overflow: hidden;
+}
+.extra-pricing-info table {
+  width: 100%;
 }
 .extra-pricing-info td {
   width: 25%;
@@ -495,20 +498,8 @@ img.avatar {
 .extra-pricing-info td:last-child {
   border-right: 0;
 }
-.details-revealed .extra-pricing-info,
 .all-details-revealed .extra-pricing-info {
-  display: block;
-}
-.details-revealed + .show-details {
-  height: 0;
-  padding: 0;
-  overflow: hidden;
-}
-.extra-pricing-info + .extra-pricing-info {
-  border-top: 0;
-}
-.show-details-all {
-  margin-bottom: 0;
+  height: auto;
 }
 
 
