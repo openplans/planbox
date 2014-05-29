@@ -84,15 +84,6 @@ h4, .h4 { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-weig
   background-color: #666;
 }
 
-table tr {
-  background-color: #f5f5f5;
-}
-table tr.even, 
-table tr.alt, 
-table tr:nth-of-type(even) {
-  background-color: #fff;
-}
-
 
 /* =Utility Classes
 -------------------------------------------------------------- */
@@ -489,14 +480,32 @@ img.avatar {
 }
 .extra-pricing-info table {
   width: 100%;
+  border: 0;
+}
+.extra-pricing-info tr {
+  background-color: #f5f5f5;
+}
+.extra-pricing-info tr.even, 
+.extra-pricing-info tr.alt, 
+.extra-pricing-info tr:nth-of-type(even) {
+  background-color: #fff;
+}
+.extra-pricing-info tr.spacer td {
+  width: 25%;
+  padding: 0;
 }
 .extra-pricing-info td {
-  width: 25%;
+  font-size: 0.75rem;
   text-align: center;
-  border-right: 1px solid rgba(0,0,0,0.05);
+  border-right: 1px solid transparent;
+  box-shadow: inset -1px 0 0 rgba(0,0,0,0.05);
+}
+.extra-pricing-info td:first-letter {
+  text-transform: uppercase;
 }
 .extra-pricing-info td:last-child {
   border-right: 0;
+  box-shadow: none;
 }
 .all-details-revealed .extra-pricing-info {
   height: auto;
