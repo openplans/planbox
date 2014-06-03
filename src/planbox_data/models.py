@@ -150,14 +150,20 @@ class OrderedModelMixin (object):
 
 
 class CloneableModelMixin (object):
-    def clone(self, commit=True):
+    def clone(self, commit=True, **inst_kwargs):
+        """
+        Create a duplicate of the model instance, replacing any properties
+        specified as keyword arguments.
+        """
         fields = self._meta.fields
-        pk_name = self._meta.pk
+        pk_name = self._meta.pk.name
 
-        new_kwargs = dict([
-            (fld.name, getattr(self, fld.name))
-            for fld in fields if fld.name != pk_name ]);
-        new_inst = self.__class__(**new_kwargs)
+        for fld in fields:
+            if fld.name != pk_name:
+                fld_value = getattr(self, fld.name)
+                inst_kwargs.setdefault(fld.name, fld_value)
+
+        new_inst = self.__class__(**inst_kwargs)
 
         if commit:
             new_inst.save()
@@ -197,9 +203,11 @@ class ModelWithSlugMixin (object):
         self.ensure_slug()
         return super(ModelWithSlugMixin, self).save(*args, **kwargs)
 
-    def clone(self):
-        new_inst = super(self, ModelWithSlugMixin).clone()
+    def clone(self, commit=True, *args, **kwargs):
+        new_inst = super(ModelWithSlugMixin, self).clone(commit=False, *args, **kwargs)
         new_inst.ensure_slug(force=True, basis=self.slug)
+        if commit:
+            new_inst.save()
         return new_inst
 
 
@@ -265,18 +273,9 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
         return [p.slug for p in self.owner.projects.all()]
 
     def clone(self, *args, **kwargs):
-        new_inst = super(self, Project).clone(*args, **kwargs)
-
-        new_events = [e.clone(commit=False) for e in self.events.all()]
-        for e in new_events:
-            e.project = new_inst
-            e.save()
-
-        new_sections = [s.clone(commit=False) for s in self.sections.all()]
-        for s in new_sections:
-            s.project = new_inst
-            s.save()
-
+        new_inst = super(Project, self).clone(*args, **kwargs)
+        for e in self.events.all(): e.clone(project=new_inst)
+        for s in self.sections.all(): s.clone(project=new_inst)
         return new_inst
 
     def owned_by(self, obj):
@@ -341,11 +340,8 @@ class Event (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, models.
         return self.project.events.aggregate(max_index=models.Max('index'))
 
     def clone(self, *args, **kwargs):
-        new_inst = super(self, Event).clone(*args, **kwargs)
-        new_attachments = [a.clone(commit=False) for a in self.attachments.all()]
-        for a in new_attachments:
-            a.attached_to = new_inst
-            a.save()
+        new_inst = super(Event, self).clone(*args, **kwargs)
+        for a in self.attachments.all(): a.clone(attached_to=new_inst)
         return new_inst
 
 
