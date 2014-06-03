@@ -149,6 +149,28 @@ class OrderedModelMixin (object):
         return super(OrderedModelMixin, self).save(*args, **kwargs)
 
 
+class CloneableModelMixin (object):
+    def clone(self, commit=True, **inst_kwargs):
+        """
+        Create a duplicate of the model instance, replacing any properties
+        specified as keyword arguments.
+        """
+        fields = self._meta.fields
+        pk_name = self._meta.pk.name
+
+        for fld in fields:
+            if fld.name != pk_name:
+                fld_value = getattr(self, fld.name)
+                inst_kwargs.setdefault(fld.name, fld_value)
+
+        new_inst = self.__class__(**inst_kwargs)
+
+        if commit:
+            new_inst.save()
+
+        return new_inst
+
+
 class ModelWithSlugMixin (object):
     """
     A model that adds a slug on save if one does not exist. This model needs
@@ -159,12 +181,12 @@ class ModelWithSlugMixin (object):
         respect to this model.
 
     """
-    def ensure_slug(self, force=False):
+    def ensure_slug(self, force=False, basis=None):
         """
         Determines a slug based on the slug's basis if no slug is set. When
         force is True, the slug is set even if it already has a value.
         """
-        basis = self.get_slug_basis()
+        basis = basis or self.get_slug_basis()
         if basis and (force or not self.slug):
             max_length = self._meta.get_field('slug').max_length
 
@@ -181,9 +203,16 @@ class ModelWithSlugMixin (object):
         self.ensure_slug()
         return super(ModelWithSlugMixin, self).save(*args, **kwargs)
 
+    def clone(self, commit=True, *args, **kwargs):
+        new_inst = super(ModelWithSlugMixin, self).clone(commit=False, *args, **kwargs)
+        new_inst.ensure_slug(force=True, basis=self.slug)
+        if commit:
+            new_inst.save()
+        return new_inst
+
 
 @python_2_unicode_compatible
-class Project (ModelWithSlugMixin, TimeStampedModel):
+class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     STATUS_CHOICES = (
         ('not-started', _('Not Started')),
         ('active', _('Active')),
@@ -243,6 +272,12 @@ class Project (ModelWithSlugMixin, TimeStampedModel):
         """
         return [p.slug for p in self.owner.projects.all()]
 
+    def clone(self, *args, **kwargs):
+        new_inst = super(Project, self).clone(*args, **kwargs)
+        for e in self.events.all(): e.clone(project=new_inst)
+        for s in self.sections.all(): s.clone(project=new_inst)
+        return new_inst
+
     def owned_by(self, obj):
         if isinstance(obj, UserAuth):
             try: obj = obj.profile
@@ -266,7 +301,7 @@ class EventManager (models.Manager):
 
 
 @python_2_unicode_compatible
-class Event (OrderedModelMixin, ModelWithSlugMixin, models.Model):
+class Event (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, models.Model):
     label = models.TextField(help_text=_("The time label for the event, e.g. \"January 15th, 2015\", \"Spring 2015 Phase\", \"Phase II, Summer 2015\", etc."))
     slug = models.CharField(max_length=64, blank=True)
     description = models.TextField(help_text=_("A summary description of the timeline item"), default='', blank=True)
@@ -303,6 +338,11 @@ class Event (OrderedModelMixin, ModelWithSlugMixin, models.Model):
 
     def get_siblings(self):
         return self.project.events.aggregate(max_index=models.Max('index'))
+
+    def clone(self, *args, **kwargs):
+        new_inst = super(Event, self).clone(*args, **kwargs)
+        for a in self.attachments.all(): a.clone(attached_to=new_inst)
+        return new_inst
 
 
 class ProfileManager (models.Manager):
@@ -369,7 +409,7 @@ class SectionManager (models.Manager):
 
 
 @python_2_unicode_compatible
-class Section (OrderedModelMixin, ModelWithSlugMixin, TimeStampedModel):
+class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     SECTION_TYPE_CHOICES = (
         ('text', _('Text')),
         ('timeline', _('Timeline')),
@@ -407,7 +447,7 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, TimeStampedModel):
         return self.project.sections.aggregate(max_index=models.Max('index'))
 
 
-class Attachment (OrderedModelMixin, TimeStampedModel):
+class Attachment (OrderedModelMixin, CloneableModelMixin, TimeStampedModel):
     url = models.URLField(max_length=2048)
     thumbnail_url = models.URLField(max_length=2048, blank=True, null=True)
     label = models.TextField(blank=True)

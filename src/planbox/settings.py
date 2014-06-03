@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'genericadmin',
     'rest_framework',
     'django_ace',
+    'django_object_actions',
 
     'custom_domains',
     'password_reset',

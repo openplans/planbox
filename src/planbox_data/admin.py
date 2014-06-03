@@ -3,13 +3,16 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import TextField
+from django.http import HttpResponseRedirect
 from django.forms import TextInput, Textarea
 from django.forms.models import inlineformset_factory, modelform_factory
 from django.utils.html import format_html
 from django.utils.translation import ugettext as _
 from django_ace import AceWidget
+from django_object_actions import DjangoObjectActions
 from genericadmin.admin import GenericAdminModelAdmin, GenericTabularInline
 from jsonfield import JSONField
 from planbox_data.models import Profile, Project, Event, Theme, Section, Attachment
@@ -79,7 +82,7 @@ class EventInline (admin.StackedInline):
     })
 
 
-class ProjectAdmin (admin.ModelAdmin):
+class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
     list_display = ('_title', 'public', 'owner', '_owner_email', '_owner_affiliation', 'location', '_updated_at', '_created_at', '_permalink')
     prepopulated_fields = {"slug": ("title",)}
     ordering = ('-updated_at',)
@@ -88,6 +91,7 @@ class ProjectAdmin (admin.ModelAdmin):
         SectionInline,
         EventInline,
     )
+    objectactions = ('clone_project',)
     raw_id_fields = ('theme', 'template')
     form = modelform_factory(Project, widgets={
         'title': TextInput(attrs={'class': 'vTextField'}),
@@ -95,6 +99,14 @@ class ProjectAdmin (admin.ModelAdmin):
         'happening_now_description': TextInput(attrs={'class': 'vTextField'}),
         'get_involved_description': TextInput(attrs={'class': 'vTextField'}),
     })
+
+    def clone_project(self, request, obj):
+        try:
+            new_obj = obj.clone()
+            new_obj_edit_url = reverse('admin:planbox_data_project_change', args=[new_obj.pk])
+            return HttpResponseRedirect(new_obj_edit_url)
+        except Exception as e:
+            messages.error(request, 'Failed to clone project: %s (%s)' % (e, type(e).__name__))
 
     def get_queryset(self, request):
         qs = super(ProjectAdmin, self).get_queryset(request)

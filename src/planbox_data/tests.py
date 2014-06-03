@@ -129,6 +129,44 @@ class ProjectModelTests (TestCase):
 
         ok_(not project.owned_by(anon))
 
+    def test_can_clone_project(self):
+        owner = Profile.objects.create(slug='owner')
+        project = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=owner)
+
+        events = [
+            Event.objects.create(project=project, slug='event-1'),
+            Event.objects.create(project=project, slug='event-2')]
+
+        attachments = [
+            Attachment.objects.create(attached_to=events[0], url='http://example.com/file-1'),
+            Attachment.objects.create(attached_to=events[0], url='http://example.com/file-2')]
+
+        new_project = project.clone()
+
+        # Make sure the projects are different
+        assert_not_equal(project.pk, new_project.pk)
+
+        # Make sure the slugs are the same on the events
+        assert_equal(
+            [e.slug for e in new_project.events.all()],
+            [e.slug for e in events])
+
+        # Make sure the original events still belong to the original project
+        assert_equal(
+            [e.project_id for e in events],
+            [project.pk] * len(events))
+
+        # Make sure the attachments were copied appropriately
+        first_event = new_project.events.all()[0]
+        assert_equal(
+            [a.attached_to_id for a in first_event.attachments.all()],
+            [first_event.pk] * len(attachments))
+
+        # Make sure the original attachments still belong to th original event
+        assert_equal(
+            [a.attached_to_id for a in events[0].attachments.all()],
+            [events[0].pk] * len(attachments))
+
 
 class UserModelTests (PlanBoxTestCase):
     def test_str_requires_no_extra_queries(self):
