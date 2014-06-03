@@ -25,7 +25,7 @@ module.exports = function (grunt) {
       app: 'src/planbox_ui/static',
       tpl: 'src/planbox_ui/jstemplates',
       test: 'src/planbox_ui/jstests',
-      dist: 'dist'
+      dist: 'src/planbox_ui/static/dist'
     },
 
     // Watches files for changes and runs tasks based on the changed files
@@ -45,12 +45,8 @@ module.exports = function (grunt) {
         files: ['Gruntfile.js']
       },
       compass: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['compass:server', 'autoprefixer']
-      },
-      styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        files: ['<%= yeoman.app %>/sass/{,*/}*.{scss,sass}'],
+        tasks: ['compass:server']
       },
       livereload: {
         options: {
@@ -146,8 +142,8 @@ module.exports = function (grunt) {
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
       options: {
-        sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
+        sassDir: '<%= yeoman.app %>/sass',
+        cssDir: '<%= yeoman.app %>/styles',
         generatedImagesDir: '.tmp/images/generated',
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',
@@ -166,25 +162,25 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          debugInfo: true
+          debugInfo: false
         }
       }
     },
 
     // Add vendor prefixed styles
-    autoprefixer: {
-      options: {
-        browsers: ['last 1 version']
-      },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
-        }]
-      }
-    },
+    // autoprefixer: {
+    //   options: {
+    //     browsers: ['last 1 version']
+    //   },
+    //   dist: {
+    //     files: [{
+    //       expand: true,
+    //       cwd: '.tmp/styles/',
+    //       src: '{,*/}*.css',
+    //       dest: '.tmp/styles/'
+    //     }]
+    //   }
+    // },
 
     // Automatically inject Bower components into the HTML file
     'bower-install': {
@@ -422,7 +418,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'concurrent:server',
-      'autoprefixer',
+      // 'autoprefixer',
       'connect:livereload',
       'watch'
     ]);
@@ -437,7 +433,7 @@ module.exports = function (grunt) {
     if (target !== 'watch') {
       grunt.task.run([
         'clean:server',
-        'concurrent:test',
+        'concurrent:test'
         // 'autoprefixer',
       ]);
     }
