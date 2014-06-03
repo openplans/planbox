@@ -2,7 +2,7 @@
 
 Hello {# user name #}.
 
-Thanks for signing up with Plan In A Box. We're excited to see you create an informative project page. 
+Thanks for signing up with OpenPlans. We're excited to see you create an informative project page.
 
 Please let me know if you have any questions about getting started (you can just reply to this email). Your feedback is always welcome.
 
@@ -10,11 +10,11 @@ Please let me know if you have any questions about getting started (you can just
 
 {# LATER, AUTOMATED.... #}
 
-Welcome to Plan in a Box!
+Welcome to OpenPlans!
 
 Hello,
 
-You've been signed up for Plan In A Box with the email address {{ email }}. Plan In A Box provides a high quality website for your street improvement project, so everyone can find out what's happening, stay engaged, and be more informed participants.
+You've been signed up for OpenPlans with the email address {{ email }}. OpenPlans provides a high quality website for your street improvement project, so everyone can find out what's happening, stay engaged, and be more informed participants.
 
 What's Next
 -----------
@@ -34,6 +34,6 @@ Looks like you've already published your project! **Give some next steps for sha
 
 {% endif %}
 -------------------
-If you did not sign up for this account, please let us know at info@planinabox.org.
+If you did not sign up for this account, please let us know at hello@openplans.org.
 -------------------
-Plan In A Box is a product of OpenPlans, with support from Knight Foundation.
+Powered by OpenPlans, with support from Knight Foundation.

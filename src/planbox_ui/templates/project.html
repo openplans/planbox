@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 {% load handlebarsjs from jstemplate %}
 {% load as_json from planbox_utils %}
+{% load striptags from planbox_utils %}
 
 
 {% block title %}{{ project_data.title }}{% endblock %}
 
 {% block meta %}
-  <meta name="description" content="{{ project_data.description|striptags }}">
+  <meta name="description" content="{{ project_data.description|striptags:' ' }}">
   {# TODO: Fill this in with project's owner name #}
   <meta name="author" content="OpenPlans">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@planinabox">
-  <meta name="twitter:title" content="{{ project_data.title|striptags }}">
-  <meta name="twitter:description" content="{{ project_data.description|striptags }}">
+  <meta name="twitter:title" content="{{ project_data.title|striptags:' ' }}">
+  <meta name="twitter:description" content="{{ project_data.description|striptags:' ' }}">
   {% comment %} TODO: Fill this in with project owner's twitter name
   <meta name="twitter:creator" content="">
   {% endcomment %}
@@ -23,9 +24,9 @@
   {% endcomment %}
 
   <!-- Facebook -->
-  <meta property="og:site_name" content="Plan In A Box"/>
-  <meta property="og:title" content="{{ project_data.title|striptags }}" />
-  <meta property="og:description" content="{{ project_data.description|striptags }}" />
+  <meta property="og:site_name" content="OpenPlans"/>
+  <meta property="og:title" content="{{ project_data.title|striptags:' ' }}" />
+  <meta property="og:description" content="{{ project_data.description|striptags:' ' }}" />
   {% comment %} TODO: Fill this in with Planbox logo or project image
   <meta property="og:image" content="" />
   {% endcomment %}
@@ -40,6 +41,8 @@
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pickadate/lib/themes/classic.css" id="theme_base">
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pickadate/lib/themes/classic.date.css" id="theme_date">
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" type="text/css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/leaflet-0.7.2/leaflet.css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/shareabouts-js/src/styles/shareabouts.css" />
   {% if is_editable %}
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.css" type="text/css" />
   {% endif %}
@@ -81,6 +84,12 @@
   <script src="{{ STATIC_URL }}bower_components/chrono/chrono.min.js"></script>
   <script src="{{ STATIC_URL }}bower_components/pickadate/lib/picker.js"></script>
   <script src="{{ STATIC_URL }}bower_components/pickadate/lib/picker.date.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/leaflet-0.7.2/leaflet-src.js"></script>
+
+  <script src="{{ STATIC_URL }}bower_components/gatekeeper/gatekeeper.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/utils.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/models.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/map.js"></script>
   {% else %}
 </script>
   <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>

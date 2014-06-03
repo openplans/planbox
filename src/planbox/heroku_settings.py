@@ -6,6 +6,8 @@ DEBUG = (os.environ.get('DEBUG', 'False') in ['true', 'True'])
 TEMPLATE_DEBUG = DEBUG
 SHOW_DEBUG_TOOLBAR = (os.environ.get('SHOW_DEBUG_TOOLBAR', 'False') in ['true', 'True']) or DEBUG
 HTTPS_ENABLED = (os.environ.get('HTTPS', 'on').lower() in ['true', 'on'])
+SESSION_COOKIE_SECURE = HTTPS_ENABLED
+CSRF_COOKIE_SECURE = HTTPS_ENABLED
 
 # STATIC_ROOT should be set the same here as in settings.py
 STATIC_ROOT = rel_path('../../staticfiles')
@@ -73,6 +75,11 @@ LAST_DEPLOY_DATE = datetime.datetime.now().replace(second=0, microsecond=0).isof
 S3_MEDIA_BUCKET = os.environ.get('S3_MEDIA_BUCKET')
 AWS_ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY')
 AWS_SECRET_KEY = os.environ.get('AWS_SECRET_KEY')
+
+# Shareabouts integration
+SHAREABOUTS_HOST = os.environ.get('SHAREABOUTS_HOST')
+SHAREABOUTS_USERNAME = os.environ.get('SHAREABOUTS_USERNAME')
+SHAREABOUTS_PASSWORD = os.environ.get('SHAREABOUTS_PASSWORD')
 
 LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO')
 LOGGING = {

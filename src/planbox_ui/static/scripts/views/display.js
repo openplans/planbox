@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Handlebars Modernizr _ Pen */
+/*globals Backbone jQuery Handlebars Modernizr _ Pen Shareabouts*/
 
 var Planbox = Planbox || {};
 
@@ -41,7 +41,7 @@ var Planbox = Planbox || {};
   NS.TimelineSectionView = Backbone.Marionette.CompositeView.extend({
     template: '#timeline-section-tpl',
     tagName: 'section',
-    className: 'project-timeline',
+    className: 'project-section-timeline',
 
     itemView: NS.EventView,
     itemViewContainer: '.event-list'
@@ -50,7 +50,7 @@ var Planbox = Planbox || {};
   NS.TextSectionView = Backbone.Marionette.ItemView.extend({
     template: '#text-section-tpl',
     tagName: 'section',
-    className: 'project-text'
+    className: 'project-section-text'
   });
 
   NS.FaqView = Backbone.Marionette.ItemView.extend({
@@ -73,12 +73,49 @@ var Planbox = Planbox || {};
   NS.FaqsSectionView = Backbone.Marionette.CompositeView.extend({
     template: '#faqs-section-tpl',
     tagName: 'section',
-    className: 'project-faqs',
+    className: 'project-section-faqs',
 
     itemView: NS.FaqView,
     itemViewContainer: '.faq-list'
   });
 
+  NS.ShareaboutsSectionView = Backbone.Marionette.ItemView.extend({
+    template: '#shareabouts-section-tpl',
+    tagName: 'section',
+    className: 'project-section-shareabouts',
+    ui: {
+      shareabouts: '.project-shareabouts'
+    },
+    onShow: function() {
+      var details = this.model.get('details');
+
+      new Shareabouts.Map({
+        el: this.ui.shareabouts,
+        map: details.map,
+        layers: details.layers,
+        placeStyles: [
+          {
+            condition: 'true',
+            icon: {
+              iconUrl: NS.bootstrapped.staticUrl + 'images/markers/dot-blue.png',
+              iconSize: [18, 18],
+              iconAnchor: [9, 9]
+            },
+            focusIcon: {
+              iconUrl: NS.bootstrapped.staticUrl + 'images/markers/marker-blue.png',
+              shadowUrl: NS.bootstrapped.staticUrl + 'images/markers/marker-shadow.png',
+              iconSize: [25, 41],
+              shadowSize: [41, 41],
+              iconAnchor: [12, 41]
+            }
+          },
+        ],
+        datasetUrl: details.dataset_url + '/places',
+        templates: Handlebars.templates
+      });
+
+    }
+  });
 
   // View =====================================================================
   NS.ModalView = Backbone.Marionette.ItemView.extend({
@@ -101,7 +138,8 @@ var Planbox = Planbox || {};
     sectionViews: {
       'timeline': NS.TimelineSectionView,
       'text': NS.TextSectionView,
-      'faqs': NS.FaqsSectionView
+      'faqs': NS.FaqsSectionView,
+      'shareabouts': NS.ShareaboutsSectionView
     }
   });
 

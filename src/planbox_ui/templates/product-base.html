@@ -2,27 +2,27 @@
 {% load include_handlebars from djangobars %}
 
 {% block title %}
-Plan In A Box
+OpenPlans
 {% endblock %}
 
 {% block meta %}
-  <meta name="description" content="Still using old-fashioned methods to promote your street improvement projects? Get useful, timely, engaging project info onto the web with Plan In A Box.">
+  <meta name="description" content="Community Engagement &hearts; Better Places. Our web tools help you manage communications &amp; constructive public input.">
   <meta name="author" content="OpenPlans">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="planinabox">
-  <meta name="twitter:title" content="Plan In A Box">
-  <meta name="twitter:description" content="Still using old-fashioned methods to promote your street improvement projects? Put timely, engaging information about your projects online in a matter of minutes.">
-  <meta name="twitter:creator" content="@planinabox">
-  {% comment %} TODO: Fill this in with Planbox logo
+  <meta name="twitter:site" content="openplans">
+  <meta name="twitter:title" content="OpenPlans">
+  <meta name="twitter:description" content="Community Engagement &hearts; Better Places. Our web tools help you manage communications &amp; constructive public input.">
+  <meta name="twitter:creator" content="@openplans">
+  {% comment %} TODO: Fill this in with OpenPlans logo
   <meta name="twitter:image:src" content="">
   {% endcomment %}
 
   <!-- Facebook -->
-  <meta property="og:title" content="Plan In A Box" />
-  <meta property="og:description" content="Still using old-fashioned methods to promote your street improvement projects? Put timely, engaging information about your projects online in a matter of minutes." />
-  {% comment %} TODO: Fill this in with Planbox logo
+  <meta property="og:title" content="OpenPlans" />
+  <meta property="og:description" content="Community Engagement &hearts; Better Places. Our web tools help you manage communications &amp; constructive public input." />
+  {% comment %} TODO: Fill this in with OpenPlans logo
   <meta property="og:image" content="" />
   {% endcomment %}
 
@@ -38,22 +38,36 @@ Plan In A Box
 
 {% block page %}
 
-<div class="contain-to-grid">
+<div class="contain-to-grid sticky openplans-top-bar">
   <nav class="top-bar" data-topbar>
     <ul class="title-area">
       <li class="name">
-        <h1><a href="/">Plan In A Box</a></h1>
+        <h1><a href="/"><img src="{{ STATIC_URL }}images/openplans-logo-hole.png" class="openplans-logo-hole"></a></h1>
       </li>
       <li class="toggle-topbar menu-icon"><a href="#"></a></li>
     </ul>
 
     <section class="top-bar-section">
       <ul class="right">
-        <li><a href="/help" class="software-help-link">Help &amp; Feedback</a></li>
+        <li><a href="http://blog.openplans.org/">Blog</a></li>
+        <li><a href="http://community.openplans.org/">Community</a></li>
+        <li class="has-dropdown">
+          <a href="/about/">About</a>
+          <ul class="dropdown">
+            <li><a href="/about/">About OpenPlans</a></li>
+            <li><a href="/shareabouts/">Shareabouts</a></li>
+            <li><a href="/open-source/">Open Source</a></li>
+          </ul>
+        </li>
         {% if user.is_authenticated %}
-        {% include_handlebars 'user-menu.html' %}
+        <li class="active has-dropdown">
+          <a href="/{{ user.username }}/new/">{{ user.username }}</a>
+          <ul class="dropdown">
+            {% include_handlebars 'user-menu.html' %}
+          </ul>
+        </li>
         {% else %}
-        <li class="active"><a href="/signin" class="login-link user-link nobreak">Sign In</a></li>
+        <li class="active"><a href="/signin">Sign In</a></li>
         {% endif %}
       </ul>
     </section>
@@ -73,10 +87,18 @@ Plan In A Box
 
   <script>
     $(function() {
+
       $('.user-menu-link').click(function(evt) {
         evt.preventDefault();
         $('.user-menu').toggleClass('is-open');
       });
+
+      $('.show-details-all').click(function(evt) {
+        evt.preventDefault();
+        $('.pricing-matrix').addClass('all-details-revealed');
+        $(this).remove();
+      });
+
     });
   </script>
 {% endblock %}

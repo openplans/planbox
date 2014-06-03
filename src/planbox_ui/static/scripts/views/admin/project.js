@@ -136,7 +136,8 @@ var Planbox = Planbox || {};
     sectionViews: {
       'timeline': NS.TimelineSectionAdminView,
       'text': NS.TextSectionAdminView,
-      'faqs': NS.FaqsSectionAdminView
+      'faqs': NS.FaqsSectionAdminView,
+      'shareabouts': NS.ShareaboutsSectionAdminView
     },
     dataChanged: function() {
       this.options.parent.dataChanged();
@@ -214,8 +215,6 @@ var Planbox = Planbox || {};
           e = e || event;
           e.preventDefault();
         }, false);
-
-        this.initRegions();
       },
 
       onRender: function() {
@@ -491,7 +490,6 @@ var Planbox = Planbox || {};
 
       regions: {
         descriptionRegion: '.project-description-region',
-        timelineRegion: '.project-timeline-region',
         highlightsRegion: '.project-highlights-region'
       },
       ui: {
@@ -507,12 +505,6 @@ var Planbox = Planbox || {};
         'click @ui.closeBtn': 'handleClose'
       },
 
-      initialize: function() {
-        NS.ProjectAdminView.prototype.initialize.call(this);
-
-        // Add an empty event to the timeline
-        this.model.get('events').add({});
-      },
       gotoStep: function(tab) {
         var $tab = this.$(tab);
         $tab.find('a').click();
@@ -538,11 +530,7 @@ var Planbox = Planbox || {};
         window.projectModel = this.model;
       },
       onRender: function() {
-        var timeline = this.model.get('sections').find(function(section) { return section.get('type') === 'timeline'; }),
-            events = this.model.get('events');
-
         this.descriptionRegion.show(new NS.StructuredProjectDescriptionView({model: this.model, parent: this}));
-        this.timelineRegion.show(new NS.TimelineSectionAdminView({model: timeline, collection: events, parent: this}));
         this.highlightsRegion.show(new NS.ProjectHighlightsAdminView({model: this.model, parent: this}));
       },
       onSaveSuccess: function(model, makePublic) {
@@ -574,8 +562,6 @@ var Planbox = Planbox || {};
         if (resp.responseJSON) {
           if ('title' in resp.responseJSON) {
             this.gotoStep('.tabs .title-step');
-          } else if ('events' in resp.responseJSON) {
-            this.gotoStep('.tabs .timeline-step');
           }
         }
       },
@@ -598,14 +584,17 @@ var Planbox = Planbox || {};
       // Assuming the pieces are arranged in the order they should appear in
       // (which may be a wrong assumption), join them together.
       this.ui.pieces.each(function(i, piece) {
-        if (!!description && description.slice(-1) !== '\n') {
-          description += ' ';
+        var $piece = $(piece),
+            value = $piece.val().trim(), //.replace(/^<br>|<br>$/g, ''),
+            heading = $piece.attr('data-heading');
+
+        if (value) {
+          if (description) { description += '<br><br>'; }
+          value = NS.Utils.htmlEscape(value).replace(/\n/g, '<br>');
+          description += '<strong>' + heading + '</strong><br>' + value;
         }
-        description += $(piece).val();
       });
 
-      description = NS.Utils.htmlEscape(description);
-      description = description.replace(/\n/g, '<br>');
       console.log('set description:', description);
       this.model.set('description', description);
     }

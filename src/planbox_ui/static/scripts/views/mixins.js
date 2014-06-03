@@ -1,4 +1,4 @@
-/*globals Pen */
+/*globals Pen jQuery */
 
 var Planbox = Planbox || {};
 
@@ -41,6 +41,23 @@ var Planbox = Planbox || {};
           self.initRichEditable(el);
         });
       }
+    }
+  };
+
+  NS.SectionAdminMixin = {
+    className: function() {
+      return [
+        'project-section',
+        'project-section-' + this.model.get('type'),
+        this.model.get('active') ? 'active' : ''
+      ].join(' ');
+    },
+    handleActivationChange: function(evt) {
+      evt.preventDefault();
+      // Expecting values of "on" (truthy) or "" (falsey)
+      var isActive = !!$(evt.currentTarget).val();
+      this.$el.toggleClass('active', isActive);
+      this.model.set('active', isActive);
     }
   };
 }(Planbox, jQuery));

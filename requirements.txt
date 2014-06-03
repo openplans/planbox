@@ -16,6 +16,7 @@ django_cache_url==0.7.0
 # ========================================
 south==0.8.4
 psycopg2==2.5.2
+psycogreen==1.0
 jsonfield==0.9.20
 
 
@@ -26,6 +27,7 @@ jsonfield==0.9.20
 django-genericadmin==0.6.1
 django-ace==1.0.1
 djangorestframework==2.3.13
+requests==2.2.1
 
 
 

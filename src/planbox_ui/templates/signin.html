@@ -17,7 +17,7 @@
         <p class="float-label-container"><input required type="password" name="password" id="my-password" class="float-label-input" placeholder="Password" max="30" tabindex="2"><label for="my-password" class="float-label">Password</label></p>
         <p style="margin:0 0 -1.25em;padding:1em 1em 0;float:right;z-index:100;"><small>Forgot your password? <a href="{% url 'password-reset-request' %}" style="text-decoration:none;">Request a reset &#8594;</a></small></p>
 
-        <p><input type="submit" value="Sign In" class="button large radius" tabindex="3"></p>
+        <p><input type="submit" value="Sign In" class="button radius" tabindex="3"></p>
 
         {% if next_url %}
         <input type="hidden" name="next" value="{{ next_url }}">

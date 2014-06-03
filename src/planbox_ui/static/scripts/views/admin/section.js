@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Handlebars Modernizr _ Pen FileAPI chrono */
+/*globals Backbone jQuery Handlebars Modernizr _ Pen FileAPI chrono L */
 
 var Planbox = Planbox || {};
 
@@ -235,10 +235,9 @@ var Planbox = Planbox || {};
   );
 
   NS.TimelineSectionAdminView = NS.SortableListAdminView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
+    _.extend({}, NS.ContentEditableMixin, NS.SectionAdminMixin, {
       template: '#timeline-section-admin-tpl',
       tagName: 'section',
-      className: 'project-timeline',
 
       itemView: NS.EventAdminView,
       itemViewContainer: '.event-list',
@@ -247,11 +246,13 @@ var Planbox = Planbox || {};
         editables: '[contenteditable]:not(.event [contenteditable])',
         itemList: '.event-list',
         newItemFocus: '.event-title:last',
-        addBtn: '.add-event-btn'
+        addBtn: '.add-event-btn',
+        activeToggle: '.active-toggle'
       },
       events: {
         'click @ui.addBtn': 'handleAddClick',
-        'blur @ui.editables': 'handleEditableBlur'
+        'blur @ui.editables': 'handleEditableBlur',
+        'change @ui.activeToggle': 'handleActivationChange'
       },
       onRender: function() {
         // We need to do this since SortableListAdminView and ContentEditableMixin
@@ -266,17 +267,100 @@ var Planbox = Planbox || {};
   );
 
   NS.TextSectionAdminView = Backbone.Marionette.ItemView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
+    _.extend({}, NS.ContentEditableMixin, NS.SectionAdminMixin, {
       template: '#text-section-admin-tpl',
       tagName: 'section',
-      className: 'project-text',
 
       ui: {
         editables: '[contenteditable]',
-        richEditables: '.project-text-content'
+        richEditables: '.project-text-content',
+        activeToggle: '.active-toggle'
       },
       events: {
-        'blur @ui.editables': 'handleEditableBlur'
+        'blur @ui.editables': 'handleEditableBlur',
+        'change @ui.activeToggle': 'handleActivationChange'
+      }
+    })
+  );
+
+  NS.ShareaboutsSectionAdminView = Backbone.Marionette.ItemView.extend(
+    _.extend({}, NS.ContentEditableMixin, NS.SectionAdminMixin, {
+      template: '#shareabouts-section-admin-tpl',
+      tagName: 'section',
+
+      ui: {
+        editables: '[contenteditable]',
+        richEditables: '.project-shareabouts-description',
+        activeToggle: '.active-toggle',
+        map: '.map'
+      },
+      events: {
+        'blur @ui.editables': 'handleEditableBlur',
+        'change @ui.activeToggle': 'handleActivationChange'
+      },
+
+      onShow: function() {
+        var options = this.model.get('details'),
+            i, layerOptions;
+
+        this.map = L.map(this.ui.map.get(0), options.map);
+        for (i = 0; i < options.layers.length; ++i) {
+          layerOptions = options.layers[i];
+          L.tileLayer(layerOptions.url, layerOptions).addTo(this.map);
+        }
+
+        this.map.on('moveend', _.bind(this.handleMapMoveEnd, this));
+      },
+
+      handleMapMoveEnd: function() {
+        var center = this.map.getCenter(),
+            zoom = this.map.getZoom(),
+            mapOptions = _.defaults({
+                center: [center.lat, center.lng],
+                zoom: zoom
+              },
+              this.model.get('details').map
+            );
+
+        this.model.set('map', mapOptions);
+      },
+
+      handleActivationChange: function(evt) {
+        evt.preventDefault();
+        var self = this,
+            $target = $(evt.currentTarget),
+            isActive = !!$target.val();
+
+        if (this.model.get('details').dataset_url || isActive === false) {
+          NS.SectionAdminMixin.handleActivationChange.call(self, evt);
+        } else {
+          // Create the dataset and set the dataset url on the section model
+          $.ajax({
+            url: '/shareabouts/create-dataset',
+            type: 'POST',
+            data: {
+              dataset_slug: NS.Data.user.username + '-' + this.model.collection.project.get('slug')
+            },
+            success: function(data) {
+              console.log('yay', arguments);
+
+              self.model.set('dataset_url', data.url);
+              NS.SectionAdminMixin.handleActivationChange.call(self, evt);
+            },
+            error: function(xhr, status, error) {
+              var name = $target.attr('name'),
+                  inactiveRadio = $('[name="'+name+'"][value=""]');
+
+              inactiveRadio.prop('checked', true);
+
+              NS.showErrorModal('Unable to activate Shareabouts',
+                'There was a temporary problem while we were setting up your ' +
+                'Shareabouts map.',
+                'We\'ve been notified and will investigate it right away. ' +
+                'This is likely a temporary issue so please try again shortly.');
+            }
+          });
+        }
       }
     })
   );
@@ -300,10 +384,9 @@ var Planbox = Planbox || {};
   );
 
   NS.FaqsSectionAdminView = NS.SortableListAdminView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
+    _.extend({}, NS.ContentEditableMixin, NS.SectionAdminMixin, {
       template: '#faqs-section-admin-tpl',
       tagName: 'section',
-      className: 'project-faqs',
 
       itemView: NS.FaqAdminView,
       itemViewContainer: '.faq-list',
@@ -312,11 +395,13 @@ var Planbox = Planbox || {};
         editables: '[contenteditable]:not(.faq [contenteditable])',
         itemList: '.faq-list',
         newItemFocus: '.faq-question:last',
-        addBtn: '.add-faq-btn'
+        addBtn: '.add-faq-btn',
+        activeToggle: '.active-toggle'
       },
       events: {
         'click @ui.addBtn': 'handleAddClick',
-        'blur @ui.editables': 'handleEditableBlur'
+        'blur @ui.editables': 'handleEditableBlur',
+        'change @ui.activeToggle': 'handleActivationChange'
       },
       onRender: function() {
         // We need to do this since SortableListAdminView and ContentEditableMixin

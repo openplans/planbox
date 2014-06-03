@@ -76,7 +76,7 @@
 
 
 
-/* =Sortable UI 
+/* =Sortable UI
 -------------------------------------------------------------- */
 
 .ui-sortable > li, .event, .faq {
@@ -489,6 +489,81 @@ li.attachment {
   display: none;
 }
 
+/* =Sections
+-------------------------------------------------------------- */
+.section-inactive-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(238,238,238,0.75);
+  z-index: 1001;
+  right: 0px;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s;
+          transition: opacity 0.3s;
+}
+
+.project-section-timeline .section-inactive-overlay {
+  background-color: rgba(136,136,136,0.75);
+}
+
+.active .section-inactive-overlay {
+  right: 9999px;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s, right 0 0.5s;
+          transition: opacity 0.3s, right 0 0.5s;
+}
+
+/* Section Activation */
+.section-activation-toggle {
+  position: relative;
+  z-index: 1002;
+}
+.section-activation-toggle .button-group {
+  background-color: #fff;
+  color: #333;
+  padding: 0.5rem;
+  margin: 0 0 0.9375rem;
+  border-radius: 1rem;
+  cursor: default;
+}
+.section-activation-toggle .button {
+  margin-bottom: 0;
+  background-color: #ddd;
+  color: #999;
+  cursor: pointer;
+}
+.section-activation-toggle .button:hover {
+  color: #333;
+}
+.section-activation-toggle .button.section-off,
+.section-activation-toggle .button.section-off:hover  {
+  background-color: #008CBA;
+  color: #fff;
+  cursor: default;
+}
+.active .button.section-off  {
+  background-color: #ddd;
+  color: #999;
+}
+.active .button.section-off:hover  {
+  background-color: #ddd;
+  color: #333;
+  cursor: pointer;
+}
+.active .button.section-on  {
+  background-color: #008CBA;
+  color: #fff;
+  cursor: default;
+}
+
+
+/* =Shareabouts
+-------------------------------------------------------------- */
+.map {
+  height: 300px;
+}
+
 
 /* =Highlights
 -------------------------------------------------------------- */
@@ -504,10 +579,10 @@ li.attachment {
 -------------------------------------------------------------- */
 
 .walkthrough {}
-.walkthrough .project-timeline {
+.walkthrough .project-section-timeline {
   background-color: inherit;
 }
-.walkthrough .project-timeline .section-header {
+.walkthrough .project-section-timeline .section-header {
   display: none;
 }
 
@@ -537,7 +612,7 @@ li.attachment {
 }
 
 .tabs.progress-tabs .step {
-  position: relative;  
+  position: relative;
   margin: 0 1.5rem 0 0;
 }
 .tabs.progress-tabs a {
@@ -592,7 +667,7 @@ li.attachment {
 }
 
 
-/* =Print Poster 
+/* =Print Poster
 -------------------------------------------------------------- */
 
 @media print {
@@ -606,15 +681,15 @@ li.attachment {
   .status-selector,
   .software-help-link,
   .event-list + br,
-  .project-faqs,
+  .project-section-faqs,
   .hide-for-print,
   .is-hidden,
   .remove-logo-btn-container,
   .image-dnd,
   .project-menu-container,
   .highlight,
-  .project-timeline .section-header,
-  .project-text,
+  .project-section-timeline .section-header,
+  .project-section-text,
   .project-faq,
   .calendar-icon,
   .logo {
@@ -686,7 +761,7 @@ li.attachment {
     font-size: 2em;
     margin-bottom: 0.5em;
   }
-  .project-timeline {
+  .project-section-timeline {
     padding: 1em;
     padding-top: 0;
   }
@@ -708,7 +783,7 @@ li.attachment {
     padding-top: 0;
   }
 
-  .project-timeline,
+  .project-section-timeline,
   .project-location {
     float: left;
     width: 70%;
