@@ -10,6 +10,7 @@ from django.forms.models import inlineformset_factory, modelform_factory
 from django.utils.html import format_html
 from django.utils.translation import ugettext as _
 from django_ace import AceWidget
+from django_object_actions import DjangoObjectActions
 from genericadmin.admin import GenericAdminModelAdmin, GenericTabularInline
 from jsonfield import JSONField
 from planbox_data.models import Profile, Project, Event, Theme, Section, Attachment
@@ -79,7 +80,7 @@ class EventInline (admin.StackedInline):
     })
 
 
-class ProjectAdmin (admin.ModelAdmin):
+class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
     list_display = ('_title', 'public', 'owner', '_owner_email', '_owner_affiliation', 'location', '_updated_at', '_created_at', '_permalink')
     prepopulated_fields = {"slug": ("title",)}
     ordering = ('-updated_at',)
@@ -95,6 +96,10 @@ class ProjectAdmin (admin.ModelAdmin):
         'happening_now_description': TextInput(attrs={'class': 'vTextField'}),
         'get_involved_description': TextInput(attrs={'class': 'vTextField'}),
     })
+
+    def clone_project(self, request, obj):
+        new_obj = obj.clone()
+        # TODO: Redirect to the new plan page
 
     def get_queryset(self, request):
         qs = super(ProjectAdmin, self).get_queryset(request)

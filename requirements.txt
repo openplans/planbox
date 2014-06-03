@@ -28,6 +28,7 @@ django-genericadmin==0.6.1
 django-ace==1.0.1
 djangorestframework==2.3.13
 requests==2.2.1
+django-object-actions==0.4.0
 
 
 
