@@ -388,9 +388,19 @@ class Profile (TimeStampedModel):
 @python_2_unicode_compatible
 class Theme (TimeStampedModel):
     css_url = models.URLField(blank=True)
+    js_url = models.URLField(blank=True)
 
     def __str__(self):
-        return self.css_url
+        s = ''
+        if self.css_url:
+            s += 'CSS: ' + self.css_url
+
+        if self.js_url:
+            if s:
+                s += '; '
+
+            s += 'JS: ' + self.js_url
+        return s
 
 
 class SectionManager (models.Manager):
