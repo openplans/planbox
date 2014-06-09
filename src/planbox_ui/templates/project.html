@@ -91,7 +91,6 @@
   <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/models.js"></script>
   <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/map.js"></script>
   {% else %}
-</script>
   <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
     {% if is_editable %}
   <script src="{{ STATIC_URL }}scripts/components-admin.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
