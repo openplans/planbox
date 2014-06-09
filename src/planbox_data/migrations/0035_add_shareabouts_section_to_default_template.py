@@ -39,7 +39,7 @@ class Migration(DataMigration):
             "description": "Give us your input on the project location. Your input will share the plan. Anyone can post an idea.",
             "layers": [
                 {
-                    "url": "http://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png"
+                    "url": "//{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png"
                 }
             ],
             "map": {
