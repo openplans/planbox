@@ -25,7 +25,7 @@ def create_dataset(request):
             status=400)
 
     current_origin = request.META.get('HTTP_ORIGIN', '')
-    datasets_url = 'http://%s/api/v2/%s/datasets' % (
+    datasets_url = 'https://%s/api/v2/%s/datasets' % (
         settings.SHAREABOUTS_HOST,
         settings.SHAREABOUTS_USERNAME)
     dataset_url = '/'.join([datasets_url, slug])
