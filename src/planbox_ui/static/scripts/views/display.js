@@ -41,6 +41,7 @@ var Planbox = Planbox || {};
   NS.TimelineSectionView = Backbone.Marionette.CompositeView.extend({
     template: '#timeline-section-tpl',
     tagName: 'section',
+    id: NS.SectionMixin.id,
     className: 'project-section-timeline',
 
     itemView: NS.EventView,
@@ -50,6 +51,7 @@ var Planbox = Planbox || {};
   NS.TextSectionView = Backbone.Marionette.ItemView.extend({
     template: '#text-section-tpl',
     tagName: 'section',
+    id: NS.SectionMixin.id,
     className: 'project-section-text'
   });
 
@@ -73,6 +75,7 @@ var Planbox = Planbox || {};
   NS.FaqsSectionView = Backbone.Marionette.CompositeView.extend({
     template: '#faqs-section-tpl',
     tagName: 'section',
+    id: NS.SectionMixin.id,
     className: 'project-section-faqs',
 
     itemView: NS.FaqView,
@@ -82,6 +85,7 @@ var Planbox = Planbox || {};
   NS.ShareaboutsSectionView = Backbone.Marionette.ItemView.extend({
     template: '#shareabouts-section-tpl',
     tagName: 'section',
+    id: NS.SectionMixin.id,
     className: 'project-section-shareabouts',
     ui: {
       shareabouts: '.project-shareabouts'

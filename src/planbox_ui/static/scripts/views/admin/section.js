@@ -238,6 +238,7 @@ var Planbox = Planbox || {};
     _.extend({}, NS.ContentEditableMixin, NS.SectionAdminMixin, {
       template: '#timeline-section-admin-tpl',
       tagName: 'section',
+      id: NS.SectionMixin.id,
 
       itemView: NS.EventAdminView,
       itemViewContainer: '.event-list',
@@ -270,6 +271,7 @@ var Planbox = Planbox || {};
     _.extend({}, NS.ContentEditableMixin, NS.SectionAdminMixin, {
       template: '#text-section-admin-tpl',
       tagName: 'section',
+      id: NS.SectionMixin.id,
 
       ui: {
         editables: '[contenteditable]',
@@ -287,6 +289,7 @@ var Planbox = Planbox || {};
     _.extend({}, NS.ContentEditableMixin, NS.SectionAdminMixin, {
       template: '#shareabouts-section-admin-tpl',
       tagName: 'section',
+      id: NS.SectionMixin.id,
 
       ui: {
         editables: '[contenteditable]',
@@ -387,6 +390,7 @@ var Planbox = Planbox || {};
     _.extend({}, NS.ContentEditableMixin, NS.SectionAdminMixin, {
       template: '#faqs-section-admin-tpl',
       tagName: 'section',
+      id: NS.SectionMixin.id,
 
       itemView: NS.FaqAdminView,
       itemViewContainer: '.faq-list',
