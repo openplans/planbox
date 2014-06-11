@@ -320,6 +320,7 @@ class Event (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, models.
 
     class Meta:
         ordering = ('project', 'index',)
+        unique_together = [('project', 'slug')]
 
     def __str__(self):
         if self.index is not None:
@@ -440,6 +441,7 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
 
     class Meta:
         ordering = ('project', 'index',)
+        unique_together = [('project', 'slug')]
 
     def __str__(self):
         return '%s section (%s)' % (self.type, self.slug)
