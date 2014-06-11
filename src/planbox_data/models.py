@@ -425,7 +425,8 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
         ('text', _('Text')),
         ('timeline', _('Timeline')),
         ('shareabouts', _('Shareabouts')),
-        ('faqs', _('FAQ'))
+        ('faqs', _('FAQ')),
+        ('raw', _('Raw HTML'))
     )
 
     project = models.ForeignKey('Project', related_name='sections')

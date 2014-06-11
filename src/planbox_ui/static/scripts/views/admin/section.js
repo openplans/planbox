@@ -418,4 +418,21 @@ var Planbox = Planbox || {};
       }
     })
   );
+
+  NS.RawHtmlSectionAdminView = Backbone.Marionette.ItemView.extend(
+    _.extend({}, NS.SectionAdminMixin, {
+      template: '#raw-section-admin-tpl',
+      tagName: 'section',
+      id: NS.SectionMixin.id,
+
+      ui: {
+        editables: '[contenteditable]',
+        activeToggle: '.active-toggle'
+      },
+      events: {
+        'blur @ui.editables': 'handleEditableBlur',
+        'change @ui.activeToggle': 'handleActivationChange'
+      }
+    })
+  );
 }(Planbox, jQuery));

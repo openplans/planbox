@@ -137,7 +137,8 @@ var Planbox = Planbox || {};
       'timeline': NS.TimelineSectionAdminView,
       'text': NS.TextSectionAdminView,
       'faqs': NS.FaqsSectionAdminView,
-      'shareabouts': NS.ShareaboutsSectionAdminView
+      'shareabouts': NS.ShareaboutsSectionAdminView,
+      'raw': NS.RawHtmlSectionAdminView
     },
     dataChanged: function() {
       this.options.parent.dataChanged();

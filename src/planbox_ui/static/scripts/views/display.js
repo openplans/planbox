@@ -55,6 +55,13 @@ var Planbox = Planbox || {};
     className: 'project-section-text'
   });
 
+  NS.TextSectionView = Backbone.Marionette.ItemView.extend({
+    template: '#raw-section-tpl',
+    tagName: 'section',
+    id: NS.SectionMixin.id,
+    className: 'project-section-raw'
+  });
+
   NS.FaqView = Backbone.Marionette.ItemView.extend({
     template: '#faq-tpl',
     tagName: 'div',
@@ -143,7 +150,8 @@ var Planbox = Planbox || {};
       'timeline': NS.TimelineSectionView,
       'text': NS.TextSectionView,
       'faqs': NS.FaqsSectionView,
-      'shareabouts': NS.ShareaboutsSectionView
+      'shareabouts': NS.ShareaboutsSectionView,
+      'raw': NS.RawHtmlSectionView
     }
   });
 
