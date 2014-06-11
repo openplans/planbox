@@ -22,7 +22,7 @@
     "pickadate": "~3.4.0",
     "foundation": "~5.2.2",
     "leaflet-0.7.2": "http://leaflet-cdn.s3.amazonaws.com/build/leaflet-0.7.2.zip",
-    "shareabouts-js": "https://github.com/openplans/shareabouts.js.git#gh-pages",
+    "shareabouts-js": "https://github.com/openplans/shareabouts.js.git#3.0.0",
     "gatekeeper": "https://github.com/openplans/gatekeeper.git#~0.1.1"
   },
   "devDependencies": {}
