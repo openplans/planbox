@@ -430,7 +430,7 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
     project = models.ForeignKey('Project', related_name='sections')
     type = models.CharField(max_length=30, choices=SECTION_TYPE_CHOICES)
     label = models.TextField(blank=True)
-    menu_label = models.TextField()
+    menu_label = models.TextField(blank=True)
     slug = models.CharField(max_length=30)
     active = models.BooleanField(default=True)
     details = JSONField(blank=True, default=dict)
