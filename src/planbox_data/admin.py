@@ -86,13 +86,14 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
     list_display = ('_title', 'public', 'owner', '_owner_email', '_owner_affiliation', 'location', '_updated_at', '_created_at', '_permalink')
     prepopulated_fields = {"slug": ("title",)}
     ordering = ('-updated_at',)
+    search_fields = ('owner', 'location', 'title', 'slug')
 
     inlines = (
         SectionInline,
         EventInline,
     )
     objectactions = ('clone_project',)
-    raw_id_fields = ('theme', 'template')
+    raw_id_fields = ('theme', 'template', 'owner')
     form = modelform_factory(Project, widgets={
         'title': TextInput(attrs={'class': 'vTextField'}),
         'location': TextInput(attrs={'class': 'vTextField'}),
