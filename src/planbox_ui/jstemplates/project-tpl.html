@@ -39,8 +39,9 @@
             <ul class="sub-nav">
               <li data-magellan-arrival="home"><a href="#home">Home</a></li>
               {{#each_active_section sections}}
-
-              <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
+                {{#if menu_label}}
+                <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
+                {{/if}}
               {{/each_active_section}}
             </ul>
           </div>
