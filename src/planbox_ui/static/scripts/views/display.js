@@ -158,6 +158,14 @@ var Planbox = Planbox || {};
   NS.ProjectView = NS.BaseProjectView.extend({
     template: '#project-tpl',
     sectionListView: NS.ProjectSectionListView,
+    ui: {
+      menuItems: '.project-menu li',
+      highlights: '.highlight a'
+    },
+    events: {
+      'click @ui.menuItems': 'onClickMenuItem',
+      'click @ui.highlights': 'onClickHighlight'
+    },
     onDomRefresh: function() {
       // The dom changed. Make sure that any Foundation plugins are init'd.
       $(document).foundation();
@@ -176,6 +184,17 @@ var Planbox = Planbox || {};
             }
           }, 250);
       $(window).off('scroll').on('scroll', debouncedScrollHandler);
+    },
+    onClickMenuItem: function(evt) {
+      var $target = $(evt.currentTarget),
+          label = $target.attr('data-magellan-arrival');
+      NS.Utils.log('USER', 'project-display', 'menu-click', label);
+    },
+    onClickHighlight: function(evt) {
+      var $target = $(evt.currentTarget),
+          label = $target.attr('data-highlight-type'),
+          linkURL = $target.attr('href');
+      NS.Utils.log('USER', 'project-display', 'highlight-click', label, linkURL);
     },
     offsets : function() {
       var self = this,
