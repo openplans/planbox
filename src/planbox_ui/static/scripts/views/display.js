@@ -75,7 +75,12 @@ var Planbox = Planbox || {};
 
     handleQuestionClick: function(evt) {
       evt.preventDefault();
+
       this.ui.question.toggleClass('is-selected');
+
+      var label = this.ui.question.text(),
+          state = this.ui.question.hasClass('is-selected') ? 'open' : 'close';
+      NS.Utils.log('USER', 'project-display', 'faq-click-' + state, label);
     }
   });
 
