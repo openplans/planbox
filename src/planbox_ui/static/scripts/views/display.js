@@ -15,6 +15,20 @@ var Planbox = Planbox || {};
     template: '#attachment-tpl',
     tagName: 'li',
     className: 'attachment',
+
+    ui: {
+      link: '.attachment-link',
+      title: '.attachment-title'
+    },
+    events: {
+      'click @ui.link': 'onLinkClick'
+    },
+
+    onLinkClick: function(evt) {
+      var label = this.ui.title.text(),
+          linkURL = this.ui.link.attr('href');
+      NS.Utils.log('USER', 'project-display', 'attachment-click', label, linkURL);
+    }
   });
 
   NS.AttachmentListView = Backbone.Marionette.CompositeView.extend({
