@@ -25,9 +25,8 @@ var Planbox = Planbox || {};
     },
 
     onLinkClick: function(evt) {
-      var label = this.ui.title.text(),
-          linkURL = this.ui.link.attr('href');
-      NS.Utils.log('USER', 'project-display', 'attachment-click', label, linkURL);
+      var label = this.ui.title.text();
+      NS.Utils.log('USER', 'project-display', 'attachment-click', label);
     }
   });
 
@@ -211,9 +210,8 @@ var Planbox = Planbox || {};
     },
     onClickHighlight: function(evt) {
       var $target = $(evt.currentTarget),
-          label = $target.attr('data-highlight-type'),
-          linkURL = $target.attr('href');
-      NS.Utils.log('USER', 'project-display', 'highlight-click', label, linkURL);
+          label = $target.attr('data-highlight-type');
+      NS.Utils.log('USER', 'project-display', 'highlight-click', label);
     },
     offsets : function() {
       var self = this,
