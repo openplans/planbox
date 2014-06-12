@@ -157,7 +157,47 @@ var Planbox = Planbox || {};
 
   NS.ProjectView = NS.BaseProjectView.extend({
     template: '#project-tpl',
-    sectionListView: NS.ProjectSectionListView
+    sectionListView: NS.ProjectSectionListView,
+    onDomRefresh: function() {
+      // The dom changed. Make sure that any Foundation plugins are init'd.
+      $(document).foundation();
+
+      var self = this,
+          debouncedScrollHandler = _.debounce(function(evt) {
+            var offsets = self.offsets(),
+                item, i;
+
+            for(i=0; i<offsets.length; i++){
+              item = offsets[i];
+              if (item.viewport_offset >= item.top_offset) {
+                NS.Utils.log('ROUTE', item.arrival.attr('data-magellan-destination'));
+                return true;
+              }
+            }
+          }, 250);
+      $(window).off('scroll').on('scroll', debouncedScrollHandler);
+    },
+    offsets : function() {
+      var self = this,
+          expedition = $('[data-magellan-expedition]'),
+          destination_threshold = expedition.data('magellanExpeditionInit').destination_threshold,
+          viewport_offset = $(window).scrollTop();
+
+      return $('[data-magellan-destination]').map(function(idx, el) {
+        var dest = $(el),
+            top_offset = dest.offset().top - destination_threshold - expedition.outerHeight();
+        return {
+          destination : dest,
+          arrival : $(this),
+          top_offset : top_offset,
+          viewport_offset : viewport_offset
+        };
+      }).sort(function(a, b) {
+        if (a.top_offset < b.top_offset) {return 1;}
+        if (a.top_offset > b.top_offset) {return -1;}
+        return 0;
+      });
+    }
   });
 
 
