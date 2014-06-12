@@ -39,8 +39,9 @@
             <ul class="sub-nav">
               <li data-magellan-arrival="home"><a href="#home">Home</a></li>
               {{#each_active_section sections}}
-
-              <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
+                {{#if menu_label}}
+                <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
+                {{/if}}
               {{/each_active_section}}
             </ul>
           </div>
@@ -62,7 +63,7 @@
            --       the same code
            --}}
         {{#if happening_now_link_url}}
-        <a href="{{ happening_now_link_url }}"{{#is happening_now_link_type 'external'}} target="_blank"{{/is}}>
+        <a href="{{ happening_now_link_url }}"{{#is happening_now_link_type 'external'}} target="_blank"{{/is}} data-highlight-type="happening-now">
           <div class="panel callout radius">
         {{else}}
           <div class="panel radius">
@@ -81,7 +82,7 @@
       {{#if get_involved_description}}
       <div class="highlight">
         {{#if get_involved_link_url}}
-        <a href="{{ get_involved_link_url }}"{{#is get_involved_link_type 'external'}} target="_blank"{{/is}}>
+        <a href="{{ get_involved_link_url }}"{{#is get_involved_link_type 'external'}} target="_blank"{{/is}} data-highlight-type="get-involved">
           <div class="panel callout radius">
         {{else}}
           <div class="panel radius">

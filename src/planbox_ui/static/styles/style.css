@@ -485,8 +485,8 @@ img.avatar {
 .extra-pricing-info tr {
   background-color: #f5f5f5;
 }
-.extra-pricing-info tr.even, 
-.extra-pricing-info tr.alt, 
+.extra-pricing-info tr.even,
+.extra-pricing-info tr.alt,
 .extra-pricing-info tr:nth-of-type(even) {
   background-color: #fff;
 }
@@ -703,6 +703,17 @@ img.avatar {
 
 .shareabouts-submit-button {
   margin-top: 0.5em;
+}
+
+/* Overrides for default styles */
+.project-shareabouts .shareabouts-add-button-container {
+  margin-left: 0;
+  bottom: 0;
+}
+
+.project-shareabouts .shareabouts-add-button.expand {
+  padding-right: 2rem;
+  padding-left: 2rem;
 }
 
 /* =Foundation Media Queries
