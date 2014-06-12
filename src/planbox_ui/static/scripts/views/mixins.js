@@ -44,6 +44,12 @@ var Planbox = Planbox || {};
     }
   };
 
+  NS.SectionMixin = {
+    id: function() {
+      return 'section-' + this.model.get('slug') + '-wrapper';
+    }
+  };
+
   NS.SectionAdminMixin = {
     className: function() {
       return [

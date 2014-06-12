@@ -320,6 +320,7 @@ class Event (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, models.
 
     class Meta:
         ordering = ('project', 'index',)
+        unique_together = [('project', 'slug')]
 
     def __str__(self):
         if self.index is not None:
@@ -424,13 +425,14 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
         ('text', _('Text')),
         ('timeline', _('Timeline')),
         ('shareabouts', _('Shareabouts')),
-        ('faqs', _('FAQ'))
+        ('faqs', _('FAQ')),
+        ('raw', _('Raw HTML'))
     )
 
     project = models.ForeignKey('Project', related_name='sections')
     type = models.CharField(max_length=30, choices=SECTION_TYPE_CHOICES)
     label = models.TextField(blank=True)
-    menu_label = models.TextField()
+    menu_label = models.TextField(blank=True)
     slug = models.CharField(max_length=30)
     active = models.BooleanField(default=True)
     details = JSONField(blank=True, default=dict)
@@ -440,6 +442,7 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
 
     class Meta:
         ordering = ('project', 'index',)
+        unique_together = [('project', 'slug')]
 
     def __str__(self):
         return '%s section (%s)' % (self.type, self.slug)
