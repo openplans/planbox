@@ -312,6 +312,9 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/gatekeeper/gatekeeper.js',
             '<%= yeoman.app %>/bower_components/shareabouts-js/src/utils.js',
             '<%= yeoman.app %>/bower_components/shareabouts-js/src/models.js',
+            '<%= yeoman.app %>/bower_components/shareabouts-js/src/panel-layout.js',
+            '<%= yeoman.app %>/bower_components/shareabouts-js/src/place-detail-view.js',
+            '<%= yeoman.app %>/bower_components/shareabouts-js/src/place-form-view.js',
             '<%= yeoman.app %>/bower_components/shareabouts-js/src/map.js'
           ],
           '<%= yeoman.app %>/scripts/components-admin.min.js': [
