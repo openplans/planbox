@@ -55,7 +55,7 @@ var Planbox = Planbox || {};
     className: 'project-section-text'
   });
 
-  NS.TextSectionView = Backbone.Marionette.ItemView.extend({
+  NS.RawHtmlSectionView = Backbone.Marionette.ItemView.extend({
     template: '#raw-section-tpl',
     tagName: 'section',
     id: NS.SectionMixin.id,
