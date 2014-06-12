@@ -66,6 +66,9 @@ CACHES = {'default': django_cache_url.config()}
 GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID', "', ''); alert('Set your Google Analytics ID and domain!'); (function(){})('")
 GOOGLE_ANALYTICS_DOMAIN = os.environ.get('GOOGLE_ANALYTICS_DOMAIN', 'herokuapp.com')
 
+# intercom.io
+INTERCOM_ID = os.environ.get('INTERCOM_ID', '')
+
 ## ===========================================================================
 
 # For sitemaps and caching -- will be a new value every time the server starts
