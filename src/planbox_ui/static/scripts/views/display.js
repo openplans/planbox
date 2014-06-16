@@ -201,7 +201,12 @@ var Planbox = Planbox || {};
               }
             }
           }, 250);
-      $(window).off('scroll').on('scroll', debouncedScrollHandler);
+
+      // Only bind the scroll event if a magellan widget exists. They don't if
+      // there are not enough items to warrant it.
+      if ($('[data-magellan-expedition]').length) {
+        $(window).off('scroll').on('scroll', debouncedScrollHandler);
+      }
     },
     onClickMenuItem: function(evt) {
       var $target = $(evt.currentTarget),
@@ -213,7 +218,7 @@ var Planbox = Planbox || {};
           label = $target.attr('data-highlight-type');
       NS.Utils.log('USER', 'project-display', 'highlight-click', label);
     },
-    offsets : function() {
+    offsets: function() {
       var self = this,
           expedition = $('[data-magellan-expedition]'),
           destination_threshold = expedition.data('magellanExpeditionInit').destination_threshold,
