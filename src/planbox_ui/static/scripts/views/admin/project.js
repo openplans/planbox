@@ -469,9 +469,12 @@ var Planbox = Planbox || {};
 
         if (makePublic || !model.get('public')) {
           // Show the modal if we're publishing this right now
-          NS.app.modalRegion.show(new NS.ProjectAdminModalView({
-            model: model
-          }));
+          // Note: we defer so that the modal is visible after re-rendering.
+          _.defer(function() {
+            NS.app.modalRegion.show(new NS.ProjectAdminModalView({
+              model: model
+            }));
+          });
         }
       },
       onSaveError: function(model, resp) {
