@@ -73,8 +73,18 @@
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', '{{ settings.GOOGLE_ANALYTICS_ID|safe }}', '{{ settings.GOOGLE_ANALYTICS_DOMAIN|safe }}');
-    ga('send', 'pageview');
+    var isLocalhost = '{{ request.domain_mapping.domain|safe }}'.slice(0,9) === 'localhost';
+    ga('create', '{{ settings.GOOGLE_ANALYTICS_ID|safe }}', isLocalhost ? 'none' : 'auto');
+
+    // GA Dimensions:
+    // 1 - Domain
+    // 2 - Root path
+    ga('set', 'dimension1', '{{ request.domain_mapping.domain|safe }}');
+    ga('set', 'dimension2', '{{ request.domain_mapping.root_path|safe }}');
+
+    // Override the page info as derived from window.location with what is
+    // attached to the request, which takes into account the domain mapping.
+    ga('send', 'pageview', '{{ request.path_info|safe }}' + window.location.search);
   </script>
   {% endif %}
 
