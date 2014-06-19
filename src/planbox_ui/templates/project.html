@@ -106,7 +106,8 @@
     var Planbox = Planbox || {}
 
     Planbox.bootstrapped = {
-      staticUrl: '{{ STATIC_URL }}'
+      staticUrl: '{{ STATIC_URL }}',
+      projectRootPath: '{{ request.path_info }}'
     };
 
     Planbox.Data = {

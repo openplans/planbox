@@ -191,12 +191,18 @@ var Planbox = Planbox || {};
       var self = this,
           debouncedScrollHandler = _.debounce(function(evt) {
             var offsets = self.offsets(),
-                item, i;
+                item, i, dest, path;
 
             for(i=0; i<offsets.length; i++){
               item = offsets[i];
               if (item.viewport_offset >= item.top_offset) {
-                NS.Utils.log('ROUTE', item.arrival.attr('data-magellan-destination'));
+                dest = item.arrival.attr('data-magellan-destination');
+                path = NS.Utils.rootPathJoin(dest);
+
+                if (path !== self.currentPath) {
+                  self.currentPath = path;
+                  NS.Utils.log('ROUTE', path);
+                }
                 return true;
               }
             }

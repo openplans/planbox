@@ -50,4 +50,4 @@ class DomainMapping (BaseDomainMappingMixin, models.Model):
 class DefaultDomainMapping (BaseDomainMappingMixin):
     def __init__(self, domain):
         self.domain = domain
-        self.root_path = ''
+        self.root_path = '/'

@@ -64,6 +64,31 @@ var Planbox = Planbox || {};
             .replace(/>/g, '&gt;');
     },
 
+    // pathJoin translated from Python's os.path.join
+    pathJoin: function() {
+      var i, segment, path = '';
+      for (i = 0; i < arguments.length; ++i) {
+        segment = arguments[i];
+        if (segment[0] === '/') {
+          path = segment;
+        } else if (path === '' || path[path.length-1] === '/') {
+          path += segment;
+        } else {
+          path += '/' + segment;
+        }
+      }
+      return path;
+    },
+
+    rootPathJoin: function() {
+      // Prepend the project root path to the arguments
+      var allArgs = Array.prototype.slice.call(arguments, 0);
+      allArgs.unshift(NS.bootstrapped.projectRootPath);
+
+      // Then treat as a normal path join
+      return NS.Utils.pathJoin.apply(this, allArgs);
+    },
+
     // ====================================================
     // Event and State Logging
 

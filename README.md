@@ -28,12 +28,12 @@ Describe the technology stack and any dependencies.
      source env/bin/activate
      pip install -r requirements.txt
      bower install
-     cp src/planbox/local_settings.py.template src/planbox/local_settings.py 
+     cp src/planbox/local_settings.py.template src/planbox/local_settings.py
 
 ### Start your local server
 
      src/manage.py runserver
-    
+
 
 ## Deploy to Heroku
 
@@ -62,6 +62,18 @@ TBD
 * IOS Safari 6+
 * Android Browser 4+
 * Chrome
+
+
+## Google Analytics configuration
+
+Planbox stores the request domain information using two additional variables
+(dimensions):
+
+* Dimension 1 : Domain
+* Dimension 2 : Root Path
+
+Refer to the Google Analytics documentation on [setting up custom dimensions](https://developers.google.com/analytics/devguides/platform/customdimsmets)
+to configure your account appropriately.
 
 
 ## Copyright
