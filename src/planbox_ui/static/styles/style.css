@@ -111,6 +111,12 @@ h4, .h4 { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-weig
   top: 0.375em;
 }
 
+/* offset page anchors for Magellan */
+.page-anchor {
+  position: relative;
+  top: -80px;
+}
+
 
 /* =Layout
 -------------------------------------------------------------- */
@@ -478,9 +484,25 @@ img.avatar {
   height: 0;
   overflow: hidden;
 }
+.extra-pricing-info-header {
+/*  color: #eee;*/
+  background-color: #ddd;
+  margin: 0;
+  padding: 0.9375rem 1.25rem;
+/*  text-align: center;*/
+  font-weight: bold;
+  font-size: 1.25rem;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+.feature-list-icon {
+  height: 1.75em;
+  width: auto;
+  margin: 0 0.375rem;
+}
 .extra-pricing-info table {
   width: 100%;
   border: 0;
+  margin: 0;
 }
 .extra-pricing-info tr {
   background-color: #f5f5f5;
@@ -496,9 +518,11 @@ img.avatar {
 }
 .extra-pricing-info td {
   font-size: 0.75rem;
-  text-align: center;
+  text-align: left;
+/*  text-align: center;*/
   border-right: 1px solid transparent;
   box-shadow: inset -1px 0 0 rgba(0,0,0,0.05);
+  vertical-align: top;
 }
 .extra-pricing-info td:first-letter {
   text-transform: uppercase;
@@ -509,6 +533,14 @@ img.avatar {
 }
 .all-details-revealed .extra-pricing-info {
   height: auto;
+}
+.extra-pricing-info p {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+.extra-pricing-info p + p {
+  margin-top: 0.625rem;
 }
 
 
