@@ -68,6 +68,7 @@ GOOGLE_ANALYTICS_DOMAIN = os.environ.get('GOOGLE_ANALYTICS_DOMAIN', 'herokuapp.c
 
 # intercom.io
 INTERCOM_ID = os.environ.get('INTERCOM_ID', '')
+INTERCOM_SECRET = os.environ.get('INTERCOM_SECRET', '')
 
 ## ===========================================================================
 
