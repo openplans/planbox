@@ -86,7 +86,7 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
     list_display = ('_title', 'public', 'owner', '_owner_email', '_owner_affiliation', 'location', '_updated_at', '_created_at', '_permalink')
     prepopulated_fields = {"slug": ("title",)}
     ordering = ('-updated_at',)
-    search_fields = ('owner', 'location', 'title', 'slug')
+    search_fields = ('owner__name', 'owner__slug', 'location', 'title', 'slug')
 
     inlines = (
         SectionInline,

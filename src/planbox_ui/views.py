@@ -71,7 +71,13 @@ class AppMixin (object):
 
         user_profile = self.get_profile()
         user_serializer = UserSerializer(user_profile)
-        context['user_data'] = None if user_profile is None else user_serializer.data
+        user_data = None if user_profile is None else user_serializer.data
+        context['user_data'] = user_data
+
+        # intercom secure mode
+        if hasattr(settings, 'INTERCOM_SECRET') and user_data:
+            context['intercom_user_hash'] = hmac.new(settings.INTERCOM_SECRET,
+                user_data['username'], digestmod=hashlib.sha256).hexdigest()
 
         # Register handlebars helpers
         @register_helper('user')
