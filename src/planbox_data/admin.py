@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals
 
+import json
 from django.contrib import admin
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -16,6 +17,18 @@ from django_object_actions import DjangoObjectActions
 from genericadmin.admin import GenericAdminModelAdmin, GenericTabularInline
 from jsonfield import JSONField
 from planbox_data.models import Profile, Project, Event, Theme, Section, Attachment
+
+
+class PrettyAceWidget (AceWidget):
+    def render(self, name, value, attrs=None):
+        if value:
+            try:
+                # If we can prettify the JSON, we should
+                value = json.dumps(json.loads(value), indent=2)
+            except ValueError:
+                # If we cannot, then we should still display the value
+                pass
+        return super(PrettyAceWidget, self).render(name, value, attrs=attrs)
 
 
 class AttachmentAdmin (GenericAdminModelAdmin):
@@ -41,7 +54,8 @@ class SectionInline (admin.StackedInline):
 
     formfield_overrides = {
         TextField: {'widget': TextInput(attrs={'class': 'vTextField'})},
-        JSONField: {'widget': Textarea(attrs={'class': 'vLargeTextField'})},
+        # JSONField: {'widget': Textarea(attrs={'class': 'vLargeTextField'})},
+        JSONField: {'widget': PrettyAceWidget(mode='json', width='100%', wordwrap=True)},
         # JSONField: {'widget': AceWidget(mode='json', theme='github')},
     }
 
@@ -159,7 +173,10 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
 
 
 class ThemeAdmin (admin.ModelAdmin):
-    pass
+    formfield_overrides = {
+        JSONField: {'widget': PrettyAceWidget(mode='json', width='100%')},
+        # JSONField: {'widget': AceWidget(mode='json', theme='github')},
+    }
 
 
 admin.site.register(Profile, ProfileAdmin)
