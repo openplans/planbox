@@ -30,6 +30,8 @@ def striptags(value, joinstr=''):
 
 @register.filter
 def force_list(value):
+    if not value:
+        return []
     if isinstance(value, (list, tuple)):
         return value
     else:
