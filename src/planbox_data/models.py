@@ -395,6 +395,7 @@ class Theme (TimeStampedModel):
                 '<li><i>css</i>: A URL or array of URLs for more than one stylesheet</li>'
                 '<li><i>js</i>: A URL or array of URLs for more than one script</li>'
                 '<li><i>favicon</i>: A URL</li>'
+                '<li><i>icons</i>: An array of objects with <code>{"url": (required), "sizes": (optional), "type": (optional)}</li>'
             '</ul>'))
 
     def __str__(self):

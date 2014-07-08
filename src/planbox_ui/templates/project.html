@@ -34,6 +34,30 @@
 
 {% endblock %}
 
+{% block icons %}
+  {% if project.theme.definition.favicon %}
+  <link rel="icon" href="{{ project.theme.definition.favicon|safe }}">
+  <link rel="shortcut icon" href="{{ project.theme.definition.favicon|safe }}">
+  {% else %}
+  <link rel="icon" href="{{ STATIC_URL }}images/favicon.png">
+  <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.png">
+  {% endif %}
+
+  {% for icon in project.theme.definition.icons %}
+  <link rel="shortcut icon" {% if icon.sizes %}sizes="{{ icon.sizes }}"{% endif %} href="{{ icon.url }}">
+  <link rel="apple-touch-icon-precomposed" {% if icon.sizes %}sizes="{{ icon.sizes }}"{% endif %} href="{{ icon.url }}">
+  {% empty %}
+  <link rel="shortcut icon" sizes="144x144" href="{{ STATIC_URL }}images/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" sizes="114x114" href="{{ STATIC_URL }}images/apple-touch-icon-114x114-precomposed.png">
+  <link rel="shortcut icon" sizes="72x72" href="{{ STATIC_URL }}images/apple-touch-icon-72x72-precomposed.png">
+  <link rel="shortcut icon" href="{{ STATIC_URL }}images/apple-touch-icon-precomposed.png">
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}images/apple-touch-icon-144x144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}images/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}images/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}images/apple-touch-icon-precomposed.png">
+  {% endfor %}
+{% endblock %}
 
 {% block styles %}
   {% if debug %}
@@ -60,11 +84,6 @@
   {% for css_url in project.theme.definition.css|force_list %}
   <link rel="stylesheet" href="{{ css_url|safe }}">
   {% endfor %}
-
-  {% if project.theme.definition.favicon %}
-  <link rel="icon" href="{{ project.theme.definition.favicon|safe }}">
-  <link rel="shortcut icon" href="{{ project.theme.definition.favicon|safe }}">
-  {% endif %}
 
 {% endblock %}
 
