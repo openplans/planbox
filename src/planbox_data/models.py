@@ -388,20 +388,15 @@ class Profile (TimeStampedModel):
 
 @python_2_unicode_compatible
 class Theme (TimeStampedModel):
-    css_url = models.URLField(blank=True)
-    js_url = models.URLField(blank=True)
+    name = models.CharField(_('Theme name'), max_length=100, blank=True)
+    definition = JSONField(default=dict,
+        help_text=('The theme definition can consist of the following:<br>'
+            '<i>css</i>: A URL or array of URLs<br>'
+            '<i>js</i>: A URL or array of URLs<br>'
+            '<i>favicon</i>: A URL, or object with <code>{url: ..., type: ...}</code>'))
 
     def __str__(self):
-        s = ''
-        if self.css_url:
-            s += 'CSS: ' + self.css_url
-
-        if self.js_url:
-            if s:
-                s += '; '
-
-            s += 'JS: ' + self.js_url
-        return s
+        return self.name or _('Theme %s (No name)') % self.pk
 
 
 class SectionManager (models.Manager):
