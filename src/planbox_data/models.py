@@ -390,10 +390,12 @@ class Profile (TimeStampedModel):
 class Theme (TimeStampedModel):
     name = models.CharField(_('Theme name'), max_length=100, blank=True)
     definition = JSONField(default=dict,
-        help_text=('The theme definition can consist of the following:<br>'
-            '<i>css</i>: A URL or array of URLs<br>'
-            '<i>js</i>: A URL or array of URLs<br>'
-            '<i>favicon</i>: A URL, or object with <code>{url: ..., type: ...}</code>'))
+        help_text=('<p><b>The theme definition can consist of the following:</b></p>'
+            '<ul>'
+                '<li><i>css</i>: A URL or array of URLs for more than one stylesheet</li>'
+                '<li><i>js</i>: A URL or array of URLs for more than one script</li>'
+                '<li><i>favicon</i>: A URL</li>'
+            '</ul>'))
 
     def __str__(self):
         return self.name or _('Theme %s (No name)') % self.pk
