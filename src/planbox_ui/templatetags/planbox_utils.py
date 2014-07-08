@@ -27,3 +27,10 @@ def striptags(value, joinstr=''):
     """Strips all [X]HTML tags."""
     new_value = strip_tags(value, joinstr)
     return re.sub('\s+', ' ', new_value)
+
+@register.filter
+def force_list(value):
+    if isinstance(value, (list, tuple)):
+        return value
+    else:
+        return [value]
