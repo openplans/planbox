@@ -15,12 +15,14 @@
   <!--  Mobile Viewport Fix -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
+  {% block icons %}
   <!-- Favicon & Progressively-Enhanced Touch Icons: http://mathiasbynens.be/notes/touch-icons#sizes -->
   <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.png">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}images/apple-touch-icon-144x144-precomposed.png">
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}images/apple-touch-icon-114x114-precomposed.png">
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}images/apple-touch-icon-72x72-precomposed.png">
   <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}images/apple-touch-icon-precomposed.png">
+  {% endblock icons %}
 
   <!-- Google Web Fonts -->
   <!-- <link href='//fonts.googleapis.com/css?family=Alegreya+Sans:100,400,800,400italic,800italic,100italic' rel='stylesheet' type='text/css'> -->

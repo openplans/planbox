@@ -2,6 +2,7 @@
 {% load handlebarsjs from jstemplate %}
 {% load as_json from planbox_utils %}
 {% load striptags from planbox_utils %}
+{% load force_list from planbox_utils %}
 
 
 {% block title %}{{ project_data.title }}{% endblock %}
@@ -33,6 +34,30 @@
 
 {% endblock %}
 
+{% block icons %}
+  {% if project.theme.definition.favicon %}
+  <link rel="icon" href="{{ project.theme.definition.favicon|safe }}">
+  <link rel="shortcut icon" href="{{ project.theme.definition.favicon|safe }}">
+  {% else %}
+  <link rel="icon" href="{{ STATIC_URL }}images/favicon.png">
+  <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.png">
+  {% endif %}
+
+  {% for icon in project.theme.definition.icons %}
+  <link rel="shortcut icon" {% if icon.sizes %}sizes="{{ icon.sizes }}"{% endif %} href="{{ icon.url }}">
+  <link rel="apple-touch-icon-precomposed" {% if icon.sizes %}sizes="{{ icon.sizes }}"{% endif %} href="{{ icon.url }}">
+  {% empty %}
+  <link rel="shortcut icon" sizes="144x144" href="{{ STATIC_URL }}images/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" sizes="114x114" href="{{ STATIC_URL }}images/apple-touch-icon-114x114-precomposed.png">
+  <link rel="shortcut icon" sizes="72x72" href="{{ STATIC_URL }}images/apple-touch-icon-72x72-precomposed.png">
+  <link rel="shortcut icon" href="{{ STATIC_URL }}images/apple-touch-icon-precomposed.png">
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}images/apple-touch-icon-144x144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}images/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}images/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}images/apple-touch-icon-precomposed.png">
+  {% endfor %}
+{% endblock %}
 
 {% block styles %}
   {% if debug %}
@@ -56,10 +81,10 @@
 
   {% endif %} {# debug #}
 
-  {% if project.theme.css_url %}
-  {# NOTE: this is ripe for injection, so users should not be able to set this. #}
-  <link rel="stylesheet" href="{{ project.theme.css_url|safe }}">
-  {% endif %}
+  {% for css_url in project.theme.definition.css|force_list %}
+  <link rel="stylesheet" href="{{ css_url|safe }}">
+  {% endfor %}
+
 {% endblock %}
 
 
@@ -140,10 +165,9 @@
   <script src="{{ STATIC_URL }}scripts/app.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
 
-  {% if project.theme.js_url %}
-  {# NOTE: this is ripe for injection, so users should not be able to set this. #}
-  <script src="{{ project.theme.js_url|safe }}"></script>
-  {% endif %}
+  {% for js_url in project.theme.definition.js|force_list %}
+  <script src="{{ js_url|safe }}"></script>
+  {% endfor %}
 
   {% handlebarsjs '(.*)' precompile register_partials %}
 
