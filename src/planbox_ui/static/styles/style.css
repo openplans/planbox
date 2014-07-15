@@ -175,7 +175,7 @@ section, footer {
   height: 100%;
   padding: 0;
 }
-.openplans-top-bar .name h1 a:hover {
+.openplans-top-bar .name h1 a:hover img {
   background-color: #cceeff;
 }
 .openplans-logo-hole {
