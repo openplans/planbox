@@ -224,7 +224,10 @@ var Planbox = Planbox || {};
     offsets: function() {
       var self = this,
           expedition = $('[data-magellan-expedition]'),
-          destination_threshold = expedition.data('magellanExpeditionInit').destination_threshold,
+          settings = expedition.data('magellanExpeditionInit') || {
+            destination_threshold: 20
+          },
+          destination_threshold = settings.destination_threshold,
           viewport_offset = $(window).scrollTop();
 
       return $('[data-magellan-destination]').map(function(idx, el) {
