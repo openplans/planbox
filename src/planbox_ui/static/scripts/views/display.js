@@ -185,9 +185,6 @@ var Planbox = Planbox || {};
       'click @ui.highlights': 'onClickHighlight'
     },
     onDomRefresh: function() {
-      // The dom changed. Make sure that any Foundation plugins are init'd.
-      $(document).foundation();
-
       var self = this,
           debouncedScrollHandler = _.debounce(function(evt) {
             var offsets = self.offsets(),

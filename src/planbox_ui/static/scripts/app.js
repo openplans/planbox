@@ -61,4 +61,13 @@ var Planbox = Planbox || {};
     NS.app.start();
   });
 
+  $(window).load(function() {
+    // Moved this from the BaseProjectView onDomRefresh. This will wait until
+    // all of the images have been loaded so that Magellan will funciton as
+    // expected. Specifically, "sticking" to the right location when scrolling
+    // and not overlapping with section title when someone links directly to
+    // a hash.
+    $(document).foundation();
+  });
+
 }(Planbox, jQuery));
