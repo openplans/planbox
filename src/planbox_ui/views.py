@@ -297,7 +297,7 @@ class BaseExisingProjectView (ProjectMixin, TemplateView):
                                          owner__slug=owner_name, slug=slug)
 
         if not self.get_project_is_visible():
-            raise Http404
+            return redirect('app-index')
 
         return super(BaseExisingProjectView, self).get(request, pk=self.project.pk)
 
