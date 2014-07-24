@@ -37,7 +37,7 @@ OpenPlans
 {% endblock %}
 
 {% block topbar %}
-<div class="contain-to-grid sticky openplans-top-bar">
+<div class="{% if is_editable %}{% else %}contain-to-grid {% endif %}sticky openplans-top-bar">
   <nav class="top-bar" data-topbar>
     <ul class="title-area">
       <li class="name">
