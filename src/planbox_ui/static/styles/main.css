@@ -6513,7 +6513,8 @@ section, footer {
 --------------------------------------------------*/
 .project-edit-form {
   background-color: #fff;
-  padding-bottom: 4rem; }
+  padding-bottom: 4rem;
+  box-shadow: 0 -65px 0 #fff; }
 
 .project-section-fieldset {
   padding: 0;
