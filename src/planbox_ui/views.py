@@ -275,7 +275,7 @@ class ProjectMixin (AppMixin):
         return context
 
 
-class BaseExisingProjectView (ProjectMixin, TemplateView):
+class BaseExistingProjectView (ProjectMixin, TemplateView):
     def get_project_is_visible(self):
         return (
             self.request.user.is_superuser or
@@ -299,10 +299,10 @@ class BaseExisingProjectView (ProjectMixin, TemplateView):
         if not self.get_project_is_visible():
             return redirect('app-index')
 
-        return super(BaseExisingProjectView, self).get(request, pk=self.project.pk)
+        return super(BaseExistingProjectView, self).get(request, pk=self.project.pk)
 
 
-class ProjectView (SSLRequired, S3UploadMixin, BaseExisingProjectView):
+class ProjectView (SSLRequired, S3UploadMixin, BaseExistingProjectView):
     """
     A view on an existing project that presents an editable template when the
     authenticated user is the owner of the project.
@@ -312,7 +312,7 @@ class ProjectView (SSLRequired, S3UploadMixin, BaseExisingProjectView):
         return self.project.owned_by(self.request.user)
 
 
-class ReadOnlyProjectView (ReadOnlyMixin, BaseExisingProjectView):
+class ReadOnlyProjectView (ReadOnlyMixin, BaseExistingProjectView):
     """
     A view on an existing project where that always presumes the user is NOT
     the project owner (thus it is always in read-only mode).
