@@ -256,7 +256,11 @@ class SigninView (AppMixin, LogoutRequired, SSLRequired, FormView):
 
 
 class ProjectMixin (AppMixin):
-    template_name = 'project.html'
+    def get_template_names(self):
+        if self.get_project_is_editable():
+            return ['project-admin.html']
+        else:
+            return ['project.html']
 
     def get_context_data(self, **kwargs):
         context = super(ProjectMixin, self).get_context_data(**kwargs)

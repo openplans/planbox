@@ -36,8 +36,7 @@ OpenPlans
   {% endif %}
 {% endblock %}
 
-{% block page %}
-
+{% block topbar %}
 <div class="contain-to-grid sticky openplans-top-bar">
   <nav class="top-bar" data-topbar>
     <ul class="title-area">
@@ -73,10 +72,9 @@ OpenPlans
     </section>
   </nav>
 </div>
-
-{% block main %}{% endblock %}
-
 {% endblock %}
+
+{% block page %}{% endblock %}
 
 {% block scripts %}
   {% if debug %}
