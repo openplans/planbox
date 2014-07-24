@@ -8,9 +8,7 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User as UserAuth
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import redirect_to_login
-from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import resolve_url
@@ -25,7 +23,7 @@ from password_reset.views import (
 from planbox_data.models import Project, Profile
 from planbox_data.serializers import ProjectSerializer, UserSerializer, TemplateProjectSerializer
 from planbox_ui.decorators import ssl_required
-from planbox_ui.forms import UserCreationForm
+from planbox_ui.forms import UserCreationForm, AuthenticationForm
 import pybars
 
 
