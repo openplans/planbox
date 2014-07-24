@@ -1,0 +1,102 @@
+// Comment out this import if you are customizing you imports below
+@import "../bower_components/foundation/scss/normalize";
+
+// Global Foundation Settings
+@import "settings";
+
+// Comment out this import if you are customizing you imports below
+@import "../bower_components/foundation/scss/foundation";
+
+
+/*==================================================
+
+  AVOID OVERRIDING FOUNDATION!!! 
+  Instead edit _settings.scss. Below are rules for 
+  enhancing Foundation. Stuff that's not possible 
+  via settings.
+
+==================================================*/
+
+
+/*--------------------------------------------------
+  Patches. These deficiencies should probably be 
+  contributed back to Foundation.
+--------------------------------------------------*/
+
+// Specificity of .hide doesn't apply to inputs.
+input.hide {
+  display: none;
+}
+
+
+/*--------------------------------------------------
+  Typography
+--------------------------------------------------*/
+
+// Can't set color:inherit in _settings.scss 'cause $header-font-color is used in subheader/small/blockquote calculations. 
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: inherit;
+}
+
+// Some headings need a different weight or font. Foundation styles 'em all the same (except for size).
+h3 { 
+  font-weight: 400;
+}
+h4 { 
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+// Use to avoid line breaks. 
+.nowrap {
+  white-space: nowrap;
+}
+
+
+/*--------------------------------------------------
+  Grid
+--------------------------------------------------*/
+
+// Add .full-width to .row and the element fills the width of the page (or container). 
+.full-width {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial;
+}
+
+// Extra margin for specific grid elements, e.g. between header & content or at bottom of page. 
+.extra-margin-top {
+  margin-top: 2rem;
+}
+.extra-margin-bottom {
+  margin-bottom: 2rem;
+}
+
+// Extra padding, as above. 
+.extra-padding-top {
+  padding-top: 2rem;
+}
+.extra-padding-bottom {
+  padding-bottom: 2rem;
+}
+
+
+/*--------------------------------------------------
+  Magellan & Location Hashes 
+--------------------------------------------------*/
+
+// Offset page anchors for Magellan ----- TODO: Doesn't Magellan do this for ya?! 
+.page-anchor {
+  position: relative;
+  top: -80px;
+}
+
+// The top bar covers content if a page is loaded with a location hash. 
+.offset-anchor {
+  display: block;
+  position: absolute;
+  top: -65px;
+}
+

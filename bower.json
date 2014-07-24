@@ -20,7 +20,7 @@
     "FileAPI": "99130c0229aa077fb464c7b955a068e1f37847fb",
     "chrono": "~0.1.9",
     "pickadate": "~3.4.0",
-    "foundation": "~5.2.2",
+    "foundation": "~5.3.1",
     "leaflet-0.7.2": "http://leaflet-cdn.s3.amazonaws.com/build/leaflet-0.7.2.zip",
     "shareabouts-js": "https://github.com/openplans/shareabouts.js.git#3.1.1",
     "gatekeeper": "https://github.com/openplans/gatekeeper.git#~0.1.1",

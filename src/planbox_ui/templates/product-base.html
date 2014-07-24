@@ -30,7 +30,7 @@ OpenPlans
 
 {% block styles %}
   {% if debug %}
-  <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" type="text/css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/main.css" type="text/css" />
   {% else %}
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" />
   {% endif %}
