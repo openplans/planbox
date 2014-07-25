@@ -10,16 +10,16 @@
 
 /*==================================================
 
-  AVOID OVERRIDING FOUNDATION!!! 
-  Instead edit _settings.scss. Below are rules for 
-  enhancing Foundation. Stuff that's not possible 
+  AVOID OVERRIDING FOUNDATION!!!
+  Instead edit _settings.scss. Below are rules for
+  enhancing Foundation. Stuff that's not possible
   via settings.
 
 ==================================================*/
 
 
 /*--------------------------------------------------
-  Patches. These deficiencies should probably be 
+  Patches. These deficiencies should probably be
   contributed back to Foundation.
 --------------------------------------------------*/
 
@@ -33,27 +33,27 @@ input.hide {
   Typography
 --------------------------------------------------*/
 
-// Can't set color:inherit in _settings.scss 'cause $header-font-color is used in subheader/small/blockquote calculations. 
+// Can't set color:inherit in _settings.scss 'cause $header-font-color is used in subheader/small/blockquote calculations.
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   color: inherit;
 }
 
 // Some headings need a different weight or font. Foundation styles 'em all the same (except for size).
-h3 { 
+h3 {
   font-weight: 400;
 }
-h4 { 
+h4 {
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: 500;
 }
 
-// Use to avoid line breaks. 
+// Use to avoid line breaks.
 .nowrap {
   white-space: nowrap;
 }
 
-// Differently-sized paragraphs 
+// Differently-sized paragraphs
 p {
   &.text-small {
     font-size: 0.75rem;
@@ -69,12 +69,25 @@ p {
   }
 }
 
+// Make links visible inside alerts with white text
+.alert-box {
+  a {
+    color: white;
+    text-decoration: underline;
+  }
+
+  // TODO: find the variable name
+  &.info a {
+    color: #308fbf;
+  }
+}
+
 
 /*--------------------------------------------------
   Grid
 --------------------------------------------------*/
 
-// Add .full-width to .row and the element fills the width of the page (or container). 
+// Add .full-width to .row and the element fills the width of the page (or container).
 .full-width {
   width: 100%;
   margin-left: auto;
@@ -82,7 +95,7 @@ p {
   max-width: initial;
 }
 
-// Margin for specific grid elements, e.g. between header & content or at bottom of page. 
+// Margin for specific grid elements, e.g. between header & content or at bottom of page.
 .some-margin-top {
   margin-top: 0.9375rem;
 }
@@ -96,7 +109,7 @@ p {
   margin-bottom: 2rem;
 }
 
-// Extra padding, as above. 
+// Extra padding, as above.
 .some-padding-top {
   padding-top: 0.9375rem;
 }
@@ -112,16 +125,16 @@ p {
 
 
 /*--------------------------------------------------
-  Magellan & Location Hashes 
+  Magellan & Location Hashes
 --------------------------------------------------*/
 
-// Offset page anchors for Magellan ----- TODO: Doesn't Magellan do this for ya?! 
+// Offset page anchors for Magellan ----- TODO: Doesn't Magellan do this for ya?!
 .page-anchor {
   position: relative;
   top: -80px;
 }
 
-// The top bar covers content if a page is loaded with a location hash. 
+// The top bar covers content if a page is loaded with a location hash.
 .offset-anchor {
   display: block;
   position: absolute;

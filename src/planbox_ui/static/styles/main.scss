@@ -2,13 +2,13 @@
 
 
 /*--------------------------------------------------
-  OpenPlans-Branded Top Bar 
+  OpenPlans-Branded Top Bar
 --------------------------------------------------*/
 
 .openplans-top-bar {
   &,
   &.contain-to-grid {
-    background-color: transparent; // transparent for the logo hole 
+    background-color: transparent; // transparent for the logo hole
     box-shadow: 0 5px 0 rgba(51,51,51,0.2);
     position: relative;
     z-index: 99;
@@ -169,8 +169,8 @@
 
 
 /*--------------------------------------------------
-  Fancy Radio Buttons 
-  Wrap 'em in .radio-images and style the labels. 
+  Fancy Radio Buttons
+  Wrap 'em in .radio-images and style the labels.
 --------------------------------------------------*/
 
 .radio-images {
@@ -633,7 +633,7 @@ section, footer {
   border-radius: 0.375em 0.375em 0 0;
 }
 
-// Logo 
+// Logo
 .logo-table {
   display: table;
   border-collapse: collapse;
@@ -948,7 +948,7 @@ textarea.no-resize {
 
 
 
-// TODO: Sort out this stuff. I'm not sure we still need it. 
+// TODO: Sort out this stuff. I'm not sure we still need it.
 
 //.h1 { font-size: 2.125rem; }
 //.h2 { font-size: 1.6875rem; }
