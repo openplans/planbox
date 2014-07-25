@@ -82,7 +82,13 @@ p {
   max-width: initial;
 }
 
-// Extra margin for specific grid elements, e.g. between header & content or at bottom of page. 
+// Margin for specific grid elements, e.g. between header & content or at bottom of page. 
+.some-margin-top {
+  margin-top: 0.9375rem;
+}
+.some-margin-bottom {
+  margin-bottom: 0.9375rem;
+}
 .extra-margin-top {
   margin-top: 2rem;
 }
@@ -91,6 +97,12 @@ p {
 }
 
 // Extra padding, as above. 
+.some-padding-top {
+  padding-top: 0.9375rem;
+}
+.some-padding-bottom {
+  padding-bottom: 0.9375rem;
+}
 .extra-padding-top {
   padding-top: 2rem;
 }

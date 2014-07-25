@@ -5823,11 +5823,23 @@ p.text-xxlarge {
   margin-right: auto;
   max-width: initial; }
 
+.some-margin-top {
+  margin-top: 0.9375rem; }
+
+.some-margin-bottom {
+  margin-bottom: 0.9375rem; }
+
 .extra-margin-top {
   margin-top: 2rem; }
 
 .extra-margin-bottom {
   margin-bottom: 2rem; }
+
+.some-padding-top {
+  padding-top: 0.9375rem; }
+
+.some-padding-bottom {
+  padding-bottom: 0.9375rem; }
 
 .extra-padding-top {
   padding-top: 2rem; }
@@ -6139,7 +6151,6 @@ section, footer {
     top: -1.5rem; } }
 
 .product-get-started {
-  padding: 1.25rem 0 0.25rem;
   background-color: #ddd; }
   @media only screen and (min-width: 64.063em) {
     .product-get-started h4 {

@@ -351,7 +351,6 @@ section, footer {
 
 // Product - Get Started Sign Up Form
 .product-get-started {
-  padding: 1.25rem 0 0.25rem;
   background-color: #ddd;
   @media #{$large-up} {
     h4 {
@@ -463,6 +462,7 @@ section, footer {
     padding-right: 0.9375rem;
   }
 }
+
 .clients-section {
   background-color: #ddd;
 }
