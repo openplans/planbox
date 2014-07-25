@@ -4007,7 +4007,7 @@ div.switch label {
   margin-bottom: 1rem;
   position: relative;
   color: transparent;
-  background: #dddddd;
+  background: #c9c9c9;
   text-indent: 100%;
   width: 4rem;
   height: 2rem;
@@ -4044,7 +4044,7 @@ div.switch input:checked + label:after {
   left: 2.25rem; }
 div.switch label {
   color: transparent;
-  background: #dddddd; }
+  background: #c9c9c9; }
 div.switch label:after {
   background: white; }
 div.switch input:checked + label {
@@ -4318,8 +4318,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.5rem;
   line-height: 1.4; }
   h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
-    font-size: 60%;
-    color: #9ea2ad;
+    font-size: 75%;
+    color: inherit;
     line-height: 0; }
 
 h1 {
@@ -4348,7 +4348,7 @@ h6 {
   margin-bottom: 0.5rem; }
 
 hr {
-  border: solid #cccccc;
+  border: solid rgba(0, 0, 0, 0.15);
   border-width: 1px 0 0;
   clear: both;
   margin: 1.25rem 0 1.1875rem;
@@ -4366,7 +4366,7 @@ b {
   line-height: inherit; }
 
 small {
-  font-size: 60%;
+  font-size: 75%;
   line-height: inherit; }
 
 code {
@@ -5805,6 +5805,15 @@ h4 {
 .nowrap {
   white-space: nowrap; }
 
+p.text-small {
+  font-size: 0.75rem; }
+p.text-large {
+  font-size: 1.25rem; }
+p.text-xlarge {
+  font-size: 1.5rem; }
+p.text-xxlarge {
+  font-size: 1.75rem; }
+
 /*--------------------------------------------------
   Grid
 --------------------------------------------------*/
@@ -5837,6 +5846,16 @@ h4 {
   display: block;
   position: absolute;
   top: -65px; }
+
+/*--------------------------------------------------
+  Forms
+--------------------------------------------------*/
+.switch + label.inline {
+  margin-left: 4.5rem; }
+.switch.small + label.inline {
+  margin-left: 4rem; }
+.switch.large + label.inline {
+  margin-left: 5.5rem; }
 
 /*--------------------------------------------------
   OpenPlans-Branded Top Bar 
@@ -6513,8 +6532,10 @@ section, footer {
 --------------------------------------------------*/
 .project-edit-form {
   background-color: #fff;
-  padding-bottom: 4rem;
   box-shadow: 0 -65px 0 #fff; }
+  @media only screen and (min-width: 40.063em) {
+    .project-edit-form {
+      padding-bottom: 4rem; } }
 
 .project-section-fieldset {
   padding: 0;
@@ -6561,14 +6582,13 @@ span.sub-heading-postfix {
     margin-top: 1rem;
     border-color: #ff8b38; }
 
-.section-switch {
-  margin-right: 0.5rem; }
-
 .unassigned {
   cursor: default; }
 
 .project-settings-container {
-  padding: 1.25rem 0.9375rem 0.9375rem; }
+  padding-top: 1.25rem;
+  padding-bottom: 0.9375rem;
+  background-color: #d9d9d9; }
   @media only screen and (min-width: 40.063em) {
     .project-settings-container {
       position: fixed;
@@ -6579,13 +6599,10 @@ span.sub-heading-postfix {
       margin: 0;
       width: 33.33333%;
       overflow: hidden;
-      background-color: #d9d9d9;
       box-shadow: inset 3px 0 0 rgba(51, 51, 51, 0.1); }
       .project-settings-container .project-settings {
         max-height: 60%;
-        overflow: auto;
-        background-color: #f9f9f9;
-        padding-bottom: 0.25rem; } }
+        overflow: auto; } }
 
 textarea.no-resize {
   resize: none; }

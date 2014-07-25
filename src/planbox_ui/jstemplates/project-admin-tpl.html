@@ -207,14 +207,31 @@
   </div>
 
   <div class="project-settings-container">
-    <button class="button expand radius">Save</button>
-    <div class="project-settings panel radius">
-      <p class="clearfix">
-        <a href="#" target="_blank" class="left">View Project &rarr;</a>
-        <a class="project-settings-toggle right" href="#"><span class="icon gear"></span></a>
-      </p>
-      <hr class="project-setting hide">
-      <p class="project-setting hide"><a href="#" class="button tiny">Request a custom URL</a></p>
+    <div class="row">
+      <div class="columns small-12">
+
+        <button class="button expand radius">Save</button>
+
+        <div class="project-settings">
+          <p class="text-right"><small><a href="#" target="_blank">View&nbsp;Project&nbsp;&rarr;</a></small></p>
+          <hr>
+          <div class="switch left">
+            <input id="public-switch" type="checkbox">
+            <label for="public-switch"></label>
+          </div>
+          <label class="inline unassigned">Unpublished</label>
+          <hr>
+          <div class="row">
+            <div class="columns large-7">
+              <p class="text-small">Want a custom domain name? No&nbsp;problem! Email us to get started.</p>
+            </div>
+            <div class="columns large-5">
+              <a href="mailto:{{contact_email}}" class="button radius tiny expand">Contact Us</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 

@@ -53,6 +53,22 @@ h4 {
   white-space: nowrap;
 }
 
+// Differently-sized paragraphs 
+p {
+  &.text-small {
+    font-size: 0.75rem;
+  }
+  &.text-large {
+    font-size: 1.25rem;
+  }
+  &.text-xlarge {
+    font-size: 1.5rem;
+  }
+  &.text-xxlarge {
+    font-size: 1.75rem;
+  }
+}
+
 
 /*--------------------------------------------------
   Grid
@@ -100,3 +116,20 @@ h4 {
   top: -65px;
 }
 
+
+/*--------------------------------------------------
+  Forms
+--------------------------------------------------*/
+
+// Switches
+.switch {
+  & + label.inline {
+    margin-left: 4.5rem;
+  }
+  &.small + label.inline {
+    margin-left: 4rem;
+  }
+  &.large + label.inline {
+    margin-left: 5.5rem;
+  }
+}
