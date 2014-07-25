@@ -46,10 +46,13 @@
 </head>
 <body>
 
-  <!-- TODO: Make sure this is the right place in the layout for this message. -->
   <!--[if lt IE 9]>
-    <div class="alert-box alert">You are using an outdated browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+    <div class="browser-warning alert-box alert text-center"><h1>Your browser is not supported.</h1> <h3>Please <a href="http://browsehappy.com/">upgrade your browser</a> to start building beautiful planning sites with OpenPlans!</h3></div>
   <![endif]-->
+  <!--[if IE 9 ]>
+    <div class="browser-warning alert-box secondary text-center"><strong>You're using an outdated browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</strong></div>
+  <![endif]-->
+
 
   <div id="page">
     {% block page %}{% endblock %}
