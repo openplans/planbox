@@ -377,6 +377,18 @@ class Profile (TimeStampedModel):
     # Organization-profile specific
     # members (reverse, Profile)
 
+    # Feature flags/versions
+    class Versions:
+        AMETHYST = 1
+        BISTRE = 2
+
+    PROJECT_EDITOR_VERSION_CHOICES = (
+        (Versions.AMETHYST, "Amethyst"),
+        (Versions.BISTRE, "Bistre"),
+    )
+
+    project_editor_version = models.PositiveIntegerField(choices=PROJECT_EDITOR_VERSION_CHOICES)
+
     objects = ProfileManager()
 
     def __str__(self):
