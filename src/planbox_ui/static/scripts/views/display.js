@@ -185,9 +185,6 @@ var Planbox = Planbox || {};
       'click @ui.highlights': 'onClickHighlight'
     },
     onDomRefresh: function() {
-      // The dom changed. Make sure that any Foundation plugins are init'd.
-      $(document).foundation();
-
       var self = this,
           debouncedScrollHandler = _.debounce(function(evt) {
             var offsets = self.offsets(),
@@ -206,12 +203,41 @@ var Planbox = Planbox || {};
                 return true;
               }
             }
-          }, 250);
+          }, 500);
 
       // Only bind the scroll event if a magellan widget exists. They don't if
       // there are not enough items to warrant it.
       if ($('[data-magellan-expedition]').length) {
-        $(window).off('scroll').on('scroll', debouncedScrollHandler);
+        $(window).off('scroll', debouncedScrollHandler).on('scroll', debouncedScrollHandler);
+
+        $(document).on('click', '[data-magellan-link]', function(evt) {
+          // See line 3147 in foundation.js. This should be an accessible function.
+          // TODO: Pull request to make this public.
+          evt.preventDefault();
+          var expedition = $('[data-magellan-expedition]'),
+              settings = expedition.data('magellan-expedition-init'),
+              hash = $(this).attr('href').split('#').join(''),
+              target = $("a[name='"+hash+"']");
+
+          if (target.length === 0) {
+            target = $('#'+hash);
+          }
+
+          // Account for expedition height if fixed position
+          var scroll_top = target.offset().top;
+          scroll_top = scroll_top - expedition.outerHeight();
+
+          $('html, body').stop().animate({
+            'scrollTop': scroll_top
+          }, 700, 'swing', function () {
+            if(history.pushState) {
+              history.pushState(null, null, '#'+hash);
+            }
+            else {
+              location.hash = '#'+hash;
+            }
+          });
+        });
       }
     },
     onClickMenuItem: function(evt) {
@@ -227,7 +253,10 @@ var Planbox = Planbox || {};
     offsets: function() {
       var self = this,
           expedition = $('[data-magellan-expedition]'),
-          destination_threshold = expedition.data('magellanExpeditionInit').destination_threshold,
+          settings = expedition.data('magellan-expedition-init') || {
+            destination_threshold: 20
+          },
+          destination_threshold = settings.destination_threshold,
           viewport_offset = $(window).scrollTop();
 
       return $('[data-magellan-destination]').map(function(idx, el) {

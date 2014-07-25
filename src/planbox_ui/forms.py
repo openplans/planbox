@@ -1,10 +1,31 @@
 from django import forms
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.template import Context
 from django.template.loader import get_template
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
+from django.contrib.auth.forms import AuthenticationForm as DjangoAuthenticationForm
 
 from planbox_data.models import UserAuth, Profile
+
+
+class AuthenticationForm(DjangoAuthenticationForm):
+    # error_messages = {
+    #     'invalid_login': _("Your username wasn't recognized or your password "
+    #                        "is incorrect. Need a <a href=\"%s\">"
+    #                        "password reset?</a> Or <a href=\"%s\">contact us for help.</a>")
+    #                        % (reverse_lazy('password-reset'), reverse_lazy('app-help'), ),
+    #     'inactive': _("This account is inactive."),
+    # }
+
+    def __init__(self, request=None, *args, **kwargs):
+        super(AuthenticationForm, self).__init__(request, *args, **kwargs)
+
+        self.error_messages['invalid_login'] = mark_safe(_("Your username "
+            "wasn't recognized or your password is incorrect. Need a "
+            "<a href=\"%s\"> password reset?</a> Or <a href=\"%s\">contact us "
+            "for help.</a>") % (reverse('password-reset-request'), reverse('app-help'), ))
 
 
 class UserCreationForm(forms.ModelForm):

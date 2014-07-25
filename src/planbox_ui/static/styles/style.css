@@ -7,6 +7,18 @@ input.hide {
   display: none;
 }
 
+/* color specificity isn't high enough for alert box text */
+.alert-box.success a,
+.alert-box.warning a,
+.alert-box.alert a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.browser-warning.alert-box {
+  margin: 0;
+}
+
 .unstyled-list {
   list-style: none;
   margin: 0;

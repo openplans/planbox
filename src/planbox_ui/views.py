@@ -8,9 +8,7 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User as UserAuth
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import redirect_to_login
-from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import resolve_url
@@ -25,7 +23,7 @@ from password_reset.views import (
 from planbox_data.models import Project, Profile
 from planbox_data.serializers import ProjectSerializer, UserSerializer, TemplateProjectSerializer
 from planbox_ui.decorators import ssl_required
-from planbox_ui.forms import UserCreationForm
+from planbox_ui.forms import UserCreationForm, AuthenticationForm
 import pybars
 
 
@@ -279,7 +277,7 @@ class ProjectMixin (AppMixin):
         return context
 
 
-class BaseExisingProjectView (ProjectMixin, TemplateView):
+class BaseExistingProjectView (ProjectMixin, TemplateView):
     def get_project_is_visible(self):
         return (
             self.request.user.is_superuser or
@@ -301,12 +299,12 @@ class BaseExisingProjectView (ProjectMixin, TemplateView):
                                          owner__slug=owner_name, slug=slug)
 
         if not self.get_project_is_visible():
-            raise Http404
+            return redirect('app-index')
 
-        return super(BaseExisingProjectView, self).get(request, pk=self.project.pk)
+        return super(BaseExistingProjectView, self).get(request, pk=self.project.pk)
 
 
-class ProjectView (SSLRequired, S3UploadMixin, BaseExisingProjectView):
+class ProjectView (SSLRequired, S3UploadMixin, BaseExistingProjectView):
     """
     A view on an existing project that presents an editable template when the
     authenticated user is the owner of the project.
@@ -316,7 +314,7 @@ class ProjectView (SSLRequired, S3UploadMixin, BaseExisingProjectView):
         return self.project.owned_by(self.request.user)
 
 
-class ReadOnlyProjectView (ReadOnlyMixin, BaseExisingProjectView):
+class ReadOnlyProjectView (ReadOnlyMixin, BaseExistingProjectView):
     """
     A view on an existing project where that always presumes the user is NOT
     the project owner (thus it is always in read-only mode).

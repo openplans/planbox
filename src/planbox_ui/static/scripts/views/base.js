@@ -25,10 +25,6 @@ var Planbox = Planbox || {};
     onShow: function() {
       // After the project is in the DOM, show the project sections
       this.showRegions();
-    },
-    onDomRefresh: function() {
-      // The dom changed. Make sure that any Foundation plugins are init'd.
-      $(document).foundation();
     }
   });
 
