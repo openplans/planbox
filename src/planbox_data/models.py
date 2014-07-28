@@ -387,7 +387,7 @@ class Profile (TimeStampedModel):
         (Versions.BISTRE, "Bistre"),
     )
 
-    project_editor_version = models.PositiveIntegerField(choices=PROJECT_EDITOR_VERSION_CHOICES)
+    project_editor_version = models.PositiveIntegerField(choices=PROJECT_EDITOR_VERSION_CHOICES, default=Versions.AMETHYST)
 
     objects = ProfileManager()
 
