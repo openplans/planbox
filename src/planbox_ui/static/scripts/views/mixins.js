@@ -7,9 +7,9 @@ var Planbox = Planbox || {};
 
   NS.ContentEditableMixin = {
     handleEditableBlur: function(evt) {
-      var $target = $(evt.target),
+      var $target = $(evt.currentTarget),
           attr = $target.attr('data-attr'),
-          val = $target.html();
+          val = $target.is('[contenteditable]') ? $target.html() : $target.val();
 
       evt.preventDefault();
 
