@@ -256,7 +256,10 @@ class SigninView (AppMixin, LogoutRequired, SSLRequired, FormView):
 class ProjectMixin (AppMixin):
     def get_template_names(self):
         if self.get_project_is_editable():
-            return ['project-admin.html']
+            if self.request.user.profile.project_editor_version == Profile.Versions.BISTRE:
+                return ['project-admin.html']
+            else:
+                return ['project.html']
         else:
             return ['project.html']
 
