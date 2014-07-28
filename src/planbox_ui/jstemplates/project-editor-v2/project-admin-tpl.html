@@ -19,12 +19,12 @@
             </div>
           </div>
           <input type="text" placeholder="Project Title" class="heading-input" value="{{ title }}" data-attr="title" />
-          <div class="row collapse">
+          <div class="row collapse character-count-container">
             <div class="small-10 large-11 columns">
-              <input type="text" placeholder="An engaging tagline..." class="sub-heading-input" id="limited-text-1" />
+              <input type="text" placeholder="An engaging tagline..." class="sub-heading-input" data-attr="tagline" value="{{ details.tagline }}" maxlength="100" />
             </div>
             <div class="small-2 large-1 columns">
-              <span class="postfix radius sub-heading-postfix" id="limited-text-1-counter">99</span>
+              <span class="postfix radius sub-heading-postfix character-count-remaining"></span>
             </div>
           </div>
           <div class="call-to-action-buttons hide">

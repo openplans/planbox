@@ -25,7 +25,8 @@ var Planbox = Planbox || {};
         imageDropZones: '.image-dnd',
         removeImageLinks: '.remove-img-btn',
         hightlightLinkSelector: '.highlight-link-selector',
-        hightlightExternalLink: '.highlight-external-link'
+        hightlightExternalLink: '.highlight-external-link',
+        characterCountInput: '.character-count-container [maxlength]'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
@@ -38,7 +39,10 @@ var Planbox = Planbox || {};
         'click @ui.publishBtn': 'handlePublish',
         'click @ui.removeImageLinks': 'handleRemoveImage',
         'change @ui.hightlightLinkSelector': 'handleHighlightLinkChange',
-        'blur @ui.hightlightExternalLink': 'handleHighlightExternalLinkBlur'
+        'blur @ui.hightlightExternalLink': 'handleHighlightExternalLinkBlur',
+
+        'input @ui.characterCountInput': 'handleCharacterCountChange',
+        'keyup @ui.characterCountInput': 'handleCharacterCountChange'
       },
       modelEvents: {
         'change': 'dataChanged',
@@ -79,9 +83,14 @@ var Planbox = Planbox || {};
       },
 
       onRender: function() {
+        var self = this;
         this.initRichEditables();
         this.initDropZones();
-        // this.showRegions();
+
+        // Set the initial character counts for each countable
+        this.ui.characterCountInput.each(function(i, el) {
+          self.setCharacterCountRemaining($(el));
+        });
       },
       setImageOnContainer: function($el, url) {
         $el.addClass('has-image');
@@ -315,6 +324,20 @@ var Planbox = Planbox || {};
       handleUserMenuClick: function(evt) {
         evt.preventDefault();
         this.ui.userMenu.toggleClass('is-open');
+      },
+      handleCharacterCountChange: function(evt) {
+        evt.preventDefault();
+        var $target = $(evt.currentTarget);
+
+        this.setCharacterCountRemaining($target);
+      },
+      setCharacterCountRemaining: function($charCountInput) {
+        var max = parseInt($charCountInput.attr('maxlength'), 10),
+            val = $charCountInput.val(),
+            $counter = $charCountInput.parents('.character-count-container')
+              .find('.character-count-remaining');
+
+        $counter.text(max - val.length);
       },
       onSaveSuccess: function(model, makePublic) {
         var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
