@@ -85,6 +85,9 @@ class ProjectSerializer (serializers.ModelSerializer):
     title = CleanedHtmlField(required=True)
     location = CleanedHtmlField(required=False)
     contact = CleanedHtmlField(required=False)
+    # DRF makes the wrong default decision for the details field, chosing a
+    # CharField. We want something more direct.
+    details = serializers.WritableField(required=False)
 
     happening_now_description = CleanedHtmlField(required=False)
     get_involved_description = CleanedHtmlField(required=False)
