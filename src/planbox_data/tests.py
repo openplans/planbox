@@ -42,8 +42,8 @@ class ProjectModelTests (TestCase):
     def test_cannot_create_project_with_same_slug_and_owner(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
-        project1 = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user, public=True)
-        project2 = Project.objects.create(slug='test-2', title='x', location='x', description='x', owner=user, public=True)
+        project1 = Project.objects.create(slug='test-1', title='x', location='x', owner=user, public=True)
+        project2 = Project.objects.create(slug='test-2', title='x', location='x', owner=user, public=True)
 
         with assert_raises(IntegrityError):
             project2.slug = 'test-1'
@@ -54,8 +54,8 @@ class ProjectModelTests (TestCase):
         user1 = auth1.profile
         auth2 = UserAuth.objects.create_user(username='atogle', password='456')
         user2 = auth2.profile
-        project1 = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user1, public=True)
-        project2 = Project.objects.create(slug='test-2', title='x', location='x', description='x', owner=user1, public=True)
+        project1 = Project.objects.create(slug='test-1', title='x', location='x', owner=user1, public=True)
+        project2 = Project.objects.create(slug='test-2', title='x', location='x', owner=user1, public=True)
 
         project2.slug = 'test-1'
         project2.owner = user2
@@ -68,25 +68,25 @@ class ProjectModelTests (TestCase):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
 
-        project1 = Project.objects.create(title='My Project', location='x', description='x', owner=user, public=True)
+        project1 = Project.objects.create(title='My Project', location='x', owner=user, public=True)
         assert_equal(project1.slug, 'my-project')
 
         # Ensure conflict resolution
-        project2 = Project.objects.create(title='My Project', location='x', description='x', owner=user, public=True)
+        project2 = Project.objects.create(title='My Project', location='x', owner=user, public=True)
         assert_equal(project2.slug, 'my-project-2')
 
     def test_auto_generated_slug_strips_html_tags(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
 
-        project1 = Project.objects.create(title='My <br> Project', location='x', description='x', owner=user, public=True)
+        project1 = Project.objects.create(title='My <br> Project', location='x', owner=user, public=True)
         assert_equal(project1.slug, 'my-project')
 
     def test_long_titles_generate_truncated_slugs(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
 
-        project1 = Project.objects.create(title='A B C D E F G H '*16, location='x', description='x', owner=user, public=True)
+        project1 = Project.objects.create(title='A B C D E F G H '*16, location='x', owner=user, public=True)
         # The field's max length is 128, and we leave a 16 character buffer
         # for uniquification.
         assert_equal(project1.slug, 'a-b-c-d-e-f-g-h-'*7)
@@ -95,16 +95,16 @@ class ProjectModelTests (TestCase):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
 
-        project1 = Project.objects.create(title='A B C D E F G H '*16, location='x', description='x', owner=user, public=True)
+        project1 = Project.objects.create(title='A B C D E F G H '*16, location='x', owner=user, public=True)
         assert_equal(project1.slug, 'a-b-c-d-e-f-g-h-'*7)
 
-        project2 = Project.objects.create(title='A B C D E F G H '*16, location='x', description='x', owner=user, public=True)
+        project2 = Project.objects.create(title='A B C D E F G H '*16, location='x', owner=user, public=True)
         assert_equal(project2.slug, 'a-b-c-d-e-f-g-h-'*7 + '-2')
 
     def test_owner_owns_project(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
-        project = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user)
+        project = Project.objects.create(slug='test-1', title='x', location='x', owner=user)
 
         ok_(project.owned_by(auth))
         ok_(project.owned_by(user))
@@ -112,7 +112,7 @@ class ProjectModelTests (TestCase):
     def test_non_owner_doesnt_own_project(self):
         auth1 = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user1 = auth1.profile
-        project = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user1)
+        project = Project.objects.create(slug='test-1', title='x', location='x', owner=user1)
 
         auth2 = UserAuth.objects.create_user(username='atogle', password='456')
         user2 = auth2.profile
@@ -123,7 +123,7 @@ class ProjectModelTests (TestCase):
     def test_anon_user_doesnt_own_project(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
-        project = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=user)
+        project = Project.objects.create(slug='test-1', title='x', location='x', owner=user)
 
         anon = AnonymousUser()
 
@@ -131,7 +131,7 @@ class ProjectModelTests (TestCase):
 
     def test_can_clone_project(self):
         owner = Profile.objects.create(slug='owner')
-        project = Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=owner)
+        project = Project.objects.create(slug='test-1', title='x', location='x', owner=owner)
 
         events = [
             Event.objects.create(project=project, slug='event-1'),
@@ -196,7 +196,7 @@ class EventModelTests (PlanBoxTestCase):
         # First event should have index 0
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=user)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=user)
         event_0 = Event.objects.create(label='test label 0', project=project)
         assert_equal(event_0.index, 0)
 
@@ -219,7 +219,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
     def test_project_with_empty_title_is_invalid(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=user)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=user)
 
         serializer = ProjectSerializer(project, data={'slug': '', 'title': ''})
         ok_(not serializer.is_valid(), 'Project with empty slug and title should not validate')
@@ -228,7 +228,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
     def test_events_are_nested_in_data(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         user = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=user)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=user)
         events = [
             Event.objects.create(label='test label 1', project=project),
             Event.objects.create(label='test label 2', project=project),
@@ -250,7 +250,6 @@ class ProjectSerializerTests (PlanBoxTestCase):
             'slug': 'test-slug',
             'title': 'test title',
             'location': 'test location',
-            'description': 'test description',
             'events': [
                 {'label': 'test label 1'},
                 {'label': 'test label 2'},
@@ -267,7 +266,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
     def test_events_are_updated_from_nested_data(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         profile = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=profile)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=profile)
         events = [
             Event.objects.create(label='test label 1', project=project),
             Event.objects.create(label='test label 3', project=project),
@@ -278,7 +277,6 @@ class ProjectSerializerTests (PlanBoxTestCase):
             'slug': 'test-slug',
             'title': 'test new title',
             'location': 'test location',
-            'description': 'test description',
             'events': [
                 {'label': 'test label 3', 'id': events[1].pk},
                 {'label': 'test label 2'},
@@ -304,7 +302,6 @@ class ProjectSerializerTests (PlanBoxTestCase):
             'slug': 'test-slug',
             'title': 'test title',
             'location': 'test location',
-            'description': 'test description',
             'events': [
                 {
                     'label': 'test label',
@@ -325,7 +322,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
     def test_events_attachments_are_updated_from_nested_data(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         profile = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=profile)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=profile)
         event = Event.objects.create(label='test label', project=project)
         attachments = [
             Attachment.objects.create(attached_to=event, label='attachment 1'),
@@ -337,7 +334,6 @@ class ProjectSerializerTests (PlanBoxTestCase):
             'slug': 'test-slug',
             'title': 'test new title',
             'location': 'test location',
-            'description': 'test description',
             'events': [
                 {
                     'label': 'test label',
@@ -383,7 +379,6 @@ class ProjectSerializerTests (PlanBoxTestCase):
             'slug': 'test-slug',
             'title': 'test title',
             'location': 'test location',
-            'description': 'test description',
             'events': None,
             'owner': profile.slug
         })
@@ -394,7 +389,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
     def test_null_events_are_invalid_for_existing_project(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         profile = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=profile)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=profile)
         Event.objects.create(label='test label 1', project=project),
         Event.objects.create(label='test label 3', project=project),
 
@@ -403,7 +398,6 @@ class ProjectSerializerTests (PlanBoxTestCase):
             'slug': 'test-slug',
             'title': 'test new title',
             'location': 'test location',
-            'description': 'test description',
             'events': None,
             'owner': profile.slug
         })
@@ -411,26 +405,12 @@ class ProjectSerializerTests (PlanBoxTestCase):
         ok_(not serializer.is_valid())
         assert_in('events', serializer.errors)
 
-    def test_project_with_invalid_markup_in_description(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        user = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=user)
-
-        description = """<div>oh</div> <b>hello</b> <script>alert('hacked');</script> <div class="hi">new line</div>"""
-        expected = """<br>oh <b>hello</b> alert('hacked'); <br>new line"""
-
-        serializer = ProjectSerializer(project, data={'slug': '', 'title': 'Test Title', 'description': description, 'owner': user.slug, 'events': [], 'sections': []})
-
-        ok_(serializer.is_valid(), 'Project with markup should validate: %s' % (serializer.errors,))
-        assert_not_equal(serializer.object.description, description)
-        assert_equal(serializer.object.description, expected)
-
 
 class OwnerPermissionTests (PlanBoxTestCase):
     def init_test_assets(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner)
         permission = IsOwnerOrReadOnly()
         return permission, auth, owner, project
 
@@ -483,7 +463,7 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
     def init_test_assets(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=True)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {'pk': project.pk}
         view = self.get_view_callback('project-detail')
@@ -498,7 +478,7 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
 
     def test_anonymous_cannot_PUT_detail(self):
         _, owner, _, _, _, url = self.init_test_assets()
-        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner": "%s"}' % (owner.slug), content_type='application/json')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "events": [], "location": "x", "owner": "%s"}' % (owner.slug), content_type='application/json')
         # Even though the user is unauthenticated and a 401 seems like it might
         # be in order, we don't want a www-authenticate response header to be
         # sent, so we'll send a 403.
@@ -506,7 +486,7 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
 
     def test_anonymous_gets_403_with_duplicate(self):
         _, owner, project, _, _, url = self.init_test_assets()
-        response = self.client.put(url, data='{"id": %s, "title": "%s", "slug": "%s", "description": "x", "events": [], "location": "x", "owner": "%s", "public": true}' % (project.pk, project.title, project.slug, owner.slug), content_type='application/json')
+        response = self.client.put(url, data='{"id": %s, "title": "%s", "slug": "%s", "events": [], "location": "x", "owner": "%s", "public": true}' % (project.pk, project.title, project.slug, owner.slug), content_type='application/json')
         # Even though the user is unauthenticated and a 401 seems like it might
         # be in order, we don't want a www-authenticate response header to be
         # sent, so we'll send a 403.
@@ -532,7 +512,7 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
         UserAuth.objects.create_user(username='atogle', password='456')
         self.client.login(username='atogle', password='456')
 
-        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner_type": "user", "owner_id": %s}' % (owner.pk), content_type='application/json')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "events": [], "location": "x", "owner_type": "user", "owner_id": %s}' % (owner.pk), content_type='application/json')
         assert_equal(response.status_code, HTTP_403_FORBIDDEN, (response.status_code, str(response)))
 
     def test_non_owner_cannot_DELETE_detail(self):
@@ -553,7 +533,7 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
     def test_owner_can_PUT_detail(self):
         auth, owner, _, _, _, url = self.init_test_assets()
         self.client.login(username=auth.username, password='123')
-        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "sections": [], "location": "x", "owner": "%s"}' % (owner.slug), content_type='application/json')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "events": [], "sections": [], "location": "x", "owner": "%s"}' % (owner.slug), content_type='application/json')
         assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
 
     def test_owner_can_DELETE_detail(self):
@@ -567,7 +547,7 @@ class NonPublicProjectDetailViewAuthenticationTests (PlanBoxTestCase):
     def init_test_assets(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=False)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
         kwargs = {'pk': project.pk}
         view = self.get_view_callback('project-detail')
@@ -582,7 +562,7 @@ class NonPublicProjectDetailViewAuthenticationTests (PlanBoxTestCase):
 
     def test_anonymous_cannot_PUT_detail(self):
         _, owner, project, _, _, url = self.init_test_assets()
-        response = self.client.put(url, data='{"id": %s, "title": "%s", "slug": "%s", "description": "x", "events": [], "location": "x", "owner": "%s", "public": false}' % (project.pk, project.title, project.slug, owner.slug), content_type='application/json')
+        response = self.client.put(url, data='{"id": %s, "title": "%s", "slug": "%s", "events": [], "location": "x", "owner": "%s", "public": false}' % (project.pk, project.title, project.slug, owner.slug), content_type='application/json')
         assert_equal(response.status_code, HTTP_403_FORBIDDEN, response.content)
 
     def test_anonymous_cannot_DELETE_detail(self):
@@ -605,7 +585,7 @@ class NonPublicProjectDetailViewAuthenticationTests (PlanBoxTestCase):
         UserAuth.objects.create_user(username='atogle', password='456')
         self.client.login(username='atogle', password='456')
 
-        response = self.client.put(url, data='{"id": %s, "title": "%s", "slug": "%s", "description": "x", "events": [], "location": "x", "owner": "%s", "public": false}' % (project.pk, project.title, project.slug, owner.slug), content_type='application/json')
+        response = self.client.put(url, data='{"id": %s, "title": "%s", "slug": "%s", "events": [], "location": "x", "owner": "%s", "public": false}' % (project.pk, project.title, project.slug, owner.slug), content_type='application/json')
         assert_equal(response.status_code, HTTP_403_FORBIDDEN, (response.status_code, str(response)))
 
     def test_non_owner_cannot_assign_detail_to_themselves(self):
@@ -614,7 +594,7 @@ class NonPublicProjectDetailViewAuthenticationTests (PlanBoxTestCase):
         nonowner = UserAuth.objects.create_user(username='atogle', password='456')
         self.client.login(username='atogle', password='456')
 
-        response = self.client.put(url, data='{"id": %s, "title": "%s", "slug": "%s", "description": "x", "events": [], "location": "x", "owner": "%s", "public": false}' % (project.pk, project.title, project.slug, nonowner.username), content_type='application/json')
+        response = self.client.put(url, data='{"id": %s, "title": "%s", "slug": "%s", "events": [], "location": "x", "owner": "%s", "public": false}' % (project.pk, project.title, project.slug, nonowner.username), content_type='application/json')
         assert_equal(response.status_code, HTTP_403_FORBIDDEN, (response.status_code, str(response)))
 
     def test_non_owner_cannot_DELETE_detail(self):
@@ -635,7 +615,7 @@ class NonPublicProjectDetailViewAuthenticationTests (PlanBoxTestCase):
     def test_owner_can_PUT_detail(self):
         auth, owner, _, _, _, url = self.init_test_assets()
         self.client.login(username=auth.username, password='123')
-        response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "sections": [], "location": "x", "public": false, "owner": "%s"}' % (owner.slug), content_type='application/json')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "events": [], "sections": [], "location": "x", "public": false, "owner": "%s"}' % (owner.slug), content_type='application/json')
         assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
 
     def test_owner_can_DELETE_detail(self):
@@ -653,10 +633,10 @@ class ProjectListViewAuthenticationTests (PlanBoxTestCase):
         ]
         owners = [auth.profile for auth in auths]
         projects = [
-            Project.objects.create(slug='test-1', title='x', location='x', description='x', owner=owners[0], public=True),
-            Project.objects.create(slug='test-2', title='x', location='x', description='x', owner=owners[0], public=False),
-            Project.objects.create(slug='test-3', title='x', location='x', description='x', owner=owners[0], public=True),
-            Project.objects.create(slug='test-4', title='x', location='x', description='x', owner=owners[1], public=True),
+            Project.objects.create(slug='test-1', title='x', location='x', owner=owners[0], public=True),
+            Project.objects.create(slug='test-2', title='x', location='x', owner=owners[0], public=False),
+            Project.objects.create(slug='test-3', title='x', location='x', owner=owners[0], public=True),
+            Project.objects.create(slug='test-4', title='x', location='x', owner=owners[1], public=True),
         ]
 
         kwargs = {}
@@ -674,7 +654,7 @@ class ProjectListViewAuthenticationTests (PlanBoxTestCase):
     def test_anonymous_cannot_POST_new_project(self):
         pass
         # _, owner, _, _, _, url = self.init_test_assets()
-        # response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner_type": "user", "owner_id": %s}' % (owner.pk), content_type='application/json')
+        # response = self.client.put(url, data='{"title": "x", "slug": "x", "events": [], "location": "x", "owner_type": "user", "owner_id": %s}' % (owner.pk), content_type='application/json')
         # # Even though the user is unauthenticated and a 401 seems like it might
         # # be in order, we don't want a www-authenticate response header to be
         # # sent, so we'll send a 403.
@@ -691,5 +671,5 @@ class ProjectListViewAuthenticationTests (PlanBoxTestCase):
         pass
         # auth, owner, _, _, _, url = self.init_test_assets()
         # self.client.login(username=auth.username, password='123')
-        # response = self.client.put(url, data='{"title": "x", "slug": "x", "description": "x", "events": [], "location": "x", "owner_type": "user", "owner_id": %s}' % (owner.pk), content_type='application/json')
+        # response = self.client.put(url, data='{"title": "x", "slug": "x", "events": [], "location": "x", "owner_type": "user", "owner_id": %s}' % (owner.pk), content_type='application/json')
         # assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))

@@ -84,7 +84,6 @@ class ProjectSerializer (serializers.ModelSerializer):
 
     title = CleanedHtmlField(required=True)
     location = CleanedHtmlField(required=False)
-    description = CleanedHtmlField(required=False)
     contact = CleanedHtmlField(required=False)
 
     happening_now_description = CleanedHtmlField(required=False)
