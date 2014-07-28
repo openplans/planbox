@@ -3,23 +3,40 @@
 {% block page %}
 
 <section class="">
-  <div class="row full-width extra-padding-top">
-    hi
+  <div class="extra-padding-top extra-padding-bottom shareabouts-page-header">
+    <div class="row shareabouts-page-header">
+      <div class="small-12 large-5 columns">
+
+        <div class="row shareabouts-page-header-text">
+          <div class="medium-8 large-12 columns">
+            <h2 class="some-padding-bottom"><img src="{{ STATIC_URL }}images/shareabouts/shareabouts-logo.png" alt="Shareabouts" title="Shareabouts"></h2>
+            <p class="text-large">Shareabouts is a flexible tool for gathering public input on a map. Collect local insights from participants at neighborhood to state-scales. Work with us, or go DIY&mdash;pick a Shareabouts that meets your needs.</p>
+          </div>
+          <div class="medium-4 large-12 columns text-center">
+            <p class="extra-padding-top"><a href="http://www.planetizen.com/websites2013"><img src="{{ STATIC_URL }}images/shareabouts/plnz-topwebsite-2013.png"></a></p>
+          </div>
+        </div>
+
+      </div>
+      <div class="small-12 large-7 large-pull-1 columns">
+
+        <div class="shareabouts-slideshow">
+          <img src="{{ STATIC_URL }}images/shareabouts/laptop.png">
+          <img class="shareabouts-slide" src="{{ STATIC_URL }}images/shareabouts/shareabouts-770x493-pb.jpg">
+          <img class="shareabouts-slide fadeout fadeout-6" src="{{ STATIC_URL }}images/shareabouts/shareabouts-770x493-makebrooklynsafer.jpg">
+          <img class="shareabouts-slide fadeout fadeout-5" src="{{ STATIC_URL }}images/shareabouts/shareabouts-770x493-nyrising.jpg">
+          <img class="shareabouts-slide fadeout fadeout-4" src="{{ STATIC_URL }}images/shareabouts/shareabouts-770x493-ourmiami.jpg">
+          <img class="shareabouts-slide fadeout fadeout-3" src="{{ STATIC_URL }}images/shareabouts/shareabouts-770x493-chibikes-divvy.jpg">
+          <img class="shareabouts-slide fadeout fadeout-2" src="{{ STATIC_URL }}images/shareabouts/shareabouts-770x493-visionzero.jpg">
+          <img class="shareabouts-slide fadeout fadeout-1" src="{{ STATIC_URL }}images/shareabouts/shareabouts-770x493-chibikes.jpg">
+        </div>
+
+      </div>
+    </div>
   </div>
 
   <div class="row extra-padding-top">
     <div class="small-12 columns">
-
-      <h2>Shareabouts</h2>
-      <div class="row">
-        <div class="large-10 columns">
-          <p class="text-large">Shareabouts is a flexible tool for gathering public input on a map. Collect local insights from participants at neighborhood to state-scales. Work with us, or go DIY&mdash;pick a Shareabouts that meets your needs.</p>
-        </div>
-        <div class="large-2 columns text-right show-for-large-up">
-          <a href="http://www.planetizen.com/websites2013"><img src="{{ STATIC_URL }}images/shareabouts/plnz-topwebsite-2013.png"></a>
-        </div>
-        <hr>
-      </div>
 
       <div class="pricing-matrix row collapse" data-equalizer>
          <div id="pricing" class="page-anchor"></div>
@@ -57,7 +74,7 @@
           </ul>
         </div>
         <div class="small-12 columns">
-          <a class="show-details-all button secondary expand show-for-large-up" href="#">&#x25BC; More Information &#x25BC;</a>
+          <a class="show-details-all button secondary expand show-for-large-up" href="#">Show More Information&nbsp;&nbsp;<small>&#x25BC;</small></a>
           <div class="extra-pricing-info">
 
             <h3 class="extra-pricing-info-header">Collect Information About Places <img class="feature-list-icon" src="{{ STATIC_URL }}images/shareabouts/feature-list-icon-marker.png"> </h3>

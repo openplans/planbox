@@ -6241,6 +6241,90 @@ section, footer {
 /*--------------------------------------------------
   Product: Shareabouts Page
 --------------------------------------------------*/
+.shareabouts-page-header {
+  overflow: hidden; }
+  .shareabouts-page-header .columns, .shareabouts-page-header .row {
+    overflow: visible; }
+  @media only screen and (min-width: 64.063em) {
+    .shareabouts-page-header .shareabouts-page-header-text {
+      margin-top: 6rem;
+      position: relative;
+      z-index: 2; } }
+  .shareabouts-page-header .shareabouts-page-header-text h2 img {
+    width: 400px; }
+
+.shareabouts-slideshow {
+  position: relative;
+  width: 500px;
+  height: 290px;
+  left: 50%;
+  margin-left: -200px; }
+  @media only screen and (min-width: 40.063em) {
+    .shareabouts-slideshow {
+      width: 1000px;
+      height: 580px;
+      left: 0;
+      margin-left: 0; } }
+  .shareabouts-slideshow .shareabouts-slide {
+    display: block;
+    position: absolute;
+    top: 11px;
+    left: 57px;
+    width: 385px;
+    height: 246px; }
+    @media only screen and (min-width: 40.063em) {
+      .shareabouts-slideshow .shareabouts-slide {
+        top: 22px;
+        left: 115px;
+        width: 770px;
+        height: 493px; } }
+  .shareabouts-slideshow .fadeout {
+    -webkit-animation: fadeout 0.5s 1 forwards;
+    -moz-animation: fadeout 0.5s 1 forwards;
+    animation: fadeout 0.5s 1 forwards; }
+    .shareabouts-slideshow .fadeout.fadeout-1 {
+      animation-delay: 4s;
+      -moz-animation-delay: 4s;
+      -webkit-animation-delay: 4s; }
+    .shareabouts-slideshow .fadeout.fadeout-2 {
+      animation-delay: 8s;
+      -moz-animation-delay: 8s;
+      -webkit-animation-delay: 8s; }
+    .shareabouts-slideshow .fadeout.fadeout-3 {
+      animation-delay: 12s;
+      -moz-animation-delay: 12s;
+      -webkit-animation-delay: 12s; }
+    .shareabouts-slideshow .fadeout.fadeout-4 {
+      animation-delay: 16s;
+      -moz-animation-delay: 16s;
+      -webkit-animation-delay: 16s; }
+    .shareabouts-slideshow .fadeout.fadeout-5 {
+      animation-delay: 20s;
+      -moz-animation-delay: 20s;
+      -webkit-animation-delay: 20s; }
+    .shareabouts-slideshow .fadeout.fadeout-6 {
+      animation-delay: 24s;
+      -moz-animation-delay: 24s;
+      -webkit-animation-delay: 24s; }
+
+@-webkit-keyframes fadeout {
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 0; } }
+@-moz-keyframes fadeout {
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 0; } }
+@keyframes fadeout {
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 0; } }
 .shareabouts-instances .img {
   margin-right: -110px;
   width: 100px;
