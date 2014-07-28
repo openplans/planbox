@@ -232,6 +232,7 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     location = models.TextField(help_text=_("The general location of the project, e.g. \"Philadelphia, PA\", \"Clifton Heights, Louisville, KY\", \"4th St. Corridor, Brooklyn, NY\", etc."), default='', blank=True)
     contact = models.TextField(help_text=_("The contact information for the project"), default='', blank=True)
     owner = models.ForeignKey('Profile', related_name='projects')
+    details = JSONField(blank=True, default=dict)
     theme = models.ForeignKey('Theme', related_name='projects', null=True, blank=True, on_delete=models.SET_NULL)
     cover_img_url = models.URLField(_('Cover Image URL'), blank=True, max_length=2048)
     logo_img_url = models.URLField(_('Logo Image URL'), blank=True, max_length=2048)
