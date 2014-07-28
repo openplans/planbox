@@ -114,6 +114,7 @@
   <script src="{{ js_url|safe }}"></script>
   {% endfor %}
 
+  {% handlebarsjs 'project-editor-v2/(.*)' precompile register_partials %}
   {% handlebarsjs '(.*)' precompile register_partials %}
 
   {% comment %}
