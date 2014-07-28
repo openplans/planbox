@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Modernizr */
+/*globals Backbone, jQuery, Modernizr, Handlebars */
 
 var Planbox = Planbox || {};
 
@@ -22,6 +22,13 @@ var Planbox = Planbox || {};
   NS.app.addRegions({
     mainRegion: '#page',
     modalRegion: '#modal-container'
+  });
+
+  NS.app.addInitializer(function() {
+    // Handlebars support for Marionette
+    Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
+      return Handlebars.compile(rawTemplate);
+    };
   });
 
   NS.app.addInitializer(function(options){

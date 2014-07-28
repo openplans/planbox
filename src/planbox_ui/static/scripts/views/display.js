@@ -5,11 +5,6 @@ var Planbox = Planbox || {};
 (function(NS, $) {
   'use strict';
 
-    // Handlebars support for Marionette
-  Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
-    return Handlebars.compile(rawTemplate);
-  };
-
   // Sections =================================================================
   NS.AttachmentView = Backbone.Marionette.Layout.extend({
     template: '#attachment-tpl',
