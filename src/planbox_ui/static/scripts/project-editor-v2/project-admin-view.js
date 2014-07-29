@@ -10,6 +10,7 @@ var Planbox = Planbox || {};
       template: '#project-admin-tpl',
       ui: {
         editables: '[data-attr]:not(#section-list [data-attr])',
+        settingsToggle: '.section-settings-toggle',
         richEditables: '.project-description',
         saveBtn: '.save-btn',
         statusSelector: '.status-selector',
@@ -33,6 +34,7 @@ var Planbox = Planbox || {};
         'blur @ui.editableNavMenuLinks': 'handleEditableNavMenuLinkBlur',
         'change @ui.statusSelector': 'handleStatusChange',
         'change @ui.visibilityToggle': 'handleVisibilityChange',
+        'click @ui.settingsToggle': 'handleSettingsToggle',
         'click @ui.saveBtn': 'handleSave',
         'click @ui.customDomainMessageBtn': 'handleCustomDomainMessageBtn',
         'click @ui.userMenuLink': 'handleUserMenuClick',
@@ -282,6 +284,10 @@ var Planbox = Planbox || {};
         $target.addClass('checked');
 
         this.model.set(attr, val);
+      },
+      handleSettingsToggle: function(evt) {
+        evt.preventDefault();
+        $(evt.currentTarget).parents('fieldset').find('.section-settings').slideToggle(400);
       },
       save: function(makePublic) {
         var self = this,
