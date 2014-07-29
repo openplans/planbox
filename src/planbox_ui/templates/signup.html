@@ -17,7 +17,7 @@
       <form method="POST" class="panel">
         {% csrf_token %}
         <p class="float-label-container"><input required type="email" name="email" id="my-email" class="float-label-input" placeholder="email@example.org" tabindex="1" value="{{ form.email.value|default_if_none:'' }}"> <label for="my-email" class="float-label">Email</label></p>
-        <p class="float-label-container"><input required type="text" name="username" id="my-username" class="float-label-input" placeholder="Username" pattern="[A-Za-z0-9-_]{1,30}" max="30" tabindex="2" value="{{ form.username.value|default_if_none:'' }}"> <label for="my-username" class="float-label">Username</label></p>
+        <p class="float-label-container"><input required type="text" name="username" id="my-username" class="float-label-input" placeholder="Username" pattern="[A-Za-z0-9-_\.]{1,30}" max="30" tabindex="2" value="{{ form.username.value|default_if_none:'' }}"> <label for="my-username" class="float-label">Username</label></p>
         <p class="float-label-container"><input required type="password" name="password" id="my-password" class="float-label-input" placeholder="Password" max="30" tabindex="3"><label for="my-password" class="float-label"><strong>Password</strong></label></p>
         <p class="float-label-container"><input required type="text" name="affiliation" id="my-affiliation" class="float-label-input" placeholder="Organizational Affiliation" max="256" tabindex="4" value="{{ form.affiliation.value|default_if_none:'' }}"> <label for="my-affiliation" class="float-label">Organizational Affiliation</label></p>
         <p><input type="submit" value="Create Account" class="button radius" tabindex="4"></p>
