@@ -190,7 +190,6 @@ var Planbox = Planbox || {};
             // TODO: file[0] is not great
             $this.data('fileUpload').previewImage(options.files.file[0], function(dataUrl) {
               $imageContainer.attr('src', dataUrl);
-              // view.setImageOnContainer($imageContainer, dataUrl);
             });
           },
           complete: function(err, xhr, options) {
