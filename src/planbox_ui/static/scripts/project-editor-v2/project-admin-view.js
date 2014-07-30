@@ -5,7 +5,7 @@ var Planbox = Planbox || {};
 (function(NS, $) {
   'use strict';
 
-  NS.ProjectAdminView = Backbone.Marionette.Layout.extend(
+  NS.ProjectAdminView = NS.BaseProjectView.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#project-admin-tpl',
       ui: {
@@ -51,6 +51,7 @@ var Planbox = Planbox || {};
         'change': 'dataChanged',
         'sync': 'onSync'
       },
+
       sectionListView: NS.ProjectSectionListAdminView,
 
       initialize: function() {
