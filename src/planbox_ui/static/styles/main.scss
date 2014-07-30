@@ -525,21 +525,32 @@ section, footer {
       height: 493px;
     }
   }
-  .fadeout {
-    -webkit-animation: fadeout 0.5s 1 forwards;
-       -moz-animation: fadeout 0.5s 1 forwards;
-            animation: fadeout 0.5s 1 forwards;
-    &.fadeout-1 { animation-delay:  4s; -moz-animation-delay:  4s; -webkit-animation-delay:  4s; }
-    &.fadeout-2 { animation-delay:  8s; -moz-animation-delay:  8s; -webkit-animation-delay:  8s; }
-    &.fadeout-3 { animation-delay: 12s; -moz-animation-delay: 12s; -webkit-animation-delay: 12s; }
-    &.fadeout-4 { animation-delay: 16s; -moz-animation-delay: 16s; -webkit-animation-delay: 16s; }
-    &.fadeout-5 { animation-delay: 20s; -moz-animation-delay: 20s; -webkit-animation-delay: 20s; }
-    &.fadeout-6 { animation-delay: 24s; -moz-animation-delay: 24s; -webkit-animation-delay: 24s; }
+  .fade {
+    -webkit-animation: fade 25s linear infinite;
+       -moz-animation: fade 25s linear infinite;
+            animation: fade 25s linear infinite;
+    &.fade2 { -webkit-animation-name: fade2; animation-name: fade2; }
+    &.fade3 { -webkit-animation-name: fade3; animation-name: fade3; }
+    &.fade4 { -webkit-animation-name: fade4; animation-name: fade4; }
   }
 }
-@-webkit-keyframes fadeout { from { opacity:1; } to { opacity:0; } }
-   @-moz-keyframes fadeout { from { opacity:1; } to { opacity:0; } }
-        @keyframes fadeout { from { opacity:1; } to { opacity:0; } }
+// 5 images * 5 seconds ea = 25 seconds 
+// 100 keyframes / 25 = 4 keyframes per second 
+@-webkit-keyframes fade  { 0% { opacity: 1; } 18% { opacity: 1; } 20% { opacity: 0; } 98% { opacity: 0; } 100% { opacity: 1; } }
+   @-moz-keyframes fade  { 0% { opacity: 1; } 18% { opacity: 1; } 20% { opacity: 0; } 98% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes fade  { 0% { opacity: 1; } 18% { opacity: 1; } 20% { opacity: 0; } 98% { opacity: 0; } 100% { opacity: 1; } }
+
+@-webkit-keyframes fade2 { 0% { opacity: 1; } 38% { opacity: 1; } 40% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
+   @-moz-keyframes fade2 { 0% { opacity: 1; } 38% { opacity: 1; } 40% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes fade2 { 0% { opacity: 1; } 38% { opacity: 1; } 40% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
+
+@-webkit-keyframes fade3 { 0% { opacity: 1; } 58% { opacity: 1; } 60% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
+   @-moz-keyframes fade3 { 0% { opacity: 1; } 58% { opacity: 1; } 60% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes fade3 { 0% { opacity: 1; } 58% { opacity: 1; } 60% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
+
+@-webkit-keyframes fade4 { 0% { opacity: 1; } 78% { opacity: 1; } 80% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
+   @-moz-keyframes fade4 { 0% { opacity: 1; } 78% { opacity: 1; } 80% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes fade4 { 0% { opacity: 1; } 78% { opacity: 1; } 80% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
 
 .shareabouts-instances {
   .img {
