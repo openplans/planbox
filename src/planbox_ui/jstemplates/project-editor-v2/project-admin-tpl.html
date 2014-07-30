@@ -5,22 +5,28 @@
 
       <section class="project-section">
         <fieldset class="project-section-fieldset">
+          {{#if_fileapi_support 'cors'}}
           <div class="section-settings-toggle-container text-right"><a class="section-settings-toggle" href="#"><span class="icon gear"></span></a></div>
           <div class="section-settings panel radius hide">
-            <input id="add-cover-image" type="checkbox" class="cover-image-switch"><label>Add Cover Image</label><br>
+            <label>
+              <input id="add-cover-image" type="checkbox" class="cover-image-switch" {{#if cover_img_url}}checked{{/if}}
+                data-confirm-remove-msg="Are you sure you want to remove the cover image?">
+              Add Cover Image
+            </label><br>
             <!-- <input id="add-logo" type="checkbox"><label for="add-logo">Replace Title with Logo Image</label><br> -->
-            <input id="add-call-to-action" type="checkbox"><label for="add-logo">Use Call-to-action Buttons</label>
+            <!-- <input id="add-call-to-action" type="checkbox"><label for="add-logo">Use Call-to-action Buttons</label> -->
           </div>
-          <div class="cover-image-container">
+          {{/if_fileapi_support}}
+
+          <div class="cover-image-container {{^if cover_img_url}}hide{{/if}}">
 
             {{#if_fileapi_support 'cors'}}
-            {{#if cover_img_url}}
-            <img src="{{cover_img_url}}" class="cover-image" data-attr="cover_img_url">
-            {{else}}
-            <img src="http://placehold.it/2390x1000&text=sample+photo+at+2.39:1+aspect+ratio" class="cover-image" data-attr="cover_img_url">
-            {{/if}}
+            <img class="cover-image image-holder" data-attr="cover_img_url"
+              src="{{#if cover_img_url}}{{cover_img_url}}{{^}}http://placehold.it/2390x1000&text=sample+photo+at+2.39:1+aspect+ratio{{/if}}"
+              data-empty-img="http://placehold.it/2390x1000&text=sample+photo+at+2.39:1+aspect+ratio">
             <div class="drag-area text-center image-dnd">
-              <p>Drop cover photo here or&hellip;</p>
+              <p class="drop-instructions">Drop cover photo here or&hellip;</p>
+              <p class="uploading-message">Uploading&hellip;</p>
               <label for="cover-image-file-chooser" class="file-upload-input-container button tiny radius"><span class="file-upload-label">Choose Cover Photo</span><input name="cover-image" id="cover-image-file-chooser" class="file-upload-input hide" type="file" accept="image/*" /></label>
 
             </div>
@@ -28,21 +34,8 @@
               <div class="alert-box text-center info">File Uploads Not Supported By Your Browser<div>
             {{/if_fileapi_support}}
 
+          </div> <!-- .cover-image-container -->
 
-      <!--
-      {{#if_fileapi_support 'cors'}}
-      <div id="cover-image-dnd" class="image-dnd file-upload">
-        <p class="drop-instructions">Drop cover photo here or&hellip;</p>
-        <p class="uploading-message">Uploading&hellip;</p>
-        <label for="cover-image-file-chooser" class="file-upload-input-container button tiny radius"><span class="file-upload-label">Choose Cover Photo</span><input name="cover-image" id="cover-image-file-chooser" class="file-upload-input" type="file" accept="image/*" /></label>
-      </div>
-      <p class="remove-cover-img-btn-container"><button class="remove-img-btn label alert" data-confirm-msg="Are you sure you want to remove your cover image?"><span class="delete-icon">&#10005;</span> Remove Cover Photo</button></p>
-      {{/if_fileapi_support}}
-      -->
-
-
-
-          </div>
           <input type="text" placeholder="Project Title" class="heading-input" value="{{ title }}" data-attr="title" />
           <div class="row collapse character-count-container">
             <div class="small-10 large-11 columns">

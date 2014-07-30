@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -6877,5 +6876,87 @@ textarea.no-resize {
   .drag-area p {
     color: #eee;
     margin-bottom: 0.5rem; }
+
+/* =File Uploads
+-------------------------------------------------------------- */
+.no-file-upload-message {
+  clear: both;
+  font-size: 0.75em;
+  background-color: #E65CA1;
+  background-color: rgba(230, 92, 161, 0.25);
+  color: #fff;
+  color: rgba(255, 255, 255, 0.75);
+  float: left;
+  padding: 0.125em 0.5em;
+  border-radius: 0.25em; }
+
+.no-file-upload-message a {
+  color: #fff;
+  color: rgba(255, 255, 255, 0.75); }
+
+.no-file-upload-message a:hover {
+  color: #fff; }
+
+.file-upload {
+  margin: 2em 1em 1em;
+  text-align: center;
+  padding: 1em;
+  border: 2px dashed #eee;
+  border-radius: 0.5em;
+  opacity: 0.8;
+  position: relative; }
+
+.file-upload:hover,
+.file-dragging,
+.file-uploading {
+  opacity: 1;
+  background-color: #888;
+  background-color: rgba(90, 90, 90, 0.5); }
+
+.file-upload p {
+  margin-bottom: 0.5em; }
+
+.file-upload-input-container {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: 0; }
+
+.file-upload-input {
+  display: none; }
+
+.uploading-message,
+.file-uploading > .drop-instructions {
+  display: none; }
+
+@keyframes uploading {
+  0% {
+    color: #888; }
+
+  50% {
+    color: #fff; }
+
+  100% {
+    color: #888; } }
+@-webkit-keyframes uploading {
+  0% {
+    color: #888; }
+
+  50% {
+    color: #fff; }
+
+  100% {
+    color: #888; } }
+.file-uploading > .uploading-message {
+  display: block;
+  position: relative;
+  top: 1.25em;
+  text-transform: uppercase;
+  font-weight: 800;
+  -webkit-animation: uploading 1.5s infinite ease-in-out;
+  animation: uploading 1.5s infinite ease-in-out; }
+
+.file-uploading > .file-upload-input-container {
+  visibility: hidden; }
 
 /* ----- Medium screens ----- */

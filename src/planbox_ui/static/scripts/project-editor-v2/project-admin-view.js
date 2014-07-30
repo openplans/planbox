@@ -11,6 +11,7 @@ var Planbox = Planbox || {};
       ui: {
         editables: '[data-attr]:not(#section-list [data-attr])',
         settingsToggle: '.section-settings-toggle',
+        coverImageSwitch: '.cover-image-switch',
         richEditables: '.project-description',
         saveBtn: '.save-btn',
         statusSelector: '.status-selector',
@@ -22,7 +23,6 @@ var Planbox = Planbox || {};
         userMenu: '.user-menu',
         editableNavMenuLinks: '.sub-nav a[contenteditable]',
         publishBtn: '.btn-public',
-        imageHolders: '.image-holder',
         imageDropZones: '.image-dnd',
         removeImageLinks: '.remove-img-btn',
         hightlightLinkSelector: '.highlight-link-selector',
@@ -34,6 +34,7 @@ var Planbox = Planbox || {};
         'blur @ui.editableNavMenuLinks': 'handleEditableNavMenuLinkBlur',
         'change @ui.statusSelector': 'handleStatusChange',
         'change @ui.visibilityToggle': 'handleVisibilityChange',
+        'change @ui.coverImageSwitch': 'handleCoverImageSwitch',
         'click @ui.settingsToggle': 'handleSettingsToggle',
         'click @ui.saveBtn': 'handleSave',
         'click @ui.customDomainMessageBtn': 'handleCustomDomainMessageBtn',
@@ -125,6 +126,26 @@ var Planbox = Planbox || {};
         }
       },
 
+      handleCoverImageSwitch: function(evt) {
+        var $coverImageSwitch = $(evt.currentTarget),
+            $imageWrapper = this.$('.cover-image-container'),
+            $imageHolder = this.$('.cover-image-container .image-holder'),
+            confirmRemoveMsg = $coverImageSwitch.attr('data-confirm-remove-msg'),
+            isOn = $coverImageSwitch.is(':checked');
+
+        if (!isOn) {
+          if (!this.model.get('cover_img_url') || window.confirm(confirmRemoveMsg)) {
+            $imageWrapper.addClass('hide');
+            $imageHolder.attr('src', $imageHolder.attr('data-empty-img'));
+            this.model.set('cover_img_url', '');
+          } else {
+            $coverImageSwitch.prop('checked', true);
+          }
+        } else {
+          this.$('.cover-image-container').removeClass('hide');
+        }
+      },
+
       initDropZones: function() {
         var view = this;
 
@@ -160,7 +181,7 @@ var Planbox = Planbox || {};
           start: function(xhr, options) {
             // When the upload starts
             var $this = $(this),
-                $imageContainer = $this.closest('.image-holder');
+                $imageContainer = $this.siblings('.image-holder');
 
             // Apply the uploading class.
             $this.addClass('file-uploading');
@@ -168,13 +189,14 @@ var Planbox = Planbox || {};
             // Show a preview
             // TODO: file[0] is not great
             $this.data('fileUpload').previewImage(options.files.file[0], function(dataUrl) {
-              view.setImageOnContainer($imageContainer, dataUrl);
+              $imageContainer.attr('src', dataUrl);
+              // view.setImageOnContainer($imageContainer, dataUrl);
             });
           },
           complete: function(err, xhr, options) {
             // When the upload is complete
             var $this = $(this),
-                $imageContainer = $this.closest('.image-holder'),
+                $imageContainer = $this.siblings('.image-holder'),
                 attrName = $imageContainer.attr('data-attr'),
                 imageUrl = window.encodeURI(
                   options.url + options.data.key.replace('${filename}',
