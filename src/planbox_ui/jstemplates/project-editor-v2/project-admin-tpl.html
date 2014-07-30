@@ -11,12 +11,37 @@
             <!-- <input id="add-logo" type="checkbox"><label for="add-logo">Replace Title with Logo Image</label><br> -->
             <input id="add-call-to-action" type="checkbox"><label for="add-logo">Use Call-to-action Buttons</label>
           </div>
-          <div class="cover-image-container hide">
-            <img src="http://placehold.it/2390x1000&text=sample+photo+at+2.39:1+aspect+ratio" class="cover-image">
-            <div class="drag-area text-center">
+          <div class="cover-image-container">
+
+            {{#if_fileapi_support 'cors'}}
+            {{#if cover_img_url}}
+            <img src="{{cover_img_url}}" class="cover-image" data-attr="cover_img_url">
+            {{else}}
+            <img src="http://placehold.it/2390x1000&text=sample+photo+at+2.39:1+aspect+ratio" class="cover-image" data-attr="cover_img_url">
+            {{/if}}
+            <div class="drag-area text-center image-dnd">
               <p>Drop cover photo here or&hellip;</p>
-              <a href="#" class="button tiny radius">Choose File</a>
+              <label for="cover-image-file-chooser" class="file-upload-input-container button tiny radius"><span class="file-upload-label">Choose Cover Photo</span><input name="cover-image" id="cover-image-file-chooser" class="file-upload-input hide" type="file" accept="image/*" /></label>
+
             </div>
+            {{^}}
+              <div class="alert-box text-center info">File Uploads Not Supported By Your Browser<div>
+            {{/if_fileapi_support}}
+
+
+      <!--
+      {{#if_fileapi_support 'cors'}}
+      <div id="cover-image-dnd" class="image-dnd file-upload">
+        <p class="drop-instructions">Drop cover photo here or&hellip;</p>
+        <p class="uploading-message">Uploading&hellip;</p>
+        <label for="cover-image-file-chooser" class="file-upload-input-container button tiny radius"><span class="file-upload-label">Choose Cover Photo</span><input name="cover-image" id="cover-image-file-chooser" class="file-upload-input" type="file" accept="image/*" /></label>
+      </div>
+      <p class="remove-cover-img-btn-container"><button class="remove-img-btn label alert" data-confirm-msg="Are you sure you want to remove your cover image?"><span class="delete-icon">&#10005;</span> Remove Cover Photo</button></p>
+      {{/if_fileapi_support}}
+      -->
+
+
+
           </div>
           <input type="text" placeholder="Project Title" class="heading-input" value="{{ title }}" data-attr="title" />
           <div class="row collapse character-count-container">
