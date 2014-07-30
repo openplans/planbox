@@ -6269,7 +6269,7 @@ section, footer {
     overflow: visible; }
   @media only screen and (min-width: 64.063em) {
     .shareabouts-page-header .shareabouts-page-header-text {
-      margin-top: 6rem;
+      margin-top: 4rem;
       position: relative;
       z-index: 2; } }
   .shareabouts-page-header .shareabouts-page-header-text h2 img {
