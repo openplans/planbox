@@ -27,7 +27,8 @@ var Planbox = Planbox || {};
         removeImageLinks: '.remove-img-btn',
         hightlightLinkSelector: '.highlight-link-selector',
         hightlightExternalLink: '.highlight-external-link',
-        characterCountInput: '.character-count-container [maxlength]'
+        characterCountInput: '.character-count-container [maxlength]',
+        addSectionButtons: '.add-section-btn'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
@@ -41,6 +42,7 @@ var Planbox = Planbox || {};
         'click @ui.userMenuLink': 'handleUserMenuClick',
         'click @ui.publishBtn': 'handlePublish',
         'click @ui.removeImageLinks': 'handleRemoveImage',
+        'click @ui.addSectionButtons': 'handleAddSectionButtonClick',
         'change @ui.hightlightLinkSelector': 'handleHighlightLinkChange',
         'blur @ui.hightlightExternalLink': 'handleHighlightExternalLinkBlur',
 
@@ -367,6 +369,45 @@ var Planbox = Planbox || {};
               .find('.character-count-remaining');
 
         $counter.text(max - val.length);
+      },
+      getDefaultSectionSlug: function(sectionType) {
+        var sectionCollection = this.model.get('sections'),
+            countSectionType = sectionCollection.where({type: sectionType}).length,
+            isUnique, slug, uniquifier = countSectionType + 1;
+
+        do {
+          slug = sectionType + '-' + countSectionType;
+          isUnique = sectionCollection.where({slug: slug}).length === 0;
+        } while (!isUnique);
+
+        return slug;
+      },
+      getDefaultSectionDetails: function(sectionType) {
+        switch (sectionType) {
+        case 'text':
+          return {};
+        }
+      },
+      handleAddSectionButtonClick: function(evt) {
+        evt.preventDefault();
+
+        var $btn = $(evt.currentTarget),
+            sectionType = $btn.attr('data-section-type'),
+            sectionCollection = this.model.get('sections'),
+            $section = $btn.closest('.project-section'),
+            // If we are adding a section at the top of the list then $section
+            // will be empty and sectionIndex will be -1.
+            sectionIndex = $('.project-section').index($section);
+
+        sectionCollection.add({
+          type: sectionType,
+          slug: this.getDefaultSectionSlug(sectionType),
+          details: this.getDefaultSectionDetails(sectionType)
+        }, {
+          at: sectionIndex + 1
+        });
+
+        $('[data-dropdown-content]').foundation('dropdown', 'closeall');
       },
       onSaveSuccess: function(model, makePublic) {
         var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
