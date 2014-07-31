@@ -1,0 +1,17 @@
+<span data-magellan-destination="section-{{ slug }}" id="section-{{ slug }}" class="section-anchor"></span>
+
+<div class="section-inactive-overlay"></div>
+
+  {{^if_fileapi_support 'cors'}}
+  <div class="alert-box secondary radius">
+    Your browser doesn't support adding event attachments. Please <a href="http://browsehappy.com/">upgrade</a> to use this feature.
+  </div>
+  {{/if_fileapi_support}}
+
+  {{> activation-toggle-tpl }}
+
+  <input type="text" placeholder="Project Timeline" class="sub-heading-input" value="{{ label }}" data-attr="label" />
+  <ol class="event-list"></ol>
+  <br>
+  <a href="#" class="add-event-btn button small radius">Add Event</a>
+</div>

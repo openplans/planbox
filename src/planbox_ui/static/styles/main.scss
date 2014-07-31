@@ -787,35 +787,15 @@ section, footer {
   Project Timeline
 --------------------------------------------------*/
 
-.project-section-timeline {
-  a {
-    color: #ACD8E6;
-    &:hover,
-    &:focus {
-      color: #B6E4F2;
-    }
-  }
-}
-.event-datetime-container {
-  font-family: 'Bitter', serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: -0.25em 0 0.25em;
-}
-
-.project-section-timeline {
-  background-color: #888;
-  color: #fff;
-  padding-top: 0.9375rem;
-}
+.project-section-timeline {}
+.event-datetime-container {}
 .project-section-timeline .section-header {
   background-color: #eee;
   color: #444;
 }
 .event-list {
-  border-left: 0.75rem solid #eee;
-  padding: 2rem 0 0;
-  margin-bottom: 0.9375rem;
+  border-left: 0.75rem solid #bbb;
+  list-style: none;
 }
 .event {
   padding-left: 2rem;
@@ -824,7 +804,7 @@ section, footer {
 }
 .event:last-child:before {
   content: '';
-  background-color: #888;
+  background-color: #fff;
   width: 1.5rem;
   position: absolute;
   top: 1.25rem;
@@ -839,8 +819,8 @@ section, footer {
   width: 2rem;
   height: 2rem;
   border-radius: 2rem;
-  background-color: #888;
-  border: 0.5rem solid #eee;
+  background-color: #fff;
+  border: 0.5rem solid #bbb;
 }
 
 /* Event Attachments */
@@ -848,9 +828,7 @@ section, footer {
 .attachment-icon img {
   width: 90%;
 }
-.attachment-title {
-  margin-bottom: 0.125rem;
-}
+.attachment-title {}
 
 
 /*--------------------------------------------------
