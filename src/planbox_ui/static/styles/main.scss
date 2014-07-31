@@ -911,6 +911,21 @@ section, footer {
   border: 0;
 }
 
+// Section Settings
+.section-settings-toggle-container {
+  margin-bottom: 0.75rem;
+  padding-top: 0.5rem;
+  padding-right: 0.25rem;
+}
+.section-settings-toggle {}
+.section-settings {
+  background-color: #f7f7f7;
+  padding-top: 1.75rem;
+  .section-settings-toggle-container + & {
+     margin-top: -2.5rem;
+  }
+}
+
 input[type=text].heading-input {
   @media #{$medium-up} {
     font-size: 2.25rem;
@@ -938,17 +953,22 @@ span.sub-heading-postfix {
   }
 }
 
-.section-settings-toggle-container {
-  margin-bottom: 0.75rem;
-  padding-top: 0.5rem;
-  padding-right: 0.25rem;
-}
-.section-settings-toggle {}
-.section-settings {
-  background-color: #f7f7f7;
-  padding-top: 1.75rem;
-  .section-settings-toggle-container + & {
-     margin-top: -2.5rem;
+.content-editable {
+  line-height: $paragraph-line-height;
+  &.rich-editable {
+    min-height: 8rem;
+  }
+  // copy textarea styles from _forms.scss
+  @include form-element;
+  @if $input-include-glowing-effect == false {
+      @include single-transition(all, 0.15s, linear);
+  }
+  &.radius {
+    @include radius($input-border-radius);
+  }
+  height: auto;
+  .error &, &.error {
+    margin-bottom: 0;
   }
 }
 
