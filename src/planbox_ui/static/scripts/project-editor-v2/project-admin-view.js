@@ -90,6 +90,7 @@ var Planbox = Planbox || {};
         var self = this;
         this.initRichEditables();
         this.initDropZones();
+        this.showRegions();
 
         // Set the initial character counts for each countable
         this.ui.characterCountInput.each(function(i, el) {
