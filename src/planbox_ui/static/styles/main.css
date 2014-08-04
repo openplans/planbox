@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -5819,6 +5820,9 @@ p.text-xxlarge {
 .alert-box.info a {
   color: #308fbf; }
 
+.project-text-content {
+  line-height: 150%; }
+
 /*--------------------------------------------------
   Grid
 --------------------------------------------------*/
@@ -6686,10 +6690,6 @@ section, footer {
 /*--------------------------------------------------
   Project Timeline
 --------------------------------------------------*/
-.project-section-timeline .section-header {
-  background-color: #eee;
-  color: #444; }
-
 .event-list {
   border-left: 0.75rem solid #bbb;
   list-style: none; }

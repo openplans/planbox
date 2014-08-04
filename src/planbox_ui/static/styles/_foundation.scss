@@ -82,6 +82,11 @@ p {
   }
 }
 
+// body line-height set explicitly to "1" in _global.scss, so text outside p/lists/blockquotes/etc is ugly
+.project-text-content {
+  line-height: $base-line-height;
+}
+
 
 /*--------------------------------------------------
   Grid
