@@ -74,7 +74,7 @@ var Planbox = Planbox || {};
     // expected. Specifically, "sticking" to the right location when scrolling
     // and not overlapping with section title when someone links directly to
     // a hash.
-    $(document).foundation();
+    $(document).foundation({'magellan': {}});
   });
 
 }(Planbox, jQuery));

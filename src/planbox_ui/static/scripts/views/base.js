@@ -22,7 +22,7 @@ var Planbox = Planbox || {};
       }));
     },
 
-    onShow: function() {
+    onRender: function() {
       // After the project is in the DOM, show the project sections
       this.showRegions();
     }

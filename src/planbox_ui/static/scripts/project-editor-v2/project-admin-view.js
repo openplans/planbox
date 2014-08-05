@@ -99,6 +99,12 @@ var Planbox = Planbox || {};
           self.setCharacterCountRemaining($(el));
         });
       },
+
+      onShow: function() {
+        // After the project is in the DOM, show the project sections
+        $(this.el).foundation();
+      },
+
       setImageOnContainer: function($el, url) {
         $el.addClass('has-image');
         if ($el.hasClass('image-as-background')) {
@@ -373,11 +379,13 @@ var Planbox = Planbox || {};
       getDefaultSectionSlug: function(sectionType) {
         var sectionCollection = this.model.get('sections'),
             countSectionType = sectionCollection.where({type: sectionType}).length,
-            isUnique, slug, uniquifier = countSectionType + 1;
+            uniquifier = countSectionType + 1,
+            isUnique, slug;
 
         do {
-          slug = sectionType + '-' + countSectionType;
+          slug = sectionType + '-' + uniquifier;
           isUnique = sectionCollection.where({slug: slug}).length === 0;
+          uniquifier++;
         } while (!isUnique);
 
         return slug;
