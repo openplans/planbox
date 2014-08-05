@@ -449,7 +449,7 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
         return self.project.natural_key() + (self.index,)
 
     def get_slug_basis(self):
-        return self.menu_label
+        return self.menu_label or self.type
 
     def get_all_slugs(self):
         return [s.slug for s in self.project.sections.all()]
