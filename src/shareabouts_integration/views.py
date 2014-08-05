@@ -57,8 +57,8 @@ def create_dataset(request):
 
     elif ds_response.status_code != 404:
         return HttpResponse(
-            json.dumps({'errors': 'Upstream problem.'}),
-            status=503,
+            json.dumps({'errors': 'Unknown upstream problem.'}),
+            status=502,
             content_type='application/json')
 
     # If the dataset did not exist, create it.
