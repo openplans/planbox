@@ -28,6 +28,22 @@ input.hide {
   display: none;
 }
 
+// .no-bullet only works on ul
+ol {
+  &.no-bullet {
+    list-style: none;
+    margin-#{$default-float}: $list-side-margin-no-bullet;
+    li {
+      ul,
+      ol {
+        margin-#{$default-float}: $list-nested-margin;
+        margin-bottom: 0;
+        list-style: none;
+      }
+    }
+  }
+}
+
 
 /*--------------------------------------------------
   Typography

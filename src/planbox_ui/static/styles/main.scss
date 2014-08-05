@@ -746,14 +746,23 @@ section, footer {
   Project Timeline
 --------------------------------------------------*/
 
-.event-list {
+ol.event-list {
   border-left: 0.75rem solid #bbb;
-  list-style: none;
+  margin-#{$default-float}: $list-nested-margin;
 }
 .event {
   padding-left: 2rem;
   margin-bottom: 2rem;
   position: relative;
+}
+.event:first-child:before {
+  content: '';
+  background-color: #fff;
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: -0.25rem;
+  left: -1.125rem;
 }
 .event:last-child:before {
   content: '';
@@ -774,6 +783,21 @@ section, footer {
   border-radius: 2rem;
   background-color: #fff;
   border: 0.5rem solid #bbb;
+  z-index: 1;
+}
+.event > .handle {
+  cursor: move;
+  position: absolute;
+  top: 0.25rem;
+  left: -1.375rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+  z-index: 2;
+  text-indent: -9999px;
+}
+.attachment > .handle {
+  display: none;
 }
 
 /* Event Attachments */
