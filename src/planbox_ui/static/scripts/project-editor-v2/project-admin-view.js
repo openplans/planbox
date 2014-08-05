@@ -376,20 +376,6 @@ var Planbox = Planbox || {};
 
         $counter.text(max - val.length);
       },
-      getDefaultSectionSlug: function(sectionType) {
-        var sectionCollection = this.model.get('sections'),
-            countSectionType = sectionCollection.where({type: sectionType}).length,
-            uniquifier = countSectionType + 1,
-            isUnique, slug;
-
-        do {
-          slug = sectionType + '-' + uniquifier;
-          isUnique = sectionCollection.where({slug: slug}).length === 0;
-          uniquifier++;
-        } while (!isUnique);
-
-        return slug;
-      },
       getDefaultSectionDetails: function(sectionType) {
         switch (sectionType) {
         case 'text':
@@ -409,7 +395,6 @@ var Planbox = Planbox || {};
 
         sectionCollection.add({
           type: sectionType,
-          slug: this.getDefaultSectionSlug(sectionType),
           details: this.getDefaultSectionDetails(sectionType)
         }, {
           at: sectionIndex + 1

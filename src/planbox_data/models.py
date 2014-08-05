@@ -443,7 +443,7 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
     type = models.CharField(max_length=30, choices=SECTION_TYPE_CHOICES)
     label = models.TextField(blank=True)
     menu_label = models.TextField(blank=True)
-    slug = models.CharField(max_length=30)
+    slug = models.CharField(max_length=30, blank=True)
     active = models.BooleanField(default=True)
     details = JSONField(blank=True, default=dict)
     index = models.PositiveIntegerField(blank=True)

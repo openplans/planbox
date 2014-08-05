@@ -21,6 +21,12 @@ var Planbox = Planbox || {};
         'blur @ui.editables': 'handleEditableBlur',
         'input @ui.editables': 'handleEditableBlur',
         'click @ui.deleteSection': 'handleDeleteSectionClick'
+      },
+      onRender: function() {
+        this.initRichEditables();
+        // This is so any changes to the menu_label will be reflected in the
+        // slug.
+        this.model.set('slug', '', {silent: true});
       }
     })
   );
