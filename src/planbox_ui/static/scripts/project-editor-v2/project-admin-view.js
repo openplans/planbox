@@ -32,6 +32,7 @@ var Planbox = Planbox || {};
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
+        'input @ui.editables': 'handleEditableBlur',
         'blur @ui.editableNavMenuLinks': 'handleEditableNavMenuLinkBlur',
         'change @ui.statusSelector': 'handleStatusChange',
         'change @ui.visibilityToggle': 'handleVisibilityChange',
