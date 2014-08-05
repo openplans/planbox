@@ -2653,8 +2653,8 @@ select::-ms-expand {
   border-width: 0px;
   overflow: hidden;
   font-size: 0.875rem;
-  height: 2.3125rem;
-  line-height: 2.3125rem; }
+  height: 2.4375rem;
+  line-height: 2.4375rem; }
 
 /* Adjust padding, alignment and radius if pre/post element is a button */
 .postfix.button {
@@ -2739,10 +2739,10 @@ textarea {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.75);
   display: block;
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin: 0 0 1rem 0;
   padding: 0.5rem;
-  height: 2.3125rem;
+  height: 2.4375rem;
   width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -2856,11 +2856,11 @@ select {
   background-repeat: no-repeat;
   border: 0px solid #cccccc;
   padding: 0.5rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: rgba(0, 0, 0, 0.75);
   line-height: normal;
   border-radius: 0;
-  height: 2.3125rem; }
+  height: 2.4375rem; }
   select.radius {
     border-radius: 3px; }
   select:hover {
@@ -6803,10 +6803,10 @@ span.sub-heading-postfix {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.75);
   display: block;
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin: 0 0 1rem 0;
   padding: 0.5rem;
-  height: 2.3125rem;
+  height: 2.4375rem;
   width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
