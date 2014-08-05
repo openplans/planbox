@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'django_ace',
     'django_object_actions',
+    'raven.contrib.django.raven_compat',
 
     'custom_domains',
     'password_reset',
