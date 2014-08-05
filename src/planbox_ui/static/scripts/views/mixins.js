@@ -64,6 +64,15 @@ var Planbox = Planbox || {};
       var isActive = !!$(evt.currentTarget).val();
       this.$el.toggleClass('active', isActive);
       this.model.set('active', isActive);
+    },
+    handleDeleteSectionClick: function(evt) {
+      evt.preventDefault();
+
+      if (window.confirm('Really delete this section?')) {
+        // Can't destroy since this is a section collection which only exists
+        // as a relational collection to the project.
+        this.model.collection.remove(this.model);
+      }
     }
   };
 

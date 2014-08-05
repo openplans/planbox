@@ -14,11 +14,13 @@ var Planbox = Planbox || {};
       ui: {
         editables: '[data-attr]',
         richEditables: '.rich-editable',
-        activeToggle: '.active-toggle'
+        activeToggle: '.active-toggle',
+        deleteSection: '.delete-section'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
-        'input @ui.editables': 'handleEditableBlur'
+        'input @ui.editables': 'handleEditableBlur',
+        'click @ui.deleteSection': 'handleDeleteSectionClick'
       }
     })
   );
