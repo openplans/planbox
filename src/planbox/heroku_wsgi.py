@@ -25,3 +25,7 @@ application = ExpiresMiddleware(application, {
     'text/css':               365*24*60*60,
     'image/png':              365*24*60*60,
 })
+
+# Send errors to Sentry
+from raven.contrib.django.raven_compat.middleware.wsgi import Sentry
+application = Sentry(application)
