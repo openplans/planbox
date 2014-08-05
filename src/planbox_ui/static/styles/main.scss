@@ -104,66 +104,25 @@
 .icon {
   display: inline-block;
   position: relative;
-  width: 1em;
-  height: 1em;
-  margin: 0 0.25rem;
-  opacity: 0.3;
-  &:before,
-  &:after {
-    content: '';
+  width: 1.5rem;
+  height: 1.5rem;
+  a & {
+    opacity: 0.3;
   }
   a:hover & {
     opacity: 1;
   }
-  &.gear {
-    border: 0.375em solid #999;
-    border-radius: 100%;
-    &:before,
-    &:after {
-      display: block;
-      width: 0.25em;
-      height: 0.25em;
-      background-color: #999;
-      position: absolute;
-      top: -0.5em;
-      left: 50%;
-      margin-left: -0.125em;
-      box-shadow: 0 1em 0 #999, 0.5em 0.5em 0 #999, -0.5em 0.5em 0 #999;
-    }
-    &:after {
-      transform: rotate(45deg);
-      transform-origin: 0.125em 0.625em;
-    }
+  &.tiny {
+    width: 1rem;
+    height: 1rem;
   }
-  &.pencil {
-    transform: rotate(45deg);
-    transform-origin: 50% 50%;
-    top: 0.125em;
-    &:before {
-      display: block;
-      border: 0.15em solid #999;
-      border-right-color: transparent;
-      border-bottom-color: transparent;
-      border-left-color: transparent;
-      border-bottom-width: 0;
-      margin-left: -0.15em;
-      margin-bottom: -0.1em;
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-    }
-    &:after {
-      display: block;
-      background-color: Gold;
-      width: 0.4em;
-      height: 0.65em;
-      margin-left: -0.2em;
-      margin-top: 0.2em;
-      position: absolute;
-      left: 50%;
-      top: 0;
-      box-shadow: 0 -0.2em 0 Pink;
-    }
+  &.small {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  &.large {
+    width: 2.25rem;
+    height: 2.25rem;
   }
 }
 
