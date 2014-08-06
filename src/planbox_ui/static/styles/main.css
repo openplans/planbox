@@ -6717,6 +6717,25 @@ section, footer {
 .event .calendar-icon {
   cursor: pointer; }
 
+.datetime-picker-container {
+  position: relative; }
+
+.picker {
+  margin-top: -1.125rem; }
+
+.picker__holder {
+  max-width: 100%; }
+
+.picker__nav--prev:hover,
+.picker__nav--next:hover {
+  background-color: transparent; }
+
+.picker button {
+  color: inherit; }
+
+.picker table tr td {
+  text-align: center; }
+
 .handle {
   cursor: move; }
 
