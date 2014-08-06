@@ -6714,6 +6714,9 @@ section, footer {
   border: 0.5rem solid #bbb;
   z-index: 1; }
 
+.event .calendar-icon {
+  cursor: pointer; }
+
 .handle {
   cursor: move; }
 

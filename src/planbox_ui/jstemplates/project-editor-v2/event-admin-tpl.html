@@ -7,16 +7,20 @@
 
 <div class="row">
 
-  <div class="medium-7 columns">
+  <div class="large-7 columns">
 
-    <div class="event-datetime-container">
-      <div class="float-label-container">
-        <div class="event-datetime content-editable float-label-input" contenteditable data-attr="datetime_label">{{ datetime_label }}</div>
-        <span class="float-label">Event Date</span>
-        <input type="text" class="event-datetime-picker hide" data-value="{{ start_datetime }}">
-        <span class="calendar-icon"></span>
+    <div class="row collapse">
+      <div class="small-10 columns">
+        <div class="float-label-container">
+          <input class="event-datetime float-label-input" type="text" placeholder="Event Date" value="{{ datetime_label }}" data-attr="datetime_label">
+          <span class="float-label">Event Date</span>
+        </div>
+      </div>
+      <div class="small-2 columns">
+        <span class="postfix radius calendar-icon"><img src="{{ static_url }}images/icon-calendar.png" class="icon tiny" /></span>
       </div>
     </div>
+    <input type="text" class="event-datetime-picker hide" data-value="{{ start_datetime }}">
 
     <div class="float-label-container">
       <div class="event-description content-editable float-label-input" data-attr="description" contenteditable>{{{ description }}}</div>
@@ -27,7 +31,7 @@
 
   </div>
 
-  <div class="medium-5 columns">
+  <div class="large-5 columns">
 
     <div class="attachments-region hide-for-print"></div>
 

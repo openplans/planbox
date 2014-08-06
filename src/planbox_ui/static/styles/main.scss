@@ -786,6 +786,10 @@ section, footer {
   z-index: 1;
 }
 
+.event .calendar-icon {
+  cursor: pointer;
+}
+
 // Event Drag-n-Drop
 .handle {
   cursor: move;
@@ -1120,4 +1124,3 @@ textarea.no-resize {
 //  .product-features {
 //    padding: 3rem 0 1rem;
 //  }
-
