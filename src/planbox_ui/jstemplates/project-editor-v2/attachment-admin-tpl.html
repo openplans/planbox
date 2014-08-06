@@ -1,34 +1,23 @@
-<div class="row collapse">
-
-  <div class="small-4 large-3 columns">
-
-    {{#if thumbnail_url}}
-    <div class="attachment-icon image">
-      <img src="{{ thumbnail_url }}">
-    </div>
-    {{else}}
+<div class="row">
+  <div class="small-3 columns text-center">
     <div class="attachment-icon">
+      {{#if thumbnail_url}}
+      <img src="{{ thumbnail_url }}">
+      {{else}}
       <img src="{{ static_url }}/images/document_generic.png">
+      {{/if}}
+      <span class="handle attachment-handle">&#9783;</span>
     </div>
-    {{/if}}
-
     <span class="delete-attachment-btn button tiny less-padding round alert">&#10005;&nbsp;Delete</span>
-
   </div>
-
-  <div class="small-8 large-9 columns">
-
+  <div class="small-9 columns">
     <div class="float-label-container">
-      <div class="h6 attachment-title content-editable float-label-input" data-attr="label" contenteditable>{{{ label }}}</div>
-      <span class="float-label">Attachment Title</span>
+      <input class="float-label-input" type="text" placeholder="Attachment Title" value="{{ label }}" data-attr="label">
+      <span class="float-label">Title</span>
     </div>
     <div class="float-label-container">
-      <div class="attachment-description content-editable float-label-input" data-attr="description" contenteditable>{{{ description }}}</div>
-      <span class="float-label">Attachment Description</span>
+      <input class="float-label-input" type="text" placeholder="Attachment Description" value="{{ description }}" data-attr="description">
+      <span class="float-label">Description</span>
     </div>
-
   </div>
-
 </div>
-
-<span class="handle">&#9783;</span>

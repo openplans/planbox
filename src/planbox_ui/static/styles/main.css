@@ -6711,8 +6711,10 @@ section, footer {
   border: 0.5rem solid #bbb;
   z-index: 1; }
 
+.handle {
+  cursor: move; }
+
 .event > .handle {
-  cursor: move;
   position: absolute;
   top: 0.25rem;
   left: -0.625rem;
@@ -6722,12 +6724,16 @@ section, footer {
   z-index: 2;
   text-indent: -9999px; }
 
-.attachment > .handle {
-  display: none; }
+.attachment-icon {
+  position: relative; }
 
-/* Event Attachments */
-.attachment-icon img {
-  width: 90%; }
+.attachment-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: -9999px; }
 
 /*--------------------------------------------------
   Project Shareabouts
