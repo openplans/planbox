@@ -187,7 +187,7 @@ var Planbox = Planbox || {};
         evt.preventDefault();
 
         var $target = $(evt.currentTarget),
-            val = $target.text(),
+            val = $target.is('[contenteditable]') ? $target.text() : $target.val(),
             picker = this.ui.datetimeInput.pickadate('picker'),
             newDate;
 
@@ -203,7 +203,13 @@ var Planbox = Planbox || {};
             val = $target.val();
 
         this.setEventDate(val);
-        this.ui.datetimeEditable.html(val);
+
+        // Backwards compatible... deprecated.
+        if (this.ui.datetimeEditable.is('[contenteditable]')) {
+          this.ui.datetimeEditable.html(val);
+        } else {
+          this.ui.datetimeEditable.val(val);
+        }
       },
       onRender: function() {
         // ContentEditableMixin
