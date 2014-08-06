@@ -1,6 +1,11 @@
-<span data-magellan-destination="section-{{ slug }}" id="section-{{ slug }}" class="section-anchor"></span>
-
-<div class="section-inactive-overlay"></div>
+<fieldset class="project-section-fieldset">
+  <div class="section-settings-toggle-container text-right"><a class="section-settings-toggle" href="#"><img src="{{ static_url }}images/gear.png" class="icon" /></a></div>
+  <div class="section-settings panel radius hide clearfix">
+    <label>Menu Text
+      <input type="text" placeholder="Leave blank to exclude from menu" value="{{ menu_label }}" data-attr="menu_label">
+    </label>
+    <a href="#" class="button tiny round alert less-padding right delete-section">Delete&nbsp;Section</a>
+  </div>
 
   {{^if_fileapi_support 'cors'}}
   <div class="alert-box secondary radius">
@@ -8,10 +13,11 @@
   </div>
   {{/if_fileapi_support}}
 
-  {{> activation-toggle-tpl }}
-
   <input type="text" placeholder="Project Timeline" class="sub-heading-input" value="{{ label }}" data-attr="label" />
   <ol class="event-list no-bullet"></ol>
   <br>
   <a href="#" class="add-event-btn button small radius">Add Event</a>
-</div>
+
+</fieldset>
+
+{{> insert-new-section-tpl }}
