@@ -14,14 +14,9 @@ var Planbox = Planbox || {};
         coverImageSwitch: '.cover-image-switch',
         richEditables: '.project-description',
         saveBtn: '.save-btn',
-        statusSelector: '.status-selector',
-        statusLabel: '.project-status',
         visibilityToggle: '[name=project-public]',
         customDomainMessage: '.custom-domain-message',
         customDomainMessageBtn: '.custom-domain-message-btn',
-        userMenuLink: '.user-menu-link',
-        userMenu: '.user-menu',
-        editableNavMenuLinks: '.sub-nav a[contenteditable]',
         publishBtn: '.btn-public',
         imageDropZones: '.image-dnd',
         removeImageLinks: '.remove-img-btn',
@@ -33,14 +28,11 @@ var Planbox = Planbox || {};
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'input @ui.editables': 'handleEditableBlur',
-        'blur @ui.editableNavMenuLinks': 'handleEditableNavMenuLinkBlur',
-        'change @ui.statusSelector': 'handleStatusChange',
         'change @ui.visibilityToggle': 'handleVisibilityChange',
         'change @ui.coverImageSwitch': 'handleCoverImageSwitch',
         'click @ui.settingsToggle': 'handleSettingsToggle',
         'click @ui.saveBtn': 'handleSave',
         'click @ui.customDomainMessageBtn': 'handleCustomDomainMessageBtn',
-        'click @ui.userMenuLink': 'handleUserMenuClick',
         'click @ui.publishBtn': 'handlePublish',
         'click @ui.removeImageLinks': 'handleRemoveImage',
         'click @ui.addSectionButtons': 'handleAddSectionButtonClick',
@@ -276,34 +268,7 @@ var Planbox = Planbox || {};
         // the view to match the data.
         this.render();
       },
-      handleEditableNavMenuLinkBlur: function(evt) {
-        var $target = $(evt.target),
-            attr = $target.attr('data-attr') || 'menu_label',
-            sectionId = $target.attr('data-id'),
-            val = $target.text(),
-            sectionCollection = this.model.get('sections'),
-            sectionModel = sectionCollection.get(sectionId);
 
-        evt.preventDefault();
-
-        // Set the value of what was just blurred. Setting an event to the same
-        // value does not trigger a change event.
-        sectionModel.set(attr, val);
-      },
-      handleStatusChange: function(evt) {
-        var $target = $(evt.target),
-            attr = $target.attr('data-attr'),
-            val = $target.val();
-
-        evt.preventDefault();
-
-        this.ui.statusLabel
-          // .removeClass('project-status-not-started project-status-active project-status-complete')
-          // .addClass('project-status-'+val)
-          .find('strong').text(_.findWhere(NS.Data.statuses, {'value': val}).label);
-
-        this.model.set(attr, val);
-      },
       handleVisibilityChange: function(evt) {
         var $target = $(evt.target),
             attr = $target.attr('data-attr'),
@@ -358,10 +323,6 @@ var Planbox = Planbox || {};
       handleCustomDomainMessageBtn: function(evt) {
         evt.preventDefault();
         this.ui.customDomainMessage.toggleClass('is-open');
-      },
-      handleUserMenuClick: function(evt) {
-        evt.preventDefault();
-        this.ui.userMenu.toggleClass('is-open');
       },
       handleCharacterCountChange: function(evt) {
         evt.preventDefault();
