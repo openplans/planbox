@@ -50,6 +50,8 @@ var Planbox = Planbox || {};
       sectionListView: NS.ProjectSectionListAdminView,
 
       initialize: function() {
+        var self = this;
+
         // Hijack paste and strip out the formatting
         this.$el.on('paste', '[contenteditable]', function(evt) {
           evt.preventDefault();
@@ -78,6 +80,19 @@ var Planbox = Planbox || {};
         window.addEventListener('drop', function(e) {
           e = e || event;
           e.preventDefault();
+        }, false);
+
+        // Protect the user from leaving before saving.
+        window.addEventListener('beforeunload', function(e) {
+          var notification = 'It looks like you have unsaved changes in your project.';
+          e = e || event;
+
+          if (self.model.hasChanged()) {
+            // set and return for browser compatibility
+            // https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload
+            e.returnValue = notification;
+            return notification;
+          }
         }, false);
       },
 
@@ -264,6 +279,9 @@ var Planbox = Planbox || {};
       },
 
       onSync: function() {
+        // Mark the model as unchanged.
+        this.model.changed = {};
+
         // When the model is synced with the server, we're going to rerender
         // the view to match the data.
         this.render();
