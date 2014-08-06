@@ -44,6 +44,11 @@ ol {
   }
 }
 
+// Set dropdown hover font-color. Background should maybe be on the a:hover, not the li:hover. 
+.f-dropdown li a:hover, .f-dropdown li a:focus {
+  color: #fff;
+}
+
 
 /*--------------------------------------------------
   Typography
@@ -193,3 +198,16 @@ p {
     margin-left: 5.5rem;
   }
 }
+
+
+/*--------------------------------------------------
+  Dropdown Menus
+--------------------------------------------------*/
+
+// Disabled Links
+.f-dropdown li a.disabled {
+  background-color: #eee;
+  color: #ccc;
+  cursor: default;
+}
+

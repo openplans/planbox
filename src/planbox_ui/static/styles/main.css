@@ -2494,7 +2494,7 @@ button::-moz-focus-inner {
     line-height: 1.125rem;
     margin: 0; }
     .f-dropdown li:hover, .f-dropdown li:focus {
-      background: #eeeeee; }
+      background: #67b3d9; }
     .f-dropdown li a {
       display: block;
       padding: 0.5rem;
@@ -5797,6 +5797,9 @@ ol.no-bullet {
     margin-bottom: 0;
     list-style: none; }
 
+.f-dropdown li a:hover, .f-dropdown li a:focus {
+  color: #fff; }
+
 /*--------------------------------------------------
   Typography
 --------------------------------------------------*/
@@ -5898,6 +5901,14 @@ p.text-xxlarge {
   margin-left: 4rem; }
 .switch.large + label.inline {
   margin-left: 5.5rem; }
+
+/*--------------------------------------------------
+  Dropdown Menus
+--------------------------------------------------*/
+.f-dropdown li a.disabled {
+  background-color: #eee;
+  color: #ccc;
+  cursor: default; }
 
 /*--------------------------------------------------
   OpenPlans-Branded Top Bar
