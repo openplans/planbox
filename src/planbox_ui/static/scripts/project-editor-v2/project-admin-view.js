@@ -12,7 +12,7 @@ var Planbox = Planbox || {};
         editables: '[data-attr]:not(#section-list [data-attr])',
         settingsToggle: '.section-settings-toggle',
         coverImageSwitch: '.cover-image-switch',
-        richEditables: '.project-description',
+        richEditables: '.rich-editable',
         saveBtn: '.save-btn',
         visibilityToggle: '[name=project-public]',
         customDomainMessage: '.custom-domain-message',
