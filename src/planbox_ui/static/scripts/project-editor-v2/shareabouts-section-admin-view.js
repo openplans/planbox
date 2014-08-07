@@ -12,7 +12,7 @@ var Planbox = Planbox || {};
       id: NS.SectionMixin.id,
 
       ui: {
-        editables: '[contenteditable]',
+        editables: '[data-attr]',
         richEditables: '.project-shareabouts-description',
         map: '.map',
         deleteSection: '.delete-section'
