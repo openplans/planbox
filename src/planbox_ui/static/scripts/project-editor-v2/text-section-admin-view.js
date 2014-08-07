@@ -14,7 +14,6 @@ var Planbox = Planbox || {};
       ui: {
         editables: '[data-attr]',
         richEditables: '.rich-editable',
-        activeToggle: '.active-toggle',
         deleteSection: '.delete-section'
       },
       events: {

@@ -20,7 +20,6 @@ var Planbox = Planbox || {};
         itemList: '.event-list',
         newItemFocus: '.event-title:last',
         addBtn: '.add-event-btn',
-        activeToggle: '.active-toggle',
         deleteSection: '.delete-section'
       },
       events: {
