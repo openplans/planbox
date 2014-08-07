@@ -22,13 +22,16 @@
 
             {{#if_fileapi_support 'cors'}}
             <img class="cover-image image-holder" data-attr="cover_img_url"
-              src="{{#if cover_img_url}}{{cover_img_url}}{{^}}http://placehold.it/2390x1000&text=Choose+a+large,+wide+image{{/if}}"
-              data-empty-img="http://placehold.it/2390x1000&text=Choose+a+large,+wide+image">
+              src="{{#if cover_img_url}}{{cover_img_url}}{{^}}{{/if}}"
+              data-empty-img="">
             <div class="drag-area text-center image-dnd">
               <p class="drop-instructions">Drop cover photo here or&hellip;</p>
               <p class="uploading-message">Uploading&hellip;</p>
               <label for="cover-image-file-chooser" class="file-upload-input-container button tiny radius"><span class="file-upload-label">Choose Cover Photo</span><input name="cover-image" id="cover-image-file-chooser" class="file-upload-input hide" type="file" accept="image/*" /></label>
-
+              <br><small>(<a href="#" data-dropdown="coverimgsize">WHAT SIZE?</a>)</small>
+              <div id="coverimgsize" data-dropdown-content class="f-dropdown content medium">
+                <p>Your cover photo should be landscape orientation, at least 1000 pixels wide, and not too tall.</p>
+              </div>
             </div>
             {{^}}
               <div class="alert-box text-center info">File Uploads Not Supported By Your Browser<div>
