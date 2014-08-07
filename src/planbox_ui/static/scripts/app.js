@@ -32,29 +32,29 @@ var Planbox = Planbox || {};
   });
 
   NS.app.addInitializer(function(options){
-    var projectModel, ProjectView, sectionCollection;
+    var ProjectView;
 
     if (NS.Data.isEditable && !NS.Data.project.owner_id) {
       NS.Data.project.owner = NS.Data.user.username;
     }
 
-    projectModel = new NS.ProjectModel(NS.Data.project);
-    sectionCollection = projectModel.get('sections');
+    NS.app.projectModel = new NS.ProjectModel(NS.Data.project);
+    NS.app.sectionCollection = NS.app.projectModel.get('sections');
 
     if (!NS.Data.isEditable) {
       ProjectView = NS.ProjectView;
-      sectionCollection = new Backbone.Collection(projectModel.get('sections').filter(function(model) {
+      NS.app.sectionCollection = new Backbone.Collection(NS.app.projectModel.get('sections').filter(function(model) {
         return model.get('active');
       }));
-    } else if (projectModel.isNew()) {
+    } else if (NS.app.projectModel.isNew()) {
       ProjectView = NS.ProjectSetupView;
     } else {
       ProjectView = NS.ProjectAdminView;
     }
 
     NS.app.mainRegion.show(new ProjectView({
-      model: projectModel,
-      collection: sectionCollection
+      model: NS.app.projectModel,
+      collection: NS.app.sectionCollection
     }));
 
     if (window.location.pathname.indexOf('/new/') !== -1 && NS.Data.isEditable) {

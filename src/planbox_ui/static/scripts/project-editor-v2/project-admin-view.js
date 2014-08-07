@@ -47,6 +47,11 @@ var Planbox = Planbox || {};
         'sync': 'onSync'
       },
 
+      collectionEvents: {
+        'add': 'sectionChanged',
+        'remove': 'sectionChanged'
+      },
+
       sectionListView: NS.ProjectSectionListAdminView,
 
       initialize: function() {
@@ -111,6 +116,19 @@ var Planbox = Planbox || {};
       onShow: function() {
         // After the project is in the DOM, show the project sections
         $(this.el).foundation();
+      },
+
+      updateSectionMenu: function() {
+        var $addButtons = this.$('.add-timeline-section'),
+            hasTimeline = !!this.collection.find(function(obj) {
+              return obj.get('type') === 'timeline';
+            });
+
+        if (hasTimeline) {
+          $addButtons.addClass('disabled');
+        } else {
+          $addButtons.removeClass('disabled');
+        }
       },
 
       setImageOnContainer: function($el, url) {
@@ -373,6 +391,11 @@ var Planbox = Planbox || {};
             // will be empty and sectionIndex will be -1.
             sectionIndex = $('.project-section').index($section);
 
+        // Ignore clicks on disabled links
+        if ($btn.is('.disabled')) {
+          return;
+        }
+
         sectionCollection.add({
           type: sectionType,
           details: this.getDefaultSectionDetails(sectionType)
@@ -409,6 +432,9 @@ var Planbox = Planbox || {};
       dataChanged: function() {
         // Show the save button
         this.ui.saveBtn.removeClass('disabled');
+      },
+      sectionChanged: function(model, collection, options) {
+        this.updateSectionMenu();
       }
     })
   );
