@@ -118,15 +118,24 @@ var Planbox = Planbox || {};
       },
 
       updateSectionMenu: function() {
-        var $addButtons = this.$('.add-timeline-section'),
-            hasTimeline = !!this.collection.find(function(obj) {
-              return obj.get('type') === 'timeline';
+        var $addTimelineButtons = this.$('.add-timeline-section'),
+            $addShareaboutsButtons = this.$('.add-shareabouts-section'),
+            counts = this.collection.countBy(function(obj) {
+              return obj.get('type');
             });
 
-        if (hasTimeline) {
-          $addButtons.addClass('disabled');
+        // Only one timeline allowed
+        if (counts.timeline) {
+          $addTimelineButtons.addClass('disabled');
         } else {
-          $addButtons.removeClass('disabled');
+          $addTimelineButtons.removeClass('disabled');
+        }
+
+        // Only one shareabouts map allowed
+        if (counts.shareabouts) {
+          $addShareaboutsButtons.addClass('disabled');
+        } else {
+          $addShareaboutsButtons.removeClass('disabled');
         }
       },
 
@@ -370,6 +379,25 @@ var Planbox = Planbox || {};
         switch (sectionType) {
         case 'text':
           return {};
+        case 'timeline':
+          return {};
+        case 'shareabouts':
+          return {
+            "layers": [
+              {
+                "url": "http://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png"
+              }
+            ],
+            "map": {
+              "center": [
+                38.993572,
+                -96.196289
+              ],
+              "scrollWheelZoom": false,
+              "zoom": 4
+            },
+            "description": "Give us your input on the project. Your input will shape the plan. Anyone can post an idea."
+          };
         }
       },
       handleAddSectionButtonClick: function(evt) {

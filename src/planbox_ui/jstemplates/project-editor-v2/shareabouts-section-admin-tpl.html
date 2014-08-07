@@ -1,0 +1,32 @@
+<fieldset class="project-section-fieldset">
+  <div class="section-settings-toggle-container text-right"><a class="section-settings-toggle" href="#"><img src="{{ static_url }}images/icon-gear.png" class="icon" /></a></div>
+  <div class="section-settings panel radius hide clearfix">
+    <label>Menu Text
+      <input type="text" placeholder="Leave blank to exclude from menu" value="{{ menu_label }}" data-attr="menu_label">
+    </label>
+    <a href="#" class="button tiny round alert less-padding right delete-section">Delete&nbsp;Section</a>
+  </div>
+
+  <div class="row container">
+    <div class="small-12 columns">
+
+      <div class="float-label-container">
+        <div class="h3 project-shareabouts-label content-editable float-label-input" data-attr="label" contenteditable>{{{ label }}}</div>
+        <span class="float-label">Interactive Map Title</span>
+      </div>
+      <div class="float-label-container">
+        <div class="project-shareabouts-description content-editable float-label-input" data-attr="description" contenteditable>{{{ details.description }}}</div>
+        <span class="float-label">Interactive Map Description</span>
+
+        <div class="alert-box info radius text-center">
+          Zoom and center the map to your preferred default location.
+        </div>
+
+        <div class="map" style="height:300px;"></div>
+      </div>
+    </div>
+  </div>
+
+</fieldset>
+
+{{> insert-new-section-tpl }}
