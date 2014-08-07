@@ -841,6 +841,9 @@ section, footer {
   Project Shareabouts
 --------------------------------------------------*/
 
+.map {
+  height: 300px;
+}
 .project-section-shareabouts {
 }
 .project-shareabouts {
@@ -879,7 +882,7 @@ section, footer {
 
 
 /*--------------------------------------------------
-  The Admin / Project Editor
+  The Admin
 --------------------------------------------------*/
 
 .project-edit-form {
@@ -972,6 +975,9 @@ span.sub-heading-postfix {
 }
 
 .project-settings-container {
+  .save-btn {
+    outline: 0;
+  }
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
   background-color: #d9d9d9;
@@ -1093,8 +1099,6 @@ textarea.no-resize {
 .file-uploading > .file-upload-input-container {
   visibility: hidden;
 }
-
-
 
 
 // TODO: Sort out this stuff. I'm not sure we still need it.

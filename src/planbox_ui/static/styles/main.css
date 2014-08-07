@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -6773,6 +6774,9 @@ section, footer {
 /*--------------------------------------------------
   Project Shareabouts
 --------------------------------------------------*/
+.map {
+  height: 300px; }
+
 .project-shareabouts {
   width: 100%;
   max-width: 64.063em;
@@ -6802,7 +6806,7 @@ section, footer {
     padding: 0 1em; } }
 
 /*--------------------------------------------------
-  The Admin / Project Editor
+  The Admin
 --------------------------------------------------*/
 .project-edit-form {
   background-color: #fff;
@@ -6900,6 +6904,8 @@ span.sub-heading-postfix {
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
   background-color: #d9d9d9; }
+  .project-settings-container .save-btn {
+    outline: 0; }
   @media only screen and (min-width: 40.063em) {
     .project-settings-container {
       position: fixed;
