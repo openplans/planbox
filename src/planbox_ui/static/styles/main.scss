@@ -946,6 +946,19 @@ span.sub-heading-postfix {
   .error &, &.error {
     margin-bottom: 0;
   }
+  a {
+    color: $anchor-font-color;
+    text-decoration: $anchor-text-decoration;
+    line-height: inherit;
+
+    &:hover,
+    &:focus {
+      color: $anchor-font-color-hover;
+      @if $anchor-text-decoration-hover != $anchor-text-decoration {
+      	text-decoration: $anchor-text-decoration-hover;
+      }
+    }
+  }
 }
 
 .section-settings-toggle-container {

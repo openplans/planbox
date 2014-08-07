@@ -6879,6 +6879,12 @@ span.sub-heading-postfix {
     border-radius: 3px; }
   .error .content-editable, .content-editable.error {
     margin-bottom: 0; }
+  .content-editable a {
+    color: #308fbf;
+    text-decoration: none;
+    line-height: inherit; }
+    .content-editable a:hover, .content-editable a:focus {
+      color: #267299; }
 
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
