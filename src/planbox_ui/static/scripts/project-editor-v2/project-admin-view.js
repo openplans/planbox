@@ -101,7 +101,7 @@ var Planbox = Planbox || {};
         }, false);
       },
 
-      onRender: function() {
+      onShow: function() {
         var self = this;
         this.initRichEditables();
         this.initDropZones();
@@ -111,9 +111,8 @@ var Planbox = Planbox || {};
         this.ui.characterCountInput.each(function(i, el) {
           self.setCharacterCountRemaining($(el));
         });
-      },
 
-      onShow: function() {
+
         // After the project is in the DOM, show the project sections
         $(this.el).foundation();
       },
@@ -299,10 +298,6 @@ var Planbox = Planbox || {};
       onSync: function() {
         // Mark the model as unchanged.
         this.model.changed = {};
-
-        // When the model is synced with the server, we're going to rerender
-        // the view to match the data.
-        this.render();
       },
 
       handleVisibilityChange: function(evt) {
@@ -332,9 +327,6 @@ var Planbox = Planbox || {};
 
         this.model.clean();
         this.model.save(data, {
-          // We are not interested in change events that come from the server,
-          // and it causes the save button to enable after saving a new project
-          silent: true,
           success: function(model) {
             self.onSaveSuccess(model, makePublic);
           },
@@ -416,14 +408,14 @@ var Planbox = Planbox || {};
           }
         }
 
+        // Disable the save button. We used to rerender the template,
+        // but this is better (prevents page jumping) and pretty easy.
+        this.ui.saveBtn.addClass('disabled');
+
         if (makePublic || !model.get('public')) {
-          // Show the modal if we're publishing this right now
-          // Note: we defer so that the modal is visible after re-rendering.
-          _.defer(function() {
-            NS.app.modalRegion.show(new NS.ProjectAdminModalView({
-              model: model
-            }));
-          });
+          NS.app.modalRegion.show(new NS.ProjectAdminModalView({
+            model: model
+          }));
         }
       },
       onSaveError: function(model, resp) {

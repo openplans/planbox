@@ -179,6 +179,10 @@ var Planbox = Planbox || {};
       'click @ui.menuItems': 'onClickMenuItem',
       'click @ui.highlights': 'onClickHighlight'
     },
+    onShow: function() {
+      // After the project is in the DOM, show the project sections
+      this.showRegions();
+    },
     onDomRefresh: function() {
       var self = this,
           debouncedScrollHandler = _.debounce(function(evt) {

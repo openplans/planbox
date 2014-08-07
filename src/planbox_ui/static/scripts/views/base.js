@@ -20,11 +20,6 @@ var Planbox = Planbox || {};
         collection: this.collection,
         parent: this
       }));
-    },
-
-    onRender: function() {
-      // After the project is in the DOM, show the project sections
-      this.showRegions();
     }
   });
 
