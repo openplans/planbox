@@ -46,8 +46,6 @@ var Planbox = Planbox || {};
       NS.app.sectionCollection = new Backbone.Collection(NS.app.projectModel.get('sections').filter(function(model) {
         return model.get('active');
       }));
-    } else if (NS.app.projectModel.isNew()) {
-      ProjectView = NS.ProjectSetupView;
     } else {
       ProjectView = NS.ProjectAdminView;
     }
