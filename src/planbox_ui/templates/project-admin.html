@@ -14,16 +14,13 @@
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pickadate/lib/themes/classic.css" id="theme_base">
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pickadate/lib/themes/classic.date.css" id="theme_date">
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pen/src/pen.css" type="text/css" />
-  <link rel="stylesheet" href="{{ STATIC_URL }}styles/main.css" type="text/css" />
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/leaflet-0.7.2/leaflet.css" />
   <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/shareabouts-js/src/styles/shareabouts.css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/main.css" type="text/css" />
 
   {% else %}
 
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" />
-  {% if is_editable %}
-  <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" />
-  {% endif %}
 
   {% endif %} {# debug #}
 
@@ -113,7 +110,7 @@
   <script src="{{ STATIC_URL }}scripts/project-editor-v2/project-admin-modal-view.js"></script>
   <script src="{{ STATIC_URL }}scripts/app.js"></script>
   {% else %}
-  <script src="{{ STATIC_URL }}scripts/app.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
+  <script src="{{ STATIC_URL }}scripts/app-admin.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
 
   {% for js_url in project.theme.definition.js|force_list %}

@@ -273,17 +273,14 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-          '<%= yeoman.app %>/styles/base.min.css': [
-            '<%= yeoman.app %>/bower_components/foundation/css/normalize.css',
-            '<%= yeoman.app %>/bower_components/foundation/css/foundation.css',
+          '<%= yeoman.app %>/styles/components.min.css': [
             '<%= yeoman.app %>/bower_components/leaflet-0.7.2/leaflet.css',
             '<%= yeoman.app %>/bower_components/shareabouts-js/src/styles/shareabouts.css'
           ],
           '<%= yeoman.app %>/styles/style.min.css': [
-            '<%= yeoman.app %>/styles/style.css'
+            '<%= yeoman.app %>/styles/main.css'
           ],
           '<%= yeoman.app %>/styles/admin.min.css': [
-            '<%= yeoman.app %>/styles/admin.css',
             '<%= yeoman.app %>/bower_components/pen/src/pen.css',
             '<%= yeoman.app %>/bower_components/pickadate/lib/themes/classic.css',
             '<%= yeoman.app %>/bower_components/pickadate/lib/themes/classic.date.css'
@@ -342,6 +339,23 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/views/display.js',
             '<%= yeoman.app %>/scripts/views/admin/section.js',
             '<%= yeoman.app %>/scripts/views/admin/project.js',
+            '<%= yeoman.app %>/scripts/app.js'
+          ],
+          '<%= yeoman.app %>/scripts/app-admin.min.js': [
+            '<%= yeoman.app %>/scripts/utils.js',
+            '<%= yeoman.app %>/scripts/handlebars-helpers.js',
+            '<%= yeoman.app %>/scripts/file-upload.js',
+            '<%= yeoman.app %>/scripts/models.js',
+            '<%= yeoman.app %>/scripts/views/mixins.js',
+            '<%= yeoman.app %>/scripts/views/base.js',
+            '<%= yeoman.app %>/scripts/views/admin/section.js',
+            '<%= yeoman.app %>/scripts/project-editor-v2/shareabouts-section-admin-view.js',
+            '<%= yeoman.app %>/scripts/project-editor-v2/timeline-section-admin-view.js',
+            '<%= yeoman.app %>/scripts/project-editor-v2/text-section-admin-view.js',
+            '<%= yeoman.app %>/scripts/project-editor-v2/section-list-admin-view.js',
+            '<%= yeoman.app %>/scripts/project-editor-v2/modal-view.js',
+            '<%= yeoman.app %>/scripts/project-editor-v2/project-admin-view.js',
+            '<%= yeoman.app %>/scripts/project-editor-v2/project-admin-modal-view.js',
             '<%= yeoman.app %>/scripts/app.js'
           ],
           '<%= yeoman.app %>/scripts/modernizr.min.js': [
