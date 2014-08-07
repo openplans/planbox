@@ -55,60 +55,6 @@
 
 </header>
 
-<section class="project-details">
-  <div class="row container">
-    <div class="medium-4 medium-push-8 columns">
-      {{#if happening_now_description}}
-      <div class="highlight">
-        {{!-- TODO: Abstract this out so that happening_now and get_involved use
-           --       the same code
-           --}}
-        {{#if happening_now_link_url}}
-        <a href="{{ happening_now_link_url }}"{{#is happening_now_link_type 'external'}} target="_blank"{{^}} data-magellan-link {{/is}} data-highlight-type="happening-now">
-          <div class="panel callout radius">
-        {{else}}
-          <div class="panel radius">
-        {{/if}}
-            <h3>Happening Now!</h3>
-            <p class="highlight-description">{{{ happening_now_description }}}</p>
-        {{#if happening_now_link_url}}
-          </div>
-        </a>
-        {{else}}
-          </div>
-        {{/if}}
-      </div>
-      {{/if}}
-
-      {{#if get_involved_description}}
-      <div class="highlight">
-        {{#if get_involved_link_url}}
-        <a href="{{ get_involved_link_url }}"{{#is get_involved_link_type 'external'}} target="_blank"{{^}} data-magellan-link {{/is}} data-highlight-type="get-involved">
-          <div class="panel callout radius">
-        {{else}}
-          <div class="panel radius">
-        {{/if}}
-            <h3>Get Involved!</h3>
-            <p class="highlight-description">{{{ get_involved_description }}}</p>
-        {{#if get_involved_link_url}}
-          </div>
-        </a>
-        {{else}}
-          </div>
-        {{/if}}
-      </div>
-      {{/if}}
-
-    </div>
-
-    <div class="medium-8 medium-pull-4 columns">
-      <p class="project-location">{{{ location }}}</p>
-      <div class="project-description">{{{ description }}}</div>
-    </div>
-
-  </div>
-</section>
-
 <div class="orderable-container" id="section-list"></div>
 
 <footer class="site-colophon">
