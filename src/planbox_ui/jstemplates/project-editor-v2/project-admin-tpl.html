@@ -241,10 +241,10 @@
           <p class="text-right"><small><a href="/~/{{user "username"}}/{{ slug }}/" target="_blank">View&nbsp;Project&nbsp;&rarr;</a></small></p>
           <hr>
           <div class="switch left">
-            <input id="public-switch" type="checkbox">
+            <input id="public-switch" type="checkbox"{{#if public}} checked{{/if}}>
             <label for="public-switch"></label>
           </div>
-          <label class="inline unassigned">Unpublished</label>
+          <label class="inline unassigned">Published</label>
           <hr>
           <div class="row collapse">
             <div class="columns large-7">

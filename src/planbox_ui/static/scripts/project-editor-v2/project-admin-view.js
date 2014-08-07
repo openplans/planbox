@@ -17,7 +17,7 @@ var Planbox = Planbox || {};
         visibilityToggle: '[name=project-public]',
         customDomainMessage: '.custom-domain-message',
         customDomainMessageBtn: '.custom-domain-message-btn',
-        publishBtn: '.btn-public',
+        publishCheckbox: '#public-switch',
         imageDropZones: '.image-dnd',
         removeImageLinks: '.remove-img-btn',
         hightlightLinkSelector: '.highlight-link-selector',
@@ -33,7 +33,7 @@ var Planbox = Planbox || {};
         'click @ui.settingsToggle': 'handleSettingsToggle',
         'click @ui.saveBtn': 'handleSave',
         'click @ui.customDomainMessageBtn': 'handleCustomDomainMessageBtn',
-        'click @ui.publishBtn': 'handlePublish',
+        'change @ui.publishCheckbox': 'handlePublish',
         'click @ui.removeImageLinks': 'handleRemoveImage',
         'click @ui.addSectionButtons': 'handleAddSectionButtonClick',
         'change @ui.hightlightLinkSelector': 'handleHighlightLinkChange',
@@ -92,7 +92,7 @@ var Planbox = Planbox || {};
           var notification = 'It looks like you have unsaved changes in your project.';
           e = e || event;
 
-          if (self.model.hasChanged()) {
+          if (self.model.isDirty) {
             // set and return for browser compatibility
             // https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload
             e.returnValue = notification;
@@ -306,7 +306,7 @@ var Planbox = Planbox || {};
 
       onSync: function() {
         // Mark the model as unchanged.
-        this.model.changed = {};
+        this.model.isDirty = false;
       },
 
       handleVisibilityChange: function(evt) {
@@ -326,20 +326,20 @@ var Planbox = Planbox || {};
         evt.preventDefault();
         $(evt.currentTarget).parents('fieldset').find('.section-settings').slideToggle(400);
       },
-      save: function(makePublic) {
-        var self = this,
-            data = null;
-
-        if (makePublic) {
-          data = {public: true};
-        }
+      save: function(data) {
+        var self = this;
 
         this.model.clean();
         this.model.save(data, {
           success: function(model) {
-            self.onSaveSuccess(model, makePublic);
+            self.onSaveSuccess(model);
           },
           error: function(model, resp) {
+            // Did we specifically change the public status? Put it back.
+            if (data.public) {
+              self.ui.publishCheckbox.prop('checked', !data.public);
+            }
+
             self.onSaveError(model, resp);
           }
         });
@@ -355,7 +355,27 @@ var Planbox = Planbox || {};
       },
       handlePublish: function(evt) {
         evt.preventDefault();
-        this.save(true);
+        var shouldPublish = this.ui.publishCheckbox.is(':checked'),
+            saveAnyway = true,
+            confirmMsg = 'a project will also save any unsaved changes. Do you want to do this?';
+
+        if (shouldPublish) {
+          confirmMsg = 'Publishing ' + confirmMsg;
+        } else {
+          confirmMsg = 'Unpublishing ' + confirmMsg;
+        }
+
+        // Are there unsaved changes?
+        if (this.model.isDirty) {
+          saveAnyway = window.confirm(confirmMsg);
+        }
+
+        if (saveAnyway) {
+          this.save({public: shouldPublish});
+        } else {
+          // Changed my mind! Put the checkbox back to its original state.
+          this.ui.publishCheckbox.prop('checked', !shouldPublish);
+        }
       },
       handleCustomDomainMessageBtn: function(evt) {
         evt.preventDefault();
@@ -425,7 +445,7 @@ var Planbox = Planbox || {};
 
         $('[data-dropdown-content]').foundation('dropdown', 'closeall');
       },
-      onSaveSuccess: function(model, makePublic) {
+      onSaveSuccess: function(model) {
         var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
 
         if (window.location.pathname !== path) {
@@ -439,12 +459,6 @@ var Planbox = Planbox || {};
         // Disable the save button. We used to rerender the template,
         // but this is better (prevents page jumping) and pretty easy.
         this.ui.saveBtn.addClass('disabled');
-
-        if (makePublic || !model.get('public')) {
-          NS.app.modalRegion.show(new NS.ProjectAdminModalView({
-            model: model
-          }));
-        }
       },
       onSaveError: function(model, resp) {
         NS.showProjectSaveErrorModal(resp);
@@ -452,6 +466,8 @@ var Planbox = Planbox || {};
       dataChanged: function() {
         // Show the save button
         this.ui.saveBtn.removeClass('disabled');
+
+        this.model.isDirty = true;
       },
       sectionChanged: function(model, collection, options) {
         this.updateSectionMenu();
