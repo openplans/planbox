@@ -339,7 +339,7 @@ var Planbox = Planbox || {};
           },
           error: function(model, resp) {
             // Did we specifically change the public status? Put it back.
-            if (data.public) {
+            if (data && data.public) {
               self.ui.publishCheckbox.prop('checked', !data.public);
             }
 
