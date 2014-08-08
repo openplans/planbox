@@ -699,6 +699,7 @@ section, footer {
   .row {
     position: relative;
     z-index: 2;
+    padding-top: .9375rem;
     padding-bottom: 0;
   }
   .columns:after {
@@ -858,12 +859,16 @@ section, footer {
 .project-section-shareabouts {
 }
 .project-shareabouts {
+  border-top: 2px solid $body-bg;
+  border-bottom: 2px solid $body-bg;
   width: 100%;
-  max-width: 64.063em;
   margin: 0 auto;
   overflow: hidden;
   @media #{$medium-up} {
     height: 400px;
+  }
+  @media #{$large-up} {
+    height: 500px;
   }
   .shareabouts-add-button-container {
     margin-left: 0;
@@ -885,9 +890,10 @@ section, footer {
   margin-top: 0.5em;
 }
 
-.project-section-shareabouts .shareabouts-panel-content {
-  @media #{$medium-up} {
-    padding: 0 1em;
+.shareabouts-add-button {
+  display: block;
+  @media #{$small-only} {
+    margin: 0;
   }
 }
 

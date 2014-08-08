@@ -6652,6 +6652,7 @@ section, footer {
 .project-menu .row {
   position: relative;
   z-index: 2;
+  padding-top: .9375rem;
   padding-bottom: 0; }
 .project-menu .columns:after {
   content: '';
@@ -6790,13 +6791,17 @@ section, footer {
   height: 300px; }
 
 .project-shareabouts {
+  border-top: 2px solid #eeeeee;
+  border-bottom: 2px solid #eeeeee;
   width: 100%;
-  max-width: 64.063em;
   margin: 0 auto;
   overflow: hidden; }
   @media only screen and (min-width: 40.063em) {
     .project-shareabouts {
       height: 400px; } }
+  @media only screen and (min-width: 64.063em) {
+    .project-shareabouts {
+      height: 500px; } }
   .project-shareabouts .shareabouts-add-button-container {
     margin-left: 0;
     bottom: 0; }
@@ -6813,9 +6818,11 @@ section, footer {
 .shareabouts-submit-button {
   margin-top: 0.5em; }
 
-@media only screen and (min-width: 40.063em) {
-  .project-section-shareabouts .shareabouts-panel-content {
-    padding: 0 1em; } }
+.shareabouts-add-button {
+  display: block; }
+  @media only screen and (max-width: 40em) {
+    .shareabouts-add-button {
+      margin: 0; } }
 
 /*--------------------------------------------------
   The Admin
