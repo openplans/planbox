@@ -19,6 +19,7 @@ var Planbox = Planbox || {};
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
+        'input @ui.editables': 'handleEditableBlur',
         'click @ui.deleteSection': 'handleDeleteSectionClick'
       },
 

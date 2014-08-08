@@ -25,6 +25,7 @@ var Planbox = Planbox || {};
       events: {
         'click @ui.addBtn': 'handleAddClick',
         'blur @ui.editables': 'handleEditableBlur',
+        'input @ui.editables': 'handleEditableBlur',
         'change @ui.activeToggle': 'handleActivationChange',
         'click @ui.deleteSection': 'handleDeleteSectionClick'
       },
