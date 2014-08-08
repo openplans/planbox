@@ -443,6 +443,11 @@ var Planbox = Planbox || {};
 
         $('[data-dropdown-content]').foundation('dropdown', 'closeall');
       },
+      updateProjectPreviewLink: function() {
+        var template = Backbone.Marionette.TemplateCache.get('#project-preview-link-tpl'),
+            content = template(this.model.toJSON());
+        this.$('.project-preview-wrapper').html(content);
+      },
       onSaveSuccess: function(model) {
         var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
 
@@ -457,6 +462,11 @@ var Planbox = Planbox || {};
         // Disable the save button. We used to rerender the template,
         // but this is better (prevents page jumping) and pretty easy.
         this.ui.saveBtn.addClass('disabled');
+
+        // Re-render the project preview link; the link should only show after
+        // the project has been saved for the first time. Also, if the slug
+        // changes, the link needs to change.
+        this.updateProjectPreviewLink();
       },
       onSaveError: function(model, resp) {
         NS.showProjectSaveErrorModal(resp);
