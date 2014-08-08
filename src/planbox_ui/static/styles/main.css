@@ -4297,7 +4297,7 @@ p {
   font-weight: normal;
   font-size: 1rem;
   line-height: 1.6;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.6rem;
   text-rendering: optimizeLegibility; }
   p.lead {
     font-size: 1.21875rem;
@@ -4380,7 +4380,7 @@ ol,
 dl {
   font-size: 1rem;
   line-height: 1.6;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.6rem;
   list-style-position: outside;
   font-family: inherit; }
 
@@ -4442,7 +4442,7 @@ abbr {
 
 /* Blockquotes */
 blockquote {
-  margin: 0 0 1.25rem;
+  margin: 0 0 1.6rem;
   padding: 0.5625rem 1.25rem 0 1.1875rem;
   border-left: 1px solid #dddddd; }
   blockquote cite {
@@ -5833,7 +5833,8 @@ p.text-xxlarge {
   color: #308fbf; }
 
 .project-text-content {
-  line-height: 150%; }
+  line-height: 1.6;
+  margin-bottom: 1.6rem; }
 
 .button.less-padding {
   padding: 0.75rem 1.25rem; }
@@ -6579,9 +6580,7 @@ section, footer {
 --------------------------------------------------*/
 .container {
   background-color: #fff;
-  color: #444;
-  padding-top: 0.9375rem;
-  padding-bottom: 0.9375rem; }
+  color: #444; }
 
 .section-heading {
   padding-top: 1.5rem; }
