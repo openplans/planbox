@@ -973,6 +973,10 @@ span.sub-heading-postfix {
     }
   }
 }
+.pen-menu,
+.pen-menu * {
+  box-sizing: content-box !important;
+}
 
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;

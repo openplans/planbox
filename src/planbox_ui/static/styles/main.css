@@ -6899,6 +6899,10 @@ span.sub-heading-postfix {
     .content-editable a:hover, .content-editable a:focus {
       color: #267299; }
 
+.pen-menu,
+.pen-menu * {
+  box-sizing: content-box !important; }
+
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
   padding-top: 0.5rem;
