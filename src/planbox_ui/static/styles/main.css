@@ -6583,10 +6583,8 @@ section, footer {
   padding-top: 0.9375rem;
   padding-bottom: 0.9375rem; }
 
-.section-header {
-  padding: 0.5rem; }
-  .section-header h2 {
-    margin: 0; }
+.section-heading {
+  padding-top: 1.5rem; }
 
 /*--------------------------------------------------
   Project Header
@@ -6715,6 +6713,16 @@ section, footer {
   bottom: -0.9375rem;
   left: 0.625rem; }
 
+.event:only-child:before {
+  content: '';
+  background-color: #fff;
+  width: 1.5rem;
+  height: auto;
+  position: absolute;
+  top: -0.25rem;
+  bottom: -0.9375rem;
+  left: 0.625rem; }
+
 .event:after {
   content: '';
   position: absolute;
@@ -6761,6 +6769,9 @@ section, footer {
   border-radius: 2rem;
   z-index: 2;
   text-indent: -9999px; }
+
+.event:only-child > .handle {
+  display: none; }
 
 .attachment-icon {
   position: relative; }
