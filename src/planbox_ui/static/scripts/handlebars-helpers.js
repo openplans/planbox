@@ -39,7 +39,7 @@ var Planbox = Planbox || {};
   });
 
   Handlebars.registerHelper('gte_active_section_length', function(sections, len, options) {
-    var activeLength = _.filter(sections, function(s){ return s.active; }).length;
+    var activeLength = _.filter(sections, function(s){ return s.active && s.menu_label; }).length;
     return (activeLength >= len ? options.fn(this) : options.inverse(this));
   });
 
