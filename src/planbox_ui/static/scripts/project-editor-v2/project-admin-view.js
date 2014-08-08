@@ -398,28 +398,37 @@ var Planbox = Planbox || {};
 
         $counter.text(max - val.length);
       },
-      getDefaultSectionDetails: function(sectionType) {
+      getDefaultSectionAttributes: function(sectionType) {
         switch (sectionType) {
         case 'text':
-          return {};
+          return {
+            type: sectionType
+          };
         case 'timeline':
-          return {};
+          return {
+            type: sectionType,
+            menu_label: 'Timeline'
+          };
         case 'shareabouts':
           return {
-            "layers": [
-              {
-                "url": "http://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png"
-              }
-            ],
-            "map": {
-              "center": [
-                38.993572,
-                -96.196289
+            type: sectionType,
+            menu_label: 'Map',
+            details: {
+              "layers": [
+                {
+                  "url": "http://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png"
+                }
               ],
-              "scrollWheelZoom": false,
-              "zoom": 4
-            },
-            "description": "Give us your input on the project. Your input will shape the plan. Anyone can post an idea."
+              "map": {
+                "center": [
+                  38.993572,
+                  -96.196289
+                ],
+                "scrollWheelZoom": false,
+                "zoom": 4
+              },
+              "description": "Give us your input on the project. Your input will shape the plan. Anyone can post an idea."
+            }
           };
         }
       },
@@ -439,10 +448,7 @@ var Planbox = Planbox || {};
           return;
         }
 
-        sectionCollection.add({
-          type: sectionType,
-          details: this.getDefaultSectionDetails(sectionType)
-        }, {
+        sectionCollection.add(this.getDefaultSectionAttributes(sectionType), {
           at: sectionIndex + 1
         });
 
