@@ -6915,7 +6915,9 @@ span.sub-heading-postfix {
     margin-top: -2.5rem; }
 
 .section-insert {
-  margin-bottom: -1rem; }
+  margin-bottom: -1rem;
+  margin-right: -0.9375rem;
+  margin-left: -0.9375rem; }
   .section-insert hr {
     margin-top: 1rem;
     border-color: #ff8b38; }
