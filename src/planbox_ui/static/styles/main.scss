@@ -722,21 +722,12 @@ section, footer {
 --------------------------------------------------*/
 
 .site-colophon {
-  padding-top: 0.9375rem;
-  background-color: #407280;
-  color: #ddd;
-  a {
-    color: #fff;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  .button:hover {
-    text-decoration: none;
-  }
+  padding-top: 2rem;
+  background-color: $body-bg;
+  color: scale-color($body-font-color, $lightness: 20%);
   .powered-by {
     margin-top: 4rem;
-    margin-bottom: 8rem;
+    margin-bottom: 4rem;
   }
 }
 

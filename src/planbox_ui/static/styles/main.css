@@ -6670,18 +6670,12 @@ section, footer {
   Project Footer
 --------------------------------------------------*/
 .site-colophon {
-  padding-top: 0.9375rem;
-  background-color: #407280;
-  color: #ddd; }
-  .site-colophon a {
-    color: #fff; }
-    .site-colophon a:hover {
-      text-decoration: underline; }
-  .site-colophon .button:hover {
-    text-decoration: none; }
+  padding-top: 2rem;
+  background-color: #eeeeee;
+  color: #888d9b; }
   .site-colophon .powered-by {
     margin-top: 4rem;
-    margin-bottom: 8rem; }
+    margin-bottom: 4rem; }
 
 /*--------------------------------------------------
   Project Timeline
