@@ -11,9 +11,17 @@
         </p> -->
       <!-- </div>
       <div class="medium-6 large-8 columns"> -->
-        <label>Menu Text
-          <input type="text" placeholder="Leave blank to exclude from menu" value="{{ menu_label }}" data-attr="menu_label">
-        </label>
+
+        <div class="row collapse">
+          <div class="small-3 large-2 columns">
+            <span class="prefix show-for-small-only">Menu</span>
+            <span class="prefix show-for-medium-up">Menu Text</span>
+          </div>
+          <div class="small-9 medium-6 large-4 columns end">
+            <input type="text" placeholder="Leave blank to exclude from menu" value="{{ menu_label }}" data-attr="menu_label">
+          </div>
+        </div>
+
       <!-- </div>
     </div> -->
     <a href="#" class="button tiny round alert less-padding right delete-section">Delete&nbsp;Section</a>
