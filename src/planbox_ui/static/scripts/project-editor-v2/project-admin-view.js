@@ -358,26 +358,15 @@ var Planbox = Planbox || {};
       },
       handlePublish: function(evt) {
         evt.preventDefault();
-        var shouldPublish = this.ui.publishCheckbox.is(':checked'),
-            saveAnyway = true,
-            confirmMsg = 'a project will also save any unsaved changes. Do you want to do this?';
+        var shouldPublish = this.ui.publishCheckbox.is(':checked');
 
+        // Set the property. We'll save only if they're are publishing, but
+        // not unpublishing.
+        this.model.set({public: shouldPublish});
+
+        // Just save. Don't ask.
         if (shouldPublish) {
-          confirmMsg = 'Publishing ' + confirmMsg;
-        } else {
-          confirmMsg = 'Unpublishing ' + confirmMsg;
-        }
-
-        // Are there unsaved changes?
-        if (this.model.isDirty) {
-          saveAnyway = window.confirm(confirmMsg);
-        }
-
-        if (saveAnyway) {
-          this.save({public: shouldPublish});
-        } else {
-          // Changed my mind! Put the checkbox back to its original state.
-          this.ui.publishCheckbox.prop('checked', !shouldPublish);
+          this.save();
         }
       },
       handleCustomDomainMessageBtn: function(evt) {
