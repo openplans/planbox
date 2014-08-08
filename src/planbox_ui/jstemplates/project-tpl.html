@@ -7,26 +7,17 @@
   <div class="site-header-content">
 
     <div class="row project-header container">
-      <div class="small-12 columns">
+      <div class="small-12 columns text-center extra-padding-top some-padding-bottom">
 
-        <div class="logo-table">
-          <div class="logo-table-row">
+        <h1 class="project-title">
+          {{#if logo_img_url}}
+            <img src="{{ logo_img_url }}" alt="{{ title }}">
+          {{else}}
+            {{{ title }}}
+          {{/if}}
+        </h1>
 
-            {{#if logo_img_url}}
-            <div class="logo has-image">
-              <img src="{{ logo_img_url }}" alt="{{ title }}">
-            {{else}}
-            <div class="logo">
-            {{/if}}
-            </div>
-
-            <div>
-              <h1 class="project-title">{{{ title }}}</h1>
-              {{# if details.tagline }}<h3 class="project-tagline">{{ details.tagline }}</h3>{{/ if }}
-            </div>
-
-          </div>
-        </div><!-- end .logo-table -->
+        {{# if details.tagline }}<h3 class="project-tagline">{{ details.tagline }}</h3>{{/ if }}
 
       </div>
     </div>

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -6618,6 +6619,8 @@ section, footer {
         .site-header.has-image .site-header-content {
           float: none;
           width: auto; } }
+  .site-header + .orderable-container {
+    clear: both; }
 
 .project-header {
   border-radius: 0.375em 0.375em 0 0; }

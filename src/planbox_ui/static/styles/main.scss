@@ -655,6 +655,9 @@ section, footer {
       }
     }
   }
+  & + .orderable-container {
+    clear: both;
+  }
 }
 
 .project-header {
