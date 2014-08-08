@@ -360,13 +360,13 @@ var Planbox = Planbox || {};
         evt.preventDefault();
         var shouldPublish = this.ui.publishCheckbox.is(':checked');
 
-        // Set the property. We'll save only if they're are publishing, but
-        // not unpublishing.
-        this.model.set({public: shouldPublish});
-
         // Just save. Don't ask.
         if (shouldPublish) {
-          this.save();
+          this.save({public: shouldPublish});
+        } else {
+          // Set the property. We'll save only if they're are publishing, but
+          // not unpublishing.
+          this.model.set({public: shouldPublish});
         }
       },
       handleCustomDomainMessageBtn: function(evt) {
