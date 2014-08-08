@@ -20,6 +20,7 @@
 
   {% else %}
 
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" />
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" />
 
   {% endif %} {# debug #}
