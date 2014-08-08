@@ -80,7 +80,11 @@ class AppMixin (object):
         # Register handlebars helpers
         @register_helper('user')
         def user_attr_helper(this, attr):
-            return context['user_data'].get(attr)
+            user_data = context.get('user_data', None)
+            if user_data is not None:
+                return user_data.get(attr)
+            else:
+                return None
 
         @register_helper('window_location')
         def window_location_helper(this):
