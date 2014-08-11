@@ -30,21 +30,20 @@ OpenPlans
 
 {% block styles %}
   {% if debug %}
-  <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" type="text/css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/main.css" type="text/css" />
   {% else %}
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" />
   {% endif %}
 {% endblock %}
 
-{% block page %}
-
-<div class="contain-to-grid sticky openplans-top-bar">
+{% block topbar %}
+<div class="{% if is_editable %}{% else %}contain-to-grid {% endif %}sticky openplans-top-bar">
   <nav class="top-bar" data-topbar>
     <ul class="title-area">
       <li class="name">
         <h1><a href="/"><img src="{{ STATIC_URL }}images/openplans-logo-hole.png" class="openplans-logo-hole"></a></h1>
       </li>
-      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
     </ul>
 
     <section class="top-bar-section">
@@ -73,10 +72,9 @@ OpenPlans
     </section>
   </nav>
 </div>
-
-{% block main %}{% endblock %}
-
 {% endblock %}
+
+{% block page %}{% endblock %}
 
 {% block scripts %}
   {% if debug %}

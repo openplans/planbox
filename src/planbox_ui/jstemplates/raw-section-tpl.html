@@ -1,11 +1,5 @@
 <span data-magellan-destination="section-{{ slug }}" id="section-{{ slug }}" class="section-anchor"></span>
 
-{{#if label }}
-<div class="row container">
-  <div class="small-12 columns">
-    <h3>{{ label }}</h3>
-  </div>
-</div>
-{{/if }}
+{{#if label}}<h3 class="section-heading">{{ label }}</h3>{{/if}}
 
 {{{ details.content }}}

@@ -39,10 +39,17 @@ var Planbox = Planbox || {};
   });
 
   Handlebars.registerHelper('gte_active_section_length', function(sections, len, options) {
-    var activeLength = _.filter(sections, function(s){ return s.active; }).length;
+    var activeLength = _.filter(sections, function(s){ return s.active && s.menu_label; }).length;
     return (activeLength >= len ? options.fn(this) : options.inverse(this));
   });
 
+  Handlebars.registerHelper('has_section_type', function(type, options) {
+    var hasType = !!NS.app.sectionCollection.find(function(model) {
+          return model.get('type') === type;
+        });
+
+    return (hasType ? options.fn(this) : options.inverse(this));
+  });
 
   Handlebars.registerHelper('contact_email', function() {
     return NS.Data.contactEmail;

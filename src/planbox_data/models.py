@@ -230,9 +230,9 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     public = models.BooleanField(default=False, blank=True)
     status = models.CharField(help_text=_("A string representing the project's status"), choices=STATUS_CHOICES, default='not-started', max_length=32, blank=True)
     location = models.TextField(help_text=_("The general location of the project, e.g. \"Philadelphia, PA\", \"Clifton Heights, Louisville, KY\", \"4th St. Corridor, Brooklyn, NY\", etc."), default='', blank=True)
-    description = models.TextField(help_text=_("An introductory description of the project"), default='', blank=True)
     contact = models.TextField(help_text=_("The contact information for the project"), default='', blank=True)
     owner = models.ForeignKey('Profile', related_name='projects')
+    details = JSONField(blank=True, default=dict)
     theme = models.ForeignKey('Theme', related_name='projects', null=True, blank=True, on_delete=models.SET_NULL)
     cover_img_url = models.URLField(_('Cover Image URL'), blank=True, max_length=2048)
     logo_img_url = models.URLField(_('Logo Image URL'), blank=True, max_length=2048)
@@ -377,6 +377,18 @@ class Profile (TimeStampedModel):
     # Organization-profile specific
     # members (reverse, Profile)
 
+    # Feature flags/versions
+    class Versions:
+        AMETHYST = 1
+        BISTRE = 2
+
+    PROJECT_EDITOR_VERSION_CHOICES = (
+        (Versions.AMETHYST, "Amethyst"),
+        (Versions.BISTRE, "Bistre"),
+    )
+
+    project_editor_version = models.PositiveIntegerField(choices=PROJECT_EDITOR_VERSION_CHOICES, default=Versions.BISTRE)
+
     objects = ProfileManager()
 
     def __str__(self):
@@ -423,7 +435,6 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
         ('text', _('Text')),
         ('timeline', _('Timeline')),
         ('shareabouts', _('Shareabouts')),
-        ('faqs', _('FAQ')),
         ('raw', _('Raw HTML'))
     )
 
@@ -431,7 +442,7 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
     type = models.CharField(max_length=30, choices=SECTION_TYPE_CHOICES)
     label = models.TextField(blank=True)
     menu_label = models.TextField(blank=True)
-    slug = models.CharField(max_length=30)
+    slug = models.CharField(max_length=30, blank=True)
     active = models.BooleanField(default=True)
     details = JSONField(blank=True, default=dict)
     index = models.PositiveIntegerField(blank=True)

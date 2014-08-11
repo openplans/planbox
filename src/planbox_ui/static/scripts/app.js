@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Modernizr */
+/*globals Backbone, jQuery, Modernizr, Handlebars */
 
 var Planbox = Planbox || {};
 
@@ -24,30 +24,35 @@ var Planbox = Planbox || {};
     modalRegion: '#modal-container'
   });
 
+  NS.app.addInitializer(function() {
+    // Handlebars support for Marionette
+    Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
+      return Handlebars.compile(rawTemplate);
+    };
+  });
+
   NS.app.addInitializer(function(options){
-    var projectModel, ProjectView, sectionCollection;
+    var ProjectView;
 
     if (NS.Data.isEditable && !NS.Data.project.owner_id) {
       NS.Data.project.owner = NS.Data.user.username;
     }
 
-    projectModel = new NS.ProjectModel(NS.Data.project);
-    sectionCollection = projectModel.get('sections');
+    NS.app.projectModel = new NS.ProjectModel(NS.Data.project);
+    NS.app.sectionCollection = NS.app.projectModel.get('sections');
 
     if (!NS.Data.isEditable) {
       ProjectView = NS.ProjectView;
-      sectionCollection = new Backbone.Collection(projectModel.get('sections').filter(function(model) {
+      NS.app.sectionCollection = new Backbone.Collection(NS.app.projectModel.get('sections').filter(function(model) {
         return model.get('active');
       }));
-    } else if (projectModel.isNew()) {
-      ProjectView = NS.ProjectSetupView;
     } else {
       ProjectView = NS.ProjectAdminView;
     }
 
     NS.app.mainRegion.show(new ProjectView({
-      model: projectModel,
-      collection: sectionCollection
+      model: NS.app.projectModel,
+      collection: NS.app.sectionCollection
     }));
 
     if (window.location.pathname.indexOf('/new/') !== -1 && NS.Data.isEditable) {
@@ -67,7 +72,7 @@ var Planbox = Planbox || {};
     // expected. Specifically, "sticking" to the right location when scrolling
     // and not overlapping with section title when someone links directly to
     // a hash.
-    $(document).foundation();
+    $(document).foundation({'magellan': {}});
   });
 
 }(Planbox, jQuery));

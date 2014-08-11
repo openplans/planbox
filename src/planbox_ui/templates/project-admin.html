@@ -1,0 +1,130 @@
+{% extends 'product-base.html' %}
+{% load handlebarsjs from jstemplate %}
+{% load as_json from planbox_utils %}
+{% load striptags from planbox_utils %}
+{% load force_list from planbox_utils %}
+
+
+{% block title %}{{ project_data.title }}{% endblock %}
+
+{% block styles %}
+  {% if debug %}
+
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/normalize-css/normalize.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pickadate/lib/themes/classic.css" id="theme_base">
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pickadate/lib/themes/classic.date.css" id="theme_date">
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/pen/src/pen.css" type="text/css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/leaflet-0.7.2/leaflet.css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/shareabouts-js/src/styles/shareabouts.css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/main.css" type="text/css" />
+
+  {% else %}
+
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/admin.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" />
+
+  {% endif %} {# debug #}
+
+  {% for css_url in project.theme.definition.css|force_list %}
+  <link rel="stylesheet" href="{{ css_url|safe }}">
+  {% endfor %}
+
+{% endblock %}
+
+
+{% block scripts %}
+  {% if debug %}
+  <script src="{{ STATIC_URL }}bower_components/jqueryui/ui/jquery.ui.core.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/jqueryui/ui/jquery.ui.widget.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/jqueryui/ui/jquery.ui.mouse.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/jqueryui/ui/jquery.ui.sortable.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js"></script>
+
+  <script src="{{ STATIC_URL }}bower_components/handlebars/handlebars.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/underscore/underscore.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/backbone/backbone.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/backbone.marionette/lib/backbone.marionette.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/backbone-relational/backbone-relational.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/django-csrf.js/django-csrf.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/pen/src/pen.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/swag/lib/swag.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/FileAPI/dist/FileAPI.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/moment/moment.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/chrono/chrono.min.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/pickadate/lib/picker.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/pickadate/lib/picker.date.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/leaflet-0.7.2/leaflet-src.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/jqxdomainrequest/jQuery.XDomainRequest.js"></script>
+
+  <script src="{{ STATIC_URL }}bower_components/gatekeeper/gatekeeper.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/utils.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/models.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/panel-layout.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/place-detail-view.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/place-form-view.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/map.js"></script>
+  {% else %}
+  <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
+    {% if is_editable %}
+  <script src="{{ STATIC_URL }}scripts/components-admin.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
+    {% endif %}
+  {% endif %}
+  <script>Swag.registerHelpers(Handlebars);</script>
+
+  <script>
+    var Planbox = Planbox || {}
+
+    Planbox.bootstrapped = {
+      staticUrl: '{{ STATIC_URL }}',
+      projectRootPath: '{{ request.path_info }}'
+    };
+
+    Planbox.Data = {
+      project: {{ project_data|as_json }},
+      user: {{ user_data|as_json }},
+      isEditable: {{ is_editable|as_json }},
+      statuses: [
+        { 'value': 'not-started', 'label': 'Not Started'},
+        { 'value': 'active', 'label': 'Active'},
+        { 'value': 'complete', 'label': 'Complete'}
+      ],
+      contactEmail: {{ settings.PLANBOX_CONTACT_EMAIL|as_json }},
+      s3UploadBucket: {{ settings.S3_MEDIA_BUCKET|as_json }},
+      s3UploadData: {{ s3_upload_form_data|as_json }}
+    };
+  </script>
+
+  {% if debug %}
+  <script src="{{ STATIC_URL }}scripts/utils.js"></script>
+  <script src="{{ STATIC_URL }}scripts/handlebars-helpers.js"></script>
+  <script src="{{ STATIC_URL }}scripts/file-upload.js"></script>
+  <script src="{{ STATIC_URL }}scripts/models.js"></script>
+  <script src="{{ STATIC_URL }}scripts/views/mixins.js"></script>
+  <script src="{{ STATIC_URL }}scripts/views/base.js"></script>
+  <script src="{{ STATIC_URL }}scripts/views/admin/section.js"></script>
+  <script src="{{ STATIC_URL }}scripts/project-editor-v2/shareabouts-section-admin-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/project-editor-v2/timeline-section-admin-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/project-editor-v2/text-section-admin-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/project-editor-v2/section-list-admin-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/project-editor-v2/modal-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/project-editor-v2/project-admin-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/project-editor-v2/project-admin-modal-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/app.js"></script>
+  {% else %}
+  <script src="{{ STATIC_URL }}scripts/app-admin.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
+  {% endif %}
+
+  {% for js_url in project.theme.definition.js|force_list %}
+  <script src="{{ js_url|safe }}"></script>
+  {% endfor %}
+
+  {% handlebarsjs 'project-editor-v2/(.*)' precompile register_partials %}
+  {% handlebarsjs '(.*)' precompile register_partials %}
+
+  {% comment %}
+  For all the event microdata attributes, see
+  http://diveintohtml5.info/extensibility.html
+  and search for "Event Vocabulary".
+  {% endcomment %}
+
+{% endblock %}

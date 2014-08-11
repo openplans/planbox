@@ -1,0 +1,42 @@
+<span id="event-{{ slug }}" class="event-anchor"></span>
+
+<div class="float-label-container">
+  <div class="h3 event-title content-editable float-label-input" data-attr="label" contenteditable>{{{ label }}}</div>
+  <span class="float-label">Event Title</span>
+</div>
+
+<div class="row">
+
+  <div class="large-7 columns">
+
+    <div class="row collapse">
+      <div class="small-10 columns">
+        <div class="float-label-container">
+          <input class="event-datetime float-label-input" type="text" placeholder="Event Date" value="{{ datetime_label }}" data-attr="datetime_label">
+          <span class="float-label">Event Date</span>
+        </div>
+      </div>
+      <div class="small-2 columns">
+        <span class="postfix radius calendar-icon"><img src="{{ static_url }}images/icon-calendar.png" class="icon tiny" /></span>
+      </div>
+    </div>
+    <div class="datetime-picker-container text-center"><input type="text" class="event-datetime-picker hide" data-value="{{ start_datetime }}"></div>
+
+    <div class="float-label-container">
+      <div class="event-description content-editable float-label-input" data-attr="description" contenteditable>{{{ description }}}</div>
+      <span class="float-label">Event Description</span>
+    </div>
+
+    <span class="delete-event button tiny less-padding round alert">Delete Event</span>
+
+  </div>
+
+  <div class="large-5 columns">
+
+    <div class="attachments-region hide-for-print"></div>
+
+  </div>
+
+</div>
+
+<span class="handle">&#9783;</span>

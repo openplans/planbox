@@ -1,0 +1,214 @@
+// Comment out this import if you are customizing you imports below
+@import "../bower_components/foundation/scss/normalize";
+
+// Global Foundation Settings
+@import "settings";
+
+// Comment out this import if you are customizing you imports below
+@import "../bower_components/foundation/scss/foundation";
+
+
+/*==================================================
+
+  AVOID OVERRIDING FOUNDATION!!!
+  Instead edit _settings.scss. Below are rules for
+  enhancing Foundation. Stuff that's not possible
+  via settings.
+
+==================================================*/
+
+
+/*--------------------------------------------------
+  Patches. These deficiencies should probably be
+  contributed back to Foundation.
+--------------------------------------------------*/
+
+// Specificity of .hide doesn't apply to inputs.
+input.hide {
+  display: none;
+}
+
+// .no-bullet only works on ul
+ol {
+  &.no-bullet {
+    list-style: none;
+    margin-#{$default-float}: $list-side-margin-no-bullet;
+    li {
+      ul,
+      ol {
+        margin-#{$default-float}: $list-nested-margin;
+        margin-bottom: 0;
+        list-style: none;
+      }
+    }
+  }
+}
+
+// Set dropdown hover font-color. Background should maybe be on the a:hover, not the li:hover. 
+.f-dropdown li a:hover, .f-dropdown li a:focus {
+  color: #fff;
+}
+
+
+/*--------------------------------------------------
+  Typography
+--------------------------------------------------*/
+
+// Can't set color:inherit in _settings.scss 'cause $header-font-color is used in subheader/small/blockquote calculations.
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: inherit;
+}
+
+// Some headings need a different weight or font. Foundation styles 'em all the same (except for size).
+h3 {
+  font-weight: 400;
+}
+h4 {
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+// Use to avoid line breaks.
+.nowrap {
+  white-space: nowrap;
+}
+
+// Differently-sized paragraphs
+p {
+  &.text-small {
+    font-size: 0.75rem;
+  }
+  &.text-large {
+    font-size: 1.25rem;
+  }
+  &.text-xlarge {
+    font-size: 1.5rem;
+  }
+  &.text-xxlarge {
+    font-size: 1.75rem;
+  }
+}
+
+// Make links visible inside alerts with white text
+.alert-box {
+  a {
+    color: white;
+    text-decoration: underline;
+  }
+
+  // TODO: find the variable name
+  &.info a {
+    color: #308fbf;
+  }
+}
+
+// body line-height set explicitly to "1" in _global.scss, so text outside p/lists/blockquotes/etc is ugly
+.project-text-content {
+  line-height: $paragraph-line-height;
+  margin-bottom: $paragraph-margin-bottom;
+}
+
+// Extend button styles
+.button.less-padding {
+  padding: 0.75rem 1.25rem;
+}
+.button.tiny.less-padding {
+  padding: 0.25rem 0.625rem;
+}
+.button.small.less-padding {
+  padding: 0.5rem 0.875rem;
+}
+.button.large.less-padding {
+  padding: 0.875rem 1.5rem;
+}
+
+
+/*--------------------------------------------------
+  Grid
+--------------------------------------------------*/
+
+// Add .full-width to .row and the element fills the width of the page (or container).
+.full-width {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial;
+}
+
+// Margin for specific grid elements, e.g. between header & content or at bottom of page.
+.some-margin-top {
+  margin-top: 0.9375rem;
+}
+.some-margin-bottom {
+  margin-bottom: 0.9375rem;
+}
+.extra-margin-top {
+  margin-top: 2rem;
+}
+.extra-margin-bottom {
+  margin-bottom: 2rem;
+}
+
+// Extra padding, as above.
+.some-padding-top {
+  padding-top: 0.9375rem;
+}
+.some-padding-bottom {
+  padding-bottom: 0.9375rem;
+}
+.extra-padding-top {
+  padding-top: 2rem;
+}
+.extra-padding-bottom {
+  padding-bottom: 2rem;
+}
+
+
+/*--------------------------------------------------
+  Magellan & Location Hashes
+--------------------------------------------------*/
+
+// Offset page anchors for Magellan ----- TODO: Doesn't Magellan do this for ya?!
+.page-anchor {
+  position: relative;
+  top: -80px;
+}
+
+// The top bar covers content if a page is loaded with a location hash.
+.offset-anchor {
+  display: block;
+  position: absolute;
+  top: -65px;
+}
+
+
+/*--------------------------------------------------
+  Forms
+--------------------------------------------------*/
+
+// Switches
+.switch {
+  & + label.inline {
+    margin-left: 4.5rem;
+  }
+  &.small + label.inline {
+    margin-left: 4rem;
+  }
+  &.large + label.inline {
+    margin-left: 5.5rem;
+  }
+}
+
+
+/*--------------------------------------------------
+  Dropdown Menus
+--------------------------------------------------*/
+
+// Disabled Links
+.f-dropdown li a.disabled {
+  background-color: #eee;
+  color: #ccc;
+  cursor: default;
+}
+

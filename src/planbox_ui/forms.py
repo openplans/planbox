@@ -11,14 +11,6 @@ from planbox_data.models import UserAuth, Profile
 
 
 class AuthenticationForm(DjangoAuthenticationForm):
-    # error_messages = {
-    #     'invalid_login': _("Your username wasn't recognized or your password "
-    #                        "is incorrect. Need a <a href=\"%s\">"
-    #                        "password reset?</a> Or <a href=\"%s\">contact us for help.</a>")
-    #                        % (reverse_lazy('password-reset'), reverse_lazy('app-help'), ),
-    #     'inactive': _("This account is inactive."),
-    # }
-
     def __init__(self, request=None, *args, **kwargs):
         super(AuthenticationForm, self).__init__(request, *args, **kwargs)
 
@@ -40,12 +32,12 @@ class UserCreationForm(forms.ModelForm):
     }
     email = forms.EmailField(label=_("Email"), max_length=254)
     username = forms.RegexField(label=_("Username"), max_length=30,
-        regex=r'^[\w.@+-]+$',
+        regex=r'^[\w.-]+$',
         help_text=_("Required. 30 characters or fewer. Letters, digits and "
-                      "@/./+/-/_ only."),
+                      "./-/_ only."),
         error_messages={
-            'invalid': _("This value may contain only letters, numbers and "
-                         "@/./+/-/_ characters.")})
+            'invalid': _("Usernames may contain only letters, numbers and "
+                         "./-/_ characters.")})
     password = forms.CharField(label=_("Password"),
         widget=forms.PasswordInput)
     affiliation = forms.CharField(label=_("Organizational Affiliation"), max_length=256)

@@ -1,0 +1,37 @@
+<fieldset class="project-section-fieldset">
+  <div class="section-settings-toggle-container text-right"><a class="section-settings-toggle" href="#"><img src="{{ static_url }}images/icon-gear.png" class="icon" /></a></div>
+  <div class="section-settings panel radius hide clearfix">
+    <!-- <div class="row">
+      <div class="medium-6 large-4 columns"> -->
+        <!--
+        <p class="radio-images text-section-layouts">
+          <label class="unassigned">Layout</label>
+          <input type="radio" name="textsection-layout-1" value="textsection-sidebar-1" class="textsection-sidebar" checked="checked"><label for="textsection-sidebar-1"><img src="images/text-section-sidebar.gif"><small class="label-text">Sidebar</small></label>
+          <input type="radio" name="textsection-layout-1" value="textsection-twocolumn-1" class="textsection-twocolumn"><label for="textsection-twocolumn-1"><img src="images/text-section-2col.gif"><small class="label-text">Two-Column</small></label>
+        </p> -->
+      <!-- </div>
+      <div class="medium-6 large-8 columns"> -->
+
+        <div class="row collapse">
+          <div class="small-3 large-2 columns">
+            <span class="prefix show-for-small-only">Menu</span>
+            <span class="prefix show-for-medium-up">Menu Text</span>
+          </div>
+          <div class="small-9 medium-6 large-4 columns end">
+            <input type="text" placeholder="Leave blank to exclude from menu" value="{{ menu_label }}" data-attr="menu_label">
+          </div>
+        </div>
+
+      <!-- </div>
+    </div> -->
+    <a href="#" class="button tiny round alert less-padding right delete-section">Delete&nbsp;Section</a>
+  </div>
+  <input type="text" placeholder="Section Title (optional)" class="sub-heading-input" value="{{{ label }}}" data-attr="label" />
+  <div class="row section-layout-container">
+    <div class="large-12 columns pen-container-1">
+      <div class="rich-editable content-editable" data-attr="content" contenteditable>{{{ details.content }}}</div>
+    </div>
+  </div>
+</fieldset>
+
+{{> insert-new-section-tpl }}

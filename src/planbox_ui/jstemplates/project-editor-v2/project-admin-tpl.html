@@ -1,0 +1,128 @@
+<form class="project-edit-form">
+
+  <div class="row full-width">
+    <div class="medium-8 columns">
+
+      <section class="project-header-section">
+        <fieldset class="project-section-fieldset">
+          {{#if_fileapi_support 'cors'}}
+          <div class="section-settings-toggle-container text-right"><a class="section-settings-toggle" href="#"><img src="{{ static_url }}images/icon-gear.png" class="icon" /></a></div>
+          <div class="section-settings panel radius hide">
+            <label>
+              <input id="add-cover-image" type="checkbox" class="cover-image-switch" {{#if cover_img_url}}checked{{/if}}
+                data-confirm-remove-msg="Are you sure you want to remove the cover image?">
+              Add Cover Image
+            </label>
+            <!-- <br><input id="add-logo" type="checkbox"><label for="add-logo">Replace Title with Logo Image</label> -->
+            <!-- <br><input id="add-call-to-action" type="checkbox"><label for="add-logo">Use Call-to-action Buttons</label> -->
+          </div>
+          {{/if_fileapi_support}}
+
+          <div class="cover-image-container {{^if cover_img_url}}hide{{/if}}">
+
+            {{#if_fileapi_support 'cors'}}
+            <img class="cover-image image-holder" data-attr="cover_img_url"
+              src="{{#if cover_img_url}}{{cover_img_url}}{{^}}{{/if}}"
+              data-empty-img="">
+            <div class="drag-area text-center image-dnd">
+              <p class="drop-instructions">Drop cover photo here or&hellip;</p>
+              <p class="uploading-message">Uploading&hellip;</p>
+              <label for="cover-image-file-chooser" class="file-upload-input-container button tiny radius"><span class="file-upload-label">Choose Cover Photo</span><input name="cover-image" id="cover-image-file-chooser" class="file-upload-input hide" type="file" accept="image/*" /></label>
+              <br><small>(<a href="#" data-dropdown="coverimgsize">WHAT SIZE?</a>)</small>
+              <div id="coverimgsize" data-dropdown-content class="f-dropdown content medium">
+                <p>Your cover photo should be landscape orientation, at least 1000 pixels wide, and not too tall.</p>
+              </div>
+            </div>
+            {{^}}
+              <div class="alert-box text-center info">File Uploads Not Supported By Your Browser</div>
+            {{/if_fileapi_support}}
+
+          </div> <!-- .cover-image-container -->
+
+          <input type="text" placeholder="Project Title" class="heading-input" value="{{ title }}" data-attr="title" />
+          <div class="row collapse character-count-container">
+            <div class="small-10 large-11 columns">
+              <input type="text" placeholder="An engaging tagline..." class="sub-heading-input" data-attr="tagline" value="{{ details.tagline }}" maxlength="100" />
+            </div>
+            <div class="small-2 large-1 columns">
+              <span class="postfix radius sub-heading-postfix character-count-remaining"></span>
+            </div>
+          </div>
+          <div class="call-to-action-buttons hide">
+            <label class="unassigned">Call-to-Action Buttons</label>
+            <div class="row">
+              <div class="large-6 columns">
+                <div class="row collapse">
+                  <div class="medium-6 columns">
+                    <input type="text" value="Get Involved" />
+                  </div>
+                  <div class="medium-6 columns">
+                    <select>
+                      <option value="husker" selected>Get Involved</option>
+                      <option value="husker">The Plan</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="large-6 columns">
+                <div class="row collapse">
+                  <div class="medium-6 columns">
+                    <input type="text" value="Learn More" />
+                  </div>
+                  <div class="medium-6 columns">
+                    <select>
+                      <option value="husker">Get Involved</option>
+                      <option value="husker" selected>The Plan</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        {{> insert-new-section-tpl }}
+      </section>
+
+      <div class="orderable-container" id="section-list"></div>
+
+      <section class="project-footer-section">
+        <fieldset class="project-section-fieldset">
+          <label class="unassigned">Contact Information</label>
+          <div class="rich-editable content-editable" data-attr="contact" contenteditable>{{{ contact }}}</div>
+        </fieldset>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="project-settings-container">
+    <div class="row">
+      <div class="columns small-12">
+
+        <button class="button expand radius save-btn disabled">Save</button>
+
+        <div class="project-settings">
+          <p class="text-right project-preview-wrapper">{{>project-preview-link-tpl}}</p>
+          <hr>
+          <div class="switch left">
+            <input id="public-switch" type="checkbox"{{#if public}} checked{{/if}}>
+            <label for="public-switch"></label>
+          </div>
+          <label id="public-switch-label" class="inline unassigned">Published</label>
+          <hr>
+          <div class="row collapse">
+            <div class="columns large-7">
+              <p class="text-small" style="padding-right:0.5rem;">Want a custom domain name? No&nbsp;problem! Email us to get started.</p>
+            </div>
+            <div class="columns large-5">
+              <a href="mailto:{{contact_email}}" class="button radius tiny expand open-intercom">Contact Us</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</form>

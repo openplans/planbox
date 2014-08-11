@@ -12,7 +12,7 @@ var Planbox = Planbox || {};
       tagName: 'li',
       className: 'attachment',
       ui: {
-        editables: '[contenteditable]',
+        editables: '[data-attr]',
         richEditables: '.attachment-description',
         deleteBtn: '.delete-attachment-btn'
       },
@@ -31,7 +31,7 @@ var Planbox = Planbox || {};
       itemViewContainer: '.attachment-list',
 
       ui: {
-        editables: '[contenteditable]:not(.event [contenteditable])',
+        editables: '[data-attr]:not(.event [data-attr])',
         dropZones: '.event-attachment-dnd',
         itemList: '.attachment-list'
       },
@@ -137,7 +137,7 @@ var Planbox = Planbox || {};
       tagName: 'li',
       className: 'event',
       ui: {
-        editables: '[contenteditable]:not(.attachment-list [contenteditable])',
+        editables: '[data-attr]:not(.attachment-list [data-attr])',
         richEditables: '.event-description',
         deleteBtn: '.delete-event-btn',
         datetimeEditable: '.event-datetime',
@@ -187,7 +187,7 @@ var Planbox = Planbox || {};
         evt.preventDefault();
 
         var $target = $(evt.currentTarget),
-            val = $target.text(),
+            val = $target.is('[contenteditable]') ? $target.text() : $target.val(),
             picker = this.ui.datetimeInput.pickadate('picker'),
             newDate;
 
@@ -203,7 +203,13 @@ var Planbox = Planbox || {};
             val = $target.val();
 
         this.setEventDate(val);
-        this.ui.datetimeEditable.html(val);
+
+        // Backwards compatible... deprecated.
+        if (this.ui.datetimeEditable.is('[contenteditable]')) {
+          this.ui.datetimeEditable.html(val);
+        } else {
+          this.ui.datetimeEditable.val(val);
+        }
       },
       onRender: function() {
         // ContentEditableMixin
@@ -244,7 +250,7 @@ var Planbox = Planbox || {};
       itemViewContainer: '.event-list',
 
       ui: {
-        editables: '[contenteditable]:not(.event [contenteditable])',
+        editables: '[data-attr]:not(.event [data-attr])',
         itemList: '.event-list',
         newItemFocus: '.event-title:last',
         addBtn: '.add-event-btn',

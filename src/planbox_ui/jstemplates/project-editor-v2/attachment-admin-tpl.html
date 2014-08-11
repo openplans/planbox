@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="small-3 columns text-center">
+    <div class="attachment-icon">
+      {{#if thumbnail_url}}
+      <img src="{{ thumbnail_url }}">
+      {{else}}
+      <img src="{{ static_url }}/images/document_generic.png">
+      {{/if}}
+      <span class="handle attachment-handle">&#9783;</span>
+    </div>
+    <span class="delete-attachment-btn button tiny less-padding round alert">&#10005;&nbsp;Delete</span>
+  </div>
+  <div class="small-9 columns">
+    <div class="float-label-container">
+      <input class="float-label-input" type="text" placeholder="Attachment Title" value="{{ label }}" data-attr="label">
+      <span class="float-label">Title</span>
+    </div>
+    <div class="float-label-container">
+      <input class="float-label-input" type="text" placeholder="Attachment Description" value="{{ description }}" data-attr="description">
+      <span class="float-label">Description</span>
+    </div>
+  </div>
+</div>
