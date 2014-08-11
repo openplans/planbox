@@ -26,10 +26,16 @@
     </div> -->
     <a href="#" class="button tiny round alert less-padding right delete-section">Delete&nbsp;Section</a>
   </div>
-  <input type="text" placeholder="Section Title (optional)" class="sub-heading-input" value="{{{ label }}}" data-attr="label" />
+  <div class="float-label-container">
+    <input type="text" placeholder="Section Title (optional)" class="sub-heading-input float-label-input" value="{{{ label }}}" data-attr="label" />
+    <span class="float-label">Section Title</span>
+  </div>
   <div class="row section-layout-container">
     <div class="large-12 columns pen-container-1">
-      <div class="rich-editable content-editable" data-attr="content" contenteditable>{{{ details.content }}}</div>
+      <div class="float-label-container">
+        <div class="rich-editable content-editable float-label-input" data-attr="content" contenteditable>{{{ details.content }}}</div>
+        <span class="float-label">Formatted Text</span>
+      </div>
     </div>
   </div>
 </fieldset>
