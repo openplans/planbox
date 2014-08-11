@@ -10,11 +10,15 @@ class Migration(DataMigration):
         "Write your forwards methods here."
         for project in orm.Project.objects.all():
             if project.logo_img_url and not project.details.get('tagline', ''):
-                project.details['tagline'] = project.title
+                project.details['tagline'] = project.title.replace('<br>', ' ')
                 project.save()
 
     def backwards(self, orm):
         "Write your backwards methods here."
+        for project in orm.Project.objects.all():
+            if project.logo_img_url and project.details.get('tagline', '') == project.title:
+                project.details.pop('tagline', None)
+                project.save()
 
     models = {
         u'auth.group': {
