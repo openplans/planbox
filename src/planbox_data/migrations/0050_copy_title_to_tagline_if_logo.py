@@ -10,7 +10,6 @@ class Migration(DataMigration):
         "Write your forwards methods here."
         for project in orm.Project.objects.all():
             if project.logo_img_url and not project.details.get('tagline', ''):
-                import pdb; pdb.set_trace()
                 project.details['tagline'] = project.title
                 project.save()
 
