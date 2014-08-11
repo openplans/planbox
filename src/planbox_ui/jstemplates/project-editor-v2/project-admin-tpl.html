@@ -39,10 +39,16 @@
 
           </div> <!-- .cover-image-container -->
 
-          <input type="text" placeholder="Project Title" class="heading-input" value="{{ title }}" data-attr="title" />
+          <div class="float-label-container">
+            <input type="text" placeholder="Project Title" class="heading-input float-label-input" value="{{ title }}" data-attr="title" />
+            <span class="float-label">Project Title</span>
+          </div>
           <div class="row collapse character-count-container">
             <div class="small-10 large-11 columns">
-              <input type="text" placeholder="An engaging tagline..." class="sub-heading-input" data-attr="tagline" value="{{ details.tagline }}" maxlength="100" />
+              <div class="float-label-container">
+                <input type="text" placeholder="An engaging tagline..." class="sub-heading-input float-label-input" data-attr="tagline" value="{{ details.tagline }}" maxlength="100" />
+                <span class="float-label">Project Title</span>
+              </div>
             </div>
             <div class="small-2 large-1 columns">
               <span class="postfix radius sub-heading-postfix character-count-remaining"></span>
