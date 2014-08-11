@@ -4,17 +4,22 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 import json
+import re
 
 class Migration(DataMigration):
 
     def forwards(self, orm):
         "Write your forwards methods here."
+
+        # Build an expression to find br tags on either end of a string
+        brs = re.compile('(^(<br>)+)|((<br>)+$)')
+
         for section in orm.Section.objects.filter(type='faqs'):
             faqs = section.details
 
             # Strip extra br's from the questions and answers.
-            faqs = [{'question': faq.get('question', '').strip('<br>'),
-                     'answer': faq.get('answer', '').strip('<br>')} for faq in faqs]
+            faqs = [{'question': brs.sub('', faq.get('question', '')),
+                     'answer': brs.sub('', faq.get('answer', ''))} for faq in faqs]
 
             # Convert the faqs into text.
             faqs_text = ['<b>%(question)s</b><br>%(answer)s' % faq for faq in faqs]
