@@ -69,7 +69,7 @@ class NewProjectViewTests (PlanBoxUITestCase):
     def test_user_gets_redirected_to_own_new_project_page(self):
         auth1 = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner1 = auth1.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner1)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner1)
 
         auth2 = UserAuth.objects.create_user(username='atogle', password='456')
 
@@ -102,7 +102,7 @@ class NewProjectViewTests (PlanBoxUITestCase):
         #       project.
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner)
 
         url_kwargs = {'owner_name': auth.username}
         url = reverse('app-new-project', kwargs=url_kwargs)
@@ -120,7 +120,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
     def test_anon_gets_non_editable_details(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=True)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
             'owner_name': 'mjumbewu',
@@ -138,7 +138,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
     def test_non_owner_gets_non_editable_details(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=True)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
             'owner_name': 'mjumbewu',
@@ -159,7 +159,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
     def test_owner_gets_editable_details(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=True)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
             'owner_name': 'mjumbewu',
@@ -177,7 +177,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
     def test_anon_gets_redirect_to_home_on_non_public_project(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=False)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
         kwargs = {
             'owner_name': 'mjumbewu',
@@ -196,7 +196,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
     def test_non_owner_gets_redirect_to_home_on_non_public_project(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=False)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
         kwargs = {
             'owner_name': 'mjumbewu',
@@ -217,7 +217,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
     def test_owner_gets_editable_details_on_non_public_project(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=False)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
         kwargs = {
             'owner_name': 'mjumbewu',
@@ -238,7 +238,7 @@ class ProjectThemeTests (PlanBoxUITestCase):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
         theme = Theme.objects.create(definition={'css': 'http://example.com/style.css'})
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, theme=theme, public=True)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, theme=theme, public=True)
 
         kwargs = {
             'owner_name': 'mjumbewu',
@@ -258,7 +258,7 @@ class ProjectThemeTests (PlanBoxUITestCase):
     def test_can_render_project_without_theme(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', description='test description', owner=owner, public=True)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
             'owner_name': 'mjumbewu',

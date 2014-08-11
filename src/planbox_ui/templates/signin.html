@@ -1,19 +1,19 @@
 {% extends 'product-base.html' %}
 
-{% block main %}
+{% block page %}
 
 <section class="main">
-  <div class="row">
+  <div class="row extra-padding-top extra-padding-bottom">
     <div class="small-12 medium-10 medium-centered large-8 columns">
       {% if form.non_field_errors %}
       <div class="alert-box alert"><strong>{{ form.non_field_errors.as_text|safe|slice:"2:" }}</strong></div>
       {% endif %}
 
-      <h3 class="page-header">Sign In</h3>
+      <h3>Sign In</h3>
 
       <form method="POST" class="panel clearfix">
         {% csrf_token %}
-        <p class="float-label-container"><input required type="text" name="username" id="my-username" class="float-label-input" placeholder="Username" pattern="[A-Za-z0-9-_]{1,30}" max="30" tabindex="1"> <label for="my-username" class="float-label">Username</label></p>
+        <p class="float-label-container"><input required type="text" name="username" id="my-username" class="float-label-input" placeholder="Username" pattern="[A-Za-z0-9-_\.]{1,30}" max="30" tabindex="1"> <label for="my-username" class="float-label">Username</label></p>
         <p class="float-label-container"><input required type="password" name="password" id="my-password" class="float-label-input" placeholder="Password" max="30" tabindex="2"><label for="my-password" class="float-label">Password</label></p>
         <input type="submit" value="Sign In" class="button radius left" tabindex="3">
 

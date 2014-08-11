@@ -39,6 +39,7 @@ class ProfileAdmin (admin.ModelAdmin):
     list_display = ('__str__', '_date_joined', 'affiliation', 'email')
     filter_horizontal = ('organizations',)
     raw_id_fields = ('auth',)
+    search_fields = ('slug',)
 
     def _date_joined(self, obj):
         return obj.created_at

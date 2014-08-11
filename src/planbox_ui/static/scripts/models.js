@@ -21,42 +21,7 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.ProjectModel = Backbone.RelationalModel.extend({
-    relations: [{
-      type: Backbone.HasMany,
-      key: 'events',
-      relatedModel: 'EventModel',
-      collectionType: 'EventCollection'
-    },
-    {
-      type: Backbone.HasMany,
-      key: 'sections',
-      relatedModel: 'SectionModel',
-      collectionType: 'SectionCollection',
-      reverseRelation: {
-        key: 'project'
-      }
-    }],
-    urlRoot: '/api/v1/projects',
-
-    clean: function(options) {
-      // Remove empty events
-      var events = this.get('events'),
-          label, descr;
-      events.each(function(evt) {
-        label = evt.get('label');
-        descr = evt.get('description');
-        if ((_.isUndefined(label) || _.isNull(label) || label.trim() === '') &&
-            (_.isUndefined(descr) || _.isNull(descr) || descr.trim() === '')) {
-          events.remove(evt);
-        }
-      });
-    }
-  });
-
-  NS.SectionModel = Backbone.RelationalModel.extend({
-    baseAttrs: ['details', 'id', 'created_at', 'updated_at', 'type', 'label', 'menu_label', 'slug', 'active'],
-
+  NS.DetailModel = Backbone.RelationalModel.extend({
     set: function(key, val, options) {
       /*
       Assign a value on the model (as Backbone.Model.set). If the attribute
@@ -105,6 +70,53 @@ var Planbox = Planbox || {};
       }
       return Backbone.RelationalModel.prototype.set.call(this, attrs, options);
     }
+  });
+
+
+  NS.ProjectModel = NS.DetailModel.extend({
+    baseAttrs: ['details', 'id', 'created_at', 'updated_at', 'title', 'slug',
+                'public', 'status', 'location', 'contact', 'owner',
+                'cover_img_url', 'logo_img_url', 'events', 'sections',
+                'template', 'theme', 'description',
+                'happening_now_description', 'happening_now_link_type',
+                'happening_now_link_url', 'get_involved_description',
+                'get_involved_link_type', 'get_involved_link_url'],
+
+    relations: [{
+      type: Backbone.HasMany,
+      key: 'events',
+      relatedModel: 'EventModel',
+      collectionType: 'EventCollection'
+    },
+    {
+      type: Backbone.HasMany,
+      key: 'sections',
+      relatedModel: 'SectionModel',
+      collectionType: 'SectionCollection',
+      reverseRelation: {
+        key: 'project'
+      }
+    }],
+    urlRoot: '/api/v1/projects',
+
+    clean: function(options) {
+      // Remove empty events
+      var events = this.get('events'),
+          label, descr;
+      events.each(function(evt) {
+        label = evt.get('label');
+        descr = evt.get('description');
+        if ((_.isUndefined(label) || _.isNull(label) || label.trim() === '') &&
+            (_.isUndefined(descr) || _.isNull(descr) || descr.trim() === '')) {
+          events.remove(evt);
+        }
+      });
+    }
+  });
+
+  NS.SectionModel = NS.DetailModel.extend({
+    baseAttrs: ['details', 'id', 'created_at', 'updated_at', 'type', 'label',
+                'menu_label', 'slug', 'active']
   });
 
   NS.SectionCollection = NS.ReorderableCollection.extend({

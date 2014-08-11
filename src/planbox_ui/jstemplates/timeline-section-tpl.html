@@ -1,9 +1,7 @@
 <span data-magellan-destination="section-{{ slug }}" id="section-{{ slug }}" class="section-anchor"></span>
-<div class="row">
+<div class="row container">
   <div class="small-12 columns">
-    <header class="section-header">
-      <h2 class="project-timeline-label">{{{ label }}}</h2>
-    </header>
-    <ol class="event-list unstyled-list"></ol>
+    {{#if label}}<h3 class="section-heading">{{ label }}</h3>{{/if}}
+    <ol class="event-list no-bullet"></ol>
   </div>
 </div>

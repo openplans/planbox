@@ -48,21 +48,19 @@
               <span class="float-label">Project Title</span>
             </div>
           </div>
-        </div><!-- end .logo-table -->
+        </div>
 
       </div>
     </div>
 
     <div class="project-menu-container {{#gte sections.length 2}} has-project-menu{{/gte}}">
       {{#gte sections.length 2}}
-      <div class="project-menu"><!-- <div data-magellan-expedition="fixed" class="project-menu"> -->
+      <div class="project-menu">
         <div class="row container">
           <div class="small-12 columns">
             <ul class="sub-nav">
-              <!-- <li data-magellan-arrival="home"><a href="#home" class="disabled">Home</a></li> -->
               <li><a href="#home" class="home-link">Home</a></li>
               {{#each sections}}
-              <!-- <li data-magellan-arrival="section-{{ slug }}"><a href="#{{ slug }}" class="content-editable button radius" data-id="{{ id }}" contenteditable>{{ menu_label }}</a></li> -->
               <li><a href="" class="content-editable float-label-input" data-id="{{ id }}" contenteditable>{{ menu_label }}</a></li>
               {{/each}}
             </ul>
@@ -72,7 +70,7 @@
       {{/gte}}
     </div>
 
-  </div><!-- end .site-header-content -->
+  </div>
 
 </header>
 
@@ -127,10 +125,6 @@
       <div class="float-label-container">
         <div class="project-location content-editable float-label-input" data-attr="location" contenteditable>{{{ location }}}</div>
         <span class="float-label">Project Location</span>
-      </div>
-      <div class="float-label-container">
-        <div class="project-description content-editable float-label-input" data-attr="description" contenteditable>{{{ description }}}</div>
-        <span class="float-label">Project Description</span>
       </div>
     </div>
 

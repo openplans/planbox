@@ -29,10 +29,10 @@
   <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic' rel='stylesheet' type='text/css'>
 
   {% if debug %}
-  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/foundation/css/normalize.css" />
-  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/foundation/css/foundation.css" />
+  <!-- <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/foundation/css/normalize.css" /> -->
+  <!-- <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/foundation/css/foundation.css" /> -->
   {% else %}
-  <link rel="stylesheet" href="{{ STATIC_URL }}styles/base.min.css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}styles/components.min.css" />
   {% endif %}
 
 
@@ -47,12 +47,14 @@
 <body>
 
   <!--[if lt IE 9]>
-    <div class="browser-warning alert-box alert text-center"><h1>Your browser is not supported.</h1> <h3>Please <a href="http://browsehappy.com/">upgrade your browser</a> to start using OpenPlans.</h3></div>
+    <div class="alert-box alert text-center" style="margin:0;"><h1>Your browser is not supported.</h1> <h3>Please <a href="http://browsehappy.com/">upgrade your browser</a> to start using OpenPlans.</h3></div>
   <![endif]-->
   <!--[if IE 9 ]>
-    <div class="browser-warning alert-box secondary text-center"><strong>You're using an outdated browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</strong></div>
+    <div class="alert-box text-center" style="margin:0;"><strong>You're using an outdated browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</strong></div>
   <![endif]-->
 
+
+  {% block topbar %}{% endblock %}
 
   <div id="page">
     {% block page %}{% endblock %}
