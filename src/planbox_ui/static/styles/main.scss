@@ -1029,11 +1029,13 @@ textarea.no-resize {
   resize: none;
 }
 
-.cover-image-container {
+.cover-image-container,
+.logo-image-container {
   width: 100%;
   min-height: 9rem;
   margin-bottom: 1rem;
   position: relative;
+  text-align: center;
 }
 .drag-area {
   position: absolute;

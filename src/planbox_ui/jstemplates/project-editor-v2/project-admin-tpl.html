@@ -7,13 +7,18 @@
         <fieldset class="project-section-fieldset">
           {{#if_fileapi_support 'cors'}}
           <div class="section-settings-toggle-container text-right"><a class="section-settings-toggle" href="#"><img src="{{ static_url }}images/icon-gear.png" class="icon" /></a></div>
+
           <div class="section-settings panel radius hide">
             <label>
               <input id="add-cover-image" type="checkbox" class="cover-image-switch" {{#if cover_img_url}}checked{{/if}}
                 data-confirm-remove-msg="Are you sure you want to remove the cover image?">
               Add Cover Image
+            </label><br>
+            <label>
+              <input id="add-logo-image" type="checkbox" class="logo-image-switch" {{#if logo_img_url}}checked{{/if}}
+                data-confirm-remove-msg="Are you sure you want to remove the title image?">
+              Replace Title with Image
             </label>
-            <!-- <br><input id="add-logo" type="checkbox"><label for="add-logo">Replace Title with Logo Image</label> -->
             <!-- <br><input id="add-call-to-action" type="checkbox"><label for="add-logo">Use Call-to-action Buttons</label> -->
           </div>
           {{/if_fileapi_support}}
@@ -38,6 +43,27 @@
             {{/if_fileapi_support}}
 
           </div> <!-- .cover-image-container -->
+
+          <div class="logo-image-container {{^if logo_img_url}}hide{{/if}}">
+
+            {{#if_fileapi_support 'cors'}}
+            <img class="logo-image image-holder" data-attr="logo_img_url"
+              src="{{#if logo_img_url}}{{logo_img_url}}{{^}}{{/if}}"
+              data-empty-img="">
+            <div class="drag-area text-center image-dnd">
+              <p class="drop-instructions">Drop title image here or&hellip;</p>
+              <p class="uploading-message">Uploading&hellip;</p>
+              <label for="logo-image-file-chooser" class="file-upload-input-container button tiny radius"><span class="file-upload-label">Choose Title Image</span><input name="logo-image" id="logo-image-file-chooser" class="file-upload-input hide" type="file" accept="image/*" /></label>
+              <br><small>(<a href="#" data-dropdown="logoimgsize">WHAT SIZE?</a>)</small>
+              <div id="logoimgsize" data-dropdown-content class="f-dropdown content medium">
+                <p>Your title image should be landscape orientation, at least 1000 pixels wide, and not too tall.</p>
+              </div>
+            </div>
+            {{^}}
+              <div class="alert-box text-center info">File Uploads Not Supported By Your Browser</div>
+            {{/if_fileapi_support}}
+
+          </div> <!-- .logo-image-container -->
 
           <div class="float-label-container">
             <input type="text" placeholder="Project Title" class="heading-input float-label-input" value="{{ title }}" data-attr="title" />
