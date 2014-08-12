@@ -6835,12 +6835,15 @@ section, footer {
   border: 0; }
 
 @media only screen and (min-width: 40.063em) {
-  input[type=text].heading-input {
+  .no-logo-image input[type=text].heading-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
     padding: 0.5rem 0.75rem;
     height: 4.5rem;
     font-weight: bold; } }
+
+.no-logo-image .heading-help {
+  display: none; }
 
 @media only screen and (min-width: 40.063em) {
   input[type=text].sub-heading-input {
