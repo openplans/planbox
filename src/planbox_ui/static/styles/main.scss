@@ -659,7 +659,14 @@ section, footer {
   border-radius: 0.375em 0.375em 0 0;
 }
 
+.project-title {
+  img {
+    max-height: 20rem;
+  }
+}
+
 // Logo
+// TODO: Remove this? There's no logo-table anymore, right? 
 .logo-table {
   display: table;
   border-collapse: collapse;
