@@ -6622,6 +6622,9 @@ section, footer {
 .project-header {
   border-radius: 0.375em 0.375em 0 0; }
 
+.project-title img {
+  max-height: 20rem; }
+
 .logo-table {
   display: table;
   border-collapse: collapse;
