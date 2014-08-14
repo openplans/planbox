@@ -7075,6 +7075,8 @@ textarea.no-resize {
       width: auto;
       padding-top: 0;
       padding-left: 0; } }
+.project-title-container .project-title-help-text {
+  margin-top: -0.75rem; }
 
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none; }
