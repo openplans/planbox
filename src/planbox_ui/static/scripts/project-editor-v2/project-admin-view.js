@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Handlebars Modernizr _ Pen FileAPI chrono, Intercom */
+/*globals Backbone jQuery Handlebars Modernizr _ Pen FileAPI chrono */
 
 var Planbox = Planbox || {};
 
@@ -23,8 +23,7 @@ var Planbox = Planbox || {};
         hightlightLinkSelector: '.highlight-link-selector',
         hightlightExternalLink: '.highlight-external-link',
         characterCountInput: '.character-count-container [maxlength]',
-        addSectionButtons: '.add-section-btn',
-        openIntercomLink: '.open-intercom'
+        addSectionButtons: '.add-section-btn'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
@@ -41,9 +40,7 @@ var Planbox = Planbox || {};
         'blur @ui.hightlightExternalLink': 'handleHighlightExternalLinkBlur',
 
         'input @ui.characterCountInput': 'handleCharacterCountChange',
-        'keyup @ui.characterCountInput': 'handleCharacterCountChange',
-
-        'click @ui.openIntercomLink': 'handleOpenIntercomClick'
+        'keyup @ui.characterCountInput': 'handleCharacterCountChange'
       },
       modelEvents: {
         'change': 'dataChanged',
@@ -481,13 +478,6 @@ var Planbox = Planbox || {};
         this.updateSectionMenu();
       },
 
-      handleOpenIntercomClick: function(evt) {
-        // if intercom is loaded, then prevent default and open the message window
-        if (Intercom) {
-          evt.preventDefault();
-          Intercom('show');
-        }
-      }
     })
   );
 
