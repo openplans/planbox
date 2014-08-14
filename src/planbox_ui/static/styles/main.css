@@ -6836,15 +6836,12 @@ section, footer {
   border: 0; }
 
 @media only screen and (min-width: 40.063em) {
-  .no-logo-image input[type=text].heading-input {
+  input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
     padding: 0.5rem 0.75rem;
     height: 4.5rem;
     font-weight: bold; } }
-
-.no-logo-image .heading-help {
-  display: none; }
 
 @media only screen and (min-width: 40.063em) {
   input[type=text].sub-heading-input {
@@ -6952,14 +6949,9 @@ span.sub-heading-postfix {
 textarea.no-resize {
   resize: none; }
 
-.cover-image-container,
-.logo-image-container {
+.drag-area-container {
   position: relative;
   text-align: center; }
-
-.cover-image-container {
-  margin: -1.125rem -0.9375rem 0.5rem -0.9375rem;
-  min-height: 9rem; }
 
 .drag-area {
   position: absolute;
@@ -6969,10 +6961,12 @@ textarea.no-resize {
   padding: 1rem;
   border: 2px dashed rgba(133, 133, 133, 0.4);
   border-radius: 0.375rem;
-  background-color: rgba(242, 242, 242, 0.7); }
+  background-color: rgba(242, 242, 242, 0.7);
+  opacity: 0.5; }
   .drag-area:hover {
     border-color: rgba(133, 133, 133, 0.9);
-    background-color: rgba(242, 242, 242, 0.8); }
+    background-color: rgba(242, 242, 242, 0.8);
+    opacity: 1; }
   .drag-area p {
     margin-bottom: 0.5rem; }
 
@@ -7055,6 +7049,35 @@ textarea.no-resize {
 
 .file-uploading > .file-upload-input-container {
   visibility: hidden; }
+
+.cover-image-container {
+  margin: -1.125rem -0.9375rem 0.5rem -0.9375rem;
+  min-height: 9rem; }
+
+.logo-image-container {
+  min-height: 9rem;
+  margin-bottom: 1rem; }
+  @media only screen and (min-width: 40.063em) {
+    .logo-image-container {
+      float: left;
+      width: 50%; } }
+  .logo-image-container img {
+    max-height: 20rem; }
+
+@media only screen and (min-width: 40.063em) {
+  .project-title-container {
+    float: right;
+    width: 50%;
+    padding-top: 1rem;
+    padding-left: 1rem; }
+    .logo-image-container.hide + .project-title-container {
+      float: none;
+      width: auto;
+      padding-top: 0;
+      padding-left: 0; } }
+
+.logo-image-container.hide + .project-title-container .project-title-help-text {
+  display: none; }
 
 /*--------------------------------------------------
   Intercom
