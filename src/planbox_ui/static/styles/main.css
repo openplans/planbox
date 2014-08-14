@@ -7068,13 +7068,17 @@ textarea.no-resize {
   .project-title-container {
     float: right;
     width: 50%;
-    padding-top: 1rem;
-    padding-left: 1rem; }
+    top: 1rem;
+    left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem; }
     .logo-image-container.hide + .project-title-container {
       float: none;
       width: auto;
-      padding-top: 0;
-      padding-left: 0; } }
+      top: 0;
+      left: 0;
+      padding-right: 0;
+      padding-bottom: 0; } }
 .project-title-container .project-title-help-text {
   margin-top: -0.75rem; }
 
