@@ -1034,11 +1034,12 @@ textarea.no-resize {
 
 .cover-image-container,
 .logo-image-container {
-  width: 100%;
-  min-height: 9rem;
-  margin-bottom: 1rem;
   position: relative;
   text-align: center;
+}
+.cover-image-container {
+  margin: -1.125rem -0.9375rem 0.5rem -0.9375rem;
+  min-height: 9rem;
 }
 .drag-area {
   position: absolute;
