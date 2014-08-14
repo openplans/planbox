@@ -7053,10 +7053,4 @@ textarea.no-resize {
 .file-uploading > .file-upload-input-container {
   visibility: hidden; }
 
-/*--------------------------------------------------
-  Intercom
---------------------------------------------------*/
-div#IntercomDefaultWidget {
-  display: none !important; }
-
 /* ----- Medium screens ----- */
