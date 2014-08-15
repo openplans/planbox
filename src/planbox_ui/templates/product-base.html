@@ -59,6 +59,7 @@ OpenPlans
           </ul>
         </li>
         {% if user.is_authenticated %}
+        <li><a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}" class="open-intercom">Help</a></li>
         <li class="active has-dropdown">
           <a href="/{{ user.username }}/new/">{{ user.username }}</a>
           <ul class="dropdown">

@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -6622,6 +6621,9 @@ section, footer {
 .project-header {
   border-radius: 0.375em 0.375em 0 0; }
 
+.project-title img {
+  max-height: 20rem; }
+
 .logo-table {
   display: table;
   border-collapse: collapse;
@@ -6751,6 +6753,21 @@ section, footer {
 .picker table tr td {
   text-align: center; }
 
+ol.attachment-list.no-bullet {
+  margin-left: 0; }
+
+.attachment .row {
+  margin: 0 -0.5rem; }
+  .attachment .row .column, .attachment .row .columns {
+    padding: 0 0.5rem; }
+  .attachment .row.collapse {
+    margin: 0; }
+    .attachment .row.collapse .column, .attachment .row.collapse .columns {
+      padding: 0; }
+    .attachment .row.collapse input {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0; }
+
 .handle {
   cursor: move; }
 
@@ -6769,6 +6786,9 @@ section, footer {
 
 .attachment-icon {
   position: relative; }
+
+img.attachment-icon {
+  margin-bottom: 1.6rem; }
 
 .attachment-handle {
   position: absolute;
@@ -7078,11 +7098,5 @@ textarea.no-resize {
 
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none; }
-
-/*--------------------------------------------------
-  Intercom
---------------------------------------------------*/
-div#IntercomDefaultWidget {
-  display: none !important; }
 
 /* ----- Medium screens ----- */
