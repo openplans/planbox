@@ -12,6 +12,7 @@ var Planbox = Planbox || {};
         editables: '[data-attr]:not(#section-list [data-attr])',
         settingsToggle: '.section-settings-toggle',
         coverImageSwitch: '.cover-image-switch',
+        logoImageSwitch: '.logo-image-switch',
         richEditables: '.rich-editable',
         saveBtn: '.save-btn',
         visibilityToggle: '[name=project-public]',
@@ -30,6 +31,7 @@ var Planbox = Planbox || {};
         'input @ui.editables': 'handleEditableBlur',
         'change @ui.visibilityToggle': 'handleVisibilityChange',
         'change @ui.coverImageSwitch': 'handleCoverImageSwitch',
+        'change @ui.logoImageSwitch': 'handleLogoImageSwitch',
         'click @ui.settingsToggle': 'handleSettingsToggle',
         'click @ui.saveBtn': 'handleSave',
         'click @ui.customDomainMessageBtn': 'handleCustomDomainMessageBtn',
@@ -187,6 +189,26 @@ var Planbox = Planbox || {};
           }
         } else {
           this.$('.cover-image-container').removeClass('hide');
+        }
+      },
+
+      handleLogoImageSwitch: function(evt) {
+        var $logoImageSwitch = $(evt.currentTarget),
+            $imageWrapper = this.$('.logo-image-container'),
+            $imageHolder = this.$('.logo-image-container .image-holder'),
+            confirmRemoveMsg = $logoImageSwitch.attr('data-confirm-remove-msg'),
+            isOn = $logoImageSwitch.is(':checked');
+
+        if (!isOn) {
+          if (!this.model.get('logo_img_url') || window.confirm(confirmRemoveMsg)) {
+            $imageWrapper.addClass('hide');
+            $imageHolder.attr('src', $imageHolder.attr('data-empty-img'));
+            this.model.set('logo_img_url', '');
+          } else {
+            $logoImageSwitch.prop('checked', true);
+          }
+        } else {
+          this.$('.logo-image-container').removeClass('hide');
         }
       },
 
