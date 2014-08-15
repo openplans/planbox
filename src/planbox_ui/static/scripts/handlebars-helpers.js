@@ -119,6 +119,14 @@ var Planbox = Planbox || {};
   });
 
 
+  // URLs and filepaths -------------------------------------------------------
+
+  Handlebars.registerHelper('filename', function(fullpath) {
+    var filename = fullpath.substring(fullpath.lastIndexOf('/')+1);
+    return filename;
+  });
+
+
   // Date and time ------------------------------------------------------------
 
   Handlebars.registerHelper('formatdatetime', function(datetime, format) {

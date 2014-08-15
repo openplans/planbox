@@ -51,6 +51,19 @@ var Planbox = Planbox || {};
         this.model.set('map', mapOptions);
       },
 
+      disableSnapshotButton: function(label) {
+        this.ui.generateSnapshot
+            .attr('disabled', 'disabled')
+            .addClass('generating')
+            .html(label);
+      },
+      enableSnapshotButton: function(label) {
+        this.ui.generateSnapshot
+          .removeAttr('disabled')
+          .removeClass('generating')
+          .html(label);
+      },
+
       handleGenerateSnapshotClick: function(evt) {
         evt.preventDefault();
 
@@ -59,44 +72,31 @@ var Planbox = Planbox || {};
               originalSnapshotButtonLabel = self.ui.generateSnapshot.html(),
               generatingSnapshotLabel = self.ui.generateSnapshot.attr('data-generating-label'),
               datasetUrl = this.model.get('details').dataset_url,
+              downloadTemplate = Backbone.Marionette.TemplateCache.get('#download-snapshot-button-tpl'),
               snapshots = new Shareabouts.SnapshotCollection(),
               snapshot;
 
-          var getFilename = function(url) {
-            var filename = url.substring(url.lastIndexOf('/')+1);
-            return filename;
-          };
-
-          self.ui.generateSnapshot
-            .attr('disabled', 'disabled')
-            .addClass('generating')
-            .html(generatingSnapshotLabel);
+          self.disableSnapshotButton(generatingSnapshotLabel);
 
           snapshots.url = datasetUrl + '/places/snapshots';
+
+          // Request a new snapshot
           snapshot = snapshots.create({}, {
             success: function() {
+
+              // Listen until the snapshot has been generated
               snapshot.waitUntilReady({
                 data: {'include_submissions': true},
                 success: function(url) {
-                  var filename = getFilename(url);
-                  $('.existing-snapshot-wrapper').html('<a href="' + url + '" class="download-snapshot button" download="' + filename + '">Download snapshot<br><small>requested ' + moment(snapshot.get('requested_at')).fromNow() + '</small></a>');
-                  self.ui.generateSnapshot
-                    .removeAttr('disabled')
-                    .removeClass('generating')
-                    .html(originalSnapshotButtonLabel);
+
+                  // Show a download button when the snapshot is ready
+                  self.$('.existing-snapshot-wrapper')
+                    .html(downloadTemplate(snapshot.toJSON()));
+                  self.enableSnapshotButton(originalSnapshotButtonLabel);
                 },
                 error: function() {
-                  self.ui.generateSnapshot
-                    .removeAttr('disabled')
-                    .removeClass('generating')
-                    .html(originalSnapshotButtonLabel);
+                  self.enableSnapshotButton(originalSnapshotButtonLabel);
                   alert('There was a problem generating your\nsnapshot. Please try again later.');
-                },
-                complete: function() {
-                  self.ui.generateSnapshot
-                    .removeAttr('disabled')
-                    .removeClass('generating')
-                    .html(originalSnapshotButtonLabel);
                 }
               });
             }
