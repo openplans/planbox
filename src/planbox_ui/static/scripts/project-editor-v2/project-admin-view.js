@@ -204,13 +204,11 @@ var Planbox = Planbox || {};
             $imageWrapper.addClass('hide');
             $imageHolder.attr('src', $imageHolder.attr('data-empty-img'));
             this.model.set('logo_img_url', '');
-            this.$('.project-edit-form').addClass('no-logo-image').removeClass('has-logo-image');
           } else {
             $logoImageSwitch.prop('checked', true);
           }
         } else {
           this.$('.logo-image-container').removeClass('hide');
-          this.$('.project-edit-form').removeClass('no-logo-image').addClass('has-logo-image');
         }
       },
 
