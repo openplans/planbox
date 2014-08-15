@@ -15,12 +15,14 @@ var Planbox = Planbox || {};
         editables: '[data-attr]',
         richEditables: '.project-shareabouts-description',
         map: '.map',
-        deleteSection: '.delete-section'
+        deleteSection: '.delete-section',
+        generateSnapshot: '.generate-snapshot'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'input @ui.editables': 'handleEditableBlur',
-        'click @ui.deleteSection': 'handleDeleteSectionClick'
+        'click @ui.deleteSection': 'handleDeleteSectionClick',
+        'click @ui.generateSnapshot': 'handleGenerateSnapshotClick'
       },
 
       onShow: function() {
@@ -47,6 +49,56 @@ var Planbox = Planbox || {};
             );
 
         this.model.set('map', mapOptions);
+      },
+
+      handleGenerateSnapshotClick: function(evt) {
+        evt.preventDefault();
+        var self = this,
+            originalSnapshotButtonLabel = self.ui.generateSnapshot.html(),
+            generatingSnapshotLabel = self.ui.generateSnapshot.attr('data-generating-label'),
+            datasetUrl = this.model.get('details').dataset_url,
+            snapshots = new Shareabouts.SnapshotCollection(),
+            snapshot;
+
+        var getFilename = function(url) {
+          var filename = url.substring(url.lastIndexOf('/')+1);
+          return filename;
+        };
+
+        snapshots.url = datasetUrl + '/places/snapshots';
+        snapshot = snapshots.create({}, {
+          success: function() {
+            snapshot.waitUntilReady({
+              data: {'include_submissions': true},
+              success: function(url) {
+                var filename = getFilename(url);
+                $('.existing-snapshot-wrapper').html('<a href="' + url + '" download="' + filename + '">Download snapshot requested ' + moment(snapshot.get('requested_at')).fromNow() + '</a>');
+                self.ui.generateSnapshot
+                  .removeAttr('disabled')
+                  .removeClass('generating')
+                  .html(originalSnapshotButtonLabel);
+              },
+              error: function() {
+                self.ui.generateSnapshot
+                  .removeAttr('disabled')
+                  .removeClass('generating')
+                  .html(originalSnapshotButtonLabel);
+                debugger;
+              },
+              complete: function() {
+                self.ui.generateSnapshot
+                  .removeAttr('disabled')
+                  .removeClass('generating')
+                  .html(originalSnapshotButtonLabel);
+              }
+            });
+          }
+        });
+
+        self.ui.generateSnapshot
+          .attr('disabled', 'disabled')
+          .addClass('generating')
+          .html(generatingSnapshotLabel);
       },
 
       initialize: function() {
