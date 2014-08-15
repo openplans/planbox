@@ -31,7 +31,7 @@ var Planbox = Planbox || {};
 
     _.each(sections, function(section) {
       if (section.active) {
-        result += options.fn(_.extend(context, section));
+        result += options.fn(_.extend({}, context, section));
       }
     });
 
