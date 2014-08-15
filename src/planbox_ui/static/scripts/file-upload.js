@@ -14,6 +14,8 @@
     start: $.noop,
     progress: $.noop,
     complete: $.noop,
+    maxWidthAttr: 'data-max-width',
+    maxHeightAttr: 'data-max-height',
     validate: function() { return true; },
     imagePreview: null,
     thumbnail: false
@@ -63,6 +65,7 @@
         url: this.options.url,
         data: data,
         files: {file: files}, // 'file' is was AWS expects
+        imageTransform: imageTransform,
         cache: true,
         upload: $.proxy(this.options.start, this.element),
         progress: $.proxy(this.options.progress, this.element),
@@ -73,13 +76,27 @@
     var file = files[0],
         data = $.extend({'Content-Type': file.type}, this.options.data),
         filesToUpload = [file],
+
+        maxWidth = $(this.element).attr(this.options.maxWidthAttr),
+        maxHeight = $(this.element).attr(this.options.maxHeightAttr),
+        isImage = file.type.indexOf('image/') === 0,
+        imageTransform,
         image;
 
     if (!this.options.validate(files)) {
       return;
     }
 
-    if (this.options.thumbnail && file.type.indexOf('image/') === 0) {
+    if ((maxWidth || maxHeight) && isImage) {
+      imageTransform = {
+        maxWidth: maxWidth,
+        maxHeight: maxHeight
+      };
+      // TODO: to avoid collisions, rename the file to something like
+      // {{file.name}}-{{maxWidth || 'auto'}}x{{maxHeight || 'auto'}}
+    }
+
+    if (this.options.thumbnail && isImage) {
       // make a thumb
       image = FileAPI.Image(file);
       image.preview(this.options.thumbnail.width, this.options.thumbnail.height);
