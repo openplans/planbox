@@ -53,52 +53,55 @@ var Planbox = Planbox || {};
 
       handleGenerateSnapshotClick: function(evt) {
         evt.preventDefault();
-        var self = this,
-            originalSnapshotButtonLabel = self.ui.generateSnapshot.html(),
-            generatingSnapshotLabel = self.ui.generateSnapshot.attr('data-generating-label'),
-            datasetUrl = this.model.get('details').dataset_url,
-            snapshots = new Shareabouts.SnapshotCollection(),
-            snapshot;
 
-        var getFilename = function(url) {
-          var filename = url.substring(url.lastIndexOf('/')+1);
-          return filename;
-        };
+        if (!this.ui.generateSnapshot.hasClass('generating')) {
+          var self = this,
+              originalSnapshotButtonLabel = self.ui.generateSnapshot.html(),
+              generatingSnapshotLabel = self.ui.generateSnapshot.attr('data-generating-label'),
+              datasetUrl = this.model.get('details').dataset_url,
+              snapshots = new Shareabouts.SnapshotCollection(),
+              snapshot;
 
-        snapshots.url = datasetUrl + '/places/snapshots';
-        snapshot = snapshots.create({}, {
-          success: function() {
-            snapshot.waitUntilReady({
-              data: {'include_submissions': true},
-              success: function(url) {
-                var filename = getFilename(url);
-                $('.existing-snapshot-wrapper').html('<a href="' + url + '" download="' + filename + '">Download snapshot requested ' + moment(snapshot.get('requested_at')).fromNow() + '</a>');
-                self.ui.generateSnapshot
-                  .removeAttr('disabled')
-                  .removeClass('generating')
-                  .html(originalSnapshotButtonLabel);
-              },
-              error: function() {
-                self.ui.generateSnapshot
-                  .removeAttr('disabled')
-                  .removeClass('generating')
-                  .html(originalSnapshotButtonLabel);
-                debugger;
-              },
-              complete: function() {
-                self.ui.generateSnapshot
-                  .removeAttr('disabled')
-                  .removeClass('generating')
-                  .html(originalSnapshotButtonLabel);
-              }
-            });
-          }
-        });
+          var getFilename = function(url) {
+            var filename = url.substring(url.lastIndexOf('/')+1);
+            return filename;
+          };
 
-        self.ui.generateSnapshot
-          .attr('disabled', 'disabled')
-          .addClass('generating')
-          .html(generatingSnapshotLabel);
+          self.ui.generateSnapshot
+            .attr('disabled', 'disabled')
+            .addClass('generating')
+            .html(generatingSnapshotLabel);
+
+          snapshots.url = datasetUrl + '/places/snapshots';
+          snapshot = snapshots.create({}, {
+            success: function() {
+              snapshot.waitUntilReady({
+                data: {'include_submissions': true},
+                success: function(url) {
+                  var filename = getFilename(url);
+                  $('.existing-snapshot-wrapper').html('<a href="' + url + '" class="download-snapshot button" download="' + filename + '">Download snapshot<br><small>requested ' + moment(snapshot.get('requested_at')).fromNow() + '</small></a>');
+                  self.ui.generateSnapshot
+                    .removeAttr('disabled')
+                    .removeClass('generating')
+                    .html(originalSnapshotButtonLabel);
+                },
+                error: function() {
+                  self.ui.generateSnapshot
+                    .removeAttr('disabled')
+                    .removeClass('generating')
+                    .html(originalSnapshotButtonLabel);
+                  alert('There was a problem generating your\nsnapshot. Please try again later.');
+                },
+                complete: function() {
+                  self.ui.generateSnapshot
+                    .removeAttr('disabled')
+                    .removeClass('generating')
+                    .html(originalSnapshotButtonLabel);
+                }
+              });
+            }
+          });
+        }
       },
 
       initialize: function() {
