@@ -40,19 +40,13 @@ class Migration(DataMigration):
         shareabouts_section.index = 1
         shareabouts_section.save()
 
-        timeline_section = get_or_create(
-            orm.Section,
-            project=default_template,
-            type='timeline',
-            commit=True)
-        timeline_section.delete()
+        try: timeline_section = default_template.sections.get(type='timeline')
+        except: pass
+        else: timeline_section.delete()
 
-        faqs_section = get_or_create(
-            orm.Section,
-            project=default_template,
-            slug='faq',
-            commit=True)
-        faqs_section.delete()
+        try: faqs_section = default_template.sections.get(slug='faq')
+        except: pass
+        else: faqs_section.delete()
 
     def backwards(self, orm):
         "Write your backwards methods here."
