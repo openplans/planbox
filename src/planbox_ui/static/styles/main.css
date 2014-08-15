@@ -6855,6 +6855,9 @@ img.attachment-icon {
   padding: 0;
   border: 0; }
 
+.project-section-image .image-holder {
+  min-height: 10em; }
+
 @media only screen and (min-width: 40.063em) {
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;

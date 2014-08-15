@@ -666,7 +666,7 @@ section, footer {
 }
 
 // Logo
-// TODO: Remove this? There's no logo-table anymore, right? 
+// TODO: Remove this? There's no logo-table anymore, right?
 .logo-table {
   display: table;
   border-collapse: collapse;
@@ -933,6 +933,10 @@ img.attachment-icon {
   border: 0;
 }
 
+.project-section-image .image-holder {
+  min-height: 10em;
+}
+
 input[type=text].heading-input {
   @media #{$medium-up} {
     font-size: 2.25rem;
@@ -1155,7 +1159,7 @@ textarea.no-resize {
   min-height: 9rem;
 }
 
-// Project Title & Logo 
+// Project Title & Logo
 .logo-image-container {
   min-height: 9rem;
   margin-bottom: 1rem;
@@ -1182,7 +1186,7 @@ textarea.no-resize {
       left: 0;
       padding-right: 0;
       padding-bottom: 0;
-    }  
+    }
   }
   .project-title-help-text {
     margin-top: -0.75rem;
