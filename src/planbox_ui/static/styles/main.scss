@@ -817,6 +817,19 @@ section, footer {
   text-align: center;
 }
 
+// nested .no-bullet lists are still indented
+ol.attachment-list.no-bullet {
+  margin-left: 0;
+}
+// via "@mixin form-row-base" from _forms.scss line 81
+.attachment .row { margin: 0 ((-$form-spacing) / 2);
+  .column, .columns { padding: 0 $form-spacing / 2; }
+  &.collapse { margin: 0;
+    .column,.columns { padding: 0; }
+    input { @include side-radius($opposite-direction, 0); }
+  }
+}
+
 // Event Drag-n-Drop
 .handle {
   cursor: move;
@@ -836,6 +849,9 @@ section, footer {
 }
 .attachment-icon {
   position: relative;
+}
+img.attachment-icon {
+  margin-bottom: $paragraph-margin-bottom;
 }
 .attachment-handle {
   position: absolute;

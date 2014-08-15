@@ -6754,6 +6754,21 @@ section, footer {
 .picker table tr td {
   text-align: center; }
 
+ol.attachment-list.no-bullet {
+  margin-left: 0; }
+
+.attachment .row {
+  margin: 0 -0.5rem; }
+  .attachment .row .column, .attachment .row .columns {
+    padding: 0 0.5rem; }
+  .attachment .row.collapse {
+    margin: 0; }
+    .attachment .row.collapse .column, .attachment .row.collapse .columns {
+      padding: 0; }
+    .attachment .row.collapse input {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0; }
+
 .handle {
   cursor: move; }
 
@@ -6772,6 +6787,9 @@ section, footer {
 
 .attachment-icon {
   position: relative; }
+
+img.attachment-icon {
+  margin-bottom: 1.6rem; }
 
 .attachment-handle {
   position: absolute;
