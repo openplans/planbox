@@ -1,0 +1,46 @@
+<fieldset class="project-section-fieldset">
+  <div class="section-settings-toggle-container text-right"><a class="section-settings-toggle" href="#"><img src="{{ static_url }}images/icon-gear.png" class="icon" /></a></div>
+  <div class="section-settings panel radius hide clearfix">
+
+    <div class="row collapse">
+      <div class="small-3 large-2 columns">
+        <span class="prefix show-for-small-only">Menu</span>
+        <span class="prefix show-for-medium-up">Menu Text</span>
+      </div>
+      <div class="small-9 medium-6 large-4 columns end">
+        <input type="text" placeholder="Leave blank to exclude from menu" value="{{ menu_label }}" data-attr="menu_label">
+      </div>
+    </div>
+
+    <a href="#" class="button tiny round alert less-padding right delete-section">Delete&nbsp;Section</a>
+  </div>
+  <div class="float-label-container">
+    <input type="text" placeholder="Section Heading (optional)" class="sub-heading-input float-label-input" value="{{{ label }}}" data-attr="label" />
+    <span class="float-label">Section Heading</span>
+  </div>
+  <div class="row section-layout-container">
+    <div class="large-12 columns pen-container-1">
+      <div class="float-label-container">
+
+        <div class="drag-area-container image-container">
+          {{#if_fileapi_support 'cors'}}
+          <img class="image-holder" data-attr="img_url"
+            src="{{#if details.img_url}}{{details.img_url}}{{^}}{{/if}}"
+            data-empty-img="">
+          <div class="drag-area text-center image-dnd" data-max-width="1000">
+            <p class="drop-instructions">Drop image here or&hellip;</p>
+            <p class="uploading-message">Uploading&hellip;</p>
+            <label class="file-upload-input-container button tiny radius"><span class="file-upload-label">Choose File</span><input class="file-upload-input hide" type="file" accept="image/*" /></label>
+            <br><small>(<a href="#" data-dropdown="coverimgsize">WHAT SIZE?</a>)</small>
+          </div>
+          {{^}}
+            <div class="alert-box text-center info">File Uploads Not Supported By Your Browser</div>
+          {{/if_fileapi_support}}
+        </div><!-- .cover-image-container -->
+
+      </div>
+    </div>
+  </div>
+</fieldset>
+
+{{> insert-new-section-tpl }}
