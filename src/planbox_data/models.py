@@ -364,7 +364,7 @@ class ProfileManager (models.Manager):
 
 @python_2_unicode_compatible
 class Profile (TimeStampedModel):
-    name = models.CharField(max_length=128, blank=True, help_text=_('The full name of the person or organization'))
+    name = models.CharField(max_length=128, blank=True, help_text=_('The full name of the person or team'))
     slug = models.CharField(max_length=128, unique=True, help_text=_('A short name that will be used in URLs for projects owned by this profile'))
     email = models.EmailField(blank=True, help_text=_('Contact email address of the profile holder'))
     # projects (reverse, Project)
@@ -372,9 +372,9 @@ class Profile (TimeStampedModel):
     # User-profile specific
     auth = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='profile', null=True, blank=True, on_delete=models.CASCADE)
     affiliation = models.CharField(max_length=256, blank=True, default='')
-    organizations = models.ManyToManyField('Profile', related_name='members', blank=True, limit_choices_to={'auth__isnull': True})
+    teams = models.ManyToManyField('Profile', related_name='members', blank=True, limit_choices_to={'auth__isnull': True})
 
-    # Organization-profile specific
+    # Team-profile specific
     # members (reverse, Profile)
 
     # Feature flags/versions

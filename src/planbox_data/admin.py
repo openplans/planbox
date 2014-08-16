@@ -37,7 +37,7 @@ class AttachmentAdmin (GenericAdminModelAdmin):
 
 class ProfileAdmin (admin.ModelAdmin):
     list_display = ('__str__', '_date_joined', 'affiliation', 'email')
-    filter_horizontal = ('organizations',)
+    filter_horizontal = ('teams',)
     raw_id_fields = ('auth',)
     search_fields = ('slug',)
 
