@@ -1183,9 +1183,14 @@ textarea.no-resize {
 }
 
 // Cover Image
+.full-width-image-container {
+  margin: 0 -0.9375rem 0.5rem -0.9375rem;
+  &.drag-area-container {
+    min-height: 9rem;
+  }
+}
 .cover-image-container {
-  margin: -1.125rem -0.9375rem 0.5rem -0.9375rem;
-  min-height: 9rem;
+  margin-top: -1.125rem;
 }
 
 // Project Title & Logo
@@ -1233,15 +1238,6 @@ textarea.no-resize {
   }
 }
 
-// Image sections
-.project-section-image .image-holder {
-  min-height: 10rem;
-}
-
-.project-image-wrapper {
-  text-align: center;
-  margin-bottom: 1.6rem;
-}
 
 // TODO: Sort out this stuff. I'm not sure we still need it.
 

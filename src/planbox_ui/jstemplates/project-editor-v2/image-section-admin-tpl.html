@@ -22,7 +22,7 @@
     <div class="large-12 columns pen-container-1">
       <div class="float-label-container">
 
-        <div class="drag-area-container image-container">
+        <div class="drag-area-container full-width-image-container">
           {{#if_fileapi_support 'cors'}}
           <img class="image-holder" data-attr="img_url"
             src="{{#if details.img_url}}{{details.img_url}}{{^}}{{/if}}"
@@ -36,7 +36,7 @@
           {{^}}
             <div class="alert-box text-center info">File Uploads Not Supported By Your Browser</div>
           {{/if_fileapi_support}}
-        </div><!-- .cover-image-container -->
+        </div><!-- .full-width-image-container -->
 
       </div>
     </div>
