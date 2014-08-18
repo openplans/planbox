@@ -31,7 +31,7 @@ var Planbox = Planbox || {};
 
     _.each(sections, function(section) {
       if (section.active) {
-        result += options.fn(_.extend(context, section));
+        result += options.fn(_.extend({}, context, section));
       }
     });
 
@@ -116,6 +116,14 @@ var Planbox = Planbox || {};
     }
 
     return $el.html();
+  });
+
+
+  // URLs and filepaths -------------------------------------------------------
+
+  Handlebars.registerHelper('filename', function(fullpath) {
+    var filename = fullpath.substring(fullpath.lastIndexOf('/')+1);
+    return filename;
   });
 
 

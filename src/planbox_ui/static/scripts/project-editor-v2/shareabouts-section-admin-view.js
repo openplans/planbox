@@ -15,12 +15,14 @@ var Planbox = Planbox || {};
         editables: '[data-attr]',
         richEditables: '.project-shareabouts-description',
         map: '.map',
-        deleteSection: '.delete-section'
+        deleteSection: '.delete-section',
+        generateSnapshot: '.generate-snapshot'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'input @ui.editables': 'handleEditableBlur',
-        'click @ui.deleteSection': 'handleDeleteSectionClick'
+        'click @ui.deleteSection': 'handleDeleteSectionClick',
+        'click @ui.generateSnapshot': 'handleGenerateSnapshotClick'
       },
 
       onShow: function() {
@@ -47,6 +49,59 @@ var Planbox = Planbox || {};
             );
 
         this.model.set('map', mapOptions);
+      },
+
+      disableSnapshotButton: function(label) {
+        this.ui.generateSnapshot
+            .attr('disabled', 'disabled')
+            .addClass('generating')
+            .html(label);
+      },
+      enableSnapshotButton: function(label) {
+        this.ui.generateSnapshot
+          .removeAttr('disabled')
+          .removeClass('generating')
+          .html(label);
+      },
+
+      handleGenerateSnapshotClick: function(evt) {
+        evt.preventDefault();
+
+        if (!this.ui.generateSnapshot.hasClass('generating')) {
+          var self = this,
+              originalSnapshotButtonLabel = self.ui.generateSnapshot.html(),
+              generatingSnapshotLabel = self.ui.generateSnapshot.attr('data-generating-label'),
+              datasetUrl = this.model.get('details').dataset_url,
+              downloadTemplate = Backbone.Marionette.TemplateCache.get('#download-snapshot-button-tpl'),
+              snapshots = new Shareabouts.SnapshotCollection(),
+              snapshot;
+
+          self.disableSnapshotButton(generatingSnapshotLabel);
+
+          snapshots.url = datasetUrl + '/places/snapshots';
+
+          // Request a new snapshot
+          snapshot = snapshots.create({}, {
+            success: function() {
+
+              // Listen until the snapshot has been generated
+              snapshot.waitUntilReady({
+                data: {'include_submissions': true},
+                success: function(url) {
+
+                  // Show a download button when the snapshot is ready
+                  self.$('.existing-snapshot-wrapper')
+                    .html(downloadTemplate(snapshot.toJSON()));
+                  self.enableSnapshotButton(originalSnapshotButtonLabel);
+                },
+                error: function() {
+                  self.enableSnapshotButton(originalSnapshotButtonLabel);
+                  alert('There was a problem generating your\nsnapshot. Please try again later.');
+                }
+              });
+            }
+          });
+        }
       },
 
       initialize: function() {
