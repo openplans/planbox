@@ -26,6 +26,8 @@ from planbox_ui.decorators import ssl_required
 from planbox_ui.forms import UserCreationForm, AuthenticationForm
 import pybars
 
+import logging
+log = logging.getLogger(__name__)
 
 def register_helper(helper_name):
     def _register(helper_callback):
@@ -59,10 +61,10 @@ class AppMixin (object):
             obj = self.request.user
 
         if isinstance(obj, UserAuth):
-            owner_name = obj.username
+            owner_slug = obj.username
         elif isinstance(obj, Profile):
-            owner_name = obj.slug
-        return resolve_url('app-new-project', owner_name=owner_name)
+            owner_slug = obj.slug
+        return resolve_url('app-new-project', owner_slug=owner_slug)
 
     def get_context_data(self, **kwargs):
         context = super(AppMixin, self).get_context_data(**kwargs)
@@ -206,10 +208,32 @@ class PasswordResetRequestView (AppMixin, SSLRequired, BasePasswordResetRequestV
 class PasswordResetInstructionsView (AppMixin, SSLRequired, BasePasswordResetInstructionsView): pass
 
 
-class ProfileView (AppMixin, LoginRequired, SSLRequired, View):
-    def get(self, request):
-        home_url = self.get_home_url()
-        return redirect(home_url)
+class ProfileView (AppMixin, LoginRequired, SSLRequired, TemplateView):
+    template_name = 'profile-admin.html'
+
+    def get_profile(self, request, profile_slug):
+        if profile_slug:
+            return get_object_or_404(Profile, slug=profile_slug)
+        else:
+            try:
+                return request.user.profile
+            except Profile.DoesNotExist:
+                return None
+
+    def get(self, request, profile_slug=None):
+        # Save the profile on the view
+        self.profile = self.get_profile(request, profile_slug)
+        if self.profile is None:
+            log.error('User "%s" has no profile' % (request.user,),
+                      extra={'stack': True})
+            return redirect('app-index')
+
+        # Check for authorization on the profile
+        if not self.profile.authorizes(request.user):
+            return redirect('app-index')
+
+        # If authorized, proceed
+        return super(ProfileView, self).get(request, profile_slug=profile_slug)
 
 
 class SignupView (AppMixin, LogoutRequired, SSLRequired, FormView):
@@ -273,7 +297,7 @@ class ProjectMixin (AppMixin):
                 self.owner_profile = self.project.owner
             except Profile.DoesNotExist:
                 try:
-                    self.owner_profile = Profile.objects.get(slug=self.kwargs.get('owner_name'))
+                    self.owner_profile = Profile.objects.get(slug=self.kwargs.get('owner_slug'))
                 except Profile.DoesNotExist:
                     self.owner_profile = None
         return self.owner_profile
@@ -315,13 +339,13 @@ class BaseExistingProjectView (ProjectMixin, TemplateView):
         return project_serializer.data
 
     def get_s3_upload_path(self):
-        owner_slug = self.kwargs['owner_name']
-        project_slug = self.kwargs['slug']
+        owner_slug = self.kwargs['owner_slug']
+        project_slug = self.kwargs['project_slug']
         return '/'.join([owner_slug, project_slug])
 
-    def get(self, request, owner_name, slug):
+    def get(self, request, owner_slug, project_slug):
         self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
-                                         owner__slug=owner_name, slug=slug)
+                                         owner__slug=owner_slug, slug=project_slug)
 
         if not self.get_project_is_visible():
             return redirect('app-index')
@@ -391,16 +415,16 @@ class NewProjectView (SSLRequired, LoginRequired, S3UploadMixin, ProjectMixin, T
         return True
 
     def get_s3_upload_path(self):
-        owner_slug = self.kwargs['owner_name']
+        owner_slug = self.kwargs['owner_slug']
         return '/'.join([owner_slug, 'new'])
 
-    def get(self, request, owner_name):
+    def get(self, request, owner_slug):
         # Check whether this page is for the auth'd user
-        if owner_name != request.user.username:
-            return redirect('app-new-project', owner_name=self.request.user.username)
+        if owner_slug != request.user.username:
+            return redirect('app-new-project', owner_slug=self.request.user.username)
 
         self.project = None
-        owner_auth = get_object_or_404(UserAuth, username=owner_name)
+        owner_auth = get_object_or_404(UserAuth, username=owner_slug)
 
         if 'force_new' not in request.GET:
             # Check whether the user has an existing project and redirect there.
@@ -409,9 +433,9 @@ class NewProjectView (SSLRequired, LoginRequired, S3UploadMixin, ProjectMixin, T
             except IndexError:
                 pass
             else:
-                return redirect('app-project', owner_name=owner_name, slug=project.slug)
+                return redirect('app-project', owner_slug=owner_slug, project_slug=project.slug)
 
-        return super(NewProjectView, self).get(request, owner_name)
+        return super(NewProjectView, self).get(request, owner_slug)
 
 
 # SEO

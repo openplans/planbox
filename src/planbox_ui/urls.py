@@ -8,18 +8,6 @@ from .views import (index_view, about_view, shareabouts_view, open_source_view, 
 
 urlpatterns = patterns('',
 
-    # Read-only resources
-    url(r'^~/(?P<owner_name>[^/]+)/(?P<slug>[^/]+)/', ro_project_view, name='app-ro-project'),
-
-    # Creating a new project
-    url(r'^(?P<owner_name>[^/]+)/new/', new_project_view, name='app-new-project'),
-
-    # Read-write version of the project page
-    url(r'^(?P<owner_name>[^/]+)/(?P<slug>[^/]+)/', project_view, name='app-project'),
-
-    # Read-write version of the project page
-    url(r'^profile/', profile_view, name='app-profile'),
-
     # Override the password change and reset views with ones that require SSL
     # and mixin with the app data.
     url(r'^change-password/$', password_change_view, name='password-change'),
@@ -37,4 +25,20 @@ urlpatterns = patterns('',
     url(r'^about/$', about_view, name='app-about'),
     url(r'^shareabouts/$', shareabouts_view, name='app-shareabouts'),
     url(r'^open-source/$', open_source_view, name='app-open-source'),
+
+    # Read-only resources
+    url(r'^~/(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', ro_project_view, name='app-ro-project'),
+
+    # Creating a new project
+    url(r'^(?P<owner_slug>[^/]+)/new/', new_project_view, name='app-new-project'),
+
+    # Read-write version of the project page
+    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', project_view, name='app-project'),
+
+    # Read-write version of the project page
+    url(r'^profile/', profile_view, name='app-profile'),
+
+    # Read-write version of a specific profile (a user could have access to
+    # multiple profiles)
+    url(r'^(?P<profile_slug>[^/]+)/', profile_view, name='app-profile'),
 )

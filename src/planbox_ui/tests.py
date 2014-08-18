@@ -41,7 +41,7 @@ class SignupViewTests (PlanBoxUITestCase):
 
         # If you get a 200 here, it's probably because of wrong form data.
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, reverse('app-new-project', kwargs={'owner_name': 'mjumbewu'}))
+        assert_equal(response.url, reverse('app-new-project', kwargs={'owner_slug': 'mjumbewu'}))
 
         user_profile = Profile.objects.get(auth__username='mjumbewu')
         assert_equal(user_profile.affiliation, 'OpenPlans')
@@ -62,7 +62,7 @@ class SigninViewTests (PlanBoxUITestCase):
         request.session = SessionStore('session')
         response = signin_view(request)
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, reverse('app-new-project', kwargs={'owner_name': 'mjumbewu'}))
+        assert_equal(response.url, reverse('app-new-project', kwargs={'owner_slug': 'mjumbewu'}))
 
 
 class NewProjectViewTests (PlanBoxUITestCase):
@@ -73,9 +73,9 @@ class NewProjectViewTests (PlanBoxUITestCase):
 
         auth2 = UserAuth.objects.create_user(username='atogle', password='456')
 
-        url1_kwargs = {'owner_name': auth1.username}
+        url1_kwargs = {'owner_slug': auth1.username}
         url1 = reverse('app-new-project', kwargs=url1_kwargs)
-        url2_kwargs = {'owner_name': auth2.username}
+        url2_kwargs = {'owner_slug': auth2.username}
         url2 = reverse('app-new-project', kwargs=url2_kwargs)
 
         request = self.factory.get(url1)
@@ -87,7 +87,7 @@ class NewProjectViewTests (PlanBoxUITestCase):
     def test_anon_user_gets_redirected_to_login(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
 
-        url_kwargs = {'owner_name': auth.username}
+        url_kwargs = {'owner_slug': auth.username}
         url = reverse('app-new-project', kwargs=url_kwargs)
         login_url = reverse('app-signin')
 
@@ -104,9 +104,9 @@ class NewProjectViewTests (PlanBoxUITestCase):
         owner = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner)
 
-        url_kwargs = {'owner_name': auth.username}
+        url_kwargs = {'owner_slug': auth.username}
         url = reverse('app-new-project', kwargs=url_kwargs)
-        project_url_kwargs = {'owner_name': auth.username, 'slug': project.slug}
+        project_url_kwargs = {'owner_slug': auth.username, 'slug': project.slug}
         project_url = reverse('app-project', kwargs=project_url_kwargs)
 
         request = self.factory.get(url)
@@ -123,8 +123,8 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
-            'owner_name': 'mjumbewu',
-            'slug': 'test-slug'
+            'owner_slug': 'mjumbewu',
+            'project_slug': 'test-slug'
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -141,8 +141,8 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
-            'owner_name': 'mjumbewu',
-            'slug': 'test-slug'
+            'owner_slug': 'mjumbewu',
+            'project_slug': 'test-slug'
         }
 
         auth2 = UserAuth.objects.create_user(username='atogle', password='456')
@@ -162,8 +162,8 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
-            'owner_name': 'mjumbewu',
-            'slug': 'test-slug'
+            'owner_slug': 'mjumbewu',
+            'project_slug': 'test-slug'
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -180,8 +180,8 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
         kwargs = {
-            'owner_name': 'mjumbewu',
-            'slug': 'test-slug'
+            'owner_slug': 'mjumbewu',
+            'project_slug': 'test-slug'
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -199,8 +199,8 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
         kwargs = {
-            'owner_name': 'mjumbewu',
-            'slug': 'test-slug'
+            'owner_slug': 'mjumbewu',
+            'project_slug': 'test-slug'
         }
 
         auth2 = UserAuth.objects.create_user(username='atogle', password='456')
@@ -220,8 +220,8 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
         kwargs = {
-            'owner_name': 'mjumbewu',
-            'slug': 'test-slug'
+            'owner_slug': 'mjumbewu',
+            'project_slug': 'test-slug'
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -241,8 +241,8 @@ class ProjectThemeTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, theme=theme, public=True)
 
         kwargs = {
-            'owner_name': 'mjumbewu',
-            'slug': 'test-slug'
+            'owner_slug': 'mjumbewu',
+            'project_slug': 'test-slug'
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -261,8 +261,8 @@ class ProjectThemeTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
-            'owner_name': 'mjumbewu',
-            'slug': 'test-slug'
+            'owner_slug': 'mjumbewu',
+            'project_slug': 'test-slug'
         }
 
         url = reverse('app-project', kwargs=kwargs)
