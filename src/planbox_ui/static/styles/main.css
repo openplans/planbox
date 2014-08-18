@@ -7138,4 +7138,7 @@ textarea.no-resize {
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none; }
 
+.existing-snapshot-wrapper .button {
+  margin-bottom: 0; }
+
 /* ----- Medium screens ----- */

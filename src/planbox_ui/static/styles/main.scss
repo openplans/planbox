@@ -1238,6 +1238,14 @@ textarea.no-resize {
   }
 }
 
+// remove download button's bottom margin
+// This should probably be reusable, extending Foundation.
+.existing-snapshot-wrapper {
+  .button {
+    margin-bottom: 0;
+  }
+}
+
 
 // TODO: Sort out this stuff. I'm not sure we still need it.
 
