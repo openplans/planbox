@@ -87,6 +87,16 @@
 
 
 /*--------------------------------------------------
+  The Page (everything following the topbar)
+--------------------------------------------------*/
+
+#page {
+  position: relative;
+  z-index: 1;
+}
+
+
+/*--------------------------------------------------
   Images
 --------------------------------------------------*/
 
@@ -1098,12 +1108,10 @@ textarea.no-resize {
   padding: 1rem;
   border: 2px dashed rgba(133,133,133,0.4);
   border-radius: 0.375rem;
-  background-color: rgba(242,242,242,0.7);
-  opacity: 0.5;
+  background-color: rgba(242,242,242,0.4);
   &:hover {
     border-color: rgba(133,133,133,0.9);
-    background-color: rgba(242,242,242,0.8);
-    opacity: 1;
+    background-color: rgba(242,242,242,0.9);
   }
   p {
     margin-bottom: 0.5rem;
@@ -1183,9 +1191,14 @@ textarea.no-resize {
 }
 
 // Cover Image
+.full-width-image-container {
+  margin: 0 -0.9375rem 0.5rem -0.9375rem;
+  &.drag-area-container {
+    min-height: 9rem;
+  }
+}
 .cover-image-container {
-  margin: -1.125rem -0.9375rem 0.5rem -0.9375rem;
-  min-height: 9rem;
+  margin-top: -1.125rem;
 }
 
 // Project Title & Logo
@@ -1233,15 +1246,14 @@ textarea.no-resize {
   }
 }
 
-// Image sections
-.project-section-image .image-holder {
-  min-height: 10rem;
+// remove download button's bottom margin
+// This should probably be reusable, extending Foundation.
+.existing-snapshot-wrapper {
+  .button {
+    margin-bottom: 0;
+  }
 }
 
-.project-image-wrapper {
-  text-align: center;
-  margin-bottom: 1.6rem;
-}
 
 // TODO: Sort out this stuff. I'm not sure we still need it.
 

@@ -6,7 +6,7 @@
       <section class="project-header-section">
         <fieldset class="project-section-fieldset">
 
-          <div class="drag-area-container cover-image-container {{^if cover_img_url}}hide{{/if}}">
+          <div class="drag-area-container full-width-image-container cover-image-container {{^if cover_img_url}}hide{{/if}}">
             {{#if_fileapi_support 'cors'}}
             <img class="cover-image image-holder" data-attr="cover_img_url"
               src="{{#if cover_img_url}}{{cover_img_url}}{{^}}{{/if}}"
@@ -23,7 +23,7 @@
             {{^}}
               <div class="alert-box text-center info">File Uploads Not Supported By Your Browser</div>
             {{/if_fileapi_support}}
-          </div><!-- .cover-image-container -->
+          </div><!-- .full-width-image-container -->
 
           {{#if_fileapi_support 'cors'}}
           <div class="section-settings-toggle-container text-right"><a class="section-settings-toggle" href="#"><img src="{{ static_url }}images/icon-gear.png" class="icon" /></a></div>

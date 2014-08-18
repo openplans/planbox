@@ -18,6 +18,7 @@ var Planbox = Planbox || {};
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
+        'input @ui.editables': 'handleEditableBlur',
         'click @ui.deleteBtn': 'handleDeleteClick'
       }
     })
@@ -146,6 +147,7 @@ var Planbox = Planbox || {};
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
+        'input @ui.editables': 'handleEditableBlur',
         'click @ui.deleteBtn': 'handleDeleteClick',
         'blur @ui.datetimeEditable': 'handleDatetimeChange',
         'input @ui.datetimeEditable': 'handleDatetimeChange',
