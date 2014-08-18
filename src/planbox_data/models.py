@@ -433,6 +433,7 @@ class SectionManager (models.Manager):
 class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     SECTION_TYPE_CHOICES = (
         ('text', _('Text')),
+        ('image', _('Image')),
         ('timeline', _('Timeline')),
         ('shareabouts', _('Shareabouts')),
         ('raw', _('Raw HTML'))

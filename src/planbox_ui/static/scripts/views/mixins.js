@@ -5,6 +5,89 @@ var Planbox = Planbox || {};
 (function(NS, $) {
   'use strict';
 
+  NS.ImageDropZonesMixin = {
+    initDropZones: function() {
+      var view = this;
+
+      this.ui.imageDropZones.fileUpload({
+        url: 'https://' + NS.Data.s3UploadBucket + '.s3.amazonaws.com/',
+        data: _.clone(NS.Data.s3UploadData),
+        dndOver: function(isOver) {
+          $(this).toggleClass('file-dragging', isOver);
+        },
+        dndDrop: function(files) {
+          var $this = $(this);
+          $this.removeClass('file-dragging');
+          $this.data('fileUpload').upload(files);
+        },
+        validate: function(files) {
+          var i;
+          // Make sure this is an image before continuing
+          for (i=0; i<files.length; i++) {
+            if (files[i].type.indexOf('image/') !== 0) {
+              NS.showErrorModal(
+                'Unable to save that file.',
+                'This file doesn\'t seem to be an image file.',
+                'Make sure the file you\'re trying to upload is a valid image file ' +
+                'and try again.'
+              );
+
+              // Return false to prevent the upload from starting
+              return false;
+            }
+          }
+          return true;
+        },
+        start: function(xhr, options) {
+          // When the upload starts
+          var $this = $(this),
+              $imageContainer = $this.siblings('.image-holder');
+
+          // Apply the uploading class.
+          $this.addClass('file-uploading');
+
+          // Show a preview
+          // TODO: file[0] is not great
+          $this.data('fileUpload').previewImage(options.files.file[0], function(dataUrl) {
+            $imageContainer.attr('src', dataUrl);
+          });
+        },
+        complete: function(err, xhr, options) {
+          // When the upload is complete
+          var $this = $(this),
+              $imageContainer = $this.siblings('.image-holder'),
+              attrName = $imageContainer.attr('data-attr'),
+              imageUrl = window.encodeURI(
+                options.url + options.data.key.replace('${filename}',
+                // TODO: file[0] is not great
+                options.files.file[0].name)
+              );
+
+          // Remove the uploading class.
+          $this.removeClass('file-uploading');
+
+          if (err) {
+            NS.showErrorModal(
+              'Unable to save that file.',
+              'We were unable to save your image.',
+              'Sorry about that. Please save your changes, reload the page, ' +
+              'and try again. Please email us at ' + NS.Data.contactEmail + ' ' +
+              'if you have any more trouble.'
+            );
+
+            return;
+          }
+
+          // Fetch the image to make loading faster
+          $this.data('fileUpload').prefetchImage(imageUrl);
+
+          // On success, apply the attribute to the project.
+          view.model.set(attrName, imageUrl);
+        }
+      });
+    }
+  };
+
   NS.ContentEditableMixin = {
     handleEditableBlur: function(evt) {
       var $target = $(evt.currentTarget),

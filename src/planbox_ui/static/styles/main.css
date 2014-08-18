@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -6621,6 +6622,29 @@ section, footer {
 .project-header {
   border-radius: 0.375em 0.375em 0 0; }
 
+.social-links-header {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  margin: 0.9375rem 0.9375rem 0 0; }
+  @media only screen and (min-width: 40.063em) {
+    .social-links-header {
+      margin-top: -2rem; } }
+  .social-links-header a {
+    float: left;
+    width: 40px;
+    border-radius: 0.25rem; }
+    @media only screen and (min-width: 40.063em) {
+      .social-links-header a {
+        margin: 0.5rem; } }
+    .social-links-header a + a {
+      margin-left: 0.5rem; }
+      @media only screen and (min-width: 40.063em) {
+        .social-links-header a + a {
+          margin-left: 0; } }
+
+@media only screen and (min-width: 40.063em) {
+  .project-title {
+    font-size: 3.125rem; } }
 .project-title img {
   max-height: 20rem; }
 
@@ -6671,6 +6695,11 @@ section, footer {
 /*--------------------------------------------------
   Project Footer
 --------------------------------------------------*/
+.social-links-section {
+  max-width: 64.375rem; }
+  .social-links-section .panel {
+    border: 0; }
+
 .site-colophon {
   padding-top: 2rem;
   background-color: #eeeeee;
@@ -7070,9 +7099,13 @@ textarea.no-resize {
 .file-uploading > .file-upload-input-container {
   visibility: hidden; }
 
+.full-width-image-container {
+  margin: 0 -0.9375rem 0.5rem -0.9375rem; }
+  .full-width-image-container.drag-area-container {
+    min-height: 9rem; }
+
 .cover-image-container {
-  margin: -1.125rem -0.9375rem 0.5rem -0.9375rem;
-  min-height: 9rem; }
+  margin-top: -1.125rem; }
 
 .logo-image-container {
   min-height: 9rem;
