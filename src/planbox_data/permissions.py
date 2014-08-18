@@ -5,29 +5,21 @@ from rest_framework import permissions
 from planbox_data import models
 
 
-class IsOwnerOrReadOnly (permissions.IsAuthenticatedOrReadOnly):
-    def is_authed_as_owner(self, auth, obj):
+class OwnerAuthorizesOrReadOnly (permissions.IsAuthenticatedOrReadOnly):
+    def does_owner_authorize_access(self, user, project):
         """
         Check whether the given authenticated user is the same same as the
         owner of the given object
         """
-        if auth is None or obj is None:
+        if user is None or project is None:
             return False
 
-        if not auth.is_authenticated():
+        if not user.is_authenticated():
             return False
 
-        try:
-            profile = auth.profile
-        except models.User.DoesNotExist:
-            profile = None
-        
-        if profile is None:
-            return False
+        return project.owner.authorizes(user)
 
-        return obj.owner == profile
-
-    def has_object_permission(self, request, view, obj):
+    def has_object_permission(self, request, view, project):
         if request.method in permissions.SAFE_METHODS:
             return True
-        return self.is_authed_as_owner(request.user, obj)
+        return self.does_owner_authorize_access(request.user, project)

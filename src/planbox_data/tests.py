@@ -9,7 +9,7 @@ from rest_framework.status import HTTP_200_OK, HTTP_204_NO_CONTENT, HTTP_403_FOR
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
 from planbox_data.models import Profile, Project, Event, Attachment
-from planbox_data.permissions import IsOwnerOrReadOnly
+from planbox_data.permissions import OwnerAuthorizesOrReadOnly
 from planbox_data.serializers import ProjectSerializer
 from planbox_data.views import router
 
@@ -215,6 +215,29 @@ class EventModelTests (PlanBoxTestCase):
         assert_equal(event_4.index, 4)
 
 
+class ProfileModelTests (PlanBoxTestCase):
+    def test_profile_authorizes_owner(self):
+        user = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        ok_(user.profile.authorizes(user))
+
+    def test_profile_authorizes_superusers(self):
+        user = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        superuser = UserAuth.objects.create_user(username='admin', password='admin')
+        superuser.is_superuser = True
+        superuser.save()
+
+        ok_(user.profile.authorizes(superuser))
+        ok_(not superuser.profile.authorizes(user))
+
+    def test_profile_authorizes_team_members(self):
+        user = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        member = UserAuth.objects.create_user(username='mjumbewu2', password='345')
+        user.profile.members.add(member.profile)
+
+        ok_(user.profile.authorizes(member))
+        ok_(not member.profile.authorizes(user))
+
+
 class ProjectSerializerTests (PlanBoxTestCase):
     def test_project_with_empty_title_is_invalid(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
@@ -411,7 +434,7 @@ class OwnerPermissionTests (PlanBoxTestCase):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner)
-        permission = IsOwnerOrReadOnly()
+        permission = OwnerAuthorizesOrReadOnly()
         return permission, auth, owner, project
 
     def test_null_auth_data_is_handled(self):

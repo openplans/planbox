@@ -10,7 +10,7 @@ from planbox_data import permissions
 
 class ProjectViewSet (viewsets.ModelViewSet):
     serializer_class = serializers.ProjectSerializer
-    permission_classes = (permissions.IsOwnerOrReadOnly,)
+    permission_classes = (permissions.OwnerAuthorizesOrReadOnly,)
     model = models.Project
 
     def get_queryset(self):

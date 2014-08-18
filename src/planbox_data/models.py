@@ -397,6 +397,32 @@ class Profile (TimeStampedModel):
     def natural_key(self):
         return (self.slug,)
 
+    def is_owned_by(self, user):
+        return (user.id == self.auth_id)
+
+    def has_member(self, user):
+        members = list(self.members.all())
+        if user.id in [profile.auth_id for profile in members]:
+            return True
+        else:
+            return any(profile.has_member(user) for profile in members)
+
+    def authorizes(self, user):
+        """
+        Test whether a given authenticated user is allowed to perform
+        actions on behalf of this profile.
+        """
+        if user.is_superuser:
+            return True
+
+        if self.is_owned_by(user):
+            return True
+
+        if self.has_member(user):
+            return True
+
+        return False
+
 
 @python_2_unicode_compatible
 class Theme (TimeStampedModel):
