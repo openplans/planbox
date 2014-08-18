@@ -7017,12 +7017,10 @@ textarea.no-resize {
   padding: 1rem;
   border: 2px dashed rgba(133, 133, 133, 0.4);
   border-radius: 0.375rem;
-  background-color: rgba(242, 242, 242, 0.7);
-  opacity: 0.5; }
+  background-color: rgba(242, 242, 242, 0.4); }
   .drag-area:hover {
     border-color: rgba(133, 133, 133, 0.9);
-    background-color: rgba(242, 242, 242, 0.8);
-    opacity: 1; }
+    background-color: rgba(242, 242, 242, 0.9); }
   .drag-area p {
     margin-bottom: 0.5rem; }
 
