@@ -119,6 +119,18 @@ class ProjectQuerySet (models.query.QuerySet):
         public_query = models.Q(public=True)
         return self.filter(owner_query | public_query)
 
+    def Q_member(self, member):
+        if isinstance(member, UserAuth):
+            member = member.profile
+        profile_ids = [member.id] + [team['id'] for team in member.teams.values('id')]
+
+        return models.Q(owner_id__in=profile_ids)
+
+    def filter_by_member_or_public(self, member):
+        member_query = self.Q_member(member)
+        public_query = models.Q(public=True)
+        return self.filter(member_query | public_query)
+
 
 class ProjectManager (models.Manager):
     def get_queryset(self):
@@ -126,6 +138,9 @@ class ProjectManager (models.Manager):
 
     def filter_by_owner_or_public(self, owner):
         return self.get_queryset().filter_by_owner_or_public(owner)
+
+    def filter_by_member_or_public(self, owner):
+        return self.get_queryset().filter_by_member_or_public(owner)
 
     def get_by_natural_key(self, owner, slug):
         """

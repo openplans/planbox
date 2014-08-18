@@ -29,7 +29,7 @@ class ProjectViewSet (viewsets.ModelViewSet):
 
         if user.is_authenticated():
             owner = self.request.user.profile
-            return models.Project.objects.filter_by_owner_or_public(owner)
+            return models.Project.objects.filter_by_member_or_public(owner)
 
         else:
             return models.Project.objects.filter(public=True)
