@@ -103,6 +103,11 @@ class UserSerializer (serializers.ModelSerializer):
         model = models.Profile
 
 
+class ProfileSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.Profile
+
+
 # ==========
 # Template serializers, which render objects without their identifying
 # information (ids, slugs, etc.). These are output only.

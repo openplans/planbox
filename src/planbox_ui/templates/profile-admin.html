@@ -13,19 +13,13 @@
 
     Planbox.bootstrapped = {
       staticUrl: '{{ STATIC_URL }}',
-      projectRootPath: '{{ request.path_info }}'
+      rootPath: '{{ request.path_info }}'
     };
 
     Planbox.Data = {
-      project: {{ project_data|as_json }},
+      // project: {{ project_data|as_json }},
       user: {{ user_data|as_json }},
-      owner: {{ owner_data|as_json }},
-      isEditable: {{ is_editable|as_json }},
-      statuses: [
-        { 'value': 'not-started', 'label': 'Not Started'},
-        { 'value': 'active', 'label': 'Active'},
-        { 'value': 'complete', 'label': 'Complete'}
-      ],
+      profile: {{ profile_data|as_json }},
       contactEmail: {{ settings.PLANBOX_CONTACT_EMAIL|as_json }},
       s3UploadBucket: {{ settings.S3_MEDIA_BUCKET|as_json }},
       s3UploadData: {{ s3_upload_form_data|as_json }}
@@ -53,7 +47,6 @@
   <script src="{{ STATIC_URL }}scripts/app-admin.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
 
-  {% handlebarsjs 'project-editor-v2/(.*)' precompile register_partials %}
-  {% handlebarsjs '(.*)' precompile register_partials %}
+  {% handlebarsjs 'profiles/(.*)' precompile register_partials %}
 
 {% endblock appscripts %}

@@ -63,30 +63,6 @@
   {% endif %}
   <script>Swag.registerHelpers(Handlebars);</script>
 
-  <script>
-    var Planbox = Planbox || {}
-
-    Planbox.bootstrapped = {
-      staticUrl: '{{ STATIC_URL }}',
-      projectRootPath: '{{ request.path_info }}'
-    };
-
-    Planbox.Data = {
-      project: {{ project_data|as_json }},
-      user: {{ user_data|as_json }},
-      owner: {{ owner_data|as_json }},
-      isEditable: {{ is_editable|as_json }},
-      statuses: [
-        { 'value': 'not-started', 'label': 'Not Started'},
-        { 'value': 'active', 'label': 'Active'},
-        { 'value': 'complete', 'label': 'Complete'}
-      ],
-      contactEmail: {{ settings.PLANBOX_CONTACT_EMAIL|as_json }},
-      s3UploadBucket: {{ settings.S3_MEDIA_BUCKET|as_json }},
-      s3UploadData: {{ s3_upload_form_data|as_json }}
-    };
-  </script>
-
   {% block appscripts %}{% endblock %}
 
 {% endblock %}

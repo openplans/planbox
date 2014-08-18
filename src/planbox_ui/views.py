@@ -21,7 +21,8 @@ from password_reset.views import (
     PasswordResetInstructionsView as BasePasswordResetInstructionsView,
     PasswordChangeView as BasePasswordChangeView)
 from planbox_data.models import Project, Profile
-from planbox_data.serializers import ProjectSerializer, UserSerializer, TemplateProjectSerializer
+from planbox_data.serializers import (ProjectSerializer, UserSerializer,
+    TemplateProjectSerializer, ProfileSerializer)
 from planbox_ui.decorators import ssl_required
 from planbox_ui.forms import UserCreationForm, AuthenticationForm
 import pybars
@@ -141,17 +142,14 @@ class S3UploadMixin (object):
         return signature
 
     def get_s3_upload_form_data(self):
-        if self.get_project_is_editable():
-            encoded_policy = self.get_s3_upload_encoded_policy()
-            return {
-                'key': '/'.join([self.get_s3_upload_path(), '${filename}']),
-                'AWSAccessKeyId': settings.AWS_ACCESS_KEY,
-                'acl': self.get_s3_upload_acl(),
-                'policy': encoded_policy,
-                'signature': self.get_s3_upload_signature(encoded_policy, settings.AWS_SECRET_KEY),
-            }
-        else:
-            return None
+        encoded_policy = self.get_s3_upload_encoded_policy()
+        return {
+            'key': '/'.join([self.get_s3_upload_path(), '${filename}']),
+            'AWSAccessKeyId': settings.AWS_ACCESS_KEY,
+            'acl': self.get_s3_upload_acl(),
+            'policy': encoded_policy,
+            'signature': self.get_s3_upload_signature(encoded_policy, settings.AWS_SECRET_KEY),
+        }
 
     def get_context_data(self, **kwargs):
         context = super(S3UploadMixin, self).get_context_data(**kwargs)
@@ -208,7 +206,7 @@ class PasswordResetRequestView (AppMixin, SSLRequired, BasePasswordResetRequestV
 class PasswordResetInstructionsView (AppMixin, SSLRequired, BasePasswordResetInstructionsView): pass
 
 
-class ProfileView (AppMixin, LoginRequired, SSLRequired, TemplateView):
+class ProfileView (AppMixin, LoginRequired, SSLRequired, S3UploadMixin, TemplateView):
     template_name = 'profile-admin.html'
 
     def get_profile(self, request, profile_slug):
@@ -219,6 +217,23 @@ class ProfileView (AppMixin, LoginRequired, SSLRequired, TemplateView):
                 return request.user.profile
             except Profile.DoesNotExist:
                 return None
+
+    def get_s3_upload_path(self):
+        slug = self.kwargs.get('profile_slug', self.profile.slug)
+        return slug
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data(**kwargs)
+
+        # The profile model
+        context['profile'] = self.profile
+
+        # The serialized representation of the profile. This is used to
+        # construct the admin view.
+        serializer = ProfileSerializer(self.profile)
+        context['profile_data'] = serializer.data
+
+        return context
 
     def get(self, request, profile_slug=None):
         # Save the profile on the view
@@ -302,7 +317,6 @@ class ProjectMixin (AppMixin):
                     self.owner_profile = None
         return self.owner_profile
 
-
     def get_context_data(self, **kwargs):
         context = super(ProjectMixin, self).get_context_data(**kwargs)
 
@@ -361,6 +375,12 @@ class ProjectView (SSLRequired, S3UploadMixin, BaseExistingProjectView):
 
     def get_project_is_editable(self):
         return self.project.editable_by(self.request.user)
+
+    def get_s3_upload_form_data(self):
+        if self.get_project_is_editable():
+            return super(ProjectView, self).get_s3_upload_form_data()
+        else:
+            return None
 
 
 class ReadOnlyProjectView (ReadOnlyMixin, BaseExistingProjectView):
