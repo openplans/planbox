@@ -55,16 +55,28 @@ var Planbox = Planbox || {};
     return NS.Data.contactEmail;
   });
 
-  Handlebars.registerHelper('user', function(attr, options) {
+
+
+  var global_data_attr = function(obj, attr, options) {
     // If there are two args, then we asked for a specific attribute
     if (options) {
-      return NS.Data.user[attr];
+      return obj[attr];
     }
 
     // Only one arg, so attr is really options
     options = attr;
-    return options.fn(NS.Data.user);
+    return options.fn(obj);
+  };
+
+  Handlebars.registerHelper('user', function(attr, options) {
+    return global_data_attr(NS.Data.user, attr, options);
   });
+
+  Handlebars.registerHelper('owner', function(attr, options) {
+    return global_data_attr(NS.Data.owner, attr, options);
+  });
+
+
 
   Handlebars.registerHelper('status_label', function(status_value, options) {
     var status = _.findWhere(NS.Data.statuses, {'value': status_value});

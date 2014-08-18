@@ -58,7 +58,7 @@ var Planbox = Planbox || {};
             url: '/shareabouts/create-dataset',
             type: 'POST',
             data: {
-              dataset_slug: NS.Data.user.username + '-' + this.model.collection.project.get('slug')
+              dataset_slug: NS.Data.owner.slug + '-' + this.model.collection.project.get('slug')
             },
             success: function(data) {
               self.model.set('dataset_url', data.url);

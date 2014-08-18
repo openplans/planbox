@@ -42,17 +42,17 @@ class ReadOnlyMixin (object):
 
 
 class AppMixin (object):
-    def get_profile(self):
-        if not hasattr(self, 'profile'):
+    def get_user_profile(self):
+        if not hasattr(self, 'user_profile'):
             auth = self.request.user
             if auth.is_authenticated():
                 try:
-                    self.profile = auth.profile
+                    self.user_profile = auth.profile
                 except Profile.DoesNotExist:
-                    self.profile = None
+                    self.user_profile = None
             else:
-                self.profile = None
-        return self.profile
+                self.user_profile = None
+        return self.user_profile
 
     def get_home_url(self, obj=None):
         if obj is None and self.request.user.is_authenticated():
@@ -67,7 +67,7 @@ class AppMixin (object):
     def get_context_data(self, **kwargs):
         context = super(AppMixin, self).get_context_data(**kwargs)
 
-        user_profile = self.get_profile()
+        user_profile = self.get_user_profile()
         user_serializer = UserSerializer(user_profile)
         user_data = None if user_profile is None else user_serializer.data
         context['user_data'] = user_data
@@ -159,7 +159,7 @@ class S3UploadMixin (object):
 
 class LoginRequired (object):
     def dispatch(self, request, *args, **kwargs):
-        if self.get_profile() is None:
+        if self.get_user_profile() is None:
             path = request.get_full_path()
             return redirect_to_login(path)
         return super(LoginRequired, self).dispatch(request, *args, **kwargs)
@@ -170,7 +170,7 @@ class LogoutRequired (object):
     Redirect a user to their profile home if they're already signed in
     """
     def dispatch(self, request, *args, **kwargs):
-        profile = self.get_profile()
+        profile = self.get_user_profile()
         if profile is not None:
             return redirect(self.get_home_url(profile))
         return super(LogoutRequired, self).dispatch(request, *args, **kwargs)
@@ -267,11 +267,29 @@ class ProjectMixin (AppMixin):
         else:
             return ['project.html']
 
+    def get_owner_profile(self):
+        if not hasattr(self, 'owner_profile'):
+            try:
+                self.owner_profile = self.project.owner
+            except Profile.DoesNotExist:
+                try:
+                    self.owner_profile = Profile.objects.get(slug=self.kwargs.get('owner_name'))
+                except Profile.DoesNotExist:
+                    self.owner_profile = None
+        return self.owner_profile
+
+
     def get_context_data(self, **kwargs):
         context = super(ProjectMixin, self).get_context_data(**kwargs)
 
         # The project model on which we are currently operating (maybe None)
         context['project'] = self.project
+
+        # The project owner (maybe None)
+        owner_profile = self.get_owner_profile()
+        owner_serializer = UserSerializer(owner_profile)
+        owner_data = None if owner_profile is None else owner_serializer.data
+        context['owner_data'] = owner_data
 
         # The serialized representation of the project. This is used to
         # construct the project page for edit and/or display.
@@ -289,7 +307,7 @@ class BaseExistingProjectView (ProjectMixin, TemplateView):
         return (
             self.request.user.is_superuser or
             self.project.public or
-            self.project.owned_by(self.request.user)
+            self.project.editable_by(self.request.user)
         )
 
     def get_project_serialized_data(self):
@@ -318,7 +336,7 @@ class ProjectView (SSLRequired, S3UploadMixin, BaseExistingProjectView):
     """
 
     def get_project_is_editable(self):
-        return self.project.owned_by(self.request.user)
+        return self.project.editable_by(self.request.user)
 
 
 class ReadOnlyProjectView (ReadOnlyMixin, BaseExistingProjectView):

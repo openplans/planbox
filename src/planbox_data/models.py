@@ -299,6 +299,12 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
             except Profile.DoesNotExist: return False
         return (self.owner == obj)
 
+    def editable_by(self, obj):
+        if isinstance(obj, UserAuth):
+            try: obj = obj.profile
+            except Profile.DoesNotExist: return False
+        return self.owned_by(obj) or (obj in self.owner.members.all())
+
 
 class EventManager (models.Manager):
     def get_by_natural_key(self, owner, project, index):

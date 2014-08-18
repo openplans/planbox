@@ -82,6 +82,7 @@
     Planbox.Data = {
       project: {{ project_data|as_json }},
       user: {{ user_data|as_json }},
+      owner: {{ owner_data|as_json }},
       isEditable: {{ is_editable|as_json }},
       statuses: [
         { 'value': 'not-started', 'label': 'Not Started'},
