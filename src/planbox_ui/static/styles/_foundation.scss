@@ -90,6 +90,13 @@ p {
   }
 }
 
+// No margins! 
+h1, h2, h3, h4, h5, h6, p, ul, ul, li {
+  &.no-margins {
+    margin: 0;
+  }
+}
+
 // Make links visible inside alerts with white text
 .alert-box {
   a {
@@ -212,3 +219,21 @@ p {
   cursor: default;
 }
 
+
+/*--------------------------------------------------
+  Panels
+--------------------------------------------------*/
+
+// Panel Headers
+.panel-header {
+  margin: -$panel-padding;
+  margin-bottom: $panel-padding;
+  border-bottom: $panel-border-size $panel-border-style $body-font-color;
+  padding: $panel-padding;
+  padding-top: $panel-padding / 2;
+  padding-bottom: $panel-padding / 2;
+  background-color: $body-font-color;
+  h1,h2,h3,h4,h5,h6 {
+    color: $body-bg;
+  }
+}

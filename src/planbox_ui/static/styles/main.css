@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -5825,6 +5826,9 @@ p.text-xlarge {
 p.text-xxlarge {
   font-size: 1.75rem; }
 
+h1.no-margins, h2.no-margins, h3.no-margins, h4.no-margins, h5.no-margins, h6.no-margins, p.no-margins, ul.no-margins, ul.no-margins, li.no-margins {
+  margin: 0; }
+
 .alert-box a {
   color: white;
   text-decoration: underline; }
@@ -5909,6 +5913,20 @@ p.text-xxlarge {
   background-color: #eee;
   color: #ccc;
   cursor: default; }
+
+/*--------------------------------------------------
+  Panels
+--------------------------------------------------*/
+.panel-header {
+  margin: -1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid #6c7180;
+  padding: 1.25rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  background-color: #6c7180; }
+  .panel-header h1, .panel-header h2, .panel-header h3, .panel-header h4, .panel-header h5, .panel-header h6 {
+    color: #eeeeee; }
 
 /*--------------------------------------------------
   OpenPlans-Branded Top Bar
@@ -7144,5 +7162,10 @@ textarea.no-resize {
 
 .existing-snapshot-wrapper .button {
   margin-bottom: 0; }
+
+.project-list li + li, .member-list li + li {
+  margin-top: 0.625rem;
+  padding-top: 0.625rem;
+  border-top: 1px solid #e3e3e3; }
 
 /* ----- Medium screens ----- */
