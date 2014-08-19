@@ -3,7 +3,11 @@
   openplans.org/{{ ./owner }}/{{ slug }}/
   &mdash; <a href="#" class="" data-dropdown="drop4">Edit URL</a>
   <ul id="drop4" class="f-dropdown" data-dropdown-content>
-    <li><a href="#">Change Slug</a></li>
+    <li><a href="#" class="change-slug">Change Slug</a></li>
     <li><a href="mailto:{{contact_email}}" class="open-intercom">Request a custom domain&hellip;</a></li>
   </ul>
 </small>
+<form class="hide">
+  <!-- TODO: validate; don't save if blank -->
+  <small><span class="hide-for-small-only">openplans.org/{{ ./owner }}/</span><input type="text" id="slug" class="inline-input" value="{{ slug }}"><span class="hide-for-small-only">/&nbsp;&nbsp;</span><button class="tiny less-padding">OK</button>&nbsp;&nbsp;<a href="#" class="cancel-slug-change alert">Cancel</a></small>
+</form>
