@@ -106,7 +106,7 @@ class NewProjectViewTests (PlanBoxUITestCase):
 
         url_kwargs = {'owner_slug': auth.username}
         url = reverse('app-new-project', kwargs=url_kwargs)
-        project_url_kwargs = {'owner_slug': auth.username, 'slug': project.slug}
+        project_url_kwargs = {'owner_slug': auth.username, 'project_slug': project.slug}
         project_url = reverse('app-project', kwargs=project_url_kwargs)
 
         request = self.factory.get(url)
