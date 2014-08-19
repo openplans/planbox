@@ -29,7 +29,7 @@ class TestPasswordResetViewRedirect (TestCase):
         reset_url = reverse('password-reset', kwargs={'token': self.reset.token})
         profile_url = resolve_url(settings.LOGIN_REDIRECT_URL)
         response = self.client.post(reset_url, data={'password': 'new_pa$$w0rd', 'password_confirm': 'new_pa$$w0rd'})
-        self.assertRedirects(response, profile_url, target_status_code=302)
+        self.assertRedirects(response, profile_url)
 
 
 class TestPasswordResetViewProtection (TestCase):
