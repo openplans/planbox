@@ -148,4 +148,24 @@ var Planbox = Planbox || {};
     model: NS.FaqModel
   });
 
+
+  NS.ProfileModel = Backbone.RelationalModel.extend({
+    relations: [{
+      type: Backbone.HasMany,
+      key: 'projects',
+      relatedModel: 'OwnedProjectModel'
+    }, {
+      type: Backbone.HasMany,
+      key: 'members',
+      relatedModel: 'MemberProfileModel'
+    }, {
+      type: Backbone.HasOne,
+      key: 'auth',
+      relatedModel: 'MemberProfileModel'
+    }]
+  });
+
+  NS.OwnedProjectModel = Backbone.RelationalModel.extend({});
+  NS.MemberProfileModel = Backbone.RelationalModel.extend({});
+
 }(Planbox));

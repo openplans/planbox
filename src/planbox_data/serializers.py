@@ -103,12 +103,30 @@ class UserSerializer (serializers.ModelSerializer):
         model = models.Profile
 
 
+# ============================================================
+# Profile serializers
+
+class MemberProfileSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.Profile
+        fields = ('id', 'slug', 'name',)
+
+
+class OwnedProjectSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.Project
+        fields = ('id', 'slug', 'title',)
+
+
 class ProfileSerializer (serializers.ModelSerializer):
+    members = MemberProfileSerializer()
+    projects = OwnedProjectSerializer()
+
     class Meta:
         model = models.Profile
 
 
-# ==========
+# ============================================================
 # Template serializers, which render objects without their identifying
 # information (ids, slugs, etc.). These are output only.
 

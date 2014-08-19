@@ -17,7 +17,6 @@
     };
 
     Planbox.Data = {
-      // project: {{ project_data|as_json }},
       user: {{ user_data|as_json }},
       profile: {{ profile_data|as_json }},
       contactEmail: {{ settings.PLANBOX_CONTACT_EMAIL|as_json }},
@@ -31,18 +30,14 @@
   <script src="{{ STATIC_URL }}scripts/handlebars-helpers.js"></script>
   <script src="{{ STATIC_URL }}scripts/file-upload.js"></script>
   <script src="{{ STATIC_URL }}scripts/models.js"></script>
-  <script src="{{ STATIC_URL }}scripts/views/mixins.js"></script>
-  <script src="{{ STATIC_URL }}scripts/views/base.js"></script>
-  <script src="{{ STATIC_URL }}scripts/views/admin/section.js"></script>
-  <script src="{{ STATIC_URL }}scripts/project-editor-v2/shareabouts-section-admin-view.js"></script>
-  <script src="{{ STATIC_URL }}scripts/project-editor-v2/timeline-section-admin-view.js"></script>
-  <script src="{{ STATIC_URL }}scripts/project-editor-v2/text-section-admin-view.js"></script>
-  <script src="{{ STATIC_URL }}scripts/project-editor-v2/image-section-admin-view.js"></script>
-  <script src="{{ STATIC_URL }}scripts/project-editor-v2/section-list-admin-view.js"></script>
-  <script src="{{ STATIC_URL }}scripts/project-editor-v2/modal-view.js"></script>
-  <script src="{{ STATIC_URL }}scripts/project-editor-v2/project-admin-view.js"></script>
-  <script src="{{ STATIC_URL }}scripts/project-editor-v2/project-admin-modal-view.js"></script>
-  <script src="{{ STATIC_URL }}scripts/app.js"></script>
+  <!-- <script src="{{ STATIC_URL }}scripts/views/mixins.js"></script> -->
+  <!-- <script src="{{ STATIC_URL }}scripts/views/base.js"></script> -->
+  <script src="{{ STATIC_URL }}scripts/profile-admin/profile-admin-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/profile-admin/profile-details-admin-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/profile-admin/project-list-admin-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/profile-admin/member-list-admin-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/base-app.js"></script>
+  <script src="{{ STATIC_URL }}scripts/profile-admin/app.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/app-admin.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
