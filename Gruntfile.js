@@ -45,7 +45,7 @@ module.exports = function (grunt) {
         files: ['Gruntfile.js']
       },
       compass: {
-        files: ['<%= yeoman.app %>/sass/{,*/}*.{scss,sass}'],
+        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass:server']
       },
       livereload: {
@@ -142,7 +142,7 @@ module.exports = function (grunt) {
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
       options: {
-        sassDir: '<%= yeoman.app %>/sass',
+        sassDir: '<%= yeoman.app %>/styles',
         cssDir: '<%= yeoman.app %>/styles',
         generatedImagesDir: '.tmp/images/generated',
         imagesDir: '<%= yeoman.app %>/images',
