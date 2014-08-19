@@ -96,15 +96,14 @@ class ProjectSerializer (serializers.ModelSerializer):
         model = models.Project
 
 
-class UserSerializer (serializers.ModelSerializer):
-    username = serializers.CharField(source='auth.username')
-
-    class Meta:
-        model = models.Profile
-
-
 # ============================================================
 # Profile serializers
+
+class TeamProfileSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.Profile
+        fields = ('id', 'slug', 'name',)
+
 
 class MemberProfileSerializer (serializers.ModelSerializer):
     class Meta:
@@ -118,8 +117,17 @@ class OwnedProjectSerializer (serializers.ModelSerializer):
         fields = ('id', 'slug', 'title',)
 
 
+class UserSerializer (serializers.ModelSerializer):
+    username = serializers.CharField(source='auth.username')
+    teams = TeamProfileSerializer()
+
+    class Meta:
+        model = models.Profile
+
+
 class ProfileSerializer (serializers.ModelSerializer):
     members = MemberProfileSerializer()
+    teams = TeamProfileSerializer()
     projects = OwnedProjectSerializer()
 
     class Meta:

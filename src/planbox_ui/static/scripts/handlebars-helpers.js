@@ -76,6 +76,21 @@ var Planbox = Planbox || {};
     return global_data_attr(NS.Data.owner, attr, options);
   });
 
+  Handlebars.registerHelper('eachUsers', function(attr, options) {
+    var iter = NS.Data.user[attr],
+        result = '';
+
+    if (iter && iter.length > 0) {
+      _.each(iter, function(elem) {
+        result += options.fn(elem);
+      });
+    } else {
+      result = options.inverse(this);
+    }
+
+    return result;
+  })
+
 
 
   Handlebars.registerHelper('status_label', function(status_value, options) {

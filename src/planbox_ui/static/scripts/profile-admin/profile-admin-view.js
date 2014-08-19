@@ -22,9 +22,11 @@ var Planbox = Planbox || {};
         model: this.model
       }));
       this.projectListRegion.show(new NS.ProjectListAdminView({
+        model: this.model,
         collection: this.model.get('projects')
       }));
       this.memberListRegion.show(new NS.MemberListAdminView({
+        model: this.model,
         collection: this.model.get('members')
       }));
     }

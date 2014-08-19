@@ -1,4 +1,8 @@
-<h5 class="subheader page-list-header">Plans <a href="#" class="new-project-button button radius tiny right">+ New Plan</a></h5>
+<h5 class="subheader page-list-header">
+  Plans
+  <!-- <a href="#" class="new-project-button button radius tiny right">+ New Plan</a> -->
+</h5>
+
 <form class="new-project hide extra-margin-top">
   <div class="row">
     <div class="small-3 medium-2 large-1 columns">
@@ -14,10 +18,10 @@
     </div>
     <div class="small-9 medium-10 large-11 columns">
       <select id="theorg">
-        <option value="husker">andycochran</option>
-        <option value="starbuck">My City DOT</option>
-        <option value="hotdog">Some Other Organization</option>
-        <option value="apollo">The Extremely Longnamed Organization</option>
+        <option value="{{user 'slug'}}">{{user 'slug'}}</option>
+        {{#eachUsers 'teams'}}
+        <option value="{{ slug }}" {{#is slug ../slug}}selected{{/is}}>{{slug}}</option>
+        {{/eachUsers}}
       </select>
       <a href="project.html" class="button radius right">Create Project</a>
     </div>
