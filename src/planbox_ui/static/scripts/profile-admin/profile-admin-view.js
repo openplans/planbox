@@ -10,7 +10,8 @@ var Planbox = Planbox || {};
     regions: {
       profileDetailsRegion: '.profile-details',
       projectListRegion: '.project-list',
-      memberListRegion: '.member-list'
+      memberListRegion: '.member-list',
+      teamListRegion: '.team-list'
     },
 
     onShow: function() {
@@ -28,6 +29,10 @@ var Planbox = Planbox || {};
       this.memberListRegion.show(new NS.MemberListAdminView({
         model: this.model,
         collection: this.model.get('members')
+      }));
+      this.teamListRegion.show(new NS.TeamListAdminView({
+        model: this.model,
+        collection: this.model.get('teams')
       }));
     }
   });

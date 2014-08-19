@@ -163,6 +163,10 @@ var Planbox = Planbox || {};
       key: 'members',
       relatedModel: 'MemberProfileModel'
     }, {
+      type: Backbone.HasMany,
+      key: 'teams',
+      relatedModel: 'TeamProfileModel'
+    }, {
       type: Backbone.HasOne,
       key: 'auth',
       relatedModel: 'MemberProfileModel'
@@ -171,5 +175,6 @@ var Planbox = Planbox || {};
 
   NS.OwnedProjectModel = Backbone.RelationalModel.extend({});
   NS.MemberProfileModel = Backbone.RelationalModel.extend({});
+  NS.TeamProfileModel = Backbone.RelationalModel.extend({});
 
 }(Planbox));
