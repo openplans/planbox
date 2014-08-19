@@ -1,4 +1,10 @@
 <div class="clearfix">
-  <img class="avatar show-for-medium-up left" src="//pbs.twimg.com/profile_images/486195376077029377/U1cXHuNZ_400x400.jpeg">
-  <h3><a href="#" class="title">Username</a></h3>
+  <img class="avatar show-for-medium-up left" src="{{#if avatar_url}}{{ avatar_url }}{{^}}//placehold.it/75x75{{/if}}">
+  <h3><a href="#" class="title">
+    {{#if name}}
+    {{ name }} ({{ slug }})
+    {{^}}
+    {{ slug }}
+    {{/if}}
+  </a></h3>
 </div>

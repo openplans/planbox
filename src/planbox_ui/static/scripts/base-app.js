@@ -24,6 +24,13 @@ var Planbox = Planbox || {};
     modalRegion: '#modal-container'
   });
 
+  NS.app.addInitializer(function() {
+    // Handlebars support for Marionette
+    Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
+      return Handlebars.compile(rawTemplate);
+    };
+  });
+
   // Init =====================================================================
   $(function() {
     NS.app.start();

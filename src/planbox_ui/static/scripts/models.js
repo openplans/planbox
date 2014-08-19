@@ -153,7 +153,11 @@ var Planbox = Planbox || {};
     relations: [{
       type: Backbone.HasMany,
       key: 'projects',
-      relatedModel: 'OwnedProjectModel'
+      relatedModel: 'OwnedProjectModel',
+      reverseRelation: {
+        key: 'owner',
+        includeInJSON: 'slug'
+      }
     }, {
       type: Backbone.HasMany,
       key: 'members',
