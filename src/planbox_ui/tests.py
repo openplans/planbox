@@ -6,7 +6,7 @@ from nose.tools import assert_equal, assert_raises, assert_in, assert_not_in
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
 from planbox_data.models import Profile, Project, Event, Theme
-from planbox_ui.views import project_view, new_project_view, signup_view, signin_view
+from planbox_ui.views import project_view, new_project_view, signup_view, signin_view, profile_view
 
 
 class PlanBoxUITestCase (TestCase):
@@ -274,3 +274,78 @@ class ProjectThemeTests (PlanBoxUITestCase):
         assert_equal(response.context_data.get('is_editable'), False)
         response.render()
         assert_not_in('<link rel="stylesheet" href="http://example.com/style.css">', response.content.decode('utf-8'))
+
+
+
+class ProfileAdminTests (PlanBoxUITestCase):
+    def test_anon_gets_redirect_to_signin(self):
+        profile = Profile.objects.create(slug='mjumbewu')
+
+        kwargs = {
+            'profile_slug': profile.slug,
+        }
+
+        url = reverse('app-profile', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = AnonymousUser()
+        response = profile_view(request, **kwargs)
+
+        signin_url = reverse('app-signin') + '?next=' + url
+        assert_equal(response.status_code, 302)
+        assert_equal(response.url, signin_url)
+
+    def test_non_member_gets_redirect_to_home(self):
+        profile = Profile.objects.create(slug='mjumbewu')
+
+        kwargs = {
+            'profile_slug': profile.slug,
+        }
+
+        auth = UserAuth.objects.create_user(username='atogle', password='456')
+
+        url = reverse('app-profile', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth
+        response = profile_view(request, **kwargs)
+
+        home_url = reverse('app-index')
+        assert_equal(response.status_code, 302)
+        assert_equal(response.url, home_url)
+
+    def test_owner_gets_profile_admin(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        profile = auth.profile
+
+        kwargs = {
+            'profile_slug': profile.slug,
+        }
+
+        url = reverse('app-profile', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth
+        response = profile_view(request, **kwargs)
+
+        assert_equal(response.status_code, 200)
+        assert_in('profile_data', response.context_data)
+        assert_equal(response.context_data['profile_data']['slug'], profile.slug)
+
+    def test_member_gets_profile_admin(self):
+        profile = Profile.objects.create(slug='mjumbewu')
+
+        kwargs = {
+            'profile_slug': profile.slug,
+        }
+
+        auth = UserAuth.objects.create_user(username='atogle', password='456')
+        member = auth.profile
+        profile.members.add(member)
+
+        url = reverse('app-profile', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth
+        response = profile_view(request, **kwargs)
+
+        assert_equal(response.status_code, 200)
+        assert_in('profile_data', response.context_data)
+        assert_equal(response.context_data['profile_data']['slug'], profile.slug)
+
