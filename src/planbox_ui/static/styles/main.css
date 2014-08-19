@@ -7167,7 +7167,7 @@ textarea.no-resize {
   .avatar-container .avatar {
     display: block; }
 
-.project-list li + li, .member-list li + li {
+.project-list > li + li, .member-list > li + li {
   margin-top: 0.625rem;
   padding-top: 0.625rem;
   border-top: 1px solid #e3e3e3; }
