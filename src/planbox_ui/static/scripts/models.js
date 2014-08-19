@@ -166,10 +166,6 @@ var Planbox = Planbox || {};
       type: Backbone.HasMany,
       key: 'teams',
       relatedModel: 'TeamProfileModel'
-    }, {
-      type: Backbone.HasOne,
-      key: 'auth',
-      relatedModel: 'MemberProfileModel'
     }]
   });
 

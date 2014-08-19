@@ -1263,6 +1263,12 @@ textarea.no-resize {
     border-top: $panel-border-size $panel-border-style $panel-border-color;
   }
 }
+.user-profile .member-list {
+  display: none;
+}
+.team-profile .team-list {
+  display: none;
+}
 
 
 // TODO: Sort out this stuff. I'm not sure we still need it.

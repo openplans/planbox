@@ -7167,4 +7167,10 @@ textarea.no-resize {
   padding-top: 0.625rem;
   border-top: 1px solid #e3e3e3; }
 
+.user-profile .member-list {
+  display: none; }
+
+.team-profile .team-list {
+  display: none; }
+
 /* ----- Medium screens ----- */
