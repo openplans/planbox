@@ -8743,6 +8743,10 @@ input[type="url"].inline-input {
 .panel-header h1, .panel-header h2, .panel-header h3, .panel-header h4, .panel-header h5, .panel-header h6 {
   color: #eeeeee;
 }
+/* line 271, _foundation.scss */
+.panel-header .button {
+  margin: -0.25rem -0.75rem;
+}
 
 /*--------------------------------------------------
   OpenPlans-Branded Top Bar
