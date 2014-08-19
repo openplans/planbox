@@ -1254,6 +1254,13 @@ textarea.no-resize {
   }
 }
 
+// Profile: Avatar
+.avatar-container {
+  padding: 0.3rem;
+  .avatar {
+    display: block;
+  }
+}
 
 // Project List & Member List
 .project-list, .member-list {

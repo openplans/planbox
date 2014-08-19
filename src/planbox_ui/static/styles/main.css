@@ -7162,6 +7162,11 @@ textarea.no-resize {
 .existing-snapshot-wrapper .button {
   margin-bottom: 0; }
 
+.avatar-container {
+  padding: 0.3rem; }
+  .avatar-container .avatar {
+    display: block; }
+
 .project-list li + li, .member-list li + li {
   margin-top: 0.625rem;
   padding-top: 0.625rem;
