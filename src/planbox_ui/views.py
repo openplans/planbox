@@ -271,7 +271,7 @@ class ProjectMixin (AppMixin):
         if not hasattr(self, 'owner_profile'):
             try:
                 self.owner_profile = self.project.owner
-            except Profile.DoesNotExist:
+            except (Profile.DoesNotExist, AttributeError):  # AttributeError if project is None`
                 try:
                     self.owner_profile = Profile.objects.get(slug=self.kwargs.get('owner_name'))
                 except Profile.DoesNotExist:
