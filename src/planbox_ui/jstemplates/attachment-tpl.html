@@ -1,24 +1,15 @@
-<a href="{{ url }}" class="attachment-link" target="_blank">
-
-  <div class="row collapse">
-
+  <div class="row">
     <div class="small-4 large-3 columns">
-      {{#if thumbnail_url}}
-      <div class="attachment-icon image">
-        <img src="{{ thumbnail_url }}">
-      </div>
-      {{else}}
-      <div class="attachment-icon">
-        <img src="{{ static_url }}/images/document_generic.png">
-      </div>
-      {{/if}}
+      <a href="{{ url }}" class="attachment-link" target="_blank">
+        {{#if thumbnail_url}}
+          <img src="{{ thumbnail_url }}" class="attachment-icon image">
+        {{else}}
+          <img src="{{ static_url }}/images/document_generic.png" class="attachment-icon image">
+        {{/if}}
+      </a>
     </div>
-
     <div class="small-8 large-9 columns">
-      <h6 class="attachment-title" data-attr="label">{{{ label }}}</h6>
-      <div class="attachment-description" data-attr="description">{{{ description }}}</div>
+      <h6 class="attachment-title" data-attr="label"><a href="{{ url }}" class="attachment-link" target="_blank">{{{ label }}}</a></h6>
+      <p class="attachment-description text-small" data-attr="description">{{{ description }}}</p>
     </div>
-
   </div>
-
-</a>

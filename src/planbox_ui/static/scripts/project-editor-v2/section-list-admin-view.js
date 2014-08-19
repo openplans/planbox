@@ -16,6 +16,7 @@ var Planbox = Planbox || {};
       sectionViews: {
         'timeline': NS.TimelineSectionAdminView,
         'text': NS.TextSectionAdminView,
+        'image': NS.ImageSectionAdminView,
         'faqs': NS.FaqsSectionAdminView,
         'shareabouts': NS.ShareaboutsSectionAdminView,
         'raw': NS.RawHtmlSectionAdminView

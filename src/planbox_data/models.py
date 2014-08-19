@@ -119,6 +119,18 @@ class ProjectQuerySet (models.query.QuerySet):
         public_query = models.Q(public=True)
         return self.filter(owner_query | public_query)
 
+    def Q_member(self, member):
+        if isinstance(member, UserAuth):
+            member = member.profile
+        profile_ids = [member.id] + [team['id'] for team in member.teams.values('id')]
+
+        return models.Q(owner_id__in=profile_ids)
+
+    def filter_by_member_or_public(self, member):
+        member_query = self.Q_member(member)
+        public_query = models.Q(public=True)
+        return self.filter(member_query | public_query)
+
 
 class ProjectManager (models.Manager):
     def get_queryset(self):
@@ -126,6 +138,9 @@ class ProjectManager (models.Manager):
 
     def filter_by_owner_or_public(self, owner):
         return self.get_queryset().filter_by_owner_or_public(owner)
+
+    def filter_by_member_or_public(self, owner):
+        return self.get_queryset().filter_by_member_or_public(owner)
 
     def get_by_natural_key(self, owner, slug):
         """
@@ -284,6 +299,12 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
             except Profile.DoesNotExist: return False
         return (self.owner == obj)
 
+    def editable_by(self, obj):
+        if isinstance(obj, UserAuth):
+            try: obj = obj.profile
+            except Profile.DoesNotExist: return False
+        return self.owned_by(obj) or (obj in self.owner.members.all())
+
 
 class EventManager (models.Manager):
     def get_by_natural_key(self, owner, project, index):
@@ -364,7 +385,7 @@ class ProfileManager (models.Manager):
 
 @python_2_unicode_compatible
 class Profile (TimeStampedModel):
-    name = models.CharField(max_length=128, blank=True, help_text=_('The full name of the person or organization'))
+    name = models.CharField(max_length=128, blank=True, help_text=_('The full name of the person or team'))
     slug = models.CharField(max_length=128, unique=True, help_text=_('A short name that will be used in URLs for projects owned by this profile'))
     email = models.EmailField(blank=True, help_text=_('Contact email address of the profile holder'))
     # projects (reverse, Project)
@@ -372,9 +393,9 @@ class Profile (TimeStampedModel):
     # User-profile specific
     auth = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='profile', null=True, blank=True, on_delete=models.CASCADE)
     affiliation = models.CharField(max_length=256, blank=True, default='')
-    organizations = models.ManyToManyField('Profile', related_name='members', blank=True, limit_choices_to={'auth__isnull': True})
+    teams = models.ManyToManyField('Profile', related_name='members', blank=True, limit_choices_to={'auth__isnull': True})
 
-    # Organization-profile specific
+    # Team-profile specific
     # members (reverse, Profile)
 
     # Feature flags/versions
@@ -396,6 +417,32 @@ class Profile (TimeStampedModel):
 
     def natural_key(self):
         return (self.slug,)
+
+    def is_owned_by(self, user):
+        return (user.id == self.auth_id)
+
+    def has_member(self, user):
+        members = list(self.members.all())
+        if user.id in [profile.auth_id for profile in members]:
+            return True
+        else:
+            return any(profile.has_member(user) for profile in members)
+
+    def authorizes(self, user):
+        """
+        Test whether a given authenticated user is allowed to perform
+        actions on behalf of this profile.
+        """
+        if user.is_superuser:
+            return True
+
+        if self.is_owned_by(user):
+            return True
+
+        if self.has_member(user):
+            return True
+
+        return False
 
 
 @python_2_unicode_compatible
@@ -433,6 +480,7 @@ class SectionManager (models.Manager):
 class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     SECTION_TYPE_CHOICES = (
         ('text', _('Text')),
+        ('image', _('Image')),
         ('timeline', _('Timeline')),
         ('shareabouts', _('Shareabouts')),
         ('raw', _('Raw HTML'))

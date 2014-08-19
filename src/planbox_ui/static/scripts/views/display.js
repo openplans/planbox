@@ -63,6 +63,13 @@ var Planbox = Planbox || {};
     className: 'project-section-text'
   });
 
+  NS.ImageSectionView = Backbone.Marionette.ItemView.extend({
+    template: '#image-section-tpl',
+    tagName: 'section',
+    id: NS.SectionMixin.id,
+    className: 'project-section-image'
+  });
+
   NS.RawHtmlSectionView = Backbone.Marionette.ItemView.extend({
     template: '#raw-section-tpl',
     tagName: 'section',
@@ -162,6 +169,7 @@ var Planbox = Planbox || {};
     sectionViews: {
       'timeline': NS.TimelineSectionView,
       'text': NS.TextSectionView,
+      'image': NS.ImageSectionView,
       'faqs': NS.FaqsSectionView,
       'shareabouts': NS.ShareaboutsSectionView,
       'raw': NS.RawHtmlSectionView

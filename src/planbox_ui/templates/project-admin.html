@@ -82,6 +82,7 @@
     Planbox.Data = {
       project: {{ project_data|as_json }},
       user: {{ user_data|as_json }},
+      owner: {{ owner_data|as_json }},
       isEditable: {{ is_editable|as_json }},
       statuses: [
         { 'value': 'not-started', 'label': 'Not Started'},
@@ -105,6 +106,7 @@
   <script src="{{ STATIC_URL }}scripts/project-editor-v2/shareabouts-section-admin-view.js"></script>
   <script src="{{ STATIC_URL }}scripts/project-editor-v2/timeline-section-admin-view.js"></script>
   <script src="{{ STATIC_URL }}scripts/project-editor-v2/text-section-admin-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/project-editor-v2/image-section-admin-view.js"></script>
   <script src="{{ STATIC_URL }}scripts/project-editor-v2/section-list-admin-view.js"></script>
   <script src="{{ STATIC_URL }}scripts/project-editor-v2/modal-view.js"></script>
   <script src="{{ STATIC_URL }}scripts/project-editor-v2/project-admin-view.js"></script>

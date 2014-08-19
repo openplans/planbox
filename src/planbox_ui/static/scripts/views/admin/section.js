@@ -18,6 +18,7 @@ var Planbox = Planbox || {};
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
+        'input @ui.editables': 'handleEditableBlur',
         'click @ui.deleteBtn': 'handleDeleteClick'
       }
     })
@@ -146,6 +147,7 @@ var Planbox = Planbox || {};
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
+        'input @ui.editables': 'handleEditableBlur',
         'click @ui.deleteBtn': 'handleDeleteClick',
         'blur @ui.datetimeEditable': 'handleDatetimeChange',
         'input @ui.datetimeEditable': 'handleDatetimeChange',
@@ -348,7 +350,7 @@ var Planbox = Planbox || {};
             url: '/shareabouts/create-dataset',
             type: 'POST',
             data: {
-              dataset_slug: NS.Data.user.username + '-' + this.model.collection.project.get('slug')
+              dataset_slug: NS.Data.owner.slug + '-' + this.model.collection.project.get('slug')
             },
             success: function(data) {
               console.log('yay', arguments);

@@ -10,7 +10,7 @@ from planbox_data import permissions
 
 class ProjectViewSet (viewsets.ModelViewSet):
     serializer_class = serializers.ProjectSerializer
-    permission_classes = (permissions.IsOwnerOrReadOnly,)
+    permission_classes = (permissions.OwnerAuthorizesOrReadOnly,)
     model = models.Project
 
     def get_queryset(self):
@@ -29,7 +29,7 @@ class ProjectViewSet (viewsets.ModelViewSet):
 
         if user.is_authenticated():
             owner = self.request.user.profile
-            return models.Project.objects.filter_by_owner_or_public(owner)
+            return models.Project.objects.filter_by_member_or_public(owner)
 
         else:
             return models.Project.objects.filter(public=True)

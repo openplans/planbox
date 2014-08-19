@@ -9,7 +9,7 @@ from rest_framework.status import HTTP_200_OK, HTTP_204_NO_CONTENT, HTTP_403_FOR
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
 from planbox_data.models import Profile, Project, Event, Attachment
-from planbox_data.permissions import IsOwnerOrReadOnly
+from planbox_data.permissions import OwnerAuthorizesOrReadOnly
 from planbox_data.serializers import ProjectSerializer
 from planbox_data.views import router
 
@@ -215,6 +215,29 @@ class EventModelTests (PlanBoxTestCase):
         assert_equal(event_4.index, 4)
 
 
+class ProfileModelTests (PlanBoxTestCase):
+    def test_profile_authorizes_owner(self):
+        user = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        ok_(user.profile.authorizes(user))
+
+    def test_profile_authorizes_superusers(self):
+        user = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        superuser = UserAuth.objects.create_user(username='admin', password='admin')
+        superuser.is_superuser = True
+        superuser.save()
+
+        ok_(user.profile.authorizes(superuser))
+        ok_(not superuser.profile.authorizes(user))
+
+    def test_profile_authorizes_team_members(self):
+        user = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        member = UserAuth.objects.create_user(username='mjumbewu2', password='345')
+        user.profile.members.add(member.profile)
+
+        ok_(user.profile.authorizes(member))
+        ok_(not member.profile.authorizes(user))
+
+
 class ProjectSerializerTests (PlanBoxTestCase):
     def test_project_with_empty_title_is_invalid(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
@@ -411,7 +434,7 @@ class OwnerPermissionTests (PlanBoxTestCase):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner)
-        permission = IsOwnerOrReadOnly()
+        permission = OwnerAuthorizesOrReadOnly()
         return permission, auth, owner, project
 
     def test_null_auth_data_is_handled(self):
@@ -458,12 +481,20 @@ class OwnerPermissionTests (PlanBoxTestCase):
         request.user = auth
         ok_(permission.has_object_permission(request, None, project))
 
+    def test_member_auth_data_is_ok_for_unsafe_requests(self):
+        permission, _, owner, project = self.init_test_assets()
+        auth = UserAuth.objects.create_user(username='aogle', password='456')
+        owner.members.add(auth.profile)
+        request = self.factory.put('')
+        request.user = auth
+        ok_(permission.has_object_permission(request, None, project))
+
 
 class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
-    def init_test_assets(self):
+    def init_test_assets(self, public=True):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=public)
 
         kwargs = {'pk': project.pk}
         view = self.get_view_callback('project-detail')
@@ -475,6 +506,11 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
         url = self.init_test_assets()[-1]
         response = self.client.get(url)
         assert_equal(response.status_code, HTTP_200_OK)
+
+    def test_anonymous_cannot_GET_unpublished_detail(self):
+        url = self.init_test_assets(public=False)[-1]
+        response = self.client.get(url)
+        assert_equal(response.status_code, HTTP_404_NOT_FOUND)
 
     def test_anonymous_cannot_PUT_detail(self):
         _, owner, _, _, _, url = self.init_test_assets()
@@ -506,6 +542,15 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
         response = self.client.get(url)
         assert_equal(response.status_code, HTTP_200_OK)
 
+    def test_non_owner_cannot_GET_unpublished_detail(self):
+        url = self.init_test_assets(public=False)[-1]
+
+        UserAuth.objects.create_user(username='atogle', password='456')
+        self.client.login(username='atogle', password='456')
+
+        response = self.client.get(url)
+        assert_equal(response.status_code, HTTP_404_NOT_FOUND)
+
     def test_non_owner_cannot_PUT_detail(self):
         _, owner, _, _, _, url = self.init_test_assets()
 
@@ -530,6 +575,12 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
         response = self.client.get(url)
         assert_equal(response.status_code, HTTP_200_OK)
 
+    def test_owner_can_GET_unpublished_detail(self):
+        auth, _, _, _, _, url = self.init_test_assets(public=False)
+        self.client.login(username=auth.username, password='123')
+        response = self.client.get(url)
+        assert_equal(response.status_code, HTTP_200_OK)
+
     def test_owner_can_PUT_detail(self):
         auth, owner, _, _, _, url = self.init_test_assets()
         self.client.login(username=auth.username, password='123')
@@ -539,6 +590,38 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
     def test_owner_can_DELETE_detail(self):
         auth, _, _, _, _, url = self.init_test_assets()
         self.client.login(username=auth.username, password='123')
+        response = self.client.delete(url)
+        assert_equal(response.status_code, HTTP_204_NO_CONTENT)
+
+    def test_member_can_GET_detail(self):
+        _, owner, _, _, _, url = self.init_test_assets()
+        auth = UserAuth.objects.create_user(username='atogle', password='456')
+        owner.members.add(auth.profile)
+        self.client.login(username=auth.username, password='456')
+        response = self.client.get(url)
+        assert_equal(response.status_code, HTTP_200_OK)
+
+    def test_member_can_GET_unpublished_detail(self):
+        _, owner, _, _, _, url = self.init_test_assets(public=False)
+        auth = UserAuth.objects.create_user(username='atogle', password='456')
+        owner.members.add(auth.profile)
+        self.client.login(username=auth.username, password='456')
+        response = self.client.get(url)
+        assert_equal(response.status_code, HTTP_200_OK)
+
+    def test_member_can_PUT_detail(self):
+        _, owner, _, _, _, url = self.init_test_assets()
+        auth = UserAuth.objects.create_user(username='atogle', password='456')
+        owner.members.add(auth.profile)
+        self.client.login(username=auth.username, password='456')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "events": [], "sections": [], "location": "x", "owner": "%s"}' % (owner.slug), content_type='application/json')
+        assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
+
+    def test_member_can_DELETE_detail(self):
+        _, owner, _, _, _, url = self.init_test_assets()
+        auth = UserAuth.objects.create_user(username='atogle', password='456')
+        owner.members.add(auth.profile)
+        self.client.login(username=auth.username, password='456')
         response = self.client.delete(url)
         assert_equal(response.status_code, HTTP_204_NO_CONTENT)
 

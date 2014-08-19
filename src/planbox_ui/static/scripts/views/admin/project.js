@@ -452,7 +452,7 @@ var Planbox = Planbox || {};
         this.ui.userMenu.toggleClass('is-open');
       },
       onSaveSuccess: function(model, makePublic) {
-        var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
+        var path = '/' + NS.Data.owner.slug + '/' + model.get('slug') + '/';
 
         if (window.location.pathname !== path) {
           if (Modernizr.history) {
@@ -533,7 +533,7 @@ var Planbox = Planbox || {};
         this.highlightsRegion.show(new NS.ProjectHighlightsAdminView({model: this.model, parent: this}));
       },
       onSaveSuccess: function(model, makePublic) {
-        var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
+        var path = '/' + NS.Data.owner.slug + '/' + model.get('slug') + '/';
 
         if (window.location.pathname !== path) {
           if (Modernizr.history) {

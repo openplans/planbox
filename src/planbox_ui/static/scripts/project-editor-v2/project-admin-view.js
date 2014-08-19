@@ -1,4 +1,4 @@
-/*globals Backbone jQuery Handlebars Modernizr _ Pen FileAPI chrono, Intercom */
+/*globals Backbone jQuery Handlebars Modernizr _ Pen FileAPI chrono */
 
 var Planbox = Planbox || {};
 
@@ -6,12 +6,13 @@ var Planbox = Planbox || {};
   'use strict';
 
   NS.ProjectAdminView = NS.BaseProjectView.extend(
-    _.extend({}, NS.ContentEditableMixin, {
+    _.extend({}, NS.ImageDropZonesMixin, NS.ContentEditableMixin, {
       template: '#project-admin-tpl',
       ui: {
         editables: '[data-attr]:not(#section-list [data-attr])',
         settingsToggle: '.section-settings-toggle',
         coverImageSwitch: '.cover-image-switch',
+        logoImageSwitch: '.logo-image-switch',
         richEditables: '.rich-editable',
         saveBtn: '.save-btn',
         visibilityToggle: '[name=project-public]',
@@ -23,14 +24,14 @@ var Planbox = Planbox || {};
         hightlightLinkSelector: '.highlight-link-selector',
         hightlightExternalLink: '.highlight-external-link',
         characterCountInput: '.character-count-container [maxlength]',
-        addSectionButtons: '.add-section-btn',
-        openIntercomLink: '.open-intercom'
+        addSectionButtons: '.add-section-btn'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'input @ui.editables': 'handleEditableBlur',
         'change @ui.visibilityToggle': 'handleVisibilityChange',
         'change @ui.coverImageSwitch': 'handleCoverImageSwitch',
+        'change @ui.logoImageSwitch': 'handleLogoImageSwitch',
         'click @ui.settingsToggle': 'handleSettingsToggle',
         'click @ui.saveBtn': 'handleSave',
         'click @ui.customDomainMessageBtn': 'handleCustomDomainMessageBtn',
@@ -41,9 +42,7 @@ var Planbox = Planbox || {};
         'blur @ui.hightlightExternalLink': 'handleHighlightExternalLinkBlur',
 
         'input @ui.characterCountInput': 'handleCharacterCountChange',
-        'keyup @ui.characterCountInput': 'handleCharacterCountChange',
-
-        'click @ui.openIntercomLink': 'handleOpenIntercomClick'
+        'keyup @ui.characterCountInput': 'handleCharacterCountChange'
       },
       modelEvents: {
         'change': 'dataChanged',
@@ -193,85 +192,24 @@ var Planbox = Planbox || {};
         }
       },
 
-      initDropZones: function() {
-        var view = this;
+      handleLogoImageSwitch: function(evt) {
+        var $logoImageSwitch = $(evt.currentTarget),
+            $imageWrapper = this.$('.logo-image-container'),
+            $imageHolder = this.$('.logo-image-container .image-holder'),
+            confirmRemoveMsg = $logoImageSwitch.attr('data-confirm-remove-msg'),
+            isOn = $logoImageSwitch.is(':checked');
 
-        this.ui.imageDropZones.fileUpload({
-          url: 'https://' + NS.Data.s3UploadBucket + '.s3.amazonaws.com/',
-          data: _.clone(NS.Data.s3UploadData),
-          dndOver: function(isOver) {
-            $(this).toggleClass('file-dragging', isOver);
-          },
-          dndDrop: function(files) {
-            var $this = $(this);
-            $this.removeClass('file-dragging');
-            $this.data('fileUpload').upload(files);
-          },
-          validate: function(files) {
-            var i;
-            // Make sure this is an image before continuing
-            for (i=0; i<files.length; i++) {
-              if (files[i].type.indexOf('image/') !== 0) {
-                NS.showErrorModal(
-                  'Unable to save that file.',
-                  'This file doesn\'t seem to be an image file.',
-                  'Make sure the file you\'re trying to upload is a valid image file ' +
-                  'and try again.'
-                );
-
-                // Return false to prevent the upload from starting
-                return false;
-              }
-            }
-            return true;
-          },
-          start: function(xhr, options) {
-            // When the upload starts
-            var $this = $(this),
-                $imageContainer = $this.siblings('.image-holder');
-
-            // Apply the uploading class.
-            $this.addClass('file-uploading');
-
-            // Show a preview
-            // TODO: file[0] is not great
-            $this.data('fileUpload').previewImage(options.files.file[0], function(dataUrl) {
-              $imageContainer.attr('src', dataUrl);
-            });
-          },
-          complete: function(err, xhr, options) {
-            // When the upload is complete
-            var $this = $(this),
-                $imageContainer = $this.siblings('.image-holder'),
-                attrName = $imageContainer.attr('data-attr'),
-                imageUrl = window.encodeURI(
-                  options.url + options.data.key.replace('${filename}',
-                  // TODO: file[0] is not great
-                  options.files.file[0].name)
-                );
-
-            // Remove the uploading class.
-            $this.removeClass('file-uploading');
-
-            if (err) {
-              NS.showErrorModal(
-                'Unable to save that file.',
-                'We were unable to save your image.',
-                'Sorry about that. Please save your changes, reload the page, ' +
-                'and try again. Please email us at ' + NS.Data.contactEmail + ' ' +
-                'if you have any more trouble.'
-              );
-
-              return;
-            }
-
-            // Fetch the image to make loading faster
-            $this.data('fileUpload').prefetchImage(imageUrl);
-
-            // On success, apply the attribute to the project.
-            view.model.set(attrName, imageUrl);
+        if (!isOn) {
+          if (!this.model.get('logo_img_url') || window.confirm(confirmRemoveMsg)) {
+            $imageWrapper.addClass('hide');
+            $imageHolder.attr('src', $imageHolder.attr('data-empty-img'));
+            this.model.set('logo_img_url', '');
+          } else {
+            $logoImageSwitch.prop('checked', true);
           }
-        });
+        } else {
+          this.$('.logo-image-container').removeClass('hide');
+        }
       },
 
       handleHighlightLinkChange: function(evt) {
@@ -389,10 +327,6 @@ var Planbox = Planbox || {};
       },
       getDefaultSectionAttributes: function(sectionType) {
         switch (sectionType) {
-        case 'text':
-          return {
-            type: sectionType
-          };
         case 'timeline':
           return {
             type: sectionType,
@@ -418,6 +352,10 @@ var Planbox = Planbox || {};
               },
               "description": "Give us your input on the project. Your input will shape the plan. Anyone can post an idea."
             }
+          };
+        default:
+          return {
+            type: sectionType
           };
         }
       },
@@ -449,7 +387,7 @@ var Planbox = Planbox || {};
         this.$('.project-preview-wrapper').html(content);
       },
       onSaveSuccess: function(model) {
-        var path = '/' + NS.Data.user.username + '/' + model.get('slug') + '/';
+        var path = '/' + NS.Data.owner.slug + '/' + model.get('slug') + '/';
 
         if (window.location.pathname !== path) {
           if (Modernizr.history) {
@@ -481,13 +419,6 @@ var Planbox = Planbox || {};
         this.updateSectionMenu();
       },
 
-      handleOpenIntercomClick: function(evt) {
-        // if intercom is loaded, then prevent default and open the message window
-        if (Intercom) {
-          evt.preventDefault();
-          Intercom('show');
-        }
-      }
     })
   );
 

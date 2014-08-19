@@ -1,55 +1,39 @@
 # -*- coding: utf-8 -*-
 from south.utils import datetime_utils as datetime
 from south.db import db
-from south.v2 import DataMigration
+from south.v2 import SchemaMigration
 from django.db import models
 
 
-def get_or_create(Model, commit=True, **kwargs):
-    try:
-        obj = Model.objects.get(**kwargs)
-    except Model.DoesNotExist:
-        obj = Model(**kwargs)
-        if commit:
-            obj.save()
-    return obj
-
-
-class Migration(DataMigration):
+class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        "Write your forwards methods here."
-        # We would use the managers' get_or_create, but South, SQLite3, and
-        # atomic don't play well together.
-        templates_profile = get_or_create(
-            orm.Profile,
-            name='Project Templates',
-            slug='templates')
-        default_template = get_or_create(
-            orm.Project,
-            owner=templates_profile,
-            slug='default')
+        # Removing M2M table for field organizations on 'Profile'
+        db.delete_table(db.shorten_name(u'planbox_data_profile_organizations'))
 
-        shareabouts_section = get_or_create(
-            orm.Section,
-            project=default_template,
-            type='shareabouts',
-            commit=True)
+        # Adding M2M table for field teams on 'Profile'
+        m2m_table_name = db.shorten_name(u'planbox_data_profile_teams')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('from_profile', models.ForeignKey(orm[u'planbox_data.profile'], null=False)),
+            ('to_profile', models.ForeignKey(orm[u'planbox_data.profile'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['from_profile_id', 'to_profile_id'])
 
-        shareabouts_section.active = True
-        shareabouts_section.index = 1
-        shareabouts_section.save()
-
-        try: timeline_section = default_template.sections.get(type='timeline')
-        except: pass
-        else: timeline_section.delete()
-
-        try: faqs_section = default_template.sections.get(slug='faq')
-        except: pass
-        else: faqs_section.delete()
 
     def backwards(self, orm):
-        "Write your backwards methods here."
+        # Adding M2M table for field organizations on 'Profile'
+        m2m_table_name = db.shorten_name(u'planbox_data_profile_organizations')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('from_profile', models.ForeignKey(orm[u'planbox_data.profile'], null=False)),
+            ('to_profile', models.ForeignKey(orm[u'planbox_data.profile'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['from_profile_id', 'to_profile_id'])
+
+        # Removing M2M table for field teams on 'Profile'
+        db.delete_table(db.shorten_name(u'planbox_data_profile_teams'))
+
 
     models = {
         u'auth.group': {
@@ -122,9 +106,9 @@ class Migration(DataMigration):
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '128', 'blank': 'True'}),
-            'organizations': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'members'", 'blank': 'True', 'to': u"orm['planbox_data.Profile']"}),
             'project_editor_version': ('django.db.models.fields.PositiveIntegerField', [], {'default': '2'}),
             'slug': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '128'}),
+            'teams': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'members'", 'blank': 'True', 'to': u"orm['planbox_data.Profile']"}),
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'})
         },
         u'planbox_data.project': {
@@ -176,4 +160,3 @@ class Migration(DataMigration):
     }
 
     complete_apps = ['planbox_data']
-    symmetrical = True
