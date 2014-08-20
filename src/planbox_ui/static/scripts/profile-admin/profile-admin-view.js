@@ -8,7 +8,7 @@ var Planbox = Planbox || {};
   NS.ProfileAdminView = Backbone.Marionette.Layout.extend({
     template: '#profile-admin-tpl',
     regions: {
-      profileDetailsRegion: '.profile-details',
+      profileDetailsRegion: '.profile',
       projectListRegion: '.project-list',
       memberListRegion: '.member-list',
       teamListRegion: '.team-list'
