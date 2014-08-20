@@ -64,6 +64,10 @@
   {% if debug %}
   <script src="{{ STATIC_URL }}bower_components/jquery/dist/jquery.js"></script>
   <script src="{{ STATIC_URL }}bower_components/foundation/js/foundation.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/raven-js/dist/raven.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/raven-js/plugins/native.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/raven-js/plugins/jquery.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/raven-js/plugins/backbone.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/components-base.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
@@ -72,6 +76,13 @@
   </script>
 
   {% block scripts %}{% endblock %}
+
+  {% if settings.SENTRY_DSN %}
+  <script>
+    // Error logging with Sentry
+    Raven.config('{{ settings.SENTRY_DSN }}').install()
+  </script>
+  {% endif %}
 
   {% if settings.GOOGLE_ANALYTICS_ID %}
   <script>

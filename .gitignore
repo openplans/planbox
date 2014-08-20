@@ -19,6 +19,7 @@ develop-eggs
 .sass-cache
 bower_components/
 *.min.js
+*.min.map
 *.min.css
 
 # Installer logs

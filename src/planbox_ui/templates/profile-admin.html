@@ -23,6 +23,11 @@
       s3UploadBucket: {{ settings.S3_MEDIA_BUCKET|as_json }},
       s3UploadData: {{ s3_upload_form_data|as_json }}
     };
+
+    Raven.setUserContext({
+        username: Planbox.Data.user.email,
+        id: Planbox.Data.user.id
+    });
   </script>
 
   {% if debug %}

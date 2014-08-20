@@ -9,6 +9,9 @@
 
 module.exports = function (grunt) {
 
+  var _ = require('lodash');
+  var path = require('path');
+
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
@@ -290,6 +293,14 @@ module.exports = function (grunt) {
     },
     uglify: {
       options: {
+        sourceMap: function (dest) {
+            return path.join(path.dirname(dest),
+                             path.basename(dest, '.js')) +
+                   '.map';
+          },
+        sourceMappingURL: function (dest) {
+            return path.basename(dest, '.js') + '.map';
+          },
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       dist: {
@@ -297,6 +308,10 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/scripts/components-base.min.js': [
             '<%= yeoman.app %>/bower_components/jquery/dist/jquery.js',
             '<%= yeoman.app %>/bower_components/foundation/js/foundation.min.js',
+            '<%= yeoman.app %>/bower_components/raven-js/dist/raven.js',
+            '<%= yeoman.app %>/bower_components/raven-js/plugins/native.js',
+            '<%= yeoman.app %>/bower_components/raven-js/plugins/jquery.js',
+            '<%= yeoman.app %>/bower_components/raven-js/plugins/backbone.js',
             '<%= yeoman.app %>/bower_components/moment/moment.js',
           ],
           '<%= yeoman.app %>/scripts/components.min.js': [
@@ -367,6 +382,10 @@ module.exports = function (grunt) {
     },
     concat: {
       dist: {}
+    },
+
+    fixSourceMaps: {
+      all: ['<%= yeoman.dist %>/**/*.map']
     },
 
     // Copies remaining files to places other tasks can use
@@ -464,6 +483,29 @@ module.exports = function (grunt) {
     ]);
   });
 
+  grunt.registerMultiTask('fixSourceMaps', function () {
+    this.files.forEach(function (f) {
+      var result;
+      var sources = f.src.filter(function (filepath) {
+        if (!grunt.file.exists(filepath)) {
+          grunt.log.warn('Source file "' + filepath + '" not found.');
+          return false;
+        } else {
+          return true;
+        }
+      }).forEach(function (filepath) {
+        var base = path.dirname(filepath);
+        var sMap = grunt.file.readJSON(filepath);
+        sMap.file = path.relative(base, sMap.file);
+        sMap.sources = _.map(sMap.sources, path.relative.bind(path, base));
+
+        grunt.file.write(filepath, JSON.stringify(sMap));
+        // Print a success message.
+        grunt.log.writeln('File "' + filepath + '" fixed.');
+      });
+    });
+  });
+
   grunt.registerTask('build', [
     // 'clean:dist',
     // 'useminPrepare',
@@ -472,6 +514,7 @@ module.exports = function (grunt) {
     'concat',
     'cssmin',
     'uglify',
+    'fixSourceMaps',
     'copy:shareabouts',
     // 'rev',
     // 'usemin',

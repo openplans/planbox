@@ -7,12 +7,9 @@ var Planbox = Planbox || {};
 
   // Exceptions ===============================================================
   NS.genericException = function(name, message, data) {
-    var exc = {
-      name: name,
-      message: message,
-      data: data,
-      toString: function() { return message; }
-    };
+    var exc = new Error(message);
+    exc.name = name;
+    exc.data = data;
     return exc;
   };
 

@@ -70,6 +70,13 @@ var Planbox = Planbox || {};
         success: function() {
           self.ui.newTeamForm[0].reset();
           self.hideNewTeamForm();
+        },
+        error: function(model, $xhr, options) {
+          alert('Something went wrong while creating your team.\n' +
+            'We have been notified of the error and will look into it ASAP.');
+          throw NS.profileException(
+            'Failed to create a new team with name "' + model.get('name') + '". ' +
+            'HTTP status ' + $xhr.status + ' ' + $xhr.statusText + '.');
         }
       });
     }

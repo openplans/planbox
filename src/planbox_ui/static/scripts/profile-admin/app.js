@@ -7,7 +7,7 @@ var Planbox = Planbox || {};
 
   // Exceptions ===============================================================
   NS.profileException = function(message, data) {
-    return NS.genericException('ProfileException');
+    return NS.genericException('ProfileException', message, data);
   };
 
   // App ======================================================================
