@@ -52,14 +52,19 @@ var Planbox = Planbox || {};
       evt.preventDefault();
 
       var self = this,
-          teamData = {members: [{id: this.model.id}]};
+          teamData = {};
 
+      // Start by adding the current profile (user) as a member.
+      teamData.members = [{id: this.model.id}];
+
+      // For each data-attr in the form, add to the team data.
       this.ui.newTeamFields.each(function(i, field) {
         var attrName = field.getAttribute('data-attr'),
             attrVal = field.value;
         teamData[attrName] = attrVal;
       });
 
+      // Create a new team based on the team data.
       this.model.get('teams').create(teamData, {
         wait: true,
         success: function() {
