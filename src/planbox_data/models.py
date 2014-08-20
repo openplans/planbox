@@ -407,9 +407,9 @@ class ProfileManager (models.Manager):
 
 
 @python_2_unicode_compatible
-class Profile (TimeStampedModel):
+class Profile (ModelWithSlugMixin, TimeStampedModel):
     name = models.CharField(max_length=128, blank=True, help_text=_('The full name of the person or team'))
-    slug = models.CharField(max_length=128, unique=True, help_text=_('A short name that will be used in URLs for projects owned by this profile'))
+    slug = models.CharField(max_length=128, unique=True, blank=True, help_text=_('A short name that will be used in URLs for projects owned by this profile'))
     email = models.EmailField(blank=True, help_text=_('Contact email address of the profile holder'))
     # projects (reverse, Project)
 
@@ -440,6 +440,12 @@ class Profile (TimeStampedModel):
 
     def natural_key(self):
         return (self.slug,)
+
+    def get_slug_basis(self):
+        return self.name
+
+    def get_all_slugs(self):
+        return set([p['slug'] for p in Profile.objects.all().values('slug')])
 
     def is_owned_by(self, user):
         return (user.id == self.auth_id)

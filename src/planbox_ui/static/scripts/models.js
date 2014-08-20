@@ -165,12 +165,19 @@ var Planbox = Planbox || {};
     }, {
       type: Backbone.HasMany,
       key: 'teams',
-      relatedModel: 'TeamProfileModel'
+      relatedModel: 'TeamProfileModel',
+      collectionType: 'TeamProfileCollection'
     }]
   });
 
   NS.OwnedProjectModel = Backbone.RelationalModel.extend({});
+
   NS.MemberProfileModel = Backbone.RelationalModel.extend({});
+
   NS.TeamProfileModel = Backbone.RelationalModel.extend({});
+  NS.TeamProfileCollection = Backbone.Collection.extend({
+    model: NS.TeamProfileModel,
+    url: '/api/v1/profiles'
+  });
 
 }(Planbox));
