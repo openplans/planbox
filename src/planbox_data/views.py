@@ -35,5 +35,32 @@ class ProjectViewSet (viewsets.ModelViewSet):
             return models.Project.objects.filter(public=True)
 
 
+class ProfileViewSet (viewsets.ModelViewSet):
+    serializer_class = serializers.ProfileSerializer
+    permission_classes = (permissions.AuthedUserForUserProfile, permissions.TeamMemberForTeamProfile,)
+    model = models.Profile
+
+    def get_queryset(self):
+        # For PUT/PATCH requests we need to refer to the complete set of
+        # profiles to correctly identify the profile being updated. Otherwise
+        # we may incorrectly assume that we are creating a new profile.
+        if self.request.method.lower() in ('put', 'patch'):
+            return models.Profile.objects.all()
+
+        # For other requests, limit the queryset to those project to which the
+        # user has access.
+        user = self.request.user
+
+        if user.is_superuser:
+            return models.Profile.objects.all()
+
+        if user.is_authenticated():
+            return models.Profile.objects.filter_by_user_or_member(user)
+
+        else:
+            return models.Profile.objects.empty()
+
+
 router = routers.DefaultRouter(trailing_slash=False)
 router.register('projects', ProjectViewSet)
+router.register('profiles', ProfileViewSet)

@@ -367,9 +367,32 @@ class Event (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, models.
         return new_inst
 
 
+class ProfileQuerySet (models.query.QuerySet):
+    def Q_user(self, profile):
+        return models.Q(id=profile.id)
+
+    def Q_member(self, profile):
+        profile_ids = [team.id for team in profile.teams.all()]
+        return models.Q(id__in=profile_ids)
+
+    def filter_by_user_or_member(self, obj):
+        if isinstance(obj, UserAuth):
+            try:
+                obj = obj.profile
+            except Profile.DoesNotExist:
+                return self.empty()
+
+        user_query = self.Q_user(obj)
+        member_query = self.Q_member(obj)
+        return self.filter(user_query | member_query)
+
+
 class ProfileManager (models.Manager):
     def get_queryset(self):
-        return super(ProfileManager, self).get_queryset().select_related('auth')
+        return ProfileQuerySet(self.model, using=self._db).select_related('auth')
+
+    def filter_by_user_or_member(self, obj):
+        return self.get_queryset().filter_by_user_or_member(obj)
 
     def get_by_natural_key(self, slug):
         """

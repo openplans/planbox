@@ -23,3 +23,38 @@ class OwnerAuthorizesOrReadOnly (permissions.IsAuthenticatedOrReadOnly):
         if request.method in permissions.SAFE_METHODS:
             return True
         return self.does_owner_authorize_access(request.user, project)
+
+
+class AuthedUserForUserProfile (permissions.IsAuthenticated):
+    def has_object_permission(self, request, view, profile):
+        # Check we have a profile, just in case.
+        if profile is None:
+            return False
+
+        # If it's a team profile, then it's not our jurisdiction.
+        if profile.auth is None:
+            return True
+
+        # Also, minimally, we must have an authenticated user.
+        if request.user is None or not request.user.is_authenticated():
+            return False
+
+        return profile.auth == request.user
+
+
+class TeamMemberForTeamProfile (permissions.IsAuthenticated):
+    def has_object_permission(self, request, view, profile):
+        # Check we have a profile, just in case.
+        if profile is None:
+            return False
+
+        # If it's a user profile, then it's not our jurisdiction.
+        if profile.auth is not None:
+            return True
+
+        # Also, minimally, we must have an authenticated.
+        if request.user is None or not request.user.is_authenticated():
+            return False
+
+        return profile.has_member(request.user)
+

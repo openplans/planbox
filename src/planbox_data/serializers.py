@@ -99,16 +99,51 @@ class ProjectSerializer (serializers.ModelSerializer):
 # ============================================================
 # Profile serializers
 
-class TeamProfileSerializer (serializers.ModelSerializer):
+class AssociatedProfileSerializer (serializers.ModelSerializer):
     class Meta:
         model = models.Profile
         fields = ('id', 'slug', 'name',)
 
+    def get_default_fields(self):
+        fields = super(AssociatedProfileSerializer, self).get_default_fields()
 
-class MemberProfileSerializer (serializers.ModelSerializer):
-    class Meta:
-        model = models.Profile
-        fields = ('id', 'slug', 'name',)
+        # Modify the fields
+        # - remove read_only so that they're available in restore_objects
+        # - remove required since only one of id or slug is required
+        fields['id'].read_only = False
+        for field in fields.values():
+            field.required = False
+
+        return fields
+
+    def restore_object(self, attrs, instance=None):
+        """
+        Only restore objects that already exist; don't create or delete.
+        """
+        Model = self.opts.model
+
+        # First try to get the model's PK
+        try:
+            id_arg_name = Model._meta.pk.name
+            id_arg_value = attrs[Model._meta.pk.name]
+        except KeyError:
+            # Failing that, try the slug
+            try:
+                id_arg_name = 'slug'
+                id_arg_value = attrs['slug']
+            except KeyError:
+                raise serializers.ValidationError(
+                    'You must specify one of the fields "%s" or "slug".' % (Model._meta.pk.name,))
+
+        # Find the model (Profile) corresponding to the id or slug.
+        try:
+            id_kwargs = {id_arg_name: id_arg_value}
+            instance = Model.objects.get(**id_kwargs)
+        except Model.DoesNotExist:
+            raise serializers.ValidationError(
+                'No %s found with %s=%s' % (Model._meta.verbose_name, id_arg_name, id_arg_value))
+
+        return instance
 
 
 class OwnedProjectSerializer (serializers.ModelSerializer):
@@ -119,19 +154,20 @@ class OwnedProjectSerializer (serializers.ModelSerializer):
 
 class UserSerializer (serializers.ModelSerializer):
     username = serializers.CharField(source='auth.username')
-    teams = TeamProfileSerializer()
+    teams = AssociatedProfileSerializer(required=False, many=True, allow_add_remove=True)
 
     class Meta:
         model = models.Profile
 
 
 class ProfileSerializer (serializers.ModelSerializer):
-    members = MemberProfileSerializer()
-    teams = TeamProfileSerializer()
-    projects = OwnedProjectSerializer()
+    members = AssociatedProfileSerializer(required=False, many=True, allow_add_remove=True)
+    teams = AssociatedProfileSerializer(required=False, many=True, allow_add_remove=True)
+    projects = OwnedProjectSerializer(many=True, read_only=True)
 
     class Meta:
         model = models.Profile
+        exclude = ('project_editor_version',)
 
 
 # ============================================================
