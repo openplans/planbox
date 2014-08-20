@@ -10648,18 +10648,28 @@ textarea.no-resize {
 }
 
 /* line 1267, main.scss */
-.project-list > li + li, .member-list > li + li {
+.project-list > li + li, .member-list > li + li, .team-list > li + li {
   margin-top: 0.625rem;
   padding-top: 0.625rem;
   border-top: 1px solid #e3e3e3;
 }
 
-/* line 1273, main.scss */
+/* line 1274, main.scss */
+.member-list li, .team-list li {
+  padding-left: 4.375rem;
+}
+/* line 1277, main.scss */
+.member-list .avatar, .team-list .avatar {
+  width: 3.75rem;
+  margin-left: -4.375rem;
+}
+
+/* line 1282, main.scss */
 .user-profile .member-list {
   display: none;
 }
 
-/* line 1276, main.scss */
+/* line 1285, main.scss */
 .team-profile .team-list {
   display: none;
 }

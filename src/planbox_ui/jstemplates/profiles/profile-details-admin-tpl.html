@@ -5,13 +5,12 @@
     </div>
   </div>
   <div class="small-8 medium-10 large-12 columns ">
-    <h3 class="profile-name">
-      {{#if name}}
-      {{ name }} ({{ slug }})
-      {{^}}
-      {{ slug }}
-      {{/if}}
-    </h3>
+    {{#if name}}
+    <h3 class="profile-name no-margins">{{ name }}</h3>
+    <p><small>{{ slug }}</small></p>
+    {{^}}
+    <h3 class="profile-name no-margins">{{ slug }}</h3>
+    {{/if}}
     <div class="project-text-content">{{{ description }}}</div>
     <small><a href="#" class="profile-edit-button">Edit Profile</a></small>
   </div>

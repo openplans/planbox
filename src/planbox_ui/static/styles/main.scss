@@ -1263,11 +1263,20 @@ textarea.no-resize {
 }
 
 // Project List & Member List
-.project-list, .member-list {
+.project-list, .member-list, .team-list {
   & > li + li {
     margin-top: $panel-padding / 2;
     padding-top: $panel-padding / 2;
     border-top: $panel-border-size $panel-border-style $panel-border-color;
+  }
+}
+.member-list, .team-list {
+  li {
+    padding-left: $panel-padding * 3.5;
+  }
+  .avatar {
+    width: $panel-padding * 3;
+    margin-left: -$panel-padding * 3.5;
   }
 }
 .user-profile .member-list {
