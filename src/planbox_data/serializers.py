@@ -172,6 +172,22 @@ class ProjectSerializer (serializers.ModelSerializer):
     class Meta:
         model = models.Project
 
+    def validate_slug(self, attrs, source):
+        slug = attrs.get(source)
+        # If the slug is empty, we're just going to generate one.
+        if not slug:
+            return attrs
+        if self.object:
+            # If the slug is not changing, then all is well.
+            if slug == self.object.slug:
+                return attrs
+            # If we're changing the slug, and it's already in use, then we
+            # have a problem.
+            existing_slugs = self.object.get_all_slugs()
+            if slug in existing_slugs:
+                raise serializers.ValidationError('This slug is already in use.')
+        return attrs
+
 
 # ============================================================
 # Template serializers, which render objects without their identifying
