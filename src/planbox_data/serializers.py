@@ -48,54 +48,6 @@ class OrderedSerializerMixin (object):
                 obj.index = index
 
 
-class AttachmentSerializer (OrderedSerializerMixin, serializers.ModelSerializer):
-    label = CleanedHtmlField()
-    description = CleanedHtmlField(required=False)
-
-    class Meta:
-        model = models.Attachment
-        exclude = ('attached_to_type', 'attached_to_id', 'index')
-
-
-class EventSerializer (OrderedSerializerMixin, serializers.ModelSerializer):
-    label = CleanedHtmlField()
-    description = CleanedHtmlField(required=False)
-    attachments = AttachmentSerializer(many=True, required=False, allow_add_remove=True)
-
-    class Meta:
-        model = models.Event
-        exclude = ('project', 'index')
-
-
-class SectionSerializer (OrderedSerializerMixin, serializers.ModelSerializer):
-    # DRF makes the wrong default decision for the details field, chosing a
-    # CharField. We want something more direct.
-    details = serializers.WritableField(required=False)
-
-    class Meta:
-        model = models.Section
-        exclude = ('project', 'index')
-
-
-class ProjectSerializer (serializers.ModelSerializer):
-    events = EventSerializer(many=True, allow_add_remove=True)
-    sections = SectionSerializer(many=True, allow_add_remove=True)
-    owner = serializers.SlugRelatedField(slug_field='slug')
-
-    title = CleanedHtmlField(required=True)
-    location = CleanedHtmlField(required=False)
-    contact = CleanedHtmlField(required=False)
-    # DRF makes the wrong default decision for the details field, chosing a
-    # CharField. We want something more direct.
-    details = serializers.WritableField(required=False)
-
-    happening_now_description = CleanedHtmlField(required=False)
-    get_involved_description = CleanedHtmlField(required=False)
-
-    class Meta:
-        model = models.Project
-
-
 # ============================================================
 # Profile serializers
 
@@ -168,6 +120,57 @@ class ProfileSerializer (serializers.ModelSerializer):
     class Meta:
         model = models.Profile
         exclude = ('project_editor_version',)
+
+
+# ============================================================
+# Project-related serializers
+
+class AttachmentSerializer (OrderedSerializerMixin, serializers.ModelSerializer):
+    label = CleanedHtmlField()
+    description = CleanedHtmlField(required=False)
+
+    class Meta:
+        model = models.Attachment
+        exclude = ('attached_to_type', 'attached_to_id', 'index')
+
+
+class EventSerializer (OrderedSerializerMixin, serializers.ModelSerializer):
+    label = CleanedHtmlField()
+    description = CleanedHtmlField(required=False)
+    attachments = AttachmentSerializer(many=True, required=False, allow_add_remove=True)
+
+    class Meta:
+        model = models.Event
+        exclude = ('project', 'index')
+
+
+class SectionSerializer (OrderedSerializerMixin, serializers.ModelSerializer):
+    # DRF makes the wrong default decision for the details field, chosing a
+    # CharField. We want something more direct.
+    details = serializers.WritableField(required=False)
+
+    class Meta:
+        model = models.Section
+        exclude = ('project', 'index')
+
+
+class ProjectSerializer (serializers.ModelSerializer):
+    events = EventSerializer(many=True, allow_add_remove=True)
+    sections = SectionSerializer(many=True, allow_add_remove=True)
+    owner = AssociatedProfileSerializer(required=True)
+
+    title = CleanedHtmlField(required=True)
+    location = CleanedHtmlField(required=False)
+    contact = CleanedHtmlField(required=False)
+    # DRF makes the wrong default decision for the details field, chosing a
+    # CharField. We want something more direct.
+    details = serializers.WritableField(required=False)
+
+    happening_now_description = CleanedHtmlField(required=False)
+    get_involved_description = CleanedHtmlField(required=False)
+
+    class Meta:
+        model = models.Project
 
 
 # ============================================================

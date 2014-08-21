@@ -35,7 +35,7 @@ var Planbox = Planbox || {};
     var ProjectView;
 
     if (NS.Data.isEditable && !NS.Data.project.owner_id) {
-      NS.Data.project.owner = NS.Data.owner.slug;
+      NS.Data.project.owner = _.clone(NS.Data.owner);
     }
 
     NS.app.projectModel = new NS.ProjectModel(NS.Data.project);

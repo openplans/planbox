@@ -154,6 +154,7 @@ var Planbox = Planbox || {};
       type: Backbone.HasMany,
       key: 'projects',
       relatedModel: 'OwnedProjectModel',
+      collectionType: 'OwnedProjectCollection',
       reverseRelation: {
         key: 'owner',
         includeInJSON: 'slug'
@@ -171,6 +172,10 @@ var Planbox = Planbox || {};
   });
 
   NS.OwnedProjectModel = Backbone.RelationalModel.extend({});
+  NS.OwnedProjectCollection = Backbone.Collection.extend({
+    model: NS.OwnedProjectModel,
+    url: '/api/v1/projects'
+  });
 
   NS.MemberProfileModel = Backbone.RelationalModel.extend({});
 

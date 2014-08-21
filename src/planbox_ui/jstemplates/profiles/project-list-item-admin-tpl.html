@@ -1,13 +1,13 @@
 <h3 class="no-margins"><a href="/{{ ./owner }}/{{ slug }}/">{{ title }}</a></h3>
-<small class="slug">
-  openplans.org/{{ ./owner }}/{{ slug }}/
-  &mdash; <a href="#" class="" data-dropdown="drop4">Edit URL</a>
-  <ul id="drop4" class="f-dropdown" data-dropdown-content>
+<small class="url">
+  openplans.org/{{ ./owner }}/<span class="slug">{{ slug }}</span>/
+  &mdash; <a href="#" class="" data-dropdown="project-{{ id }}-menu">Edit URL</a>
+  <ul id="project-{{ id }}-menu" class="f-dropdown" data-dropdown-content>
     <li><a href="#" class="change-slug">Change Slug</a></li>
     <li><a href="mailto:{{contact_email}}" class="open-intercom">Request a custom domain&hellip;</a></li>
   </ul>
 </small>
-<form class="hide">
+<form class="slug-form hide">
   <!-- TODO: validate; don't save if blank -->
-  <small><span class="hide-for-small-only">openplans.org/{{ ./owner }}/</span><input type="text" id="slug" class="inline-input" value="{{ slug }}"><span class="hide-for-small-only">/&nbsp;&nbsp;</span><button class="tiny less-padding">OK</button>&nbsp;&nbsp;<a href="#" class="cancel-slug-change alert">Cancel</a></small>
+  <small><span class="hide-for-small-only">openplans.org/{{ ./owner }}/</span><input type="text" id="slug" class="slug-field inline-input" value="{{ slug }}"><span class="hide-for-small-only">/&nbsp;&nbsp;</span><button class="tiny less-padding">OK</button>&nbsp;&nbsp;<a href="#" class="cancel-slug-change alert">Cancel</a></small>
 </form>
