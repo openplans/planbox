@@ -35,6 +35,8 @@ var Planbox = Planbox || {};
     handleSlugFormSubmit: function(evt) {
       evt.preventDefault();
       var self = this;
+
+      this.$('.error').remove();
       this.model.save({'slug': this.ui.slugField.val()}, {
         patch: true,
         wait: true,
@@ -42,11 +44,15 @@ var Planbox = Planbox || {};
           self.render();
         },
         error: function(model, $xhr, options) {
-          alert('Something went wrong while setting the plan slug.\n' +
-            'We have been notified of the error and will look into it ASAP.');
-          throw NS.profileException(
-            'Failed to set project slug for project with id "' + model.get('id') + '". ' +
-            'HTTP status ' + $xhr.status + ' ' + $xhr.statusText + '.');
+          if ($xhr.status === 400) {
+            self.ui.slugForm.append('<small class="error">' + self.ui.slugField.attr('data-error-message') + '</small>');
+          } else {
+            alert('Something went wrong while setting the plan slug.\n' +
+              'We have been notified of the error and will look into it ASAP.');
+            throw NS.profileException(
+              'Failed to set project slug for project with id "' + model.get('id') + '". ' +
+              'HTTP status ' + $xhr.status + ' ' + $xhr.statusText + '.');
+          }
         }
       });
     }

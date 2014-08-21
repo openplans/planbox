@@ -9,5 +9,5 @@
 </small>
 <form class="slug-form hide">
   <!-- TODO: validate; don't save if blank -->
-  <small><span class="hide-for-small-only">openplans.org/{{ ./owner }}/</span><input type="text" id="slug" class="slug-field inline-input" value="{{ slug }}"><span class="hide-for-small-only">/&nbsp;&nbsp;</span><button class="tiny less-padding">OK</button>&nbsp;&nbsp;<a href="#" class="cancel-slug-change alert">Cancel</a></small>
+  <small><span class="hide-for-small-only">openplans.org/{{ ./owner }}/</span><input type="text" id="slug" class="slug-field inline-input" value="{{ slug }}" data-error-message="That slug is already used by another plan in your team. Please use a different slug for each plan."><span class="hide-for-small-only">/&nbsp;&nbsp;</span><button class="tiny less-padding">OK</button>&nbsp;&nbsp;<a href="#" class="cancel-slug-change alert">Cancel</a></small>
 </form>
