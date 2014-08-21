@@ -26,11 +26,13 @@ var Planbox = Planbox || {};
       this.ui.slugField.width(Math.max(slugWidth, 20));
       this.$('.url').addClass('hide');
       this.$('form').removeClass('hide');
+      $('.slug-field').select();
     },
     handleCloseSlugForm: function(evt) {
       evt.preventDefault();
       this.$('.url').removeClass('hide');
       this.$('form').addClass('hide');
+      this.render();
     },
     handleSlugFormSubmit: function(evt) {
       evt.preventDefault();
