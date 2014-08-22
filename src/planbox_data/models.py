@@ -412,6 +412,8 @@ class Profile (ModelWithSlugMixin, TimeStampedModel):
     name = models.CharField(max_length=128, blank=True, help_text=_('The full name of the person or team'))
     slug = models.CharField(max_length=128, unique=True, blank=True, help_text=_('A short name that will be used in URLs for projects owned by this profile'))
     email = models.EmailField(blank=True, help_text=_('Contact email address of the profile holder'))
+    description = models.TextField(blank=True, default='')
+    avatar_url = models.URLField(blank=True, null=True)
     # projects (reverse, Project)
 
     # User-profile specific
