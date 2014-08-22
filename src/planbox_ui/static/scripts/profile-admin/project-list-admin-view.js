@@ -63,7 +63,15 @@ var Planbox = Planbox || {};
   NS.ProjectListAdminView = Backbone.Marionette.CompositeView.extend({
     template: '#project-list-admin-tpl',
     itemView: NS.ProjectListItemAdminView,
-    itemViewContainer: '.project-list'
+    itemViewContainer: '.project-list',
+
+    modelEvents: {
+      'sync': 'handleModelSync'
+    },
+
+    handleModelSync: function() {
+      this.render();
+    }
   });
 
 }(Planbox, jQuery));

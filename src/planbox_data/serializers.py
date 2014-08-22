@@ -121,6 +121,11 @@ class ProfileSerializer (serializers.ModelSerializer):
         model = models.Profile
         exclude = ('project_editor_version',)
 
+    def validate(self, attrs):
+        if not attrs.get('name') and not attrs.get('slug'):
+            raise serializers.ValidationError('You must specify either a name or a slug.')
+        return attrs
+
 
 # ============================================================
 # Project-related serializers

@@ -150,6 +150,7 @@ var Planbox = Planbox || {};
 
 
   NS.ProfileModel = Backbone.RelationalModel.extend({
+    urlRoot: '/api/v1/profiles',
     relations: [{
       type: Backbone.HasMany,
       key: 'projects',

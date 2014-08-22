@@ -21,9 +21,9 @@
     <div class="avatar-container panel">
       <div class="drag-area-container">
         {{#if_fileapi_support 'cors'}}
-        <img class="image-holder" data-attr="img_url"
+        <img class="image-holder" data-attr="avatar_url"
           src="{{#if avatar_url}}{{ avatar_url }}{{^}}//placehold.it/400/f7f7f7/bbbbbb&text=...{{/if}}"
-          data-empty-img="">
+          data-empty-img="//placehold.it/400/f7f7f7/bbbbbb&text=...">
         <div class="drag-area text-center image-dnd" data-max-width="1000">
           <p class="drop-instructions">Drop image here or&hellip;</p>
           <p class="uploading-message">Uploading&hellip;</p>
@@ -39,10 +39,16 @@
     <div class="float-label-container">
       <input class="sub-heading-input float-label-input" type="text" placeholder="Name" value="{{ name }}" data-attr="name">
       <span class="float-label">Name</span>
+
+      <div data-error-attr="non_field_errors" data-error-message="You must enter &lt;em&gt;at least&lt;/em&gt; either a name or a slug."></div>
+
     </div>
     <div class="float-label-container">
       <input class="float-label-input" type="text" placeholder="slug" value="{{ slug }}" data-attr="slug">
       <span class="float-label">Slug</span>
+
+      <div data-error-attr="slug" data-error-message="This slug is already used by another user or team. Please choose a different, unique slug."></div>
+
     </div>
     <div class="float-label-container">
       <!-- TODO: Make this a pen editor. -->
