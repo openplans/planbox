@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.utils.timezone import now
 from rest_framework import routers
 from rest_framework import viewsets
 
@@ -33,6 +34,11 @@ class ProjectViewSet (viewsets.ModelViewSet):
 
         else:
             return models.Project.objects.filter(public=True)
+
+    def pre_save(self, obj):
+        user = self.request.user
+        obj.last_saved_by = user if user.is_authenticated() else None
+        obj.last_saved_at = now()
 
 
 class ProfileViewSet (viewsets.ModelViewSet):

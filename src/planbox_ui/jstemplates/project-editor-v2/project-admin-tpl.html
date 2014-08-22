@@ -162,9 +162,15 @@
     <div class="row">
       <div class="columns small-12">
 
+        <!-- <div data-alert class="multi-user-warning alert-box alert radius"> -->
+          <!-- <small>WARNING:</small> Frank, and Aaron may be editing this plan! -->
+        <!-- </div> -->
+
+        {{#bootstrapped 'opened'}}
         <div data-alert class="multi-user-warning alert-box alert radius">
-          <small>WARNING:</small> Frank<!-- , and Aaron --> may be editing this plan!
+          <small>WARNING:</small> {{opened_by.slug}} may be editing this plan!
         </div>
+        {{/bootstrapped}}
 
         <button class="button expand radius save-btn disabled">Save</button>
 

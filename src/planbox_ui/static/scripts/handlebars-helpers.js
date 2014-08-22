@@ -63,10 +63,18 @@ var Planbox = Planbox || {};
       return obj[attr];
     }
 
-    // Only one arg, so attr is really options
+    // Only one arg, so this is a block and attr is really options
     options = attr;
-    return options.fn(obj);
+    if (obj) {
+      return options.fn(obj);
+    } else {
+      return options.inverse(this);
+    }
   };
+
+  Handlebars.registerHelper('bootstrapped', function(data_name, attr, options) {
+    return global_data_attr(NS.Data[data_name], attr, options);
+  });
 
   Handlebars.registerHelper('user', function(attr, options) {
     return global_data_attr(NS.Data.user, attr, options);

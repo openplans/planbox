@@ -22,7 +22,7 @@ from password_reset.views import (
     PasswordChangeView as BasePasswordChangeView)
 from planbox_data.models import Project, Profile
 from planbox_data.serializers import (ProjectSerializer, UserSerializer,
-    TemplateProjectSerializer, ProfileSerializer)
+    TemplateProjectSerializer, ProfileSerializer, AssociatedProfileSerializer)
 from planbox_ui.decorators import ssl_required
 from planbox_ui.forms import UserCreationForm, AuthenticationForm
 import pybars
@@ -336,7 +336,17 @@ class ProjectMixin (AppMixin):
 
         # A flag denoting whether the current user is the project owner. Used
         # to determine whether an editable interface should be presented.
-        context['is_editable'] = self.get_project_is_editable()
+        is_editable = self.get_project_is_editable()
+        context['is_editable'] = is_editable
+
+        if is_editable and not self.project.is_opened_by(self.request.user):
+            opened_data = self.project.get_opened_status()
+            opened_by = opened_data['opened_by']
+            opened_by_serializer = AssociatedProfileSerializer(opened_by.profile)
+            opened_data['opened_by'] = None if opened_by is None else opened_by_serializer.data
+            context['opened_data'] = opened_data
+        else:
+            context['opened_data'] = None
 
         return context
 
@@ -358,12 +368,18 @@ class BaseExistingProjectView (ProjectMixin, TemplateView):
         project_slug = self.kwargs['project_slug']
         return '/'.join([owner_slug, project_slug])
 
+    def is_project_open(self):
+        return self.project.get_opened_status()
+
     def get(self, request, owner_slug, project_slug):
         self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
                                          owner__slug=owner_slug, slug=project_slug)
 
         if not self.get_project_is_visible():
             return redirect('app-index')
+
+        if self.get_project_is_editable() and not self.is_project_open():
+            self.project.mark_opened_by(request.user)
 
         return super(BaseExistingProjectView, self).get(request, pk=self.project.pk)
 

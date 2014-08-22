@@ -176,6 +176,7 @@ class ProjectSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = models.Project
+        exclude = ('last_opened_at', 'last_opened_by', 'last_saved_at', 'last_saved_by')
 
     def validate_slug(self, attrs, source):
         slug = attrs.get(source)

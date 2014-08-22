@@ -8,7 +8,7 @@ from django.db.models.signals import post_save
 from django.utils.text import slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import strip_tags
-from django.utils.timezone import now
+from django.utils.timezone import now, timedelta
 from django.utils.translation import ugettext as _
 from jsonfield import JSONField
 
@@ -264,6 +264,12 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     get_involved_link_type = models.CharField(max_length=16, choices=LINK_TYPE_CHOICES, blank=True)
     get_involved_link_url = models.CharField(max_length=2048, blank=True)
 
+    # Project activity
+    last_opened_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, related_name='+')
+    last_opened_at = models.DateTimeField(null=True, blank=True)
+    last_saved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, related_name='+')
+    last_saved_at = models.DateTimeField(null=True, blank=True)
+
     objects = ProjectManager()
 
     class Meta:
@@ -271,6 +277,25 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    def mark_opened_by(self, user):
+        # TODO: This could just be done in the cache.
+        self.last_opened_at = now()
+        self.last_opened_by = user if user.is_authenticated() else None
+        self.save()
+
+    def is_opened_by(self, user):
+        return self.last_opened_by == user
+
+    def get_opened_status(self):
+        two_minutes = timedelta(minutes=2)
+        if self.last_opened_at and (now() - self.last_opened_at) < two_minutes:
+            return {
+                'opened_by': self.last_opened_by,
+                'opened_at': self.last_opened_at
+            }
+        else:
+            return None
 
     def natural_key(self):
         return self.owner.natural_key() + (self.slug,)
