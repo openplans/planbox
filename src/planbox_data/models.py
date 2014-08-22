@@ -468,7 +468,7 @@ class Profile (ModelWithSlugMixin, TimeStampedModel):
 
     def save(self, **kwargs):
         super(Profile, self).save(**kwargs)
-        if not self.is_synced_with_auth():
+        if self.auth and not self.is_synced_with_auth():
             self.auth.username = self.slug
             self.auth.email = self.email
             self.auth.save()
