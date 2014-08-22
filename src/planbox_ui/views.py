@@ -143,12 +143,13 @@ class S3UploadMixin (object):
 
     def get_s3_upload_form_data(self):
         encoded_policy = self.get_s3_upload_encoded_policy()
+        upload_signature = self.get_s3_upload_signature(encoded_policy, settings.AWS_SECRET_KEY)
         return {
             'key': '/'.join([self.get_s3_upload_path(), '${filename}']),
             'AWSAccessKeyId': settings.AWS_ACCESS_KEY,
             'acl': self.get_s3_upload_acl(),
-            'policy': encoded_policy,
-            'signature': self.get_s3_upload_signature(encoded_policy, settings.AWS_SECRET_KEY),
+            'policy': encoded_policy.decode('utf-8'),
+            'signature': upload_signature.decode('utf-8'),
         }
 
     def get_context_data(self, **kwargs):
