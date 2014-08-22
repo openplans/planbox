@@ -77,10 +77,10 @@
 
   {% block scripts %}{% endblock %}
 
-  {% if settings.SENTRY_DSN %}
+  {% if settings.SAFE_SENTRY_DSN %}
   <script>
     // Error logging with Sentry
-    Raven.config('{{ settings.SENTRY_DSN }}').install()
+    Raven.config('{{ settings.SAFE_SENTRY_DSN }}').install()
   </script>
   {% endif %}
 
