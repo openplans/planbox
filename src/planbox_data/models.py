@@ -101,9 +101,10 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
         profile = Profile.objects.get(auth=auth)
     except Profile.DoesNotExist:
         profile = Profile(auth=auth)
-    profile.slug = auth.username
-    profile.email = auth.email
-    profile.save()
+    if not profile.is_synced_with_auth(auth):
+        profile.slug = auth.username
+        profile.email = auth.email
+        profile.save()
 post_save.connect(create_or_update_user_profile, sender=UserAuth, dispatch_uid="user-profile-create-signal")
 
 
@@ -456,6 +457,21 @@ class Profile (ModelWithSlugMixin, TimeStampedModel):
             return True
         else:
             return any(profile.has_member(user) for profile in members)
+
+    def is_synced_with_auth(self, auth=None):
+        auth = auth or self.auth
+        if self.slug != auth.username:
+            return False
+        if self.email != auth.email:
+            return False
+        return True
+
+    def save(self, **kwargs):
+        super(Profile, self).save(**kwargs)
+        if not self.is_synced_with_auth():
+            self.auth.username = self.slug
+            self.auth.email = self.email
+            self.auth.save()
 
     def authorizes(self, user):
         """
