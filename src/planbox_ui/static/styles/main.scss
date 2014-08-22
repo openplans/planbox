@@ -312,15 +312,16 @@ section, footer {
 }
 
 .feature-illustration {
+  display: block;
   @media #{$medium-up} {
     margin-top: -1.5rem;
   }
   @media #{$large-up} {
     margin-top: -3.5rem;
     position: relative;
-    right: -1rem;
+    right: -1.5rem;
     .medium-push-8 & {
-      right: 1rem;
+      right: 1.5rem;
     }
   }
 }
