@@ -313,8 +313,15 @@ section, footer {
 
 .feature-illustration {
   @media #{$medium-up} {
+    margin-top: -1.5rem;
+  }
+  @media #{$large-up} {
+    margin-top: -3.5rem;
     position: relative;
-    top: -1.5rem;
+    right: -1rem;
+    .medium-push-8 & {
+      right: 1rem;
+    }
   }
 }
 
@@ -333,6 +340,11 @@ section, footer {
       padding-left: 0.5em;
     }
   }
+}
+
+// Product - Benefits
+.product-benefits {
+  background-color: #ddd;
 }
 
 // Product - Demos

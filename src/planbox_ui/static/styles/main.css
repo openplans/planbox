@@ -6159,7 +6159,15 @@ section, footer {
 
 @media only screen and (min-width: 40.063em) {
   .feature-illustration {
+    margin-top: -1.5rem;
+  }
+}
+@media only screen and (min-width: 64.063em) {
+  /* line 314, main.scss */
+  .feature-illustration {
+    margin-top: -3.5rem;
     position: relative;
+<<<<<<< Updated upstream
     top: -1.5rem; } }
 
 .product-get-started {
@@ -6193,6 +6201,69 @@ section, footer {
       -ms-transform-origin: 50% 50%;
       transform-origin: 50% 50%; } }
 
+=======
+    right: -1rem;
+  }
+  /* line 322, main.scss */
+  .medium-push-8 .feature-illustration {
+    right: 1rem;
+  }
+}
+
+/* line 329, main.scss */
+.product-get-started {
+  background-color: #ddd;
+}
+@media only screen and (min-width: 64.063em) {
+  /* line 332, main.scss */
+  .product-get-started h4 {
+    line-height: 2.25em;
+  }
+  /* line 336, main.scss */
+  .product-get-started input,
+  .product-get-started button {
+    height: 2.75em;
+    font-size: 1.25em;
+    line-height: 2.75em;
+    padding-left: 0.5em;
+  }
+}
+
+/* line 346, main.scss */
+.product-benefits {
+  background-color: #ddd;
+}
+
+/* line 351, main.scss */
+.product-demos {
+  color: #fff;
+  background-color: #308fbf;
+}
+/* line 354, main.scss */
+.product-demos h3 {
+  margin: 0;
+}
+
+/* line 358, main.scss */
+.demo-image {
+  display: block;
+  float: right;
+  position: relative;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 358, main.scss */
+  .demo-image {
+    -webkit-transition: -webkit-transform .2s ease;
+    -ms-transition: -ms-transform .2s ease;
+    transition: transform .2s ease;
+    -webkit-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+  }
+}
+
+/* line 371, main.scss */
+>>>>>>> Stashed changes
 .demo-image-ipad {
   float: left;
   width: 36%;
@@ -6200,6 +6271,7 @@ section, footer {
   z-index: 2;
   -webkit-transform: rotate(-8deg);
   -ms-transform: rotate(-8deg);
+<<<<<<< Updated upstream
   transform: rotate(-8deg); }
   @media only screen and (min-width: 40.063em) {
     .demo-image-ipad:hover {
@@ -6208,6 +6280,21 @@ section, footer {
       -ms-transform: scale(1.25) rotate(-6deg);
       transform: scale(1.25) rotate(-6deg); } }
 
+=======
+  transform: rotate(-8deg);
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 379, main.scss */
+  .demo-image-ipad:hover {
+    z-index: 4;
+    -webkit-transform: scale(1.25) rotate(-6deg);
+    -ms-transform: scale(1.25) rotate(-6deg);
+    transform: scale(1.25) rotate(-6deg);
+  }
+}
+
+/* line 388, main.scss */
+>>>>>>> Stashed changes
 .demo-image-iphone {
   width: 17%;
   margin-bottom: -13%;
@@ -6215,6 +6302,7 @@ section, footer {
   z-index: 3;
   -webkit-transform: rotate(15deg);
   -ms-transform: rotate(15deg);
+<<<<<<< Updated upstream
   transform: rotate(15deg); }
   @media only screen and (min-width: 40.063em) {
     .demo-image-iphone:hover {
@@ -6244,19 +6332,82 @@ section, footer {
     color: #cceeff; }
     .product-feedback a:hover, .product-feedback a:focus {
       color: #3db6f2; }
+=======
+  transform: rotate(15deg);
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 396, main.scss */
+  .demo-image-iphone:hover {
+    z-index: 4;
+    -webkit-transform: scale(1.25) rotate(10deg);
+    -ms-transform: scale(1.25) rotate(10deg);
+    transform: scale(1.25) rotate(10deg);
+  }
+}
+
+/* line 405, main.scss */
+.demo-image-ff {
+  width: 63%;
+  z-index: 1;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 405, main.scss */
+  .demo-image-ff {
+    -webkit-transform-origin: 60% 100%;
+    -ms-transform-origin: 60% 100%;
+    transform-origin: 60% 100%;
+  }
+  /* line 412, main.scss */
+  .demo-image-ff:hover {
+    z-index: 4;
+    -webkit-transform: scale(1.25);
+    -ms-transform: scale(1.25);
+    transform: scale(1.25);
+  }
+}
+
+/* line 422, main.scss */
+.product-feedback {
+  background-color: #6c7180;
+  color: #fff;
+}
+/* line 425, main.scss */
+.product-feedback a {
+  color: #cceeff;
+}
+/* line 428, main.scss */
+.product-feedback a:hover, .product-feedback a:focus {
+  color: #3db6f2;
+}
+>>>>>>> Stashed changes
 
 /*--------------------------------------------------
   Product: About Page
 --------------------------------------------------*/
+<<<<<<< Updated upstream
 .team-section {
   background-color: #ccc; }
   .team-section .avatar {
     display: block;
     padding-right: 0.9375rem; }
 
+=======
+/* line 439, main.scss */
+.team-section {
+  background-color: #ccc;
+}
+/* line 441, main.scss */
+.team-section .avatar {
+  display: block;
+  padding-right: 0.9375rem;
+}
+
+/* line 447, main.scss */
+>>>>>>> Stashed changes
 .clients-section {
   background-color: #ddd; }
 
+<<<<<<< Updated upstream
 .clients-list {
   text-align: center; }
   .clients-list img {
@@ -6266,10 +6417,26 @@ section, footer {
     max-height: 90%;
     width: auto;
     height: auto; }
+=======
+/* line 450, main.scss */
+.clients-list {
+  text-align: center;
+}
+/* line 452, main.scss */
+.clients-list img {
+  display: block;
+  margin: 0.9375rem auto;
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+}
+>>>>>>> Stashed changes
 
 /*--------------------------------------------------
   Product: Shareabouts Page
 --------------------------------------------------*/
+<<<<<<< Updated upstream
 .shareabouts-page-header {
   overflow: hidden; }
   .shareabouts-page-header .columns, .shareabouts-page-header .row {
@@ -6282,11 +6449,36 @@ section, footer {
   .shareabouts-page-header .shareabouts-page-header-text h2 img {
     width: 400px; }
 
+=======
+/* line 467, main.scss */
+.shareabouts-page-header {
+  overflow: hidden;
+}
+/* line 469, main.scss */
+.shareabouts-page-header .columns, .shareabouts-page-header .row {
+  overflow: visible;
+}
+@media only screen and (min-width: 64.063em) {
+  /* line 472, main.scss */
+  .shareabouts-page-header .shareabouts-page-header-text {
+    margin-top: 4rem;
+    position: relative;
+    z-index: 2;
+  }
+}
+/* line 478, main.scss */
+.shareabouts-page-header .shareabouts-page-header-text h2 img {
+  width: 400px;
+}
+
+/* line 483, main.scss */
+>>>>>>> Stashed changes
 .shareabouts-slideshow {
   position: relative;
   width: 500px;
   height: 290px;
   left: 50%;
+<<<<<<< Updated upstream
   margin-left: -200px; }
   @media only screen and (min-width: 40.063em) {
     .shareabouts-slideshow {
@@ -6322,199 +6514,511 @@ section, footer {
       animation-name: fade4; }
 
 @-webkit-keyframes fade {
+=======
+  margin-left: -200px;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 483, main.scss */
+  .shareabouts-slideshow {
+    width: 1000px;
+    height: 580px;
+    left: 0;
+    margin-left: 0;
+  }
+}
+/* line 495, main.scss */
+.shareabouts-slideshow .shareabouts-slide {
+  display: block;
+  position: absolute;
+  top: 11px;
+  left: 57px;
+  width: 385px;
+  height: 246px;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 495, main.scss */
+  .shareabouts-slideshow .shareabouts-slide {
+    top: 22px;
+    left: 115px;
+    width: 770px;
+    height: 493px;
+  }
+}
+/* line 509, main.scss */
+.shareabouts-slideshow .fade {
+  -webkit-animation: fade 25s linear infinite;
+  -moz-animation: fade 25s linear infinite;
+  animation: fade 25s linear infinite;
+}
+/* line 513, main.scss */
+.shareabouts-slideshow .fade.fade2 {
+  -webkit-animation-name: fade2;
+  animation-name: fade2;
+}
+/* line 514, main.scss */
+.shareabouts-slideshow .fade.fade3 {
+  -webkit-animation-name: fade3;
+  animation-name: fade3;
+}
+/* line 515, main.scss */
+.shareabouts-slideshow .fade.fade4 {
+  -webkit-animation-name: fade4;
+  animation-name: fade4;
+}
+
+@-webkit-keyframes fade {
+  /* line 520, main.scss */
+>>>>>>> Stashed changes
   0% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 520, main.scss */
+>>>>>>> Stashed changes
   18% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 520, main.scss */
+>>>>>>> Stashed changes
   20% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 520, main.scss */
+>>>>>>> Stashed changes
   98% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 520, main.scss */
+>>>>>>> Stashed changes
   100% {
     opacity: 1; } }
 @-moz-keyframes fade {
+<<<<<<< Updated upstream
+=======
+  /* line 521, main.scss */
+>>>>>>> Stashed changes
   0% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 521, main.scss */
+>>>>>>> Stashed changes
   18% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 521, main.scss */
+>>>>>>> Stashed changes
   20% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 521, main.scss */
+>>>>>>> Stashed changes
   98% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 521, main.scss */
+>>>>>>> Stashed changes
   100% {
     opacity: 1; } }
 @keyframes fade {
+<<<<<<< Updated upstream
+=======
+  /* line 522, main.scss */
+>>>>>>> Stashed changes
   0% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 522, main.scss */
+>>>>>>> Stashed changes
   18% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 522, main.scss */
+>>>>>>> Stashed changes
   20% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 522, main.scss */
+>>>>>>> Stashed changes
   98% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 522, main.scss */
+>>>>>>> Stashed changes
   100% {
     opacity: 1; } }
 @-webkit-keyframes fade2 {
+<<<<<<< Updated upstream
+=======
+  /* line 524, main.scss */
+>>>>>>> Stashed changes
   0% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 524, main.scss */
+>>>>>>> Stashed changes
   38% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 524, main.scss */
+>>>>>>> Stashed changes
   40% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 524, main.scss */
+>>>>>>> Stashed changes
   99% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 524, main.scss */
+>>>>>>> Stashed changes
   100% {
     opacity: 1; } }
 @-moz-keyframes fade2 {
+<<<<<<< Updated upstream
+=======
+  /* line 525, main.scss */
+>>>>>>> Stashed changes
   0% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 525, main.scss */
+>>>>>>> Stashed changes
   38% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 525, main.scss */
+>>>>>>> Stashed changes
   40% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 525, main.scss */
+>>>>>>> Stashed changes
   99% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 525, main.scss */
+>>>>>>> Stashed changes
   100% {
     opacity: 1; } }
 @keyframes fade2 {
+<<<<<<< Updated upstream
+=======
+  /* line 526, main.scss */
+>>>>>>> Stashed changes
   0% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 526, main.scss */
+>>>>>>> Stashed changes
   38% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 526, main.scss */
+>>>>>>> Stashed changes
   40% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 526, main.scss */
+>>>>>>> Stashed changes
   99% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 526, main.scss */
+>>>>>>> Stashed changes
   100% {
     opacity: 1; } }
 @-webkit-keyframes fade3 {
+<<<<<<< Updated upstream
+=======
+  /* line 528, main.scss */
+>>>>>>> Stashed changes
   0% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 528, main.scss */
+>>>>>>> Stashed changes
   58% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 528, main.scss */
+>>>>>>> Stashed changes
   60% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 528, main.scss */
+>>>>>>> Stashed changes
   99% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 528, main.scss */
+>>>>>>> Stashed changes
   100% {
     opacity: 1; } }
 @-moz-keyframes fade3 {
+<<<<<<< Updated upstream
+=======
+  /* line 529, main.scss */
+>>>>>>> Stashed changes
   0% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 529, main.scss */
+>>>>>>> Stashed changes
   58% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 529, main.scss */
+>>>>>>> Stashed changes
   60% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 529, main.scss */
+>>>>>>> Stashed changes
   99% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 529, main.scss */
+>>>>>>> Stashed changes
   100% {
     opacity: 1; } }
 @keyframes fade3 {
+<<<<<<< Updated upstream
+=======
+  /* line 530, main.scss */
+>>>>>>> Stashed changes
   0% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 530, main.scss */
+>>>>>>> Stashed changes
   58% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 530, main.scss */
+>>>>>>> Stashed changes
   60% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 530, main.scss */
+>>>>>>> Stashed changes
   99% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 530, main.scss */
+>>>>>>> Stashed changes
   100% {
     opacity: 1; } }
 @-webkit-keyframes fade4 {
+<<<<<<< Updated upstream
+=======
+  /* line 532, main.scss */
+>>>>>>> Stashed changes
   0% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 532, main.scss */
+>>>>>>> Stashed changes
   78% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 532, main.scss */
+>>>>>>> Stashed changes
   80% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 532, main.scss */
+>>>>>>> Stashed changes
   99% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 532, main.scss */
+>>>>>>> Stashed changes
   100% {
     opacity: 1; } }
 @-moz-keyframes fade4 {
+<<<<<<< Updated upstream
+=======
+  /* line 533, main.scss */
+>>>>>>> Stashed changes
   0% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 533, main.scss */
+>>>>>>> Stashed changes
   78% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 533, main.scss */
+>>>>>>> Stashed changes
   80% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 533, main.scss */
+>>>>>>> Stashed changes
   99% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 533, main.scss */
+>>>>>>> Stashed changes
   100% {
     opacity: 1; } }
 @keyframes fade4 {
+<<<<<<< Updated upstream
+=======
+  /* line 534, main.scss */
+>>>>>>> Stashed changes
   0% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 534, main.scss */
+>>>>>>> Stashed changes
   78% {
     opacity: 1; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 534, main.scss */
+>>>>>>> Stashed changes
   80% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 534, main.scss */
+>>>>>>> Stashed changes
   99% {
     opacity: 0; }
 
+<<<<<<< Updated upstream
   100% {
     opacity: 1; } }
 .shareabouts-instances .img {
   margin-right: -110px;
   width: 100px;
   height: 100px; }
+=======
+  /* line 534, main.scss */
+  100% {
+    opacity: 1;
+  }
+}
+
+/* line 537, main.scss */
+.shareabouts-instances .img {
+  margin-right: -110px;
+  width: 100px;
+  height: 100px;
+}
+/* line 542, main.scss */
+>>>>>>> Stashed changes
 .shareabouts-instances .description {
   margin-left: 110px; }
 
+<<<<<<< Updated upstream
+=======
+/* line 546, main.scss */
+>>>>>>> Stashed changes
 .pricing-table {
   border: 0;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05); }
 
+<<<<<<< Updated upstream
+=======
+/* line 550, main.scss */
+>>>>>>> Stashed changes
 .pricing-table .title {
   background-color: #666; }
 
+<<<<<<< Updated upstream
 .pricing-matrix {
   margin-bottom: 2rem !important;
   overflow: hidden; }
@@ -6522,10 +7026,29 @@ section, footer {
     .pricing-matrix .pricing-table {
       margin-bottom: 0; } }
 
+=======
+/* line 553, main.scss */
+.pricing-matrix {
+  margin-bottom: 2rem !important;
+  overflow: hidden;
+}
+@media only screen and (min-width: 64.063em) {
+  /* line 557, main.scss */
+  .pricing-matrix .pricing-table {
+    margin-bottom: 0;
+  }
+}
+
+/* line 562, main.scss */
+>>>>>>> Stashed changes
 .extra-pricing-info {
   height: 0;
   overflow: hidden; }
 
+<<<<<<< Updated upstream
+=======
+/* line 566, main.scss */
+>>>>>>> Stashed changes
 .extra-pricing-info-header {
   background-color: #ddd;
   margin: 0;
@@ -6534,28 +7057,52 @@ section, footer {
   font-size: 1.25rem;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; }
 
+<<<<<<< Updated upstream
+=======
+/* line 574, main.scss */
+>>>>>>> Stashed changes
 .feature-list-icon {
   height: 1.75em;
   width: auto;
   margin: 0 0.375rem; }
 
+<<<<<<< Updated upstream
+=======
+/* line 579, main.scss */
+>>>>>>> Stashed changes
 .extra-pricing-info table {
   width: 100%;
   border: 0;
   margin: 0; }
 
+<<<<<<< Updated upstream
+=======
+/* line 584, main.scss */
+>>>>>>> Stashed changes
 .extra-pricing-info tr {
   background-color: #f5f5f5; }
 
+<<<<<<< Updated upstream
+=======
+/* line 589, main.scss */
+>>>>>>> Stashed changes
 .extra-pricing-info tr.even,
 .extra-pricing-info tr.alt,
 .extra-pricing-info tr:nth-of-type(even) {
   background-color: #fff; }
 
+<<<<<<< Updated upstream
+=======
+/* line 592, main.scss */
+>>>>>>> Stashed changes
 .extra-pricing-info tr.spacer td {
   width: 25%;
   padding: 0; }
 
+<<<<<<< Updated upstream
+=======
+/* line 596, main.scss */
+>>>>>>> Stashed changes
 .extra-pricing-info td {
   font-size: 0.75rem;
   text-align: left;
@@ -6563,37 +7110,66 @@ section, footer {
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.05);
   vertical-align: top; }
 
+<<<<<<< Updated upstream
+=======
+/* line 603, main.scss */
+>>>>>>> Stashed changes
 .extra-pricing-info td:first-letter {
   text-transform: uppercase; }
 
+<<<<<<< Updated upstream
+=======
+/* line 606, main.scss */
+>>>>>>> Stashed changes
 .extra-pricing-info td:last-child {
   border-right: 0;
   box-shadow: none; }
 
+<<<<<<< Updated upstream
+=======
+/* line 610, main.scss */
+>>>>>>> Stashed changes
 .all-details-revealed .extra-pricing-info {
   height: auto; }
 
+<<<<<<< Updated upstream
+=======
+/* line 613, main.scss */
+>>>>>>> Stashed changes
 .extra-pricing-info p {
   font-size: inherit;
   line-height: inherit;
   margin: 0; }
 
+<<<<<<< Updated upstream
+=======
+/* line 618, main.scss */
+>>>>>>> Stashed changes
 .extra-pricing-info p + p {
   margin-top: 0.625rem; }
 
 /*--------------------------------------------------
   Project Layout
 --------------------------------------------------*/
+<<<<<<< Updated upstream
+=======
+/* line 627, main.scss */
+>>>>>>> Stashed changes
 .container {
   background-color: #fff;
   color: #444; }
 
+<<<<<<< Updated upstream
+=======
+/* line 631, main.scss */
+>>>>>>> Stashed changes
 .section-heading {
   padding-top: 1.5rem; }
 
 /*--------------------------------------------------
   Project Header
 --------------------------------------------------*/
+<<<<<<< Updated upstream
 .site-header {
   background-color: #fff; }
   @media only screen and (min-width: 64.063em) {
@@ -6625,9 +7201,67 @@ section, footer {
   .site-header + .orderable-container {
     clear: both; }
 
+=======
+/* line 640, main.scss */
+.site-header {
+  background-color: #fff;
+}
+@media only screen and (min-width: 64.063em) {
+  /* line 640, main.scss */
+  .site-header {
+    background-color: #268099;
+    color: #fff;
+    padding-top: 4rem;
+  }
+}
+@media only screen and (min-width: 64.063em) {
+  /* line 647, main.scss */
+  .site-header .site-header-content {
+    border-top: 0;
+    border-radius: 0.25em 0.25em 0 0;
+  }
+}
+/* line 654, main.scss */
+.site-header.has-image {
+  padding-top: 40%;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 654, main.scss */
+  .site-header.has-image {
+    padding-top: 30%;
+  }
+}
+@media only screen and (min-width: 64.063em) {
+  /* line 654, main.scss */
+  .site-header.has-image {
+    padding-top: 15.25em;
+    background-position: center center;
+  }
+}
+/* line 664, main.scss */
+.site-header.has-image .site-header-content {
+  float: left;
+  width: 100%;
+  border-top: 0;
+}
+@media only screen and (min-width: 64.063em) {
+  /* line 664, main.scss */
+  .site-header.has-image .site-header-content {
+    float: none;
+    width: auto;
+  }
+}
+/* line 675, main.scss */
+.site-header + .orderable-container {
+  clear: both;
+}
+
+/* line 680, main.scss */
+>>>>>>> Stashed changes
 .project-header {
   border-radius: 0.375em 0.375em 0 0; }
 
+<<<<<<< Updated upstream
 .social-links-header {
   background-color: #fff;
   border-radius: 0.5rem;
@@ -6651,14 +7285,63 @@ section, footer {
 @media only screen and (min-width: 40.063em) {
   .project-title {
     font-size: 3.125rem; } }
+=======
+/* line 684, main.scss */
+.social-links-header {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  margin: 0.9375rem 0.9375rem 0 0;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 684, main.scss */
+  .social-links-header {
+    margin-top: -2rem;
+  }
+}
+/* line 691, main.scss */
+.social-links-header a {
+  float: left;
+  width: 40px;
+  border-radius: 0.25rem;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 691, main.scss */
+  .social-links-header a {
+    margin: 0.5rem;
+  }
+}
+/* line 698, main.scss */
+.social-links-header a + a {
+  margin-left: 0.5rem;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 698, main.scss */
+  .social-links-header a + a {
+    margin-left: 0;
+  }
+}
+
+@media only screen and (min-width: 40.063em) {
+  /* line 707, main.scss */
+  .project-title {
+    font-size: 3.125rem;
+  }
+}
+/* line 711, main.scss */
+>>>>>>> Stashed changes
 .project-title img {
   max-height: 20rem; }
 
+<<<<<<< Updated upstream
+=======
+/* line 718, main.scss */
+>>>>>>> Stashed changes
 .logo-table {
   display: table;
   border-collapse: collapse;
   border-spacing: 0;
   position: relative;
+<<<<<<< Updated upstream
   z-index: 5; }
   .logo-table .logo-table-row {
     display: table-row; }
@@ -6673,19 +7356,59 @@ section, footer {
     height: auto;
     width: auto; }
 
+=======
+  z-index: 5;
+}
+/* line 724, main.scss */
+.logo-table .logo-table-row {
+  display: table-row;
+}
+/* line 726, main.scss */
+.logo-table .logo-table-row > div {
+  display: table-cell;
+  padding: 0;
+  vertical-align: top;
+}
+/* line 731, main.scss */
+.logo-table .logo-table-row > div.image-holder, .logo-table .logo-table-row > div.has-image {
+  padding-right: 1em;
+}
+/* line 736, main.scss */
+.logo-table img {
+  max-height: 8em;
+  height: auto;
+  width: auto;
+}
+
+/* line 744, main.scss */
+>>>>>>> Stashed changes
 .project-menu-container.has-project-menu {
   position: relative; }
 
+<<<<<<< Updated upstream
+=======
+/* line 749, main.scss */
+>>>>>>> Stashed changes
 [data-magellan-expedition],
 [data-magellan-expedition-clone] {
   background-color: transparent;
   padding: 0; }
 
+<<<<<<< Updated upstream
+=======
+/* line 754, main.scss */
+>>>>>>> Stashed changes
 .project-menu .row {
   position: relative;
   z-index: 2;
   padding-top: .9375rem;
+<<<<<<< Updated upstream
   padding-bottom: 0; }
+=======
+  padding-bottom: 0;
+}
+/* line 760, main.scss */
+>>>>>>> Stashed changes
 .project-menu .columns:after {
   content: '';
   display: block;
@@ -6701,6 +7424,7 @@ section, footer {
 /*--------------------------------------------------
   Project Footer
 --------------------------------------------------*/
+<<<<<<< Updated upstream
 .social-links-section {
   max-width: 64.375rem; }
   .social-links-section .panel {
@@ -6713,19 +7437,53 @@ section, footer {
   .site-colophon .powered-by {
     margin-top: 4rem;
     margin-bottom: 4rem; }
+=======
+/* line 779, main.scss */
+.social-links-section {
+  max-width: 64.375rem;
+}
+/* line 781, main.scss */
+.social-links-section .panel {
+  border: 0;
+}
+
+/* line 786, main.scss */
+.site-colophon {
+  padding-top: 2rem;
+  background-color: #eeeeee;
+  color: #888d9b;
+}
+/* line 790, main.scss */
+.site-colophon .powered-by {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+>>>>>>> Stashed changes
 
 /*--------------------------------------------------
   Project Timeline
 --------------------------------------------------*/
+<<<<<<< Updated upstream
+=======
+/* line 801, main.scss */
+>>>>>>> Stashed changes
 .event-list {
   border-left: 1rem solid #fff;
   box-shadow: inset 0.75rem 0 0 #bbb; }
 
+<<<<<<< Updated upstream
+=======
+/* line 805, main.scss */
+>>>>>>> Stashed changes
 .event {
   padding: 0 0 2rem 3.25rem;
   margin-left: -1rem;
   position: relative; }
 
+<<<<<<< Updated upstream
+=======
+/* line 810, main.scss */
+>>>>>>> Stashed changes
 .event:first-child:before {
   content: '';
   background-color: #fff;
@@ -6735,6 +7493,10 @@ section, footer {
   top: -0.25rem;
   left: 0.625rem; }
 
+<<<<<<< Updated upstream
+=======
+/* line 819, main.scss */
+>>>>>>> Stashed changes
 .event:last-child:before {
   content: '';
   background-color: #fff;
@@ -6744,6 +7506,10 @@ section, footer {
   bottom: -0.9375rem;
   left: 0.625rem; }
 
+<<<<<<< Updated upstream
+=======
+/* line 828, main.scss */
+>>>>>>> Stashed changes
 .event:only-child:before {
   content: '';
   background-color: #fff;
@@ -6754,6 +7520,10 @@ section, footer {
   bottom: -0.9375rem;
   left: 0.625rem; }
 
+<<<<<<< Updated upstream
+=======
+/* line 838, main.scss */
+>>>>>>> Stashed changes
 .event:after {
   content: '';
   position: absolute;
@@ -6766,31 +7536,64 @@ section, footer {
   border: 0.5rem solid #bbb;
   z-index: 1; }
 
+<<<<<<< Updated upstream
+=======
+/* line 852, main.scss */
+>>>>>>> Stashed changes
 .event .calendar-icon {
   cursor: pointer; }
 
+<<<<<<< Updated upstream
+=======
+/* line 855, main.scss */
+>>>>>>> Stashed changes
 .datetime-picker-container {
   position: relative; }
 
+<<<<<<< Updated upstream
+=======
+/* line 858, main.scss */
+>>>>>>> Stashed changes
 .picker {
   margin-top: -1.125rem; }
 
+<<<<<<< Updated upstream
+=======
+/* line 861, main.scss */
+>>>>>>> Stashed changes
 .picker__holder {
   max-width: 100%; }
 
+<<<<<<< Updated upstream
+=======
+/* line 865, main.scss */
+>>>>>>> Stashed changes
 .picker__nav--prev:hover,
 .picker__nav--next:hover {
   background-color: transparent; }
 
+<<<<<<< Updated upstream
+=======
+/* line 868, main.scss */
+>>>>>>> Stashed changes
 .picker button {
   color: inherit; }
 
+<<<<<<< Updated upstream
+=======
+/* line 871, main.scss */
+>>>>>>> Stashed changes
 .picker table tr td {
   text-align: center; }
 
+<<<<<<< Updated upstream
+=======
+/* line 876, main.scss */
+>>>>>>> Stashed changes
 ol.attachment-list.no-bullet {
   margin-left: 0; }
 
+<<<<<<< Updated upstream
 .attachment .row {
   margin: 0 -0.5rem; }
   .attachment .row .column, .attachment .row .columns {
@@ -6803,9 +7606,38 @@ ol.attachment-list.no-bullet {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0; }
 
+=======
+/* line 880, main.scss */
+.attachment .row {
+  margin: 0 -0.5rem;
+}
+/* line 881, main.scss */
+.attachment .row .column, .attachment .row .columns {
+  padding: 0 0.5rem;
+}
+/* line 882, main.scss */
+.attachment .row.collapse {
+  margin: 0;
+}
+/* line 883, main.scss */
+.attachment .row.collapse .column, .attachment .row.collapse .columns {
+  padding: 0;
+}
+/* line 884, main.scss */
+.attachment .row.collapse input {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* line 889, main.scss */
+>>>>>>> Stashed changes
 .handle {
   cursor: move; }
 
+<<<<<<< Updated upstream
+=======
+/* line 892, main.scss */
+>>>>>>> Stashed changes
 .event > .handle {
   position: absolute;
   top: 0.25rem;
@@ -6816,15 +7648,31 @@ ol.attachment-list.no-bullet {
   z-index: 2;
   text-indent: -9999px; }
 
+<<<<<<< Updated upstream
+=======
+/* line 902, main.scss */
+>>>>>>> Stashed changes
 .event:only-child > .handle {
   display: none; }
 
+<<<<<<< Updated upstream
+=======
+/* line 905, main.scss */
+>>>>>>> Stashed changes
 .attachment-icon {
   position: relative; }
 
+<<<<<<< Updated upstream
+=======
+/* line 908, main.scss */
+>>>>>>> Stashed changes
 img.attachment-icon {
   margin-bottom: 1.6rem; }
 
+<<<<<<< Updated upstream
+=======
+/* line 911, main.scss */
+>>>>>>> Stashed changes
 .attachment-handle {
   position: absolute;
   top: 0;
@@ -6836,14 +7684,23 @@ img.attachment-icon {
 /*--------------------------------------------------
   Project Shareabouts
 --------------------------------------------------*/
+<<<<<<< Updated upstream
+=======
+/* line 925, main.scss */
+>>>>>>> Stashed changes
 .map {
   height: 300px; }
 
+<<<<<<< Updated upstream
+=======
+/* line 930, main.scss */
+>>>>>>> Stashed changes
 .project-shareabouts {
   border-top: 2px solid #eeeeee;
   border-bottom: 2px solid #eeeeee;
   width: 100%;
   margin: 0 auto;
+<<<<<<< Updated upstream
   overflow: hidden; }
   @media only screen and (min-width: 40.063em) {
     .project-shareabouts {
@@ -6855,27 +7712,72 @@ img.attachment-icon {
     margin-left: 0;
     bottom: 0; }
 
+=======
+  overflow: hidden;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 930, main.scss */
+  .project-shareabouts {
+    height: 400px;
+  }
+}
+@media only screen and (min-width: 64.063em) {
+  /* line 930, main.scss */
+  .project-shareabouts {
+    height: 500px;
+  }
+}
+/* line 942, main.scss */
+.project-shareabouts .shareabouts-add-button-container {
+  margin-left: 0;
+  bottom: 0;
+}
+
+/* line 947, main.scss */
+>>>>>>> Stashed changes
 .shareabouts-geometry-set .form-instructions {
   display: none; }
 
 /* NOTE: use these selectors to style invalid form elements on non-HTML5 browsers */
+<<<<<<< Updated upstream
+=======
+/* line 954, main.scss */
+>>>>>>> Stashed changes
 .project-shareabouts .form-submitted input:invalid,
 .project-shareabouts .form-submitted textarea:invalid,
 .project-shareabouts .form-submitted select:invalid {
   border: 1px solid #f04124; }
 
+<<<<<<< Updated upstream
+=======
+/* line 958, main.scss */
+>>>>>>> Stashed changes
 .shareabouts-submit-button {
   margin-top: 0.5em; }
 
+<<<<<<< Updated upstream
 .shareabouts-add-button {
   display: block; }
   @media only screen and (max-width: 40em) {
     .shareabouts-add-button {
       margin: 0; } }
+=======
+/* line 962, main.scss */
+.shareabouts-add-button {
+  display: block;
+}
+@media only screen and (max-width: 40em) {
+  /* line 962, main.scss */
+  .shareabouts-add-button {
+    margin: 0;
+  }
+}
+>>>>>>> Stashed changes
 
 /*--------------------------------------------------
   The Admin
 --------------------------------------------------*/
+<<<<<<< Updated upstream
 .project-edit-form {
   background-color: #fff;
   box-shadow: 0 -65px 0 #fff; }
@@ -6883,14 +7785,37 @@ img.attachment-icon {
     .project-edit-form {
       padding-bottom: 4rem; } }
 
+=======
+/* line 974, main.scss */
+.project-edit-form {
+  background-color: #fff;
+  box-shadow: 0 -65px 0 #fff;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 974, main.scss */
+  .project-edit-form {
+    padding-bottom: 4rem;
+  }
+}
+
+/* line 982, main.scss */
+>>>>>>> Stashed changes
 .project-section {
   z-index: auto; }
 
+<<<<<<< Updated upstream
+=======
+/* line 986, main.scss */
+>>>>>>> Stashed changes
 .project-section-fieldset {
   padding: 0;
   border: 0; }
 
 @media only screen and (min-width: 40.063em) {
+<<<<<<< Updated upstream
+=======
+  /* line 991, main.scss */
+>>>>>>> Stashed changes
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
@@ -6899,6 +7824,10 @@ img.attachment-icon {
     font-weight: bold; } }
 
 @media only screen and (min-width: 40.063em) {
+<<<<<<< Updated upstream
+=======
+  /* line 1000, main.scss */
+>>>>>>> Stashed changes
   input[type=text].sub-heading-input {
     font-size: 1.75rem;
     margin: 0 0 1rem 0;
@@ -6906,6 +7835,7 @@ img.attachment-icon {
     height: 3.625rem;
     font-weight: bold; } }
 
+<<<<<<< Updated upstream
 span.sub-heading-postfix {
   color: #999; }
   @media only screen and (min-width: 40.063em) {
@@ -6914,6 +7844,22 @@ span.sub-heading-postfix {
       padding: 0.5rem 0.75rem;
       height: 3.625rem; } }
 
+=======
+/* line 1009, main.scss */
+span.sub-heading-postfix {
+  color: #999;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 1009, main.scss */
+  span.sub-heading-postfix {
+    margin: 0 0 1rem 0;
+    padding: 0.5rem 0.75rem;
+    height: 3.625rem;
+  }
+}
+
+/* line 1018, main.scss */
+>>>>>>> Stashed changes
 .content-editable {
   line-height: 1.6;
   background-color: white;
@@ -6931,6 +7877,7 @@ span.sub-heading-postfix {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
+<<<<<<< Updated upstream
   height: auto; }
   .content-editable.rich-editable {
     min-height: 8rem; }
@@ -6954,15 +7901,63 @@ span.sub-heading-postfix {
     .content-editable a:hover, .content-editable a:focus {
       color: #267299; }
 
+=======
+  height: auto;
+}
+/* line 1020, main.scss */
+.content-editable.rich-editable {
+  min-height: 8rem;
+}
+/* line 181, ../bower_components/foundation/scss/foundation/components/_global.scss */
+.content-editable:focus {
+  box-shadow: 0 0 5px #999999;
+  border-color: #999999;
+}
+/* line 124, ../bower_components/foundation/scss/foundation/components/_forms.scss */
+.content-editable:focus {
+  background: #fafafa;
+  border-color: #999999;
+  outline: none;
+}
+/* line 131, ../bower_components/foundation/scss/foundation/components/_forms.scss */
+.content-editable[disabled], .content-editable[readonly], fieldset[disabled] .content-editable {
+  background-color: #dddddd;
+}
+/* line 1028, main.scss */
+.content-editable.radius {
+  border-radius: 3px;
+}
+/* line 1032, main.scss */
+.error .content-editable, .content-editable.error {
+  margin-bottom: 0;
+}
+/* line 1035, main.scss */
+.content-editable a {
+  color: #308fbf;
+  text-decoration: none;
+  line-height: inherit;
+}
+/* line 1041, main.scss */
+.content-editable a:hover, .content-editable a:focus {
+  color: #267299;
+}
+
+/* line 1050, main.scss */
+>>>>>>> Stashed changes
 .pen-menu,
 .pen-menu * {
   box-sizing: content-box !important; }
 
+<<<<<<< Updated upstream
+=======
+/* line 1054, main.scss */
+>>>>>>> Stashed changes
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
   padding-top: 0.5rem;
   padding-right: 0.25rem; }
 
+<<<<<<< Updated upstream
 .section-settings {
   background-color: #f7f7f7;
   padding-top: 1.75rem; }
@@ -6977,9 +7972,35 @@ span.sub-heading-postfix {
     margin-top: 1rem;
     border-color: #ff8b38; }
 
+=======
+/* line 1060, main.scss */
+.section-settings {
+  background-color: #f7f7f7;
+  padding-top: 1.75rem;
+}
+/* line 1063, main.scss */
+.section-settings-toggle-container + .section-settings {
+  margin-top: -2.5rem;
+}
+
+/* line 1068, main.scss */
+.section-insert {
+  margin-bottom: -1rem;
+  margin-right: -0.9375rem;
+  margin-left: -0.9375rem;
+}
+/* line 1072, main.scss */
+.section-insert hr {
+  margin-top: 1rem;
+  border-color: #ff8b38;
+}
+
+/* line 1078, main.scss */
+>>>>>>> Stashed changes
 .unassigned {
   cursor: default; }
 
+<<<<<<< Updated upstream
 .project-settings-container {
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
@@ -7001,13 +8022,54 @@ span.sub-heading-postfix {
         max-height: 60%;
         overflow: auto; } }
 
+=======
+/* line 1082, main.scss */
+.project-settings-container {
+  padding-top: 1.25rem;
+  padding-bottom: 0.9375rem;
+  background-color: #d9d9d9;
+}
+/* line 1083, main.scss */
+.project-settings-container .save-btn {
+  outline: 0;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 1082, main.scss */
+  .project-settings-container {
+    position: fixed;
+    top: 65px;
+    right: auto;
+    bottom: 0;
+    left: 66.66667%;
+    margin: 0;
+    width: 33.33333%;
+    overflow: hidden;
+    box-shadow: inset 3px 0 0 rgba(51, 51, 51, 0.1);
+  }
+  /* line 1099, main.scss */
+  .project-settings-container .project-settings {
+    max-height: 60%;
+    overflow: auto;
+  }
+}
+
+/* line 1106, main.scss */
+>>>>>>> Stashed changes
 textarea.no-resize {
   resize: none; }
 
+<<<<<<< Updated upstream
+=======
+/* line 1111, main.scss */
+>>>>>>> Stashed changes
 .drag-area-container {
   position: relative;
   text-align: center; }
 
+<<<<<<< Updated upstream
+=======
+/* line 1115, main.scss */
+>>>>>>> Stashed changes
 .drag-area {
   position: absolute;
   top: 1rem;
@@ -7016,6 +8078,7 @@ textarea.no-resize {
   padding: 1rem;
   border: 2px dashed rgba(133, 133, 133, 0.4);
   border-radius: 0.375rem;
+<<<<<<< Updated upstream
   background-color: rgba(242, 242, 242, 0.4); }
   .drag-area:hover {
     border-color: rgba(133, 133, 133, 0.9);
@@ -7023,6 +8086,21 @@ textarea.no-resize {
   .drag-area p {
     margin-bottom: 0.5rem; }
 
+=======
+  background-color: rgba(242, 242, 242, 0.4);
+}
+/* line 1124, main.scss */
+.drag-area:hover {
+  border-color: rgba(133, 133, 133, 0.9);
+  background-color: rgba(242, 242, 242, 0.9);
+}
+/* line 1128, main.scss */
+.drag-area p {
+  margin-bottom: 0.5rem;
+}
+
+/* line 1132, main.scss */
+>>>>>>> Stashed changes
 .no-file-upload-message {
   clear: both;
   font-size: 0.75em;
@@ -7034,13 +8112,25 @@ textarea.no-resize {
   padding: 0.125em 0.5em;
   border-radius: 0.25em; }
 
+<<<<<<< Updated upstream
+=======
+/* line 1143, main.scss */
+>>>>>>> Stashed changes
 .no-file-upload-message a {
   color: #fff;
   color: rgba(255, 255, 255, 0.75); }
 
+<<<<<<< Updated upstream
+=======
+/* line 1147, main.scss */
+>>>>>>> Stashed changes
 .no-file-upload-message a:hover {
   color: #fff; }
 
+<<<<<<< Updated upstream
+=======
+/* line 1150, main.scss */
+>>>>>>> Stashed changes
 .file-upload {
   margin: 2em 1em 1em;
   text-align: center;
@@ -7050,6 +8140,10 @@ textarea.no-resize {
   opacity: 0.8;
   position: relative; }
 
+<<<<<<< Updated upstream
+=======
+/* line 1161, main.scss */
+>>>>>>> Stashed changes
 .file-upload:hover,
 .file-dragging,
 .file-uploading {
@@ -7057,40 +8151,86 @@ textarea.no-resize {
   background-color: #888;
   background-color: rgba(90, 90, 90, 0.5); }
 
+<<<<<<< Updated upstream
+=======
+/* line 1166, main.scss */
+>>>>>>> Stashed changes
 .file-upload p {
   margin-bottom: 0.5em; }
 
+<<<<<<< Updated upstream
+=======
+/* line 1169, main.scss */
+>>>>>>> Stashed changes
 .file-upload-input-container {
   position: relative;
   overflow: hidden;
   white-space: nowrap;
   margin-bottom: 0; }
 
+<<<<<<< Updated upstream
+=======
+/* line 1175, main.scss */
+>>>>>>> Stashed changes
 .file-upload-input {
   display: none; }
 
+<<<<<<< Updated upstream
+=======
+/* line 1179, main.scss */
+>>>>>>> Stashed changes
 .uploading-message,
 .file-uploading > .drop-instructions {
   display: none; }
 
 @keyframes uploading {
+<<<<<<< Updated upstream
+=======
+  /* line 1183, main.scss */
+>>>>>>> Stashed changes
   0% {
     color: #888; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 1184, main.scss */
+>>>>>>> Stashed changes
   50% {
     color: #fff; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 1185, main.scss */
+>>>>>>> Stashed changes
   100% {
     color: #888; } }
 @-webkit-keyframes uploading {
+<<<<<<< Updated upstream
+=======
+  /* line 1188, main.scss */
+>>>>>>> Stashed changes
   0% {
     color: #888; }
 
+<<<<<<< Updated upstream
+=======
+  /* line 1189, main.scss */
+>>>>>>> Stashed changes
   50% {
     color: #fff; }
 
+<<<<<<< Updated upstream
   100% {
     color: #888; } }
+=======
+  /* line 1190, main.scss */
+  100% {
+    color: #888;
+  }
+}
+
+/* line 1192, main.scss */
+>>>>>>> Stashed changes
 .file-uploading > .uploading-message {
   display: block;
   position: relative;
@@ -7100,17 +8240,35 @@ textarea.no-resize {
   -webkit-animation: uploading 1.5s infinite ease-in-out;
   animation: uploading 1.5s infinite ease-in-out; }
 
+<<<<<<< Updated upstream
+=======
+/* line 1201, main.scss */
+>>>>>>> Stashed changes
 .file-uploading > .file-upload-input-container {
   visibility: hidden; }
 
+<<<<<<< Updated upstream
 .full-width-image-container {
   margin: 0 -0.9375rem 0.5rem -0.9375rem; }
   .full-width-image-container.drag-area-container {
     min-height: 9rem; }
 
+=======
+/* line 1206, main.scss */
+.full-width-image-container {
+  margin: 0 -0.9375rem 0.5rem -0.9375rem;
+}
+/* line 1208, main.scss */
+.full-width-image-container.drag-area-container {
+  min-height: 9rem;
+}
+
+/* line 1212, main.scss */
+>>>>>>> Stashed changes
 .cover-image-container {
   margin-top: -1.125rem; }
 
+<<<<<<< Updated upstream
 .logo-image-container {
   min-height: 9rem;
   margin-bottom: 1rem; }
@@ -7122,12 +8280,34 @@ textarea.no-resize {
     max-height: 20rem; }
 
 @media only screen and (min-width: 40.063em) {
+=======
+/* line 1217, main.scss */
+.logo-image-container {
+  min-height: 9rem;
+  margin-bottom: 1rem;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 1217, main.scss */
+  .logo-image-container {
+    float: left;
+    width: 50%;
+  }
+}
+/* line 1224, main.scss */
+.logo-image-container img {
+  max-height: 20rem;
+}
+
+@media only screen and (min-width: 40.063em) {
+  /* line 1228, main.scss */
+>>>>>>> Stashed changes
   .project-title-container {
     float: right;
     width: 50%;
     top: 1rem;
     left: 1rem;
     padding-right: 1rem;
+<<<<<<< Updated upstream
     padding-bottom: 1rem; }
     .logo-image-container.hide + .project-title-container {
       float: none;
@@ -7136,13 +8316,75 @@ textarea.no-resize {
       left: 0;
       padding-right: 0;
       padding-bottom: 0; } }
+=======
+    padding-bottom: 1rem;
+  }
+  /* line 1236, main.scss */
+  .logo-image-container.hide + .project-title-container {
+    float: none;
+    width: auto;
+    top: 0;
+    left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+}
+/* line 1245, main.scss */
+>>>>>>> Stashed changes
 .project-title-container .project-title-help-text {
   margin-top: -0.75rem; }
 
+<<<<<<< Updated upstream
+=======
+/* line 1252, main.scss */
+>>>>>>> Stashed changes
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none; }
 
+<<<<<<< Updated upstream
 .existing-snapshot-wrapper .button {
   margin-bottom: 0; }
+=======
+/* line 1264, main.scss */
+.existing-snapshot-wrapper .button {
+  margin-bottom: 0;
+}
+
+/* line 1270, main.scss */
+.avatar-container {
+  padding: 0.3rem;
+}
+/* line 1272, main.scss */
+.avatar-container .avatar {
+  display: block;
+}
+
+/* line 1279, main.scss */
+.project-list > li + li, .member-list > li + li, .team-list > li + li {
+  margin-top: 0.625rem;
+  padding-top: 0.625rem;
+  border-top: 1px solid #e3e3e3;
+}
+
+/* line 1286, main.scss */
+.member-list li, .team-list li {
+  padding-left: 4.375rem;
+}
+/* line 1289, main.scss */
+.member-list .avatar, .team-list .avatar {
+  width: 3.75rem;
+  margin-left: -4.375rem;
+}
+
+/* line 1294, main.scss */
+.user-profile .member-list {
+  display: none;
+}
+
+/* line 1297, main.scss */
+.team-profile .team-list {
+  display: none;
+}
+>>>>>>> Stashed changes
 
 /* ----- Medium screens ----- */
