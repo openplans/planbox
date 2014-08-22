@@ -7,30 +7,10 @@ var Planbox = Planbox || {};
 
   // Exceptions ===============================================================
   NS.projectException = function(message, data) {
-    var exc = {
-      name: 'ProjectException',
-      message: message,
-      data: data,
-      toString: function() { return message; }
-    };
-    return exc;
+    return genericException('ProjectException', message, data);
   };
 
   // App ======================================================================
-  NS.app = new Backbone.Marionette.Application();
-
-  NS.app.addRegions({
-    mainRegion: '#page',
-    modalRegion: '#modal-container'
-  });
-
-  NS.app.addInitializer(function() {
-    // Handlebars support for Marionette
-    Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
-      return Handlebars.compile(rawTemplate);
-    };
-  });
-
   NS.app.addInitializer(function(options){
     var ProjectView;
 
@@ -61,18 +41,19 @@ var Planbox = Planbox || {};
     }
   });
 
-  // Init =====================================================================
-  $(function() {
-    NS.app.start();
-  });
+  NS.app.addInitializer(function(options) {
+    // Protect the user from leaving before saving.
+    window.addEventListener('beforeunload', function(e) {
+      var notification = 'It looks like you have unsaved changes in your project.';
+      e = e || event;
 
-  $(window).load(function() {
-    // Moved this from the BaseProjectView onDomRefresh. This will wait until
-    // all of the images have been loaded so that Magellan will funciton as
-    // expected. Specifically, "sticking" to the right location when scrolling
-    // and not overlapping with section title when someone links directly to
-    // a hash.
-    $(document).foundation({'magellan': {}});
+      if (NS.app.projectModel.isDirty) {
+        // set and return for browser compatibility
+        // https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload
+        e.returnValue = notification;
+        return notification;
+      }
+    }, false);
   });
 
 }(Planbox, jQuery));

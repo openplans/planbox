@@ -77,30 +77,6 @@ var Planbox = Planbox || {};
           // Convert line breaks into <br> and paste
           NS.Utils.pasteHtmlAtCaret(pasted.replace(/\n/g, '<br>'));
         });
-
-        // Do simple protection against accidental drops of images outside of
-        // drop areas (http://stackoverflow.com/a/6756680).
-        window.addEventListener('dragover', function(e) {
-          e = e || event;
-          e.preventDefault();
-        }, false);
-        window.addEventListener('drop', function(e) {
-          e = e || event;
-          e.preventDefault();
-        }, false);
-
-        // Protect the user from leaving before saving.
-        window.addEventListener('beforeunload', function(e) {
-          var notification = 'It looks like you have unsaved changes in your project.';
-          e = e || event;
-
-          if (self.model.isDirty) {
-            // set and return for browser compatibility
-            // https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload
-            e.returnValue = notification;
-            return notification;
-          }
-        }, false);
       },
 
       onShow: function() {
