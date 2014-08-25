@@ -97,24 +97,6 @@ class NewProjectViewTests (PlanBoxUITestCase):
         assert_equal(response.status_code, 302)
         assert_equal(response.url, login_url + '?next=' + url)
 
-    def test_user_gets_redirected_to_existing_project(self):
-        # NOTE: This test is only relevant as long as users can have only one
-        #       project.
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner)
-
-        url_kwargs = {'owner_slug': auth.username}
-        url = reverse('app-new-project', kwargs=url_kwargs)
-        project_url_kwargs = {'owner_slug': auth.username, 'project_slug': project.slug}
-        project_url = reverse('app-project', kwargs=project_url_kwargs)
-
-        request = self.factory.get(url)
-        request.user = auth
-        response = new_project_view(request, **url_kwargs)
-        assert_equal(response.status_code, 302)
-        assert_equal(response.url, project_url)
-
 
 class ProjectDetailViewTests (PlanBoxUITestCase):
     def test_anon_gets_non_editable_details(self):
