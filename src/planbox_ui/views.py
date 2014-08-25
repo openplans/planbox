@@ -65,7 +65,7 @@ class AppMixin (object):
             owner_slug = obj.username
         elif isinstance(obj, Profile):
             owner_slug = obj.slug
-        return resolve_url('app-new-project', owner_slug=owner_slug)
+        return resolve_url('app-profile', profile_slug=owner_slug)
 
     def get_context_data(self, **kwargs):
         context = super(AppMixin, self).get_context_data(**kwargs)
