@@ -195,6 +195,15 @@ class ProjectSerializer (serializers.ModelSerializer):
         return attrs
 
 
+class ProjectActivitySerializer (serializers.ModelSerializer):
+    last_opened_by = AssociatedProfileSerializer(source='last_opened_by.profile')
+    last_saved_by = AssociatedProfileSerializer(source='last_saved_by.profile')
+
+    class Meta:
+        model = models.Project
+        fields = ('last_opened_at', 'last_opened_by', 'last_saved_at', 'last_saved_by')
+
+
 # ============================================================
 # Template serializers, which render objects without their identifying
 # information (ids, slugs, etc.). These are output only.

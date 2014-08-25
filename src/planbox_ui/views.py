@@ -22,7 +22,7 @@ from password_reset.views import (
     PasswordChangeView as BasePasswordChangeView)
 from planbox_data.models import Project, Profile
 from planbox_data.serializers import (ProjectSerializer, UserSerializer,
-    TemplateProjectSerializer, ProfileSerializer, AssociatedProfileSerializer)
+    TemplateProjectSerializer, ProfileSerializer, ProjectActivitySerializer)
 from planbox_ui.decorators import ssl_required
 from planbox_ui.forms import UserCreationForm, AuthenticationForm
 import pybars
@@ -340,13 +340,11 @@ class ProjectMixin (AppMixin):
         context['is_editable'] = is_editable
 
         if is_editable and not self.project.is_opened_by(self.request.user):
-            opened_data = self.project.get_opened_status()
-            opened_by = opened_data['opened_by']
-            opened_by_serializer = AssociatedProfileSerializer(opened_by.profile)
-            opened_data['opened_by'] = None if opened_by is None else opened_by_serializer.data
-            context['opened_data'] = opened_data
+            activity_serializer = ProjectActivitySerializer(self.project)
+            activity_data = activity_serializer.data
+            context['activity_data'] = activity_data
         else:
-            context['opened_data'] = None
+            context['activity_data'] = None
 
         return context
 
