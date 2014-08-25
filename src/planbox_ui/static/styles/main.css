@@ -6200,10 +6200,18 @@ section, footer {
         padding: 1.5rem;
         font-size: 1.5rem; } }
 
-@media only screen and (min-width: 40.063em) {
-  .feature-illustration {
-    position: relative;
-    top: -1.5rem; } }
+.feature-illustration {
+  display: block; }
+  @media only screen and (min-width: 40.063em) {
+    .feature-illustration {
+      margin-top: -1.5rem; } }
+  @media only screen and (min-width: 64.063em) {
+    .feature-illustration {
+      margin-top: -3.5rem;
+      position: relative;
+      right: -1.5rem; }
+      .medium-push-8 .feature-illustration {
+        right: 1.5rem; } }
 
 .product-get-started {
   background-color: #ddd; }
@@ -6216,6 +6224,9 @@ section, footer {
       font-size: 1.25em;
       line-height: 2.75em;
       padding-left: 0.5em; } }
+
+.product-benefits {
+  background-color: #ddd; }
 
 .product-demos {
   color: #fff;
