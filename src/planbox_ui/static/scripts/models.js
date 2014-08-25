@@ -111,6 +111,25 @@ var Planbox = Planbox || {};
           events.remove(evt);
         }
       });
+    },
+
+    markAsOpenedBy: function(user, options) {
+      var endpoint = this.url() + '/activity';
+      $.ajax(_.defaults({
+        type: 'POST',
+        url: endpoint,
+        data: JSON.stringify(user),
+        dataType: 'json'
+      }, options));
+    },
+
+    markAsClosed: function(options) {
+      var endpoint = this.url() + '/activity';
+      $.ajax(_.defaults({
+        type: 'DELETE',
+        url: endpoint,
+        dataType: 'json'
+      }, options));
     }
   });
 
@@ -146,6 +165,44 @@ var Planbox = Planbox || {};
 
   NS.FaqCollection = NS.ReorderableCollection.extend({
     model: NS.FaqModel
+  });
+
+
+  NS.ProfileModel = Backbone.RelationalModel.extend({
+    urlRoot: '/api/v1/profiles',
+    relations: [{
+      type: Backbone.HasMany,
+      key: 'projects',
+      relatedModel: 'OwnedProjectModel',
+      collectionType: 'OwnedProjectCollection',
+      reverseRelation: {
+        key: 'owner',
+        includeInJSON: 'slug'
+      }
+    }, {
+      type: Backbone.HasMany,
+      key: 'members',
+      relatedModel: 'MemberProfileModel'
+    }, {
+      type: Backbone.HasMany,
+      key: 'teams',
+      relatedModel: 'TeamProfileModel',
+      collectionType: 'TeamProfileCollection'
+    }]
+  });
+
+  NS.OwnedProjectModel = Backbone.RelationalModel.extend({});
+  NS.OwnedProjectCollection = Backbone.Collection.extend({
+    model: NS.OwnedProjectModel,
+    url: '/api/v1/projects'
+  });
+
+  NS.MemberProfileModel = Backbone.RelationalModel.extend({});
+
+  NS.TeamProfileModel = Backbone.RelationalModel.extend({});
+  NS.TeamProfileCollection = Backbone.Collection.extend({
+    model: NS.TeamProfileModel,
+    url: '/api/v1/profiles'
   });
 
 }(Planbox));

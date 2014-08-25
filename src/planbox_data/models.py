@@ -8,7 +8,7 @@ from django.db.models.signals import post_save
 from django.utils.text import slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import strip_tags
-from django.utils.timezone import now
+from django.utils.timezone import now, timedelta
 from django.utils.translation import ugettext as _
 from jsonfield import JSONField
 
@@ -101,9 +101,10 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
         profile = Profile.objects.get(auth=auth)
     except Profile.DoesNotExist:
         profile = Profile(auth=auth)
-    profile.slug = auth.username
-    profile.email = auth.email
-    profile.save()
+    if not profile.is_synced_with_auth(auth):
+        profile.slug = auth.username
+        profile.email = auth.email
+        profile.save()
 post_save.connect(create_or_update_user_profile, sender=UserAuth, dispatch_uid="user-profile-create-signal")
 
 
@@ -263,6 +264,12 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     get_involved_link_type = models.CharField(max_length=16, choices=LINK_TYPE_CHOICES, blank=True)
     get_involved_link_url = models.CharField(max_length=2048, blank=True)
 
+    # Project activity
+    last_opened_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, related_name='+')
+    last_opened_at = models.DateTimeField(null=True, blank=True)
+    last_saved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, related_name='+')
+    last_saved_at = models.DateTimeField(null=True, blank=True)
+
     objects = ProjectManager()
 
     class Meta:
@@ -270,6 +277,26 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    def mark_opened_by(self, user, opened_at=None):
+        # TODO: This could just be done in the cache.
+        self.last_opened_at = opened_at or now()
+        self.last_opened_by = user if (user and user.is_authenticated()) else None
+        self.save()
+
+    def mark_closed(self):
+        self.mark_opened_by(None)
+
+    def is_opened_by(self, user):
+        two_minutes = timedelta(minutes=2)
+        return self.last_opened_by == user and (now() - self.last_opened_at) < two_minutes
+
+    def get_opened_by(self):
+        two_minutes = timedelta(minutes=2)
+        if self.last_opened_at and (now() - self.last_opened_at) < two_minutes:
+            return self.last_opened_by
+        else:
+            return None
 
     def natural_key(self):
         return self.owner.natural_key() + (self.slug,)
@@ -367,9 +394,32 @@ class Event (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, models.
         return new_inst
 
 
+class ProfileQuerySet (models.query.QuerySet):
+    def Q_user(self, profile):
+        return models.Q(id=profile.id)
+
+    def Q_member(self, profile):
+        profile_ids = [team.id for team in profile.teams.all()]
+        return models.Q(id__in=profile_ids)
+
+    def filter_by_user_or_member(self, obj):
+        if isinstance(obj, UserAuth):
+            try:
+                obj = obj.profile
+            except Profile.DoesNotExist:
+                return self.empty()
+
+        user_query = self.Q_user(obj)
+        member_query = self.Q_member(obj)
+        return self.filter(user_query | member_query)
+
+
 class ProfileManager (models.Manager):
     def get_queryset(self):
-        return super(ProfileManager, self).get_queryset().select_related('auth')
+        return ProfileQuerySet(self.model, using=self._db).select_related('auth')
+
+    def filter_by_user_or_member(self, obj):
+        return self.get_queryset().filter_by_user_or_member(obj)
 
     def get_by_natural_key(self, slug):
         """
@@ -384,10 +434,12 @@ class ProfileManager (models.Manager):
 
 
 @python_2_unicode_compatible
-class Profile (TimeStampedModel):
+class Profile (ModelWithSlugMixin, TimeStampedModel):
     name = models.CharField(max_length=128, blank=True, help_text=_('The full name of the person or team'))
-    slug = models.CharField(max_length=128, unique=True, help_text=_('A short name that will be used in URLs for projects owned by this profile'))
+    slug = models.CharField(max_length=128, unique=True, blank=True, help_text=_('A short name that will be used in URLs for projects owned by this profile'))
     email = models.EmailField(blank=True, help_text=_('Contact email address of the profile holder'))
+    description = models.TextField(blank=True, default='')
+    avatar_url = models.URLField(blank=True, null=True)
     # projects (reverse, Project)
 
     # User-profile specific
@@ -418,6 +470,12 @@ class Profile (TimeStampedModel):
     def natural_key(self):
         return (self.slug,)
 
+    def get_slug_basis(self):
+        return self.name
+
+    def get_all_slugs(self):
+        return set([p['slug'] for p in Profile.objects.all().values('slug')])
+
     def is_owned_by(self, user):
         return (user.id == self.auth_id)
 
@@ -427,6 +485,21 @@ class Profile (TimeStampedModel):
             return True
         else:
             return any(profile.has_member(user) for profile in members)
+
+    def is_synced_with_auth(self, auth=None):
+        auth = auth or self.auth
+        if self.slug != auth.username:
+            return False
+        if self.email != auth.email:
+            return False
+        return True
+
+    def save(self, **kwargs):
+        super(Profile, self).save(**kwargs)
+        if self.auth and not self.is_synced_with_auth():
+            self.auth.username = self.slug
+            self.auth.email = self.email
+            self.auth.save()
 
     def authorizes(self, user):
         """

@@ -1,0 +1,62 @@
+<div class="row profile-details">
+  <div class="small-4 medium-2 large-12 columns">
+    <div class="avatar-container panel">
+      <img class="avatar" src="{{#if avatar_url}}{{ avatar_url }}{{^}}//placehold.it/400/f7f7f7/bbbbbb&text=...{{/if}}">
+    </div>
+  </div>
+  <div class="small-8 medium-10 large-12 columns ">
+    {{#if name}}
+    <h3 class="profile-name no-margins">{{ name }}</h3>
+    <p><small>{{ slug }}</small></p>
+    {{^}}
+    <h3 class="profile-name no-margins">{{ slug }}</h3>
+    {{/if}}
+    <div class="project-text-content">{{{ description }}}</div>
+    <small><a href="#" class="profile-edit-button">Edit Profile</a></small>
+  </div>
+</div>
+
+<form class="row profile-form hide">
+  <div class="small-8 small-centered medium-4 medium-uncentered large-12 columns">
+    <div class="avatar-container panel">
+      <div class="drag-area-container">
+        {{#if_fileapi_support 'cors'}}
+        <img class="image-holder" data-attr="avatar_url"
+          src="{{#if avatar_url}}{{ avatar_url }}{{^}}//placehold.it/400/f7f7f7/bbbbbb&text=...{{/if}}"
+          data-empty-img="//placehold.it/400/f7f7f7/bbbbbb&text=...">
+        <div class="drag-area text-center image-dnd" data-max-width="1000">
+          <p class="drop-instructions">Drop image here or&hellip;</p>
+          <p class="uploading-message">Uploading&hellip;</p>
+          <label class="file-upload-input-container button tiny radius"><span class="file-upload-label">Choose File</span><input class="file-upload-input hide" type="file" accept="image/*" /></label>
+        </div>
+        {{^}}
+          <div class="alert-box text-center info">File Uploads Not Supported By Your Browser</div>
+        {{/if_fileapi_support}}
+      </div>
+    </div>
+  </div>
+  <div class="small-8 small-centered medium-8 medium-uncentered large-12 columns ">
+    <div class="float-label-container">
+      <input class="sub-heading-input float-label-input" type="text" placeholder="Name" value="{{ name }}" data-attr="name">
+      <span class="float-label">Name</span>
+
+      <div data-error-attr="non_field_errors" data-error-message="You must enter &lt;em&gt;at least&lt;/em&gt; either a name or a slug."></div>
+
+    </div>
+    <div class="float-label-container">
+      <input class="float-label-input" type="text" placeholder="slug" value="{{ slug }}" data-attr="slug">
+      <span class="float-label">Slug</span>
+
+      <div data-error-attr="slug" data-error-message="This slug is already used by another user or team. Please choose a different, unique slug."></div>
+
+      <span class="help"><strong>NOTE:</strong> Changing your slug will change the URLs to all of your projects as well.</span>
+    </div>
+    <div class="float-label-container">
+      <!-- TODO: Make this a pen editor. -->
+      <div class="project-text-content content-editable rich-editable float-label-input" data-attr="description" contenteditable>{{{ description }}}</div>
+      <span class="float-label">Description</span>
+    </div>
+    <button class="button small radius save-btn disabled">Save</button>&nbsp;&nbsp;
+    <small><a href="#" class="cancel-profile-edit-button alert">Cancel</a></small>
+  </div>
+</form>
