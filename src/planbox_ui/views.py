@@ -339,7 +339,7 @@ class ProjectMixin (AppMixin):
         is_editable = self.get_project_is_editable()
         context['is_editable'] = is_editable
 
-        if is_editable and not self.project.is_opened_by(self.request.user):
+        if self.project and is_editable and not self.project.is_opened_by(self.request.user):
             activity_serializer = ProjectActivitySerializer(self.project)
             activity_data = activity_serializer.data
             context['activity_data'] = activity_data
@@ -454,22 +454,13 @@ class NewProjectView (SSLRequired, LoginRequired, S3UploadMixin, ProjectMixin, T
         return '/'.join([owner_slug, 'new'])
 
     def get(self, request, owner_slug):
+        self.owner = get_object_or_404(Profile, slug=owner_slug)
+
         # Check whether this page is for the auth'd user
-        if owner_slug != request.user.username:
+        if not self.owner.authorizes(request.user):
             return redirect('app-new-project', owner_slug=self.request.user.username)
 
         self.project = None
-        owner_auth = get_object_or_404(UserAuth, username=owner_slug)
-
-        if 'force_new' not in request.GET:
-            # Check whether the user has an existing project and redirect there.
-            try:
-                project = owner_auth.profile.projects.all()[0]
-            except IndexError:
-                pass
-            else:
-                return redirect('app-project', owner_slug=owner_slug, project_slug=project.slug)
-
         return super(NewProjectView, self).get(request, owner_slug)
 
 
