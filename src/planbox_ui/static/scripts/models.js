@@ -111,6 +111,25 @@ var Planbox = Planbox || {};
           events.remove(evt);
         }
       });
+    },
+
+    markAsOpenedBy: function(user, options) {
+      var endpoint = this.url() + '/activity';
+      $.ajax(_.defaults({
+        type: 'POST',
+        url: endpoint,
+        data: JSON.stringify(user),
+        dataType: 'json'
+      }, options));
+    },
+
+    markAsClosed: function(options) {
+      var endpoint = this.url() + '/activity';
+      $.ajax(_.defaults({
+        type: 'DELETE',
+        url: endpoint,
+        dataType: 'json'
+      }, options));
     }
   });
 

@@ -278,22 +278,23 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     def __str__(self):
         return self.title
 
-    def mark_opened_by(self, user):
+    def mark_opened_by(self, user, opened_at=None):
         # TODO: This could just be done in the cache.
-        self.last_opened_at = now()
-        self.last_opened_by = user if user.is_authenticated() else None
+        self.last_opened_at = opened_at or now()
+        self.last_opened_by = user if (user and user.is_authenticated()) else None
         self.save()
 
-    def is_opened_by(self, user):
-        return self.last_opened_by == user
+    def mark_closed(self):
+        self.mark_opened_by(None)
 
-    def get_opened_status(self):
+    def is_opened_by(self, user):
+        two_minutes = timedelta(minutes=2)
+        return self.last_opened_by == user and (now() - self.last_opened_at) < two_minutes
+
+    def get_opened_by(self):
         two_minutes = timedelta(minutes=2)
         if self.last_opened_at and (now() - self.last_opened_at) < two_minutes:
-            return {
-                'opened_by': self.last_opened_by,
-                'opened_at': self.last_opened_at
-            }
+            return self.last_opened_by
         else:
             return None
 

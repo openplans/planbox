@@ -367,7 +367,7 @@ class BaseExistingProjectView (ProjectMixin, TemplateView):
         return '/'.join([owner_slug, project_slug])
 
     def is_project_open(self):
-        return self.project.get_opened_status()
+        return self.project.get_opened_by()
 
     def get(self, request, owner_slug, project_slug):
         self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),

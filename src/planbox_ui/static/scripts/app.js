@@ -53,6 +53,9 @@ var Planbox = Planbox || {};
         e.returnValue = notification;
         return notification;
       }
+
+      // Close the project
+      NS.app.projectModel.markAsClosed();
     }, false);
   });
 
