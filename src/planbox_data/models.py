@@ -330,6 +330,10 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
         if isinstance(obj, UserAuth):
             try: obj = obj.profile
             except Profile.DoesNotExist: return False
+
+        if obj.auth.is_superuser:
+            return True
+
         return self.owned_by(obj) or (obj in self.owner.members.all())
 
 
