@@ -34,6 +34,9 @@ var Planbox = Planbox || {};
       this.$('form').addClass('hide');
       this.render();
     },
+    getErrorMessage: function(attr, errors) {
+      return this.$('[data-error-attr="' + attr + '"]');
+    },
     handleSlugFormSubmit: function(evt) {
       evt.preventDefault();
       var self = this;
@@ -46,8 +49,10 @@ var Planbox = Planbox || {};
           self.render();
         },
         error: function(model, $xhr, options) {
+          var errors;
           if ($xhr.status === 400) {
-            self.ui.slugForm.append('<small class="error">' + self.ui.slugField.attr('data-error-message') + '</small>');
+            errors = $xhr.responseJSON;
+            self.ui.slugForm.append('<small class="error">' + self.getErrorMessage('slug', errors) + '</small>');
           } else {
             alert('Something went wrong while setting the plan slug.\n' +
               'We have been notified of the error and will look into it ASAP.');

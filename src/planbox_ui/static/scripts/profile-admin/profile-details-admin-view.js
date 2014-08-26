@@ -85,6 +85,9 @@ var Planbox = Planbox || {};
         this.initRichEditables();
         this.initDropZones();
       },
+      getErrorMessage: function(attr, errors) {
+        return this.$('[data-error-attr="' + attr + '"]');
+      },
       showFormErrors: function(errors) {
         var attr,
             $errorField,
@@ -92,7 +95,7 @@ var Planbox = Planbox || {};
             errorMessage;
 
         for (attr in errors) {
-          $errorMessageWrapper = this.$('[data-error-attr="' + attr + '"]');
+          $errorMessageWrapper = this.getErrorMessage();
           errorMessage = $errorMessageWrapper.attr('data-error-message');
           $errorMessageWrapper.html('<small class="error error-message">' + errorMessage + '</small>');
 
