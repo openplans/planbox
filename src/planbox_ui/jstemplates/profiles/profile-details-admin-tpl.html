@@ -1,6 +1,6 @@
 <div class="row profile-details">
   <div class="small-4 medium-2 large-12 columns">
-    <div class="avatar-container panel">
+    <div class="avatar-container panel text-center">
       <img class="avatar" 
         src="{{#if avatar_url}}{{ avatar_url }}{{^}}{{#if auth}}{{ static_url }}images/avatar-user.gif{{^}}{{ static_url }}images/avatar-city.gif{{/if}}{{/if}}">
     </div>
@@ -19,7 +19,7 @@
 
 <form class="row profile-form hide">
   <div class="small-8 small-centered medium-4 medium-uncentered large-12 columns">
-    <div class="avatar-container panel">
+    <div class="avatar-container panel text-center">
       <div class="drag-area-container">
         {{#if_fileapi_support 'cors'}}
         <img class="image-holder" data-attr="avatar_url"

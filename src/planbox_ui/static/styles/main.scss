@@ -1282,9 +1282,13 @@ textarea.no-resize {
 .avatar-container {
   padding: 0.3rem;
   .avatar {
-    display: block;
+    display: inline-block;
+  }
+  .drag-area-container {
+    min-height: 10.125rem;
   }
 }
+
 
 // Project List & Member List
 .project-list, .member-list, .team-list {
