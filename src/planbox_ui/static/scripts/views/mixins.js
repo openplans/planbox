@@ -222,4 +222,35 @@ var Planbox = Planbox || {};
     }
   };
 
+  NS.FormErrorsMixin = {
+    showFormErrors: function(errors) {
+      var attr,
+          $errorField,
+          $errorMessageWrapper,
+          errorMessage;
+
+      for (attr in errors) {
+        $errorMessageWrapper = this.$('[data-error-attr="' + attr + '"]');
+        $errorMessageWrapper.html(
+          '<small class="error error-message">' +
+          this.getErrorMessage($errorMessageWrapper, attr, errors) +
+          '</small>');
+
+        $errorField = this.$('[data-attr="' + attr + '"]');
+        $errorField.addClass('error');
+      }
+    },
+    getErrorMessage: function($wrapper, attr, errors) {
+      return $wrapper.attr('data-error-message');
+    },
+    clearErrors: function() {
+      this.$('.error-message').remove();
+      this.$('.error').removeClass('error');
+    },
+    resetForm: function() {
+      this.ui.form.reset();
+      this.clearErrors();
+    }
+  };
+
 }(Planbox, jQuery));

@@ -67,7 +67,7 @@ class SlugValidationMixin (object):
                 raise serializers.ValidationError('This slug is already in use.')
 
         # Letters, numbers, and dashes.
-        pattern = r'[A-Za-z0-9-]*'
+        pattern = r'^[A-Za-z0-9-]*$'
         if not re.match(pattern, slug):
             raise serializers.ValidationError('Use only numbers, letters, and dashes in slugs.')
 
