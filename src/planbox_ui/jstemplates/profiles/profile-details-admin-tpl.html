@@ -1,7 +1,8 @@
 <div class="row profile-details">
   <div class="small-4 medium-2 large-12 columns">
     <div class="avatar-container panel">
-      <img class="avatar" src="{{#if avatar_url}}{{ avatar_url }}{{^}}//placehold.it/400/f7f7f7/bbbbbb&text=...{{/if}}">
+      <img class="avatar" 
+        src="{{#if avatar_url}}{{ avatar_url }}{{^}}{{#if auth}}{{ static_url }}images/avatar-user.gif{{^}}{{ static_url }}images/avatar-city.gif{{/if}}{{/if}}">
     </div>
   </div>
   <div class="small-8 medium-10 large-12 columns ">
@@ -22,8 +23,8 @@
       <div class="drag-area-container">
         {{#if_fileapi_support 'cors'}}
         <img class="image-holder" data-attr="avatar_url"
-          src="{{#if avatar_url}}{{ avatar_url }}{{^}}//placehold.it/400/f7f7f7/bbbbbb&text=...{{/if}}"
-          data-empty-img="//placehold.it/400/f7f7f7/bbbbbb&text=...">
+          src="{{#if avatar_url}}{{ avatar_url }}{{^}}{{#if auth}}{{ static_url }}images/avatar-user.gif{{^}}{{ static_url }}images/avatar-city.gif{{/if}}{{/if}}"
+          data-empty-img="{{ static_url }}images/avatar-city.gif">
         <div class="drag-area text-center image-dnd" data-max-width="1000">
           <p class="drop-instructions">Drop image here or&hellip;</p>
           <p class="uploading-message">Uploading&hellip;</p>
