@@ -1,0 +1,7 @@
+{{! A simple template to construct a profile name string }}
+
+{{#if name}}
+  {{ name }} ({{ slug }})
+{{^}}
+  {{ slug }}
+{{/if}}

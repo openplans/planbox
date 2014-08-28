@@ -1,0 +1,32 @@
+<div class="panel-header">
+  <h5 class="page-list-header subheader no-margins">
+    Plans
+    <a href="new/" class="new-project-button button radius tiny right">+ New Plan</a>
+  </h5>
+</div>
+<form class="new-project hide extra-margin-top">
+  <div class="row">
+    <div class="small-3 medium-2 large-1 columns">
+      <label for="thetitle" class="inline">Title</label>
+    </div>
+    <div class="small-9 medium-10 large-11 columns">
+      <input id="thetitle" type="text" placeholder="Keep it short &amp; descriptive..." />
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 medium-2 large-1 columns">
+      <label for="theorg" class="inline">Owner</label>
+    </div>
+    <div class="small-9 medium-10 large-11 columns">
+      <select id="theorg">
+        <option value="{{user 'slug'}}">{{user 'slug'}}</option>
+        {{#eachUsers 'teams'}}
+        <option value="{{ slug }}" {{#is slug ../slug}}selected{{/is}}>{{slug}}</option>
+        {{/eachUsers}}
+      </select>
+      <a href="project.html" class="button radius right">Create Project</a>
+    </div>
+  </div>
+  <hr>
+</form>
+<ul class="project-list no-bullet no-margins"></ul>

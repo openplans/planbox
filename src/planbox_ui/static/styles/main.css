@@ -2116,8 +2116,8 @@ select {
 }
 /* line 119, ../bower_components/foundation/scss/foundation/components/_alert-boxes.scss */
 .alert-box.alert {
-  background-color: #f04124;
-  border-color: #de2d0f;
+  background-color: #f24c3d;
+  border-color: #ef2715;
   color: white;
 }
 /* line 120, ../bower_components/foundation/scss/foundation/components/_alert-boxes.scss */
@@ -2809,7 +2809,7 @@ button.success:hover, button.success:focus, .button.success:hover, .button.succe
 }
 /* line 199, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 button.alert, .button.alert {
-  background-color: #f04124;
+  background-color: #f24c3d;
   border-color: #267299;
   color: white;
 }
@@ -2934,7 +2934,7 @@ button.disabled.success:hover, button.disabled.success:focus, button[disabled].s
 }
 /* line 215, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 button.disabled.alert, button[disabled].alert, .button.disabled.alert, .button[disabled].alert {
-  background-color: #f04124;
+  background-color: #f24c3d;
   border-color: #267299;
   color: white;
   cursor: default;
@@ -2951,7 +2951,7 @@ button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert
 }
 /* line 159, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert:hover, button[disabled].alert:focus, .button.disabled.alert:hover, .button.disabled.alert:focus, .button[disabled].alert:hover, .button[disabled].alert:focus {
-  background-color: #f04124;
+  background-color: #f24c3d;
 }
 
 /* line 220, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
@@ -4207,7 +4207,7 @@ fieldset legend {
   font-size: 0.75rem;
   font-weight: normal;
   font-style: italic;
-  background: #f04124;
+  background: #f24c3d;
   color: white;
 }
 /* line 451, ../bower_components/foundation/scss/foundation/components/_forms.scss */
@@ -4224,7 +4224,7 @@ span.error, small.error {
   font-size: 0.75rem;
   font-weight: normal;
   font-style: italic;
-  background: #f04124;
+  background: #f24c3d;
   color: white;
 }
 
@@ -4242,7 +4242,7 @@ span.error, small.error {
 /* line 471, ../bower_components/foundation/scss/foundation/components/_forms.scss */
 .error label,
 .error label.error {
-  color: #f04124;
+  color: #f24c3d;
 }
 /* line 475, ../bower_components/foundation/scss/foundation/components/_forms.scss */
 .error small.error {
@@ -4253,7 +4253,7 @@ span.error, small.error {
   font-size: 0.75rem;
   font-weight: normal;
   font-style: italic;
-  background: #f04124;
+  background: #f24c3d;
   color: white;
 }
 /* line 480, ../bower_components/foundation/scss/foundation/components/_forms.scss */
@@ -4280,7 +4280,7 @@ textarea.error {
 
 /* line 501, ../bower_components/foundation/scss/foundation/components/_forms.scss */
 label.error {
-  color: #f04124;
+  color: #f24c3d;
 }
 
 /* line 196, ../bower_components/foundation/scss/foundation/components/_icon-bar.scss */
@@ -4680,7 +4680,7 @@ kbd {
 }
 /* line 99, ../bower_components/foundation/scss/foundation/components/_labels.scss */
 .label.alert {
-  background-color: #f04124;
+  background-color: #f24c3d;
   color: white;
 }
 /* line 100, ../bower_components/foundation/scss/foundation/components/_labels.scss */
@@ -5302,7 +5302,7 @@ ul.pagination li {
 }
 /* line 66, ../bower_components/foundation/scss/foundation/components/_progress-bars.scss */
 .progress.alert .meter {
-  background: #f04124;
+  background: #f24c3d;
   height: 100%;
   display: block;
 }
@@ -6406,7 +6406,7 @@ small {
 code {
   font-family: Consolas, "Liberation Mono", Courier, monospace;
   font-weight: bold;
-  color: #bd260d;
+  color: #cf1e0e;
 }
 
 /* Lists */
@@ -7213,7 +7213,7 @@ meta.foundation-mq-topbar {
 }
 /* line 320, ../bower_components/foundation/scss/foundation/components/_top-bar.scss */
 .top-bar-section ul li > a.button.alert {
-  background-color: #f04124;
+  background-color: #f24c3d;
   border-color: #267299;
   color: white;
 }
@@ -7272,7 +7272,7 @@ meta.foundation-mq-topbar {
 }
 /* line 331, ../bower_components/foundation/scss/foundation/components/_top-bar.scss */
 .top-bar-section ul li > button.alert {
-  background-color: #f04124;
+  background-color: #f24c3d;
   border-color: #267299;
   color: white;
 }
@@ -8569,45 +8569,52 @@ p.text-xxlarge {
 }
 
 /* line 95, _foundation.scss */
+h1.no-margins, h2.no-margins, h3.no-margins, h4.no-margins, h5.no-margins, h6.no-margins, p.no-margins, ul.no-margins, ul.no-margins, li.no-margins {
+  margin: 0;
+}
+
+/* line 102, _foundation.scss */
 .alert-box a {
   color: white;
   text-decoration: underline;
 }
-/* line 101, _foundation.scss */
+/* line 108, _foundation.scss */
 .alert-box.info a {
   color: #308fbf;
 }
 
-/* line 107, _foundation.scss */
+/* line 114, _foundation.scss */
 .project-text-content {
   line-height: 1.6;
   margin-bottom: 1.6rem;
 }
 
-/* line 113, _foundation.scss */
-.button.less-padding {
+/* line 121, _foundation.scss */
+.button.less-padding, button.less-padding {
   padding: 0.75rem 1.25rem;
 }
-
-/* line 116, _foundation.scss */
-.button.tiny.less-padding {
-  padding: 0.25rem 0.625rem;
+/* line 124, _foundation.scss */
+.button.tiny.less-padding, button.tiny.less-padding {
+  padding: 0.25rem 0.375rem;
+}
+/* line 127, _foundation.scss */
+.button.small.less-padding, button.small.less-padding {
+  padding: 0.5rem 0.75rem;
+}
+/* line 130, _foundation.scss */
+.button.large.less-padding, button.large.less-padding {
+  padding: 0.875rem 1.25rem;
 }
 
-/* line 119, _foundation.scss */
-.button.small.less-padding {
-  padding: 0.5rem 0.875rem;
-}
-
-/* line 122, _foundation.scss */
-.button.large.less-padding {
-  padding: 0.875rem 1.5rem;
+/* line 136, _foundation.scss */
+a.alert {
+  color: #f24c3d;
 }
 
 /*--------------------------------------------------
   Grid
 --------------------------------------------------*/
-/* line 132, _foundation.scss */
+/* line 146, _foundation.scss */
 .full-width {
   width: 100%;
   margin-left: auto;
@@ -8615,42 +8622,42 @@ p.text-xxlarge {
   max-width: initial;
 }
 
-/* line 140, _foundation.scss */
+/* line 154, _foundation.scss */
 .some-margin-top {
   margin-top: 0.9375rem;
 }
 
-/* line 143, _foundation.scss */
+/* line 157, _foundation.scss */
 .some-margin-bottom {
   margin-bottom: 0.9375rem;
 }
 
-/* line 146, _foundation.scss */
+/* line 160, _foundation.scss */
 .extra-margin-top {
   margin-top: 2rem;
 }
 
-/* line 149, _foundation.scss */
+/* line 163, _foundation.scss */
 .extra-margin-bottom {
   margin-bottom: 2rem;
 }
 
-/* line 154, _foundation.scss */
+/* line 168, _foundation.scss */
 .some-padding-top {
   padding-top: 0.9375rem;
 }
 
-/* line 157, _foundation.scss */
+/* line 171, _foundation.scss */
 .some-padding-bottom {
   padding-bottom: 0.9375rem;
 }
 
-/* line 160, _foundation.scss */
+/* line 174, _foundation.scss */
 .extra-padding-top {
   padding-top: 2rem;
 }
 
-/* line 163, _foundation.scss */
+/* line 177, _foundation.scss */
 .extra-padding-bottom {
   padding-bottom: 2rem;
 }
@@ -8658,13 +8665,13 @@ p.text-xxlarge {
 /*--------------------------------------------------
   Magellan & Location Hashes
 --------------------------------------------------*/
-/* line 173, _foundation.scss */
+/* line 187, _foundation.scss */
 .page-anchor {
   position: relative;
   top: -80px;
 }
 
-/* line 179, _foundation.scss */
+/* line 193, _foundation.scss */
 .offset-anchor {
   display: block;
   position: absolute;
@@ -8674,15 +8681,37 @@ p.text-xxlarge {
 /*--------------------------------------------------
   Forms
 --------------------------------------------------*/
-/* line 192, _foundation.scss */
+/* line 218, _foundation.scss */
+input[type="text"].inline-input,
+input[type="password"].inline-input,
+input[type="date"].inline-input,
+input[type="datetime"].inline-input,
+input[type="datetime-local"].inline-input,
+input[type="month"].inline-input,
+input[type="week"].inline-input,
+input[type="email"].inline-input,
+input[type="number"].inline-input,
+input[type="search"].inline-input,
+input[type="tel"].inline-input,
+input[type="time"].inline-input,
+input[type="url"].inline-input {
+  display: inline;
+  font-size: inherit;
+  margin: 0;
+  padding: 0.25rem;
+  height: auto;
+  width: auto;
+}
+
+/* line 231, _foundation.scss */
 .switch + label.inline {
   margin-left: 4.5rem;
 }
-/* line 195, _foundation.scss */
+/* line 234, _foundation.scss */
 .switch.small + label.inline {
   margin-left: 4rem;
 }
-/* line 198, _foundation.scss */
+/* line 237, _foundation.scss */
 .switch.large + label.inline {
   margin-left: 5.5rem;
 }
@@ -8690,11 +8719,39 @@ p.text-xxlarge {
 /*--------------------------------------------------
   Dropdown Menus
 --------------------------------------------------*/
-/* line 209, _foundation.scss */
+/* line 248, _foundation.scss */
+.dropdown,
+.f-dropdown {
+  box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
+}
+
+/* line 253, _foundation.scss */
 .f-dropdown li a.disabled {
   background-color: #eee;
   color: #ccc;
   cursor: default;
+}
+
+/*--------------------------------------------------
+  Panels
+--------------------------------------------------*/
+/* line 265, _foundation.scss */
+.panel-header {
+  margin: -1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid #6c7180;
+  padding: 1.25rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  background-color: #6c7180;
+}
+/* line 273, _foundation.scss */
+.panel-header h1, .panel-header h2, .panel-header h3, .panel-header h4, .panel-header h5, .panel-header h6 {
+  color: #eeeeee;
+}
+/* line 276, _foundation.scss */
+.panel-header .button {
+  margin: -0.25rem -0.75rem;
 }
 
 /*--------------------------------------------------
@@ -10222,8 +10279,20 @@ img.attachment-icon {
   border: 0;
 }
 
+/* line 992, main.scss */
+.help {
+  /* Style copied from span.error, except without the red background. */
+  display: block;
+  padding: 0.375rem 0.5625rem 0.5625rem;
+  margin-top: -1px;
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  font-weight: normal;
+  font-style: italic;
+}
+
 @media only screen and (min-width: 40.063em) {
-  /* line 992, main.scss */
+  /* line 1003, main.scss */
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
@@ -10234,7 +10303,7 @@ img.attachment-icon {
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1001, main.scss */
+  /* line 1012, main.scss */
   input[type=text].sub-heading-input {
     font-size: 1.75rem;
     margin: 0 0 1rem 0;
@@ -10244,12 +10313,12 @@ img.attachment-icon {
   }
 }
 
-/* line 1010, main.scss */
+/* line 1021, main.scss */
 span.sub-heading-postfix {
   color: #999;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1010, main.scss */
+  /* line 1021, main.scss */
   span.sub-heading-postfix {
     margin: 0 0 1rem 0;
     padding: 0.5rem 0.75rem;
@@ -10257,7 +10326,7 @@ span.sub-heading-postfix {
   }
 }
 
-/* line 1019, main.scss */
+/* line 1030, main.scss */
 .content-editable {
   line-height: 1.6;
   background-color: white;
@@ -10277,7 +10346,7 @@ span.sub-heading-postfix {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
   height: auto;
 }
-/* line 1021, main.scss */
+/* line 1032, main.scss */
 .content-editable.rich-editable {
   min-height: 8rem;
 }
@@ -10296,77 +10365,77 @@ span.sub-heading-postfix {
 .content-editable[disabled], .content-editable[readonly], fieldset[disabled] .content-editable {
   background-color: #dddddd;
 }
-/* line 1029, main.scss */
+/* line 1040, main.scss */
 .content-editable.radius {
   border-radius: 3px;
 }
-/* line 1033, main.scss */
+/* line 1044, main.scss */
 .error .content-editable, .content-editable.error {
   margin-bottom: 0;
 }
-/* line 1036, main.scss */
+/* line 1047, main.scss */
 .content-editable a {
   color: #308fbf;
   text-decoration: none;
   line-height: inherit;
 }
-/* line 1042, main.scss */
+/* line 1053, main.scss */
 .content-editable a:hover, .content-editable a:focus {
   color: #267299;
 }
 
-/* line 1051, main.scss */
+/* line 1062, main.scss */
 .pen-menu,
 .pen-menu * {
   box-sizing: content-box !important;
 }
 
-/* line 1055, main.scss */
+/* line 1066, main.scss */
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
   padding-top: 0.5rem;
   padding-right: 0.25rem;
 }
 
-/* line 1061, main.scss */
+/* line 1072, main.scss */
 .section-settings {
   background-color: #f7f7f7;
   padding-top: 1.75rem;
 }
-/* line 1064, main.scss */
+/* line 1075, main.scss */
 .section-settings-toggle-container + .section-settings {
   margin-top: -2.5rem;
 }
 
-/* line 1069, main.scss */
+/* line 1080, main.scss */
 .section-insert {
   margin-bottom: -1rem;
   margin-right: -0.9375rem;
   margin-left: -0.9375rem;
 }
-/* line 1073, main.scss */
+/* line 1084, main.scss */
 .section-insert hr {
   margin-top: 1rem;
   border-color: #ff8b38;
 }
 
-/* line 1079, main.scss */
+/* line 1090, main.scss */
 .unassigned {
   cursor: default;
 }
 
-/* line 1083, main.scss */
+/* line 1094, main.scss */
 .project-settings-container {
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
   background-color: #d9d9d9;
 }
-/* line 1084, main.scss */
+/* line 1095, main.scss */
 .project-settings-container .save-btn {
   outline: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1083, main.scss */
+  /* line 1094, main.scss */
   .project-settings-container {
     position: fixed;
     top: 65px;
@@ -10378,25 +10447,25 @@ span.sub-heading-postfix {
     overflow: hidden;
     box-shadow: inset 3px 0 0 rgba(51, 51, 51, 0.1);
   }
-  /* line 1100, main.scss */
+  /* line 1111, main.scss */
   .project-settings-container .project-settings {
     max-height: 60%;
     overflow: auto;
   }
 }
 
-/* line 1107, main.scss */
+/* line 1118, main.scss */
 textarea.no-resize {
   resize: none;
 }
 
-/* line 1112, main.scss */
+/* line 1123, main.scss */
 .drag-area-container {
   position: relative;
   text-align: center;
 }
 
-/* line 1116, main.scss */
+/* line 1127, main.scss */
 .drag-area {
   position: absolute;
   top: 1rem;
@@ -10407,17 +10476,17 @@ textarea.no-resize {
   border-radius: 0.375rem;
   background-color: rgba(242, 242, 242, 0.4);
 }
-/* line 1125, main.scss */
+/* line 1136, main.scss */
 .drag-area:hover {
   border-color: rgba(133, 133, 133, 0.9);
   background-color: rgba(242, 242, 242, 0.9);
 }
-/* line 1129, main.scss */
+/* line 1140, main.scss */
 .drag-area p {
   margin-bottom: 0.5rem;
 }
 
-/* line 1133, main.scss */
+/* line 1144, main.scss */
 .no-file-upload-message {
   clear: both;
   font-size: 0.75em;
@@ -10430,18 +10499,18 @@ textarea.no-resize {
   border-radius: 0.25em;
 }
 
-/* line 1144, main.scss */
+/* line 1155, main.scss */
 .no-file-upload-message a {
   color: #fff;
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 1148, main.scss */
+/* line 1159, main.scss */
 .no-file-upload-message a:hover {
   color: #fff;
 }
 
-/* line 1151, main.scss */
+/* line 1162, main.scss */
 .file-upload {
   margin: 2em 1em 1em;
   text-align: center;
@@ -10452,7 +10521,7 @@ textarea.no-resize {
   position: relative;
 }
 
-/* line 1162, main.scss */
+/* line 1173, main.scss */
 .file-upload:hover,
 .file-dragging,
 .file-uploading {
@@ -10461,12 +10530,12 @@ textarea.no-resize {
   background-color: rgba(90, 90, 90, 0.5);
 }
 
-/* line 1167, main.scss */
+/* line 1178, main.scss */
 .file-upload p {
   margin-bottom: 0.5em;
 }
 
-/* line 1170, main.scss */
+/* line 1181, main.scss */
 .file-upload-input-container {
   position: relative;
   overflow: hidden;
@@ -10474,52 +10543,52 @@ textarea.no-resize {
   margin-bottom: 0;
 }
 
-/* line 1176, main.scss */
+/* line 1187, main.scss */
 .file-upload-input {
   display: none;
 }
 
-/* line 1180, main.scss */
+/* line 1191, main.scss */
 .uploading-message,
 .file-uploading > .drop-instructions {
   display: none;
 }
 
 @keyframes uploading {
-  /* line 1184, main.scss */
+  /* line 1195, main.scss */
   0% {
     color: #888;
   }
 
-  /* line 1185, main.scss */
+  /* line 1196, main.scss */
   50% {
     color: #fff;
   }
 
-  /* line 1186, main.scss */
+  /* line 1197, main.scss */
   100% {
     color: #888;
   }
 }
 
 @-webkit-keyframes uploading {
-  /* line 1189, main.scss */
+  /* line 1200, main.scss */
   0% {
     color: #888;
   }
 
-  /* line 1190, main.scss */
+  /* line 1201, main.scss */
   50% {
     color: #fff;
   }
 
-  /* line 1191, main.scss */
+  /* line 1202, main.scss */
   100% {
     color: #888;
   }
 }
 
-/* line 1193, main.scss */
+/* line 1204, main.scss */
 .file-uploading > .uploading-message {
   display: block;
   position: relative;
@@ -10530,44 +10599,44 @@ textarea.no-resize {
   animation: uploading 1.5s infinite ease-in-out;
 }
 
-/* line 1202, main.scss */
+/* line 1213, main.scss */
 .file-uploading > .file-upload-input-container {
   visibility: hidden;
 }
 
-/* line 1207, main.scss */
+/* line 1218, main.scss */
 .full-width-image-container {
   margin: 0 -0.9375rem 0.5rem -0.9375rem;
 }
-/* line 1209, main.scss */
+/* line 1220, main.scss */
 .full-width-image-container.drag-area-container {
   min-height: 9rem;
 }
 
-/* line 1213, main.scss */
+/* line 1224, main.scss */
 .cover-image-container {
   margin-top: -1.125rem;
 }
 
-/* line 1218, main.scss */
+/* line 1229, main.scss */
 .logo-image-container {
   min-height: 9rem;
   margin-bottom: 1rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1218, main.scss */
+  /* line 1229, main.scss */
   .logo-image-container {
     float: left;
     width: 50%;
   }
 }
-/* line 1225, main.scss */
+/* line 1236, main.scss */
 .logo-image-container img {
   max-height: 20rem;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1229, main.scss */
+  /* line 1240, main.scss */
   .project-title-container {
     float: right;
     width: 50%;
@@ -10576,7 +10645,7 @@ textarea.no-resize {
     padding-right: 1rem;
     padding-bottom: 1rem;
   }
-  /* line 1237, main.scss */
+  /* line 1248, main.scss */
   .logo-image-container.hide + .project-title-container {
     float: none;
     width: auto;
@@ -10586,19 +10655,59 @@ textarea.no-resize {
     padding-bottom: 0;
   }
 }
-/* line 1246, main.scss */
+/* line 1257, main.scss */
 .project-title-container .project-title-help-text {
   margin-top: -0.75rem;
 }
 
-/* line 1253, main.scss */
+/* line 1264, main.scss */
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none;
 }
 
-/* line 1265, main.scss */
+/* line 1276, main.scss */
 .existing-snapshot-wrapper .button {
   margin-bottom: 0;
+}
+
+/* line 1282, main.scss */
+.avatar-container {
+  padding: 0.3rem;
+}
+/* line 1284, main.scss */
+.avatar-container .avatar {
+  display: inline-block;
+}
+/* line 1287, main.scss */
+.avatar-container .drag-area-container {
+  min-height: 10.125rem;
+}
+
+/* line 1295, main.scss */
+.project-list > li + li, .member-list > li + li, .team-list > li + li {
+  margin-top: 0.625rem;
+  padding-top: 0.625rem;
+  border-top: 1px solid #e3e3e3;
+}
+
+/* line 1302, main.scss */
+.member-list li, .team-list li {
+  padding-left: 4.375rem;
+}
+/* line 1305, main.scss */
+.member-list .avatar, .team-list .avatar {
+  width: 3.75rem;
+  margin-left: -4.375rem;
+}
+
+/* line 1310, main.scss */
+.user-profile .member-list {
+  display: none;
+}
+
+/* line 1313, main.scss */
+.team-profile .team-list {
+  display: none;
 }
 
 /* ----- Medium screens ----- */

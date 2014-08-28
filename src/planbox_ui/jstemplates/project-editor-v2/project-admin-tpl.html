@@ -162,10 +162,23 @@
     <div class="row">
       <div class="columns small-12">
 
+        <!-- <div data-alert class="multi-user-warning alert-box alert radius"> -->
+          <!-- <small>WARNING:</small> Frank, and Aaron may be editing this plan! -->
+        <!-- </div> -->
+
+        <div class="multi-user-warning-wrapper">
+          {{#bootstrapped 'activity'}}
+          {{>multi-user-warning-tpl}}
+          {{/bootstrapped}}
+        </div>
+
         <button class="button expand radius save-btn disabled">Save</button>
 
         <div class="project-settings">
-          <p class="text-right project-preview-wrapper">{{>project-preview-link-tpl}}</p>
+          <div class="row">
+            {{!-- <div class="project-save-info-wrapper large-8 columns some-margin-bottom">{{>project-save-info-tpl}}</div> --}}
+            <div class="project-preview-wrapper large-12 columns text-right">{{>project-preview-link-tpl}}</div>
+          </div>
           <hr>
           <div class="switch left">
             <input id="public-switch" type="checkbox"{{#if public}} checked{{/if}}>

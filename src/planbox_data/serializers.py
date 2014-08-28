@@ -48,6 +48,88 @@ class OrderedSerializerMixin (object):
                 obj.index = index
 
 
+# ============================================================
+# Profile serializers
+
+class AssociatedProfileSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.Profile
+        fields = ('id', 'slug', 'name',)
+
+    def get_default_fields(self):
+        fields = super(AssociatedProfileSerializer, self).get_default_fields()
+
+        # Modify the fields
+        # - remove read_only so that they're available in restore_objects
+        # - remove required since only one of id or slug is required
+        fields['id'].read_only = False
+        for field in fields.values():
+            field.required = False
+
+        return fields
+
+    def restore_object(self, attrs, instance=None):
+        """
+        Only restore objects that already exist; don't create or delete.
+        """
+        Model = self.opts.model
+
+        # First try to get the model's PK
+        try:
+            id_arg_name = Model._meta.pk.name
+            id_arg_value = attrs[Model._meta.pk.name]
+        except KeyError:
+            # Failing that, try the slug
+            try:
+                id_arg_name = 'slug'
+                id_arg_value = attrs['slug']
+            except KeyError:
+                raise serializers.ValidationError(
+                    'You must specify one of the fields "%s" or "slug".' % (Model._meta.pk.name,))
+
+        # Find the model (Profile) corresponding to the id or slug.
+        try:
+            id_kwargs = {id_arg_name: id_arg_value}
+            instance = Model.objects.get(**id_kwargs)
+        except Model.DoesNotExist:
+            raise serializers.ValidationError(
+                'No %s found with %s=%s' % (Model._meta.verbose_name, id_arg_name, id_arg_value))
+
+        return instance
+
+
+class OwnedProjectSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.Project
+        fields = ('id', 'slug', 'title',)
+
+
+class UserSerializer (serializers.ModelSerializer):
+    username = serializers.CharField(source='auth.username')
+    teams = AssociatedProfileSerializer(required=False, many=True, allow_add_remove=True)
+
+    class Meta:
+        model = models.Profile
+
+
+class ProfileSerializer (serializers.ModelSerializer):
+    members = AssociatedProfileSerializer(required=False, many=True, allow_add_remove=True)
+    teams = AssociatedProfileSerializer(required=False, many=True, allow_add_remove=True)
+    projects = OwnedProjectSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = models.Profile
+        exclude = ('project_editor_version',)
+
+    def validate(self, attrs):
+        if not attrs.get('name') and not attrs.get('slug'):
+            raise serializers.ValidationError('You must specify either a name or a slug.')
+        return attrs
+
+
+# ============================================================
+# Project-related serializers
+
 class AttachmentSerializer (OrderedSerializerMixin, serializers.ModelSerializer):
     label = CleanedHtmlField()
     description = CleanedHtmlField(required=False)
@@ -80,7 +162,7 @@ class SectionSerializer (OrderedSerializerMixin, serializers.ModelSerializer):
 class ProjectSerializer (serializers.ModelSerializer):
     events = EventSerializer(many=True, allow_add_remove=True)
     sections = SectionSerializer(many=True, allow_add_remove=True)
-    owner = serializers.SlugRelatedField(slug_field='slug')
+    owner = AssociatedProfileSerializer(required=True)
 
     title = CleanedHtmlField(required=True)
     location = CleanedHtmlField(required=False)
@@ -94,16 +176,35 @@ class ProjectSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = models.Project
+        exclude = ('last_opened_at', 'last_opened_by', 'last_saved_at', 'last_saved_by')
+
+    def validate_slug(self, attrs, source):
+        slug = attrs.get(source)
+        # If the slug is empty, we're just going to generate one.
+        if not slug:
+            return attrs
+        if self.object:
+            # If the slug is not changing, then all is well.
+            if slug == self.object.slug:
+                return attrs
+            # If we're changing the slug, and it's already in use, then we
+            # have a problem.
+            existing_slugs = self.object.get_all_slugs()
+            if slug in existing_slugs:
+                raise serializers.ValidationError('This slug is already in use.')
+        return attrs
 
 
-class UserSerializer (serializers.ModelSerializer):
-    username = serializers.CharField(source='auth.username')
+class ProjectActivitySerializer (serializers.ModelSerializer):
+    last_opened_by = AssociatedProfileSerializer(source='last_opened_by.profile')
+    last_saved_by = AssociatedProfileSerializer(source='last_saved_by.profile')
 
     class Meta:
-        model = models.Profile
+        model = models.Project
+        fields = ('last_opened_at', 'last_opened_by', 'last_saved_at', 'last_saved_by')
 
 
-# ==========
+# ============================================================
 # Template serializers, which render objects without their identifying
 # information (ids, slugs, etc.). These are output only.
 

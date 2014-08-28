@@ -279,7 +279,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
                 {'label': 'test label 3'}
             ],
             'sections': [],
-            'owner': profile.slug
+            'owner': {'slug': profile.slug}
         })
 
         ok_(serializer.is_valid(), serializer.errors)
@@ -306,7 +306,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
                 {'label': 'test label 1', 'id': events[0].pk}
             ],
             'sections': [],
-            'owner': profile.slug
+            'owner': {'slug': profile.slug}
         })
 
         ok_(serializer.is_valid(), serializer.errors)
@@ -335,7 +335,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
                 },
             ],
             'sections': [],
-            'owner': profile.slug
+            'owner': {'slug': profile.slug}
         })
 
         ok_(serializer.is_valid(), serializer.errors)
@@ -369,7 +369,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
                 },
             ],
             'sections': [],
-            'owner': profile.slug
+            'owner': {'slug': profile.slug}
         })
 
         ok_(serializer.is_valid(), serializer.errors)
@@ -403,7 +403,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
             'title': 'test title',
             'location': 'test location',
             'events': None,
-            'owner': profile.slug
+            'owner': {'slug': profile.slug}
         })
 
         ok_(not serializer.is_valid())
@@ -422,7 +422,7 @@ class ProjectSerializerTests (PlanBoxTestCase):
             'title': 'test new title',
             'location': 'test location',
             'events': None,
-            'owner': profile.slug
+            'owner': {'slug': profile.slug}
         })
 
         ok_(not serializer.is_valid())
@@ -584,7 +584,7 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
     def test_owner_can_PUT_detail(self):
         auth, owner, _, _, _, url = self.init_test_assets()
         self.client.login(username=auth.username, password='123')
-        response = self.client.put(url, data='{"title": "x", "slug": "x", "events": [], "sections": [], "location": "x", "owner": "%s"}' % (owner.slug), content_type='application/json')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "events": [], "sections": [], "location": "x", "owner": {"slug": "%s"}}' % (owner.slug), content_type='application/json')
         assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
 
     def test_owner_can_DELETE_detail(self):
@@ -614,7 +614,7 @@ class ProjectDetailViewAuthenticationTests (PlanBoxTestCase):
         auth = UserAuth.objects.create_user(username='atogle', password='456')
         owner.members.add(auth.profile)
         self.client.login(username=auth.username, password='456')
-        response = self.client.put(url, data='{"title": "x", "slug": "x", "events": [], "sections": [], "location": "x", "owner": "%s"}' % (owner.slug), content_type='application/json')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "events": [], "sections": [], "location": "x", "owner": {"slug": "%s"}}' % (owner.slug), content_type='application/json')
         assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
 
     def test_member_can_DELETE_detail(self):
@@ -698,7 +698,7 @@ class NonPublicProjectDetailViewAuthenticationTests (PlanBoxTestCase):
     def test_owner_can_PUT_detail(self):
         auth, owner, _, _, _, url = self.init_test_assets()
         self.client.login(username=auth.username, password='123')
-        response = self.client.put(url, data='{"title": "x", "slug": "x", "events": [], "sections": [], "location": "x", "public": false, "owner": "%s"}' % (owner.slug), content_type='application/json')
+        response = self.client.put(url, data='{"title": "x", "slug": "x", "events": [], "sections": [], "location": "x", "public": false, "owner": {"slug": "%s"}}' % (owner.slug), content_type='application/json')
         assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
 
     def test_owner_can_DELETE_detail(self):

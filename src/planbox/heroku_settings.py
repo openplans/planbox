@@ -85,6 +85,19 @@ SHAREABOUTS_HOST = os.environ.get('SHAREABOUTS_HOST')
 SHAREABOUTS_USERNAME = os.environ.get('SHAREABOUTS_USERNAME')
 SHAREABOUTS_PASSWORD = os.environ.get('SHAREABOUTS_PASSWORD')
 
+# Error logging
+SENTRY_DSN = os.environ.get('SENTRY_DSN')
+if SENTRY_DSN:
+    try:
+        from urlparse import urlparse
+    except ImportError:
+        from urllib.parse import urlparse
+
+    pieces = urlparse(SENTRY_DSN)
+    # Create a version of the SENTRY_DSN without the password
+    SAFE_SENTRY_DSN = '%s://%s@%s%s' % (
+        pieces.scheme, pieces.username, pieces.hostname, pieces.path)
+
 LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO')
 LOGGING = {
     'version': 1,

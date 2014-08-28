@@ -989,6 +989,17 @@ img.attachment-icon {
   border: 0;
 }
 
+.help {
+  /* Style copied from span.error, except without the red background. */
+  display: block;
+  padding: 0.375rem 0.5625rem 0.5625rem;
+  margin-top: -1px;
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  font-weight: normal;
+  font-style: italic;
+}
+
 input[type=text].heading-input {
   @media #{$medium-up} {
     font-size: 2.25rem;
@@ -1265,6 +1276,42 @@ textarea.no-resize {
   .button {
     margin-bottom: 0;
   }
+}
+
+// Profile: Avatar
+.avatar-container {
+  padding: 0.3rem;
+  .avatar {
+    display: inline-block;
+  }
+  .drag-area-container {
+    min-height: 10.125rem;
+  }
+}
+
+
+// Project List & Member List
+.project-list, .member-list, .team-list {
+  & > li + li {
+    margin-top: $panel-padding / 2;
+    padding-top: $panel-padding / 2;
+    border-top: $panel-border-size $panel-border-style $panel-border-color;
+  }
+}
+.member-list, .team-list {
+  li {
+    padding-left: $panel-padding * 3.5;
+  }
+  .avatar {
+    width: $panel-padding * 3;
+    margin-left: -$panel-padding * 3.5;
+  }
+}
+.user-profile .member-list {
+  display: none;
+}
+.team-profile .team-list {
+  display: none;
 }
 
 

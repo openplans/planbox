@@ -77,31 +77,36 @@ var Planbox = Planbox || {};
           // Convert line breaks into <br> and paste
           NS.Utils.pasteHtmlAtCaret(pasted.replace(/\n/g, '<br>'));
         });
-
-        // Do simple protection against accidental drops of images outside of
-        // drop areas (http://stackoverflow.com/a/6756680).
-        window.addEventListener('dragover', function(e) {
-          e = e || event;
-          e.preventDefault();
-        }, false);
-        window.addEventListener('drop', function(e) {
-          e = e || event;
-          e.preventDefault();
-        }, false);
-
-        // Protect the user from leaving before saving.
-        window.addEventListener('beforeunload', function(e) {
-          var notification = 'It looks like you have unsaved changes in your project.';
-          e = e || event;
-
-          if (self.model.isDirty) {
-            // set and return for browser compatibility
-            // https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload
-            e.returnValue = notification;
-            return notification;
-          }
-        }, false);
       },
+
+      notifyProjectOpen: function() {
+        var self = this;
+        this.model.markAsOpenedBy(NS.Data.user, {
+          success: function(data) {
+            self.clearMultiUserWarning();
+          },
+          error: function($xhr) {
+            if ($xhr.status === 409) {
+              self.setMultiUserWarning($xhr.responseJSON);
+            }
+          },
+          complete: function($xhr) {
+            self.updateLastSavedInfo($xhr.responseJSON);
+          }
+        });
+      },
+
+      setMultiUserWarning: function(activityData) {
+        var template = Backbone.Marionette.TemplateCache.get('#multi-user-warning-tpl'),
+            content = template(activityData);
+        this.$('.multi-user-warning-wrapper').html(content);
+      },
+
+      clearMultiUserWarning: function() {
+        this.$('.multi-user-warning-wrapper').empty();
+      },
+
+      updateLastSavedInfo: function() {},
 
       onShow: function() {
         var self = this;
@@ -117,6 +122,13 @@ var Planbox = Planbox || {};
 
         // After the project is in the DOM, show the project sections
         $(this.el).foundation();
+
+        // Start letting the server know you have the project open.
+        this.openNotification = window.setInterval(_.bind(this.notifyProjectOpen, this), 15000);
+      },
+
+      onClose: function() {
+        window.clearInterval(this.openNotification);
       },
 
       updateSectionMenu: function() {

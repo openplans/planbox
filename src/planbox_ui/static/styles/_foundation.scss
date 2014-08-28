@@ -90,6 +90,13 @@ p {
   }
 }
 
+// No margins! 
+h1, h2, h3, h4, h5, h6, p, ul, ul, li {
+  &.no-margins {
+    margin: 0;
+  }
+}
+
 // Make links visible inside alerts with white text
 .alert-box {
   a {
@@ -99,7 +106,7 @@ p {
 
   // TODO: find the variable name
   &.info a {
-    color: #308fbf;
+    color: $primary-color;
   }
 }
 
@@ -110,17 +117,24 @@ p {
 }
 
 // Extend button styles
-.button.less-padding {
-  padding: 0.75rem 1.25rem;
+.button, button {
+  &.less-padding {
+    padding: 0.75rem 1.25rem;
+  }
+  &.tiny.less-padding {
+    padding: 0.25rem 0.375rem;
+  }
+  &.small.less-padding {
+    padding: 0.5rem 0.75rem;
+  }
+  &.large.less-padding {
+    padding: 0.875rem 1.25rem;
+  }
 }
-.button.tiny.less-padding {
-  padding: 0.25rem 0.625rem;
-}
-.button.small.less-padding {
-  padding: 0.5rem 0.875rem;
-}
-.button.large.less-padding {
-  padding: 0.875rem 1.5rem;
+
+// Extend link styles
+a.alert {
+  color: $alert-color;
 }
 
 
@@ -187,6 +201,31 @@ p {
   Forms
 --------------------------------------------------*/
 
+// Inline Inputs
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"] {
+  &.inline-input {
+    display: inline;
+    font-size: inherit;
+    margin: 0;
+    padding: $form-spacing / 4;
+    height: auto;
+    width: auto;
+  }
+}
+
+
 // Switches
 .switch {
   & + label.inline {
@@ -205,6 +244,11 @@ p {
   Dropdown Menus
 --------------------------------------------------*/
 
+.dropdown,
+.f-dropdown {
+  box-shadow: -5px 5px 0 rgba(51,51,51,0.2);
+}
+
 // Disabled Links
 .f-dropdown li a.disabled {
   background-color: #eee;
@@ -212,3 +256,24 @@ p {
   cursor: default;
 }
 
+
+/*--------------------------------------------------
+  Panels
+--------------------------------------------------*/
+
+// Panel Headers
+.panel-header {
+  margin: -$panel-padding;
+  margin-bottom: $panel-padding;
+  border-bottom: $panel-border-size $panel-border-style $body-font-color;
+  padding: $panel-padding;
+  padding-top: $panel-padding / 2;
+  padding-bottom: $panel-padding / 2;
+  background-color: $body-font-color;
+  h1,h2,h3,h4,h5,h6 {
+    color: $body-bg;
+  }
+  .button {
+    margin: -0.25rem -0.75rem;
+  }
+}
