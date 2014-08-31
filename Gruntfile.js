@@ -401,7 +401,7 @@ module.exports = function (grunt) {
     },
 
     fixSourceMaps: {
-      all: ['<%= yeoman.dist %>/**/*.map']
+      all: ['<%= yeoman.app %>/**/*.map']
     },
 
     // Copies remaining files to places other tasks can use
@@ -510,7 +510,8 @@ module.exports = function (grunt) {
           return true;
         }
       }).forEach(function (filepath) {
-        var base = path.dirname(filepath);
+        var appPath = grunt.config('yeoman').app;
+        var base = path.dirname(appPath);
         var sMap = grunt.file.readJSON(filepath);
         sMap.file = path.relative(base, sMap.file);
         sMap.sources = _.map(sMap.sources, path.relative.bind(path, base));
