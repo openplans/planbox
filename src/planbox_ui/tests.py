@@ -46,6 +46,46 @@ class SignupViewTests (PlanBoxUITestCase):
         user_profile = Profile.objects.get(auth__username='mjumbewu')
         assert_equal(user_profile.affiliation, 'OpenPlans')
 
+    def test_username_is_case_insensitive(self):
+        UserAuth.objects.create_user(username='mjumbewu', password='456')
+
+        url = reverse('app-signup')
+
+        user_data = {
+            'username': 'MjumbeWU',
+            'password': '123',
+            'email': 'mjumbewu@example.com',
+            'affiliation': 'OpenPlans',
+        }
+
+        request = self.factory.post(url, data=user_data)
+        request.user = AnonymousUser()
+        request.session = SessionStore('session')
+        response = signup_view(request)
+
+        assert_equal(response.status_code, 200)
+        assert_in('username', response.context_data['form'].errors)
+
+    def test_username_cannot_have_dots(self):
+        # We don't want dots in usernames or slugs because then they couldn't
+        # be used as subdomains.
+        url = reverse('app-signup')
+
+        user_data = {
+            'username': 'mjumbe.wu',
+            'password': '123',
+            'email': 'mjumbewu@example.com',
+            'affiliation': 'OpenPlans',
+        }
+
+        request = self.factory.post(url, data=user_data)
+        request.user = AnonymousUser()
+        request.session = SessionStore('session')
+        response = signup_view(request)
+
+        assert_equal(response.status_code, 200)
+        assert_in('username', response.context_data['form'].errors)
+
 
 class SigninViewTests (PlanBoxUITestCase):
     def test_user_is_redirected_home_on_successful_signin(self):
