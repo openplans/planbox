@@ -175,24 +175,16 @@
         <button class="button expand radius save-btn disabled">Save</button>
 
         <div class="project-settings">
-          <div class="row">
-            {{!-- <div class="project-save-info-wrapper large-8 columns some-margin-bottom">{{>project-save-info-tpl}}</div> --}}
-            <div class="project-preview-wrapper large-12 columns text-right">{{>project-preview-link-tpl}}</div>
-          </div>
-          <hr>
-          <div class="switch left">
-            <input id="public-switch" type="checkbox"{{#if public}} checked{{/if}}>
-            <label for="public-switch"></label>
-          </div>
-          <label id="public-switch-label" class="inline unassigned">Published</label>
-          <hr>
           <div class="row collapse">
-            <div class="columns large-7">
-              <p class="text-small" style="padding-right:0.5rem;">Want a custom domain name? No&nbsp;problem! Email us to get started.</p>
+            <div class="large-6 columns">
+              <div class="switch left">
+                <input id="public-switch" type="checkbox"{{#if public}} checked{{/if}}>
+                <label for="public-switch"></label>
+              </div>
+              <label id="public-switch-label" class="inline unassigned">Published</label>
             </div>
-            <div class="columns large-5">
-              <a href="mailto:{{contact_email}}" class="button radius tiny expand open-intercom">Contact Us</a>
-            </div>
+            {{!-- <div class="project-save-info-wrapper large-6 columns some-margin-bottom">{{>project-save-info-tpl}}</div> --}}
+            <div class="project-preview-wrapper large-6 columns text-right">{{>project-preview-link-tpl}}</div>
           </div>
         </div>
 

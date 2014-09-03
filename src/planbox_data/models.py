@@ -327,6 +327,9 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
         return (self.owner == obj)
 
     def editable_by(self, obj):
+        if hasattr(obj, 'is_authenticated') and not obj.is_authenticated():
+            return False
+
         if isinstance(obj, UserAuth):
             try: obj = obj.profile
             except Profile.DoesNotExist: return False

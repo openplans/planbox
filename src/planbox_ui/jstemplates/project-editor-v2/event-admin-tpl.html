@@ -1,7 +1,7 @@
 <span id="event-{{ slug }}" class="event-anchor"></span>
 
 <div class="float-label-container">
-    <input class="float-label-input" type="text" placeholder="Attachment Title" value="{{ label }}" data-attr="label">
+    <input class="float-label-input" type="text" placeholder="Event Title" value="{{ label }}" data-attr="label">
   <span class="float-label">Event Title</span>
 </div>
 
@@ -23,7 +23,7 @@
     <div class="datetime-picker-container text-center"><input type="text" class="event-datetime-picker hide" data-value="{{ start_datetime }}"></div>
 
     <div class="float-label-container">
-      <div class="event-description content-editable float-label-input" data-attr="description" contenteditable>{{{ description }}}</div>
+      <div class="event-description content-editable rich-editable float-label-input" data-attr="description" contenteditable>{{{ description }}}</div>
       <span class="float-label">Event Description</span>
     </div>
 

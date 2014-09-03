@@ -41,10 +41,50 @@ class SignupViewTests (PlanBoxUITestCase):
 
         # If you get a 200 here, it's probably because of wrong form data.
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, reverse('app-new-project', kwargs={'owner_slug': 'mjumbewu'}))
+        assert_equal(response.url, reverse('app-profile', kwargs={'profile_slug': 'mjumbewu'}))
 
         user_profile = Profile.objects.get(auth__username='mjumbewu')
         assert_equal(user_profile.affiliation, 'OpenPlans')
+
+    def test_username_is_case_insensitive(self):
+        UserAuth.objects.create_user(username='mjumbewu', password='456')
+
+        url = reverse('app-signup')
+
+        user_data = {
+            'username': 'MjumbeWU',
+            'password': '123',
+            'email': 'mjumbewu@example.com',
+            'affiliation': 'OpenPlans',
+        }
+
+        request = self.factory.post(url, data=user_data)
+        request.user = AnonymousUser()
+        request.session = SessionStore('session')
+        response = signup_view(request)
+
+        assert_equal(response.status_code, 200)
+        assert_in('username', response.context_data['form'].errors)
+
+    def test_username_cannot_have_dots(self):
+        # We don't want dots in usernames or slugs because then they couldn't
+        # be used as subdomains.
+        url = reverse('app-signup')
+
+        user_data = {
+            'username': 'mjumbe.wu',
+            'password': '123',
+            'email': 'mjumbewu@example.com',
+            'affiliation': 'OpenPlans',
+        }
+
+        request = self.factory.post(url, data=user_data)
+        request.user = AnonymousUser()
+        request.session = SessionStore('session')
+        response = signup_view(request)
+
+        assert_equal(response.status_code, 200)
+        assert_in('username', response.context_data['form'].errors)
 
 
 class SigninViewTests (PlanBoxUITestCase):
@@ -62,7 +102,7 @@ class SigninViewTests (PlanBoxUITestCase):
         request.session = SessionStore('session')
         response = signin_view(request)
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, reverse('app-new-project', kwargs={'owner_slug': 'mjumbewu'}))
+        assert_equal(response.url, reverse('app-profile', kwargs={'profile_slug': 'mjumbewu'}))
 
 
 class NewProjectViewTests (PlanBoxUITestCase):

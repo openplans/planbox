@@ -20,7 +20,7 @@ class OwnerAuthorizesOrReadOnly (permissions.IsAuthenticatedOrReadOnly):
         return project.owner.authorizes(user)
 
     def has_object_permission(self, request, view, project):
-        if request.user.is_superuser:
+        if request.user and request.user.is_superuser:
             return True
         if request.method in permissions.SAFE_METHODS:
             return True
@@ -29,7 +29,7 @@ class OwnerAuthorizesOrReadOnly (permissions.IsAuthenticatedOrReadOnly):
 
 class AuthedUserForUserProfile (permissions.IsAuthenticated):
     def has_object_permission(self, request, view, profile):
-        if request.user.is_superuser:
+        if request.user and request.user.is_superuser:
             return True
 
         # Check we have a profile, just in case.
@@ -49,7 +49,7 @@ class AuthedUserForUserProfile (permissions.IsAuthenticated):
 
 class TeamMemberForTeamProfile (permissions.IsAuthenticated):
     def has_object_permission(self, request, view, profile):
-        if request.user.is_superuser:
+        if request.user and request.user.is_superuser:
             return True
 
         # Check we have a profile, just in case.

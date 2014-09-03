@@ -1,5 +1,5 @@
 <div class="clearfix">
-  <img class="avatar show-for-medium-up left" src="{{#if avatar_url}}{{ avatar_url }}{{^}}//placehold.it/75x75{{/if}}">
+  <img class="avatar show-for-medium-up left" src="{{#if avatar_url}}{{ avatar_url }}{{^}}{{#if auth}}{{ static_url }}images/avatar-user.gif{{^}}{{ static_url }}images/avatar-user.gif{{/if}}{{/if}}">
   <h3 class="no-margins">
     {{#bootstrapped 'user'}}
       {{#is slug ../slug}}<a href="/{{ slug }}/">{{/is}}
@@ -11,7 +11,4 @@
       {{#is slug ../slug}}</a>{{/is}}
     {{/bootstrapped}}
   </h3>
-  <small class="slug">
-    openplans.org/{{ slug }}/
-  </small>
 </div>

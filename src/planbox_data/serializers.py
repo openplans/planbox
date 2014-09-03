@@ -80,7 +80,7 @@ class SlugValidationMixin (object):
 class AssociatedProfileSerializer (serializers.ModelSerializer):
     class Meta:
         model = models.Profile
-        fields = ('id', 'slug', 'name',)
+        fields = ('id', 'slug', 'name', 'avatar_url',)
 
     def get_default_fields(self):
         fields = super(AssociatedProfileSerializer, self).get_default_fields()

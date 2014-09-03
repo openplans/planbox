@@ -1,7 +1,10 @@
 language: python
+
 python:
   - "2.7"
   - "3.3"
+
+sudo: false
 
 env:
   global:
@@ -9,6 +12,7 @@ env:
     # http://about.travis-ci.org/docs/user/addons/#Sauce-Connect
     - secure: "Kt9OpZv934sRj0K9KP3m82ecn5/eQBWgeI5CWqIrcykjn6cTuY/KI4IMF2I8\nilZHVMDj/lx82teB9X8zHUlWige4aZJ0b0L1FtoMgf/lprKwh2uFt6olnwvU\nEPrF9U2rMNvc+UTDywzs+4dplE2zHCuIx8J111aSa1CAHQxdIeY="
     - secure: "ZmrIM5bgoouu289OvC1E4t3vSnOVuR/UiRRoNAaeieTJAaW4y5BypyAdO7FZ\nMvJkuhsoVNld4IxfN7ta6XYV0VBnia2+y5RN1CppoTII9WmdjKlxIgTeNeOR\nzanlmGx1NZqMto0dG1xToeOVbDlh4fh44HwZDpMAU/bgKHmRNQw="
+
 addons:
   sauce_connect: true
 
@@ -19,12 +23,10 @@ install:
   - cp src/planbox/local_settings.py.template src/planbox/local_settings.py
 
   # JavaScript test requirements
-  - sudo add-apt-repository -y ppa:chris-lea/node.js  # For the latest nodejs
-  - sudo apt-get -y update
-  - sudo apt-get -y install nodejs
-  - sudo npm install -g grunt-cli
-  - sudo npm install -g bower
-  - sudo npm install
+  - nvm install 0.10
+  - npm install -g grunt-cli
+  - npm install -g bower
+  - npm install
   - bower install
 
 before_script:

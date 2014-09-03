@@ -5,6 +5,11 @@ var Planbox = Planbox || {};
 (function(NS, $) {
   'use strict';
 
+  NS.ProjectListEmptyAdminView = Backbone.Marionette.ItemView.extend({
+    template: '#project-list-empty-admin-tpl',
+    tagName: 'li'
+  });
+
   NS.ProjectListItemAdminView = Backbone.Marionette.ItemView.extend({
     template: '#project-list-item-admin-tpl',
     tagName: 'li',
@@ -69,6 +74,7 @@ var Planbox = Planbox || {};
     template: '#project-list-admin-tpl',
     itemView: NS.ProjectListItemAdminView,
     itemViewContainer: '.project-list',
+    emptyView: NS.ProjectListEmptyAdminView,
 
     modelEvents: {
       'sync': 'handleModelSync'
