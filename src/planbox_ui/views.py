@@ -96,6 +96,19 @@ class AppMixin (object):
         return context
 
 
+class AlwaysFresh (object):
+    """
+    Disallow client-side caching so that stale data isn't kept (e.g., when the
+    user presses the back button).
+    """
+    def get(self, request, *args, **kwargs):
+        response = super(AlwaysFresh, self).get(request, *args, **kwargs)
+        response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+        response['Pragma'] = 'no-cache'
+        response['Expires'] = 0
+        return response
+
+
 class S3UploadMixin (object):
     DEFAULT_S3_UPLOAD_ACL = 'public-read'
     DEFAULT_S3_UPLOAD_EXP = timedelta(hours=1)
@@ -207,7 +220,7 @@ class PasswordResetRequestView (AppMixin, SSLRequired, BasePasswordResetRequestV
 class PasswordResetInstructionsView (AppMixin, SSLRequired, BasePasswordResetInstructionsView): pass
 
 
-class ProfileView (AppMixin, LoginRequired, SSLRequired, S3UploadMixin, TemplateView):
+class ProfileView (AppMixin, AlwaysFresh, LoginRequired, SSLRequired, S3UploadMixin, TemplateView):
     template_name = 'profile-admin.html'
 
     def get_profile(self, request, profile_slug):
@@ -349,7 +362,7 @@ class ProjectMixin (AppMixin):
         return context
 
 
-class BaseExistingProjectView (ProjectMixin, TemplateView):
+class BaseExistingProjectView (AlwaysFresh, ProjectMixin, TemplateView):
     def get_project_is_visible(self):
         return (
             self.request.user.is_superuser or

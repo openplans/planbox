@@ -403,7 +403,7 @@ var Planbox = Planbox || {};
 
         if (window.location.pathname !== path) {
           if (Modernizr.history) {
-            window.history.pushState('', '', path);
+            window.history.replaceState('', '', path);
           } else {
             window.location = path;
           }

@@ -32,9 +32,9 @@ class UserCreationForm(forms.ModelForm):
     }
     email = forms.EmailField(label=_("Email"), max_length=254)
     username = forms.RegexField(label=_("Username"), max_length=30,
-        regex=r'^[\w.-]+$',
+        regex=r'^[A-Za-z0-9-]+$',
         help_text=_("Required. 30 characters or fewer. Letters, digits and "
-                      "./-/_ only."),
+                      "dashes (-) only."),
         error_messages={
             'invalid': _("Usernames may contain only letters, numbers and "
                          "./-/_ characters.")})
@@ -67,7 +67,7 @@ class UserCreationForm(forms.ModelForm):
         # but it sets a nicer error message than the ORM. See #13147.
         username = self.cleaned_data["username"]
         try:
-            Profile.objects.get(slug=username)
+            Profile.objects.get(slug__iexact=username)
         except Profile.DoesNotExist:
             return username
 
