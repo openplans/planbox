@@ -67,6 +67,9 @@ var Planbox = Planbox || {};
             }
           }
         });
+      },
+      onRender: function() {
+        this.initValidityMessages();
       }
     })
   );

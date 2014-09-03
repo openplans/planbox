@@ -84,6 +84,7 @@ var Planbox = Planbox || {};
       onRender: function() {
         this.initRichEditables();
         this.initDropZones();
+        this.initValidityMessages();
       }
     })
   );
