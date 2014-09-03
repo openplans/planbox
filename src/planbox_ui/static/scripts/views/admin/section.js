@@ -140,7 +140,7 @@ var Planbox = Planbox || {};
       ui: {
         editables: '[data-attr]:not(.attachment-list [data-attr])',
         richEditables: '.event-description',
-        deleteBtn: '.delete-event-btn',
+        deleteBtn: '.delete-event',
         datetimeEditable: '.event-datetime',
         datetimeInput: '.event-datetime-picker',
         calendarIcon: '.calendar-icon'
