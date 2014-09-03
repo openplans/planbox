@@ -6,7 +6,7 @@ var Planbox = Planbox || {};
   'use strict';
 
   NS.ProfileDetailsAdminView = Backbone.Marionette.ItemView.extend(
-    _.extend({}, NS.ImageDropZonesMixin, NS.ContentEditableMixin, {
+    _.extend({}, NS.ImageDropZonesMixin, NS.ContentEditableMixin, NS.FormErrorsMixin, {
       template: '#profile-details-admin-tpl',
       ui: {
         imageDropZones: '.image-dnd',
@@ -14,14 +14,14 @@ var Planbox = Planbox || {};
         richEditables: '.rich-editable',
         changeProfileBtn: '.profile-edit-button',
         cancelProfileBtn: '.cancel-profile-edit-button',
-        profileForm: '.profile-form'
+        form: '.profile-form'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'input @ui.editables': 'handleEditableBlur',
         'click @ui.changeProfileBtn': 'handleOpenProfileForm',
         'click @ui.cancelProfileBtn': 'handleCloseProfileForm',
-        'submit @ui.profileForm': 'handleProfileFormSubmit'
+        'submit @ui.form': 'handleProfileFormSubmit'
       },
       modelEvents: {
         'sync': 'handleModelSync'
@@ -84,29 +84,7 @@ var Planbox = Planbox || {};
       onRender: function() {
         this.initRichEditables();
         this.initDropZones();
-      },
-      showFormErrors: function(errors) {
-        var attr,
-            $errorField,
-            $errorMessageWrapper,
-            errorMessage;
-
-        for (attr in errors) {
-          $errorMessageWrapper = this.$('[data-error-attr="' + attr + '"]');
-          errorMessage = $errorMessageWrapper.attr('data-error-message');
-          $errorMessageWrapper.html('<small class="error error-message">' + errorMessage + '</small>');
-
-          $errorField = this.$('[data-attr="' + attr + '"]');
-          $errorField.addClass('error');
-        }
-      },
-      clearErrors: function() {
-        this.$('.error-message').remove();
-        this.$('.error').removeClass('error');
-      },
-      resetForm: function() {
-        this.ui.profileForm[0].reset();
-        this.clearErrors();
+        this.initValidityMessages();
       }
     })
   );
