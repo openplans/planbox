@@ -8611,10 +8611,19 @@ a.alert {
   color: #f24c3d;
 }
 
+/* line 142, _foundation.scss */
+.project-text-content ul, .pen ul {
+  list-style: disc !important;
+}
+/* line 145, _foundation.scss */
+.project-text-content ol, .pen ol {
+  list-style: decimal !important;
+}
+
 /*--------------------------------------------------
   Grid
 --------------------------------------------------*/
-/* line 146, _foundation.scss */
+/* line 158, _foundation.scss */
 .full-width {
   width: 100%;
   margin-left: auto;
@@ -8622,42 +8631,42 @@ a.alert {
   max-width: initial;
 }
 
-/* line 154, _foundation.scss */
+/* line 166, _foundation.scss */
 .some-margin-top {
   margin-top: 0.9375rem;
 }
 
-/* line 157, _foundation.scss */
+/* line 169, _foundation.scss */
 .some-margin-bottom {
   margin-bottom: 0.9375rem;
 }
 
-/* line 160, _foundation.scss */
+/* line 172, _foundation.scss */
 .extra-margin-top {
   margin-top: 2rem;
 }
 
-/* line 163, _foundation.scss */
+/* line 175, _foundation.scss */
 .extra-margin-bottom {
   margin-bottom: 2rem;
 }
 
-/* line 168, _foundation.scss */
+/* line 180, _foundation.scss */
 .some-padding-top {
   padding-top: 0.9375rem;
 }
 
-/* line 171, _foundation.scss */
+/* line 183, _foundation.scss */
 .some-padding-bottom {
   padding-bottom: 0.9375rem;
 }
 
-/* line 174, _foundation.scss */
+/* line 186, _foundation.scss */
 .extra-padding-top {
   padding-top: 2rem;
 }
 
-/* line 177, _foundation.scss */
+/* line 189, _foundation.scss */
 .extra-padding-bottom {
   padding-bottom: 2rem;
 }
@@ -8665,13 +8674,13 @@ a.alert {
 /*--------------------------------------------------
   Magellan & Location Hashes
 --------------------------------------------------*/
-/* line 187, _foundation.scss */
+/* line 199, _foundation.scss */
 .page-anchor {
   position: relative;
   top: -80px;
 }
 
-/* line 193, _foundation.scss */
+/* line 205, _foundation.scss */
 .offset-anchor {
   display: block;
   position: absolute;
@@ -8681,7 +8690,7 @@ a.alert {
 /*--------------------------------------------------
   Forms
 --------------------------------------------------*/
-/* line 218, _foundation.scss */
+/* line 230, _foundation.scss */
 input[type="text"].inline-input,
 input[type="password"].inline-input,
 input[type="date"].inline-input,
@@ -8703,15 +8712,15 @@ input[type="url"].inline-input {
   width: auto;
 }
 
-/* line 231, _foundation.scss */
+/* line 243, _foundation.scss */
 .switch + label.inline {
   margin-left: 4.5rem;
 }
-/* line 234, _foundation.scss */
+/* line 246, _foundation.scss */
 .switch.small + label.inline {
   margin-left: 4rem;
 }
-/* line 237, _foundation.scss */
+/* line 249, _foundation.scss */
 .switch.large + label.inline {
   margin-left: 5.5rem;
 }
@@ -8719,13 +8728,13 @@ input[type="url"].inline-input {
 /*--------------------------------------------------
   Dropdown Menus
 --------------------------------------------------*/
-/* line 248, _foundation.scss */
+/* line 260, _foundation.scss */
 .dropdown,
 .f-dropdown {
   box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
 }
 
-/* line 253, _foundation.scss */
+/* line 265, _foundation.scss */
 .f-dropdown li a.disabled {
   background-color: #eee;
   color: #ccc;
@@ -8735,7 +8744,7 @@ input[type="url"].inline-input {
 /*--------------------------------------------------
   Panels
 --------------------------------------------------*/
-/* line 265, _foundation.scss */
+/* line 277, _foundation.scss */
 .panel-header {
   margin: -1.25rem;
   margin-bottom: 1.25rem;
@@ -8745,11 +8754,11 @@ input[type="url"].inline-input {
   padding-bottom: 0.625rem;
   background-color: #6c7180;
 }
-/* line 273, _foundation.scss */
+/* line 285, _foundation.scss */
 .panel-header h1, .panel-header h2, .panel-header h3, .panel-header h4, .panel-header h5, .panel-header h6 {
   color: #eeeeee;
 }
-/* line 276, _foundation.scss */
+/* line 288, _foundation.scss */
 .panel-header .button {
   margin: -0.25rem -0.75rem;
 }

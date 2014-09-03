@@ -137,6 +137,18 @@ a.alert {
   color: $alert-color;
 }
 
+// Heavy-handed list styles... ugh
+.project-text-content, .pen {
+  ul {
+    list-style: disc !important;
+  }
+  ol {
+    list-style: decimal !important;
+  }
+}
+
+
+
 
 /*--------------------------------------------------
   Grid
