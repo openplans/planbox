@@ -223,6 +223,25 @@ var Planbox = Planbox || {};
   };
 
   NS.FormErrorsMixin = {
+    onRender: function() {
+      this.initValidityMessages();
+    },
+
+    initValidityMessages: function() {
+      var $validityFields = this.$('[data-validity-message]');
+      $validityFields.each(function(i, element) {
+        var message = element.getAttribute('data-validity-message');
+        element.oninvalid = function() {
+          element.setCustomValidity('');
+          if (!element.validity.valid) {
+            element.setCustomValidity(message);
+          }
+        };
+        element.oninput = function() {
+          element.setCustomValidity('');
+        };
+      });
+    },
     showFormErrors: function(errors) {
       var attr,
           $errorField,
