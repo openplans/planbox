@@ -183,25 +183,21 @@ var Planbox = Planbox || {};
 
   Handlebars.registerHelper('randomquote', function() {
     var quoteArray = [
-        'True life is lived when tiny changes occur.', // -Leo Tolstoy
-        'It\'s a bad plan that admits of no modification.', // -Publilius Syrus
-        'It takes as much energy to wish as it does to plan.', // -Eleanor Roosevelt
-        'A good plan today is better that a perfect plan tomorrow.', // -Geoge S. Patton
-        'Planning is bringing the future into the present so that you can do something about it now.', // -Alan Lakein
-        'Always have a plan, and believe in it. Nothing happens by accident.', // -Chuck Knox
-        'A good plan is like a road map: it shows the final destination and usually the best way to get there.', // -H. Stanely Judd
-        'A community is like a ship: everyone ought to be prepared to take the helm.', // -Henrik Ibsen
-        'It\'s not the plan that\'s important, it\'s the planning.', // -Dr. Gramme Edwards
-        'Plans are only good intentions unless they immediately degenerate into hard work.', // -Peter Drucker
-        'If you can dream it, you can do it.', // -Walt Disney
-        'A plan which succeeds is bold, one which fails is reckless.', // -General Karl von Clauswitz
-        'Those who plan do better than those who do not plan even thou they rarely stick to their plan.', // -Winston Churchill
-        'Good plans shape good decisions. That\'s why good planning helps to make elusive dreams come true.', // -Lester Robert Bittel
-        'You got to be careful if you don\'t know where you\'re going, because you might not get there.', // -Yogi Berra
-        'Prediction is difficult, especially about the future.', // -Yogi Berra
-        'Plans are nothing; planning is everything.', // -Dwight D. Eisenhower
-        'Alone we can do so little; together we can do so much.', // -Helen Keller
-        'Why do they call it rush hour when nothing moves?' // -Robin Williams
+        '\u201CTrue life is lived when tiny changes occur.\u201D \u2011\u00A0Leo\u00A0Tolstoy',
+        '\u201CIt\'s a bad plan that admits of no modification.\u201D \u2011\u00A0Publilius\u00A0Syrus',
+        '\u201CIt takes as much energy to wish as it does to plan.\u201D \u2011\u00A0Eleanor\u00A0Roosevelt',
+        '\u201CPlanning is bringing the future into the present so that you can do something about it now.\u201D \u2011\u00A0Alan\u00A0Lakein',
+        '\u201CAlways have a plan, and believe in it. Nothing happens by accident.\u201D \u2011\u00A0Chuck\u00A0Knox',
+        '\u201CA community is like a ship: everyone ought to be prepared to take the helm.\u201D \u2011\u00A0Henrik\u00A0Ibsen',
+        '\u201CIt\'s not the plan that\'s important, it\'s the planning.\u201D \u2011\u00A0Dr.\u00A0Gramme\u00A0Edwards',
+        '\u201CPlans are only good intentions unless they immediately degenerate into hard work.\u201D \u2011\u00A0Peter\u00A0Drucker',
+        '\u201CIf you can dream it, you can do it.\u201D \u2011\u00A0Walt\u00A0Disney',
+        '\u201CThose who plan do better than those who do not plan even thou they rarely stick to their plan.\u201D \u2011\u00A0Winston\u00A0Churchill',
+        '\u201CGood plans shape good decisions. That\'s why good planning helps to make elusive dreams come true.\u201D \u2011\u00A0Lester\u00A0Robert\u00A0Bittel',
+        '\u201CPrediction is difficult, especially about the future.\u201D \u2011\u00A0Yogi\u00A0Berra',
+        '\u201CPlans are nothing; planning is everything.\u201D \u2011\u00A0Dwight\u00A0D.\u00A0Eisenhower',
+        '\u201CAlone we can do so little; together we can do so much.\u201D \u2011\u00A0Helen\u00A0Keller',
+        '\u201CWhy do they call it rush hour when nothing moves?\u201D \u2011\u00A0Robin\u00A0Williams'
     ];
     var randomNumber = Math.floor(Math.random()*quoteArray.length);
 
