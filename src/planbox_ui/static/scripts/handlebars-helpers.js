@@ -179,4 +179,34 @@ var Planbox = Planbox || {};
   });
 
 
+  // A random short quote -----------------------------------------------------
+
+  Handlebars.registerHelper('randomquote', function() {
+    var quoteArray = [
+        'True life is lived when tiny changes occur.', // -Leo Tolstoy
+        'It\'s a bad plan that admits of no modification.', // -Publilius Syrus
+        'It takes as much energy to wish as it does to plan.', // -Eleanor Roosevelt
+        'A good plan today is better that a perfect plan tomorrow.', // -Geoge S. Patton
+        'Planning is bringing the future into the present so that you can do something about it now.', // -Alan Lakein
+        'Always have a plan, and believe in it. Nothing happens by accident.', // -Chuck Knox
+        'A good plan is like a road map: it shows the final destination and usually the best way to get there.', // -H. Stanely Judd
+        'A community is like a ship: everyone ought to be prepared to take the helm.', // -Henrik Ibsen
+        'It\'s not the plan that\'s important, it\'s the planning.', // -Dr. Gramme Edwards
+        'Plans are only good intentions unless they immediately degenerate into hard work.', // -Peter Drucker
+        'If you can dream it, you can do it.', // -Walt Disney
+        'A plan which succeeds is bold, one which fails is reckless.', // -General Karl von Clauswitz
+        'Those who plan do better than those who do not plan even thou they rarely stick to their plan.', // -Winston Churchill
+        'Good plans shape good decisions. That\'s why good planning helps to make elusive dreams come true.', // -Lester Robert Bittel
+        'You got to be careful if you don\'t know where you\'re going, because you might not get there.', // -Yogi Berra
+        'Prediction is difficult, especially about the future.', // -Yogi Berra
+        'Plans are nothing; planning is everything.', // -Dwight D. Eisenhower
+        'Alone we can do so little; together we can do so much.', // -Helen Keller
+        'Why do they call it rush hour when nothing moves?' // -Robin Williams
+    ];
+    var randomNumber = Math.floor(Math.random()*quoteArray.length);
+
+    return quoteArray[randomNumber];
+  });
+
+
 }(Planbox, jQuery));
