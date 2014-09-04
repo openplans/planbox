@@ -12,8 +12,6 @@ from django.utils.timezone import now, timedelta
 from django.utils.translation import ugettext as _
 from jsonfield import JSONField
 
-UserAuth = auth.get_user_model()
-
 
 class TimeStampedModel (models.Model):
     created_at = models.DateTimeField(default=now, blank=True)
@@ -105,11 +103,12 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
         profile.slug = auth.username
         profile.email = auth.email
         profile.save()
-post_save.connect(create_or_update_user_profile, sender=UserAuth, dispatch_uid="user-profile-create-signal")
+post_save.connect(create_or_update_user_profile, sender=settings.AUTH_USER_MODEL, dispatch_uid="user-profile-create-signal")
 
 
 class ProjectQuerySet (models.query.QuerySet):
     def Q_owner(self, owner):
+        UserAuth = auth.get_user_model()
         if isinstance(owner, UserAuth):
             owner = owner.profile
 
@@ -121,6 +120,7 @@ class ProjectQuerySet (models.query.QuerySet):
         return self.filter(owner_query | public_query)
 
     def Q_member(self, member):
+        UserAuth = auth.get_user_model()
         if isinstance(member, UserAuth):
             member = member.profile
         profile_ids = [member.id] + [team['id'] for team in member.teams.values('id')]
@@ -321,12 +321,14 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
         return new_inst
 
     def owned_by(self, obj):
+        UserAuth = auth.get_user_model()
         if isinstance(obj, UserAuth):
             try: obj = obj.profile
             except Profile.DoesNotExist: return False
         return (self.owner == obj)
 
     def editable_by(self, obj):
+        UserAuth = auth.get_user_model()
         if hasattr(obj, 'is_authenticated') and not obj.is_authenticated():
             return False
 
@@ -410,6 +412,7 @@ class ProfileQuerySet (models.query.QuerySet):
         return models.Q(id__in=profile_ids)
 
     def filter_by_user_or_member(self, obj):
+        UserAuth = auth.get_user_model()
         if isinstance(obj, UserAuth):
             try:
                 obj = obj.profile

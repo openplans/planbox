@@ -7,11 +7,9 @@ from django.utils.timezone import now
 from password_reset.models import PasswordResetRequest
 
 
-UserAuth = auth.get_user_model()
-
-
 class TestPasswordResetViewRedirect (TestCase):
     def setUp(self):
+        UserAuth = auth.get_user_model()
         self.client = Client()
         self.user = UserAuth.objects.create_user(
             username='abc',
@@ -22,6 +20,7 @@ class TestPasswordResetViewRedirect (TestCase):
             auth=self.user)
 
     def tearDown(self):
+        UserAuth = auth.get_user_model()
         UserAuth.objects.all().delete()
         PasswordResetRequest.objects.all().delete()
 
@@ -34,6 +33,7 @@ class TestPasswordResetViewRedirect (TestCase):
 
 class TestPasswordResetViewProtection (TestCase):
     def setUp(self):
+        UserAuth = auth.get_user_model()
         self.client = Client()
         self.user = UserAuth.objects.create_user(
             username='abc',
@@ -44,6 +44,7 @@ class TestPasswordResetViewProtection (TestCase):
             auth=self.user)
 
     def tearDown(self):
+        UserAuth = auth.get_user_model()
         UserAuth.objects.all().delete()
         PasswordResetRequest.objects.all().delete()
 

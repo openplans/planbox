@@ -6,8 +6,9 @@ from django.template.loader import get_template
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.contrib.auth.forms import AuthenticationForm as DjangoAuthenticationForm
+from django.contrib.auth.models import User as UserAuth
 
-from planbox_data.models import UserAuth, Profile
+from planbox_data.models import Profile
 
 
 class AuthenticationForm(DjangoAuthenticationForm):
