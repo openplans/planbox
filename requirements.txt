@@ -15,7 +15,6 @@ raven==5.0.0
 # ========================================
 # Data storage and management
 # ========================================
-south==0.8.4
 psycopg2==2.5.3
 psycogreen==1.0
 jsonfield==1.0.0

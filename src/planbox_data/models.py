@@ -202,8 +202,11 @@ class ModelWithSlugMixin (object):
         Determines a slug based on the slug's basis if no slug is set. When
         force is True, the slug is set even if it already has a value.
         """
+        if self.slug and not force:
+            return self.slug
+
         basis = basis or self.get_slug_basis()
-        if basis and (force or not self.slug):
+        if basis:
             max_length = self._meta.get_field('slug').max_length
 
             # Leave some room in the slug length for the uniquifier.

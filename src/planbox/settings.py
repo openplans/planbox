@@ -41,7 +41,6 @@ INSTALLED_APPS = (
 
     'jstemplate',
     'djangobars',
-    'south',
     'genericadmin',
     'rest_framework',
     'django_ace',
