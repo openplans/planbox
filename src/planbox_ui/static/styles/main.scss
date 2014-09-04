@@ -13,7 +13,9 @@
     position: relative;
     z-index: 99;
     .right {
-      padding-right: 0.5rem;
+      @media #{$medium-up} {
+        padding-right: 0.5rem;
+      }
     }
     .avatar {
       width: 35px;
@@ -54,25 +56,6 @@
   }
   .top-bar-section {
     padding-top: 10px;
-  }
-  .top-bar-section ul li > a,
-  .top-bar-section ul,
-  .top-bar-section li:not(.has-form) a:not(.button) {
-    background-color: #ff8b38;
-    font-family: 'Bitter', serif;
-    font-size: 16px;
-  }
-  .top-bar-section li.active:not(.has-form) a:not(.button) {
-    background-color: $primary-color;
-  }
-  .top-bar-section li.active:not(.has-form) a:not(.button):hover {
-    background-color: scale-color($primary-color, $lightness: -20%);
-  }
-  .top-bar-section .dropdown li:not(.has-form) a:not(.button) {
-    background: $primary-color;
-  }
-  .top-bar-section li:not(.has-form) a:not(.button):hover {
-    background-color: scale-color($primary-color, $lightness: -20%);
   }
   .top-bar.expanded .title-area {
     background-color: transparent;
@@ -631,6 +614,12 @@ section, footer {
 }
 .section-heading {
   padding-top: 1.5rem;
+}
+
+// make WYSIWYG text match styles of p/lists/blockquotes/etc
+.project-text-content {
+  line-height: $paragraph-line-height;
+  margin-bottom: $paragraph-margin-bottom;
 }
 
 
@@ -1302,50 +1291,3 @@ textarea.no-resize {
 .team-profile .team-list {
   display: none;
 }
-
-
-// TODO: Sort out this stuff. I'm not sure we still need it.
-
-//.h1 { font-size: 2.125rem; }
-//.h2 { font-size: 1.6875rem; }
-//.h3 { font-size: 1.375rem; }
-//.h4 { font-size: 1.125rem; }
-//.h5 { font-size: 1.125rem; }
-//.h6 { font-size: 1rem; }
-//@media #{$medium-up} {
-//  .h1 { font-size: 2.75rem; }
-//  .h2 { font-size: 2.3125rem; }
-//  .h3 { font-size: 1.6875rem; }
-//  .h4 { font-size: 1.4375rem; }
-//}
-
-//.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6, .panel p {
-//  color: inherit;
-//}
-
-//.project-title {
-//  margin: 0;
-//  min-width: 4em;
-//}
-
-//.vcard .email .button {
-//  margin-top: 0.5rem;
-//  margin-bottom: 0.5rem;
-//}
-
-//.checked-icon {
-//  color: #57D982;
-//}
-//.checked-icon.unchecked {
-//  color: #777;
-//  color: rgba(100,100,100,0.8);
-//}
-//.arrow-left-down {
-//  position: relative;
-//  top: 0.375em;
-//}
-
-/* ----- Medium screens ----- */
-//  .product-features {
-//    padding: 3rem 0 1rem;
-//  }

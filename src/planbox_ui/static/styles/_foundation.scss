@@ -110,12 +110,6 @@ h1, h2, h3, h4, h5, h6, p, ul, ul, li {
   }
 }
 
-// body line-height set explicitly to "1" in _global.scss, so text outside p/lists/blockquotes/etc is ugly
-.project-text-content {
-  line-height: $paragraph-line-height;
-  margin-bottom: $paragraph-margin-bottom;
-}
-
 // Extend button styles
 .button, button {
   &.less-padding {
@@ -137,7 +131,7 @@ a.alert {
   color: $alert-color;
 }
 
-// Heavy-handed list styles... ugh
+// Heavy-handed list styles... ugh (I've submitted an issue for this on github. -AC)
 .project-text-content, .pen {
   ul {
     list-style: disc !important;
@@ -146,8 +140,6 @@ a.alert {
     list-style: decimal !important;
   }
 }
-
-
 
 
 /*--------------------------------------------------
@@ -237,8 +229,7 @@ input[type="url"] {
   }
 }
 
-
-// Switches
+// Switch Labels 
 .switch {
   & + label.inline {
     margin-left: 4.5rem;
