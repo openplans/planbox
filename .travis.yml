@@ -32,8 +32,8 @@ install:
 before_script:
   - psql -c 'create database planbox;' -U postgres
   - psql -d planbox -c 'create extension postgis;' -U postgres
-  - python src/manage.py syncdb --all --noinput
-  - gunicorn --chdir src planbox.wsgi:application --bind 0.0.0.0:80 --worker-class gevent --workers 4 --daemon
+  - python src/manage.py migrate --noinput
+  - gunicorn --chdir src planbox.wsgi:application --bind 0.0.0.0:80 --workers 4 --daemon
 
 script:
   # Run tests and generate coverage statistics for Django
