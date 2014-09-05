@@ -78,13 +78,18 @@ class UserCreationForm(forms.ModelForm):
             code='duplicate_username',
         )
 
-    def save(self, commit=True):
+    def save(self, commit=True, create_team=True):
         auth = super(UserCreationForm, self).save(commit=False)
         auth.set_password(self.cleaned_data["password"])
         if commit:
             auth.save()
             auth.profile.affiliation = self.cleaned_data["affiliation"]
             auth.profile.save()
+
+        if create_team:
+            # Create a team for the user from their affiliation
+            team = Profile.objects.create(name=self.cleaned_data["affiliation"])
+            team.members.add(auth.profile)
 
             # TODO: Send welcome email
 

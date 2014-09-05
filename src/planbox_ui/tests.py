@@ -86,6 +86,28 @@ class SignupViewTests (PlanBoxUITestCase):
         assert_equal(response.status_code, 200)
         assert_in('username', response.context_data['form'].errors)
 
+    def test_user_has_team_based_on_affiliation_by_default(self):
+        url = reverse('app-signup')
+
+        user_data = {
+            'username': 'mjumbewu',
+            'password': '123',
+            'email': 'mjumbewu@example.com',
+            'affiliation': 'OpenPlans',
+        }
+
+        request = self.factory.post(url, data=user_data)
+        request.user = AnonymousUser()
+        request.session = SessionStore('session')
+        response = signup_view(request)
+
+        assert_equal(response.status_code, 302)
+
+        teams = UserAuth.objects.get(username=user_data['username']).profile.teams.all()
+        assert_equal(teams.count(), 1)
+        assert_equal(teams[0].slug, 'openplans')
+        assert_equal(teams[0].name, 'OpenPlans')
+
 
 class SigninViewTests (PlanBoxUITestCase):
     def test_user_is_redirected_home_on_successful_signin(self):
