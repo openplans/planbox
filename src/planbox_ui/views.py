@@ -218,7 +218,7 @@ class ProfileView (AppMixin, AlwaysFresh, LoginRequired, SSLRequired, S3UploadMi
 
     def get_profile(self, request, profile_slug):
         if profile_slug:
-            return get_object_or_404(Profile, slug=profile_slug)
+            return get_object_or_404(Profile.objects.filter(auth=None), slug=profile_slug)
         else:
             try:
                 return request.user.profile

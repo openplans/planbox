@@ -351,23 +351,6 @@ class ProfileAdminTests (PlanBoxUITestCase):
         assert_equal(response.status_code, 302)
         assert_equal(response.url, home_url)
 
-    def test_owner_gets_profile_admin(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        profile = auth.profile
-
-        kwargs = {
-            'profile_slug': profile.slug,
-        }
-
-        url = reverse('app-profile', kwargs=kwargs)
-        request = self.factory.get(url)
-        request.user = auth
-        response = profile_view(request, **kwargs)
-
-        assert_equal(response.status_code, 200)
-        assert_in('profile_data', response.context_data)
-        assert_equal(response.context_data['profile_data']['slug'], profile.slug)
-
     def test_member_gets_profile_admin(self):
         profile = Profile.objects.create(slug='mjumbewu')
 
