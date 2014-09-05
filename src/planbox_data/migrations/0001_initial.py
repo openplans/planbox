@@ -6,7 +6,12 @@ import jsonfield.fields
 from django.conf import settings
 import django.db.models.deletion
 import planbox_data.models
-import builtins
+try:
+    # Python 3
+    import builtins
+except ImportError:
+    # Python 2
+    import __builtin__ as builtins
 import django.utils.timezone
 
 
