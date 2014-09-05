@@ -41,7 +41,7 @@ class SignupViewTests (PlanBoxUITestCase):
 
         # If you get a 200 here, it's probably because of wrong form data.
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, reverse('app-profile', kwargs={'profile_slug': 'mjumbewu'}))
+        assert_equal(response.url, reverse('app-user-profile'))
 
         user_profile = Profile.objects.get(auth__username='mjumbewu')
         assert_equal(user_profile.affiliation, 'OpenPlans')
@@ -124,7 +124,7 @@ class SigninViewTests (PlanBoxUITestCase):
         request.session = SessionStore('session')
         response = signin_view(request)
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, reverse('app-profile', kwargs={'profile_slug': 'mjumbewu'}))
+        assert_equal(response.url, reverse('app-user-profile'))
 
 
 class NewProjectViewTests (PlanBoxUITestCase):
@@ -137,7 +137,7 @@ class NewProjectViewTests (PlanBoxUITestCase):
         url1_kwargs = {'owner_slug': owner.slug}
         url1 = reverse('app-new-project', kwargs=url1_kwargs)
         url2_kwargs = {}
-        url2 = reverse('app-profile', kwargs=url2_kwargs)
+        url2 = reverse('app-user-profile', kwargs=url2_kwargs)
 
         request = self.factory.get(url1)
         request.user = user

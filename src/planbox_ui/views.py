@@ -58,14 +58,7 @@ class AppMixin (object):
         return self.user_profile
 
     def get_home_url(self, obj=None):
-        if obj is None and self.request.user.is_authenticated():
-            obj = self.request.user
-
-        if isinstance(obj, UserAuth):
-            owner_slug = obj.username
-        elif isinstance(obj, Profile):
-            owner_slug = obj.slug
-        return resolve_url('app-profile', profile_slug=owner_slug)
+        return resolve_url('app-user-profile')
 
     def get_context_data(self, **kwargs):
         context = super(AppMixin, self).get_context_data(**kwargs)
@@ -471,7 +464,7 @@ class NewProjectView (SSLRequired, LoginRequired, S3UploadMixin, ProjectMixin, T
 
         # Check whether this page is for the auth'd user
         if not self.owner.authorizes(request.user):
-            return redirect('app-profile')
+            return redirect('app-user-profile')
 
         self.project = None
         return super(NewProjectView, self).get(request, owner_slug)

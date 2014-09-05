@@ -466,6 +466,9 @@ class Profile (ModelWithSlugMixin, TimeStampedModel):
     def get_all_slugs(self):
         return set([p['slug'] for p in Profile.objects.all().values('slug')])
 
+    def is_user_profile(self):
+        return self.auth_id is not None
+
     def is_owned_by(self, user):
         return (user.id == self.auth_id)
 

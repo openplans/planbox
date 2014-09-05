@@ -147,6 +147,15 @@ class ProfileSerializer (SlugValidationMixin, serializers.ModelSerializer):
         model = models.Profile
         exclude = ('project_editor_version',)
 
+    def get_fields(self):
+        fields = super(ProfileSerializer, self).get_fields()
+
+        # Add the username field if it's a user profile
+        if self.object.is_user_profile():
+            fields['username'] = serializers.CharField(source='auth.username', read_only=True)
+
+        return fields
+
     def validate(self, attrs):
         if not attrs.get('name') and not attrs.get('slug'):
             raise serializers.ValidationError('You must specify either a name or a slug.')

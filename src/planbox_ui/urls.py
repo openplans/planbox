@@ -36,7 +36,7 @@ urlpatterns = patterns('',
     url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', project_view, name='app-project'),
 
     # Read-write version of the project page
-    url(r'^profile/', profile_view, name='app-profile'),
+    url(r'^profile/', profile_view, name='app-user-profile'),
 
     # Read-write version of a specific profile (a user could have access to
     # multiple profiles)
