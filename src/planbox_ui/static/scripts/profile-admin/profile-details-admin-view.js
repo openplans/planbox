@@ -71,7 +71,7 @@ var Planbox = Planbox || {};
       },
       handleModelSync: function(model, attrs, options) {
         // On any given sync, the slug may have changed. Update the path.
-        var path = '/' + model.get('slug') + '/';
+        var path = (model.get('username') ? '/dashboard/' : '/' + model.get('slug') + '/dashboard/');
 
         if (window.location.pathname !== path) {
           if (Modernizr.history) {
