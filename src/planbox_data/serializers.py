@@ -48,6 +48,32 @@ class OrderedSerializerMixin (object):
                 obj.index = index
 
 
+class SlugValidationMixin (object):
+    def validate_slug(self, attrs, source):
+        slug = attrs.get(source)
+
+        # If the slug is empty, we're just going to generate one.
+        if not slug:
+            return attrs
+
+        if self.object:
+            # If the slug is not changing, then all is well.
+            if slug == self.object.slug:
+                return attrs
+            # If we're changing the slug, and it's already in use, then we
+            # have a problem.
+            existing_slugs = self.object.get_all_slugs()
+            if slug in existing_slugs:
+                raise serializers.ValidationError('This slug is already in use.')
+
+        # Letters, numbers, and dashes.
+        pattern = r'^[A-Za-z0-9-]*$'
+        if not re.match(pattern, slug):
+            raise serializers.ValidationError('Use only numbers, letters, and dashes in slugs.')
+
+        return attrs
+
+
 # ============================================================
 # Profile serializers
 
@@ -112,7 +138,7 @@ class UserSerializer (serializers.ModelSerializer):
         model = models.Profile
 
 
-class ProfileSerializer (serializers.ModelSerializer):
+class ProfileSerializer (SlugValidationMixin, serializers.ModelSerializer):
     members = AssociatedProfileSerializer(required=False, many=True, allow_add_remove=True)
     teams = AssociatedProfileSerializer(required=False, many=True, allow_add_remove=True)
     projects = OwnedProjectSerializer(many=True, read_only=True)
@@ -159,7 +185,7 @@ class SectionSerializer (OrderedSerializerMixin, serializers.ModelSerializer):
         exclude = ('project', 'index')
 
 
-class ProjectSerializer (serializers.ModelSerializer):
+class ProjectSerializer (SlugValidationMixin, serializers.ModelSerializer):
     events = EventSerializer(many=True, allow_add_remove=True)
     sections = SectionSerializer(many=True, allow_add_remove=True)
     owner = AssociatedProfileSerializer(required=True)
@@ -177,22 +203,6 @@ class ProjectSerializer (serializers.ModelSerializer):
     class Meta:
         model = models.Project
         exclude = ('last_opened_at', 'last_opened_by', 'last_saved_at', 'last_saved_by')
-
-    def validate_slug(self, attrs, source):
-        slug = attrs.get(source)
-        # If the slug is empty, we're just going to generate one.
-        if not slug:
-            return attrs
-        if self.object:
-            # If the slug is not changing, then all is well.
-            if slug == self.object.slug:
-                return attrs
-            # If we're changing the slug, and it's already in use, then we
-            # have a problem.
-            existing_slugs = self.object.get_all_slugs()
-            if slug in existing_slugs:
-                raise serializers.ValidationError('This slug is already in use.')
-        return attrs
 
 
 class ProjectActivitySerializer (serializers.ModelSerializer):
