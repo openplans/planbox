@@ -267,7 +267,7 @@ var Planbox = Planbox || {};
       this.$('.error').removeClass('error');
     },
     resetForm: function() {
-      this.ui.form.reset();
+      this.ui.form[0].reset();
       this.clearErrors();
     }
   };
