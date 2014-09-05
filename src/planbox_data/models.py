@@ -59,9 +59,8 @@ def uniquify_slug(slug, existing_slugs):
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
     Update the corresponding profile for a user authentication object with the
-    auth object's username as the slug, and the email address as the profile
-    email. Create the user profile object for the authentication object if it
-    doesn't already exist.
+    auth object's email address as the profile email. Create the user profile
+    object for the authentication object if it doesn't already exist.
 
     Connect as a post-save signal on the user authentication model, so that
     the above process is done every time a user authentication object is saved.
@@ -72,36 +71,14 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     instance -- The user authentication model object that has been saved.
     created -- True if called as a result of the authentication model object
         being created; False otherwise.
-
-    Example:
-
-    >>> ## Create a user...
-    >>>
-    >>> user = UserAuth.objects.create_user(
-    ...     username='my-user',
-    ...     email='my-user@example.com',
-    ...     password='123')
-    >>> user.profile.slug
-    'my-user'
-    >>> user.profile.email
-    'my-user@example.com'
-    >>>
-    >>> ## Update the user...
-    >>>
-    >>> user.username = 'my-new-username'
-    >>> user.save()
-    >>> user.profile.slug
-    'my-new-username'
-
     """
-    auth = instance
+    user = instance
     try:
-        profile = Profile.objects.get(auth=auth)
+        profile = Profile.objects.get(auth=user)
     except Profile.DoesNotExist:
-        profile = Profile(auth=auth)
-    if not profile.is_synced_with_auth(auth):
-        profile.slug = auth.username
-        profile.email = auth.email
+        profile = Profile(auth=user, slug='user-{}'.format(user.id))
+    if profile.id is None or not profile.is_synced_with_auth(user):
+        profile.email = user.email
         profile.save()
 post_save.connect(create_or_update_user_profile, sender=settings.AUTH_USER_MODEL, dispatch_uid="user-profile-create-signal")
 
@@ -478,7 +455,7 @@ class Profile (ModelWithSlugMixin, TimeStampedModel):
     objects = ProfileManager()
 
     def __str__(self):
-        return self.slug
+        return self.slug if self.auth is None else self.auth.username
 
     def natural_key(self):
         return (self.slug,)
@@ -501,8 +478,6 @@ class Profile (ModelWithSlugMixin, TimeStampedModel):
 
     def is_synced_with_auth(self, auth=None):
         auth = auth or self.auth
-        if self.slug != auth.username:
-            return False
         if self.email != auth.email:
             return False
         return True

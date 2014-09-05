@@ -107,19 +107,18 @@ class SigninViewTests (PlanBoxUITestCase):
 
 class NewProjectViewTests (PlanBoxUITestCase):
     def test_user_gets_redirected_to_own_new_project_page(self):
-        auth1 = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        owner1 = auth1.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner1)
+        owner = Profile.objects.create(slug='mjumbewu')
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner)
 
-        auth2 = UserAuth.objects.create_user(username='atogle', password='456')
+        user = UserAuth.objects.create_user(username='atogle', password='456')
 
-        url1_kwargs = {'owner_slug': auth1.username}
+        url1_kwargs = {'owner_slug': owner.slug}
         url1 = reverse('app-new-project', kwargs=url1_kwargs)
-        url2_kwargs = {'owner_slug': auth2.username}
-        url2 = reverse('app-new-project', kwargs=url2_kwargs)
+        url2_kwargs = {}
+        url2 = reverse('app-profile', kwargs=url2_kwargs)
 
         request = self.factory.get(url1)
-        request.user = auth2
+        request.user = user
         response = new_project_view(request, **url1_kwargs)
         assert_equal(response.status_code, 302)
         assert_equal(response.url, url2)
@@ -140,13 +139,12 @@ class NewProjectViewTests (PlanBoxUITestCase):
 
 class ProjectDetailViewTests (PlanBoxUITestCase):
     def test_anon_gets_non_editable_details(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.profile
+        owner = Profile.objects.create(slug='mjumbewu')
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -158,13 +156,12 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         assert_equal(response.context_data.get('is_editable'), False)
 
     def test_non_owner_gets_non_editable_details(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.profile
+        owner = Profile.objects.create(slug='mjumbewu')
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         auth2 = UserAuth.objects.create_user(username='atogle', password='456')
@@ -184,8 +181,8 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -197,13 +194,12 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         assert_equal(response.context_data.get('is_editable'), True)
 
     def test_anon_gets_redirect_to_home_on_non_public_project(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.profile
+        owner = Profile.objects.create(slug='mjumbewu')
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -216,13 +212,12 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         assert_equal(response.url, home_url)
 
     def test_non_owner_gets_redirect_to_home_on_non_public_project(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.profile
+        owner = Profile.objects.create(slug='mjumbewu')
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         auth2 = UserAuth.objects.create_user(username='atogle', password='456')
@@ -242,8 +237,8 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -263,8 +258,8 @@ class ProjectThemeTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, theme=theme, public=True)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -283,8 +278,8 @@ class ProjectThemeTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         url = reverse('app-project', kwargs=kwargs)

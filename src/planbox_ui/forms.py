@@ -68,8 +68,8 @@ class UserCreationForm(forms.ModelForm):
         # but it sets a nicer error message than the ORM. See #13147.
         username = self.cleaned_data["username"]
         try:
-            Profile.objects.get(slug__iexact=username)
-        except Profile.DoesNotExist:
+            UserAuth.objects.get(username__iexact=username)
+        except UserAuth.DoesNotExist:
             return username
 
         error_template = get_template(self.error_message_templates['duplicate_username'])

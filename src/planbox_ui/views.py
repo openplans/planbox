@@ -471,7 +471,7 @@ class NewProjectView (SSLRequired, LoginRequired, S3UploadMixin, ProjectMixin, T
 
         # Check whether this page is for the auth'd user
         if not self.owner.authorizes(request.user):
-            return redirect('app-new-project', owner_slug=self.request.user.username)
+            return redirect('app-profile')
 
         self.project = None
         return super(NewProjectView, self).get(request, owner_slug)
