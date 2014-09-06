@@ -6,8 +6,9 @@ from django.template.loader import get_template
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.contrib.auth.forms import AuthenticationForm as DjangoAuthenticationForm
+from django.contrib.auth.models import User as UserAuth
 
-from planbox_data.models import UserAuth, Profile
+from planbox_data.models import Profile
 
 
 class AuthenticationForm(DjangoAuthenticationForm):
@@ -67,8 +68,8 @@ class UserCreationForm(forms.ModelForm):
         # but it sets a nicer error message than the ORM. See #13147.
         username = self.cleaned_data["username"]
         try:
-            Profile.objects.get(slug__iexact=username)
-        except Profile.DoesNotExist:
+            UserAuth.objects.get(username__iexact=username)
+        except UserAuth.DoesNotExist:
             return username
 
         error_template = get_template(self.error_message_templates['duplicate_username'])
@@ -77,13 +78,18 @@ class UserCreationForm(forms.ModelForm):
             code='duplicate_username',
         )
 
-    def save(self, commit=True):
+    def save(self, commit=True, create_team=True):
         auth = super(UserCreationForm, self).save(commit=False)
         auth.set_password(self.cleaned_data["password"])
         if commit:
             auth.save()
             auth.profile.affiliation = self.cleaned_data["affiliation"]
             auth.profile.save()
+
+        if create_team:
+            # Create a team for the user from their affiliation
+            team = Profile.objects.create(name=self.cleaned_data["affiliation"])
+            team.members.add(auth.profile)
 
             # TODO: Send welcome email
 

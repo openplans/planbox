@@ -5,9 +5,6 @@ from django.utils.translation import ugettext as _
 from password_reset.models import PasswordResetRequest
 
 
-UserAuth = get_user_model()
-
-
 class PasswordConfirmationMixin(object):
     def __init__(self, *args, **kwargs):
         super(PasswordConfirmationMixin, self).__init__(*args, **kwargs)
@@ -34,6 +31,7 @@ class PasswordResetRequestForm (forms.Form):
     email = forms.EmailField()
 
     def clean_email(self):
+        UserAuth = get_user_model()
         email = self.cleaned_data.get('email')
         try:
             self.user = UserAuth.objects.get(email=email)

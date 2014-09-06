@@ -41,7 +41,7 @@ class SignupViewTests (PlanBoxUITestCase):
 
         # If you get a 200 here, it's probably because of wrong form data.
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, reverse('app-profile', kwargs={'profile_slug': 'mjumbewu'}))
+        assert_equal(response.url, reverse('app-user-profile'))
 
         user_profile = Profile.objects.get(auth__username='mjumbewu')
         assert_equal(user_profile.affiliation, 'OpenPlans')
@@ -86,6 +86,28 @@ class SignupViewTests (PlanBoxUITestCase):
         assert_equal(response.status_code, 200)
         assert_in('username', response.context_data['form'].errors)
 
+    def test_user_has_team_based_on_affiliation_by_default(self):
+        url = reverse('app-signup')
+
+        user_data = {
+            'username': 'mjumbewu',
+            'password': '123',
+            'email': 'mjumbewu@example.com',
+            'affiliation': 'OpenPlans',
+        }
+
+        request = self.factory.post(url, data=user_data)
+        request.user = AnonymousUser()
+        request.session = SessionStore('session')
+        response = signup_view(request)
+
+        assert_equal(response.status_code, 302)
+
+        teams = UserAuth.objects.get(username=user_data['username']).profile.teams.all()
+        assert_equal(teams.count(), 1)
+        assert_equal(teams[0].slug, 'openplans')
+        assert_equal(teams[0].name, 'OpenPlans')
+
 
 class SigninViewTests (PlanBoxUITestCase):
     def test_user_is_redirected_home_on_successful_signin(self):
@@ -102,24 +124,23 @@ class SigninViewTests (PlanBoxUITestCase):
         request.session = SessionStore('session')
         response = signin_view(request)
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, reverse('app-profile', kwargs={'profile_slug': 'mjumbewu'}))
+        assert_equal(response.url, reverse('app-user-profile'))
 
 
 class NewProjectViewTests (PlanBoxUITestCase):
     def test_user_gets_redirected_to_own_new_project_page(self):
-        auth1 = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        owner1 = auth1.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner1)
+        owner = Profile.objects.create(slug='mjumbewu')
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner)
 
-        auth2 = UserAuth.objects.create_user(username='atogle', password='456')
+        user = UserAuth.objects.create_user(username='atogle', password='456')
 
-        url1_kwargs = {'owner_slug': auth1.username}
+        url1_kwargs = {'owner_slug': owner.slug}
         url1 = reverse('app-new-project', kwargs=url1_kwargs)
-        url2_kwargs = {'owner_slug': auth2.username}
-        url2 = reverse('app-new-project', kwargs=url2_kwargs)
+        url2_kwargs = {}
+        url2 = reverse('app-user-profile', kwargs=url2_kwargs)
 
         request = self.factory.get(url1)
-        request.user = auth2
+        request.user = user
         response = new_project_view(request, **url1_kwargs)
         assert_equal(response.status_code, 302)
         assert_equal(response.url, url2)
@@ -140,13 +161,12 @@ class NewProjectViewTests (PlanBoxUITestCase):
 
 class ProjectDetailViewTests (PlanBoxUITestCase):
     def test_anon_gets_non_editable_details(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.profile
+        owner = Profile.objects.create(slug='mjumbewu')
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -158,13 +178,12 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         assert_equal(response.context_data.get('is_editable'), False)
 
     def test_non_owner_gets_non_editable_details(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.profile
+        owner = Profile.objects.create(slug='mjumbewu')
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         auth2 = UserAuth.objects.create_user(username='atogle', password='456')
@@ -184,8 +203,8 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -197,13 +216,12 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         assert_equal(response.context_data.get('is_editable'), True)
 
     def test_anon_gets_redirect_to_home_on_non_public_project(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.profile
+        owner = Profile.objects.create(slug='mjumbewu')
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -216,13 +234,12 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         assert_equal(response.url, home_url)
 
     def test_non_owner_gets_redirect_to_home_on_non_public_project(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        owner = auth.profile
+        owner = Profile.objects.create(slug='mjumbewu')
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         auth2 = UserAuth.objects.create_user(username='atogle', password='456')
@@ -242,8 +259,8 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -263,8 +280,8 @@ class ProjectThemeTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, theme=theme, public=True)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -283,8 +300,8 @@ class ProjectThemeTests (PlanBoxUITestCase):
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
         kwargs = {
-            'owner_slug': 'mjumbewu',
-            'project_slug': 'test-slug'
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
         }
 
         url = reverse('app-project', kwargs=kwargs)
@@ -333,23 +350,6 @@ class ProfileAdminTests (PlanBoxUITestCase):
         home_url = reverse('app-index')
         assert_equal(response.status_code, 302)
         assert_equal(response.url, home_url)
-
-    def test_owner_gets_profile_admin(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        profile = auth.profile
-
-        kwargs = {
-            'profile_slug': profile.slug,
-        }
-
-        url = reverse('app-profile', kwargs=kwargs)
-        request = self.factory.get(url)
-        request.user = auth
-        response = profile_view(request, **kwargs)
-
-        assert_equal(response.status_code, 200)
-        assert_in('profile_data', response.context_data)
-        assert_equal(response.context_data['profile_data']['slug'], profile.slug)
 
     def test_member_gets_profile_admin(self):
         profile = Profile.objects.create(slug='mjumbewu')

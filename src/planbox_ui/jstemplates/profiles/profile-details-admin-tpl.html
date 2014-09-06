@@ -8,9 +8,9 @@
   <div class="small-8 medium-10 large-12 columns ">
     {{#if name}}
     <h3 class="profile-name no-margins">{{ name }}</h3>
-    <p><small>{{ slug }}</small></p>
+    <p><small>{{ default username slug }}</small></p>
     {{^}}
-    <h3 class="profile-name no-margins">{{ slug }}</h3>
+    <h3 class="profile-name no-margins">{{ default username slug }}</h3>
     {{/if}}
     <div class="project-text-content">{{{ description }}}</div>
     <small><a href="#" class="profile-edit-button">Edit Profile</a></small>
@@ -41,13 +41,21 @@
       <input class="sub-heading-input float-label-input" type="text" placeholder="Name" value="{{ name }}" data-attr="name">
       <span class="float-label">Name</span>
 
-      <div data-error-attr="non_field_errors" data-error-message="You must enter &lt;em&gt;at least&lt;/em&gt; either a name or a slug."></div>
+      {{^if username}}
+      <div data-error-attr="non_field_errors"
+        data-error-message="You must enter &lt;em&gt;at least&lt;/em&gt; either a name or a slug."> </div>
+      {{/if}}
 
     </div>
 
+    {{#if username}}
+    {{!-- Slug is not editable for user profiles --}}
+    <input type="hidden" value="{{ slug }}" data-attr="slug">
+    {{^}}
     <small><span class="hide-for-small-only">openplans.org/</span><input type="text" class="slug-field inline-input" value="{{ slug }}" data-attr="slug" pattern="[A-Za-z0-9-]+" data-validity-message="Please use only letters, numbers, and dashes."><span class="hide-for-small-only">/</span></small>
     <div data-error-attr="slug" data-error-message="This slug is already used by another user or team. Please choose a different, unique slug."></div>
     <div class="extra-padding-bottom"><small><em>Changing this will also change the links to all of your plans.</em></small></div>
+    {{/if}}
 
     <div class="float-label-container">
       <!-- TODO: Make this a pen editor. -->

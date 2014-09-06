@@ -12,8 +12,6 @@ from django.utils.timezone import now, timedelta
 from django.utils.translation import ugettext as _
 from jsonfield import JSONField
 
-UserAuth = auth.get_user_model()
-
 
 class TimeStampedModel (models.Model):
     created_at = models.DateTimeField(default=now, blank=True)
@@ -61,9 +59,8 @@ def uniquify_slug(slug, existing_slugs):
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
     Update the corresponding profile for a user authentication object with the
-    auth object's username as the slug, and the email address as the profile
-    email. Create the user profile object for the authentication object if it
-    doesn't already exist.
+    auth object's email address as the profile email. Create the user profile
+    object for the authentication object if it doesn't already exist.
 
     Connect as a post-save signal on the user authentication model, so that
     the above process is done every time a user authentication object is saved.
@@ -74,42 +71,21 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     instance -- The user authentication model object that has been saved.
     created -- True if called as a result of the authentication model object
         being created; False otherwise.
-
-    Example:
-
-    >>> ## Create a user...
-    >>>
-    >>> user = UserAuth.objects.create_user(
-    ...     username='my-user',
-    ...     email='my-user@example.com',
-    ...     password='123')
-    >>> user.profile.slug
-    'my-user'
-    >>> user.profile.email
-    'my-user@example.com'
-    >>>
-    >>> ## Update the user...
-    >>>
-    >>> user.username = 'my-new-username'
-    >>> user.save()
-    >>> user.profile.slug
-    'my-new-username'
-
     """
-    auth = instance
+    user = instance
     try:
-        profile = Profile.objects.get(auth=auth)
+        profile = Profile.objects.get(auth=user)
     except Profile.DoesNotExist:
-        profile = Profile(auth=auth)
-    if not profile.is_synced_with_auth(auth):
-        profile.slug = auth.username
-        profile.email = auth.email
+        profile = Profile(auth=user, slug='user-{}'.format(user.id))
+    if profile.id is None or not profile.is_synced_with_auth(user):
+        profile.email = user.email
         profile.save()
-post_save.connect(create_or_update_user_profile, sender=UserAuth, dispatch_uid="user-profile-create-signal")
+post_save.connect(create_or_update_user_profile, sender=settings.AUTH_USER_MODEL, dispatch_uid="user-profile-create-signal")
 
 
 class ProjectQuerySet (models.query.QuerySet):
     def Q_owner(self, owner):
+        UserAuth = auth.get_user_model()
         if isinstance(owner, UserAuth):
             owner = owner.profile
 
@@ -121,6 +97,7 @@ class ProjectQuerySet (models.query.QuerySet):
         return self.filter(owner_query | public_query)
 
     def Q_member(self, member):
+        UserAuth = auth.get_user_model()
         if isinstance(member, UserAuth):
             member = member.profile
         profile_ids = [member.id] + [team['id'] for team in member.teams.values('id')]
@@ -202,8 +179,11 @@ class ModelWithSlugMixin (object):
         Determines a slug based on the slug's basis if no slug is set. When
         force is True, the slug is set even if it already has a value.
         """
+        if self.slug and not force:
+            return self.slug
+
         basis = basis or self.get_slug_basis()
-        if basis and (force or not self.slug):
+        if basis:
             max_length = self._meta.get_field('slug').max_length
 
             # Leave some room in the slug length for the uniquifier.
@@ -321,12 +301,14 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
         return new_inst
 
     def owned_by(self, obj):
+        UserAuth = auth.get_user_model()
         if isinstance(obj, UserAuth):
             try: obj = obj.profile
             except Profile.DoesNotExist: return False
         return (self.owner == obj)
 
     def editable_by(self, obj):
+        UserAuth = auth.get_user_model()
         if hasattr(obj, 'is_authenticated') and not obj.is_authenticated():
             return False
 
@@ -410,6 +392,7 @@ class ProfileQuerySet (models.query.QuerySet):
         return models.Q(id__in=profile_ids)
 
     def filter_by_user_or_member(self, obj):
+        UserAuth = auth.get_user_model()
         if isinstance(obj, UserAuth):
             try:
                 obj = obj.profile
@@ -472,7 +455,7 @@ class Profile (ModelWithSlugMixin, TimeStampedModel):
     objects = ProfileManager()
 
     def __str__(self):
-        return self.slug
+        return self.slug if self.auth is None else self.auth.username
 
     def natural_key(self):
         return (self.slug,)
@@ -482,6 +465,9 @@ class Profile (ModelWithSlugMixin, TimeStampedModel):
 
     def get_all_slugs(self):
         return set([p['slug'] for p in Profile.objects.all().values('slug')])
+
+    def is_user_profile(self):
+        return self.auth is not None
 
     def is_owned_by(self, user):
         return (user.id == self.auth_id)
@@ -495,8 +481,6 @@ class Profile (ModelWithSlugMixin, TimeStampedModel):
 
     def is_synced_with_auth(self, auth=None):
         auth = auth or self.auth
-        if self.slug != auth.username:
-            return False
         if self.email != auth.email:
             return False
         return True

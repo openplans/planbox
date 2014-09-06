@@ -41,7 +41,6 @@ INSTALLED_APPS = (
 
     'jstemplate',
     'djangobars',
-    'south',
     'genericadmin',
     'rest_framework',
     'django_ace',
@@ -59,7 +58,7 @@ CANONICAL_ROOT = ''
 DEFAULT_PROJECT_TEMPLATE = 'templates/default'
 
 LOGIN_URL = 'app-signin'
-LOGIN_REDIRECT_URL = 'app-profile'
+LOGIN_REDIRECT_URL = 'app-user-profile'
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
