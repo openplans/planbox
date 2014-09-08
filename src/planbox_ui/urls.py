@@ -26,9 +26,6 @@ urlpatterns = patterns('',
     url(r'^shareabouts/$', shareabouts_view, name='app-shareabouts'),
     url(r'^open-source/$', open_source_view, name='app-open-source'),
 
-    # Read-only resources
-    url(r'^~/(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', ro_project_view, name='app-ro-project'),
-
     # ==============================
     # Profile dashboards
 
@@ -37,9 +34,11 @@ urlpatterns = patterns('',
     url(r'^(?P<profile_slug>[^/]+)/$', profile_view, name='old-app-profile'),
 
     # ==============================
-    # Project editing
+    # Project pages
 
     url(r'^(?P<owner_slug>[^/]+)/new/$', new_project_view, name='app-new-project'),
-    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/$', project_view, name='app-project'),
+    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/edit/$', project_view, name='app-project'),
+    # Read-only project page
+    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', ro_project_view, name='app-ro-project'),
 
 )
