@@ -15,6 +15,7 @@ var Planbox = Planbox || {};
         logoImageSwitch: '.logo-image-switch',
         richEditables: '.rich-editable',
         saveBtn: '.save-btn',
+        form: 'form.project-edit-form',
         visibilityToggle: '[name=project-public]',
         customDomainMessage: '.custom-domain-message',
         customDomainMessageBtn: '.custom-domain-message-btn',
@@ -34,6 +35,7 @@ var Planbox = Planbox || {};
         'change @ui.logoImageSwitch': 'handleLogoImageSwitch',
         'click @ui.settingsToggle': 'handleSettingsToggle',
         'click @ui.saveBtn': 'handleSave',
+        'keypress @ui.form': 'handleKeypress',
         'click @ui.customDomainMessageBtn': 'handleCustomDomainMessageBtn',
         'change @ui.publishCheckbox': 'handlePublish',
         'click @ui.removeImageLinks': 'handleRemoveImage',
@@ -304,6 +306,15 @@ var Planbox = Planbox || {};
 
         if (!$target.hasClass('disabled')) {
           this.save();
+        }
+      },
+      handleKeypress: function(evt) {
+        // This is to prevent the form submission on enter.
+        var code = evt.keyCode || evt.which;
+        // If enter key
+        if( code === 13 ) {
+          evt.preventDefault();
+          return false;
         }
       },
       handlePublish: function(evt) {
