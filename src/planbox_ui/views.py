@@ -377,7 +377,7 @@ class BaseExistingProjectView (AlwaysFresh, ProjectMixin, TemplateView):
 
     def get(self, request, owner_slug, project_slug):
         self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
-                                         owner__slug=owner_slug, slug=project_slug)
+                                         owner__slug=owner_slug, slug__iexact=project_slug)
 
         if not self.get_project_is_visible():
             return redirect('app-index')

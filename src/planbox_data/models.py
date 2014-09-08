@@ -294,6 +294,9 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
         """
         return [p.slug for p in self.owner.projects.all()]
 
+    def slug_exists(self, slug):
+        return self.owner.projects.filter(slug__iexact=slug).exists()
+
     def clone(self, *args, **kwargs):
         new_inst = super(Project, self).clone(*args, **kwargs)
         for e in self.events.all(): e.clone(project=new_inst)
@@ -373,6 +376,9 @@ class Event (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, models.
 
     def get_all_slugs(self):
         return [e.slug for e in self.project.events.all()]
+
+    def slug_exists(self, slug):
+        return self.project.events.filter(slug__iexact=slug).exists()
 
     def get_siblings(self):
         return self.project.events.aggregate(max_index=models.Max('index'))
@@ -465,6 +471,9 @@ class Profile (ModelWithSlugMixin, TimeStampedModel):
 
     def get_all_slugs(self):
         return set([p['slug'] for p in Profile.objects.all().values('slug')])
+
+    def slug_exists(self, slug):
+        return Profile.objects.filter(slug__iexact=slug).exists()
 
     def is_user_profile(self):
         return self.auth is not None
@@ -576,6 +585,9 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
 
     def get_all_slugs(self):
         return [s.slug for s in self.project.sections.all()]
+
+    def slug_exists(self, slug):
+        return self.project.sections.filter(slug__iexact=slug).exists()
 
     def get_siblings(self):
         return self.project.sections.aggregate(max_index=models.Max('index'))

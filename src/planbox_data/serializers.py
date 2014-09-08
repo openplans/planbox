@@ -62,8 +62,7 @@ class SlugValidationMixin (object):
                 return attrs
             # If we're changing the slug, and it's already in use, then we
             # have a problem.
-            existing_slugs = self.object.get_all_slugs()
-            if slug in existing_slugs:
+            if self.object.slug_exists(slug):
                 raise serializers.ValidationError('This slug is already in use.')
 
         # Letters, numbers, and dashes.
