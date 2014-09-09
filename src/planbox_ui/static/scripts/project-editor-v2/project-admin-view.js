@@ -311,8 +311,8 @@ var Planbox = Planbox || {};
       handleKeypress: function(evt) {
         // This is to prevent the form submission on enter.
         var code = evt.keyCode || evt.which;
-        // If enter key
-        if( code === 13 ) {
+        // If enter key in an input field. Divs and textareas should allow enter.
+        if(code === 13 && evt.target.nodeName === 'INPUT') {
           evt.preventDefault();
           return false;
         }
