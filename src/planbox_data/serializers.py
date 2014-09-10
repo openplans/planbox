@@ -228,6 +228,14 @@ class ProjectActivitySerializer (serializers.ModelSerializer):
 
 
 # ============================================================
+# Roundup-related serializers
+
+class RoundupSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.Roundup
+
+
+# ============================================================
 # Template serializers, which render objects without their identifying
 # information (ids, slugs, etc.). These are output only.
 

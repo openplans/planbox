@@ -644,3 +644,20 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
 
     def get_siblings(self):
         return self.project.sections.all()
+
+
+
+# ============================================================
+# Roundup pages
+
+@python_2_unicode_compatible
+class Roundup (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
+    title = models.TextField(blank=True)
+    slug = models.CharField(max_length=128, blank=True)
+    owner = models.ForeignKey('Profile', related_name='projects')
+    details = JSONField(blank=True, default=dict)
+    theme = models.ForeignKey('Theme', related_name='projects', null=True, blank=True, on_delete=models.SET_NULL)
+    template = models.ForeignKey('Roundup', help_text=_("The roundup, if any, that this one is based off of"), null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.title
