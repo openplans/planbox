@@ -1,101 +1,77 @@
-{{#if cover_img_url}}
-<header data-magellan-destination="home" id="home" class="site-header has-image" style="background-image: url(&quot;{{ cover_img_url }}&quot;)">
-{{else }}
-<header data-magellan-destination="home" id="home" class="site-header">
-{{/if}}
-
-  <div class="site-header-content">
-
-    <div class="row project-header container">
-
-      <div class="social-links-header right">
-        {{#if details.facebook_url}}<a href="{{ details.facebook_url }}" class="social-link"><img src="{{ static_url }}/images/social-facebook.gif"></a>{{/if}}
-        {{#if details.instagram_url}}<a href="{{ details.instagram_url }}" class="social-link"><img src="{{ static_url }}/images/social-instagram.gif"></a>{{/if}}
-        {{#if details.twitter_url}}<a href="{{ details.twitter_url }}" class="social-link"><img src="{{ static_url }}/images/social-twitter.gif"></a>{{/if}}
-      </div>
-
-      <div class="small-12 columns text-center extra-padding-top some-padding-bottom">
-
-        <h1 class="project-title">
-          {{#if logo_img_url}}
-            <img src="{{ logo_img_url }}" alt="{{ title }}">
-          {{else}}
-            {{{ title }}}
-          {{/if}}
-        </h1>
-
-        {{# if details.tagline }}<h2 class="project-tagline">{{ details.tagline }}</h2>{{/ if }}
-
-      </div>
+<div class="large-3 columns extra-margin-bottom">
+  <div class="row small-only-text-center">
+    <div class="small-9 small-centered medium-3 medium-uncentered large-12 columns">
+      <h1><img class="avatar" src="images/nycdot-logo.png"></h1>
     </div>
-
-    <div class="project-menu-container {{#gte sections.length 2}} has-project-menu{{/gte}}">
-      {{! Think of a more general solution when you have time }}
-      {{#gte_active_section_length sections 2}}
-      <div data-magellan-expedition="fixed" class="project-menu">
-        <div class="row container">
-          <div class="small-12 columns">
-            <ul class="sub-nav">
-              <li data-magellan-arrival="home"><a href="#home">Home</a></li>
-              {{#each sections}}
-                {{#if active}}{{#if menu_label}}
-                <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
-                {{/if}}{{/if}}
-              {{/each}}
-            </ul>
-          </div>
-        </div>
-      </div>
-      {{/gte_active_section_length}}
+    <div class="small-12 medium-9 large-12 columns ">
+      <p>DOT generally presents projects at community board meetings where the public can ask questions and provide feedback. To find out more about these meetings check the <a href="#">DOT Events Calendar</a> or contact your local <a href="#">community board</a>.</p>
+      <h6><a href="#">www.nyc.gov/dot</a></h6>
     </div>
-
-  </div><!-- end .site-header-content -->
-
-</header>
-
-<div class="orderable-container" id="section-list"></div>
-
-<div class="row social-links-section text-center extra-margin-top">
-  {{#if details.facebook_url}}
-  <div class="medium-4 columns">
-    <a href="{{ details.facebook_url }}" class="social-link">
-      <div class="panel">
-        <img src="{{ static_url }}/images/social-facebook.gif" class="some-margin-bottom">
-        <h4>Join us on <br>Facebook!</h4>
-      </div>
-    </a>
   </div>
-  {{/if}}
-  {{#if details.instagram_url}}
-  <div class="medium-4 columns">
-    <a href="{{ details.instagram_url }}" class="social-link">
-      <div class="panel">
-        <img src="{{ static_url }}/images/social-instagram.gif" class="some-margin-bottom">
-        <h4>Follow us on <br>Instagram!</h4>
-      </div>
-    </a>
-  </div>
-  {{/if}}
-  {{#if details.twitter_url}}
-  <div class="medium-4 columns">
-    <a href="{{ details.twitter_url }}" class="social-link">
-      <div class="panel">
-        <img src="{{ static_url }}/images/social-twitter.gif" class="some-margin-bottom">
-        <h4>Follow us on <br>Twitter!</h4>
-      </div>
-    </a>
-  </div>
-  {{/if}}
 </div>
 
-<footer class="site-colophon">
+<div class="large-9 columns">
 
-  <div class="row">
-    <div class="small-12 columns">
-      <p class="project-contact-info text-center medium-text-left">{{{ contact }}}</p>
-      {{! NOTE: These URLs is hardcoded for the sake of pages with custom URLs. Should maybe be passed in as context? }}
-      <p class="powered-by text-center medium-text-right text-small">{{#_}}Powered by <a href="http://openplans.org/">OpenPlans.org</a>.{{/_}}</p>
+  <ul class="tabs" data-tab>
+    <li class="tab-title active"><a href="#panel-1">Current Projects</a></li>
+    <li class="tab-title"><a href="#panel-2">Past Projects</a></li>
+  </ul>
+
+  <div class="tabs-content">
+
+    <br>
+
+    <p style="background:url(images/nyc-map.png) center center; height:300px;"><img class="avatar" src="images/zoom.png"></p>
+
+    <div class="row collapse">
+      <div class="small-10 large-11 columns">
+        <input type="text" placeholder="Find a project...">
+      </div>
+      <div class="small-2 large-1 columns">
+        <a href="#" class="button postfix">Go</a>
+      </div>
     </div>
-  </div>
 
-</footer>
+    <div class="panel">
+      <h4><a href="#">West End Avenue Traffic Calming and Pedestrian Safety Improvements</a></h4>
+      <h6>Safety improvements for W 72nd St to W 106th St on West End Avenue</h6>
+      <p>DOT is proposing safety improvements for W 72nd St to W 106th St on West End Avenue. The proposal will remove excess road capacity, add left turn bays in a painted center median, and add a wide parking stripe to calm traffic and reduce unnecessary lane&hellip;
+        <br>
+        <a href="#" class="label radius">traffic</a>
+        <a href="#" class="label radius">pedestrian</a>
+        <a href="#" class="label radius">safety</a>
+      </p>
+    </div>
+
+    <div class="panel">
+      <h4><a href="#">Safety Enhancements for Myrtle and Wyckoff Avenues at Palmetto Street</a></h4>
+      <h6>Enhancing Safety at Myrtle and Wyckoff Avenues</h6>
+      <p>At the request of former Council Member Reyna and the local community, DOT developed a plan to enhance safety for all street users at the complex intersection of Myrtle and Wyckoff Avenues at Palmetto Street. The proposal shortens crossing distances fo&hellip;
+        <br>
+        <a href="#" class="label radius">safety</a>
+      </p>
+    </div>
+
+    <div class="panel">
+      <h4><a href="#">Flatbush Avenue Extension at Myrtle Avenue Intersection Safety Improvements</a></h4>
+      <h6>Pedestrian Safety Improvements at Flatbush Avenue and Myrtle Avenue</h6>
+      <p>In response to requests from the community, DOT is proposing pedestrian safety improvements for the intersection of Flatbush Avenue Extension and Myrtle Avenue. These changes will reduce conflicts between pedestrians and vehicles while improving the co&hellip;
+        <br>
+        <a href="#" class="label radius">biking</a>
+        <a href="#" class="label radius">pedestrian</a>
+        <a href="#" class="label radius">safety</a>
+        <a href="#" class="label radius">traffic</a>
+      </p>
+    </div>
+
+    <div class="panel">
+      <h4><a href="#">White Plains Road Traffic Calming</a></h4>
+      <h6>Organize traffic and discourage speeding, improving safety for everyone!!!</h6>
+      <p>DOT is proposing a set of changes to White Plains Road between Birchall Avenue and Soundview Avenue. DOT will install left turn bays and add parking stripes to narrow moving lanes. These changes will organize traffic and discourage speeding, improving &hellip;
+        <br>
+        <a href="#" class="label radius">traffic</a>
+      </p>
+    </div>
+
+  </div>
+</div>

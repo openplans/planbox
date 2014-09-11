@@ -168,6 +168,15 @@ var Planbox = Planbox || {};
   });
 
 
+  NS.RoundupModel = NS.DetailModel.extend({
+    baseAttrs: ['details', 'id', 'created_at', 'updated_at', 'title', 'slug',
+                'owner', 'template', 'theme'],
+
+    relations: [],
+    urlRoot: '/api/v1/roundups'
+  });
+
+
   NS.ProfileModel = Backbone.RelationalModel.extend({
     urlRoot: '/api/v1/profiles',
     relations: [{

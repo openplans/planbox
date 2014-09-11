@@ -152,11 +152,11 @@
   <script src="{{ STATIC_URL }}scripts/views/base.js"></script>
 
   <!-- Roundup-specific views -->
-  <script src="{{ STATIC_URL }}scripts/roundup/app-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/roundup/roundup-view.js"></script>
 
   <!-- Roundup-specific app -->
   <script src="{{ STATIC_URL }}scripts/base-app.js"></script>
-  <script src="{{ STATIC_URL }}scripts/roundup/app.js"></script>
+  <script src="{{ STATIC_URL }}scripts/roundup/roundup-app.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/roundup-app.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}

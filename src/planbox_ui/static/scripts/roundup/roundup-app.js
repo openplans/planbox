@@ -18,7 +18,7 @@ var Planbox = Planbox || {};
     NS.app.roundupModel = new NS.RoundupModel(NS.Data.profile);
 
     // Show the main app view
-    NS.app.mainRegion.show(new NS.RoundupDisplayView({
+    NS.app.mainRegion.show(new NS.RoundupView({
       model: NS.app.roundupModel
     }));
   });
