@@ -49,7 +49,7 @@ urlpatterns = patterns('',
     # ==============================
     # Roundup pages
 
-    url(r'^(?P<owner_slug>)[^/]+/$', roundup_view, name='app-roundup'),
+    url(r'^(?P<owner_slug>[^/]+)/$', roundup_view, name='app-roundup'),
 
     # ==============================
     # Project pages

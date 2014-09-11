@@ -20,7 +20,7 @@ from password_reset.views import (
     PasswordResetRequestView as BasePasswordResetRequestView,
     PasswordResetInstructionsView as BasePasswordResetInstructionsView,
     PasswordChangeView as BasePasswordChangeView)
-from planbox_data.models import Project, Profile
+from planbox_data.models import Project, Profile, Roundup
 from planbox_data.serializers import (ProjectSerializer, UserSerializer,
     TemplateProjectSerializer, ProfileSerializer, ProjectActivitySerializer)
 from planbox_ui.decorators import ssl_required
@@ -471,6 +471,12 @@ class NewProjectView (SSLRequired, LoginRequired, S3UploadMixin, ProjectMixin, T
 
 class RoundupView (AlwaysFresh, AppMixin, TemplateView):
     template_name = 'roundup.html'
+
+    def get(self, request, owner_slug):
+        try:
+            roundup = Roundup.objects.filter(owner__slug=owner_slug)[0]
+        except IndexError:
+            return redirect('app-profile', profile_slug=owner_slug)
 
 
 # SEO
