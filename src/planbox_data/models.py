@@ -654,9 +654,9 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
 class Roundup (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     title = models.TextField(blank=True)
     slug = models.CharField(max_length=128, blank=True)
-    owner = models.ForeignKey('Profile', related_name='projects')
+    owner = models.ForeignKey('Profile', related_name='roundups')
     details = JSONField(blank=True, default=dict)
-    theme = models.ForeignKey('Theme', related_name='projects', null=True, blank=True, on_delete=models.SET_NULL)
+    theme = models.ForeignKey('Theme', related_name='roundups', null=True, blank=True, on_delete=models.SET_NULL)
     template = models.ForeignKey('Roundup', help_text=_("The roundup, if any, that this one is based off of"), null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
