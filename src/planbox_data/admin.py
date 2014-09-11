@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 import json
-from django.contrib import admin
+from django.contrib.gis import admin
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import TextField

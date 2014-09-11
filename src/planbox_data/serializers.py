@@ -1,6 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
-from planbox_data import models
+from planbox_data import models, fields
 import bleach, re, json
 
 
@@ -212,6 +212,8 @@ class ProjectSerializer (SlugValidationMixin, serializers.ModelSerializer):
 
     happening_now_description = CleanedHtmlField(required=False)
     get_involved_description = CleanedHtmlField(required=False)
+
+    geometry = fields.GeometryField(required=False)
 
     class Meta:
         model = models.Project

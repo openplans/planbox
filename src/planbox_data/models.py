@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.contrib import auth
 from django.contrib.contenttypes.generic import GenericForeignKey, GenericRelation
-from django.db import models
+from django.contrib.gis.db import models
 from django.db.models.signals import post_save
 from django.utils.text import slugify
 from django.utils.encoding import python_2_unicode_compatible
@@ -344,7 +344,7 @@ class ProjectQuerySet (models.query.QuerySet):
         return self.filter(member_query | public_query)
 
 
-class ProjectManager (models.Manager):
+class ProjectManager (models.GeoManager):
     def get_queryset(self):
         return ProjectQuerySet(self.model, using=self._db)
 
@@ -393,6 +393,8 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     cover_img_url = models.URLField(_('Cover Image URL'), blank=True, max_length=2048)
     logo_img_url = models.URLField(_('Logo Image URL'), blank=True, max_length=2048)
     template = models.ForeignKey('Project', help_text=_("The project, if any, that this one is based off of"), null=True, blank=True, on_delete=models.SET_NULL)
+
+    geometry = models.GeometryField(null=True, blank=True)
 
     # NOTE: These may belong in a separate model, but are on the project for
     #       now. I think the model would be called a Highlight.
