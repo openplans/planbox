@@ -1,10 +1,24 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import patterns, url
-from .views import (index_view, about_view, shareabouts_view, open_source_view, project_view, new_project_view, signup_view,
-    signin_view, password_reset_view, help_view, robots_view, sitemap_view,
-    ro_project_view, profile_view, password_change_view,
-    password_reset_request_view, password_reset_instructions_view)
+from .views import (
+    # Static site and metadata views
+    index_view, about_view, shareabouts_view, open_source_view, help_view,
+    robots_view, sitemap_view,
+
+    # User authentication views
+    signup_view, signin_view, password_reset_view, password_change_view,
+    password_reset_request_view, password_reset_instructions_view,
+
+    # Profile views
+    profile_view,
+
+    # Roundup views
+    roundup_view,
+
+    # Project views
+    project_view, new_project_view, ro_project_view,
+)
 
 urlpatterns = patterns('',
 
@@ -31,7 +45,11 @@ urlpatterns = patterns('',
 
     url(r'^dashboard/', profile_view, name='app-user-profile'),
     url(r'^(?P<profile_slug>[^/]+)/dashboard/$', profile_view, name='app-profile'),
-    url(r'^(?P<profile_slug>[^/]+)/$', profile_view, name='old-app-profile'),
+
+    # ==============================
+    # Roundup pages
+
+    url(r'^(?P<owner_slug>)[^/]+/$', roundup_view, name='app-roundup'),
 
     # ==============================
     # Project pages
@@ -40,5 +58,4 @@ urlpatterns = patterns('',
     url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/edit/$', project_view, name='app-project'),
     # Read-only project page
     url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', ro_project_view, name='app-ro-project'),
-
 )

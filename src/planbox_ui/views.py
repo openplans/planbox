@@ -202,7 +202,6 @@ class ShareaboutsView (AppMixin, TemplateView):
 class OpenSourceView (AppMixin, TemplateView):
     template_name = 'open-source.html'
 
-
 class HelpView (AppMixin, TemplateView):
     template_name = 'help.html'
 
@@ -211,51 +210,6 @@ class PasswordChangeView (AppMixin, LoginRequired, SSLRequired, BasePasswordChan
 class PasswordResetView (AppMixin, SSLRequired, BasePasswordResetView): pass
 class PasswordResetRequestView (AppMixin, SSLRequired, BasePasswordResetRequestView): pass
 class PasswordResetInstructionsView (AppMixin, SSLRequired, BasePasswordResetInstructionsView): pass
-
-
-class ProfileView (AppMixin, AlwaysFresh, LoginRequired, SSLRequired, S3UploadMixin, TemplateView):
-    template_name = 'profile-admin.html'
-
-    def get_profile(self, request, profile_slug):
-        if profile_slug:
-            return get_object_or_404(Profile.objects.filter(auth=None), slug=profile_slug)
-        else:
-            try:
-                return request.user.profile
-            except Profile.DoesNotExist:
-                return None
-
-    def get_s3_upload_path(self):
-        slug = self.kwargs.get('profile_slug', self.profile.slug)
-        return slug
-
-    def get_context_data(self, **kwargs):
-        context = super(ProfileView, self).get_context_data(**kwargs)
-
-        # The profile model
-        context['profile'] = self.profile
-
-        # The serialized representation of the profile. This is used to
-        # construct the admin view.
-        serializer = ProfileSerializer(self.profile)
-        context['profile_data'] = serializer.data
-
-        return context
-
-    def get(self, request, profile_slug=None):
-        # Save the profile on the view
-        self.profile = self.get_profile(request, profile_slug)
-        if self.profile is None:
-            log.error('User "%s" has no profile' % (request.user,),
-                      extra={'stack': True})
-            return redirect('app-index')
-
-        # Check for authorization on the profile
-        if not self.profile.authorizes(request.user):
-            return redirect('app-index')
-
-        # If authorized, proceed
-        return super(ProfileView, self).get(request, profile_slug=profile_slug)
 
 
 class SignupView (AppMixin, LogoutRequired, SSLRequired, FormView):
@@ -301,6 +255,51 @@ class SigninView (AppMixin, LogoutRequired, SSLRequired, FormView):
         self.auth = form.get_user()
         login(self.request, self.auth)
         return super(SigninView, self).form_valid(form)
+
+
+class ProfileView (AppMixin, AlwaysFresh, LoginRequired, SSLRequired, S3UploadMixin, TemplateView):
+    template_name = 'profile-admin.html'
+
+    def get_profile(self, request, profile_slug):
+        if profile_slug:
+            return get_object_or_404(Profile.objects.filter(auth=None), slug=profile_slug)
+        else:
+            try:
+                return request.user.profile
+            except Profile.DoesNotExist:
+                return None
+
+    def get_s3_upload_path(self):
+        slug = self.kwargs.get('profile_slug', self.profile.slug)
+        return slug
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data(**kwargs)
+
+        # The profile model
+        context['profile'] = self.profile
+
+        # The serialized representation of the profile. This is used to
+        # construct the admin view.
+        serializer = ProfileSerializer(self.profile)
+        context['profile_data'] = serializer.data
+
+        return context
+
+    def get(self, request, profile_slug=None):
+        # Save the profile on the view
+        self.profile = self.get_profile(request, profile_slug)
+        if self.profile is None:
+            log.error('User "%s" has no profile' % (request.user,),
+                      extra={'stack': True})
+            return redirect('app-index')
+
+        # Check for authorization on the profile
+        if not self.profile.authorizes(request.user):
+            return redirect('app-index')
+
+        # If authorized, proceed
+        return super(ProfileView, self).get(request, profile_slug=profile_slug)
 
 
 class ProjectMixin (AppMixin):
@@ -470,6 +469,10 @@ class NewProjectView (SSLRequired, LoginRequired, S3UploadMixin, ProjectMixin, T
         return super(NewProjectView, self).get(request, owner_slug)
 
 
+class RoundupView (AlwaysFresh, AppMixin, TemplateView):
+    template_name = 'roundup.html'
+
+
 # SEO
 class SiteMapView (AppMixin, TemplateView):
     template_name = 'sitemap.xml'
@@ -493,6 +496,8 @@ project_view = ProjectView.as_view()
 ro_project_view = ReadOnlyProjectView.as_view()
 profile_view = ProfileView.as_view()
 new_project_view = NewProjectView.as_view()
+
+roundup_view = RoundupView.as_view()
 
 password_reset_view = PasswordResetView.as_view()
 password_change_view = PasswordChangeView.as_view()
