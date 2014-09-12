@@ -18,12 +18,13 @@ var Planbox = Planbox || {};
     onShow: function() {
       var self = this,
           geom = this.model.get('geometry'),
-          options = { center: [31.5, 0], zoom: 1 };
+          options = { center: [31.5, 0], zoom: 1, scrollWheelZoom: false };
 
       if (geom) {
         options = {
           center: [geom.coordinates[1], geom.coordinates[0]],
-          zoom: 12
+          zoom: 12,
+          scrollWheelZoom: false
         };
       }
 
