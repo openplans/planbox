@@ -424,7 +424,7 @@ var Planbox = Planbox || {};
         this.$('.project-preview-wrapper').html(content);
       },
       onSaveSuccess: function(model) {
-        var path = '/' + NS.Data.owner.slug + '/' + model.get('slug') + '/';
+        var path = '/' + NS.Data.owner.slug + '/' + model.get('slug') + '/edit/';
 
         if (window.location.pathname !== path) {
           if (Modernizr.history) {
