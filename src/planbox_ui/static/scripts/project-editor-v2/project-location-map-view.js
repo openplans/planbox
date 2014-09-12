@@ -9,13 +9,14 @@ var Planbox = Planbox || {};
     template: '#project-location-map-tpl',
     ui: {
       mapCheckbox: '#map-switch',
+      container: '.map-container',
       map: '.map'
     },
     events: {
       'change @ui.mapCheckbox': 'handleVisibilityToggle'
     },
 
-    onShow: function() {
+    onRender: function() {
       var self = this,
           geom = this.model.get('geometry'),
           options = { center: [31.5, 0], zoom: 1, scrollWheelZoom: false };
@@ -49,16 +50,22 @@ var Planbox = Planbox || {};
       });
     },
 
+    onShow: function() {
+      this.map.invalidateSize();
+    },
+
     handleVisibilityToggle: function(evt) {
       evt.preventDefault();
       var checked = this.ui.mapCheckbox.is(':checked');
 
       if (checked) {
-        this.ui.map.show();
+        this.ui.container.show();
         this.map.invalidateSize();
       } else {
+        this.model.set('location', '');
         this.model.set('geometry', null);
-        this.ui.map.hide();
+        this.render();
+        this.ui.container.hide();
       }
     }
   });

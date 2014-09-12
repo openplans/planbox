@@ -5,6 +5,7 @@
               </div>
               <label id="map-switch-label" class="inline unassigned">Project Location</label>
             </div>
-            <div class="large-12 columns">
-              <div class="map"{{^if geometry}} style="display:none;"{{/if}}></div>
+            <div class="large-12 columns map-container" {{^if geometry}} style="display:none;"{{/if}}>
+              <input type="text" placeholder="Location Description" class="float-label-input"  value="{{ location }}" data-attr="location" />
+              <div class="map"></div>
             </div>
