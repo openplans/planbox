@@ -33,6 +33,9 @@ class GeometryField(serializers.WritableField):
             raise ValueError('Cannot output as %s' % self.format)
 
     def from_native(self, data):
+        if data is None:
+            return None
+
         if not isinstance(data, basestring):
             data = json.dumps(data)
 

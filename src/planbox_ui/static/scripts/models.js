@@ -77,7 +77,7 @@ var Planbox = Planbox || {};
     baseAttrs: ['details', 'id', 'created_at', 'updated_at', 'title', 'slug',
                 'public', 'status', 'location', 'contact', 'owner',
                 'cover_img_url', 'logo_img_url', 'events', 'sections',
-                'template', 'theme', 'description',
+                'template', 'theme', 'description', 'geometry',
                 'happening_now_description', 'happening_now_link_type',
                 'happening_now_link_url', 'get_involved_description',
                 'get_involved_link_type', 'get_involved_link_url'],

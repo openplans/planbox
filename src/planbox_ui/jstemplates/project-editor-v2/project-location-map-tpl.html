@@ -1,0 +1,10 @@
+            <div class="large-12 columns">
+              <div class="switch left">
+                <input id="map-switch" type="checkbox"{{#if geometry}} checked{{/if}}>
+                <label for="map-switch"></label>
+              </div>
+              <label id="map-switch-label" class="inline unassigned">Project Location</label>
+            </div>
+            <div class="large-12 columns">
+              <div class="map"{{^if geometry}} style="display:none;"{{/if}}></div>
+            </div>

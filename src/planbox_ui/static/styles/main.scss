@@ -978,6 +978,11 @@ img.attachment-icon {
   border: 0;
 }
 
+.location-map-region .map {
+  height: 200px;
+  border: 1px solid #c9c9c9;
+}
+
 input[type=text].heading-input {
   @media #{$medium-up} {
     font-size: 2.25rem;

@@ -47,7 +47,8 @@ var Planbox = Planbox || {};
         'keyup @ui.characterCountInput': 'handleCharacterCountChange'
       },
       regions: {
-        sectionList: '#section-list'
+        sectionList: '#section-list',
+        locationMap: '.location-map-region'
       },
 
       modelEvents: {
@@ -123,6 +124,10 @@ var Planbox = Planbox || {};
           model: this.model,
           collection: this.collection,
           parent: this
+        }));
+
+        this.locationMap.show(new NS.ProjectLocationMapView({
+          model: this.model
         }));
 
         // Set the initial character counts for each countable
