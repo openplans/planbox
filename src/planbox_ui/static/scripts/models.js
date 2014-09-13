@@ -172,9 +172,15 @@ var Planbox = Planbox || {};
     baseAttrs: ['details', 'id', 'created_at', 'updated_at', 'title', 'slug',
                 'owner', 'template', 'theme'],
 
-    relations: [],
+    relations: [{
+      type: Backbone.HasOne,
+      key: 'owner',
+      relatedModel: 'OwnerProfileModel'
+    }],
     urlRoot: '/api/v1/roundups'
   });
+
+  NS.OwnerProfileModel = Backbone.RelationalModel.extend({});
 
 
   NS.ProfileModel = Backbone.RelationalModel.extend({

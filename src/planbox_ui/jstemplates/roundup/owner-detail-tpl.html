@@ -1,0 +1,12 @@
+<div class="profile-details row small-only-text-center">
+  <div class="small-9 small-centered medium-3 medium-uncentered large-12 columns">
+    <h1><img class="avatar"
+      src="{{#if avatar_url}}{{ avatar_url }}{{^}}{{#if auth}}{{ static_url }}images/avatar-user.gif{{^}}{{ static_url }}images/avatar-city.gif{{/if}}{{/if}}"></h1>
+  </div>
+  <div class="small-12 medium-9 large-12 columns ">
+    <div class="profile-description small-12 medium-9 large-12 columns">
+      <p>{{{ description }}}</p>
+    </div>
+    <!-- <h6><a href="#">www.nyc.gov/dot</a></h6> -->
+  </div>
+</div>

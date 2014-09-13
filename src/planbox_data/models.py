@@ -420,6 +420,11 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     def __str__(self):
         return self.title
 
+    def get_summary(self):
+        for section in self.sections.all():
+            if section.type == 'text':
+                return section.details.get('content', '')
+
     def mark_opened_by(self, user, opened_at=None):
         # TODO: This could just be done in the cache.
         self.last_opened_at = opened_at or now()

@@ -73,10 +73,35 @@ class SlugValidationMixin (object):
         return attrs
 
 
+class FlexibleFields (object):
+    """
+    Allow a serializer's field set to be overridden at instantiation time.
+    """
+    def __init__(self, *args, **kwargs):
+        self.override_fields = kwargs.pop('fields', None)
+        self.include_fields = kwargs.pop('include', None)
+        self.exclude_fields = kwargs.pop('exclude', None)
+        super(FlexibleFields, self).__init__(*args, **kwargs)
+
+    def _options_class(self, *args, **kwargs):
+        opts = super(FlexibleFields, self)._options_class(*args, **kwargs)
+        if self.override_fields is not None:
+            opts.fields = self.override_fields
+        if self.include_fields is not None:
+            opts.fields = opts.fields or []
+            iter_type = type(opts.fields)
+            opts.fields += iter_type(self.include_fields)
+        if self.exclude_fields is not None:
+            opts.exclude = opts.exclude or []
+            iter_type = type(opts.exclude)
+            opts.exclude += iter_type(self.exclude_fields)
+        return opts
+
+
 # ============================================================
 # Profile serializers
 
-class AssociatedProfileSerializer (serializers.ModelSerializer):
+class AssociatedProfileSerializer (FlexibleFields, serializers.ModelSerializer):
     class Meta:
         model = models.Profile
         fields = ('id', 'slug', 'name', 'avatar_url',)
@@ -232,9 +257,31 @@ class ProjectActivitySerializer (serializers.ModelSerializer):
 # ============================================================
 # Roundup-related serializers
 
+class ProjectSummarySerializer (serializers.ModelSerializer):
+    summary = serializers.SerializerMethodField('get_project_summary')
+
+    class Meta:
+        model = models.Project
+        fields = ('id', 'slug', 'title', 'summary',)
+
+    def get_project_summary(self, project):
+        return project.get_summary()
+
+
 class RoundupSerializer (serializers.ModelSerializer):
+    projects = serializers.SerializerMethodField('get_project_summaries')
+    owner = AssociatedProfileSerializer(include=['description'])
+
     class Meta:
         model = models.Roundup
+
+    def get_project_summaries(self, roundup):
+        # For now, we just serialize the complete set of projects owned by the
+        # roundup owner.
+        qs = roundup.owner.projects.all()
+
+        serializer = ProjectSummarySerializer(qs, many=True)
+        return serializer.data
 
 
 # ============================================================

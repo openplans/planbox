@@ -15,7 +15,7 @@ var Planbox = Planbox || {};
 
   NS.app.addInitializer(function(options){
     // Construct models from bootstrapped data
-    NS.app.roundupModel = new NS.RoundupModel(NS.Data.profile);
+    NS.app.roundupModel = new NS.RoundupModel(NS.Data.roundup);
 
     // Show the main app view
     NS.app.mainRegion.show(new NS.RoundupView({
