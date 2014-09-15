@@ -258,11 +258,12 @@ class ProjectActivitySerializer (serializers.ModelSerializer):
 # Roundup-related serializers
 
 class ProjectSummarySerializer (serializers.ModelSerializer):
+    owner = AssociatedProfileSerializer(required=True)
     summary = serializers.SerializerMethodField('get_project_summary')
 
     class Meta:
         model = models.Project
-        fields = ('id', 'slug', 'title', 'summary',)
+        fields = ('id', 'slug', 'title', 'summary', 'owner',)
 
     def get_project_summary(self, project):
         return project.get_summary()

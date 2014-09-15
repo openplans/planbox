@@ -154,6 +154,7 @@
   <!-- Roundup-specific views -->
   <script src="{{ STATIC_URL }}scripts/roundup/roundup-view.js"></script>
   <script src="{{ STATIC_URL }}scripts/roundup/owner-detail-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/roundup/project-list-view.js"></script>
 
   <!-- Roundup-specific app -->
   <script src="{{ STATIC_URL }}scripts/base-app.js"></script>
@@ -167,6 +168,7 @@
   {% endfor %}
 
   {% handlebarsjs 'roundup/(.*)' precompile register_partials %}
+  {% handlebarsjs 'common/(.*)' precompile register_partials %}
   {% handlebarsjs '(.*)' precompile register_partials %}
 
   {% comment %}

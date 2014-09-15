@@ -170,17 +170,28 @@ var Planbox = Planbox || {};
 
   NS.RoundupModel = NS.DetailModel.extend({
     baseAttrs: ['details', 'id', 'created_at', 'updated_at', 'title', 'slug',
-                'owner', 'template', 'theme'],
+                'owner', 'template', 'theme', 'projects'],
 
     relations: [{
       type: Backbone.HasOne,
       key: 'owner',
       relatedModel: 'OwnerProfileModel'
+    },
+    {
+      type: Backbone.HasMany,
+      key: 'projects',
+      relatedModel: 'CollectedProjectModel',
+      collectionType: 'CollectedProjectCollection'
     }],
     urlRoot: '/api/v1/roundups'
   });
 
   NS.OwnerProfileModel = Backbone.RelationalModel.extend({});
+  NS.CollectedProjectModel = Backbone.RelationalModel.extend({});
+  NS.CollectedProjectCollection = Backbone.Collection.extend({
+    model: NS.CollectedProjectModel,
+    url: '/api/v1/projects'
+  });
 
 
   NS.ProfileModel = Backbone.RelationalModel.extend({

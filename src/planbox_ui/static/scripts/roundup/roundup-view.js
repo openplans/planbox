@@ -8,7 +8,9 @@ var Planbox = Planbox || {};
   NS.RoundupView = Backbone.Marionette.Layout.extend({
     template: '#roundup-tpl',
     regions: {
-      ownerDetailRegion: '.owner-detail'
+      ownerDetailRegion: '.owner-detail-region',
+      projectListRegion: '.project-list-region',
+      projectMapRegion: '.project-map-region'
     },
 
     onShow: function() {
@@ -18,6 +20,11 @@ var Planbox = Planbox || {};
     showRegions: function() {
       this.ownerDetailRegion.show(new NS.OwnerDetailView({
         model: this.model.get('owner')
+      }));
+
+      this.projectListRegion.show(new NS.ProjectListView({
+        model: this.model,
+        collection: this.model.get('projects')
       }));
     }
   });
