@@ -58,14 +58,7 @@ class AppMixin (object):
         return self.user_profile
 
     def get_home_url(self, obj=None):
-        if obj is None and self.request.user.is_authenticated():
-            obj = self.request.user
-
-        if isinstance(obj, UserAuth):
-            owner_slug = obj.username
-        elif isinstance(obj, Profile):
-            owner_slug = obj.slug
-        return resolve_url('app-profile', profile_slug=owner_slug)
+        return resolve_url('app-user-profile')
 
     def get_context_data(self, **kwargs):
         context = super(AppMixin, self).get_context_data(**kwargs)
@@ -225,7 +218,7 @@ class ProfileView (AppMixin, AlwaysFresh, LoginRequired, SSLRequired, S3UploadMi
 
     def get_profile(self, request, profile_slug):
         if profile_slug:
-            return get_object_or_404(Profile, slug=profile_slug)
+            return get_object_or_404(Profile.objects.filter(auth=None), slug=profile_slug)
         else:
             try:
                 return request.user.profile
@@ -384,7 +377,7 @@ class BaseExistingProjectView (AlwaysFresh, ProjectMixin, TemplateView):
 
     def get(self, request, owner_slug, project_slug):
         self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
-                                         owner__slug=owner_slug, slug=project_slug)
+                                         owner__slug=owner_slug, slug__iexact=project_slug)
 
         if not self.get_project_is_visible():
             return redirect('app-index')
@@ -471,7 +464,7 @@ class NewProjectView (SSLRequired, LoginRequired, S3UploadMixin, ProjectMixin, T
 
         # Check whether this page is for the auth'd user
         if not self.owner.authorizes(request.user):
-            return redirect('app-new-project', owner_slug=self.request.user.username)
+            return redirect('app-user-profile')
 
         self.project = None
         return super(NewProjectView, self).get(request, owner_slug)

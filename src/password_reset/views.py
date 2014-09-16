@@ -11,9 +11,6 @@ from password_reset.forms import PasswordResetRequestForm, SetPasswordForm
 from password_reset.models import PasswordResetRequest
 
 
-UserAuth = auth.get_user_model()
-
-
 class PasswordResetRequestView (FormView):
     form_class = PasswordResetRequestForm
     template_name = 'password_reset/password-reset-request.html'
@@ -33,9 +30,12 @@ class PasswordResetInstructionsView (TemplateView):
 
 
 class BasePasswordChangeView (UpdateView):
-    model = UserAuth
     template_name = 'password_reset/password-reset.html'
     form_class = SetPasswordForm
+
+    def get_queryset(self):
+        UserAuth = auth.get_user_model()
+        return UserAuth.objects.all()
 
     def get_context_data(self, **kwargs):
         return super(BasePasswordChangeView, self).get_context_data(save_label="Save Password", **kwargs)

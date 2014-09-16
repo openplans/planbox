@@ -12,10 +12,15 @@ from django.utils.translation import ugettext as _
 class PasswordResetRequest (models.Model):
     DEFAULT_EXPIRATION = datetime.timedelta(hours=1)
 
+    class Utils:
+        @staticmethod
+        def make_default_expiration():
+            return now() + PasswordResetRequest.DEFAULT_EXPIRATION
+
     token = models.CharField(max_length=200, verbose_name=_('Reset token'))
     auth = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('User Auth Account'))
     requested_at = models.DateTimeField(default=now)
-    expires_at = models.DateTimeField(default=lambda: (now() + PasswordResetRequest.DEFAULT_EXPIRATION))
+    expires_at = models.DateTimeField(default=Utils.make_default_expiration)
 
     def __str__(self):
         return str(self.auth)

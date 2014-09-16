@@ -12,21 +12,61 @@ from django.utils.timezone import now, timedelta
 from django.utils.translation import ugettext as _
 from jsonfield import JSONField
 
-UserAuth = auth.get_user_model()
+
+# ============================================================
+# Mixins, utilities, and base models
+
+class OrderedModelMixin (object):
+    """
+    Mixin for models that are orderable by the user.
+
+    Required fields
+    ---------------
+    * index
+        The sort order of the instance (it's not necessarily an index)
+
+    Required methods
+    ----------------
+    * get_siblings()
+        Get a queryset of the other instances in the instance's collection
+
+    """
+    def get_next_sibling_index(self):
+        siblings = self.get_siblings()
+        max_index = siblings.aggregate(max_index=models.Max('index'))['max_index']
+        return (0) if (max_index is None) else (max_index + 1)
+
+    def save(self, *args, **kwargs):
+        if self.index is None:
+            self.index = self.get_next_sibling_index()
+        return super(OrderedModelMixin, self).save(*args, **kwargs)
 
 
-class TimeStampedModel (models.Model):
-    created_at = models.DateTimeField(default=now, blank=True)
-    updated_at = models.DateTimeField(default=now, blank=True)
+class CloneableModelMixin (object):
+    """
+    Mixin providing a clone method that copies all of a models instance's
+    fields to a new instance of the model, allowing overrides.
 
-    class Meta:
-        abstract = True
+    """
+    def clone(self, commit=True, **inst_kwargs):
+        """
+        Create a duplicate of the model instance, replacing any properties
+        specified as keyword arguments.
+        """
+        fields = self._meta.fields
+        pk_name = self._meta.pk.name
 
-    def save(self, update_times=True, *args, **kwargs):
-        if update_times:
-            if self.pk is None: self.created_at = now()
-            self.updated_at = now()
-        super(TimeStampedModel, self).save(*args, **kwargs)
+        for fld in fields:
+            if fld.name != pk_name:
+                fld_value = getattr(self, fld.name)
+                inst_kwargs.setdefault(fld.name, fld_value)
+
+        new_inst = self.__class__(**inst_kwargs)
+
+        if commit:
+            new_inst.save()
+
+        return new_inst
 
 
 def uniquify_slug(slug, existing_slugs):
@@ -58,12 +98,200 @@ def uniquify_slug(slug, existing_slugs):
             uniquifier += 1
 
 
+class ModelWithSlugMixin (object):
+    """
+    A model that adds a slug on save if one does not exist. This model needs
+    the following methods:
+
+    get_slug_basis -- Get the string off that will be slugified to construct the slug.
+    get_all_slugs -- Generate the set of all mututally unique slugs with
+        respect to this model.
+
+    """
+    def ensure_slug(self, force=False, basis=None):
+        """
+        Determines a slug based on the slug's basis if no slug is set. When
+        force is True, the slug is set even if it already has a value.
+        """
+        if self.slug and not force:
+            return self.slug
+
+        basis = basis or self.get_slug_basis()
+        if basis:
+            max_length = self._meta.get_field('slug').max_length
+
+            # Leave some room in the slug length for the uniquifier.
+            max_length -= 16
+
+            self.slug = uniquify_slug(
+                slugify(strip_tags(basis))[:max_length],
+                self.get_all_slugs()
+            )
+        return self.slug
+
+    def save(self, *args, **kwargs):
+        self.ensure_slug()
+        return super(ModelWithSlugMixin, self).save(*args, **kwargs)
+
+    def clone(self, commit=True, *args, **kwargs):
+        new_inst = super(ModelWithSlugMixin, self).clone(commit=False, *args, **kwargs)
+        new_inst.ensure_slug(force=True, basis=self.slug)
+        if commit:
+            new_inst.save()
+        return new_inst
+
+
+class TimeStampedModel (models.Model):
+    created_at = models.DateTimeField(default=now, blank=True)
+    updated_at = models.DateTimeField(default=now, blank=True)
+
+    class Meta:
+        abstract = True
+
+    def save(self, update_times=True, *args, **kwargs):
+        if update_times:
+            if self.pk is None: self.created_at = now()
+            self.updated_at = now()
+        super(TimeStampedModel, self).save(*args, **kwargs)
+
+
+# ============================================================
+# Profiles
+
+class ProfileQuerySet (models.query.QuerySet):
+    def Q_user(self, profile):
+        return models.Q(id=profile.id)
+
+    def Q_member(self, profile):
+        profile_ids = [team.id for team in profile.teams.all()]
+        return models.Q(id__in=profile_ids)
+
+    def filter_by_user_or_member(self, obj):
+        UserAuth = auth.get_user_model()
+        if isinstance(obj, UserAuth):
+            try:
+                obj = obj.profile
+            except Profile.DoesNotExist:
+                return self.empty()
+
+        user_query = self.Q_user(obj)
+        member_query = self.Q_member(obj)
+        return self.filter(user_query | member_query)
+
+
+class ProfileManager (models.Manager):
+    def get_queryset(self):
+        return ProfileQuerySet(self.model, using=self._db).select_related('auth')
+
+    def filter_by_user_or_member(self, obj):
+        return self.get_queryset().filter_by_user_or_member(obj)
+
+    def get_by_natural_key(self, slug):
+        """
+        Build a profile from its natural key.
+
+        Arguments:
+
+        slug -- The slug of the profile.
+
+        """
+        return self.get(slug=slug)
+
+
+@python_2_unicode_compatible
+class Profile (ModelWithSlugMixin, TimeStampedModel):
+    name = models.CharField(max_length=128, blank=True, help_text=_('The full name of the person or team'))
+    slug = models.CharField(max_length=128, unique=True, blank=True, help_text=_('A short name that will be used in URLs for projects owned by this profile'))
+    email = models.EmailField(blank=True, help_text=_('Contact email address of the profile holder'))
+    description = models.TextField(blank=True, default='')
+    avatar_url = models.URLField(blank=True, null=True)
+    # projects (reverse, Project)
+
+    # User-profile specific
+    auth = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='profile', null=True, blank=True, on_delete=models.CASCADE)
+    affiliation = models.CharField(max_length=256, blank=True, default='')
+    teams = models.ManyToManyField('Profile', related_name='members', blank=True, limit_choices_to={'auth__isnull': True})
+
+    # Team-profile specific
+    # members (reverse, Profile)
+
+    # Feature flags/versions
+    class Versions:
+        AMETHYST = 1
+        BISTRE = 2
+
+    PROJECT_EDITOR_VERSION_CHOICES = (
+        (Versions.AMETHYST, "Amethyst"),
+        (Versions.BISTRE, "Bistre"),
+    )
+
+    project_editor_version = models.PositiveIntegerField(choices=PROJECT_EDITOR_VERSION_CHOICES, default=Versions.BISTRE)
+
+    objects = ProfileManager()
+
+    def __str__(self):
+        return self.slug if self.auth is None else self.auth.username
+
+    def natural_key(self):
+        return (self.slug,)
+
+    def get_slug_basis(self):
+        return self.name
+
+    def get_all_slugs(self):
+        return set([p['slug'] for p in Profile.objects.all().values('slug')])
+
+    def slug_exists(self, slug):
+        return Profile.objects.filter(slug__iexact=slug).exists()
+
+    def is_user_profile(self):
+        return self.auth is not None
+
+    def is_owned_by(self, user):
+        return (user.id == self.auth_id)
+
+    def has_member(self, user):
+        members = list(self.members.all())
+        if user.id in [profile.auth_id for profile in members]:
+            return True
+        else:
+            return any(profile.has_member(user) for profile in members)
+
+    def is_synced_with_auth(self, auth=None):
+        auth = auth or self.auth
+        if self.email != auth.email:
+            return False
+        return True
+
+    def save(self, **kwargs):
+        super(Profile, self).save(**kwargs)
+        if self.auth and not self.is_synced_with_auth():
+            self.auth.username = self.slug
+            self.auth.email = self.email
+            self.auth.save()
+
+    def authorizes(self, user):
+        """
+        Test whether a given authenticated user is allowed to perform
+        actions on behalf of this profile.
+        """
+        if user.is_superuser:
+            return True
+
+        if self.is_owned_by(user):
+            return True
+
+        if self.has_member(user):
+            return True
+
+        return False
+
+
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
     Update the corresponding profile for a user authentication object with the
-    auth object's username as the slug, and the email address as the profile
-    email. Create the user profile object for the authentication object if it
-    doesn't already exist.
+    auth object's email address as the profile email. Create the user profile
+    object for the authentication object if it doesn't already exist.
 
     Connect as a post-save signal on the user authentication model, so that
     the above process is done every time a user authentication object is saved.
@@ -74,42 +302,24 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     instance -- The user authentication model object that has been saved.
     created -- True if called as a result of the authentication model object
         being created; False otherwise.
-
-    Example:
-
-    >>> ## Create a user...
-    >>>
-    >>> user = UserAuth.objects.create_user(
-    ...     username='my-user',
-    ...     email='my-user@example.com',
-    ...     password='123')
-    >>> user.profile.slug
-    'my-user'
-    >>> user.profile.email
-    'my-user@example.com'
-    >>>
-    >>> ## Update the user...
-    >>>
-    >>> user.username = 'my-new-username'
-    >>> user.save()
-    >>> user.profile.slug
-    'my-new-username'
-
     """
-    auth = instance
+    user = instance
     try:
-        profile = Profile.objects.get(auth=auth)
+        profile = Profile.objects.get(auth=user)
     except Profile.DoesNotExist:
-        profile = Profile(auth=auth)
-    if not profile.is_synced_with_auth(auth):
-        profile.slug = auth.username
-        profile.email = auth.email
+        profile = Profile(auth=user, slug='user-{}'.format(user.id))
+    if profile.id is None or not profile.is_synced_with_auth(user):
+        profile.email = user.email
         profile.save()
-post_save.connect(create_or_update_user_profile, sender=UserAuth, dispatch_uid="user-profile-create-signal")
+post_save.connect(create_or_update_user_profile, sender=settings.AUTH_USER_MODEL, dispatch_uid="user-profile-create-signal")
 
+
+# ============================================================
+# Projects
 
 class ProjectQuerySet (models.query.QuerySet):
     def Q_owner(self, owner):
+        UserAuth = auth.get_user_model()
         if isinstance(owner, UserAuth):
             owner = owner.profile
 
@@ -121,6 +331,7 @@ class ProjectQuerySet (models.query.QuerySet):
         return self.filter(owner_query | public_query)
 
     def Q_member(self, member):
+        UserAuth = auth.get_user_model()
         if isinstance(member, UserAuth):
             member = member.profile
         profile_ids = [member.id] + [team['id'] for team in member.teams.values('id')]
@@ -154,77 +365,6 @@ class ProjectManager (models.Manager):
 
         """
         return self.get(owner__slug=owner, slug=slug)
-
-
-class OrderedModelMixin (object):
-    def save(self, *args, **kwargs):
-        if self.index is None:
-            siblings = self.get_siblings()
-            if siblings['max_index'] is None: self.index = 0
-            else: self.index = siblings['max_index'] + 1
-        return super(OrderedModelMixin, self).save(*args, **kwargs)
-
-
-class CloneableModelMixin (object):
-    def clone(self, commit=True, **inst_kwargs):
-        """
-        Create a duplicate of the model instance, replacing any properties
-        specified as keyword arguments.
-        """
-        fields = self._meta.fields
-        pk_name = self._meta.pk.name
-
-        for fld in fields:
-            if fld.name != pk_name:
-                fld_value = getattr(self, fld.name)
-                inst_kwargs.setdefault(fld.name, fld_value)
-
-        new_inst = self.__class__(**inst_kwargs)
-
-        if commit:
-            new_inst.save()
-
-        return new_inst
-
-
-class ModelWithSlugMixin (object):
-    """
-    A model that adds a slug on save if one does not exist. This model needs
-    the following methods:
-
-    get_slug_basis -- Get the string off that will be slugified to construct the slug.
-    get_all_slugs -- Generate the set of all mututally unique slugs with
-        respect to this model.
-
-    """
-    def ensure_slug(self, force=False, basis=None):
-        """
-        Determines a slug based on the slug's basis if no slug is set. When
-        force is True, the slug is set even if it already has a value.
-        """
-        basis = basis or self.get_slug_basis()
-        if basis and (force or not self.slug):
-            max_length = self._meta.get_field('slug').max_length
-
-            # Leave some room in the slug length for the uniquifier.
-            max_length -= 16
-
-            self.slug = uniquify_slug(
-                slugify(strip_tags(basis))[:max_length],
-                self.get_all_slugs()
-            )
-        return self.slug
-
-    def save(self, *args, **kwargs):
-        self.ensure_slug()
-        return super(ModelWithSlugMixin, self).save(*args, **kwargs)
-
-    def clone(self, commit=True, *args, **kwargs):
-        new_inst = super(ModelWithSlugMixin, self).clone(commit=False, *args, **kwargs)
-        new_inst.ensure_slug(force=True, basis=self.slug)
-        if commit:
-            new_inst.save()
-        return new_inst
 
 
 @python_2_unicode_compatible
@@ -314,6 +454,9 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
         """
         return [p.slug for p in self.owner.projects.all()]
 
+    def slug_exists(self, slug):
+        return self.owner.projects.filter(slug__iexact=slug).exists()
+
     def clone(self, *args, **kwargs):
         new_inst = super(Project, self).clone(*args, **kwargs)
         for e in self.events.all(): e.clone(project=new_inst)
@@ -321,12 +464,14 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
         return new_inst
 
     def owned_by(self, obj):
+        UserAuth = auth.get_user_model()
         if isinstance(obj, UserAuth):
             try: obj = obj.profile
             except Profile.DoesNotExist: return False
         return (self.owner == obj)
 
     def editable_by(self, obj):
+        UserAuth = auth.get_user_model()
         if hasattr(obj, 'is_authenticated') and not obj.is_authenticated():
             return False
 
@@ -392,8 +537,11 @@ class Event (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, models.
     def get_all_slugs(self):
         return [e.slug for e in self.project.events.all()]
 
+    def slug_exists(self, slug):
+        return self.project.events.filter(slug__iexact=slug).exists()
+
     def get_siblings(self):
-        return self.project.events.aggregate(max_index=models.Max('index'))
+        return self.project.events.all()
 
     def clone(self, *args, **kwargs):
         new_inst = super(Event, self).clone(*args, **kwargs)
@@ -401,129 +549,27 @@ class Event (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, models.
         return new_inst
 
 
-class ProfileQuerySet (models.query.QuerySet):
-    def Q_user(self, profile):
-        return models.Q(id=profile.id)
+class Attachment (OrderedModelMixin, CloneableModelMixin, TimeStampedModel):
+    url = models.URLField(max_length=2048)
+    thumbnail_url = models.URLField(max_length=2048, blank=True, null=True)
+    label = models.TextField(blank=True)
+    description = models.TextField(blank=True)
+    type = models.CharField(max_length=256, blank=True)
+    index = models.PositiveIntegerField(blank=True)
 
-    def Q_member(self, profile):
-        profile_ids = [team.id for team in profile.teams.all()]
-        return models.Q(id__in=profile_ids)
+    attached_to_type = models.ForeignKey('contenttypes.ContentType')
+    attached_to_id = models.PositiveIntegerField()
+    attached_to = GenericForeignKey('attached_to_type', 'attached_to_id')
 
-    def filter_by_user_or_member(self, obj):
-        if isinstance(obj, UserAuth):
-            try:
-                obj = obj.profile
-            except Profile.DoesNotExist:
-                return self.empty()
+    class Meta:
+        ordering = ('attached_to_type', 'attached_to_id', 'index',)
 
-        user_query = self.Q_user(obj)
-        member_query = self.Q_member(obj)
-        return self.filter(user_query | member_query)
-
-
-class ProfileManager (models.Manager):
-    def get_queryset(self):
-        return ProfileQuerySet(self.model, using=self._db).select_related('auth')
-
-    def filter_by_user_or_member(self, obj):
-        return self.get_queryset().filter_by_user_or_member(obj)
-
-    def get_by_natural_key(self, slug):
-        """
-        Build a profile from its natural key.
-
-        Arguments:
-
-        slug -- The slug of the profile.
-
-        """
-        return self.get(slug=slug)
+    def get_siblings(self):
+        return self.attached_to.attachments.all()
 
 
-@python_2_unicode_compatible
-class Profile (ModelWithSlugMixin, TimeStampedModel):
-    name = models.CharField(max_length=128, blank=True, help_text=_('The full name of the person or team'))
-    slug = models.CharField(max_length=128, unique=True, blank=True, help_text=_('A short name that will be used in URLs for projects owned by this profile'))
-    email = models.EmailField(blank=True, help_text=_('Contact email address of the profile holder'))
-    description = models.TextField(blank=True, default='')
-    avatar_url = models.URLField(blank=True, null=True)
-    # projects (reverse, Project)
-
-    # User-profile specific
-    auth = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='profile', null=True, blank=True, on_delete=models.CASCADE)
-    affiliation = models.CharField(max_length=256, blank=True, default='')
-    teams = models.ManyToManyField('Profile', related_name='members', blank=True, limit_choices_to={'auth__isnull': True})
-
-    # Team-profile specific
-    # members (reverse, Profile)
-
-    # Feature flags/versions
-    class Versions:
-        AMETHYST = 1
-        BISTRE = 2
-
-    PROJECT_EDITOR_VERSION_CHOICES = (
-        (Versions.AMETHYST, "Amethyst"),
-        (Versions.BISTRE, "Bistre"),
-    )
-
-    project_editor_version = models.PositiveIntegerField(choices=PROJECT_EDITOR_VERSION_CHOICES, default=Versions.BISTRE)
-
-    objects = ProfileManager()
-
-    def __str__(self):
-        return self.slug
-
-    def natural_key(self):
-        return (self.slug,)
-
-    def get_slug_basis(self):
-        return self.name
-
-    def get_all_slugs(self):
-        return set([p['slug'] for p in Profile.objects.all().values('slug')])
-
-    def is_owned_by(self, user):
-        return (user.id == self.auth_id)
-
-    def has_member(self, user):
-        members = list(self.members.all())
-        if user.id in [profile.auth_id for profile in members]:
-            return True
-        else:
-            return any(profile.has_member(user) for profile in members)
-
-    def is_synced_with_auth(self, auth=None):
-        auth = auth or self.auth
-        if self.slug != auth.username:
-            return False
-        if self.email != auth.email:
-            return False
-        return True
-
-    def save(self, **kwargs):
-        super(Profile, self).save(**kwargs)
-        if self.auth and not self.is_synced_with_auth():
-            self.auth.username = self.slug
-            self.auth.email = self.email
-            self.auth.save()
-
-    def authorizes(self, user):
-        """
-        Test whether a given authenticated user is allowed to perform
-        actions on behalf of this profile.
-        """
-        if user.is_superuser:
-            return True
-
-        if self.is_owned_by(user):
-            return True
-
-        if self.has_member(user):
-            return True
-
-        return False
-
+# ============================================================
+# Project pages
 
 @python_2_unicode_compatible
 class Theme (TimeStampedModel):
@@ -593,24 +639,8 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
     def get_all_slugs(self):
         return [s.slug for s in self.project.sections.all()]
 
-    def get_siblings(self):
-        return self.project.sections.aggregate(max_index=models.Max('index'))
-
-
-class Attachment (OrderedModelMixin, CloneableModelMixin, TimeStampedModel):
-    url = models.URLField(max_length=2048)
-    thumbnail_url = models.URLField(max_length=2048, blank=True, null=True)
-    label = models.TextField(blank=True)
-    description = models.TextField(blank=True)
-    type = models.CharField(max_length=256, blank=True)
-    index = models.PositiveIntegerField(blank=True)
-
-    attached_to_type = models.ForeignKey('contenttypes.ContentType')
-    attached_to_id = models.PositiveIntegerField()
-    attached_to = GenericForeignKey('attached_to_type', 'attached_to_id')
-
-    class Meta:
-        ordering = ('attached_to_type', 'attached_to_id', 'index',)
+    def slug_exists(self, slug):
+        return self.project.sections.filter(slug__iexact=slug).exists()
 
     def get_siblings(self):
-        return self.attached_to.attachments.aggregate(max_index=models.Max('index'))
+        return self.project.sections.all()

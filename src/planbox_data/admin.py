@@ -68,7 +68,7 @@ class AttachmentInline (GenericTabularInline):
     ct_field = 'attached_to_type'
     ct_fk_field = 'attached_to_id'
     exclude = ('created_at', 'updated_at')
-    form = modelform_factory(Attachment, widgets={
+    form = modelform_factory(Attachment, fields='__all__', widgets={
         'label': TextInput(),
     })
 
@@ -79,7 +79,7 @@ class EventAdmin (admin.ModelAdmin):
         AttachmentInline,
     )
     raw_id_fields = ('project',)
-    form = modelform_factory(Event, widgets={
+    form = modelform_factory(Event, fields='__all__', widgets={
         'label': TextInput(attrs={'class': 'vTextField'}),
         'datetime_label': TextInput(attrs={'class': 'vTextField'})
     })
@@ -91,7 +91,7 @@ class EventInline (admin.StackedInline):
     prepopulated_fields = {"slug": ("label",)}
     readonly_fields = ('index',)
 
-    form = modelform_factory(Event, widgets={
+    form = modelform_factory(Event, fields='__all__', widgets={
         'label': TextInput(attrs={'class': 'vTextField'}),
         'datetime_label': TextInput(attrs={'class': 'vTextField'})
     })
@@ -109,7 +109,7 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
     )
     objectactions = ('clone_project',)
     raw_id_fields = ('theme', 'template', 'owner')
-    form = modelform_factory(Project, widgets={
+    form = modelform_factory(Project, fields='__all__', widgets={
         'title': TextInput(attrs={'class': 'vTextField'}),
         'location': TextInput(attrs={'class': 'vTextField'}),
         'happening_now_description': TextInput(attrs={'class': 'vTextField'}),

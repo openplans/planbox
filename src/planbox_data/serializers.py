@@ -62,8 +62,7 @@ class SlugValidationMixin (object):
                 return attrs
             # If we're changing the slug, and it's already in use, then we
             # have a problem.
-            existing_slugs = self.object.get_all_slugs()
-            if slug in existing_slugs:
+            if self.object.slug_exists(slug):
                 raise serializers.ValidationError('This slug is already in use.')
 
         # Letters, numbers, and dashes.
@@ -93,6 +92,13 @@ class AssociatedProfileSerializer (serializers.ModelSerializer):
             field.required = False
 
         return fields
+
+    def to_native(self, obj):
+        data = super(AssociatedProfileSerializer, self).to_native(obj)
+        # Add the username field if it's a user profile
+        if obj.is_user_profile():
+            data['username'] = obj.auth.username
+        return data
 
     def restore_object(self, attrs, instance=None):
         """
@@ -146,6 +152,13 @@ class ProfileSerializer (SlugValidationMixin, serializers.ModelSerializer):
     class Meta:
         model = models.Profile
         exclude = ('project_editor_version',)
+
+    def get_default_fields(self):
+        fields = super(ProfileSerializer, self).get_default_fields()
+        # Add the username field if it's a user profile
+        if self.object.is_user_profile():
+            fields['username'] = serializers.CharField(source='auth.username', read_only=True)
+        return fields
 
     def validate(self, attrs):
         if not attrs.get('name') and not attrs.get('slug'):
