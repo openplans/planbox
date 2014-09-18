@@ -6,7 +6,7 @@ var Planbox = Planbox || {};
   'use strict';
 
   NS.ProjectMapItemView = Backbone.Marionette.ItemView.extend({
-    template: '#project-list-item-tpl',
+    template: '#project-map-item-tpl',
     tagName: 'div',
 
     initialize: function() {
@@ -14,11 +14,6 @@ var Planbox = Planbox || {};
     },
 
     render: function() {
-      this.isClosed = false;
-
-      this.triggerMethod('before:render', this);
-      this.triggerMethod('item:before:render', this);
-
       var geometry = this.model.get('geometry'),
           lat, lng;
 
@@ -28,26 +23,15 @@ var Planbox = Planbox || {};
         this.layer = null;
       }
 
-      // Create a new layer
       if (geometry) {
         lat = geometry.coordinates[1];
         lng = geometry.coordinates[0];
         this.layer = L.marker([lat, lng]);
 
-        // TODO: Bind a popup to the layer with the project info
+        Backbone.Marionette.ItemView.prototype.render.call(this);
 
-        // var data = this.serializeData();
-        // data = this.mixinTemplateHelpers(data);
-
-        // var template = this.getTemplate();
-        // var html = Marionette.Renderer.render(template, data);
-
-        // this.$el.html(html);
-        // this.bindUIElements();
+        this.layer.bindPopup(this.el);
       }
-
-      this.triggerMethod('render', this);
-      this.triggerMethod('item:rendered', this);
 
       return this;
     },

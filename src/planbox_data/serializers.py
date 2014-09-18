@@ -261,10 +261,11 @@ class ProjectSummarySerializer (serializers.ModelSerializer):
     owner = AssociatedProfileSerializer(required=True)
     summary = serializers.SerializerMethodField('get_project_summary')
     geometry = fields.GeometryField(required=False)
+    details = serializers.WritableField()
 
     class Meta:
         model = models.Project
-        fields = ('id', 'slug', 'title', 'summary', 'owner', 'geometry')
+        fields = ('id', 'slug', 'title', 'summary', 'owner', 'geometry', 'details')
 
     def get_project_summary(self, project):
         return project.get_summary()
