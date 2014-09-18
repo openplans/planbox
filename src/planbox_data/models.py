@@ -314,6 +314,17 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
 post_save.connect(create_or_update_user_profile, sender=settings.AUTH_USER_MODEL, dispatch_uid="user-profile-create-signal")
 
 
+def create_roundup_for_new_team(sender, instance, created, **kwargs):
+    """
+    Create a project roundup for each new team profile.
+    """
+    if not created or instance.is_user_profile():
+        return
+    team = instance
+    Roundup.objects.create(title='%s\'s Plans' % (team.name or team.slug,), owner=team)
+post_save.connect(create_roundup_for_new_team, sender=Profile, dispatch_uid="user-team-profile-create-roundup-signal")
+
+
 # ============================================================
 # Projects
 
@@ -668,3 +679,12 @@ class Roundup (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    def get_slug_basis(self):
+        return self.title
+
+    def get_all_slugs(self):
+        return [r.slug for r in self.owner.roundups.all()]
+
+    def slug_exists(self, slug):
+        return self.owner.roundups.filter(slug__iexact=slug).exists()
