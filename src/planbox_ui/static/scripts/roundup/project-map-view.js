@@ -63,7 +63,10 @@ var Planbox = Planbox || {};
     fitCollectionBounds: function() {
       var bounds = this.calculateCollectionBounds();
       if (bounds) {
-        this.map.fitBounds(bounds);
+        this.map.fitBounds(bounds, {
+          // Add some padding to the top of the map for tall markers
+          paddingTopLeft: [0, 41]
+        });
       }
     },
 
