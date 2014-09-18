@@ -624,6 +624,28 @@ section, footer {
 
 
 /*--------------------------------------------------
+  Roundups
+--------------------------------------------------*/
+
+.truncated-wysiwyg {
+  max-height: 7.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.truncated-wysiwyg:after {
+  content: '';
+  display: block;
+  height: 4rem;
+  background-color: #fff;
+  position: absolute;
+  top: 7.5rem;
+  right: -1rem;
+  left: -1rem;
+  box-shadow: 0 -2rem 2rem #fff;
+}
+
+
+/*--------------------------------------------------
   Project Header
 --------------------------------------------------*/
 
