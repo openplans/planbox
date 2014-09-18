@@ -111,6 +111,7 @@
   <script src="{{ STATIC_URL }}bower_components/gatekeeper/gatekeeper.js"></script>
   <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/utils.js"></script>
   <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/models.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/auth.js"></script>
   <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/panel-layout.js"></script>
   <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/place-detail-view.js"></script>
   <script src="{{ STATIC_URL }}bower_components/shareabouts-js/src/place-form-view.js"></script>
@@ -163,6 +164,7 @@
   <script src="{{ js_url|safe }}"></script>
   {% endfor %}
 
+  {% handlebarsjs 'shareabouts/(.*)' precompile register_partials %}
   {% handlebarsjs '(.*)' precompile register_partials %}
 
   {% comment %}

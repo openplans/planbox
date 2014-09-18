@@ -200,6 +200,12 @@ class AboutView (AppMixin, TemplateView):
 class ShareaboutsView (AppMixin, TemplateView):
     template_name = 'shareabouts.html'
 
+class ShareaboutsAuthSuccessView (AppMixin, TemplateView):
+    template_name = 'shareabouts/auth-success.html'
+
+class ShareaboutsAuthErrorView (AppMixin, TemplateView):
+    template_name = 'shareabouts/auth-error.html'
+
 class OpenSourceView (AppMixin, TemplateView):
     template_name = 'open-source.html'
 
@@ -507,6 +513,8 @@ class SiteMapView (AppMixin, TemplateView):
 index_view = IndexView.as_view()
 about_view = AboutView.as_view()
 shareabouts_view = ShareaboutsView.as_view()
+shareabouts_auth_success_view = ShareaboutsAuthSuccessView.as_view()
+shareabouts_auth_error_view = ShareaboutsAuthErrorView.as_view()
 open_source_view = OpenSourceView.as_view()
 
 project_view = ProjectView.as_view()

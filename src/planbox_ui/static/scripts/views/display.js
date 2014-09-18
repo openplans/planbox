@@ -118,9 +118,18 @@ var Planbox = Planbox || {};
       shareabouts: '.project-shareabouts'
     },
     onShow: function() {
-      var details = this.model.get('details');
+      var details = this.model.get('details'),
+          compiledTemplates = details.templates,
+          sa;
 
-      new Shareabouts.Map({
+      // Compile string templates if necessary
+      _.each(details.templates, function(tpl, key) {
+        if(_.isString(tpl)) {
+          compiledTemplates[key] = Handlebars.compile(tpl);
+        }
+      });
+
+      sa = new Shareabouts.Map({
         el: this.ui.shareabouts,
         map: details.map,
         layers: details.layers,
@@ -142,9 +151,20 @@ var Planbox = Planbox || {};
           },
         ],
         datasetUrl: details.dataset_url + '/places',
-        templates: Handlebars.templates
+        templates: _.extend({}, Handlebars.templates, compiledTemplates)
       });
 
+      Shareabouts.auth = new Shareabouts.Auth({
+        apiRoot: 'http://data.shareabouts.org/api/v2/',
+        successPage: '/shareabouts/success',
+        errorPage: '/shareabouts/error'
+      });
+
+      $(Shareabouts.auth).on('authsuccess', function(evt, data) {
+        sa.setUser(data);
+      });
+
+      Shareabouts.auth.initUser();
     }
   });
 

@@ -18,6 +18,9 @@ from .views import (
 
     # Project views
     project_view, new_project_view, ro_project_view,
+
+    # Shareabouts auth
+    shareabouts_auth_success_view, shareabouts_auth_error_view,
 )
 
 urlpatterns = patterns('',
@@ -38,6 +41,8 @@ urlpatterns = patterns('',
     url(r'^$', index_view, name='app-index'),
     url(r'^about/$', about_view, name='app-about'),
     url(r'^shareabouts/$', shareabouts_view, name='app-shareabouts'),
+    url(r'^shareabouts/success$', shareabouts_auth_success_view, name='app-shareabouts-success'),
+    url(r'^shareabouts/error$', shareabouts_auth_error_view, name='app-shareabouts-error'),
     url(r'^open-source/$', open_source_view, name='app-open-source'),
 
     # ==============================
