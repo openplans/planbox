@@ -75,13 +75,12 @@ var Planbox = Planbox || {};
     },
 
     onShow: function() {
-      this.fitCollectionBounds();
-      this.map.invalidateSize();
-
       if (this.layerGroup.getLayers().length === 0) {
         this.$el.addClass('hide');
       } else {
         this.$el.removeClass('hide');
+        this.fitCollectionBounds();
+        this.map.invalidateSize();
       }
     }
   });

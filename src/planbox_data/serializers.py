@@ -281,7 +281,7 @@ class RoundupSerializer (serializers.ModelSerializer):
     def get_project_summaries(self, roundup):
         # For now, we just serialize the complete set of projects owned by the
         # roundup owner.
-        qs = roundup.owner.projects.all()
+        qs = roundup.owner.projects.all().filter(public=True)
 
         serializer = ProjectSummarySerializer(qs, many=True)
         return serializer.data
