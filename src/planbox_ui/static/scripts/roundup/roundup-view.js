@@ -26,6 +26,11 @@ var Planbox = Planbox || {};
         model: this.model,
         collection: this.model.get('projects')
       }));
+
+      this.projectMapRegion.show(new NS.ProjectMapView({
+        model: this.model,
+        collection: this.model.get('projects')
+      }));
     }
   });
 
