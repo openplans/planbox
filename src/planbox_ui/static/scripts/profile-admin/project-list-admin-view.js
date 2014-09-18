@@ -80,6 +80,19 @@ var Planbox = Planbox || {};
     itemViewContainer: '.project-list',
     emptyView: NS.ProjectListEmptyAdminView,
 
+    // Override Marionette 1.4.1 internal method to use the current model as
+    // opposed to a blank model in the view options. This wouldn't be necessary
+    // in the latest version, because we'd override emptyViewOptions.
+    showEmptyView: function(){
+      var EmptyView = this.getEmptyView();
+
+      if (EmptyView && !this._showingEmptyView){
+        this._showingEmptyView = true;
+        var model = this.model;
+        this.addItemView(model, EmptyView, 0);
+      }
+    },
+
     modelEvents: {
       'sync': 'handleModelSync'
     },
