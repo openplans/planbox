@@ -265,7 +265,7 @@ class ProjectSummarySerializer (serializers.ModelSerializer):
 
     class Meta:
         model = models.Project
-        fields = ('id', 'slug', 'title', 'summary', 'owner', 'geometry', 'details')
+        fields = ('id', 'slug', 'title', 'summary', 'owner', 'geometry', 'location', 'details')
 
     def get_project_summary(self, project):
         return project.get_summary()
