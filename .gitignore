@@ -21,6 +21,9 @@ bower_components/
 *.min.js
 *.min.map
 *.min.css
+src/planbox_ui/static/images/marker-plus.png
+src/planbox_ui/static/images/marker-shadow.png
+src/planbox_ui/static/images/marker-x.png
 
 # Installer logs
 pip-log.txt
