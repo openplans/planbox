@@ -2,6 +2,10 @@ from django.contrib.gis.geos import GEOSGeometry
 from rest_framework import serializers
 from django.core.exceptions import ValidationError
 import json
+try:
+    strtype = basestring
+except NameError:
+    strtype = str
 
 
 ###############################################################################
@@ -36,7 +40,7 @@ class GeometryField(serializers.WritableField):
         if data is None:
             return None
 
-        if not isinstance(data, basestring):
+        if not isinstance(data, strtype):
             data = json.dumps(data)
 
         try:
