@@ -15,7 +15,7 @@
     <div class="project-text-content">{{{ description }}}</div>
     <p>
       <small><a href="#" class="profile-edit-button">Edit Profile</a></small><br>
-      <small><a href="{{> url-roundup-display-tpl }}" target="_blank">View Profile →</a></small>
+      {{#unless auth}}<small><a href="{{> url-roundup-display-tpl }}" target="_blank">View Profile →</a></small>{{/unless}}
     </p>
   </div>
 </div>
