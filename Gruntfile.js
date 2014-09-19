@@ -527,8 +527,10 @@ module.exports = function (grunt) {
         var appPath = grunt.config('yeoman').app;
         var base = path.dirname(appPath);
         var sMap = grunt.file.readJSON(filepath);
-        sMap.file = path.relative(base, sMap.file);
-        sMap.sources = _.map(sMap.sources, path.relative.bind(path, base));
+        sMap.file = '/' + path.relative(base, sMap.file);
+        sMap.sources = _.map(sMap.sources, function(source) {
+          return '/' + path.relative(base, source);
+        });
 
         grunt.file.write(filepath, JSON.stringify(sMap));
         // Print a success message.
