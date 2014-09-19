@@ -2,7 +2,12 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import __builtin__
+try:
+    # Python 3
+    import builtins
+except ImportError:
+    # Python 2
+    import __builtin__ as builtins
 import jsonfield.fields
 import planbox_data.models
 import django.db.models.deletion
@@ -24,7 +29,7 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(default=django.utils.timezone.now, blank=True)),
                 ('title', models.TextField(blank=True)),
                 ('slug', models.CharField(max_length=128, blank=True)),
-                ('details', jsonfield.fields.JSONField(default=__builtin__.dict, blank=True)),
+                ('details', jsonfield.fields.JSONField(default=builtins.dict, blank=True)),
                 ('owner', models.ForeignKey(related_name='roundups', to='planbox_data.Profile')),
                 ('template', models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, blank=True, to='planbox_data.Roundup', help_text='The roundup, if any, that this one is based off of', null=True)),
                 ('theme', models.ForeignKey(related_name='roundups', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='planbox_data.Theme', null=True)),

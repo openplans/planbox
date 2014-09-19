@@ -277,7 +277,7 @@ module.exports = function (grunt) {
       dist: {
         files: {
           '<%= yeoman.app %>/styles/components.min.css': [
-            '<%= yeoman.app %>/bower_components/leaflet-0.7.2/leaflet.css',
+            '<%= yeoman.app %>/bower_components/leaflet/dist/leaflet.css',
             '<%= yeoman.app %>/bower_components/shareabouts-js/src/styles/shareabouts.css'
           ],
           '<%= yeoman.app %>/styles/style.min.css': [
@@ -321,7 +321,8 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/backbone.marionette/lib/backbone.marionette.js',
             '<%= yeoman.app %>/bower_components/backbone-relational/backbone-relational.js',
             '<%= yeoman.app %>/bower_components/swag/lib/swag.js',
-            '<%= yeoman.app %>/bower_components/leaflet-0.7.2/leaflet-src.js',
+            '<%= yeoman.app %>/bower_components/leaflet/dist/leaflet-src.js',
+            '<%= yeoman.app %>/scripts/leaflet-imagepath-set.js',
             '<%= yeoman.app %>/bower_components/jqxdomainrequest/jQuery.XDomainRequest.js',
             '<%= yeoman.app %>/bower_components/gatekeeper/gatekeeper.js',
             '<%= yeoman.app %>/bower_components/shareabouts-js/src/utils.js',
@@ -372,6 +373,7 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/project-editor-v2/image-section-admin-view.js',
             '<%= yeoman.app %>/scripts/project-editor-v2/section-list-admin-view.js',
             '<%= yeoman.app %>/scripts/project-editor-v2/modal-view.js',
+            '<%= yeoman.app %>/scripts/project-editor-v2/project-location-map-view.js',
             '<%= yeoman.app %>/scripts/project-editor-v2/project-admin-view.js',
             '<%= yeoman.app %>/scripts/project-editor-v2/project-admin-modal-view.js',
             '<%= yeoman.app %>/scripts/base-app.js',
@@ -390,6 +392,20 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/profile-admin/team-list-admin-view.js',
             '<%= yeoman.app %>/scripts/base-app.js',
             '<%= yeoman.app %>/scripts/profile-admin/app.js'
+          ],
+          '<%= yeoman.app %>/scripts/roundup-app.min.js': [
+            '<%= yeoman.app %>/scripts/utils.js',
+            '<%= yeoman.app %>/scripts/handlebars-helpers.js',
+            '<%= yeoman.app %>/scripts/file-upload.js',
+            '<%= yeoman.app %>/scripts/models.js',
+            '<%= yeoman.app %>/scripts/views/mixins.js',
+            '<%= yeoman.app %>/scripts/views/base.js',
+            '<%= yeoman.app %>/scripts/roundup/roundup-view.js',
+            '<%= yeoman.app %>/scripts/roundup/owner-detail-view.js',
+            '<%= yeoman.app %>/scripts/roundup/project-list-view.js',
+            '<%= yeoman.app %>/scripts/roundup/project-map-view.js',
+            '<%= yeoman.app %>/scripts/base-app.js',
+            '<%= yeoman.app %>/scripts/roundup/roundup-app.js'
           ],
           '<%= yeoman.app %>/scripts/modernizr.min.js': [
             '<%= yeoman.app %>/bower_components/modernizr/modernizr.js'
@@ -419,6 +435,14 @@ module.exports = function (grunt) {
         {
           src: ['<%= yeoman.app %>/bower_components/shareabouts-js/src/images/marker-x.png'],
           dest: '<%= yeoman.app %>/images/marker-x.png'
+        }]
+      },
+      leaflet: {
+        files: [{
+          expand: true,
+          cwd:  '<%= yeoman.app %>/bower_components/leaflet/dist/images/',
+          src: ['*'],
+          dest: '<%= yeoman.app %>/images/'
         }]
       },
       dist: {
@@ -514,8 +538,10 @@ module.exports = function (grunt) {
         var appPath = grunt.config('yeoman').app;
         var base = path.dirname(appPath);
         var sMap = grunt.file.readJSON(filepath);
-        sMap.file = path.relative(base, sMap.file);
-        sMap.sources = _.map(sMap.sources, path.relative.bind(path, base));
+        sMap.file = '/' + path.relative(base, sMap.file);
+        sMap.sources = _.map(sMap.sources, function(source) {
+          return '/' + path.relative(base, source);
+        });
 
         grunt.file.write(filepath, JSON.stringify(sMap));
         // Print a success message.
@@ -534,6 +560,7 @@ module.exports = function (grunt) {
     'uglify',
     'fixSourceMaps',
     'copy:shareabouts',
+    'copy:leaflet',
     // 'rev',
     // 'usemin',
     // 'htmlmin'

@@ -86,6 +86,7 @@
   {% else %}
   <script src="{{ STATIC_URL }}scripts/components-base.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
+
   <script>
     $(document).foundation();
   </script>
