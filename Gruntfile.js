@@ -277,7 +277,7 @@ module.exports = function (grunt) {
       dist: {
         files: {
           '<%= yeoman.app %>/styles/components.min.css': [
-            '<%= yeoman.app %>/bower_components/leaflet/leaflet.css',
+            '<%= yeoman.app %>/bower_components/leaflet/dist/leaflet.css',
             '<%= yeoman.app %>/bower_components/shareabouts-js/src/styles/shareabouts.css'
           ],
           '<%= yeoman.app %>/styles/style.min.css': [
@@ -321,7 +321,8 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/backbone.marionette/lib/backbone.marionette.js',
             '<%= yeoman.app %>/bower_components/backbone-relational/backbone-relational.js',
             '<%= yeoman.app %>/bower_components/swag/lib/swag.js',
-            '<%= yeoman.app %>/bower_components/leaflet/leaflet-src.js',
+            '<%= yeoman.app %>/bower_components/leaflet/dist/leaflet-src.js',
+            '<%= yeoman.app %>/scripts/leaflet-imagepath-set.js',
             '<%= yeoman.app %>/bower_components/jqxdomainrequest/jQuery.XDomainRequest.js',
             '<%= yeoman.app %>/bower_components/gatekeeper/gatekeeper.js',
             '<%= yeoman.app %>/bower_components/shareabouts-js/src/utils.js',
@@ -433,6 +434,14 @@ module.exports = function (grunt) {
         {
           src: ['<%= yeoman.app %>/bower_components/shareabouts-js/src/images/marker-x.png'],
           dest: '<%= yeoman.app %>/images/marker-x.png'
+        }]
+      },
+      leaflet: {
+        files: [{
+          expand: true,
+          cwd:  '<%= yeoman.app %>/bower_components/leaflet/dist/images/',
+          src: ['*'],
+          dest: '<%= yeoman.app %>/images/'
         }]
       },
       dist: {
@@ -550,6 +559,7 @@ module.exports = function (grunt) {
     'uglify',
     'fixSourceMaps',
     'copy:shareabouts',
+    'copy:leaflet',
     // 'rev',
     // 'usemin',
     // 'htmlmin'
