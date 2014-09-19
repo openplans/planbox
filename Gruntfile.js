@@ -371,6 +371,7 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/project-editor-v2/image-section-admin-view.js',
             '<%= yeoman.app %>/scripts/project-editor-v2/section-list-admin-view.js',
             '<%= yeoman.app %>/scripts/project-editor-v2/modal-view.js',
+            '<%= yeoman.app %>/scripts/project-editor-v2/project-location-map-view.js',
             '<%= yeoman.app %>/scripts/project-editor-v2/project-admin-view.js',
             '<%= yeoman.app %>/scripts/project-editor-v2/project-admin-modal-view.js',
             '<%= yeoman.app %>/scripts/base-app.js',
