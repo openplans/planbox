@@ -19,6 +19,7 @@
     Planbox.Data = {
       user: {{ user_data|as_json }},
       profile: {{ profile_data|as_json }},
+      projectTemplates: {{ project_templates_data|as_json }},
       contactEmail: {{ settings.PLANBOX_CONTACT_EMAIL|as_json }},
       s3UploadBucket: {{ settings.S3_MEDIA_BUCKET|as_json }},
       s3UploadData: {{ s3_upload_form_data|as_json }}

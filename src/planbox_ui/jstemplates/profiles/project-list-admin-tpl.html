@@ -1,7 +1,19 @@
 <div class="panel-header">
   <h5 class="page-list-header subheader no-margins">
     Plans
-    <a href="{{> url-project-new-tpl }}" class="new-project-button button radius tiny right">+ New Plan</a>
+    <a href="#" class="new-project-button button radius tiny right" data-dropdown="new-project-template-chooser">+ New Plan</a>
   </h5>
 </div>
+
+<div id="new-project-template-chooser" class="f-dropdown content" data-dropdown-content>
+  <h6>Select a template to create your project:</h6>
+  <ul>
+  {{#bootstrapped 'projectTemplates'}}
+    {{#each .}}
+    <li><a href="{{> url-project-new-tpl ../.. }}?template={{ owner.slug }}/{{ slug }}">{{ slug }}</a></li>
+    {{/each}}
+  {{/bootstrapped}}
+  </ul>
+</div>
+
 <ul class="project-list no-bullet no-margins"></ul>
