@@ -977,6 +977,13 @@ img.attachment-icon {
   padding: 0;
   border: 0;
 }
+// In Firefox, the minimum width of a fieldset is never less than the intrinsic width of its content. 
+// http://stackoverflow.com/questions/17408815/fieldset-resizes-wrong-appears-to-have-unremovable-min-width-min-content#answer-17863685
+@-moz-document url-prefix() {
+  .project-section-fieldset {
+    display: table-cell;
+  }  
+}
 
 input[type=text].heading-input {
   @media #{$medium-up} {
