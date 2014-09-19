@@ -7620,6 +7620,12 @@ img.attachment-icon {
   .project-shareabouts .shareabouts-add-button-container {
     margin-left: 0;
     bottom: 0; }
+  .project-shareabouts .avatar {
+    width: 30px; }
+  .project-shareabouts .signed-in-as .avatar {
+    width: 50px; }
+  .project-shareabouts .response-body {
+    padding-top: 0.25em; }
 
 .shareabouts-geometry-set .form-instructions {
   display: none; }

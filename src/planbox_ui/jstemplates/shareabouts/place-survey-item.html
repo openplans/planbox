@@ -1,0 +1,20 @@
+<article data-response-id="{{ id }}" class="response">
+  <header class="response-header clearfix">
+    <strong class="response-submitter">
+      {{#if submitter}}
+        <img src="{{ submitter.avatar_url }}" class="avatar" /> {{ submitter.name }}
+      {{^}}
+        <img src="{{ static_url }}images/avatar-user.gif" class="avatar" /> {{ submitter_name }}
+      {{/if}}
+    </strong>
+    <small class="response-date">
+      around {{ fromnow created_datetime }}
+    </small>
+  </header>
+
+  <div class="response-body">
+    <div class="response-item response-item-comment">
+      <p class="response-value response-value-comment">{{ comment }}</p>
+    </div>
+  </div>
+</article>

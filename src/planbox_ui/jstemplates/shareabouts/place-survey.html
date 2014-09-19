@@ -1,0 +1,44 @@
+<div class="clearfix">
+  <h5 class="survey-header left">Comments</h5>
+  <a href="#reply" class="button tiny right">Leave a Comment</a>
+</div>
+
+<ol class="survey-items no-bullet"></ol>
+
+<div id="reply">
+
+  <hr>
+
+  <form class="survey-form clearfix" action="#" method="post">
+    <input type="hidden" name="visible" value="on">
+    <!--<input type="hidden" name="user_token" value="user:1">-->
+
+    <div class="survey-field survey-field-comment">
+      <label class="survey-label survey-label-comment" for="survey-comment">
+        Comment
+      </label>
+      <div class="survey-widgets survey-widgets-comment">
+        <textarea class="survey-comment" name="comment" required="">{{comment}}</textarea>
+      </div>
+    </div>
+
+    {{^if submitter}}
+    <div class="survey-field survey-field-submitter_name">
+      <label class="survey-label survey-label-submitter_name" for="survey-submitter_name">
+        Your Name
+      </label>
+      <div class="survey-widgets survey-widgets-submitter_name">
+        <input class="survey-submitter-name" name="submitter_name" type="text" value="{{submitter_name}}">
+      </div>
+    </div>
+    {{/if}}
+
+    <input name="commit" type="submit" value="Comment" class="button">
+
+    {{#if submitter}}
+    <p class="signed-in-as right"><img src="{{ submitter.avatar_url }}" class="avatar" /> {{ submitter.name }}. <a class="shareabouts-auth-logout-button" href="#">Log Out</a></p>
+    {{/if}}
+
+    <div class="form-spinner"></div>
+  </form>
+</div>

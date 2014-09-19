@@ -955,6 +955,20 @@ img.attachment-icon {
     margin-left: 0;
     bottom: 0;
   }
+
+  .avatar {
+    width: 30px;
+  }
+
+  .signed-in-as {
+    .avatar {
+      width: 50px;
+    }
+  }
+
+  .response-body {
+    padding-top: 0.25em;
+  }
 }
 .shareabouts-geometry-set .form-instructions {
   display: none;
