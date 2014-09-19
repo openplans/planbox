@@ -8,7 +8,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth.forms import AuthenticationForm as DjangoAuthenticationForm
 from django.contrib.auth.models import User as UserAuth
 
-from planbox_data.models import Profile
+from planbox_data.models import Profile, Roundup
 
 
 class AuthenticationForm(DjangoAuthenticationForm):
@@ -90,6 +90,9 @@ class UserCreationForm(forms.ModelForm):
             # Create a team for the user from their affiliation
             team = Profile.objects.create(name=self.cleaned_data["affiliation"])
             team.members.add(auth.profile)
+
+            # Create a roundup page for the team
+            Roundup.objects.create(title='%s\'s Plans' % (team.name,), owner=team)
 
             # TODO: Send welcome email
 

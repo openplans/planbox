@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.contrib import auth
 from django.contrib.contenttypes.generic import GenericForeignKey, GenericRelation
-from django.db import models
+from django.contrib.gis.db import models
 from django.db.models.signals import post_save
 from django.utils.text import slugify
 from django.utils.encoding import python_2_unicode_compatible
@@ -314,6 +314,17 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
 post_save.connect(create_or_update_user_profile, sender=settings.AUTH_USER_MODEL, dispatch_uid="user-profile-create-signal")
 
 
+def create_roundup_for_new_team(sender, instance, created, **kwargs):
+    """
+    Create a project roundup for each new team profile.
+    """
+    if not created or instance.is_user_profile():
+        return
+    team = instance
+    Roundup.objects.create(title='%s\'s Plans' % (team.name or team.slug,), owner=team)
+post_save.connect(create_roundup_for_new_team, sender=Profile, dispatch_uid="user-team-profile-create-roundup-signal")
+
+
 # ============================================================
 # Projects
 
@@ -344,7 +355,7 @@ class ProjectQuerySet (models.query.QuerySet):
         return self.filter(member_query | public_query)
 
 
-class ProjectManager (models.Manager):
+class ProjectManager (models.GeoManager):
     def get_queryset(self):
         return ProjectQuerySet(self.model, using=self._db)
 
@@ -394,6 +405,8 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     logo_img_url = models.URLField(_('Logo Image URL'), blank=True, max_length=2048)
     template = models.ForeignKey('Project', help_text=_("The project, if any, that this one is based off of"), null=True, blank=True, on_delete=models.SET_NULL)
 
+    geometry = models.GeometryField(null=True, blank=True)
+
     # NOTE: These may belong in a separate model, but are on the project for
     #       now. I think the model would be called a Highlight.
     happening_now_description = models.TextField(blank=True)
@@ -417,6 +430,11 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    def get_summary(self):
+        for section in self.sections.all():
+            if section.type == 'text':
+                return section.details.get('content', '')
 
     def mark_opened_by(self, user, opened_at=None):
         # TODO: This could just be done in the cache.
@@ -644,3 +662,29 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
 
     def get_siblings(self):
         return self.project.sections.all()
+
+
+
+# ============================================================
+# Roundup pages
+
+@python_2_unicode_compatible
+class Roundup (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
+    title = models.TextField(blank=True)
+    slug = models.CharField(max_length=128, blank=True)
+    owner = models.ForeignKey('Profile', related_name='roundups')
+    details = JSONField(blank=True, default=dict)
+    theme = models.ForeignKey('Theme', related_name='roundups', null=True, blank=True, on_delete=models.SET_NULL)
+    template = models.ForeignKey('Roundup', help_text=_("The roundup, if any, that this one is based off of"), null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.title
+
+    def get_slug_basis(self):
+        return self.title
+
+    def get_all_slugs(self):
+        return [r.slug for r in self.owner.roundups.all()]
+
+    def slug_exists(self, slug):
+        return self.owner.roundups.filter(slug__iexact=slug).exists()

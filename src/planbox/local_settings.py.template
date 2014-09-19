@@ -2,6 +2,18 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 INTERNAL_IPS = ('127.0.0.1',)
 
+# Uncomment to use PostGIS instead of the default Spatialite DB
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'planbox',
+#         'USER': 'planbox',
+#         'PASSWORD': 'secret-pw',
+#         'HOST': '',
+#         'PORT': '',
+#     }
+# }
+
 INSTALLED_APPS += (
     'django_nose',
 )

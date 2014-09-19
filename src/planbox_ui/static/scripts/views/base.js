@@ -5,24 +5,6 @@ var Planbox = Planbox || {};
 (function(NS, $) {
   'use strict';
 
-  NS.BaseProjectView = Backbone.Marionette.Layout.extend({
-    regions: {
-      highlightHappeningNow: '#highlight-happening-now',
-      highlightGetInvolved: '#highlight-get-involved',
-      sectionList: '#section-list'
-    },
-
-    showRegions: function() {
-      // You must set sectionListView in the derived view class to the view
-      // for displaying the list of sections.
-      this.sectionList.show(new this.sectionListView({
-        model: this.model,
-        collection: this.collection,
-        parent: this
-      }));
-    }
-  });
-
   NS.BaseProjectSectionListView = Backbone.Marionette.CollectionView.extend({
     initialize: function() {
       this.options.itemViewOptions = this.getItemViewOptions;

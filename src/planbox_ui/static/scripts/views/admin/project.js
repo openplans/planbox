@@ -140,7 +140,7 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.ProjectAdminView = NS.BaseProjectView.extend(
+  NS.ProjectAdminView = Backbone.Marionette.Layout.extend(
     _.extend({}, NS.ContentEditableMixin, {
       template: '#project-admin-tpl',
       ui: {
@@ -179,6 +179,11 @@ var Planbox = Planbox || {};
         'change': 'dataChanged',
         'sync': 'onSync'
       },
+
+      regions: {
+        sectionList: '#section-list'
+      },
+
       sectionListView: NS.ProjectSectionListAdminView,
 
       initialize: function() {
@@ -216,7 +221,12 @@ var Planbox = Planbox || {};
       onRender: function() {
         this.initRichEditables();
         this.initDropZones();
-        this.showRegions();
+
+        this.sectionList.show(new this.sectionListView({
+          model: this.model,
+          collection: this.collection,
+          parent: this
+        }));
       },
       setImageOnContainer: function($el, url) {
         $el.addClass('has-image');

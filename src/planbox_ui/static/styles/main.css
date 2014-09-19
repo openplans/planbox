@@ -7337,6 +7337,25 @@ section, footer {
   margin-bottom: 1.6rem; }
 
 /*--------------------------------------------------
+  Roundups
+--------------------------------------------------*/
+.truncated-wysiwyg {
+  max-height: 7.5rem;
+  position: relative;
+  overflow: hidden; }
+
+.truncated-wysiwyg:after {
+  content: '';
+  display: block;
+  height: 4rem;
+  background-color: #fff;
+  position: absolute;
+  top: 7.5rem;
+  right: -1rem;
+  left: -1rem;
+  box-shadow: 0 -2rem 2rem #fff; }
+
+/*--------------------------------------------------
   Project Header
 --------------------------------------------------*/
 .site-header {
@@ -7621,6 +7640,12 @@ img.attachment-icon {
       margin: 0; } }
 
 /*--------------------------------------------------
+  Project Layout
+--------------------------------------------------*/
+.project-map-region > div {
+  height: 300px; }
+
+/*--------------------------------------------------
   The Admin
 --------------------------------------------------*/
 .project-edit-form {
@@ -7640,6 +7665,10 @@ img.attachment-icon {
 @-moz-document url-prefix() {
   .project-section-fieldset {
     display: table-cell; } }
+.location-map-region .map {
+  height: 200px;
+  border: 1px solid #c9c9c9; }
+
 @media only screen and (min-width: 40.063em) {
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
