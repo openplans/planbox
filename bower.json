@@ -20,11 +20,11 @@
     "chrono": "~0.1.9",
     "pickadate": "~3.4.0",
     "foundation": "~5.4.3",
-    "leaflet-0.7.2": "http://leaflet-cdn.s3.amazonaws.com/build/leaflet-0.7.2.zip",
     "shareabouts-js": "https://github.com/openplans/shareabouts.js.git#3.5.0",
     "gatekeeper": "https://github.com/openplans/gatekeeper.git#~0.1.1",
     "jqxdomainrequest": "https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest.git#v1.0.2",
-    "raven-js": "~1.1.16"
+    "raven-js": "~1.1.16",
+    "leaflet": "~0.7.3"
   },
   "devDependencies": {}
 }
