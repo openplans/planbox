@@ -1006,12 +1006,33 @@ img.attachment-icon {
   margin-top: 0.5em;
 }
 
+.shareabouts-auth-container {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  bottom: auto;
+  left: 1rem;
+  text-align: right;
+  height: 0;
+  overflow: visible;
+}
+.shareabouts-auth-avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-top: 0.125rem;
+  margin-bottom: 0.125rem;
+}
+
 .shareabouts-add-button {
   display: block;
   @media #{$small-only} {
     margin: 0;
   }
+  @media #{$medium-up} {
+    box-shadow: -5px 5px 0 rgba(51,51,51,0.2);
+  }
 }
+
 
 /*--------------------------------------------------
   Project Layout
@@ -1020,6 +1041,7 @@ img.attachment-icon {
 .project-map-region > div {
   height: 300px;
 }
+
 
 /*--------------------------------------------------
   The Admin

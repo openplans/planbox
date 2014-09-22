@@ -9538,29 +9538,57 @@ h1.no-margins, h2.no-margins, h3.no-margins, h4.no-margins, h5.no-margins, h6.no
 .button.less-padding, button.less-padding {
   padding: 0.75rem 1.25rem;
 }
-/* line 118, _foundation.scss */
+/* line 117, _foundation.scss */
+.button.less-padding.dropdown, button.less-padding.dropdown {
+  padding-right: 3.0625rem;
+}
+/* line 121, _foundation.scss */
 .button.tiny.less-padding, button.tiny.less-padding {
   padding: 0.25rem 0.375rem;
 }
-/* line 121, _foundation.scss */
+/* line 123, _foundation.scss */
+.button.tiny.less-padding.dropdown, button.tiny.less-padding.dropdown {
+  padding-right: 1.5rem;
+}
+/* line 125, _foundation.scss */
+.button.tiny.less-padding.dropdown:after, button.tiny.less-padding.dropdown:after {
+  right: 0.375rem;
+}
+/* line 130, _foundation.scss */
 .button.small.less-padding, button.small.less-padding {
   padding: 0.5rem 0.75rem;
 }
-/* line 124, _foundation.scss */
+/* line 132, _foundation.scss */
+.button.small.less-padding.dropdown, button.small.less-padding.dropdown {
+  padding-right: 2.125rem;
+}
+/* line 134, _foundation.scss */
+.button.small.less-padding.dropdown:after, button.small.less-padding.dropdown:after {
+  right: 0.75rem;
+}
+/* line 139, _foundation.scss */
 .button.large.less-padding, button.large.less-padding {
   padding: 0.875rem 1.25rem;
 }
+/* line 141, _foundation.scss */
+.button.large.less-padding.dropdown, button.large.less-padding.dropdown {
+  padding-right: 3.0625rem;
+}
+/* line 145, _foundation.scss */
+.button.shadowed, button.shadowed {
+  box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
+}
 
-/* line 130, _foundation.scss */
+/* line 151, _foundation.scss */
 a.alert {
   color: #f24c3d;
 }
 
-/* line 136, _foundation.scss */
+/* line 157, _foundation.scss */
 .project-text-content ul, .pen ul {
   list-style: disc !important;
 }
-/* line 139, _foundation.scss */
+/* line 160, _foundation.scss */
 .project-text-content ol, .pen ol {
   list-style: decimal !important;
 }
@@ -9568,7 +9596,7 @@ a.alert {
 /*--------------------------------------------------
   Grid
 --------------------------------------------------*/
-/* line 150, _foundation.scss */
+/* line 171, _foundation.scss */
 .full-width {
   width: 100%;
   margin-left: auto;
@@ -9576,42 +9604,42 @@ a.alert {
   max-width: initial;
 }
 
-/* line 158, _foundation.scss */
+/* line 179, _foundation.scss */
 .some-margin-top {
   margin-top: 0.9375rem;
 }
 
-/* line 161, _foundation.scss */
+/* line 182, _foundation.scss */
 .some-margin-bottom {
   margin-bottom: 0.9375rem;
 }
 
-/* line 164, _foundation.scss */
+/* line 185, _foundation.scss */
 .extra-margin-top {
   margin-top: 2rem;
 }
 
-/* line 167, _foundation.scss */
+/* line 188, _foundation.scss */
 .extra-margin-bottom {
   margin-bottom: 2rem;
 }
 
-/* line 172, _foundation.scss */
+/* line 193, _foundation.scss */
 .some-padding-top {
   padding-top: 0.9375rem;
 }
 
-/* line 175, _foundation.scss */
+/* line 196, _foundation.scss */
 .some-padding-bottom {
   padding-bottom: 0.9375rem;
 }
 
-/* line 178, _foundation.scss */
+/* line 199, _foundation.scss */
 .extra-padding-top {
   padding-top: 2rem;
 }
 
-/* line 181, _foundation.scss */
+/* line 202, _foundation.scss */
 .extra-padding-bottom {
   padding-bottom: 2rem;
 }
@@ -9619,13 +9647,13 @@ a.alert {
 /*--------------------------------------------------
   Magellan & Location Hashes
 --------------------------------------------------*/
-/* line 191, _foundation.scss */
+/* line 212, _foundation.scss */
 .page-anchor {
   position: relative;
   top: -80px;
 }
 
-/* line 197, _foundation.scss */
+/* line 218, _foundation.scss */
 .offset-anchor {
   display: block;
   position: absolute;
@@ -9635,7 +9663,7 @@ a.alert {
 /*--------------------------------------------------
   Forms
 --------------------------------------------------*/
-/* line 222, _foundation.scss */
+/* line 243, _foundation.scss */
 input[type="text"].inline-input,
 input[type="password"].inline-input,
 input[type="date"].inline-input,
@@ -9657,15 +9685,15 @@ input[type="url"].inline-input {
   width: auto;
 }
 
-/* line 234, _foundation.scss */
+/* line 255, _foundation.scss */
 .switch + label.inline {
   margin-left: 4.5rem;
 }
-/* line 237, _foundation.scss */
+/* line 258, _foundation.scss */
 .switch.small + label.inline {
   margin-left: 4rem;
 }
-/* line 240, _foundation.scss */
+/* line 261, _foundation.scss */
 .switch.large + label.inline {
   margin-left: 5.5rem;
 }
@@ -9673,13 +9701,14 @@ input[type="url"].inline-input {
 /*--------------------------------------------------
   Dropdown Menus
 --------------------------------------------------*/
-/* line 250, _foundation.scss */
+/* line 271, _foundation.scss */
 .dropdown,
 .f-dropdown {
   box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
+  outline: 0;
 }
 
-/* line 256, _foundation.scss */
+/* line 278, _foundation.scss */
 .f-dropdown li a.disabled {
   background-color: #eee;
   color: #ccc;
@@ -9689,7 +9718,7 @@ input[type="url"].inline-input {
 /*--------------------------------------------------
   Panels
 --------------------------------------------------*/
-/* line 268, _foundation.scss */
+/* line 290, _foundation.scss */
 .panel-header {
   margin: -1.25rem;
   margin-bottom: 1.25rem;
@@ -9699,11 +9728,11 @@ input[type="url"].inline-input {
   padding-bottom: 0.625rem;
   background-color: #6c7180;
 }
-/* line 276, _foundation.scss */
+/* line 298, _foundation.scss */
 .panel-header h1, .panel-header h2, .panel-header h3, .panel-header h4, .panel-header h5, .panel-header h6 {
   color: #eee;
 }
-/* line 279, _foundation.scss */
+/* line 301, _foundation.scss */
 .panel-header .button {
   margin: -0.25rem -0.75rem;
 }
@@ -11117,20 +11146,46 @@ img.attachment-icon {
 }
 
 /* line 1009, main.scss */
+.shareabouts-auth-container {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  bottom: auto;
+  left: 1rem;
+  text-align: right;
+  height: 0;
+  overflow: visible;
+}
+
+/* line 1019, main.scss */
+.shareabouts-auth-avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-top: 0.125rem;
+  margin-bottom: 0.125rem;
+}
+
+/* line 1026, main.scss */
 .shareabouts-add-button {
   display: block;
 }
 @media only screen and (max-width: 40em) {
-  /* line 1009, main.scss */
+  /* line 1026, main.scss */
   .shareabouts-add-button {
     margin: 0;
+  }
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 1026, main.scss */
+  .shareabouts-add-button {
+    box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
   }
 }
 
 /*--------------------------------------------------
   Project Layout
 --------------------------------------------------*/
-/* line 1020, main.scss */
+/* line 1041, main.scss */
 .project-map-region > div {
   height: 300px;
 }
@@ -11138,43 +11193,43 @@ img.attachment-icon {
 /*--------------------------------------------------
   The Admin
 --------------------------------------------------*/
-/* line 1028, main.scss */
+/* line 1050, main.scss */
 .project-edit-form {
   background-color: #fff;
   box-shadow: 0 -65px 0 #fff;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1028, main.scss */
+  /* line 1050, main.scss */
   .project-edit-form {
     padding-bottom: 4rem;
   }
 }
 
-/* line 1036, main.scss */
+/* line 1058, main.scss */
 .project-section {
   z-index: auto;
 }
 
-/* line 1040, main.scss */
+/* line 1062, main.scss */
 .project-section-fieldset {
   padding: 0;
   border: 0;
 }
 
 @-moz-document url-prefix() {
-  /* line 1047, main.scss */
+  /* line 1069, main.scss */
   .project-section-fieldset {
     display: table-cell;
   }
 }
-/* line 1052, main.scss */
+/* line 1074, main.scss */
 .location-map-region .map {
   height: 200px;
   border: 1px solid #c9c9c9;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1057, main.scss */
+  /* line 1079, main.scss */
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
@@ -11185,7 +11240,7 @@ img.attachment-icon {
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1066, main.scss */
+  /* line 1088, main.scss */
   input[type=text].sub-heading-input {
     font-size: 1.75rem;
     margin: 0 0 1rem 0;
@@ -11195,12 +11250,12 @@ img.attachment-icon {
   }
 }
 
-/* line 1075, main.scss */
+/* line 1097, main.scss */
 span.sub-heading-postfix {
   color: #999;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1075, main.scss */
+  /* line 1097, main.scss */
   span.sub-heading-postfix {
     margin: 0 0 1rem 0;
     padding: 0.5rem 0.75rem;
@@ -11208,7 +11263,7 @@ span.sub-heading-postfix {
   }
 }
 
-/* line 1084, main.scss */
+/* line 1106, main.scss */
 .content-editable {
   line-height: 1.6;
   background-color: #FFFFFF;
@@ -11228,7 +11283,7 @@ span.sub-heading-postfix {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
   height: auto;
 }
-/* line 1086, main.scss */
+/* line 1108, main.scss */
 .content-editable.rich-editable {
   min-height: 8rem;
 }
@@ -11253,77 +11308,77 @@ span.sub-heading-postfix {
   background-color: #DDDDDD;
   cursor: default;
 }
-/* line 1094, main.scss */
+/* line 1116, main.scss */
 .content-editable.radius {
   border-radius: 3px;
 }
-/* line 1098, main.scss */
+/* line 1120, main.scss */
 .error .content-editable, .content-editable.error {
   margin-bottom: 0;
 }
-/* line 1101, main.scss */
+/* line 1123, main.scss */
 .content-editable a {
   color: #308fbf;
   text-decoration: none;
   line-height: inherit;
 }
-/* line 1106, main.scss */
+/* line 1128, main.scss */
 .content-editable a:hover, .content-editable a:focus {
   color: #267299;
 }
 
-/* line 1115, main.scss */
+/* line 1137, main.scss */
 .pen-menu,
 .pen-menu * {
   box-sizing: content-box !important;
 }
 
-/* line 1120, main.scss */
+/* line 1142, main.scss */
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
   padding-top: 0.5rem;
   padding-right: 0.25rem;
 }
 
-/* line 1126, main.scss */
+/* line 1148, main.scss */
 .section-settings {
   background-color: #f7f7f7;
   padding-top: 1.75rem;
 }
-/* line 1129, main.scss */
+/* line 1151, main.scss */
 .section-settings-toggle-container + .section-settings {
   margin-top: -2.5rem;
 }
 
-/* line 1134, main.scss */
+/* line 1156, main.scss */
 .section-insert {
   margin-bottom: -1rem;
   margin-right: -0.9375rem;
   margin-left: -0.9375rem;
 }
-/* line 1138, main.scss */
+/* line 1160, main.scss */
 .section-insert hr {
   margin-top: 1rem;
   border-color: #ff8b38;
 }
 
-/* line 1144, main.scss */
+/* line 1166, main.scss */
 .unassigned {
   cursor: default;
 }
 
-/* line 1148, main.scss */
+/* line 1170, main.scss */
 .project-settings-container {
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
   background-color: #d9d9d9;
 }
-/* line 1149, main.scss */
+/* line 1171, main.scss */
 .project-settings-container .save-btn {
   outline: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1148, main.scss */
+  /* line 1170, main.scss */
   .project-settings-container {
     position: fixed;
     top: 65px;
@@ -11335,25 +11390,25 @@ span.sub-heading-postfix {
     overflow: hidden;
     box-shadow: inset 3px 0 0 rgba(51, 51, 51, 0.1);
   }
-  /* line 1165, main.scss */
+  /* line 1187, main.scss */
   .project-settings-container .project-settings {
     max-height: 60%;
     overflow: auto;
   }
 }
 
-/* line 1172, main.scss */
+/* line 1194, main.scss */
 textarea.no-resize {
   resize: none;
 }
 
-/* line 1177, main.scss */
+/* line 1199, main.scss */
 .drag-area-container {
   position: relative;
   text-align: center;
 }
 
-/* line 1181, main.scss */
+/* line 1203, main.scss */
 .drag-area {
   position: absolute;
   top: 1rem;
@@ -11364,17 +11419,17 @@ textarea.no-resize {
   border-radius: 0.375rem;
   background-color: rgba(242, 242, 242, 0.4);
 }
-/* line 1190, main.scss */
+/* line 1212, main.scss */
 .drag-area:hover {
   border-color: rgba(133, 133, 133, 0.9);
   background-color: rgba(242, 242, 242, 0.9);
 }
-/* line 1194, main.scss */
+/* line 1216, main.scss */
 .drag-area p {
   margin-bottom: 0.5rem;
 }
 
-/* line 1198, main.scss */
+/* line 1220, main.scss */
 .no-file-upload-message {
   clear: both;
   font-size: 0.75em;
@@ -11387,18 +11442,18 @@ textarea.no-resize {
   border-radius: 0.25em;
 }
 
-/* line 1209, main.scss */
+/* line 1231, main.scss */
 .no-file-upload-message a {
   color: #fff;
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 1213, main.scss */
+/* line 1235, main.scss */
 .no-file-upload-message a:hover {
   color: #fff;
 }
 
-/* line 1216, main.scss */
+/* line 1238, main.scss */
 .file-upload {
   margin: 2em 1em 1em;
   text-align: center;
@@ -11409,7 +11464,7 @@ textarea.no-resize {
   position: relative;
 }
 
-/* line 1225, main.scss */
+/* line 1247, main.scss */
 .file-upload:hover,
 .file-dragging,
 .file-uploading {
@@ -11418,12 +11473,12 @@ textarea.no-resize {
   background-color: rgba(90, 90, 90, 0.5);
 }
 
-/* line 1232, main.scss */
+/* line 1254, main.scss */
 .file-upload p {
   margin-bottom: 0.5em;
 }
 
-/* line 1235, main.scss */
+/* line 1257, main.scss */
 .file-upload-input-container {
   position: relative;
   overflow: hidden;
@@ -11431,12 +11486,12 @@ textarea.no-resize {
   margin-bottom: 0;
 }
 
-/* line 1241, main.scss */
+/* line 1263, main.scss */
 .file-upload-input {
   display: none;
 }
 
-/* line 1244, main.scss */
+/* line 1266, main.scss */
 .uploading-message,
 .file-uploading > .drop-instructions {
   display: none;
@@ -11464,7 +11519,7 @@ textarea.no-resize {
     color: #888;
   }
 }
-/* line 1258, main.scss */
+/* line 1280, main.scss */
 .file-uploading > .uploading-message {
   display: block;
   position: relative;
@@ -11475,44 +11530,44 @@ textarea.no-resize {
   animation: uploading 1.5s infinite ease-in-out;
 }
 
-/* line 1267, main.scss */
+/* line 1289, main.scss */
 .file-uploading > .file-upload-input-container {
   visibility: hidden;
 }
 
-/* line 1272, main.scss */
+/* line 1294, main.scss */
 .full-width-image-container {
   margin: 0 -0.9375rem 0.5rem -0.9375rem;
 }
-/* line 1274, main.scss */
+/* line 1296, main.scss */
 .full-width-image-container.drag-area-container {
   min-height: 9rem;
 }
 
-/* line 1278, main.scss */
+/* line 1300, main.scss */
 .cover-image-container {
   margin-top: -1.125rem;
 }
 
-/* line 1283, main.scss */
+/* line 1305, main.scss */
 .logo-image-container {
   min-height: 9rem;
   margin-bottom: 1rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1283, main.scss */
+  /* line 1305, main.scss */
   .logo-image-container {
     float: left;
     width: 50%;
   }
 }
-/* line 1290, main.scss */
+/* line 1312, main.scss */
 .logo-image-container img {
   max-height: 20rem;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1294, main.scss */
+  /* line 1316, main.scss */
   .project-title-container {
     float: right;
     width: 50%;
@@ -11521,7 +11576,7 @@ textarea.no-resize {
     padding-right: 1rem;
     padding-bottom: 1rem;
   }
-  /* line 1302, main.scss */
+  /* line 1324, main.scss */
   .logo-image-container.hide + .project-title-container {
     float: none;
     width: auto;
@@ -11531,62 +11586,62 @@ textarea.no-resize {
     padding-bottom: 0;
   }
 }
-/* line 1311, main.scss */
+/* line 1333, main.scss */
 .project-title-container .project-title-help-text {
   margin-top: -0.75rem;
 }
 
-/* line 1318, main.scss */
+/* line 1340, main.scss */
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none;
 }
 
-/* line 1330, main.scss */
+/* line 1352, main.scss */
 .existing-snapshot-wrapper .button {
   margin-bottom: 0;
 }
 
-/* line 1336, main.scss */
+/* line 1358, main.scss */
 .avatar-container {
   padding: 0.3rem;
 }
-/* line 1338, main.scss */
+/* line 1360, main.scss */
 .avatar-container .avatar {
   display: inline-block;
 }
-/* line 1341, main.scss */
+/* line 1363, main.scss */
 .avatar-container .drag-area-container {
   min-height: 10.125rem;
 }
 
-/* line 1349, main.scss */
+/* line 1371, main.scss */
 .project-list > li + li, .member-list > li + li, .team-list > li + li {
   margin-top: 0.625rem;
   padding-top: 0.625rem;
   border-top: 1px solid #e3e3e3;
 }
 
-/* line 1356, main.scss */
+/* line 1378, main.scss */
 .member-list li, .team-list li {
   padding-left: 4.375rem;
 }
-/* line 1359, main.scss */
+/* line 1381, main.scss */
 .member-list .avatar, .team-list .avatar {
   width: 3.75rem;
   margin-left: -4.375rem;
 }
 
-/* line 1364, main.scss */
+/* line 1386, main.scss */
 .user-profile .member-list {
   display: none;
 }
 
-/* line 1367, main.scss */
+/* line 1389, main.scss */
 .user-profile .project-list {
   display: none;
 }
 
-/* line 1370, main.scss */
+/* line 1392, main.scss */
 .team-profile .team-list {
   display: none;
 }

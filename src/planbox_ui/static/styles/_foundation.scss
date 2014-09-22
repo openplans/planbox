@@ -114,15 +114,36 @@ h1, h2, h3, h4, h5, h6, p, ul, ul, li {
 .button, button {
   &.less-padding {
     padding: 0.75rem 1.25rem;
+    &.dropdown {
+      padding-right: 3.0625rem;
+    }
   }
   &.tiny.less-padding {
     padding: 0.25rem 0.375rem;
+    &.dropdown {
+      padding-right: 1.5rem;
+      &:after {
+        right: 0.375rem;
+      }
+    }
   }
   &.small.less-padding {
     padding: 0.5rem 0.75rem;
+    &.dropdown {
+      padding-right: 2.125rem;
+      &:after {
+        right: 0.75rem;
+      }
+    }
   }
   &.large.less-padding {
     padding: 0.875rem 1.25rem;
+    &.dropdown {
+      padding-right: 3.0625rem;
+    }
+  }
+  &.shadowed {
+    box-shadow: -5px 5px 0 rgba(51,51,51,0.2);
   }
 }
 
@@ -250,6 +271,7 @@ input[type="url"] {
 .dropdown,
 .f-dropdown {
   box-shadow: -5px 5px 0 rgba(51,51,51,0.2);
+  outline: 0; // https://github.com/zurb/foundation/issues/5757
 }
 
 // Disabled Links

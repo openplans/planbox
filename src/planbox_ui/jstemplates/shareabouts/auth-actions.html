@@ -1,12 +1,13 @@
 {{^if .}}
-  <a href="#" class="shareabouts-auth-button button"><img class="shareabouts-auth-avatar" src="images/user-50.png"><small>Sign In</small></a>
-  <div class="shareabouts-auth-menu is-exposed">
-    <a class="shareabouts-auth-twitter-button" href="#">Twitter</a><br>
-    <a class="shareabouts-auth-facebook-button" href="#">Facebook</a>
-  </div>
+  <button href="#" data-dropdown="shareaboutsauth" data-options="align:left" aria-controls="shareaboutsauth" aria-expanded="true" class="shareabouts-auth-button button small less-padding shadowed">Sign In</button>
+  <ul id="shareaboutsauth" data-dropdown-content class="f-dropdown text-center" aria-hidden="true" tabindex="-1">
+    <li><a class="shareabouts-auth-twitter-button" href="#"><strong>Twitter</strong></a></li>
+    <li><a class="shareabouts-auth-facebook-button" href="#"><strong>Facebook</strong></a></li>
+  </ul>
 {{else}}
-  <a href="#" class="shareabouts-auth-button button"><img class="shareabouts-auth-avatar" src=" {{ avatar_url }} "><small> {{ name }} </small></a>
-  <div class="shareabouts-auth-menu is-exposed">
-    <a class="shareabouts-auth-logout-button" href="#">Logout</a>
+  <button href="#" data-dropdown="shareaboutsauth" data-options="align:left" aria-controls="shareaboutsauth" aria-expanded="true" class="shareabouts-auth-button button tiny less-padding dropdown"><img class="shareabouts-auth-avatar" src=" {{ avatar_url }} "></button>
+  <div id="shareaboutsauth" data-dropdown-content class="f-dropdown content text-center" aria-hidden="true" tabindex="-1">
+    Signed in as <strong class="nowrap">{{ name }}</strong><br/>
+    <strong><a class="shareabouts-auth-logout-button" href="#">Sign Out</a></strong>
   </div>
 {{/if}}
