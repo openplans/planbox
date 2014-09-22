@@ -3,6 +3,8 @@
 </div>
 
 <form novalidate>
+  <input type="hidden" name="user_token" value="{{ userToken }}">
+
   <h5>Add a Place</h5>
 
   {{#if submitter}}
