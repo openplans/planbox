@@ -49,5 +49,16 @@
     </div>
   </div>
 
-  <input type="submit" value="Add to Map" class="button small expand shareabouts-submit-button"/>
+  {{#if submitter}}
+  <div class="row">
+    <div class="large-6 columns">
+      <input type="submit" value="Add to Map" class="button small shareabouts-submit-button"/>
+    </div>
+    <div class="large-6 columns signed-in-as">
+      <img src="{{ submitter.avatar_url }}" class="avatar" /> {{ submitter.name }}
+    </div>
+  </div>
+  {{else}}
+    <input type="submit" value="Add to Map" class="button small expand shareabouts-submit-button"/>
+  {{/if}}
 </form>
