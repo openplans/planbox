@@ -2110,9 +2110,9 @@ select {
 }
 /* line 118, ../bower_components/foundation/scss/foundation/components/_alert-boxes.scss */
 .alert-box.success {
-  background-color: #43AC6A;
-  border-color: #3a945b;
-  color: #FFFFFF;
+  background-color: #cceeff;
+  border-color: #8cd9ff;
+  color: #6a2c00;
 }
 /* line 119, ../bower_components/foundation/scss/foundation/components/_alert-boxes.scss */
 .alert-box.alert {
@@ -2801,17 +2801,17 @@ button.secondary:hover, button.secondary:focus, .button.secondary:hover, .button
 }
 /* line 225, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 button.success, .button.success {
-  background-color: #43AC6A;
-  border-color: #368a55;
-  color: #FFFFFF;
+  background-color: #cceeff;
+  border-color: #70cfff;
+  color: #333333;
 }
 /* line 161, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 button.success:hover, button.success:focus, .button.success:hover, .button.success:focus {
-  background-color: #368a55;
+  background-color: #70cfff;
 }
 /* line 167, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 button.success:hover, button.success:focus, .button.success:hover, .button.success:focus {
-  color: #FFFFFF;
+  color: #333333;
 }
 /* line 226, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 button.alert, .button.alert {
@@ -2947,24 +2947,24 @@ button.disabled.secondary:hover, button.disabled.secondary:focus, button[disable
 }
 /* line 243, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 button.disabled.success, button[disabled].success, .button.disabled.success, .button[disabled].success {
-  background-color: #43AC6A;
-  border-color: #368a55;
-  color: #FFFFFF;
+  background-color: #cceeff;
+  border-color: #70cfff;
+  color: #333333;
   cursor: default;
   opacity: 0.7;
   box-shadow: none;
 }
 /* line 161, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .button.disabled.success:focus, .button[disabled].success:hover, .button[disabled].success:focus {
-  background-color: #368a55;
+  background-color: #70cfff;
 }
 /* line 167, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .button.disabled.success:focus, .button[disabled].success:hover, .button[disabled].success:focus {
-  color: #FFFFFF;
+  color: #333333;
 }
 /* line 178, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .button.disabled.success:focus, .button[disabled].success:hover, .button[disabled].success:focus {
-  background-color: #43AC6A;
+  background-color: #cceeff;
 }
 /* line 244, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 button.disabled.alert, button[disabled].alert, .button.disabled.alert, .button[disabled].alert {
@@ -5350,8 +5350,8 @@ kbd {
 }
 /* line 101, ../bower_components/foundation/scss/foundation/components/_labels.scss */
 .label.success {
-  background-color: #43AC6A;
-  color: #FFFFFF;
+  background-color: #cceeff;
+  color: #6c7180;
 }
 /* line 102, ../bower_components/foundation/scss/foundation/components/_labels.scss */
 .label.secondary {
@@ -5361,7 +5361,7 @@ kbd {
 /* line 103, ../bower_components/foundation/scss/foundation/components/_labels.scss */
 .label.info {
   background-color: #a0d3e8;
-  color: #333333;
+  color: #6c7180;
 }
 
 /* line 18, ../bower_components/foundation/scss/foundation/components/_magellan.scss */
@@ -5947,7 +5947,7 @@ ul.pagination li {
 }
 /* line 65, ../bower_components/foundation/scss/foundation/components/_progress-bars.scss */
 .progress.success .meter {
-  background: #43AC6A;
+  background: #cceeff;
   height: 100%;
   display: block;
 }
@@ -7916,17 +7916,17 @@ meta.foundation-mq-topbar {
 }
 /* line 322, ../bower_components/foundation/scss/foundation/components/_top-bar.scss */
 .top-bar-section ul li > a.button.success {
-  background-color: #43AC6A;
-  border-color: #368a55;
-  color: #FFFFFF;
+  background-color: #cceeff;
+  border-color: #70cfff;
+  color: #333333;
 }
 /* line 161, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 .top-bar-section ul li > a.button.success:hover, .top-bar-section ul li > a.button.success:focus {
-  background-color: #368a55;
+  background-color: #70cfff;
 }
 /* line 167, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 .top-bar-section ul li > a.button.success:hover, .top-bar-section ul li > a.button.success:focus {
-  color: #FFFFFF;
+  color: #333333;
 }
 /* line 323, ../bower_components/foundation/scss/foundation/components/_top-bar.scss */
 .top-bar-section ul li > a.button.alert {
@@ -7975,17 +7975,17 @@ meta.foundation-mq-topbar {
 }
 /* line 333, ../bower_components/foundation/scss/foundation/components/_top-bar.scss */
 .top-bar-section ul li > button.success {
-  background-color: #43AC6A;
-  border-color: #368a55;
-  color: #FFFFFF;
+  background-color: #cceeff;
+  border-color: #70cfff;
+  color: #333333;
 }
 /* line 161, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 .top-bar-section ul li > button.success:hover, .top-bar-section ul li > button.success:focus {
-  background-color: #368a55;
+  background-color: #70cfff;
 }
 /* line 167, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 .top-bar-section ul li > button.success:hover, .top-bar-section ul li > button.success:focus {
-  color: #FFFFFF;
+  color: #333333;
 }
 /* line 334, ../bower_components/foundation/scss/foundation/components/_top-bar.scss */
 .top-bar-section ul li > button.alert {
@@ -9801,35 +9801,40 @@ input[type="url"].inline-input {
   background-size: cover !important;
 }
 
+/* line 91, main.scss */
+img.shadowed {
+  box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
+}
+
 /*--------------------------------------------------
   Icons
 --------------------------------------------------*/
-/* line 97, main.scss */
+/* line 100, main.scss */
 .icon {
   display: inline-block;
   position: relative;
   width: 1.5rem;
   height: 1.5rem;
 }
-/* line 102, main.scss */
+/* line 105, main.scss */
 a .icon {
   opacity: 0.3;
 }
-/* line 105, main.scss */
+/* line 108, main.scss */
 a:hover .icon {
   opacity: 1;
 }
-/* line 108, main.scss */
+/* line 111, main.scss */
 .icon.tiny {
   width: 1rem;
   height: 1rem;
 }
-/* line 112, main.scss */
+/* line 115, main.scss */
 .icon.small {
   width: 1.25rem;
   height: 1.25rem;
 }
-/* line 116, main.scss */
+/* line 119, main.scss */
 .icon.large {
   width: 2.25rem;
   height: 2.25rem;
@@ -9839,15 +9844,15 @@ a:hover .icon {
   Fancy Radio Buttons
   Wrap 'em in .radio-images and style the labels.
 --------------------------------------------------*/
-/* line 129, main.scss */
+/* line 132, main.scss */
 .radio-images input[type="radio"] {
   display: none;
 }
-/* line 132, main.scss */
+/* line 135, main.scss */
 .radio-images input[type="radio"] + label {
   margin-left: 0;
 }
-/* line 137, main.scss */
+/* line 140, main.scss */
 .radio-images.text-section-layouts img {
   background-color: #eee;
   border: 1px solid #eee;
@@ -9855,17 +9860,17 @@ a:hover .icon {
   width: 100px;
   height: auto;
 }
-/* line 144, main.scss */
+/* line 147, main.scss */
 .radio-images.text-section-layouts :checked + label img {
   background-color: #999;
   border: 1px solid #ccc;
 }
-/* line 148, main.scss */
+/* line 151, main.scss */
 .radio-images.text-section-layouts label:hover img {
   background-color: #00bfff;
   border: 1px solid #00bfff;
 }
-/* line 152, main.scss */
+/* line 155, main.scss */
 .radio-images.text-section-layouts .label-text {
   display: block;
   text-align: center;
@@ -9874,12 +9879,12 @@ a:hover .icon {
 /*--------------------------------------------------
   Float Label Pattern
 --------------------------------------------------*/
-/* line 164, main.scss */
+/* line 167, main.scss */
 .float-label-container {
   position: relative;
 }
 
-/* line 167, main.scss */
+/* line 170, main.scss */
 .float-label {
   background-color: #999;
   float: left;
@@ -9901,14 +9906,14 @@ a:hover .icon {
   transition: height 0.1s ease, opacity 0.45s ease, background-color 0.45s ease-in-out;
 }
 
-/* line 187, main.scss */
+/* line 190, main.scss */
 .float-label-input:focus + .float-label {
   visibility: visible;
   opacity: 1;
   height: 2em;
 }
 
-/* line 192, main.scss */
+/* line 195, main.scss */
 .float-label-input {
   -webkit-appearance: none;
   background-color: #fff;
@@ -9926,7 +9931,7 @@ a:hover .icon {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
 }
 
-/* line 208, main.scss */
+/* line 211, main.scss */
 .float-label-input:focus {
   background-color: #fafafa;
   color: #444;
@@ -9936,18 +9941,18 @@ a:hover .icon {
   border-color: #999999;
 }
 
-/* line 218, main.scss */
+/* line 221, main.scss */
 .float-label-input:focus a {
   color: #008CBA;
 }
 
-/* line 221, main.scss */
+/* line 224, main.scss */
 .float-label-input:focus a:hover,
 .float-label-input:focus a:focus {
   color: #007ba0;
 }
 
-/* line 225, main.scss */
+/* line 228, main.scss */
 section, footer {
   position: relative;
   z-index: 10;
@@ -9956,7 +9961,7 @@ section, footer {
 /*--------------------------------------------------
   Product: Home Page
 --------------------------------------------------*/
-/* line 236, main.scss */
+/* line 239, main.scss */
 .product-tagline-section {
   margin: -65px 0 0;
   padding: 7% 0 17%;
@@ -9965,7 +9970,7 @@ section, footer {
   color: #fff;
   text-align: center;
 }
-/* line 243, main.scss */
+/* line 246, main.scss */
 .product-tagline-section .tagline {
   margin: 65px 0 0;
   padding: 0.5rem;
@@ -9977,26 +9982,26 @@ section, footer {
   opacity: 0.75;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 243, main.scss */
+  /* line 246, main.scss */
   .product-tagline-section .tagline {
     font-size: 1.875rem;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 243, main.scss */
+  /* line 246, main.scss */
   .product-tagline-section .tagline {
     padding: 1.5rem;
     font-size: 2.5rem;
   }
 }
 @media only screen and (min-width: 90.063em) {
-  /* line 243, main.scss */
+  /* line 246, main.scss */
   .product-tagline-section .tagline {
     padding: 2rem;
     font-size: 3rem;
   }
 }
-/* line 263, main.scss */
+/* line 266, main.scss */
 .product-tagline-section .tagline .hearts {
   margin: 0 0.375em;
   display: inline-block;
@@ -10007,7 +10012,7 @@ section, footer {
   -ms-transform: scale(1.5);
   transform: scale(1.5);
 }
-/* line 274, main.scss */
+/* line 277, main.scss */
 .product-tagline-section .slogan {
   margin: 0;
   padding: 0.5rem;
@@ -10019,77 +10024,72 @@ section, footer {
   background-color: rgba(250, 107, 35, 0.7);
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 274, main.scss */
+  /* line 277, main.scss */
   .product-tagline-section .slogan {
     font-size: 1rem;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 274, main.scss */
+  /* line 277, main.scss */
   .product-tagline-section .slogan {
     padding: 0.9375rem;
     font-size: 1.375rem;
   }
 }
 @media only screen and (min-width: 90.063em) {
-  /* line 274, main.scss */
+  /* line 277, main.scss */
   .product-tagline-section .slogan {
     padding: 1.5rem;
     font-size: 1.5rem;
   }
 }
 
-/* line 297, main.scss */
+/* line 300, main.scss */
 .feature-illustration {
   display: block;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 297, main.scss */
+  /* line 300, main.scss */
   .feature-illustration {
     margin-top: -1.5rem;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 297, main.scss */
+  /* line 300, main.scss */
   .feature-illustration {
     margin-top: -3.5rem;
     position: relative;
     right: -1.5rem;
   }
-  /* line 306, main.scss */
+  /* line 309, main.scss */
   .medium-push-8 .feature-illustration {
     right: 1.5rem;
   }
 }
 
-/* line 313, main.scss */
-.product-get-started {
+/* line 316, main.scss */
+.product-section-alt {
   background-color: #ddd;
 }
 
-/* line 318, main.scss */
-.product-benefits {
-  background-color: #ddd;
-}
-
-/* line 323, main.scss */
+/* line 321, main.scss */
 .product-demos {
   color: #fff;
   background-color: #308fbf;
 }
-/* line 326, main.scss */
+/* line 324, main.scss */
 .product-demos h3 {
   margin: 0;
 }
 
-/* line 330, main.scss */
+/* line 328, main.scss */
 .demo-image {
   display: block;
   float: right;
   position: relative;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 330, main.scss */
+  /* line 328, main.scss */
   .demo-image {
     -webkit-transition: -webkit-transform .2s ease;
     -ms-transition: -ms-transform .2s ease;
@@ -10100,7 +10100,7 @@ section, footer {
   }
 }
 
-/* line 343, main.scss */
+/* line 341, main.scss */
 .demo-image-ipad {
   float: left;
   width: 36%;
@@ -10111,7 +10111,7 @@ section, footer {
   transform: rotate(-8deg);
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 351, main.scss */
+  /* line 349, main.scss */
   .demo-image-ipad:hover {
     z-index: 4;
     -webkit-transform: scale(1.25) rotate(-6deg);
@@ -10120,7 +10120,7 @@ section, footer {
   }
 }
 
-/* line 360, main.scss */
+/* line 358, main.scss */
 .demo-image-iphone {
   width: 17%;
   margin-bottom: -13%;
@@ -10131,7 +10131,7 @@ section, footer {
   transform: rotate(15deg);
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 368, main.scss */
+  /* line 366, main.scss */
   .demo-image-iphone:hover {
     z-index: 4;
     -webkit-transform: scale(1.25) rotate(10deg);
@@ -10140,19 +10140,19 @@ section, footer {
   }
 }
 
-/* line 377, main.scss */
+/* line 375, main.scss */
 .demo-image-ff {
   width: 63%;
   z-index: 1;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 377, main.scss */
+  /* line 375, main.scss */
   .demo-image-ff {
     -webkit-transform-origin: 60% 100%;
     -ms-transform-origin: 60% 100%;
     transform-origin: 60% 100%;
   }
-  /* line 384, main.scss */
+  /* line 382, main.scss */
   .demo-image-ff:hover {
     z-index: 4;
     -webkit-transform: scale(1.25);
@@ -10161,16 +10161,16 @@ section, footer {
   }
 }
 
-/* line 394, main.scss */
+/* line 392, main.scss */
 .product-feedback {
   background-color: #6c7180;
   color: #fff;
 }
-/* line 397, main.scss */
+/* line 395, main.scss */
 .product-feedback a {
   color: #cceeff;
 }
-/* line 399, main.scss */
+/* line 397, main.scss */
 .product-feedback a:hover, .product-feedback a:focus {
   color: #3db6f2;
 }
@@ -10178,26 +10178,26 @@ section, footer {
 /*--------------------------------------------------
   Product: About Page
 --------------------------------------------------*/
-/* line 411, main.scss */
+/* line 409, main.scss */
 .team-section {
   background-color: #ccc;
 }
-/* line 413, main.scss */
+/* line 411, main.scss */
 .team-section .avatar {
   display: block;
   padding-right: 0.9375rem;
 }
 
-/* line 419, main.scss */
+/* line 417, main.scss */
 .clients-section {
   background-color: #ddd;
 }
 
-/* line 422, main.scss */
+/* line 420, main.scss */
 .clients-list {
   text-align: center;
 }
-/* line 424, main.scss */
+/* line 422, main.scss */
 .clients-list img {
   display: block;
   margin: 0.9375rem auto;
@@ -10210,28 +10210,28 @@ section, footer {
 /*--------------------------------------------------
   Product: Shareabouts Page
 --------------------------------------------------*/
-/* line 439, main.scss */
+/* line 437, main.scss */
 .shareabouts-page-header {
   overflow: hidden;
 }
-/* line 441, main.scss */
+/* line 439, main.scss */
 .shareabouts-page-header .columns, .shareabouts-page-header .row {
   overflow: visible;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 444, main.scss */
+  /* line 442, main.scss */
   .shareabouts-page-header .shareabouts-page-header-text {
     margin-top: 4rem;
     position: relative;
     z-index: 2;
   }
 }
-/* line 450, main.scss */
+/* line 448, main.scss */
 .shareabouts-page-header .shareabouts-page-header-text h2 img {
   width: 400px;
 }
 
-/* line 455, main.scss */
+/* line 453, main.scss */
 .shareabouts-slideshow {
   position: relative;
   width: 500px;
@@ -10240,7 +10240,7 @@ section, footer {
   margin-left: -200px;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 455, main.scss */
+  /* line 453, main.scss */
   .shareabouts-slideshow {
     width: 1000px;
     height: 580px;
@@ -10248,7 +10248,7 @@ section, footer {
     margin-left: 0;
   }
 }
-/* line 467, main.scss */
+/* line 465, main.scss */
 .shareabouts-slideshow .shareabouts-slide {
   display: block;
   position: absolute;
@@ -10258,7 +10258,7 @@ section, footer {
   height: 246px;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 467, main.scss */
+  /* line 465, main.scss */
   .shareabouts-slideshow .shareabouts-slide {
     top: 22px;
     left: 115px;
@@ -10266,23 +10266,23 @@ section, footer {
     height: 493px;
   }
 }
-/* line 481, main.scss */
+/* line 479, main.scss */
 .shareabouts-slideshow .fade {
   -webkit-animation: fade 25s linear infinite;
   -moz-animation: fade 25s linear infinite;
   animation: fade 25s linear infinite;
 }
-/* line 485, main.scss */
+/* line 483, main.scss */
 .shareabouts-slideshow .fade.fade2 {
   -webkit-animation-name: fade2;
   animation-name: fade2;
 }
-/* line 486, main.scss */
+/* line 484, main.scss */
 .shareabouts-slideshow .fade.fade3 {
   -webkit-animation-name: fade3;
   animation-name: fade3;
 }
-/* line 487, main.scss */
+/* line 485, main.scss */
 .shareabouts-slideshow .fade.fade4 {
   -webkit-animation-name: fade4;
   animation-name: fade4;
@@ -10492,47 +10492,47 @@ section, footer {
     opacity: 1;
   }
 }
-/* line 509, main.scss */
+/* line 507, main.scss */
 .shareabouts-instances .img {
   margin-right: -110px;
   width: 100px;
   height: 100px;
 }
-/* line 514, main.scss */
+/* line 512, main.scss */
 .shareabouts-instances .description {
   margin-left: 110px;
 }
 
-/* line 518, main.scss */
+/* line 516, main.scss */
 .pricing-table {
   border: 0;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
-/* line 522, main.scss */
+/* line 520, main.scss */
 .pricing-table .title {
   background-color: #666;
 }
 
-/* line 525, main.scss */
+/* line 523, main.scss */
 .pricing-matrix {
   margin-bottom: 2rem !important;
   overflow: hidden;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 529, main.scss */
+  /* line 527, main.scss */
   .pricing-matrix .pricing-table {
     margin-bottom: 0;
   }
 }
 
-/* line 534, main.scss */
+/* line 532, main.scss */
 .extra-pricing-info {
   height: 0;
   overflow: hidden;
 }
 
-/* line 538, main.scss */
+/* line 536, main.scss */
 .extra-pricing-info-header {
   background-color: #ddd;
   margin: 0;
@@ -10542,39 +10542,39 @@ section, footer {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 }
 
-/* line 546, main.scss */
+/* line 544, main.scss */
 .feature-list-icon {
   height: 1.75em;
   width: auto;
   margin: 0 0.375rem;
 }
 
-/* line 551, main.scss */
+/* line 549, main.scss */
 .extra-pricing-info table {
   width: 100%;
   border: 0;
   margin: 0;
 }
 
-/* line 556, main.scss */
+/* line 554, main.scss */
 .extra-pricing-info tr {
   background-color: #f5f5f5;
 }
 
-/* line 559, main.scss */
+/* line 557, main.scss */
 .extra-pricing-info tr.even,
 .extra-pricing-info tr.alt,
 .extra-pricing-info tr:nth-of-type(even) {
   background-color: #fff;
 }
 
-/* line 564, main.scss */
+/* line 562, main.scss */
 .extra-pricing-info tr.spacer td {
   width: 25%;
   padding: 0;
 }
 
-/* line 568, main.scss */
+/* line 566, main.scss */
 .extra-pricing-info td {
   font-size: 0.75rem;
   text-align: left;
@@ -10583,30 +10583,30 @@ section, footer {
   vertical-align: top;
 }
 
-/* line 575, main.scss */
+/* line 573, main.scss */
 .extra-pricing-info td:first-letter {
   text-transform: uppercase;
 }
 
-/* line 578, main.scss */
+/* line 576, main.scss */
 .extra-pricing-info td:last-child {
   border-right: 0;
   box-shadow: none;
 }
 
-/* line 582, main.scss */
+/* line 580, main.scss */
 .all-details-revealed .extra-pricing-info {
   height: auto;
 }
 
-/* line 585, main.scss */
+/* line 583, main.scss */
 .extra-pricing-info p {
   font-size: inherit;
   line-height: inherit;
   margin: 0;
 }
 
-/* line 590, main.scss */
+/* line 588, main.scss */
 .extra-pricing-info p + p {
   margin-top: 0.625rem;
 }
@@ -10614,18 +10614,18 @@ section, footer {
 /*--------------------------------------------------
   Project Layout
 --------------------------------------------------*/
-/* line 599, main.scss */
+/* line 597, main.scss */
 .container {
   background-color: #fff;
   color: #444;
 }
 
-/* line 603, main.scss */
+/* line 601, main.scss */
 .section-heading {
   padding-top: 1.5rem;
 }
 
-/* line 608, main.scss */
+/* line 606, main.scss */
 .project-text-content {
   line-height: 1.6;
   margin-bottom: 1.6rem;
@@ -10634,14 +10634,14 @@ section, footer {
 /*--------------------------------------------------
   Roundups
 --------------------------------------------------*/
-/* line 618, main.scss */
+/* line 616, main.scss */
 .truncated-wysiwyg {
   max-height: 7.5rem;
   position: relative;
   overflow: hidden;
 }
 
-/* line 623, main.scss */
+/* line 621, main.scss */
 .truncated-wysiwyg:after {
   content: '';
   display: block;
@@ -10657,12 +10657,12 @@ section, footer {
 /*--------------------------------------------------
   Project Header
 --------------------------------------------------*/
-/* line 640, main.scss */
+/* line 638, main.scss */
 .site-header {
   background-color: #fff;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 640, main.scss */
+  /* line 638, main.scss */
   .site-header {
     background-color: #268099;
     color: #fff;
@@ -10670,99 +10670,99 @@ section, footer {
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 647, main.scss */
+  /* line 645, main.scss */
   .site-header .site-header-content {
     border-top: 0;
     border-radius: 0.25em 0.25em 0 0;
   }
 }
-/* line 654, main.scss */
+/* line 652, main.scss */
 .site-header.has-image {
   padding-top: 40%;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 654, main.scss */
+  /* line 652, main.scss */
   .site-header.has-image {
     padding-top: 30%;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 654, main.scss */
+  /* line 652, main.scss */
   .site-header.has-image {
     padding-top: 15.25em;
     background-position: center center;
   }
 }
-/* line 664, main.scss */
+/* line 662, main.scss */
 .site-header.has-image .site-header-content {
   float: left;
   width: 100%;
   border-top: 0;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 664, main.scss */
+  /* line 662, main.scss */
   .site-header.has-image .site-header-content {
     float: none;
     width: auto;
   }
 }
-/* line 675, main.scss */
+/* line 673, main.scss */
 .site-header + .orderable-container {
   clear: both;
 }
 
-/* line 680, main.scss */
+/* line 678, main.scss */
 .project-header {
   border-radius: 0.375em 0.375em 0 0;
 }
 
-/* line 684, main.scss */
+/* line 682, main.scss */
 .social-links-header {
   background-color: #fff;
   border-radius: 0.5rem;
   margin: 0.9375rem 0.9375rem 0 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 684, main.scss */
+  /* line 682, main.scss */
   .social-links-header {
     margin-top: -2rem;
   }
 }
-/* line 691, main.scss */
+/* line 689, main.scss */
 .social-links-header a {
   float: left;
   width: 40px;
   border-radius: 0.25rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 691, main.scss */
+  /* line 689, main.scss */
   .social-links-header a {
     margin: 0.5rem;
   }
 }
-/* line 698, main.scss */
+/* line 696, main.scss */
 .social-links-header a + a {
   margin-left: 0.5rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 698, main.scss */
+  /* line 696, main.scss */
   .social-links-header a + a {
     margin-left: 0;
   }
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 707, main.scss */
+  /* line 705, main.scss */
   .project-title {
     font-size: 3.125rem;
   }
 }
-/* line 711, main.scss */
+/* line 709, main.scss */
 .project-title img {
   max-height: 20rem;
 }
 
-/* line 718, main.scss */
+/* line 716, main.scss */
 .logo-table {
   display: table;
   border-collapse: collapse;
@@ -10770,47 +10770,47 @@ section, footer {
   position: relative;
   z-index: 5;
 }
-/* line 724, main.scss */
+/* line 722, main.scss */
 .logo-table .logo-table-row {
   display: table-row;
 }
-/* line 726, main.scss */
+/* line 724, main.scss */
 .logo-table .logo-table-row > div {
   display: table-cell;
   padding: 0;
   vertical-align: top;
 }
-/* line 730, main.scss */
+/* line 728, main.scss */
 .logo-table .logo-table-row > div.image-holder, .logo-table .logo-table-row > div.has-image {
   padding-right: 1em;
 }
-/* line 736, main.scss */
+/* line 734, main.scss */
 .logo-table img {
   max-height: 8em;
   height: auto;
   width: auto;
 }
 
-/* line 744, main.scss */
+/* line 742, main.scss */
 .project-menu-container.has-project-menu {
   position: relative;
 }
 
-/* line 748, main.scss */
+/* line 746, main.scss */
 [data-magellan-expedition],
 [data-magellan-expedition-clone] {
   background-color: transparent;
   padding: 0;
 }
 
-/* line 754, main.scss */
+/* line 752, main.scss */
 .project-menu .row {
   position: relative;
   z-index: 2;
   padding-top: .9375rem;
   padding-bottom: 0;
 }
-/* line 760, main.scss */
+/* line 758, main.scss */
 .project-menu .columns:after {
   content: '';
   display: block;
@@ -10827,22 +10827,22 @@ section, footer {
 /*--------------------------------------------------
   Project Footer
 --------------------------------------------------*/
-/* line 779, main.scss */
+/* line 777, main.scss */
 .social-links-section {
   max-width: 64.375rem;
 }
-/* line 781, main.scss */
+/* line 779, main.scss */
 .social-links-section .panel {
   border: 0;
 }
 
-/* line 786, main.scss */
+/* line 784, main.scss */
 .site-colophon {
   padding-top: 2rem;
   background-color: #eee;
   color: #888d9b;
 }
-/* line 790, main.scss */
+/* line 788, main.scss */
 .site-colophon .powered-by {
   margin-top: 4rem;
   margin-bottom: 4rem;
@@ -10851,20 +10851,20 @@ section, footer {
 /*--------------------------------------------------
   Project Timeline
 --------------------------------------------------*/
-/* line 801, main.scss */
+/* line 799, main.scss */
 .event-list {
   border-left: 1rem solid #fff;
   box-shadow: inset 0.75rem 0 0 #bbb;
 }
 
-/* line 805, main.scss */
+/* line 803, main.scss */
 .event {
   padding: 0 0 2rem 3.25rem;
   margin-left: -1rem;
   position: relative;
 }
 
-/* line 810, main.scss */
+/* line 808, main.scss */
 .event:first-child:before {
   content: '';
   background-color: #fff;
@@ -10875,7 +10875,7 @@ section, footer {
   left: 0.625rem;
 }
 
-/* line 819, main.scss */
+/* line 817, main.scss */
 .event:last-child:before {
   content: '';
   background-color: #fff;
@@ -10886,7 +10886,7 @@ section, footer {
   left: 0.625rem;
 }
 
-/* line 828, main.scss */
+/* line 826, main.scss */
 .event:only-child:before {
   content: '';
   background-color: #fff;
@@ -10898,7 +10898,7 @@ section, footer {
   left: 0.625rem;
 }
 
-/* line 838, main.scss */
+/* line 836, main.scss */
 .event:after {
   content: '';
   position: absolute;
@@ -10912,64 +10912,64 @@ section, footer {
   z-index: 1;
 }
 
-/* line 852, main.scss */
+/* line 850, main.scss */
 .event .calendar-icon {
   cursor: pointer;
 }
 
-/* line 855, main.scss */
+/* line 853, main.scss */
 .datetime-picker-container {
   position: relative;
 }
 
-/* line 858, main.scss */
+/* line 856, main.scss */
 .picker {
   margin-top: -1.125rem;
 }
 
-/* line 861, main.scss */
+/* line 859, main.scss */
 .picker__holder {
   max-width: 100%;
 }
 
-/* line 864, main.scss */
+/* line 862, main.scss */
 .picker__nav--prev:hover,
 .picker__nav--next:hover {
   background-color: transparent;
 }
 
-/* line 868, main.scss */
+/* line 866, main.scss */
 .picker button {
   color: inherit;
 }
 
-/* line 871, main.scss */
+/* line 869, main.scss */
 .picker table tr td {
   text-align: center;
 }
 
-/* line 876, main.scss */
+/* line 874, main.scss */
 ol.attachment-list.no-bullet {
   margin-left: 0;
 }
 
-/* line 880, main.scss */
+/* line 878, main.scss */
 .attachment .row {
   margin: 0 -0.5rem;
 }
-/* line 881, main.scss */
+/* line 879, main.scss */
 .attachment .row .column, .attachment .row .columns {
   padding: 0 0.5rem;
 }
-/* line 882, main.scss */
+/* line 880, main.scss */
 .attachment .row.collapse {
   margin: 0;
 }
-/* line 883, main.scss */
+/* line 881, main.scss */
 .attachment .row.collapse .column, .attachment .row.collapse .columns {
   padding: 0;
 }
-/* line 884, main.scss */
+/* line 882, main.scss */
 .attachment .row.collapse input {
   -webkit-border-bottom-right-radius: 0;
   -webkit-border-top-right-radius: 0;
@@ -10977,12 +10977,12 @@ ol.attachment-list.no-bullet {
   border-top-right-radius: 0;
 }
 
-/* line 889, main.scss */
+/* line 887, main.scss */
 .handle {
   cursor: move;
 }
 
-/* line 892, main.scss */
+/* line 890, main.scss */
 .event > .handle {
   position: absolute;
   top: 0.25rem;
@@ -10994,22 +10994,22 @@ ol.attachment-list.no-bullet {
   text-indent: -9999px;
 }
 
-/* line 902, main.scss */
+/* line 900, main.scss */
 .event:only-child > .handle {
   display: none;
 }
 
-/* line 905, main.scss */
+/* line 903, main.scss */
 .attachment-icon {
   position: relative;
 }
 
-/* line 908, main.scss */
+/* line 906, main.scss */
 img.attachment-icon {
   margin-bottom: 1.6rem;
 }
 
-/* line 911, main.scss */
+/* line 909, main.scss */
 .attachment-handle {
   position: absolute;
   top: 0;
@@ -11022,12 +11022,12 @@ img.attachment-icon {
 /*--------------------------------------------------
   Project Shareabouts
 --------------------------------------------------*/
-/* line 925, main.scss */
+/* line 923, main.scss */
 .map {
   height: 300px;
 }
 
-/* line 930, main.scss */
+/* line 928, main.scss */
 .project-shareabouts {
   border-top: 2px solid #eee;
   border-bottom: 2px solid #eee;
@@ -11036,47 +11036,47 @@ img.attachment-icon {
   overflow: hidden;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 930, main.scss */
+  /* line 928, main.scss */
   .project-shareabouts {
     height: 400px;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 930, main.scss */
+  /* line 928, main.scss */
   .project-shareabouts {
     height: 500px;
   }
 }
-/* line 942, main.scss */
+/* line 940, main.scss */
 .project-shareabouts .shareabouts-add-button-container {
   margin-left: 0;
   bottom: 0;
 }
 
-/* line 947, main.scss */
+/* line 945, main.scss */
 .shareabouts-geometry-set .form-instructions {
   display: none;
 }
 
 /* NOTE: use these selectors to style invalid form elements on non-HTML5 browsers */
-/* line 952, main.scss */
+/* line 950, main.scss */
 .project-shareabouts .form-submitted input:invalid,
 .project-shareabouts .form-submitted textarea:invalid,
 .project-shareabouts .form-submitted select:invalid {
   border: 1px solid #f04124;
 }
 
-/* line 958, main.scss */
+/* line 956, main.scss */
 .shareabouts-submit-button {
   margin-top: 0.5em;
 }
 
-/* line 962, main.scss */
+/* line 960, main.scss */
 .shareabouts-add-button {
   display: block;
 }
 @media only screen and (max-width: 40em) {
-  /* line 962, main.scss */
+  /* line 960, main.scss */
   .shareabouts-add-button {
     margin: 0;
   }
@@ -11085,7 +11085,7 @@ img.attachment-icon {
 /*--------------------------------------------------
   Project Layout
 --------------------------------------------------*/
-/* line 973, main.scss */
+/* line 971, main.scss */
 .project-map-region > div {
   height: 300px;
 }
@@ -11093,43 +11093,43 @@ img.attachment-icon {
 /*--------------------------------------------------
   The Admin
 --------------------------------------------------*/
-/* line 981, main.scss */
+/* line 979, main.scss */
 .project-edit-form {
   background-color: #fff;
   box-shadow: 0 -65px 0 #fff;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 981, main.scss */
+  /* line 979, main.scss */
   .project-edit-form {
     padding-bottom: 4rem;
   }
 }
 
-/* line 989, main.scss */
+/* line 987, main.scss */
 .project-section {
   z-index: auto;
 }
 
-/* line 993, main.scss */
+/* line 991, main.scss */
 .project-section-fieldset {
   padding: 0;
   border: 0;
 }
 
 @-moz-document url-prefix() {
-  /* line 1000, main.scss */
+  /* line 998, main.scss */
   .project-section-fieldset {
     display: table-cell;
   }
 }
-/* line 1005, main.scss */
+/* line 1003, main.scss */
 .location-map-region .map {
   height: 200px;
   border: 1px solid #c9c9c9;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1010, main.scss */
+  /* line 1008, main.scss */
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
@@ -11140,7 +11140,7 @@ img.attachment-icon {
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1019, main.scss */
+  /* line 1017, main.scss */
   input[type=text].sub-heading-input {
     font-size: 1.75rem;
     margin: 0 0 1rem 0;
@@ -11150,12 +11150,12 @@ img.attachment-icon {
   }
 }
 
-/* line 1028, main.scss */
+/* line 1026, main.scss */
 span.sub-heading-postfix {
   color: #999;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1028, main.scss */
+  /* line 1026, main.scss */
   span.sub-heading-postfix {
     margin: 0 0 1rem 0;
     padding: 0.5rem 0.75rem;
@@ -11163,7 +11163,7 @@ span.sub-heading-postfix {
   }
 }
 
-/* line 1037, main.scss */
+/* line 1035, main.scss */
 .content-editable {
   line-height: 1.6;
   background-color: #FFFFFF;
@@ -11183,7 +11183,7 @@ span.sub-heading-postfix {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
   height: auto;
 }
-/* line 1039, main.scss */
+/* line 1037, main.scss */
 .content-editable.rich-editable {
   min-height: 8rem;
 }
@@ -11208,77 +11208,77 @@ span.sub-heading-postfix {
   background-color: #DDDDDD;
   cursor: default;
 }
-/* line 1047, main.scss */
+/* line 1045, main.scss */
 .content-editable.radius {
   border-radius: 3px;
 }
-/* line 1051, main.scss */
+/* line 1049, main.scss */
 .error .content-editable, .content-editable.error {
   margin-bottom: 0;
 }
-/* line 1054, main.scss */
+/* line 1052, main.scss */
 .content-editable a {
   color: #308fbf;
   text-decoration: none;
   line-height: inherit;
 }
-/* line 1059, main.scss */
+/* line 1057, main.scss */
 .content-editable a:hover, .content-editable a:focus {
   color: #267299;
 }
 
-/* line 1068, main.scss */
+/* line 1066, main.scss */
 .pen-menu,
 .pen-menu * {
   box-sizing: content-box !important;
 }
 
-/* line 1073, main.scss */
+/* line 1071, main.scss */
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
   padding-top: 0.5rem;
   padding-right: 0.25rem;
 }
 
-/* line 1079, main.scss */
+/* line 1077, main.scss */
 .section-settings {
   background-color: #f7f7f7;
   padding-top: 1.75rem;
 }
-/* line 1082, main.scss */
+/* line 1080, main.scss */
 .section-settings-toggle-container + .section-settings {
   margin-top: -2.5rem;
 }
 
-/* line 1087, main.scss */
+/* line 1085, main.scss */
 .section-insert {
   margin-bottom: -1rem;
   margin-right: -0.9375rem;
   margin-left: -0.9375rem;
 }
-/* line 1091, main.scss */
+/* line 1089, main.scss */
 .section-insert hr {
   margin-top: 1rem;
   border-color: #ff8b38;
 }
 
-/* line 1097, main.scss */
+/* line 1095, main.scss */
 .unassigned {
   cursor: default;
 }
 
-/* line 1101, main.scss */
+/* line 1099, main.scss */
 .project-settings-container {
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
   background-color: #d9d9d9;
 }
-/* line 1102, main.scss */
+/* line 1100, main.scss */
 .project-settings-container .save-btn {
   outline: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1101, main.scss */
+  /* line 1099, main.scss */
   .project-settings-container {
     position: fixed;
     top: 65px;
@@ -11290,25 +11290,25 @@ span.sub-heading-postfix {
     overflow: hidden;
     box-shadow: inset 3px 0 0 rgba(51, 51, 51, 0.1);
   }
-  /* line 1118, main.scss */
+  /* line 1116, main.scss */
   .project-settings-container .project-settings {
     max-height: 60%;
     overflow: auto;
   }
 }
 
-/* line 1125, main.scss */
+/* line 1123, main.scss */
 textarea.no-resize {
   resize: none;
 }
 
-/* line 1130, main.scss */
+/* line 1128, main.scss */
 .drag-area-container {
   position: relative;
   text-align: center;
 }
 
-/* line 1134, main.scss */
+/* line 1132, main.scss */
 .drag-area {
   position: absolute;
   top: 1rem;
@@ -11319,17 +11319,17 @@ textarea.no-resize {
   border-radius: 0.375rem;
   background-color: rgba(242, 242, 242, 0.4);
 }
-/* line 1143, main.scss */
+/* line 1141, main.scss */
 .drag-area:hover {
   border-color: rgba(133, 133, 133, 0.9);
   background-color: rgba(242, 242, 242, 0.9);
 }
-/* line 1147, main.scss */
+/* line 1145, main.scss */
 .drag-area p {
   margin-bottom: 0.5rem;
 }
 
-/* line 1151, main.scss */
+/* line 1149, main.scss */
 .no-file-upload-message {
   clear: both;
   font-size: 0.75em;
@@ -11342,18 +11342,18 @@ textarea.no-resize {
   border-radius: 0.25em;
 }
 
-/* line 1162, main.scss */
+/* line 1160, main.scss */
 .no-file-upload-message a {
   color: #fff;
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 1166, main.scss */
+/* line 1164, main.scss */
 .no-file-upload-message a:hover {
   color: #fff;
 }
 
-/* line 1169, main.scss */
+/* line 1167, main.scss */
 .file-upload {
   margin: 2em 1em 1em;
   text-align: center;
@@ -11364,7 +11364,7 @@ textarea.no-resize {
   position: relative;
 }
 
-/* line 1178, main.scss */
+/* line 1176, main.scss */
 .file-upload:hover,
 .file-dragging,
 .file-uploading {
@@ -11373,12 +11373,12 @@ textarea.no-resize {
   background-color: rgba(90, 90, 90, 0.5);
 }
 
-/* line 1185, main.scss */
+/* line 1183, main.scss */
 .file-upload p {
   margin-bottom: 0.5em;
 }
 
-/* line 1188, main.scss */
+/* line 1186, main.scss */
 .file-upload-input-container {
   position: relative;
   overflow: hidden;
@@ -11386,12 +11386,12 @@ textarea.no-resize {
   margin-bottom: 0;
 }
 
-/* line 1194, main.scss */
+/* line 1192, main.scss */
 .file-upload-input {
   display: none;
 }
 
-/* line 1197, main.scss */
+/* line 1195, main.scss */
 .uploading-message,
 .file-uploading > .drop-instructions {
   display: none;
@@ -11419,7 +11419,7 @@ textarea.no-resize {
     color: #888;
   }
 }
-/* line 1211, main.scss */
+/* line 1209, main.scss */
 .file-uploading > .uploading-message {
   display: block;
   position: relative;
@@ -11430,44 +11430,44 @@ textarea.no-resize {
   animation: uploading 1.5s infinite ease-in-out;
 }
 
-/* line 1220, main.scss */
+/* line 1218, main.scss */
 .file-uploading > .file-upload-input-container {
   visibility: hidden;
 }
 
-/* line 1225, main.scss */
+/* line 1223, main.scss */
 .full-width-image-container {
   margin: 0 -0.9375rem 0.5rem -0.9375rem;
 }
-/* line 1227, main.scss */
+/* line 1225, main.scss */
 .full-width-image-container.drag-area-container {
   min-height: 9rem;
 }
 
-/* line 1231, main.scss */
+/* line 1229, main.scss */
 .cover-image-container {
   margin-top: -1.125rem;
 }
 
-/* line 1236, main.scss */
+/* line 1234, main.scss */
 .logo-image-container {
   min-height: 9rem;
   margin-bottom: 1rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1236, main.scss */
+  /* line 1234, main.scss */
   .logo-image-container {
     float: left;
     width: 50%;
   }
 }
-/* line 1243, main.scss */
+/* line 1241, main.scss */
 .logo-image-container img {
   max-height: 20rem;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1247, main.scss */
+  /* line 1245, main.scss */
   .project-title-container {
     float: right;
     width: 50%;
@@ -11476,7 +11476,7 @@ textarea.no-resize {
     padding-right: 1rem;
     padding-bottom: 1rem;
   }
-  /* line 1255, main.scss */
+  /* line 1253, main.scss */
   .logo-image-container.hide + .project-title-container {
     float: none;
     width: auto;
@@ -11486,62 +11486,62 @@ textarea.no-resize {
     padding-bottom: 0;
   }
 }
-/* line 1264, main.scss */
+/* line 1262, main.scss */
 .project-title-container .project-title-help-text {
   margin-top: -0.75rem;
 }
 
-/* line 1271, main.scss */
+/* line 1269, main.scss */
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none;
 }
 
-/* line 1283, main.scss */
+/* line 1281, main.scss */
 .existing-snapshot-wrapper .button {
   margin-bottom: 0;
 }
 
-/* line 1289, main.scss */
+/* line 1287, main.scss */
 .avatar-container {
   padding: 0.3rem;
 }
-/* line 1291, main.scss */
+/* line 1289, main.scss */
 .avatar-container .avatar {
   display: inline-block;
 }
-/* line 1294, main.scss */
+/* line 1292, main.scss */
 .avatar-container .drag-area-container {
   min-height: 10.125rem;
 }
 
-/* line 1302, main.scss */
+/* line 1300, main.scss */
 .project-list > li + li, .member-list > li + li, .team-list > li + li {
   margin-top: 0.625rem;
   padding-top: 0.625rem;
   border-top: 1px solid #e3e3e3;
 }
 
-/* line 1309, main.scss */
+/* line 1307, main.scss */
 .member-list li, .team-list li {
   padding-left: 4.375rem;
 }
-/* line 1312, main.scss */
+/* line 1310, main.scss */
 .member-list .avatar, .team-list .avatar {
   width: 3.75rem;
   margin-left: -4.375rem;
 }
 
-/* line 1317, main.scss */
+/* line 1315, main.scss */
 .user-profile .member-list {
   display: none;
 }
 
-/* line 1320, main.scss */
+/* line 1318, main.scss */
 .user-profile .project-list {
   display: none;
 }
 
-/* line 1323, main.scss */
+/* line 1321, main.scss */
 .team-profile .team-list {
   display: none;
 }
