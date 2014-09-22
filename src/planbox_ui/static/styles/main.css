@@ -11202,10 +11202,25 @@ img.attachment-icon {
   background-color: #fff;
 }
 
+/* line 1049, main.scss */
+.heart {
+  color: LightGrey;
+  font-size: 1.5em;
+  display: inline-block;
+  margin-top: -1em;
+  margin-bottom: -1em;
+  position: relative;
+  top: 0.125em;
+}
+/* line 1057, main.scss */
+.heart.suported {
+  color: LightPink;
+}
+
 /*--------------------------------------------------
   Project Layout
 --------------------------------------------------*/
-/* line 1054, main.scss */
+/* line 1067, main.scss */
 .project-map-region > div {
   height: 300px;
 }
@@ -11213,43 +11228,43 @@ img.attachment-icon {
 /*--------------------------------------------------
   The Admin
 --------------------------------------------------*/
-/* line 1063, main.scss */
+/* line 1076, main.scss */
 .project-edit-form {
   background-color: #fff;
   box-shadow: 0 -65px 0 #fff;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1063, main.scss */
+  /* line 1076, main.scss */
   .project-edit-form {
     padding-bottom: 4rem;
   }
 }
 
-/* line 1071, main.scss */
+/* line 1084, main.scss */
 .project-section {
   z-index: auto;
 }
 
-/* line 1075, main.scss */
+/* line 1088, main.scss */
 .project-section-fieldset {
   padding: 0;
   border: 0;
 }
 
 @-moz-document url-prefix() {
-  /* line 1082, main.scss */
+  /* line 1095, main.scss */
   .project-section-fieldset {
     display: table-cell;
   }
 }
-/* line 1087, main.scss */
+/* line 1100, main.scss */
 .location-map-region .map {
   height: 200px;
   border: 1px solid #c9c9c9;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1092, main.scss */
+  /* line 1105, main.scss */
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
@@ -11260,7 +11275,7 @@ img.attachment-icon {
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1101, main.scss */
+  /* line 1114, main.scss */
   input[type=text].sub-heading-input {
     font-size: 1.75rem;
     margin: 0 0 1rem 0;
@@ -11270,12 +11285,12 @@ img.attachment-icon {
   }
 }
 
-/* line 1110, main.scss */
+/* line 1123, main.scss */
 span.sub-heading-postfix {
   color: #999;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1110, main.scss */
+  /* line 1123, main.scss */
   span.sub-heading-postfix {
     margin: 0 0 1rem 0;
     padding: 0.5rem 0.75rem;
@@ -11283,7 +11298,7 @@ span.sub-heading-postfix {
   }
 }
 
-/* line 1119, main.scss */
+/* line 1132, main.scss */
 .content-editable {
   line-height: 1.6;
   background-color: #FFFFFF;
@@ -11303,7 +11318,7 @@ span.sub-heading-postfix {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
   height: auto;
 }
-/* line 1121, main.scss */
+/* line 1134, main.scss */
 .content-editable.rich-editable {
   min-height: 8rem;
 }
@@ -11328,77 +11343,77 @@ span.sub-heading-postfix {
   background-color: #DDDDDD;
   cursor: default;
 }
-/* line 1129, main.scss */
+/* line 1142, main.scss */
 .content-editable.radius {
   border-radius: 3px;
 }
-/* line 1133, main.scss */
+/* line 1146, main.scss */
 .error .content-editable, .content-editable.error {
   margin-bottom: 0;
 }
-/* line 1136, main.scss */
+/* line 1149, main.scss */
 .content-editable a {
   color: #308fbf;
   text-decoration: none;
   line-height: inherit;
 }
-/* line 1141, main.scss */
+/* line 1154, main.scss */
 .content-editable a:hover, .content-editable a:focus {
   color: #267299;
 }
 
-/* line 1150, main.scss */
+/* line 1163, main.scss */
 .pen-menu,
 .pen-menu * {
   box-sizing: content-box !important;
 }
 
-/* line 1155, main.scss */
+/* line 1168, main.scss */
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
   padding-top: 0.5rem;
   padding-right: 0.25rem;
 }
 
-/* line 1161, main.scss */
+/* line 1174, main.scss */
 .section-settings {
   background-color: #f7f7f7;
   padding-top: 1.75rem;
 }
-/* line 1164, main.scss */
+/* line 1177, main.scss */
 .section-settings-toggle-container + .section-settings {
   margin-top: -2.5rem;
 }
 
-/* line 1169, main.scss */
+/* line 1182, main.scss */
 .section-insert {
   margin-bottom: -1rem;
   margin-right: -0.9375rem;
   margin-left: -0.9375rem;
 }
-/* line 1173, main.scss */
+/* line 1186, main.scss */
 .section-insert hr {
   margin-top: 1rem;
   border-color: #ff8b38;
 }
 
-/* line 1179, main.scss */
+/* line 1192, main.scss */
 .unassigned {
   cursor: default;
 }
 
-/* line 1183, main.scss */
+/* line 1196, main.scss */
 .project-settings-container {
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
   background-color: #d9d9d9;
 }
-/* line 1184, main.scss */
+/* line 1197, main.scss */
 .project-settings-container .save-btn {
   outline: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1183, main.scss */
+  /* line 1196, main.scss */
   .project-settings-container {
     position: fixed;
     top: 65px;
@@ -11410,25 +11425,25 @@ span.sub-heading-postfix {
     overflow: hidden;
     box-shadow: inset 3px 0 0 rgba(51, 51, 51, 0.1);
   }
-  /* line 1200, main.scss */
+  /* line 1213, main.scss */
   .project-settings-container .project-settings {
     max-height: 60%;
     overflow: auto;
   }
 }
 
-/* line 1207, main.scss */
+/* line 1220, main.scss */
 textarea.no-resize {
   resize: none;
 }
 
-/* line 1212, main.scss */
+/* line 1225, main.scss */
 .drag-area-container {
   position: relative;
   text-align: center;
 }
 
-/* line 1216, main.scss */
+/* line 1229, main.scss */
 .drag-area {
   position: absolute;
   top: 1rem;
@@ -11439,17 +11454,17 @@ textarea.no-resize {
   border-radius: 0.375rem;
   background-color: rgba(242, 242, 242, 0.4);
 }
-/* line 1225, main.scss */
+/* line 1238, main.scss */
 .drag-area:hover {
   border-color: rgba(133, 133, 133, 0.9);
   background-color: rgba(242, 242, 242, 0.9);
 }
-/* line 1229, main.scss */
+/* line 1242, main.scss */
 .drag-area p {
   margin-bottom: 0.5rem;
 }
 
-/* line 1233, main.scss */
+/* line 1246, main.scss */
 .no-file-upload-message {
   clear: both;
   font-size: 0.75em;
@@ -11462,18 +11477,18 @@ textarea.no-resize {
   border-radius: 0.25em;
 }
 
-/* line 1244, main.scss */
+/* line 1257, main.scss */
 .no-file-upload-message a {
   color: #fff;
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 1248, main.scss */
+/* line 1261, main.scss */
 .no-file-upload-message a:hover {
   color: #fff;
 }
 
-/* line 1251, main.scss */
+/* line 1264, main.scss */
 .file-upload {
   margin: 2em 1em 1em;
   text-align: center;
@@ -11484,7 +11499,7 @@ textarea.no-resize {
   position: relative;
 }
 
-/* line 1260, main.scss */
+/* line 1273, main.scss */
 .file-upload:hover,
 .file-dragging,
 .file-uploading {
@@ -11493,12 +11508,12 @@ textarea.no-resize {
   background-color: rgba(90, 90, 90, 0.5);
 }
 
-/* line 1267, main.scss */
+/* line 1280, main.scss */
 .file-upload p {
   margin-bottom: 0.5em;
 }
 
-/* line 1270, main.scss */
+/* line 1283, main.scss */
 .file-upload-input-container {
   position: relative;
   overflow: hidden;
@@ -11506,12 +11521,12 @@ textarea.no-resize {
   margin-bottom: 0;
 }
 
-/* line 1276, main.scss */
+/* line 1289, main.scss */
 .file-upload-input {
   display: none;
 }
 
-/* line 1279, main.scss */
+/* line 1292, main.scss */
 .uploading-message,
 .file-uploading > .drop-instructions {
   display: none;
@@ -11539,7 +11554,7 @@ textarea.no-resize {
     color: #888;
   }
 }
-/* line 1293, main.scss */
+/* line 1306, main.scss */
 .file-uploading > .uploading-message {
   display: block;
   position: relative;
@@ -11550,44 +11565,44 @@ textarea.no-resize {
   animation: uploading 1.5s infinite ease-in-out;
 }
 
-/* line 1302, main.scss */
+/* line 1315, main.scss */
 .file-uploading > .file-upload-input-container {
   visibility: hidden;
 }
 
-/* line 1307, main.scss */
+/* line 1320, main.scss */
 .full-width-image-container {
   margin: 0 -0.9375rem 0.5rem -0.9375rem;
 }
-/* line 1309, main.scss */
+/* line 1322, main.scss */
 .full-width-image-container.drag-area-container {
   min-height: 9rem;
 }
 
-/* line 1313, main.scss */
+/* line 1326, main.scss */
 .cover-image-container {
   margin-top: -1.125rem;
 }
 
-/* line 1318, main.scss */
+/* line 1331, main.scss */
 .logo-image-container {
   min-height: 9rem;
   margin-bottom: 1rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1318, main.scss */
+  /* line 1331, main.scss */
   .logo-image-container {
     float: left;
     width: 50%;
   }
 }
-/* line 1325, main.scss */
+/* line 1338, main.scss */
 .logo-image-container img {
   max-height: 20rem;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1329, main.scss */
+  /* line 1342, main.scss */
   .project-title-container {
     float: right;
     width: 50%;
@@ -11596,7 +11611,7 @@ textarea.no-resize {
     padding-right: 1rem;
     padding-bottom: 1rem;
   }
-  /* line 1337, main.scss */
+  /* line 1350, main.scss */
   .logo-image-container.hide + .project-title-container {
     float: none;
     width: auto;
@@ -11606,62 +11621,62 @@ textarea.no-resize {
     padding-bottom: 0;
   }
 }
-/* line 1346, main.scss */
+/* line 1359, main.scss */
 .project-title-container .project-title-help-text {
   margin-top: -0.75rem;
 }
 
-/* line 1353, main.scss */
+/* line 1366, main.scss */
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none;
 }
 
-/* line 1365, main.scss */
+/* line 1378, main.scss */
 .existing-snapshot-wrapper .button {
   margin-bottom: 0;
 }
 
-/* line 1371, main.scss */
+/* line 1384, main.scss */
 .avatar-container {
   padding: 0.3rem;
 }
-/* line 1373, main.scss */
+/* line 1386, main.scss */
 .avatar-container .avatar {
   display: inline-block;
 }
-/* line 1376, main.scss */
+/* line 1389, main.scss */
 .avatar-container .drag-area-container {
   min-height: 10.125rem;
 }
 
-/* line 1384, main.scss */
+/* line 1397, main.scss */
 .project-list > li + li, .member-list > li + li, .team-list > li + li {
   margin-top: 0.625rem;
   padding-top: 0.625rem;
   border-top: 1px solid #e3e3e3;
 }
 
-/* line 1391, main.scss */
+/* line 1404, main.scss */
 .member-list li, .team-list li {
   padding-left: 4.375rem;
 }
-/* line 1394, main.scss */
+/* line 1407, main.scss */
 .member-list .avatar, .team-list .avatar {
   width: 3.75rem;
   margin-left: -4.375rem;
 }
 
-/* line 1399, main.scss */
+/* line 1412, main.scss */
 .user-profile .member-list {
   display: none;
 }
 
-/* line 1402, main.scss */
+/* line 1415, main.scss */
 .user-profile .project-list {
   display: none;
 }
 
-/* line 1405, main.scss */
+/* line 1418, main.scss */
 .team-profile .team-list {
   display: none;
 }
