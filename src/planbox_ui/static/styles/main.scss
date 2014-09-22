@@ -978,18 +978,6 @@ img.attachment-icon {
     text-decoration: none;
     padding: 0.25em 0.5em;
   }
-
-  a.shareabouts-auth-twitter-button {
-    background-color: #4099FF;
-    color: #fff !important;
-    margin-right: 0.25em;
-  }
-
-  a.shareabouts-auth-facebook-button {
-    background-color: #3b5998;
-    color: #fff !important;
-    margin-left: 0.25em;
-  }
 }
 .shareabouts-geometry-set .form-instructions {
   display: none;
@@ -1008,6 +996,7 @@ img.attachment-icon {
 
 .shareabouts-auth-container {
   position: absolute;
+  z-index: 2;
   top: 1rem;
   right: 1rem;
   bottom: auto;
@@ -1022,6 +1011,22 @@ img.attachment-icon {
   margin-top: 0.125rem;
   margin-bottom: 0.125rem;
 }
+.shareabouts-auth-social-button {
+  color: #fff !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  &.shareabouts-auth-twitter-button {
+    background-color: #66caf4;
+  }
+  &.shareabouts-auth-facebook-button {
+    background-color: #4f79c1;
+  }
+  img {
+    display: inline-block;
+    max-width: 2.5rem;
+    max-height: 2.5rem;
+  }
+}
 
 .shareabouts-add-button {
   display: block;
@@ -1031,6 +1036,10 @@ img.attachment-icon {
   @media #{$medium-up} {
     box-shadow: -5px 5px 0 rgba(51,51,51,0.2);
   }
+}
+
+.shareabouts-panel {
+  background-color: #fff;
 }
 
 

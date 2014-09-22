@@ -1,8 +1,8 @@
 {{^if .}}
   <button href="#" data-dropdown="shareaboutsauth" data-options="align:left" aria-controls="shareaboutsauth" aria-expanded="true" class="shareabouts-auth-button button small less-padding shadowed">Sign In</button>
   <ul id="shareaboutsauth" data-dropdown-content class="f-dropdown text-center" aria-hidden="true" tabindex="-1">
-    <li><a class="shareabouts-auth-twitter-button" href="#"><strong>Twitter</strong></a></li>
-    <li><a class="shareabouts-auth-facebook-button" href="#"><strong>Facebook</strong></a></li>
+    <li><a class="shareabouts-auth-social-button shareabouts-auth-twitter-button" href="#"><strong><img src="{{ static_url }}images/social-twitter.gif">Twitter</strong></a></li>
+    <li><a class="shareabouts-auth-social-button shareabouts-auth-facebook-button" href="#"><strong><img src="{{ static_url }}images/social-facebook.gif">Facebook</strong></a></li>
   </ul>
 {{else}}
   <button href="#" data-dropdown="shareaboutsauth" data-options="align:left" aria-controls="shareaboutsauth" aria-expanded="true" class="shareabouts-auth-button button tiny less-padding dropdown"><img class="shareabouts-auth-avatar" src=" {{ avatar_url }} "></button>
