@@ -1,13 +1,23 @@
-<div data-alert class="alert-box info radius form-instructions">
-  Drag the map to the place's location.
+<div data-alert class="alert-box info radius text-center form-instructions">
+  <strong>Drag the map to the place's location.</strong>
 </div>
 
 <form novalidate>
   <h5>Add a Place</h5>
+
+  {{#if submitter}}
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Your Email
+        <input type="text" name="private-email" placeholder="optional" />
+      </label>
+    </div>
+  </div>
+  {{else}}
   <div class="row">
     <div class="large-6 columns">
       <label>Your Name
-        <input type="text" name="submitter_name" placeholder="" required />
+        <input type="text" name="submitter_name" placeholder="optional" required />
       </label>
     </div>
     <div class="large-6 columns">
@@ -16,10 +26,18 @@
       </label>
     </div>
   </div>
+
+  <div class="row">
+    <div class="large-12 columns text-right">
+      <span class="or-sign-in">Or sign in with <a class="auth-inline shareabouts-auth-twitter-button" href="#">Twitter</a> <a class="auth-inline shareabouts-auth-facebook-button" href="#">Facebook</a></span>
+    </div>
+  </div>
+  {{/if}}
+
   <div class="row">
     <div class="large-12 columns">
-      <label>Title
-        <input type="text" name="name" placeholder="" required />
+      <label>Location Name
+        <input type="text" name="name" placeholder="optional" required />
       </label>
     </div>
   </div>

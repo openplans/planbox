@@ -934,9 +934,6 @@ img.attachment-icon {
   Project Shareabouts
 --------------------------------------------------*/
 
-.map {
-  height: 300px;
-}
 .project-section-shareabouts {
 }
 .project-shareabouts {
@@ -956,6 +953,10 @@ img.attachment-icon {
     bottom: 0;
   }
 
+  .map {
+    height: 300px;
+  }
+
   .avatar {
     width: 30px;
   }
@@ -968,6 +969,26 @@ img.attachment-icon {
 
   .response-body {
     padding-top: 0.25em;
+  }
+
+  a.auth-inline {
+    display: inline;
+    font-size: 0.875em;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.25em 0.5em;
+  }
+
+  a.shareabouts-auth-twitter-button {
+    background-color: #4099FF;
+    color: #fff !important;
+    margin-right: 0.25em;
+  }
+
+  a.shareabouts-auth-facebook-button {
+    background-color: #3b5998;
+    color: #fff !important;
+    margin-left: 0.25em;
   }
 }
 .shareabouts-geometry-set .form-instructions {
