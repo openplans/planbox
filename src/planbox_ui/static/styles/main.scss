@@ -935,7 +935,11 @@ img.attachment-icon {
 --------------------------------------------------*/
 
 .project-section-shareabouts {
+  .map {
+    height: 300px;
+  }
 }
+
 .project-shareabouts {
   border-top: 2px solid $body-bg;
   border-bottom: 2px solid $body-bg;
