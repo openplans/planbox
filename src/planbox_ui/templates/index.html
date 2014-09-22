@@ -9,24 +9,21 @@
 
 <section class="product-get-started extra-padding-top some-padding-bottom" id="get-started">
   <div class="row">
-    <div class="small-12 columns">
+    <div class="medium-7 columns">
+      <p class="">Use OpenPlans to set up a collaborative map for community input. Our tried and tested templates help you collect and manage feedback about street issues, suggestions for new bike and walking infrastructure, problems and opportunities for neighborhood planning, and more.</p>
+    </div>
+    <div class="medium-5 columns">
+      <h5>Create Your Planning Website:</h5>
       <form method="GET" action="{% url 'app-signup' %}">
-        <div class="row">
-          <div class="small-12 medium-8 large-12 medium-centered columns">
-            <div class="row collapse">
-              <div class="small-12 large-5 columns text-center">
-                <h4>Create Your Planning Website:</h4>
-              </div>
-              <div class="small-8 large-5 columns">
-                <div class="float-label-container">
-                  <input required name="email" type="email" class="float-label-input" placeholder="email@example.org">
-                  <label for="email" class="float-label">Email Address</label>
-                </div>
-              </div>
-              <div class="small-4 large-2 columns">
-                <button class="button postfix">Get Started</button>
-              </div>
+        <div class="row collapse">
+          <div class="small-8 columns">
+            <div class="float-label-container">
+              <input required name="email" type="email" class="float-label-input" placeholder="email@example.org">
+              <label for="email" class="float-label">Email Address</label>
             </div>
+          </div>
+          <div class="small-4 columns">
+            <button class="button postfix">Get Started</button>
           </div>
         </div>
       </form>
