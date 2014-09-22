@@ -181,7 +181,7 @@ class ProfileSerializer (SlugValidationMixin, serializers.ModelSerializer):
     def get_default_fields(self):
         fields = super(ProfileSerializer, self).get_default_fields()
         # Add the username field if it's a user profile
-        if self.object.is_user_profile():
+        if self.object and self.object.is_user_profile():
             fields['username'] = serializers.CharField(source='auth.username', read_only=True)
         return fields
 
