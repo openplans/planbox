@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 import json
-from django.contrib import admin
+from django.contrib.gis import admin
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import TextField
@@ -16,7 +16,7 @@ from django_ace import AceWidget
 from django_object_actions import DjangoObjectActions
 from genericadmin.admin import GenericAdminModelAdmin, GenericTabularInline
 from jsonfield import JSONField
-from planbox_data.models import Profile, Project, Event, Theme, Section, Attachment
+from planbox_data.models import Profile, Roundup, Project, Event, Theme, Section, Attachment
 
 
 class PrettyAceWidget (AceWidget):
@@ -39,7 +39,7 @@ class ProfileAdmin (admin.ModelAdmin):
     list_display = ('__str__', '_date_joined', 'affiliation', 'email')
     filter_horizontal = ('teams',)
     raw_id_fields = ('auth',)
-    search_fields = ('slug',)
+    search_fields = ('name', 'slug', 'email')
 
     def _date_joined(self, obj):
         return obj.created_at
@@ -73,6 +73,74 @@ class AttachmentInline (GenericTabularInline):
     })
 
 
+class RoundupAdmin (DjangoObjectActions, admin.ModelAdmin):
+    list_display = ('_title', '_owner_slug', '_owner_email', '_updated_at', '_created_at', '_permalink')
+    prepopulated_fields = {"slug": ("title",)}
+    ordering = ('-updated_at',)
+    search_fields = ('owner__name', 'owner__slug', 'title', 'slug')
+
+    objectactions = ('clone_roundup',)
+    raw_id_fields = ('theme', 'template', 'owner')
+
+    def clone_roundup(self, request, obj):
+        try:
+            new_obj = obj.clone()
+            new_obj_edit_url = reverse('admin:planbox_data_roundup_change', args=[new_obj.pk])
+            return HttpResponseRedirect(new_obj_edit_url)
+        except Exception as e:
+            messages.error(request, 'Failed to clone roundup: %s (%s)' % (e, type(e).__name__))
+
+    def get_queryset(self, request):
+        qs = super(RoundupAdmin, self).get_queryset(request)
+        return qs.select_related('owner')
+
+    def _permalink(self, roundup):
+        if len(roundup.owner.slug) == 0:
+            return '(bad owner slug)'
+
+        return format_html(
+            '''<a href="{0}" target="_blank">Link &#8663</a>''',  # 8663 is the ⇗ character
+            reverse('app-roundup', kwargs={'owner_slug': roundup.owner.slug})
+        )
+    _permalink.allow_tags = True
+    _permalink.short_description = _('Link')
+
+    def _title(self, roundup):
+        return format_html(
+            '{0} <small style="white-space:nowrap">({1})</small>',
+            roundup.title if roundup.title != '' else '[No Title]',
+            roundup.slug
+        )
+    _title.short_description = _('Roundup')
+    _title.admin_order_field = 'title'
+
+    def _owner_slug(self, roundup):
+        return  roundup.owner.slug
+    _owner_slug.short_description = _('Owner slug')
+    _owner_slug.admin_order_field = 'owner__slug'
+
+    def _owner_email(self, roundup):
+        return  roundup.owner.email
+    _owner_email.short_description = _('Email')
+    _owner_email.admin_order_field = 'owner__email'
+
+    def _owner_affiliation(self, roundup):
+        return roundup.owner.affiliation
+    _owner_affiliation.short_description = _('Affiliation')
+    _owner_affiliation.admin_order_field = 'owner__affiliation'
+
+    # Format datetimes
+    def _updated_at(self, roundup):
+        return roundup.updated_at.strftime('%Y-%m-%d %H:%M')
+    _updated_at.short_description = _('Updated')
+    _updated_at.admin_order_field = 'updated_at'
+
+    def _created_at(self, roundup):
+        return roundup.created_at.strftime('%Y-%m-%d %H:%M')
+    _created_at.short_description = _('Created')
+    _created_at.admin_order_field = 'created_at'
+
+
 class EventAdmin (admin.ModelAdmin):
     list_display = ('label', 'project', 'index')
     inlines = (
@@ -98,7 +166,7 @@ class EventInline (admin.StackedInline):
 
 
 class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
-    list_display = ('_title', 'public', 'owner', '_owner_email', '_owner_affiliation', 'location', '_updated_at', '_created_at', '_permalink')
+    list_display = ('_title', 'public', '_owner_slug', '_owner_email', '_owner_affiliation', 'location', '_updated_at', '_created_at', '_permalink')
     prepopulated_fields = {"slug": ("title",)}
     ordering = ('-updated_at',)
     search_fields = ('owner__name', 'owner__slug', 'location', 'title', 'slug')
@@ -151,6 +219,11 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
     _title.short_description = _('Project')
     _title.admin_order_field = 'title'
 
+    def _owner_slug(self, project):
+        return  project.owner.slug
+    _owner_slug.short_description = _('Owner slug')
+    _owner_slug.admin_order_field = 'owner__slug'
+
     def _owner_email(self, project):
         return  project.owner.email
     _owner_email.short_description = _('Email')
@@ -182,6 +255,7 @@ class ThemeAdmin (admin.ModelAdmin):
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(Roundup, RoundupAdmin)
 admin.site.register(Theme, ThemeAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Attachment, AttachmentAdmin)

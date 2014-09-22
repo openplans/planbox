@@ -13,7 +13,10 @@
     <h3 class="profile-name no-margins">{{ default username slug }}</h3>
     {{/if}}
     <div class="project-text-content">{{{ description }}}</div>
-    <small><a href="#" class="profile-edit-button">Edit Profile</a></small>
+    <p>
+      <small><a href="#" class="profile-edit-button">Edit Profile</a></small><br>
+      {{#unless auth}}<small><a href="{{> url-roundup-display-tpl }}" target="_blank">View Profile →</a></small>{{/unless}}
+    </p>
   </div>
 </div>
 

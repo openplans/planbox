@@ -42,6 +42,9 @@ EMAIL_ADDRESS = PLANBOX_CONTACT_EMAIL
 
 import dj_database_url
 DATABASES = {'default': dj_database_url.config()}
+# https://devcenter.heroku.com/articles/postgis#geodjango-setup
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+
 
 import django_cache_url
 CACHES = {'default': django_cache_url.config()}

@@ -5,7 +5,7 @@ var Planbox = Planbox || {};
 (function(NS, $) {
   'use strict';
 
-  NS.ProjectAdminView = NS.BaseProjectView.extend(
+  NS.ProjectAdminView = Backbone.Marionette.Layout.extend(
     _.extend({}, NS.ImageDropZonesMixin, NS.ContentEditableMixin, {
       template: '#project-admin-tpl',
       ui: {
@@ -46,6 +46,11 @@ var Planbox = Planbox || {};
         'input @ui.characterCountInput': 'handleCharacterCountChange',
         'keyup @ui.characterCountInput': 'handleCharacterCountChange'
       },
+      regions: {
+        sectionList: '#section-list',
+        locationMap: '.location-map-region'
+      },
+
       modelEvents: {
         'change': 'dataChanged',
         'sync': 'onSync'
@@ -114,7 +119,16 @@ var Planbox = Planbox || {};
         var self = this;
         this.initRichEditables();
         this.initDropZones();
-        this.showRegions();
+
+        this.sectionList.show(new this.sectionListView({
+          model: this.model,
+          collection: this.collection,
+          parent: this
+        }));
+
+        this.locationMap.show(new NS.ProjectLocationMapView({
+          model: this.model
+        }));
 
         // Set the initial character counts for each countable
         this.ui.characterCountInput.each(function(i, el) {
@@ -410,7 +424,7 @@ var Planbox = Planbox || {};
         this.$('.project-preview-wrapper').html(content);
       },
       onSaveSuccess: function(model) {
-        var path = '/' + NS.Data.owner.slug + '/' + model.get('slug') + '/';
+        var path = '/' + NS.Data.owner.slug + '/' + model.get('slug') + '/edit/';
 
         if (window.location.pathname !== path) {
           if (Modernizr.history) {

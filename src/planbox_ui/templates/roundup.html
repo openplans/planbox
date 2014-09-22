@@ -5,45 +5,44 @@
 {% load force_list from planbox_utils %}
 
 
-{% block title %}{{ project_data.title }}{% endblock %}
+{% block title %}{{ roundup_data.title }}{% endblock %}
 
 {% block meta %}
-  <meta name="description" content="{{ project_data.details.tagline|striptags:' ' }}">
-  {# TODO: Fill this in with project's owner name #}
+  <meta name="description" content="Project roundup for the {{ roundup_data.owner.name }} team.">
   <meta name="author" content="OpenPlans">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@planinabox">
-  <meta name="twitter:title" content="{{ project_data.title|striptags:' ' }}">
-  <meta name="twitter:description" content="{{ project_data.details.tagline|striptags:' ' }}">
-  {% comment %} TODO: Fill this in with project owner's twitter name
+  <meta name="twitter:site" content="@openplans">
+  <meta name="twitter:title" content="{{ roundup_data.title|striptags:' ' }}">
+  <meta name="twitter:description" content="Project roundup for the {{ roundup_data.owner.name }} team.">
+  {% comment %} TODO: Fill this in with roundup owner's twitter name, if exists
   <meta name="twitter:creator" content="">
   {% endcomment %}
-  {% comment %} TODO: Fill this in with Planbox logo or project image
+  {% comment %} TODO: Fill this in with Planbox logo or roundup image
   <meta name="twitter:image:src" content="">
   {% endcomment %}
 
   <!-- Facebook -->
   <meta property="og:site_name" content="OpenPlans"/>
-  <meta property="og:title" content="{{ project_data.title|striptags:' ' }}" />
-  <meta property="og:description" content="{{ project_data.details.tagline|striptags:' ' }}" />
-  {% comment %} TODO: Fill this in with Planbox logo or project image
+  <meta property="og:title" content="{{ roundup_data.title|striptags:' ' }}" />
+  <meta property="og:description" content="Project roundup for the {{ roundup_data.owner.name }} team." />
+  {% comment %} TODO: Fill this in with Planbox logo or roundup image
   <meta property="og:image" content="" />
   {% endcomment %}
 
 {% endblock %}
 
 {% block icons %}
-  {% if project.theme.definition.favicon %}
-  <link rel="icon" href="{{ project.theme.definition.favicon|safe }}">
-  <link rel="shortcut icon" href="{{ project.theme.definition.favicon|safe }}">
+  {% if roundup.theme.definition.favicon %}
+  <link rel="icon" href="{{ roundup.theme.definition.favicon|safe }}">
+  <link rel="shortcut icon" href="{{ roundup.theme.definition.favicon|safe }}">
   {% else %}
   <link rel="icon" href="{{ STATIC_URL }}images/favicon.png">
   <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.png">
   {% endif %}
 
-  {% for icon in project.theme.definition.icons %}
+  {% for icon in roundup.theme.definition.icons %}
   <link rel="shortcut icon" {% if icon.sizes %}sizes="{{ icon.sizes }}"{% endif %} href="{{ icon.url }}">
   <link rel="apple-touch-icon-precomposed" {% if icon.sizes %}sizes="{{ icon.sizes }}"{% endif %} href="{{ icon.url }}">
   {% empty %}
@@ -77,7 +76,7 @@
 
   {% endif %} {# debug #}
 
-  {% for css_url in project.theme.definition.css|force_list %}
+  {% for css_url in roundup.theme.definition.css|force_list %}
   <link rel="stylesheet" href="{{ css_url|safe }}">
   {% endfor %}
 
@@ -125,11 +124,11 @@
 
     Planbox.bootstrapped = {
       staticUrl: '{{ STATIC_URL }}',
-      projectRootPath: '{{ request.path_info }}'
+      rootPath: '{{ request.path_info }}'
     };
 
     Planbox.Data = {
-      project: {{ project_data|as_json }},
+      roundup: {{ roundup_data|as_json }},
       user: {{ user_data|as_json }},
       isEditable: {{ is_editable|as_json }},
       statuses: [
@@ -144,25 +143,33 @@
   </script>
 
   {% if debug %}
+  <!-- Planbox-wide display assets -->
   <script src="{{ STATIC_URL }}scripts/utils.js"></script>
   <script src="{{ STATIC_URL }}scripts/handlebars-helpers.js"></script>
   <script src="{{ STATIC_URL }}scripts/file-upload.js"></script>
   <script src="{{ STATIC_URL }}scripts/models.js"></script>
   <script src="{{ STATIC_URL }}scripts/views/mixins.js"></script>
   <script src="{{ STATIC_URL }}scripts/views/base.js"></script>
-  <script src="{{ STATIC_URL }}scripts/views/display.js"></script>
-  <script src="{{ STATIC_URL }}scripts/views/admin/section.js"></script>
-  <script src="{{ STATIC_URL }}scripts/views/admin/project.js"></script>
+
+  <!-- Roundup-specific views -->
+  <script src="{{ STATIC_URL }}scripts/roundup/roundup-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/roundup/owner-detail-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/roundup/project-list-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/roundup/project-map-view.js"></script>
+
+  <!-- Roundup-specific app -->
   <script src="{{ STATIC_URL }}scripts/base-app.js"></script>
-  <script src="{{ STATIC_URL }}scripts/app.js"></script>
+  <script src="{{ STATIC_URL }}scripts/roundup/roundup-app.js"></script>
   {% else %}
-  <script src="{{ STATIC_URL }}scripts/app.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
+  <script src="{{ STATIC_URL }}scripts/roundup-app.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
 
-  {% for js_url in project.theme.definition.js|force_list %}
+  {% for js_url in roundup.theme.definition.js|force_list %}
   <script src="{{ js_url|safe }}"></script>
   {% endfor %}
 
+  {% handlebarsjs 'roundup/(.*)' precompile register_partials %}
+  {% handlebarsjs 'common/(.*)' precompile register_partials %}
   {% handlebarsjs '(.*)' precompile register_partials %}
 
   {% comment %}
@@ -170,21 +177,4 @@
   http://diveintohtml5.info/extensibility.html
   and search for "Event Vocabulary".
   {% endcomment %}
-
-  <ul class="hide">
-    {% for event in project_data.events %}
-
-    {% if event.datetime_label %}
-    <li itemscope itemtype="http://data-vocabulary.org/Event">
-      <header itemprop="summary">{{ event.label|safe }}</header>
-      <a itemprop="url" href="{{ request.build_absolute_uri }}#event-{{ event.slug }}"></a>
-      <time itemprop="startDate" datetime="{{ event.start_datetime }}"></time>
-      <time itemprop="endDate" datetime="{{ event.end_datetime }}"></time>
-      <div itemprop="description">{{ event.description|safe }}</div>
-    </li>
-    {% endif %}
-
-    {% endfor %}
-  </ul>
-
 {% endblock %}

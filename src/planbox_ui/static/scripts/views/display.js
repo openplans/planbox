@@ -176,7 +176,7 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.ProjectView = NS.BaseProjectView.extend({
+  NS.ProjectView = Backbone.Marionette.Layout.extend({
     template: '#project-tpl',
     sectionListView: NS.ProjectSectionListView,
     ui: {
@@ -187,9 +187,16 @@ var Planbox = Planbox || {};
       'click @ui.menuItems': 'onClickMenuItem',
       'click @ui.highlights': 'onClickHighlight'
     },
+    regions: {
+      sectionList: '#section-list'
+    },
     onShow: function() {
       // After the project is in the DOM, show the project sections
-      this.showRegions();
+      this.sectionList.show(new this.sectionListView({
+        model: this.model,
+        collection: this.collection,
+        parent: this
+      }));
     },
     onDomRefresh: function() {
       var self = this,

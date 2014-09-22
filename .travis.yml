@@ -21,6 +21,7 @@ install:
   - pip install -r requirements.txt --allow-all-external --process-dependency-links --allow-unverified=pymeta --allow-unverified=pybars
   - pip install coverage selenium
   - cp src/planbox/local_settings.py.template src/planbox/local_settings.py
+  - "echo \"DATABASES = {'default': {'ENGINE': 'django.contrib.gis.db.backends.postgis', 'NAME': 'planbox', 'USER': 'postgres', 'PASSWORD': '', 'HOST': 'localhost'}}\" >> src/planbox/local_settings.py"
 
   # JavaScript test requirements
   - nvm install 0.10

@@ -624,6 +624,28 @@ section, footer {
 
 
 /*--------------------------------------------------
+  Roundups
+--------------------------------------------------*/
+
+.truncated-wysiwyg {
+  max-height: 7.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.truncated-wysiwyg:after {
+  content: '';
+  display: block;
+  height: 4rem;
+  background-color: #fff;
+  position: absolute;
+  top: 7.5rem;
+  right: -1rem;
+  left: -1rem;
+  box-shadow: 0 -2rem 2rem #fff;
+}
+
+
+/*--------------------------------------------------
   Project Header
 --------------------------------------------------*/
 
@@ -956,6 +978,13 @@ img.attachment-icon {
   }
 }
 
+/*--------------------------------------------------
+  Project Layout
+--------------------------------------------------*/
+
+.project-map-region > div {
+  height: 300px;
+}
 
 /*--------------------------------------------------
   The Admin
@@ -977,12 +1006,17 @@ img.attachment-icon {
   padding: 0;
   border: 0;
 }
-// In Firefox, the minimum width of a fieldset is never less than the intrinsic width of its content. 
+// In Firefox, the minimum width of a fieldset is never less than the intrinsic width of its content.
 // http://stackoverflow.com/questions/17408815/fieldset-resizes-wrong-appears-to-have-unremovable-min-width-min-content#answer-17863685
 @-moz-document url-prefix() {
   .project-section-fieldset {
     display: table-cell;
-  }  
+  }
+}
+
+.location-map-region .map {
+  height: 200px;
+  border: 1px solid #c9c9c9;
 }
 
 input[type=text].heading-input {
