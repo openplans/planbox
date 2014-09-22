@@ -162,6 +162,9 @@ var Planbox = Planbox || {};
 
       $(Shareabouts.auth).on('authsuccess', function(evt, data) {
         sa.setUser(data);
+
+        // So the auth dropdown aligns properly
+        $(document).foundation({'dropdown': {}});
       });
 
       Shareabouts.auth.initUser();
