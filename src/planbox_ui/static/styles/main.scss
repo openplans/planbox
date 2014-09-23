@@ -88,6 +88,9 @@
   background-repeat: no-repeat;
   background-size: cover !important;
 }
+img.shadowed {
+  box-shadow: -5px 5px 0 rgba(51,51,51,0.2);
+}
 
 
 /*--------------------------------------------------
@@ -235,9 +238,9 @@ section, footer {
 
 .product-tagline-section {
   margin: -65px 0 0;
-  padding: 7% 0 19%;
+  padding: 7% 0 17%;
   background-image: url(../images/flickr-ghbremer-6268027064-b.jpg);
-  background-position: center 75%;
+  background-position: center 70%;
   color: #fff;
   text-align: center;
   .tagline {
@@ -310,24 +313,7 @@ section, footer {
 }
 
 // Product - Get Started Sign Up Form
-.product-get-started {
-  background-color: #ddd;
-  @media #{$large-up} {
-    h4 {
-      line-height: 2.25em;
-    }
-    input,
-    button {
-      height: 2.75em;
-      font-size: 1.25em;
-      line-height: 2.75em;
-      padding-left: 0.5em;
-    }
-  }
-}
-
-// Product - Benefits
-.product-benefits {
+.product-section-alt {
   background-color: #ddd;
 }
 

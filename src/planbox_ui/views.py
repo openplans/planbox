@@ -203,6 +203,9 @@ class ShareaboutsView (AppMixin, TemplateView):
 class OpenSourceView (AppMixin, TemplateView):
     template_name = 'open-source.html'
 
+class MapFlavorsView (AppMixin, TemplateView):
+    template_name = 'map-flavors.html'
+
 class HelpView (AppMixin, TemplateView):
     template_name = 'help.html'
 
@@ -508,6 +511,7 @@ index_view = IndexView.as_view()
 about_view = AboutView.as_view()
 shareabouts_view = ShareaboutsView.as_view()
 open_source_view = OpenSourceView.as_view()
+map_flavors_view = MapFlavorsView.as_view()
 
 project_view = ProjectView.as_view()
 ro_project_view = ReadOnlyProjectView.as_view()
