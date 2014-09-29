@@ -295,7 +295,7 @@ class ProfileView (AppMixin, AlwaysFresh, LoginRequired, SSLRequired, S3UploadMi
         ### TODO: Cache these
         templates_slug = settings.TEMPLATES_PROFILE
         templates = Profile.objects.get(slug=templates_slug)
-        project_summary_serializer = ProjectSummarySerializer(templates.projects.all())
+        project_summary_serializer = ProjectSummarySerializer(templates.projects.all(), many=True)
         context['project_templates_data'] = project_summary_serializer.data
 
         return context
