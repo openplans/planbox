@@ -291,8 +291,10 @@ class ProjectSerializerTests (PlanBoxTestCase):
         profile = auth.profile
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=profile)
         events = [
-            Event.objects.create(label='test label 1', project=project),
-            Event.objects.create(label='test label 3', project=project),
+            Event.objects.create(label='test label 1', slug='test-1', project=project),
+            Event.objects.create(label='test label 2', slug='test-2', project=project),
+            Event.objects.create(label='test label 3', slug='test-3', project=project),
+            Event.objects.create(label='test label 4', slug='test-4', project=project),
         ]
 
         serializer = ProjectSerializer(project, data={
@@ -301,9 +303,9 @@ class ProjectSerializerTests (PlanBoxTestCase):
             'title': 'test new title',
             'location': 'test location',
             'events': [
-                {'label': 'test label 3', 'id': events[1].pk},
-                {'label': 'test label 2'},
-                {'label': 'test label 1', 'id': events[0].pk}
+                {'label': 'test label 3', 'slug': 'test-3', 'id': events[1].pk},
+                {'label': 'test label 2', 'slug': 'test-2'},
+                {'label': 'test label 1', 'slug': 'test-1', 'id': events[0].pk}
             ],
             'sections': [],
             'owner': {'slug': profile.slug}
