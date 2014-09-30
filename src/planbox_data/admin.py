@@ -177,6 +177,7 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
     )
     objectactions = ('clone_project',)
     raw_id_fields = ('theme', 'template', 'owner')
+    readonly_fields = ('_api_url',)
     form = modelform_factory(Project, fields='__all__', widgets={
         'title': TextInput(attrs={'class': 'vTextField'}),
         'location': TextInput(attrs={'class': 'vTextField'}),
@@ -233,6 +234,12 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
         return project.owner.affiliation
     _owner_affiliation.short_description = _('Affiliation')
     _owner_affiliation.admin_order_field = 'owner__affiliation'
+
+    def _api_url(self, project):
+        url = reverse('project-detail', args=[project.pk])
+        return '<a href="{0}" target="_blank">{0}</a>'.format(url)
+    _api_url.allow_tags = True
+    _api_url.short_description = _('API URL')
 
     # Format datetimes
     def _updated_at(self, project):
