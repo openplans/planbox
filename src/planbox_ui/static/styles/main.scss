@@ -1081,6 +1081,16 @@ img.attachment-icon {
   }
 }
 
+.project-shareabouts {
+  &.panel-open, &.panel-form-open {
+    & + .after-shareabouts {
+      @media #{$small-only} {
+        display: none;
+      }
+    }
+  }
+}
+
 
 /*--------------------------------------------------
   The Admin
