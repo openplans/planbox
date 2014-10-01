@@ -167,8 +167,17 @@
   <script src="{{ js_url|safe }}"></script>
   {% endfor %}
 
+  {# Globally shared templates #}
+  {% handlebarsjs 'common/(.*)' precompile register_partials %}
+
+  {# Default shareabouts forms, strings, and other templates #}
   {% handlebarsjs 'shareabouts/(.*)' precompile register_partials %}
-  {% handlebarsjs '(.*)' precompile register_partials %}
+
+  {# Project layout templates, default and overrides #}
+  {% if project.layout == 'shareabouts' %}
+  {% handlebarsjs 'project-layout-shareabouts/(.*)' precompile register_partials %}
+  {% endif %}
+  {% handlebarsjs '([^/]*)' precompile register_partials %}
 
   {% comment %}
   For all the event microdata attributes, see
