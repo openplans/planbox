@@ -1069,6 +1069,18 @@ img.attachment-icon {
   height: 300px;
 }
 
+.shareabouts-side-nav {
+  &.fixed {
+    div {
+      @include grid-row();
+    }
+    .side-nav {
+      background-color: #fff;
+      @include grid-column(4);
+    }
+  }
+}
+
 
 /*--------------------------------------------------
   The Admin

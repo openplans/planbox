@@ -1,26 +1,28 @@
-<div id="shareabouts-region" class="project-section-shareabouts project-shareabouts"></div>
+<div id="shareabouts-region" class="project-section-shareabouts project-shareabouts" data-magellan-destination="shareabouts-region"></div>
 
 <div class="after-shareabouts row container">
   <header class="small-12 medium-4 columns text-center medium-text-left">
-    <h1 class="project-title">{{#if logo_img_url}}<img src="{{ logo_img_url }}" alt="{{ title }}">{{else}}{{{ title }}}{{/if}}</h1>
+    <h1 class="project-title some-margin-top">{{#if logo_img_url}}<img src="{{ logo_img_url }}" alt="{{ title }}">{{else}}{{{ title }}}{{/if}}</h1>
     {{# if details.tagline }}<h2 class="project-tagline">{{ details.tagline }}</h2>{{/ if }}
     <div class="social-links-header right">
       {{#if details.facebook_url}}<a href="{{ details.facebook_url }}" class="social-link"><img src="{{ static_url }}/images/social-facebook.gif"></a>{{/if}}
       {{#if details.instagram_url}}<a href="{{ details.instagram_url }}" class="social-link"><img src="{{ static_url }}/images/social-instagram.gif"></a>{{/if}}
       {{#if details.twitter_url}}<a href="{{ details.twitter_url }}" class="social-link"><img src="{{ static_url }}/images/social-twitter.gif"></a>{{/if}}
     </div>
-    <div data-magellan-expedition="fixed">
-      {{! Think of a more general solution when you have time }}
-      {{#gte_active_section_length sections 2}}
-      <ul class="side-nav">
-        {{#each sections}}
-          {{#if active}}{{#if menu_label}}
-          <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
-          {{/if}}{{/if}}
-        {{/each}}
-      </ul>
-      {{/gte_active_section_length}}
-    </div>
+    <div class="shareabouts-side-nav hide-for-small" data-magellan-expedition="fixed">
+      <div>
+        {{! Think of a more general solution when you have time }}
+        {{#gte_active_section_length sections 1}}
+        <ul class="side-nav">
+          <li data-magellan-arrival="shareabouts-region"><a href="#shareabouts-region">Map</a></li>
+          {{#each sections}}
+            {{#if active}}{{#if menu_label}}
+            <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
+            {{/if}}{{/if}}
+          {{/each}}
+        </ul>
+        {{/gte_active_section_length}}
+      </div>
   </header>
 
   <div class="small-12 medium-8 columns">
