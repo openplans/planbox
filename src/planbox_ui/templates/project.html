@@ -147,20 +147,37 @@
     };
   </script>
 
-  {% if debug %}
-  <script src="{{ STATIC_URL }}scripts/utils.js"></script>
-  <script src="{{ STATIC_URL }}scripts/handlebars-helpers.js"></script>
-  <script src="{{ STATIC_URL }}scripts/file-upload.js"></script>
-  <script src="{{ STATIC_URL }}scripts/models.js"></script>
-  <script src="{{ STATIC_URL }}scripts/views/mixins.js"></script>
-  <script src="{{ STATIC_URL }}scripts/views/base.js"></script>
-  <script src="{{ STATIC_URL }}scripts/views/display.js"></script>
-  <script src="{{ STATIC_URL }}scripts/views/admin/section.js"></script>
-  <script src="{{ STATIC_URL }}scripts/views/admin/project.js"></script>
-  <script src="{{ STATIC_URL }}scripts/base-app.js"></script>
-  <script src="{{ STATIC_URL }}scripts/app.js"></script>
+  {% if project.layout == 'shareabouts' %}
+    {% if debug %}
+    <script src="{{ STATIC_URL }}scripts/utils.js"></script>
+    <script src="{{ STATIC_URL }}scripts/handlebars-helpers.js"></script>
+    <script src="{{ STATIC_URL }}scripts/file-upload.js"></script>
+    <script src="{{ STATIC_URL }}scripts/models.js"></script>
+    <script src="{{ STATIC_URL }}scripts/views/mixins.js"></script>
+    <script src="{{ STATIC_URL }}scripts/views/base.js"></script>
+    <script src="{{ STATIC_URL }}scripts/views/display.js"></script>
+    <script src="{{ STATIC_URL }}scripts/project-layout-shareabouts/project-view.js"></script>
+    <script src="{{ STATIC_URL }}scripts/base-app.js"></script>
+    <script src="{{ STATIC_URL }}scripts/app.js"></script>
+    {% else %}
+    <script src="{{ STATIC_URL }}scripts/project-display-shareabouts-app.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
+    {% endif %}
   {% else %}
-  <script src="{{ STATIC_URL }}scripts/app.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
+    {% if debug %}
+    <script src="{{ STATIC_URL }}scripts/utils.js"></script>
+    <script src="{{ STATIC_URL }}scripts/handlebars-helpers.js"></script>
+    <script src="{{ STATIC_URL }}scripts/file-upload.js"></script>
+    <script src="{{ STATIC_URL }}scripts/models.js"></script>
+    <script src="{{ STATIC_URL }}scripts/views/mixins.js"></script>
+    <script src="{{ STATIC_URL }}scripts/views/base.js"></script>
+    <script src="{{ STATIC_URL }}scripts/views/display.js"></script>
+    <script src="{{ STATIC_URL }}scripts/views/admin/section.js"></script>
+    <script src="{{ STATIC_URL }}scripts/views/admin/project.js"></script>
+    <script src="{{ STATIC_URL }}scripts/base-app.js"></script>
+    <script src="{{ STATIC_URL }}scripts/app.js"></script>
+    {% else %}
+    <script src="{{ STATIC_URL }}scripts/app.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
+    {% endif %}
   {% endif %}
 
   {% for js_url in project.theme.definition.js|force_list %}
@@ -175,7 +192,7 @@
 
   {# Project layout templates, default and overrides #}
   {% if project.layout == 'shareabouts' %}
-  {% handlebarsjs 'project-layout-shareabouts/(.*)' precompile register_partials %}
+    {% handlebarsjs 'project-layout-shareabouts/(.*)' precompile register_partials %}
   {% endif %}
   {% handlebarsjs '([^/]*)' precompile register_partials %}
 
