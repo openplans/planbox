@@ -31,6 +31,7 @@ var Planbox = Planbox || {};
     }
 
     NS.app.mainRegion.show(new ProjectView({
+      className: NS.app.projectModel.get('layout') + '-page',
       model: NS.app.projectModel,
       collection: NS.app.sectionCollection
     }));
