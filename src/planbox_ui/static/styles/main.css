@@ -11094,6 +11094,7 @@ img.attachment-icon {
 .project-shareabouts {
   border-top: 2px solid #eee;
   border-bottom: 2px solid #eee;
+  position: relative;
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
@@ -11110,28 +11111,28 @@ img.attachment-icon {
     height: 500px;
   }
 }
-/* line 955, main.scss */
+/* line 956, main.scss */
 .project-shareabouts .shareabouts-add-button-container {
   margin-left: 0;
   bottom: 0;
 }
-/* line 960, main.scss */
+/* line 961, main.scss */
 .project-shareabouts .map {
   height: 300px;
 }
-/* line 964, main.scss */
+/* line 965, main.scss */
 .project-shareabouts .avatar {
   width: 30px;
 }
-/* line 969, main.scss */
+/* line 970, main.scss */
 .project-shareabouts .signed-in-as .avatar {
   width: 50px;
 }
-/* line 974, main.scss */
+/* line 975, main.scss */
 .project-shareabouts .response-body {
   padding-top: 0.25em;
 }
-/* line 978, main.scss */
+/* line 979, main.scss */
 .project-shareabouts a.auth-inline {
   display: inline;
   font-size: 0.875em;
@@ -11140,25 +11141,25 @@ img.attachment-icon {
   padding: 0.25em 0.5em;
 }
 
-/* line 986, main.scss */
+/* line 987, main.scss */
 .shareabouts-geometry-set .form-instructions {
   display: none;
 }
 
 /* NOTE: use these selectors to style invalid form elements on non-HTML5 browsers */
-/* line 991, main.scss */
+/* line 992, main.scss */
 .project-shareabouts .form-submitted input:invalid,
 .project-shareabouts .form-submitted textarea:invalid,
 .project-shareabouts .form-submitted select:invalid {
   border: 1px solid #f04124;
 }
 
-/* line 997, main.scss */
+/* line 998, main.scss */
 .shareabouts-submit-button {
   margin-top: 0.5em;
 }
 
-/* line 1001, main.scss */
+/* line 1002, main.scss */
 .shareabouts-auth-container {
   position: absolute;
   z-index: 2;
@@ -11171,7 +11172,7 @@ img.attachment-icon {
   overflow: visible;
 }
 
-/* line 1012, main.scss */
+/* line 1013, main.scss */
 .shareabouts-auth-avatar {
   width: 2.25rem;
   height: 2.25rem;
@@ -11179,50 +11180,50 @@ img.attachment-icon {
   margin-bottom: 0.125rem;
 }
 
-/* line 1018, main.scss */
+/* line 1019, main.scss */
 .shareabouts-auth-social-button {
   color: #fff !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
-/* line 1022, main.scss */
+/* line 1023, main.scss */
 .shareabouts-auth-social-button.shareabouts-auth-twitter-button {
   background-color: #66caf4;
 }
-/* line 1025, main.scss */
+/* line 1026, main.scss */
 .shareabouts-auth-social-button.shareabouts-auth-facebook-button {
   background-color: #4f79c1;
 }
-/* line 1028, main.scss */
+/* line 1029, main.scss */
 .shareabouts-auth-social-button img {
   display: inline-block;
   max-width: 2.5rem;
   max-height: 2.5rem;
 }
 
-/* line 1035, main.scss */
+/* line 1036, main.scss */
 .shareabouts-add-button {
   display: block;
 }
 @media only screen and (max-width: 40em) {
-  /* line 1035, main.scss */
+  /* line 1036, main.scss */
   .shareabouts-add-button {
     margin: 0;
   }
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1035, main.scss */
+  /* line 1036, main.scss */
   .shareabouts-add-button {
     box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
   }
 }
 
-/* line 1045, main.scss */
+/* line 1046, main.scss */
 .shareabouts-panel {
   background-color: #fff;
 }
 
-/* line 1049, main.scss */
+/* line 1050, main.scss */
 .heart {
   color: LightGrey;
   font-size: 1.5em;
@@ -11232,7 +11233,7 @@ img.attachment-icon {
   position: relative;
   top: 0.125em;
 }
-/* line 1057, main.scss */
+/* line 1058, main.scss */
 .heart.suported {
   color: LightPink;
 }
@@ -11240,7 +11241,7 @@ img.attachment-icon {
 /*--------------------------------------------------
   Project Layout
 --------------------------------------------------*/
-/* line 1067, main.scss */
+/* line 1068, main.scss */
 .project-map-region > div {
   height: 300px;
 }
@@ -11248,43 +11249,43 @@ img.attachment-icon {
 /*--------------------------------------------------
   The Admin
 --------------------------------------------------*/
-/* line 1076, main.scss */
+/* line 1077, main.scss */
 .project-edit-form {
   background-color: #fff;
   box-shadow: 0 -65px 0 #fff;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1076, main.scss */
+  /* line 1077, main.scss */
   .project-edit-form {
     padding-bottom: 4rem;
   }
 }
 
-/* line 1084, main.scss */
+/* line 1085, main.scss */
 .project-section {
   z-index: auto;
 }
 
-/* line 1088, main.scss */
+/* line 1089, main.scss */
 .project-section-fieldset {
   padding: 0;
   border: 0;
 }
 
 @-moz-document url-prefix() {
-  /* line 1095, main.scss */
+  /* line 1096, main.scss */
   .project-section-fieldset {
     display: table-cell;
   }
 }
-/* line 1100, main.scss */
+/* line 1101, main.scss */
 .location-map-region .map {
   height: 200px;
   border: 1px solid #c9c9c9;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1105, main.scss */
+  /* line 1106, main.scss */
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
@@ -11295,7 +11296,7 @@ img.attachment-icon {
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1114, main.scss */
+  /* line 1115, main.scss */
   input[type=text].sub-heading-input {
     font-size: 1.75rem;
     margin: 0 0 1rem 0;
@@ -11305,12 +11306,12 @@ img.attachment-icon {
   }
 }
 
-/* line 1123, main.scss */
+/* line 1124, main.scss */
 span.sub-heading-postfix {
   color: #999;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1123, main.scss */
+  /* line 1124, main.scss */
   span.sub-heading-postfix {
     margin: 0 0 1rem 0;
     padding: 0.5rem 0.75rem;
@@ -11318,7 +11319,7 @@ span.sub-heading-postfix {
   }
 }
 
-/* line 1132, main.scss */
+/* line 1133, main.scss */
 .content-editable {
   line-height: 1.6;
   background-color: #FFFFFF;
@@ -11338,7 +11339,7 @@ span.sub-heading-postfix {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
   height: auto;
 }
-/* line 1134, main.scss */
+/* line 1135, main.scss */
 .content-editable.rich-editable {
   min-height: 8rem;
 }
@@ -11363,77 +11364,77 @@ span.sub-heading-postfix {
   background-color: #DDDDDD;
   cursor: default;
 }
-/* line 1142, main.scss */
+/* line 1143, main.scss */
 .content-editable.radius {
   border-radius: 3px;
 }
-/* line 1146, main.scss */
+/* line 1147, main.scss */
 .error .content-editable, .content-editable.error {
   margin-bottom: 0;
 }
-/* line 1149, main.scss */
+/* line 1150, main.scss */
 .content-editable a {
   color: #308fbf;
   text-decoration: none;
   line-height: inherit;
 }
-/* line 1154, main.scss */
+/* line 1155, main.scss */
 .content-editable a:hover, .content-editable a:focus {
   color: #267299;
 }
 
-/* line 1163, main.scss */
+/* line 1164, main.scss */
 .pen-menu,
 .pen-menu * {
   box-sizing: content-box !important;
 }
 
-/* line 1168, main.scss */
+/* line 1169, main.scss */
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
   padding-top: 0.5rem;
   padding-right: 0.25rem;
 }
 
-/* line 1174, main.scss */
+/* line 1175, main.scss */
 .section-settings {
   background-color: #f7f7f7;
   padding-top: 1.75rem;
 }
-/* line 1177, main.scss */
+/* line 1178, main.scss */
 .section-settings-toggle-container + .section-settings {
   margin-top: -2.5rem;
 }
 
-/* line 1182, main.scss */
+/* line 1183, main.scss */
 .section-insert {
   margin-bottom: -1rem;
   margin-right: -0.9375rem;
   margin-left: -0.9375rem;
 }
-/* line 1186, main.scss */
+/* line 1187, main.scss */
 .section-insert hr {
   margin-top: 1rem;
   border-color: #ff8b38;
 }
 
-/* line 1192, main.scss */
+/* line 1193, main.scss */
 .unassigned {
   cursor: default;
 }
 
-/* line 1196, main.scss */
+/* line 1197, main.scss */
 .project-settings-container {
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
   background-color: #d9d9d9;
 }
-/* line 1197, main.scss */
+/* line 1198, main.scss */
 .project-settings-container .save-btn {
   outline: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1196, main.scss */
+  /* line 1197, main.scss */
   .project-settings-container {
     position: fixed;
     top: 65px;
@@ -11445,25 +11446,25 @@ span.sub-heading-postfix {
     overflow: hidden;
     box-shadow: inset 3px 0 0 rgba(51, 51, 51, 0.1);
   }
-  /* line 1213, main.scss */
+  /* line 1214, main.scss */
   .project-settings-container .project-settings {
     max-height: 60%;
     overflow: auto;
   }
 }
 
-/* line 1220, main.scss */
+/* line 1221, main.scss */
 textarea.no-resize {
   resize: none;
 }
 
-/* line 1225, main.scss */
+/* line 1226, main.scss */
 .drag-area-container {
   position: relative;
   text-align: center;
 }
 
-/* line 1229, main.scss */
+/* line 1230, main.scss */
 .drag-area {
   position: absolute;
   top: 1rem;
@@ -11474,17 +11475,17 @@ textarea.no-resize {
   border-radius: 0.375rem;
   background-color: rgba(242, 242, 242, 0.4);
 }
-/* line 1238, main.scss */
+/* line 1239, main.scss */
 .drag-area:hover {
   border-color: rgba(133, 133, 133, 0.9);
   background-color: rgba(242, 242, 242, 0.9);
 }
-/* line 1242, main.scss */
+/* line 1243, main.scss */
 .drag-area p {
   margin-bottom: 0.5rem;
 }
 
-/* line 1246, main.scss */
+/* line 1247, main.scss */
 .no-file-upload-message {
   clear: both;
   font-size: 0.75em;
@@ -11497,18 +11498,18 @@ textarea.no-resize {
   border-radius: 0.25em;
 }
 
-/* line 1257, main.scss */
+/* line 1258, main.scss */
 .no-file-upload-message a {
   color: #fff;
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 1261, main.scss */
+/* line 1262, main.scss */
 .no-file-upload-message a:hover {
   color: #fff;
 }
 
-/* line 1264, main.scss */
+/* line 1265, main.scss */
 .file-upload {
   margin: 2em 1em 1em;
   text-align: center;
@@ -11519,7 +11520,7 @@ textarea.no-resize {
   position: relative;
 }
 
-/* line 1273, main.scss */
+/* line 1274, main.scss */
 .file-upload:hover,
 .file-dragging,
 .file-uploading {
@@ -11528,12 +11529,12 @@ textarea.no-resize {
   background-color: rgba(90, 90, 90, 0.5);
 }
 
-/* line 1280, main.scss */
+/* line 1281, main.scss */
 .file-upload p {
   margin-bottom: 0.5em;
 }
 
-/* line 1283, main.scss */
+/* line 1284, main.scss */
 .file-upload-input-container {
   position: relative;
   overflow: hidden;
@@ -11541,12 +11542,12 @@ textarea.no-resize {
   margin-bottom: 0;
 }
 
-/* line 1289, main.scss */
+/* line 1290, main.scss */
 .file-upload-input {
   display: none;
 }
 
-/* line 1292, main.scss */
+/* line 1293, main.scss */
 .uploading-message,
 .file-uploading > .drop-instructions {
   display: none;
@@ -11574,7 +11575,7 @@ textarea.no-resize {
     color: #888;
   }
 }
-/* line 1306, main.scss */
+/* line 1307, main.scss */
 .file-uploading > .uploading-message {
   display: block;
   position: relative;
@@ -11585,44 +11586,44 @@ textarea.no-resize {
   animation: uploading 1.5s infinite ease-in-out;
 }
 
-/* line 1315, main.scss */
+/* line 1316, main.scss */
 .file-uploading > .file-upload-input-container {
   visibility: hidden;
 }
 
-/* line 1320, main.scss */
+/* line 1321, main.scss */
 .full-width-image-container {
   margin: 0 -0.9375rem 0.5rem -0.9375rem;
 }
-/* line 1322, main.scss */
+/* line 1323, main.scss */
 .full-width-image-container.drag-area-container {
   min-height: 9rem;
 }
 
-/* line 1326, main.scss */
+/* line 1327, main.scss */
 .cover-image-container {
   margin-top: -1.125rem;
 }
 
-/* line 1331, main.scss */
+/* line 1332, main.scss */
 .logo-image-container {
   min-height: 9rem;
   margin-bottom: 1rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1331, main.scss */
+  /* line 1332, main.scss */
   .logo-image-container {
     float: left;
     width: 50%;
   }
 }
-/* line 1338, main.scss */
+/* line 1339, main.scss */
 .logo-image-container img {
   max-height: 20rem;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1342, main.scss */
+  /* line 1343, main.scss */
   .project-title-container {
     float: right;
     width: 50%;
@@ -11631,7 +11632,7 @@ textarea.no-resize {
     padding-right: 1rem;
     padding-bottom: 1rem;
   }
-  /* line 1350, main.scss */
+  /* line 1351, main.scss */
   .logo-image-container.hide + .project-title-container {
     float: none;
     width: auto;
@@ -11641,62 +11642,62 @@ textarea.no-resize {
     padding-bottom: 0;
   }
 }
-/* line 1359, main.scss */
+/* line 1360, main.scss */
 .project-title-container .project-title-help-text {
   margin-top: -0.75rem;
 }
 
-/* line 1366, main.scss */
+/* line 1367, main.scss */
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none;
 }
 
-/* line 1378, main.scss */
+/* line 1379, main.scss */
 .existing-snapshot-wrapper .button {
   margin-bottom: 0;
 }
 
-/* line 1384, main.scss */
+/* line 1385, main.scss */
 .avatar-container {
   padding: 0.3rem;
 }
-/* line 1386, main.scss */
+/* line 1387, main.scss */
 .avatar-container .avatar {
   display: inline-block;
 }
-/* line 1389, main.scss */
+/* line 1390, main.scss */
 .avatar-container .drag-area-container {
   min-height: 10.125rem;
 }
 
-/* line 1397, main.scss */
+/* line 1398, main.scss */
 .project-list > li + li, .member-list > li + li, .team-list > li + li {
   margin-top: 0.625rem;
   padding-top: 0.625rem;
   border-top: 1px solid #e3e3e3;
 }
 
-/* line 1404, main.scss */
+/* line 1405, main.scss */
 .member-list li, .team-list li {
   padding-left: 4.375rem;
 }
-/* line 1407, main.scss */
+/* line 1408, main.scss */
 .member-list .avatar, .team-list .avatar {
   width: 3.75rem;
   margin-left: -4.375rem;
 }
 
-/* line 1412, main.scss */
+/* line 1413, main.scss */
 .user-profile .member-list {
   display: none;
 }
 
-/* line 1415, main.scss */
+/* line 1416, main.scss */
 .user-profile .project-list {
   display: none;
 }
 
-/* line 1418, main.scss */
+/* line 1419, main.scss */
 .team-profile .team-list {
   display: none;
 }

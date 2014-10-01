@@ -117,6 +117,9 @@ var Planbox = Planbox || {};
     ui: {
       shareabouts: '.project-shareabouts'
     },
+    getShareaboutsEl: function() {
+      return this.ui.shareabouts;
+    },
     onShow: function() {
       var details = this.model.get('details'),
           compiledTemplates = details.templates,
@@ -130,7 +133,7 @@ var Planbox = Planbox || {};
       });
 
       sa = new Shareabouts.Map({
-        el: this.ui.shareabouts,
+        el: this.getShareaboutsEl(),
         map: details.map,
         layers: details.layers,
         placeStyles: [
