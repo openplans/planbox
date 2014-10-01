@@ -9,7 +9,7 @@
   <ul class="no-bullet">
   {{#bootstrapped 'projectTemplates'}}
     {{#each .}}
-    <li><a href="{{> url-project-new-tpl ../.. }}?template={{ owner.slug }}/{{ slug }}">{{ slug }}</a></li>
+    <li><a href="{{> url-project-new-tpl ../.. }}?template={{ profile.slug }}/{{ project.slug }}">{{ label }}</a></li>
     {{/each}}
   {{/bootstrapped}}
   </ul>

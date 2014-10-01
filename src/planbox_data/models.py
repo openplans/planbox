@@ -318,7 +318,7 @@ def create_roundup_for_new_team(sender, instance, created, **kwargs):
     """
     Create a project roundup for each new team profile.
     """
-    if not created or instance.is_user_profile():
+    if not created:
         return
     team = instance
     Roundup.objects.create(title='%s\'s Plans' % (team.name or team.slug,), owner=team)
@@ -670,6 +670,38 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
     def get_siblings(self):
         return self.project.sections.all()
 
+
+# ============================================================
+# Project templates
+
+@python_2_unicode_compatible
+class ProfileProjectTemplate(OrderedModelMixin, TimeStampedModel):
+    profile = models.ForeignKey('Profile', related_name='project_templates')
+    project = models.ForeignKey('Project')
+    label = models.TextField()
+    index = models.PositiveIntegerField()
+
+    class Meta:
+        ordering = ('index',)
+
+    def __str__(self):
+        return self.label or _('(No label)')
+
+    def get_siblings(self):
+        return self.profile.project_templates.exclude(pk=self.pk)
+
+
+def add_project_template(sender, instance, created, **kwargs):
+    """
+    Create a profile project template for each project added to the template
+    profile.
+    """
+    if not created:
+        return
+    if not instance.owner.slug != settings.TEMPLATE_PROFILE:
+        return
+    ProfileProjectTemplate.objects.create(profile=instance.owner, project=instance, label=instance.title)
+post_save.connect(create_roundup_for_new_team, sender=Project, dispatch_uid="add-project-template-signal")
 
 
 # ============================================================

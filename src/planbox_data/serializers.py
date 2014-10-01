@@ -230,6 +230,15 @@ class UserSerializer (AddRemoveModelSerializer):
         model = models.Profile
 
 
+class ProfileProjectTemplateSerializer (AddRemoveModelSerializer):
+    profile = AssociatedProfileSerializer()
+    project = OwnedProjectSerializer()
+
+    class Meta:
+        model = models.ProfileProjectTemplate
+        fields = ('label', 'project', 'profile')
+
+
 class ProfileSerializer (SlugValidationMixin, AddRemoveModelSerializer):
     members = AssociatedProfileSerializer(required=False, many=True, allow_add_remove=True)
     teams = AssociatedProfileSerializer(required=False, many=True, allow_add_remove=True)

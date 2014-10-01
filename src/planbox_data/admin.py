@@ -16,7 +16,7 @@ from django_ace import AceWidget
 from django_object_actions import DjangoObjectActions
 from genericadmin.admin import GenericAdminModelAdmin, GenericTabularInline
 from jsonfield import JSONField
-from planbox_data.models import Profile, Roundup, Project, Event, Theme, Section, Attachment
+from planbox_data.models import Profile, ProfileProjectTemplate, Roundup, Project, Event, Theme, Section, Attachment
 
 
 class PrettyAceWidget (AceWidget):
@@ -35,11 +35,23 @@ class AttachmentAdmin (GenericAdminModelAdmin):
     pass
 
 
+class ProfileProjectTemplateInline (admin.TabularInline):
+    model = ProfileProjectTemplate
+    extra = 0
+    raw_id_fields = ('project',)
+    exclude = ('created_at', 'updated_at')
+    formfield_overrides = {
+        TextField: {'widget': TextInput(attrs={'class': 'vTextField'})},
+    }
+
+
 class ProfileAdmin (admin.ModelAdmin):
     list_display = ('__str__', '_date_joined', 'affiliation', 'email')
     filter_horizontal = ('teams',)
     raw_id_fields = ('auth',)
     search_fields = ('slug',)
+
+    inlines = (ProfileProjectTemplateInline,)
 
     def _date_joined(self, obj):
         return obj.created_at

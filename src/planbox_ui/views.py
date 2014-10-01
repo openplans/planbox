@@ -22,7 +22,7 @@ from password_reset.views import (
     PasswordChangeView as BasePasswordChangeView)
 from planbox_data.models import Project, Profile, Roundup
 from planbox_data.serializers import (ProjectSerializer, UserSerializer,
-    RoundupSerializer, ProjectSummarySerializer,
+    RoundupSerializer, ProfileProjectTemplateSerializer,
     TemplateProjectSerializer, ProfileSerializer, ProjectActivitySerializer)
 from planbox_ui.decorators import ssl_required
 from planbox_ui.forms import UserCreationForm, AuthenticationForm
@@ -295,8 +295,8 @@ class ProfileView (AppMixin, AlwaysFresh, LoginRequired, SSLRequired, S3UploadMi
         ### TODO: Cache these
         templates_slug = settings.TEMPLATES_PROFILE
         templates = Profile.objects.get(slug=templates_slug)
-        project_summary_serializer = ProjectSummarySerializer(templates.projects.all(), many=True)
-        context['project_templates_data'] = project_summary_serializer.data
+        project_templates_serializer = ProfileProjectTemplateSerializer(templates.project_templates.all(), many=True)
+        context['project_templates_data'] = project_templates_serializer.data
 
         return context
 
