@@ -698,10 +698,10 @@ def add_project_template(sender, instance, created, **kwargs):
     """
     if not created:
         return
-    if not instance.owner.slug != settings.TEMPLATE_PROFILE:
+    if not instance.owner.slug != settings.TEMPLATES_PROFILE:
         return
     ProfileProjectTemplate.objects.create(profile=instance.owner, project=instance, label=instance.title)
-post_save.connect(create_roundup_for_new_team, sender=Project, dispatch_uid="add-project-template-signal")
+post_save.connect(add_project_template, sender=Project, dispatch_uid="add-project-template-signal")
 
 
 # ============================================================
