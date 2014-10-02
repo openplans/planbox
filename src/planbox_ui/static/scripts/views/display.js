@@ -136,7 +136,7 @@ var Planbox = Planbox || {};
         el: this.getShareaboutsEl(),
         map: details.map,
         layers: details.layers,
-        placeStyles: [
+        placeStyles: (details.place_styles || []).concat([
           {
             condition: 'true',
             icon: {
@@ -152,7 +152,7 @@ var Planbox = Planbox || {};
               iconAnchor: [12, 41]
             }
           },
-        ],
+        ]),
         datasetUrl: details.dataset_url + '/places',
         templates: _.extend({}, Handlebars.templates, compiledTemplates)
       });
