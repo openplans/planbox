@@ -49,7 +49,7 @@ class ProfileAdmin (admin.ModelAdmin):
     list_display = ('__str__', '_date_joined', 'affiliation', 'email')
     filter_horizontal = ('teams',)
     raw_id_fields = ('auth',)
-    search_fields = ('slug',)
+    search_fields = ('name', 'slug', 'email')
 
     inlines = (ProfileProjectTemplateInline,)
 

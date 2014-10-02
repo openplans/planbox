@@ -4,29 +4,26 @@
 
 <hgroup class="product-tagline-section has-image">
   <h3 class="tagline"><span class="nowrap">Community Engagement</span> <span class="hearts">&hearts;</span> <span class="nowrap">Better Places</span></h3>
-  <h4 class="slogan">Our web tools help you manage communications <span class="nowrap">&amp; constructive</span> <span class="nowrap">public input.</span></h4>
+  <h4 class="slogan">Our web maps help you gather constructive public input for walking <span class="nowrap">&amp; biking projects.</span></h4>
 </hgroup>
 
-<section class="product-get-started extra-padding-top some-padding-bottom" id="get-started">
+<section class="extra-padding-top some-padding-bottom" id="get-started">
   <div class="row">
-    <div class="small-12 columns">
+    <div class="medium-7 columns">
+      <p class="">Use OpenPlans to set up a collaborative map for community input. Our tried and tested templates help you collect and manage feedback about street issues, suggestions for new bike and walking infrastructure, problems and opportunities for neighborhood planning, and more.</p>
+    </div>
+    <div class="medium-5 columns">
+      <h5>Create an Account:</h5>
       <form method="GET" action="{% url 'app-signup' %}">
-        <div class="row">
-          <div class="small-12 medium-8 large-12 medium-centered columns">
-            <div class="row collapse">
-              <div class="small-12 large-5 columns text-center">
-                <h4>Create Your Planning Website:</h4>
-              </div>
-              <div class="small-8 large-5 columns">
-                <div class="float-label-container">
-                  <input required name="email" type="email" class="float-label-input" placeholder="email@example.org">
-                  <label for="email" class="float-label">Email Address</label>
-                </div>
-              </div>
-              <div class="small-4 large-2 columns">
-                <button class="button postfix">Get Started</button>
-              </div>
+        <div class="row collapse">
+          <div class="small-8 columns">
+            <div class="float-label-container">
+              <input required name="email" type="email" class="float-label-input" placeholder="email@example.org">
+              <label for="email" class="float-label">Email Address</label>
             </div>
+          </div>
+          <div class="small-4 columns">
+            <button class="button postfix">Get Started</button>
           </div>
         </div>
       </form>
@@ -34,9 +31,37 @@
   </div>
 </section>
 
+<section class="product-section-alt extra-padding-bottom" id="whos-got-openplans">
+  <div class="row extra-padding-top">
+    <div class="small-12 columns some-padding-bottom">
+      <h3><strong>Who&rsquo;s got OpenPlans?</strong></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-10 small-push-1 medium-4 medium-reset-order columns">
+      <span class="label success radius"><strong>STREET SAFETY MAPPING</strong></span>
+      <h4>NYC DOT Vision Zero</h4>
+      <img src="{{ STATIC_URL }}images/shareabouts/shareabouts-600x375-visionzero.jpg" class="some-margin-bottom shadowed">
+      <p>New York City is collecting feedback on street safety conditions like speeding and double parking, using Shareabouts and Google Street View. <small><a href="http://www.nyc.gov/html/visionzero/pages/dialogue/map.html" target="_blank"><strong>VIEW&nbsp;SITE</strong></a></small></p>
+    </div>
+    <div class="small-10 small-push-1 medium-4 medium-reset-order columns">
+      <span class="label success radius"><strong>INFRASTRUCTURE REQUESTS</strong></span>
+      <h4>CDOT Bike Parking</h4>
+      <img src="{{ STATIC_URL }}images/shareabouts/shareabouts-600x375-chicagobikeparking.jpg" class="some-margin-bottom shadowed">
+      <p>Chicago residents can request a bike rack using Shareabouts. With a custom admin tool, city staff can review and reply to requests, and track installation tasks for contractors. <small><a href="http://bikeparking.chicagocompletestreets.org/" target="_blank"><strong>VIEW&nbsp;SITE</strong></a></small></p>
+    </div>
+    <div class="small-10 small-push-1 medium-4 medium-reset-order columns end">
+      <span class="label success radius"><strong>BIKE SHARE PLANNING</strong></span>
+      <h4>Philly Bike Share</h4>
+      <img src="{{ STATIC_URL }}images/shareabouts/shareabouts-600x375-phillybikeshare.jpg" class="some-margin-bottom shadowed">
+      <p>Philadelphia is collecting feedback on shortlisted bike share locations, using community knowledge to pick the best spots. <small><a href="http://www.phillybikeshare.com/" target="_blank"><strong>VIEW&nbsp;SITE</strong></a></small></p>
+    </div>
+  </div>
+</section>
+
 <section class="text-center" id="features">
   <div class="row extra-padding-top">
-    <div class="small-12 medium-10 medium-centered large-11 columns extra-padding-top">
+    <div class="small-12 medium-10 medium-centered large-11 columns extra-padding-top some-padding-bottom">
 
       <div class="row">
         <div class="small-6 small-centered medium-4 medium-push-8 medium-uncentered columns">
@@ -50,21 +75,21 @@
 
       <div class="row">
         <div class="small-6 small-centered medium-4 medium-uncentered columns">
-          <img class="feature-illustration" src="{{ STATIC_URL }}images/feature-edit.gif">
+          <img class="feature-illustration" src="{{ STATIC_URL }}images/feature-map.gif">
         </div>
         <div class="small-12 medium-8 columns">
-          <h3 class="some-padding-top">Easily Create &amp; Edit Plans</h3>
-          <p>It's super easy to create plans. Our templates &amp; engagement tools help you focus on the message, giving you the power to broadcast &amp; collect information.</p>
+          <h3 class="some-padding-top">It&rsquo;s all about your map!</h3>
+          <p>Choose from our <a href="/shareabouts"><strong>gallery</strong></a> of high&#8209;quality, user&#8209;friendly maps that collect place&#8209;based feedback &amp; ideas from participants.</p>
         </div>
       </div>
 
       <div class="row">
         <div class="small-6 small-centered medium-4 medium-push-8 medium-uncentered columns">
-          <img class="feature-illustration" src="{{ STATIC_URL }}images/feature-map.gif">
+          <img class="feature-illustration" src="{{ STATIC_URL }}images/feature-edit.gif">
         </div>
         <div class="small-12 medium-8 medium-pull-4 columns">
-          <h3 class="some-padding-top">Add Interactive Maps</h3>
-          <p>Gather place-based public input with our user-friendly map interface. Use a <a href="/shareabouts">Shareabouts</a> map to collect feedback &amp; ideas from of participants.</p>
+          <h3 class="some-padding-top">Easily Manage Your Plans</h3>
+          <p>It&rsquo;s super easy to add other information to your plan. Alongside your map, include a project timeline, downloadable documents, text, images&hellip;</p>
         </div>
       </div>
 
@@ -74,8 +99,7 @@
         </div>
         <div class="small-12 medium-8 columns">
           <h3 class="some-padding-top">Plans Large &amp; Larger</h3>
-          <p>Use OpenPlans on your own, or upgrade to features like roundup pages, branded templates, custom integrations, user management&hellip; Work with us to accelerate development of new features.</p>
-          <!-- <p class=""><a href="#">Read our infrastructure for planning white paper&hellip;</a></p> -->
+          <p>Use OpenPlans to collect data for multiple projects, and give everyone a birds&#8209;eye view of planning initiatives across your municipality.</p>
         </div>
       </div>
 
@@ -83,18 +107,56 @@
   </div>
 </section>
 
-<section class="product-benefits extra-padding-top some-padding-bottom" id="benefits">
+<section class="product-section-alt extra-padding-top extra-padding-bottom text-center" id="benefits">
+  <div class="row">
+    <div class="columns">
+      <h3 class="some-padding-bottom">Choose the right map for your plan&hellip;</h3>
+    </div>
+  </div>
+
+  <div class="row full-width" data-equalizer>
+    <div class="medium-6 large-3 columns some-margin-bottom">
+      <div class="panel radius" data-equalizer-watch>
+        <h4><a href="/map-flavors/#bike-parking-map"><img src="{{ STATIC_URL }}images/plan-types/illustration-bikeparking.png" class="some-margin-bottom">Bike Parking</a></h4>
+      </div>
+    </div>
+    <div class="medium-6 large-3 columns some-margin-bottom">
+      <div class="panel radius" data-equalizer-watch>
+        <h4><a href="/map-flavors/#bike-share-map"><img src="{{ STATIC_URL }}images/plan-types/illustration-bikeshare.png" class="some-margin-bottom">Bike Share</a></h4>
+      </div>
+    </div>
+    <div class="medium-6 large-3 columns some-margin-bottom">
+      <div class="panel radius" data-equalizer-watch>
+        <h4><a href="/map-flavors/#neighborhood-assessment-map"><img src="{{ STATIC_URL }}images/plan-types/illustration-assessment.png" class="some-margin-bottom">Neighborhood Assessment</a></h4>
+      </div>
+    </div>
+    <div class="medium-6 large-3 columns some-margin-bottom">
+      <div class="panel radius" data-equalizer-watch>
+        <h4><a href="/map-flavors/#street-safety-map"><img src="{{ STATIC_URL }}images/plan-types/illustration-streetview.png" class="some-margin-bottom">Street Safety</a></h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="columns some-padding-bottom">
+      <a href="/map-flavors/" class="button large round">Compare Map Features</a><br>
+      <a href="/signup/"><em><strong>Or build a plan from scratch&hellip;</strong></em></a>
+    </div>
+  </div>
+</section>
+
+<section class="extra-padding-top some-padding-bottom" id="benefits">
   <div class="row">
     <div class="clearfix">
       <p class="medium-10 medium-centered large-4 large-uncentered columns text-large"><strong>For Planners</strong>    <br>OpenPlans makes it easy to create &amp; update websites. Spend less time making web design decisions, and more time adding content and engaging people where they&nbsp;are.</p>
       <p class="medium-10 medium-centered large-4 large-uncentered columns text-large"><strong>For Communities</strong> <br>OpenPlans enables informed participation. It's where people can find out what's happening, give their input, and stay engaged throughout the whole&nbsp;project.</p>
       <p class="medium-10 medium-centered large-4 large-uncentered columns text-large"><strong>For Cities</strong>      <br>OpenPlans provides a birds-eye view of all plans. Information is aggregated to give a city-wide roundup of plans by type, helping people find multiple plans to&nbsp;track.</p>
     </div>
-    <p class="small-12 medium-10 medium-centered large-8 columns some-padding-top"><a href="/signup/" class="button large round expand"><strong>Sign up for an <span class="show-for-medium-up">OpenPlans </span>account&hellip;</strong></a></p>
+    <p class="columns text-center some-padding-top"><a href="/signup/" class="button large round"><strong>Sign up for an <span class="show-for-medium-up">OpenPlans </span>account&hellip;</strong></a></p>
   </div>
 </section>
 
-<section class="extra-padding-top some-padding-bottom" id="">
+<section class="product-section-alt extra-padding-top some-padding-bottom" id="">
   <div class="row">
     <div class="small-12 medium-5 columns">
       <h3>Who is OpenPlans for?</h3>
@@ -117,7 +179,7 @@
   </div>
 </section>
 
-<section class="product-demos extra-padding-top extra-padding-bottom" id="demos">
+<!-- <section class="product-demos extra-padding-top extra-padding-bottom" id="demos">
   <div class="row">
     <div class="small-12 columns some-padding-bottom">
       <h3>Check out these plans&hellip;</h3>
@@ -129,7 +191,7 @@
       <a href="http://maconactionplan.com/" target="_blank"><img class="" src="{{ STATIC_URL }}images/project-screenshot-maconactionplan.png"></a>
     </div>
   </div>
-</section>
+</section> -->
 
 <section class="product-feedback extra-padding-top extra-padding-bottom">
   <div class="row">
