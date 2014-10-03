@@ -61,7 +61,7 @@ urlpatterns = patterns('',
     # Project pages
 
     url(r'^(?P<owner_slug>[^/]+)/new/$', new_project_view, name='app-new-project'),
-    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/edit/$', project_view, name='app-project'),
+    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/edit/$', project_view, name='app-project-editor'),
     # Read-only project page
-    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', ro_project_view, name='app-ro-project'),
+    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', ro_project_view, name='app-project-display'),
 )

@@ -218,7 +218,7 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
 
         return format_html(
             '''<a href="{0}" target="_blank">Link &#8663</a>''',  # 8663 is the ⇗ character
-            reverse('app-project', kwargs={'owner_slug': project.owner.slug, 'project_slug': project.slug})
+            reverse('app-project-page', kwargs={'owner_slug': project.owner.slug, 'project_slug': project.slug})
         )
     _permalink.allow_tags = True
     _permalink.short_description = _('Link')
