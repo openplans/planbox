@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, url
 from .views import (
     # Static site and metadata views
-    index_view, about_view, shareabouts_view, open_source_view, map_flavors_view, help_view,
+    index_view, about_view, shareabouts_view, open_source_view, map_flavors_view, help_view, plan_expired_view,
     robots_view, sitemap_view,
 
     # User authentication views
@@ -45,6 +45,7 @@ urlpatterns = patterns('',
     url(r'^shareabouts/error$', shareabouts_auth_error_view, name='app-shareabouts-error'),
     url(r'^open-source/$', open_source_view, name='app-open-source'),
     url(r'^map-flavors/$', map_flavors_view, name='app-map-flavors'),
+    url(r'^plan-expired/$', plan_expired_view, name='app-plan-expired'),
 
     # ==============================
     # Profile dashboards
