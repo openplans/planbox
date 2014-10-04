@@ -9,6 +9,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User as UserAuth
 from django.contrib.auth.views import redirect_to_login
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import resolve_url
@@ -394,20 +395,8 @@ class BaseExistingProjectView (AlwaysFresh, ProjectMixin, TemplateView):
     def is_project_open(self):
         return self.project.get_opened_by()
 
-    def get(self, request, owner_slug, project_slug):
-        self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
-                                         owner__slug=owner_slug, slug__iexact=project_slug)
 
-        if not self.get_project_is_visible():
-            return redirect('app-index')
-
-        if self.get_project_is_editable() and not self.is_project_open():
-            self.project.mark_opened_by(request.user)
-
-        return super(BaseExistingProjectView, self).get(request, pk=self.project.pk)
-
-
-class ProjectView (SSLRequired, S3UploadMixin, BaseExistingProjectView):
+class ProjectEditorView (SSLRequired, LoginRequired, S3UploadMixin, BaseExistingProjectView):
     """
     A view on an existing project that presents an editable template when the
     authenticated user is the owner of the project.
@@ -418,12 +407,24 @@ class ProjectView (SSLRequired, S3UploadMixin, BaseExistingProjectView):
 
     def get_s3_upload_form_data(self):
         if self.get_project_is_editable():
-            return super(ProjectView, self).get_s3_upload_form_data()
+            return super(ProjectEditorView, self).get_s3_upload_form_data()
         else:
             return None
 
+    def get(self, request, owner_slug, project_slug):
+        self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
+                                         owner__slug=owner_slug, slug__iexact=project_slug)
 
-class ReadOnlyProjectView (ReadOnlyMixin, BaseExistingProjectView):
+        if not self.get_project_is_editable():
+            raise Http404
+
+        if not self.is_project_open():
+            self.project.mark_opened_by(request.user)
+
+        return super(ProjectEditorView, self).get(request, pk=self.project.pk)
+
+
+class ProjectPageView (ReadOnlyMixin, BaseExistingProjectView):
     """
     A view on an existing project where that always presumes the user is NOT
     the project owner (thus it is always in read-only mode).
@@ -431,6 +432,15 @@ class ReadOnlyProjectView (ReadOnlyMixin, BaseExistingProjectView):
 
     def get_project_is_editable(self):
         return False
+
+    def get(self, request, owner_slug, project_slug):
+        self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
+                                         owner__slug=owner_slug, slug__iexact=project_slug)
+
+        if not self.get_project_is_visible():
+            raise Http404
+
+        return super(ProjectPageView, self).get(request, pk=self.project.pk)
 
 
 class NewProjectView (SSLRequired, LoginRequired, S3UploadMixin, ProjectMixin, TemplateView):
@@ -532,8 +542,8 @@ open_source_view = OpenSourceView.as_view()
 map_flavors_view = MapFlavorsView.as_view()
 plan_expired_view = ExpiredPlanView.as_view()
 
-project_view = ProjectView.as_view()
-ro_project_view = ReadOnlyProjectView.as_view()
+project_editor_view = ProjectEditorView.as_view()
+project_page_view = ProjectPageView.as_view()
 profile_view = ProfileView.as_view()
 new_project_view = NewProjectView.as_view()
 

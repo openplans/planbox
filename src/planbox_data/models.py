@@ -393,7 +393,7 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     )
 
     LAYOUT_CHOICES = (
-        ('generic', _('Generic (classic)')),
+        ('generic', _('Default (classic)')),
         ('shareabouts', _('Shareabouts Map')),
     )
 

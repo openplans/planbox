@@ -6,7 +6,8 @@ from nose.tools import assert_equal, assert_raises, assert_in, assert_not_in
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
 from planbox_data.models import Profile, Project, Event, Theme
-from planbox_ui.views import project_view, new_project_view, signup_view, signin_view, profile_view
+from planbox_ui.views import (project_editor_view, project_page_view, new_project_view,
+    signup_view, signin_view, profile_view)
 
 
 class PlanBoxUITestCase (TestCase):
@@ -159,8 +160,8 @@ class NewProjectViewTests (PlanBoxUITestCase):
         assert_equal(response.url, login_url + '?next=' + url)
 
 
-class ProjectDetailViewTests (PlanBoxUITestCase):
-    def test_anon_gets_non_editable_details(self):
+class ProjectEditorViewTests (PlanBoxUITestCase):
+    def test_anon_gets_302_to_signin(self):
         owner = Profile.objects.create(slug='mjumbewu')
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
@@ -172,12 +173,13 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = AnonymousUser()
-        response = project_view(request, **kwargs)
+        response = project_editor_view(request, **kwargs)
 
-        assert_equal(response.status_code, 200)
-        assert_equal(response.context_data.get('is_editable'), False)
+        signin_url = reverse('app-signin') + '?next=' + url
+        assert_equal(response.status_code, 302)
+        assert_equal(response.url, signin_url)
 
-    def test_non_owner_gets_non_editable_details(self):
+    def test_non_owner_gets_404(self):
         owner = Profile.objects.create(slug='mjumbewu')
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
 
@@ -192,10 +194,9 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = auth2
-        response = project_view(request, **kwargs)
 
-        assert_equal(response.status_code, 200)
-        assert_equal(response.context_data.get('is_editable'), False)
+        with assert_raises(Http404):
+            response = project_editor_view(request, **kwargs)
 
     def test_owner_gets_editable_details(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
@@ -210,12 +211,12 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = auth
-        response = project_view(request, **kwargs)
+        response = project_editor_view(request, **kwargs)
 
         assert_equal(response.status_code, 200)
         assert_equal(response.context_data.get('is_editable'), True)
 
-    def test_anon_gets_redirect_to_home_on_non_public_project(self):
+    def test_anon_gets_redirect_to_signin_non_public_project(self):
         owner = Profile.objects.create(slug='mjumbewu')
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
@@ -227,13 +228,13 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = AnonymousUser()
-        response = project_view(request, **kwargs)
+        response = project_editor_view(request, **kwargs)
 
-        home_url = reverse('app-index')
+        signin_url = reverse('app-signin') + '?next=' + url
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, home_url)
+        assert_equal(response.url, signin_url)
 
-    def test_non_owner_gets_redirect_to_home_on_non_public_project(self):
+    def test_non_owner_gets_404_on_non_public_project(self):
         owner = Profile.objects.create(slug='mjumbewu')
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
 
@@ -247,11 +248,9 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = auth2
-        response = project_view(request, **kwargs)
 
-        home_url = reverse('app-index')
-        assert_equal(response.status_code, 302)
-        assert_equal(response.url, home_url)
+        with assert_raises(Http404):
+            response = project_editor_view(request, **kwargs)
 
     def test_owner_gets_editable_details_on_non_public_project(self):
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
@@ -266,7 +265,28 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = auth
-        response = project_view(request, **kwargs)
+        response = project_editor_view(request, **kwargs)
+
+        assert_equal(response.status_code, 200)
+        assert_equal(response.context_data.get('is_editable'), True)
+
+    def test_team_member_gets_editable_details_on_non_public_project(self):
+        owner = Profile.objects.create(slug='test-slug')
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        member = auth.profile
+        owner.members.add(member)
+
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
+
+        kwargs = {
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
+        }
+
+        url = reverse('app-project-editor', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth
+        response = project_editor_view(request, **kwargs)
 
         assert_equal(response.status_code, 200)
         assert_equal(response.context_data.get('is_editable'), True)
@@ -284,10 +304,10 @@ class ProjectThemeTests (PlanBoxUITestCase):
             'project_slug': project.slug
         }
 
-        url = reverse('app-project-editor', kwargs=kwargs)
+        url = reverse('app-project-page', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = AnonymousUser()
-        response = project_view(request, **kwargs)
+        response = project_page_view(request, **kwargs)
 
         assert_equal(response.status_code, 200)
         assert_equal(response.context_data.get('is_editable'), False)
@@ -304,10 +324,10 @@ class ProjectThemeTests (PlanBoxUITestCase):
             'project_slug': project.slug
         }
 
-        url = reverse('app-project-editor', kwargs=kwargs)
+        url = reverse('app-project-page', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = AnonymousUser()
-        response = project_view(request, **kwargs)
+        response = project_page_view(request, **kwargs)
 
         assert_equal(response.status_code, 200)
         assert_equal(response.context_data.get('is_editable'), False)

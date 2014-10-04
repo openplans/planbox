@@ -78,6 +78,10 @@ var Planbox = Planbox || {};
                 'public', 'status', 'location', 'contact', 'owner',
                 'cover_img_url', 'logo_img_url', 'events', 'sections',
                 'template', 'layout', 'theme', 'description', 'geometry',
+
+                'last_opened_at', 'last_opened_by',
+                'last_saved_at', 'last_saved_by',
+
                 'happening_now_description', 'happening_now_link_type',
                 'happening_now_link_url', 'get_involved_description',
                 'get_involved_link_type', 'get_involved_link_url'],

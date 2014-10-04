@@ -17,7 +17,7 @@ from .views import (
     roundup_view,
 
     # Project views
-    project_view, new_project_view, ro_project_view,
+    project_editor_view, new_project_view, project_page_view,
 
     # Shareabouts auth
     shareabouts_auth_success_view, shareabouts_auth_error_view,
@@ -62,7 +62,7 @@ urlpatterns = patterns('',
     # Project pages
 
     url(r'^(?P<owner_slug>[^/]+)/new/$', new_project_view, name='app-new-project'),
-    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/edit/$', project_view, name='app-project-editor'),
+    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/edit/$', project_editor_view, name='app-project-editor'),
     # Read-only project page
-    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', ro_project_view, name='app-project-page'),
+    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', project_page_view, name='app-project-page'),
 )
