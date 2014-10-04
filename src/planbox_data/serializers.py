@@ -314,6 +314,7 @@ class ProjectSerializer (SlugValidationMixin, AddRemoveModelSerializer):
     class Meta:
         model = models.Project
         exclude = ('last_opened_at', 'last_opened_by', 'last_saved_at', 'last_saved_by')
+        read_only_fields = ('expires_at',)
 
 
 class ProjectActivitySerializer (AddRemoveModelSerializer):
@@ -336,7 +337,8 @@ class ProjectSummarySerializer (AddRemoveModelSerializer):
 
     class Meta:
         model = models.Project
-        fields = ('id', 'slug', 'title', 'summary', 'owner', 'geometry', 'location', 'details')
+        fields = ('id', 'slug', 'title', 'summary', 'owner', 'geometry', 'location', 'details', 'expires_at')
+        read_only_fields = ('expires_at',)
 
     def get_project_summary(self, project):
         return project.get_summary()
@@ -387,4 +389,5 @@ class TemplateProjectSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = models.Project
-        exclude = ('owner', 'slug', 'id', 'public')
+        exclude = ('owner', 'slug', 'id', 'public', 'expires_at',
+            'last_opened_at', 'last_opened_by', 'last_saved_at', 'last_saved_by')

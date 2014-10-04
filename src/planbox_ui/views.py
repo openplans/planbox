@@ -15,6 +15,7 @@ from django.shortcuts import redirect
 from django.shortcuts import resolve_url
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
+from django.utils.timezone import now
 from django.views.generic import TemplateView, FormView, View
 from password_reset.views import (
     PasswordResetView as BasePasswordResetView,
@@ -395,6 +396,9 @@ class BaseExistingProjectView (AlwaysFresh, ProjectMixin, TemplateView):
     def is_project_open(self):
         return self.project.get_opened_by()
 
+    def is_project_active(self):
+        return now() < self.project.expires_at
+
 
 class ProjectEditorView (SSLRequired, LoginRequired, S3UploadMixin, BaseExistingProjectView):
     """
@@ -411,12 +415,21 @@ class ProjectEditorView (SSLRequired, LoginRequired, S3UploadMixin, BaseExisting
         else:
             return None
 
+    def get_template_names(self):
+        if not self.is_project_active():
+            return ['project-expired.html']
+        return super(ProjectEditorView, self).get_template_names()
+
     def get(self, request, owner_slug, project_slug):
         self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
                                          owner__slug=owner_slug, slug__iexact=project_slug)
 
         if not self.get_project_is_editable():
             raise Http404
+
+        if not self.is_project_active():
+            context = self.get_context_data(**self.kwargs)
+            return self.render_to_response(context, status=402)
 
         if not self.is_project_open():
             self.project.mark_opened_by(request.user)
@@ -436,6 +449,9 @@ class ProjectPageView (ReadOnlyMixin, BaseExistingProjectView):
     def get(self, request, owner_slug, project_slug):
         self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
                                          owner__slug=owner_slug, slug__iexact=project_slug)
+
+        if not self.is_project_active():
+            raise Http404
 
         if not self.get_project_is_visible():
             raise Http404

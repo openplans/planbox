@@ -414,6 +414,8 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
 
     geometry = models.GeometryField(null=True, blank=True)
 
+    expires_at = models.DateTimeField(null=True, blank=True)
+
     # NOTE: These may belong in a separate model, but are on the project for
     #       now. I think the model would be called a Highlight.
     happening_now_description = models.TextField(blank=True)
@@ -508,6 +510,19 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
             return True
 
         return self.owned_by(obj) or (obj in self.owner.members.all())
+
+    def reset_trial_period(self):
+        if hasattr(settings, 'TRIAL_DURATION'):
+            duration = settings.TRIAL_DURATION
+            if not isinstance(duration, timedelta):
+                duration = timedelta(seconds=duration)
+            self.expires_at = now() + duration
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:  # Creating...
+            if self.expires_at is None:
+                self.reset_trial_period()
+        return super(Project, self).save(*args, **kwargs)
 
 
 class EventManager (models.Manager):

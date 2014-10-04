@@ -2,6 +2,7 @@ from django.contrib.sessions.backends.cache import SessionStore
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.test import TestCase, RequestFactory
+from django.utils.timezone import datetime, utc
 from nose.tools import assert_equal, assert_raises, assert_in, assert_not_in
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
@@ -290,6 +291,132 @@ class ProjectEditorViewTests (PlanBoxUITestCase):
 
         assert_equal(response.status_code, 200)
         assert_equal(response.context_data.get('is_editable'), True)
+
+    def test_owner_gets_402_on_expired_project(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        owner = auth.profile
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False, expires_at=datetime(1970, 1, 1, tzinfo=utc))
+
+        kwargs = {
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
+        }
+
+        url = reverse('app-project-editor', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth
+        response = project_editor_view(request, **kwargs)
+
+        assert_equal(response.status_code, 402)
+
+
+class ProjectPageViewTests (PlanBoxUITestCase):
+    def test_anon_gets_public_page(self):
+        owner = Profile.objects.create(slug='mjumbewu')
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
+
+        kwargs = {
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
+        }
+
+        url = reverse('app-project-page', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = AnonymousUser()
+        response = project_page_view(request, **kwargs)
+
+        assert_equal(response.status_code, 200)
+        assert_equal(response.context_data.get('is_editable'), False)
+
+    def test_anon_gets_404_for_non_public_project(self):
+        owner = Profile.objects.create(slug='mjumbewu')
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
+
+        kwargs = {
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
+        }
+
+        url = reverse('app-project-page', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = AnonymousUser()
+
+        with assert_raises(Http404):
+            response = project_page_view(request, **kwargs)
+
+    def test_non_owner_gets_404_on_non_public_project(self):
+        owner = Profile.objects.create(slug='mjumbewu')
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
+
+        kwargs = {
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
+        }
+
+        auth2 = UserAuth.objects.create_user(username='atogle', password='456')
+
+        url = reverse('app-project-page', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth2
+
+        with assert_raises(Http404):
+            response = project_page_view(request, **kwargs)
+
+    def test_owner_gets_uneditable_details_on_non_public_project(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        owner = auth.profile
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
+
+        kwargs = {
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
+        }
+
+        url = reverse('app-project-page', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth
+        response = project_page_view(request, **kwargs)
+
+        assert_equal(response.status_code, 200)
+        assert_equal(response.context_data.get('is_editable'), False)
+
+    def test_team_member_gets_uneditable_details_on_non_public_project(self):
+        owner = Profile.objects.create(slug='test-slug')
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        member = auth.profile
+        owner.members.add(member)
+
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False)
+
+        kwargs = {
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
+        }
+
+        url = reverse('app-project-page', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth
+        response = project_page_view(request, **kwargs)
+
+        assert_equal(response.status_code, 200)
+        assert_equal(response.context_data.get('is_editable'), False)
+
+    def test_owner_gets_404_on_expired_project(self):
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        owner = auth.profile
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=False, expires_at=datetime(1970, 1, 1, tzinfo=utc))
+
+        kwargs = {
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
+        }
+
+        url = reverse('app-project-page', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = auth
+
+        with assert_raises(Http404):
+            response = project_page_view(request, **kwargs)
 
 
 class ProjectThemeTests (PlanBoxUITestCase):
