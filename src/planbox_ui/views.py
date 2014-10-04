@@ -397,7 +397,10 @@ class BaseExistingProjectView (AlwaysFresh, ProjectMixin, TemplateView):
         return self.project.get_opened_by()
 
     def is_project_active(self):
-        return now() < self.project.expires_at
+        return (
+            self.project.expires_at is None or
+            now() < self.project.expires_at
+        )
 
 
 class ProjectEditorView (SSLRequired, LoginRequired, S3UploadMixin, BaseExistingProjectView):

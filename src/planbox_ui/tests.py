@@ -2,7 +2,7 @@ from django.contrib.sessions.backends.cache import SessionStore
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.test import TestCase, RequestFactory
-from django.utils.timezone import datetime, utc
+from django.utils.timezone import datetime, now, timedelta, utc
 from nose.tools import assert_equal, assert_raises, assert_in, assert_not_in
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
@@ -311,9 +311,28 @@ class ProjectEditorViewTests (PlanBoxUITestCase):
 
 
 class ProjectPageViewTests (PlanBoxUITestCase):
-    def test_anon_gets_public_page(self):
+    def test_anon_gets_public_page_with_future_expires(self):
+        owner = Profile.objects.create(slug='mjumbewu')
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True, expires_at=(now() + timedelta(days=1)))
+
+        kwargs = {
+            'owner_slug': owner.slug,
+            'project_slug': project.slug
+        }
+
+        url = reverse('app-project-page', kwargs=kwargs)
+        request = self.factory.get(url)
+        request.user = AnonymousUser()
+        response = project_page_view(request, **kwargs)
+
+        assert_equal(response.status_code, 200)
+        assert_equal(response.context_data.get('is_editable'), False)
+
+    def test_anon_gets_public_page_with_no_expires(self):
         owner = Profile.objects.create(slug='mjumbewu')
         project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
+        project.expires_at = None
+        project.save()
 
         kwargs = {
             'owner_slug': owner.slug,
