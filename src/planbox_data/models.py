@@ -415,6 +415,7 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     geometry = models.GeometryField(null=True, blank=True)
 
     expires_at = models.DateTimeField(null=True, blank=True)
+    payment_type = models.CharField(max_length=20, blank=True)
 
     # NOTE: These may belong in a separate model, but are on the project for
     #       now. I think the model would be called a Highlight.

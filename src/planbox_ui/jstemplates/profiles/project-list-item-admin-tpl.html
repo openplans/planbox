@@ -16,9 +16,23 @@
 {{#if expires_at}}
 <p class="text-small no-margins">
   {{#isfuture expires_at}}
-    <strong><em>Your plan expires {{ fromnow expires_at }}.</em> <a href="#">Buy Plan</a></strong>
+    <strong>
+      {{#if payment_type}}
+        <em>Your plan expires {{ fromnow expires_at }}.</em>
+      {{else}}
+        <em>Your trial expires {{ fromnow expires_at }}.</em>
+      {{/if}}
+      <a href="#">Buy Plan</a>
+    </strong>
   {{else}}
-    <strong><em>Your plan has expired.</em> <a href="#">Buy Plan</a></strong>
+    <strong>
+      {{#if payment_type}}
+        <em>Your plan has expired.</em>
+      {{else}}
+        <em>Your trial has expired.</em>
+      {{/if}}
+      <a href="#">Buy Plan</a>
+    </strong>
   {{/isfuture}}
 </p>
 {{/if}}

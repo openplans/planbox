@@ -24,7 +24,7 @@ from password_reset.views import (
     PasswordChangeView as BasePasswordChangeView)
 from planbox_data.models import Project, Profile, Roundup
 from planbox_data.serializers import (ProjectSerializer, UserSerializer,
-    RoundupSerializer, ProfileProjectTemplateSerializer,
+    FullProjectSerializer, RoundupSerializer, ProfileProjectTemplateSerializer,
     TemplateProjectSerializer, ProfileSerializer, ProjectActivitySerializer)
 from planbox_ui.decorators import ssl_required
 from planbox_ui.forms import UserCreationForm, AuthenticationForm
@@ -408,6 +408,10 @@ class ProjectEditorView (SSLRequired, LoginRequired, S3UploadMixin, BaseExisting
     A view on an existing project that presents an editable template when the
     authenticated user is the owner of the project.
     """
+
+    def get_project_serialized_data(self):
+        project_serializer = FullProjectSerializer(self.project)
+        return project_serializer.data
 
     def get_project_is_editable(self):
         return self.project.editable_by(self.request.user)

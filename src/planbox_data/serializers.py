@@ -219,8 +219,8 @@ class AssociatedProfileSerializer (FlexibleFields, AddRemoveModelSerializer):
 class OwnedProjectSerializer (AddRemoveModelSerializer):
     class Meta:
         model = models.Project
-        fields = ('id', 'slug', 'title', 'expires_at',)
-        read_only_fields = ('expires_at',)
+        fields = ('id', 'slug', 'title', 'expires_at', 'payment_type',)
+        read_only_fields = ('expires_at', 'payment_type',)
 
 
 class UserSerializer (AddRemoveModelSerializer):
@@ -314,8 +314,13 @@ class ProjectSerializer (SlugValidationMixin, AddRemoveModelSerializer):
 
     class Meta:
         model = models.Project
+        exclude = ('last_opened_at', 'last_opened_by', 'last_saved_at', 'last_saved_by', 'expires_at', 'payment_type',)
+
+
+class FullProjectSerializer (ProjectSerializer):
+    class Meta (ProjectSerializer.Meta):
         exclude = ('last_opened_at', 'last_opened_by', 'last_saved_at', 'last_saved_by')
-        read_only_fields = ('expires_at',)
+        read_only_fields = ('expires_at', 'payment_type',)
 
 
 class ProjectActivitySerializer (AddRemoveModelSerializer):
