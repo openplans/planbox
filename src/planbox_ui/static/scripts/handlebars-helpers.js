@@ -178,6 +178,18 @@ var Planbox = Planbox || {};
     return '';
   });
 
+  Handlebars.registerHelper('ispast', function(datetime, options) {
+    var now = new Date();
+    datetime = new Date(datetime);
+    return (datetime <= now ? options.fn(this) : options.inverse(this));
+  });
+
+  Handlebars.registerHelper('isfuture', function(datetime, options) {
+    var now = new Date();
+    datetime = new Date(datetime);
+    return (datetime > now ? options.fn(this) : options.inverse(this));
+  });
+
 
   // A random short quote -----------------------------------------------------
 

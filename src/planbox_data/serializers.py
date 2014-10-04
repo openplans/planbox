@@ -219,7 +219,8 @@ class AssociatedProfileSerializer (FlexibleFields, AddRemoveModelSerializer):
 class OwnedProjectSerializer (AddRemoveModelSerializer):
     class Meta:
         model = models.Project
-        fields = ('id', 'slug', 'title',)
+        fields = ('id', 'slug', 'title', 'expires_at',)
+        read_only_fields = ('expires_at',)
 
 
 class UserSerializer (AddRemoveModelSerializer):
