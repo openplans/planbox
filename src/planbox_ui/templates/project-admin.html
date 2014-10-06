@@ -62,6 +62,7 @@
   {% endif %}
 
   {% handlebarsjs 'project-editor-v2/(.*)' precompile register_partials %}
+  {% handlebarsjs 'common/(.*)' precompile register_partials %}
   {% handlebarsjs '(.*)' precompile register_partials %}
 
 {% endblock appscripts %}

@@ -79,6 +79,8 @@ var Planbox = Planbox || {};
                 'cover_img_url', 'logo_img_url', 'events', 'sections',
                 'template', 'layout', 'theme', 'description', 'geometry',
 
+                'expires_at', 'payment_type',
+
                 'last_opened_at', 'last_opened_by',
                 'last_saved_at', 'last_saved_by',
 
