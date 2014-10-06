@@ -35,6 +35,40 @@
   </div>
 
   <footer class="site-colophon small-12 columns">
+
+    <div class="row social-links-section text-center extra-margin-top hide-for-medium-up">
+      {{#if details.facebook_url}}
+      <div class="medium-4 columns">
+        <a href="{{ details.facebook_url }}" class="social-link">
+          <div class="panel">
+            <img src="{{ static_url }}/images/social-facebook.gif" class="some-margin-bottom">
+            <h4>Join us on <br>Facebook!</h4>
+          </div>
+        </a>
+      </div>
+      {{/if}}
+      {{#if details.instagram_url}}
+      <div class="medium-4 columns">
+        <a href="{{ details.instagram_url }}" class="social-link">
+          <div class="panel">
+            <img src="{{ static_url }}/images/social-instagram.gif" class="some-margin-bottom">
+            <h4>Follow us on <br>Instagram!</h4>
+          </div>
+        </a>
+      </div>
+      {{/if}}
+      {{#if details.twitter_url}}
+      <div class="medium-4 columns">
+        <a href="{{ details.twitter_url }}" class="social-link">
+          <div class="panel">
+            <img src="{{ static_url }}/images/social-twitter.gif" class="some-margin-bottom">
+            <h4>Follow us on <br>Twitter!</h4>
+          </div>
+        </a>
+      </div>
+      {{/if}}
+    </div>
+
       <p class="project-contact-info text-center medium-text-left">{{{ contact }}}</p>
       {{! NOTE: These URLs is hardcoded for the sake of pages with custom URLs. Should maybe be passed in as context? }}
       <p class="powered-by text-center medium-text-right text-small">{{#_}}Powered by <a href="http://openplans.org/">OpenPlans.org</a>.{{/_}}</p>
