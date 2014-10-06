@@ -318,7 +318,7 @@ def create_roundup_for_new_team(sender, instance, created, **kwargs):
     """
     Create a project roundup for each new team profile.
     """
-    if not created or instance.is_user_profile():
+    if not created:
         return
     team = instance
     Roundup.objects.create(title='%s\'s Plans' % (team.name or team.slug,), owner=team)
@@ -392,6 +392,11 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
         ('external', _('External URL')),
     )
 
+    LAYOUT_CHOICES = (
+        ('generic', _('Generic (classic)')),
+        ('shareabouts', _('Shareabouts Map')),
+    )
+
     title = models.TextField(blank=True)
     slug = models.CharField(max_length=128, blank=True)
     public = models.BooleanField(default=False, blank=True)
@@ -399,8 +404,10 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     location = models.TextField(help_text=_("The general location of the project, e.g. \"Philadelphia, PA\", \"Clifton Heights, Louisville, KY\", \"4th St. Corridor, Brooklyn, NY\", etc."), default='', blank=True)
     contact = models.TextField(help_text=_("The contact information for the project"), default='', blank=True)
     owner = models.ForeignKey('Profile', related_name='projects')
+
     details = JSONField(blank=True, default=dict)
     theme = models.ForeignKey('Theme', related_name='projects', null=True, blank=True, on_delete=models.SET_NULL)
+    layout = models.CharField(max_length=20, choices=LAYOUT_CHOICES, default='generic')
     cover_img_url = models.URLField(_('Cover Image URL'), blank=True, max_length=2048)
     logo_img_url = models.URLField(_('Logo Image URL'), blank=True, max_length=2048)
     template = models.ForeignKey('Project', help_text=_("The project, if any, that this one is based off of"), null=True, blank=True, on_delete=models.SET_NULL)
@@ -663,6 +670,38 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
     def get_siblings(self):
         return self.project.sections.all()
 
+
+# ============================================================
+# Project templates
+
+@python_2_unicode_compatible
+class ProfileProjectTemplate(OrderedModelMixin, TimeStampedModel):
+    profile = models.ForeignKey('Profile', related_name='project_templates')
+    project = models.ForeignKey('Project')
+    label = models.TextField()
+    index = models.PositiveIntegerField()
+
+    class Meta:
+        ordering = ('index',)
+
+    def __str__(self):
+        return self.label or _('(No label)')
+
+    def get_siblings(self):
+        return self.profile.project_templates.exclude(pk=self.pk)
+
+
+def add_project_template(sender, instance, created, **kwargs):
+    """
+    Create a profile project template for each project added to the template
+    profile.
+    """
+    if not created:
+        return
+    if instance.owner.slug != settings.TEMPLATES_PROFILE:
+        return
+    ProfileProjectTemplate.objects.create(profile=instance.owner, project=instance, label=instance.title)
+post_save.connect(add_project_template, sender=Project, dispatch_uid="add-project-template-signal")
 
 
 # ============================================================

@@ -76,6 +76,8 @@
 #page {
   position: relative;
   z-index: 1;
+  height: 100%;
+  overflow: visible;
 }
 
 
@@ -684,6 +686,9 @@ section, footer {
   border-radius: 0.5rem;
   margin: 0.9375rem 0.9375rem 0 0;
   @media #{$medium-up} {
+    margin-top: 0.5rem;
+  }
+  @media #{$large-up} {
     margin-top: -2rem;
   }
   a {
@@ -920,14 +925,16 @@ img.attachment-icon {
   Project Shareabouts
 --------------------------------------------------*/
 
-.map {
-  height: 300px;
-}
 .project-section-shareabouts {
+  .map {
+    height: 300px;
+  }
 }
+
 .project-shareabouts {
   border-top: 2px solid $body-bg;
   border-bottom: 2px solid $body-bg;
+  position: relative;
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
@@ -940,6 +947,32 @@ img.attachment-icon {
   .shareabouts-add-button-container {
     margin-left: 0;
     bottom: 0;
+  }
+
+  .map {
+    height: 300px;
+  }
+
+  .avatar {
+    width: 30px;
+  }
+
+  .signed-in-as {
+    .avatar {
+      width: 50px;
+    }
+  }
+
+  .response-body {
+    padding-top: 0.25em;
+  }
+
+  a.auth-inline {
+    display: inline;
+    font-size: 0.875em;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.25em 0.5em;
   }
 }
 .shareabouts-geometry-set .form-instructions {
@@ -957,12 +990,67 @@ img.attachment-icon {
   margin-top: 0.5em;
 }
 
+.shareabouts-auth-container {
+  position: absolute;
+  z-index: 2;
+  top: 1rem;
+  right: 1rem;
+  bottom: auto;
+  left: 1rem;
+  text-align: right;
+  height: 0;
+  overflow: visible;
+}
+.shareabouts-auth-avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-top: 0.125rem;
+  margin-bottom: 0.125rem;
+}
+.shareabouts-auth-social-button {
+  color: #fff !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  &.shareabouts-auth-twitter-button {
+    background-color: #66caf4;
+  }
+  &.shareabouts-auth-facebook-button {
+    background-color: #4f79c1;
+  }
+  img {
+    display: inline-block;
+    max-width: 2.5rem;
+    max-height: 2.5rem;
+  }
+}
+
 .shareabouts-add-button {
   display: block;
   @media #{$small-only} {
     margin: 0;
   }
+  @media #{$medium-up} {
+    box-shadow: -5px 5px 0 rgba(51,51,51,0.2);
+  }
 }
+
+.shareabouts-panel {
+  background-color: #fff;
+}
+
+.heart {
+  color: LightGrey;
+  font-size: 1.5em;
+  display: inline-block;
+  margin-top: -1em;
+  margin-bottom: -1em;
+  position: relative;
+  top: 0.125em;
+  &.suported {
+    color: LightPink;
+  }
+}
+
 
 /*--------------------------------------------------
   Project Layout
@@ -971,6 +1059,50 @@ img.attachment-icon {
 .project-map-region > div {
   height: 300px;
 }
+
+.shareabouts-side-nav {
+  &.fixed {
+    div {
+      @include grid-row();
+    }
+    .side-nav {
+      background-color: #fff;
+      @include grid-column(4);
+    }
+  }
+}
+
+.project-shareabouts {
+  &.panel-open, &.panel-form-open {
+    & + .after-shareabouts {
+      @media #{$small-only} {
+        display: none;
+      }
+    }
+  }
+}
+
+.shareabouts-page {
+  height: 100%;
+  .project-shareabouts {
+    border: 0;
+    @media #{$medium-up} {
+      height: 60%; // set height of map on Shareabouts-specific layouts
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 100%;
+        height: 1rem;
+        right: 0;
+        left: 0;
+        z-index: 2;
+        box-shadow: 0 -3px 0 rgba(51, 51, 51, 0.1);
+      }
+    }
+  }
+}
+
 
 /*--------------------------------------------------
   The Admin

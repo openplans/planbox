@@ -22,7 +22,7 @@ from password_reset.views import (
     PasswordChangeView as BasePasswordChangeView)
 from planbox_data.models import Project, Profile, Roundup
 from planbox_data.serializers import (ProjectSerializer, UserSerializer,
-    RoundupSerializer,
+    RoundupSerializer, ProfileProjectTemplateSerializer,
     TemplateProjectSerializer, ProfileSerializer, ProjectActivitySerializer)
 from planbox_ui.decorators import ssl_required
 from planbox_ui.forms import UserCreationForm, AuthenticationForm
@@ -200,6 +200,12 @@ class AboutView (AppMixin, TemplateView):
 class ShareaboutsView (AppMixin, TemplateView):
     template_name = 'shareabouts.html'
 
+class ShareaboutsAuthSuccessView (AppMixin, TemplateView):
+    template_name = 'shareabouts/auth-success.html'
+
+class ShareaboutsAuthErrorView (AppMixin, TemplateView):
+    template_name = 'shareabouts/auth-error.html'
+
 class OpenSourceView (AppMixin, TemplateView):
     template_name = 'open-source.html'
 
@@ -287,6 +293,13 @@ class ProfileView (AppMixin, AlwaysFresh, LoginRequired, SSLRequired, S3UploadMi
         # construct the admin view.
         serializer = ProfileSerializer(self.profile)
         context['profile_data'] = serializer.data
+
+        # The project templates
+        ### TODO: Cache these
+        templates_slug = settings.TEMPLATES_PROFILE
+        templates = Profile.objects.get(slug=templates_slug)
+        project_templates_serializer = ProfileProjectTemplateSerializer(templates.project_templates.all(), many=True)
+        context['project_templates_data'] = project_templates_serializer.data
 
         return context
 
@@ -510,6 +523,8 @@ class SiteMapView (AppMixin, TemplateView):
 index_view = IndexView.as_view()
 about_view = AboutView.as_view()
 shareabouts_view = ShareaboutsView.as_view()
+shareabouts_auth_success_view = ShareaboutsAuthSuccessView.as_view()
+shareabouts_auth_error_view = ShareaboutsAuthErrorView.as_view()
 open_source_view = OpenSourceView.as_view()
 map_flavors_view = MapFlavorsView.as_view()
 

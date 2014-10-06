@@ -1,0 +1,66 @@
+<div data-alert class="alert-box info radius text-center form-instructions">
+  <strong>Drag the map to the place's location.</strong>
+</div>
+
+<form novalidate>
+  <input type="hidden" name="user_token" value="{{ userToken }}">
+
+  <h5>Add a Place</h5>
+
+  {{#if submitter}}
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Your Email
+        <input type="text" name="private-email" placeholder="optional" />
+      </label>
+    </div>
+  </div>
+  {{else}}
+  <div class="row">
+    <div class="large-6 columns">
+      <label>Your Name
+        <input type="text" name="submitter_name" placeholder="optional" required />
+      </label>
+    </div>
+    <div class="large-6 columns">
+      <label>Your Email
+        <input type="text" name="private-email" placeholder="optional" />
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns text-right">
+      <span class="or-sign-in">Or sign in with <a class="auth-inline shareabouts-auth-twitter-button" href="#">Twitter</a> <a class="auth-inline shareabouts-auth-facebook-button" href="#">Facebook</a></span>
+    </div>
+  </div>
+  {{/if}}
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Location Name
+        <input type="text" name="name" placeholder="optional" required />
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Description
+        <textarea name="description" placeholder="" required></textarea>
+      </label>
+    </div>
+  </div>
+
+  {{#if submitter}}
+  <div class="row">
+    <div class="small-6 columns">
+      <input type="submit" value="Add to Map" class="button small expand shareabouts-submit-button"/>
+    </div>
+    <div class="small-6 columns signed-in-as">
+      <img src="{{ submitter.avatar_url }}" class="avatar" /> {{ submitter.name }}
+    </div>
+  </div>
+  {{else}}
+    <input type="submit" value="Add to Map" class="button small expand shareabouts-submit-button"/>
+  {{/if}}
+</form>

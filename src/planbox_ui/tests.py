@@ -169,7 +169,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
             'project_slug': project.slug
         }
 
-        url = reverse('app-project', kwargs=kwargs)
+        url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = AnonymousUser()
         response = project_view(request, **kwargs)
@@ -189,7 +189,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
         auth2 = UserAuth.objects.create_user(username='atogle', password='456')
         owner2 = auth2.profile
 
-        url = reverse('app-project', kwargs=kwargs)
+        url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = auth2
         response = project_view(request, **kwargs)
@@ -207,7 +207,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
             'project_slug': project.slug
         }
 
-        url = reverse('app-project', kwargs=kwargs)
+        url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = auth
         response = project_view(request, **kwargs)
@@ -224,7 +224,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
             'project_slug': project.slug
         }
 
-        url = reverse('app-project', kwargs=kwargs)
+        url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = AnonymousUser()
         response = project_view(request, **kwargs)
@@ -244,7 +244,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
 
         auth2 = UserAuth.objects.create_user(username='atogle', password='456')
 
-        url = reverse('app-project', kwargs=kwargs)
+        url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = auth2
         response = project_view(request, **kwargs)
@@ -263,7 +263,7 @@ class ProjectDetailViewTests (PlanBoxUITestCase):
             'project_slug': project.slug
         }
 
-        url = reverse('app-project', kwargs=kwargs)
+        url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = auth
         response = project_view(request, **kwargs)
@@ -284,7 +284,7 @@ class ProjectThemeTests (PlanBoxUITestCase):
             'project_slug': project.slug
         }
 
-        url = reverse('app-project', kwargs=kwargs)
+        url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = AnonymousUser()
         response = project_view(request, **kwargs)
@@ -304,7 +304,7 @@ class ProjectThemeTests (PlanBoxUITestCase):
             'project_slug': project.slug
         }
 
-        url = reverse('app-project', kwargs=kwargs)
+        url = reverse('app-project-editor', kwargs=kwargs)
         request = self.factory.get(url)
         request.user = AnonymousUser()
         response = project_view(request, **kwargs)

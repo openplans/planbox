@@ -1,32 +1,24 @@
 <div class="panel-header">
   <h5 class="page-list-header subheader no-margins">
     Plans
-    <a href="{{> url-project-new-tpl }}" class="new-project-button button radius tiny right">+ New Plan</a>
+    {{#bootstrapped 'projectTemplates'}}
+      {{#lengthEqual . 1}}
+        <a href="{{> url-project-new-tpl ../.. }}" class="new-project-button button radius tiny right">New Plan</a>
+      {{else}}
+        <a href="#" class="new-project-button button radius tiny right" data-dropdown="new-project-template-chooser" data-options="align:left">New Plan</a>
+      {{/lengthEqual}}
+    {{/bootstrapped}}
   </h5>
 </div>
-<form class="new-project hide extra-margin-top">
-  <div class="row">
-    <div class="small-3 medium-2 large-1 columns">
-      <label for="thetitle" class="inline">Title</label>
-    </div>
-    <div class="small-9 medium-10 large-11 columns">
-      <input id="thetitle" type="text" placeholder="Keep it short &amp; descriptive..." />
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-3 medium-2 large-1 columns">
-      <label for="theorg" class="inline">Owner</label>
-    </div>
-    <div class="small-9 medium-10 large-11 columns">
-      <select id="theorg">
-        <option value="{{user 'slug'}}">{{user 'slug'}}</option>
-        {{#eachUsers 'teams'}}
-        <option value="{{ slug }}" {{#is slug ../slug}}selected{{/is}}>{{slug}}</option>
-        {{/eachUsers}}
-      </select>
-      <a href="project.html" class="button radius right">Create Project</a>
-    </div>
-  </div>
-  <hr>
-</form>
+
+<div id="new-project-template-chooser" class="f-dropdown" data-dropdown-content>
+  <ul class="no-bullet">
+  {{#bootstrapped 'projectTemplates'}}
+    {{#each .}}
+    <li><a href="{{> url-project-new-tpl ../.. }}?template={{ profile.slug }}/{{ project.slug }}">{{ label }}</a></li>
+    {{/each}}
+  {{/bootstrapped}}
+  </ul>
+</div>
+
 <ul class="project-list no-bullet no-margins"></ul>

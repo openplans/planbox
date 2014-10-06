@@ -16,7 +16,7 @@ from django_ace import AceWidget
 from django_object_actions import DjangoObjectActions
 from genericadmin.admin import GenericAdminModelAdmin, GenericTabularInline
 from jsonfield import JSONField
-from planbox_data.models import Profile, Roundup, Project, Event, Theme, Section, Attachment
+from planbox_data.models import Profile, ProfileProjectTemplate, Roundup, Project, Event, Theme, Section, Attachment
 
 
 class PrettyAceWidget (AceWidget):
@@ -35,11 +35,23 @@ class AttachmentAdmin (GenericAdminModelAdmin):
     pass
 
 
+class ProfileProjectTemplateInline (admin.TabularInline):
+    model = ProfileProjectTemplate
+    extra = 0
+    raw_id_fields = ('project',)
+    exclude = ('created_at', 'updated_at')
+    formfield_overrides = {
+        TextField: {'widget': TextInput(attrs={'class': 'vTextField'})},
+    }
+
+
 class ProfileAdmin (admin.ModelAdmin):
     list_display = ('__str__', '_date_joined', 'affiliation', 'email')
     filter_horizontal = ('teams',)
     raw_id_fields = ('auth',)
     search_fields = ('name', 'slug', 'email')
+
+    inlines = (ProfileProjectTemplateInline,)
 
     def _date_joined(self, obj):
         return obj.created_at
@@ -177,6 +189,7 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
     )
     objectactions = ('clone_project',)
     raw_id_fields = ('theme', 'template', 'owner')
+    readonly_fields = ('_api_url',)
     form = modelform_factory(Project, fields='__all__', widgets={
         'title': TextInput(attrs={'class': 'vTextField'}),
         'location': TextInput(attrs={'class': 'vTextField'}),
@@ -205,7 +218,7 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
 
         return format_html(
             '''<a href="{0}" target="_blank">Link &#8663</a>''',  # 8663 is the ⇗ character
-            reverse('app-project', kwargs={'owner_slug': project.owner.slug, 'project_slug': project.slug})
+            reverse('app-project-page', kwargs={'owner_slug': project.owner.slug, 'project_slug': project.slug})
         )
     _permalink.allow_tags = True
     _permalink.short_description = _('Link')
@@ -233,6 +246,12 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
         return project.owner.affiliation
     _owner_affiliation.short_description = _('Affiliation')
     _owner_affiliation.admin_order_field = 'owner__affiliation'
+
+    def _api_url(self, project):
+        url = reverse('project-detail', args=[project.pk])
+        return '<a href="{0}" target="_blank">{0}</a>'.format(url)
+    _api_url.allow_tags = True
+    _api_url.short_description = _('API URL')
 
     # Format datetimes
     def _updated_at(self, project):

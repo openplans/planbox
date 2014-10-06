@@ -117,14 +117,26 @@ var Planbox = Planbox || {};
     ui: {
       shareabouts: '.project-shareabouts'
     },
+    getShareaboutsEl: function() {
+      return this.ui.shareabouts;
+    },
     onShow: function() {
-      var details = this.model.get('details');
+      var details = this.model.get('details'),
+          compiledTemplates = details.templates,
+          sa;
 
-      new Shareabouts.Map({
-        el: this.ui.shareabouts,
+      // Compile string templates if necessary
+      _.each(details.templates, function(tpl, key) {
+        if(_.isString(tpl)) {
+          compiledTemplates[key] = Handlebars.compile(tpl);
+        }
+      });
+
+      sa = new Shareabouts.Map({
+        el: this.getShareaboutsEl(),
         map: details.map,
         layers: details.layers,
-        placeStyles: [
+        placeStyles: (details.place_styles || []).concat([
           {
             condition: 'true',
             icon: {
@@ -140,11 +152,25 @@ var Planbox = Planbox || {};
               iconAnchor: [12, 41]
             }
           },
-        ],
+        ]),
         datasetUrl: details.dataset_url + '/places',
-        templates: Handlebars.templates
+        templates: _.extend({}, Handlebars.templates, compiledTemplates)
       });
 
+      Shareabouts.auth = new Shareabouts.Auth({
+        apiRoot: 'http://data.shareabouts.org/api/v2/',
+        successPage: '/shareabouts/success',
+        errorPage: '/shareabouts/error'
+      });
+
+      $(Shareabouts.auth).on('authsuccess', function(evt, data) {
+        sa.setUser(data);
+
+        // So the auth dropdown aligns properly
+        $(document).foundation({'dropdown': {}});
+      });
+
+      Shareabouts.auth.initUser();
     }
   });
 
@@ -176,119 +202,31 @@ var Planbox = Planbox || {};
     }
   });
 
-  NS.ProjectView = Backbone.Marionette.Layout.extend({
-    template: '#project-tpl',
-    sectionListView: NS.ProjectSectionListView,
-    ui: {
-      menuItems: '.project-menu li',
-      highlights: '.highlight a'
-    },
-    events: {
-      'click @ui.menuItems': 'onClickMenuItem',
-      'click @ui.highlights': 'onClickHighlight'
-    },
-    regions: {
-      sectionList: '#section-list'
-    },
-    onShow: function() {
-      // After the project is in the DOM, show the project sections
-      this.sectionList.show(new this.sectionListView({
-        model: this.model,
-        collection: this.collection,
-        parent: this
-      }));
-    },
-    onDomRefresh: function() {
-      var self = this,
-          debouncedScrollHandler = _.debounce(function(evt) {
-            var offsets = self.offsets(),
-                item, i, dest, path;
-
-            for(i=0; i<offsets.length; i++){
-              item = offsets[i];
-              if (item.viewport_offset >= item.top_offset) {
-                dest = item.arrival.attr('data-magellan-destination');
-                path = NS.Utils.rootPathJoin(dest);
-
-                if (path !== self.currentPath) {
-                  self.currentPath = path;
-                  NS.Utils.log('ROUTE', path);
-                }
-                return true;
-              }
-            }
-          }, 500);
-
-      // Only bind the scroll event if a magellan widget exists. They don't if
-      // there are not enough items to warrant it.
-      if ($('[data-magellan-expedition]').length) {
-        $(window).off('scroll', debouncedScrollHandler).on('scroll', debouncedScrollHandler);
-
-        $(document).on('click', '[data-magellan-link]', function(evt) {
-          // See line 3147 in foundation.js. This should be an accessible function.
-          // TODO: Pull request to make this public.
-          evt.preventDefault();
-          var expedition = $('[data-magellan-expedition]'),
-              settings = expedition.data('magellan-expedition-init'),
-              hash = $(this).attr('href').split('#').join(''),
-              target = $("a[name='"+hash+"']");
-
-          if (target.length === 0) {
-            target = $('#'+hash);
-          }
-
-          // Account for expedition height if fixed position
-          var scroll_top = target.offset().top;
-          scroll_top = scroll_top - expedition.outerHeight();
-
-          $('html, body').stop().animate({
-            'scrollTop': scroll_top
-          }, 700, 'swing', function () {
-            if(history.pushState) {
-              history.pushState(null, null, '#'+hash);
-            }
-            else {
-              location.hash = '#'+hash;
-            }
-          });
-        });
+  NS.ProjectView = Backbone.Marionette.Layout.extend(
+    _.extend({}, NS.MagellanMenuMixin, {
+      template: '#project-tpl',
+      sectionListView: NS.ProjectSectionListView,
+      ui: {
+        menuItems: '.project-menu li',
+        highlights: '.highlight a'
+      },
+      events: {
+        'click @ui.menuItems': 'onClickMenuItem',
+        'click @ui.highlights': 'onClickHighlight'
+      },
+      regions: {
+        sectionList: '#section-list'
+      },
+      onShow: function() {
+        // After the project is in the DOM, show the project sections
+        this.sectionList.show(new this.sectionListView({
+          model: this.model,
+          collection: this.collection,
+          parent: this
+        }));
       }
-    },
-    onClickMenuItem: function(evt) {
-      var $target = $(evt.currentTarget),
-          label = $target.attr('data-magellan-arrival');
-      NS.Utils.log('USER', 'project-display', 'menu-click', label);
-    },
-    onClickHighlight: function(evt) {
-      var $target = $(evt.currentTarget),
-          label = $target.attr('data-highlight-type');
-      NS.Utils.log('USER', 'project-display', 'highlight-click', label);
-    },
-    offsets: function() {
-      var self = this,
-          expedition = $('[data-magellan-expedition]'),
-          settings = expedition.data('magellan-expedition-init') || {
-            destination_threshold: 20
-          },
-          destination_threshold = settings.destination_threshold,
-          viewport_offset = $(window).scrollTop();
-
-      return $('[data-magellan-destination]').map(function(idx, el) {
-        var dest = $(el),
-            top_offset = dest.offset().top - destination_threshold - expedition.outerHeight();
-        return {
-          destination : dest,
-          arrival : $(this),
-          top_offset : top_offset,
-          viewport_offset : viewport_offset
-        };
-      }).sort(function(a, b) {
-        if (a.top_offset < b.top_offset) {return 1;}
-        if (a.top_offset > b.top_offset) {return -1;}
-        return 0;
-      });
-    }
-  });
+    })
+  );
 
 
 }(Planbox, jQuery));

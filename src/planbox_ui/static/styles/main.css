@@ -6283,7 +6283,7 @@ dialog[open] {
 /* line 70, ../bower_components/foundation/scss/foundation/components/_side-nav.scss */
 .side-nav li {
   margin: 0 0 0.4375rem 0;
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: normal;
 }
 /* line 75, ../bower_components/foundation/scss/foundation/components/_side-nav.scss */
@@ -6295,13 +6295,13 @@ dialog[open] {
 }
 /* line 80, ../bower_components/foundation/scss/foundation/components/_side-nav.scss */
 .side-nav li a:not(.button):hover, .side-nav li a:not(.button):focus {
-  background: rgba(0, 0, 0, 0.025);
-  color: #67b3d9;
+  background: #eee;
+  color: #308fbf;
 }
 /* line 87, ../bower_components/foundation/scss/foundation/components/_side-nav.scss */
 .side-nav li.active > a:first-child:not(.button) {
-  color: #67b3d9;
-  font-weight: normal;
+  color: #6c7180;
+  font-weight: bold;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 }
 /* line 93, ../bower_components/foundation/scss/foundation/components/_side-nav.scss */
@@ -6315,7 +6315,7 @@ dialog[open] {
 /* line 101, ../bower_components/foundation/scss/foundation/components/_side-nav.scss */
 .side-nav li.heading {
   color: #308fbf;
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -9538,29 +9538,57 @@ h1.no-margins, h2.no-margins, h3.no-margins, h4.no-margins, h5.no-margins, h6.no
 .button.less-padding, button.less-padding {
   padding: 0.75rem 1.25rem;
 }
-/* line 118, _foundation.scss */
+/* line 117, _foundation.scss */
+.button.less-padding.dropdown, button.less-padding.dropdown {
+  padding-right: 3.0625rem;
+}
+/* line 121, _foundation.scss */
 .button.tiny.less-padding, button.tiny.less-padding {
   padding: 0.25rem 0.375rem;
 }
-/* line 121, _foundation.scss */
+/* line 123, _foundation.scss */
+.button.tiny.less-padding.dropdown, button.tiny.less-padding.dropdown {
+  padding-right: 1.5rem;
+}
+/* line 125, _foundation.scss */
+.button.tiny.less-padding.dropdown:after, button.tiny.less-padding.dropdown:after {
+  right: 0.375rem;
+}
+/* line 130, _foundation.scss */
 .button.small.less-padding, button.small.less-padding {
   padding: 0.5rem 0.75rem;
 }
-/* line 124, _foundation.scss */
+/* line 132, _foundation.scss */
+.button.small.less-padding.dropdown, button.small.less-padding.dropdown {
+  padding-right: 2.125rem;
+}
+/* line 134, _foundation.scss */
+.button.small.less-padding.dropdown:after, button.small.less-padding.dropdown:after {
+  right: 0.75rem;
+}
+/* line 139, _foundation.scss */
 .button.large.less-padding, button.large.less-padding {
   padding: 0.875rem 1.25rem;
 }
+/* line 141, _foundation.scss */
+.button.large.less-padding.dropdown, button.large.less-padding.dropdown {
+  padding-right: 3.0625rem;
+}
+/* line 145, _foundation.scss */
+.button.shadowed, button.shadowed {
+  box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
+}
 
-/* line 130, _foundation.scss */
+/* line 151, _foundation.scss */
 a.alert {
   color: #f24c3d;
 }
 
-/* line 136, _foundation.scss */
+/* line 157, _foundation.scss */
 .project-text-content ul, .pen ul {
   list-style: disc !important;
 }
-/* line 139, _foundation.scss */
+/* line 160, _foundation.scss */
 .project-text-content ol, .pen ol {
   list-style: decimal !important;
 }
@@ -9568,7 +9596,7 @@ a.alert {
 /*--------------------------------------------------
   Grid
 --------------------------------------------------*/
-/* line 150, _foundation.scss */
+/* line 171, _foundation.scss */
 .full-width {
   width: 100%;
   margin-left: auto;
@@ -9576,42 +9604,62 @@ a.alert {
   max-width: initial;
 }
 
-/* line 158, _foundation.scss */
+/* line 179, _foundation.scss */
 .some-margin-top {
   margin-top: 0.9375rem;
 }
 
-/* line 161, _foundation.scss */
+/* line 182, _foundation.scss */
+.some-margin-right {
+  margin-right: 0.9375rem;
+}
+
+/* line 185, _foundation.scss */
 .some-margin-bottom {
   margin-bottom: 0.9375rem;
 }
 
-/* line 164, _foundation.scss */
+/* line 188, _foundation.scss */
+.some-margin-left {
+  margin-left: 0.9375rem;
+}
+
+/* line 191, _foundation.scss */
 .extra-margin-top {
   margin-top: 2rem;
 }
 
-/* line 167, _foundation.scss */
+/* line 194, _foundation.scss */
+.extra-margin-right {
+  margin-right: 2rem;
+}
+
+/* line 197, _foundation.scss */
 .extra-margin-bottom {
   margin-bottom: 2rem;
 }
 
-/* line 172, _foundation.scss */
+/* line 200, _foundation.scss */
+.extra-margin-left {
+  margin-left: 2rem;
+}
+
+/* line 205, _foundation.scss */
 .some-padding-top {
   padding-top: 0.9375rem;
 }
 
-/* line 175, _foundation.scss */
+/* line 208, _foundation.scss */
 .some-padding-bottom {
   padding-bottom: 0.9375rem;
 }
 
-/* line 178, _foundation.scss */
+/* line 211, _foundation.scss */
 .extra-padding-top {
   padding-top: 2rem;
 }
 
-/* line 181, _foundation.scss */
+/* line 214, _foundation.scss */
 .extra-padding-bottom {
   padding-bottom: 2rem;
 }
@@ -9619,13 +9667,13 @@ a.alert {
 /*--------------------------------------------------
   Magellan & Location Hashes
 --------------------------------------------------*/
-/* line 191, _foundation.scss */
+/* line 224, _foundation.scss */
 .page-anchor {
   position: relative;
   top: -80px;
 }
 
-/* line 197, _foundation.scss */
+/* line 230, _foundation.scss */
 .offset-anchor {
   display: block;
   position: absolute;
@@ -9635,7 +9683,7 @@ a.alert {
 /*--------------------------------------------------
   Forms
 --------------------------------------------------*/
-/* line 222, _foundation.scss */
+/* line 255, _foundation.scss */
 input[type="text"].inline-input,
 input[type="password"].inline-input,
 input[type="date"].inline-input,
@@ -9657,15 +9705,15 @@ input[type="url"].inline-input {
   width: auto;
 }
 
-/* line 234, _foundation.scss */
+/* line 267, _foundation.scss */
 .switch + label.inline {
   margin-left: 4.5rem;
 }
-/* line 237, _foundation.scss */
+/* line 270, _foundation.scss */
 .switch.small + label.inline {
   margin-left: 4rem;
 }
-/* line 240, _foundation.scss */
+/* line 273, _foundation.scss */
 .switch.large + label.inline {
   margin-left: 5.5rem;
 }
@@ -9673,13 +9721,14 @@ input[type="url"].inline-input {
 /*--------------------------------------------------
   Dropdown Menus
 --------------------------------------------------*/
-/* line 250, _foundation.scss */
+/* line 283, _foundation.scss */
 .dropdown,
 .f-dropdown {
   box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
+  outline: 0;
 }
 
-/* line 256, _foundation.scss */
+/* line 290, _foundation.scss */
 .f-dropdown li a.disabled {
   background-color: #eee;
   color: #ccc;
@@ -9689,7 +9738,7 @@ input[type="url"].inline-input {
 /*--------------------------------------------------
   Panels
 --------------------------------------------------*/
-/* line 268, _foundation.scss */
+/* line 302, _foundation.scss */
 .panel-header {
   margin: -1.25rem;
   margin-bottom: 1.25rem;
@@ -9699,11 +9748,11 @@ input[type="url"].inline-input {
   padding-bottom: 0.625rem;
   background-color: #6c7180;
 }
-/* line 276, _foundation.scss */
+/* line 310, _foundation.scss */
 .panel-header h1, .panel-header h2, .panel-header h3, .panel-header h4, .panel-header h5, .panel-header h6 {
   color: #eee;
 }
-/* line 279, _foundation.scss */
+/* line 313, _foundation.scss */
 .panel-header .button {
   margin: -0.25rem -0.75rem;
 }
@@ -9789,19 +9838,21 @@ input[type="url"].inline-input {
 #page {
   position: relative;
   z-index: 1;
+  height: 100%;
+  overflow: visible;
 }
 
 /*--------------------------------------------------
   Images
 --------------------------------------------------*/
-/* line 86, main.scss */
+/* line 88, main.scss */
 .has-image {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover !important;
 }
 
-/* line 91, main.scss */
+/* line 93, main.scss */
 img.shadowed {
   box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
 }
@@ -9809,32 +9860,32 @@ img.shadowed {
 /*--------------------------------------------------
   Icons
 --------------------------------------------------*/
-/* line 100, main.scss */
+/* line 102, main.scss */
 .icon {
   display: inline-block;
   position: relative;
   width: 1.5rem;
   height: 1.5rem;
 }
-/* line 105, main.scss */
+/* line 107, main.scss */
 a .icon {
   opacity: 0.3;
 }
-/* line 108, main.scss */
+/* line 110, main.scss */
 a:hover .icon {
   opacity: 1;
 }
-/* line 111, main.scss */
+/* line 113, main.scss */
 .icon.tiny {
   width: 1rem;
   height: 1rem;
 }
-/* line 115, main.scss */
+/* line 117, main.scss */
 .icon.small {
   width: 1.25rem;
   height: 1.25rem;
 }
-/* line 119, main.scss */
+/* line 121, main.scss */
 .icon.large {
   width: 2.25rem;
   height: 2.25rem;
@@ -9844,15 +9895,15 @@ a:hover .icon {
   Fancy Radio Buttons
   Wrap 'em in .radio-images and style the labels.
 --------------------------------------------------*/
-/* line 132, main.scss */
+/* line 134, main.scss */
 .radio-images input[type="radio"] {
   display: none;
 }
-/* line 135, main.scss */
+/* line 137, main.scss */
 .radio-images input[type="radio"] + label {
   margin-left: 0;
 }
-/* line 140, main.scss */
+/* line 142, main.scss */
 .radio-images.text-section-layouts img {
   background-color: #eee;
   border: 1px solid #eee;
@@ -9860,17 +9911,17 @@ a:hover .icon {
   width: 100px;
   height: auto;
 }
-/* line 147, main.scss */
+/* line 149, main.scss */
 .radio-images.text-section-layouts :checked + label img {
   background-color: #999;
   border: 1px solid #ccc;
 }
-/* line 151, main.scss */
+/* line 153, main.scss */
 .radio-images.text-section-layouts label:hover img {
   background-color: #00bfff;
   border: 1px solid #00bfff;
 }
-/* line 155, main.scss */
+/* line 157, main.scss */
 .radio-images.text-section-layouts .label-text {
   display: block;
   text-align: center;
@@ -9879,12 +9930,12 @@ a:hover .icon {
 /*--------------------------------------------------
   Float Label Pattern
 --------------------------------------------------*/
-/* line 167, main.scss */
+/* line 169, main.scss */
 .float-label-container {
   position: relative;
 }
 
-/* line 170, main.scss */
+/* line 172, main.scss */
 .float-label {
   background-color: #999;
   float: left;
@@ -9906,14 +9957,14 @@ a:hover .icon {
   transition: height 0.1s ease, opacity 0.45s ease, background-color 0.45s ease-in-out;
 }
 
-/* line 190, main.scss */
+/* line 192, main.scss */
 .float-label-input:focus + .float-label {
   visibility: visible;
   opacity: 1;
   height: 2em;
 }
 
-/* line 195, main.scss */
+/* line 197, main.scss */
 .float-label-input {
   -webkit-appearance: none;
   background-color: #fff;
@@ -9931,7 +9982,7 @@ a:hover .icon {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
 }
 
-/* line 211, main.scss */
+/* line 213, main.scss */
 .float-label-input:focus {
   background-color: #fafafa;
   color: #444;
@@ -9941,18 +9992,18 @@ a:hover .icon {
   border-color: #999999;
 }
 
-/* line 221, main.scss */
+/* line 223, main.scss */
 .float-label-input:focus a {
   color: #008CBA;
 }
 
-/* line 224, main.scss */
+/* line 226, main.scss */
 .float-label-input:focus a:hover,
 .float-label-input:focus a:focus {
   color: #007ba0;
 }
 
-/* line 228, main.scss */
+/* line 230, main.scss */
 section, footer {
   position: relative;
   z-index: 10;
@@ -9961,7 +10012,7 @@ section, footer {
 /*--------------------------------------------------
   Product: Home Page
 --------------------------------------------------*/
-/* line 239, main.scss */
+/* line 241, main.scss */
 .product-tagline-section {
   margin: -65px 0 0;
   padding: 7% 0 17%;
@@ -9970,7 +10021,7 @@ section, footer {
   color: #fff;
   text-align: center;
 }
-/* line 246, main.scss */
+/* line 248, main.scss */
 .product-tagline-section .tagline {
   margin: 65px 0 0;
   padding: 0.5rem;
@@ -9982,26 +10033,26 @@ section, footer {
   opacity: 0.75;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 246, main.scss */
+  /* line 248, main.scss */
   .product-tagline-section .tagline {
     font-size: 1.875rem;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 246, main.scss */
+  /* line 248, main.scss */
   .product-tagline-section .tagline {
     padding: 1.5rem;
     font-size: 2.5rem;
   }
 }
 @media only screen and (min-width: 90.063em) {
-  /* line 246, main.scss */
+  /* line 248, main.scss */
   .product-tagline-section .tagline {
     padding: 2rem;
     font-size: 3rem;
   }
 }
-/* line 266, main.scss */
+/* line 268, main.scss */
 .product-tagline-section .tagline .hearts {
   margin: 0 0.375em;
   display: inline-block;
@@ -10012,7 +10063,7 @@ section, footer {
   -ms-transform: scale(1.5);
   transform: scale(1.5);
 }
-/* line 277, main.scss */
+/* line 279, main.scss */
 .product-tagline-section .slogan {
   margin: 0;
   padding: 0.5rem;
@@ -10024,72 +10075,72 @@ section, footer {
   background-color: rgba(250, 107, 35, 0.7);
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 277, main.scss */
+  /* line 279, main.scss */
   .product-tagline-section .slogan {
     font-size: 1rem;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 277, main.scss */
+  /* line 279, main.scss */
   .product-tagline-section .slogan {
     padding: 0.9375rem;
     font-size: 1.375rem;
   }
 }
 @media only screen and (min-width: 90.063em) {
-  /* line 277, main.scss */
+  /* line 279, main.scss */
   .product-tagline-section .slogan {
     padding: 1.5rem;
     font-size: 1.5rem;
   }
 }
 
-/* line 300, main.scss */
+/* line 302, main.scss */
 .feature-illustration {
   display: block;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 300, main.scss */
+  /* line 302, main.scss */
   .feature-illustration {
     margin-top: -1.5rem;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 300, main.scss */
+  /* line 302, main.scss */
   .feature-illustration {
     margin-top: -3.5rem;
     position: relative;
     right: -1.5rem;
   }
-  /* line 309, main.scss */
+  /* line 311, main.scss */
   .medium-push-8 .feature-illustration {
     right: 1.5rem;
   }
 }
 
-/* line 316, main.scss */
+/* line 318, main.scss */
 .product-section-alt {
   background-color: #ddd;
 }
 
-/* line 321, main.scss */
+/* line 323, main.scss */
 .product-demos {
   color: #fff;
   background-color: #308fbf;
 }
-/* line 324, main.scss */
+/* line 326, main.scss */
 .product-demos h3 {
   margin: 0;
 }
 
-/* line 328, main.scss */
+/* line 330, main.scss */
 .demo-image {
   display: block;
   float: right;
   position: relative;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 328, main.scss */
+  /* line 330, main.scss */
   .demo-image {
     -webkit-transition: -webkit-transform .2s ease;
     -ms-transition: -ms-transform .2s ease;
@@ -10100,7 +10151,7 @@ section, footer {
   }
 }
 
-/* line 341, main.scss */
+/* line 343, main.scss */
 .demo-image-ipad {
   float: left;
   width: 36%;
@@ -10111,7 +10162,7 @@ section, footer {
   transform: rotate(-8deg);
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 349, main.scss */
+  /* line 351, main.scss */
   .demo-image-ipad:hover {
     z-index: 4;
     -webkit-transform: scale(1.25) rotate(-6deg);
@@ -10120,7 +10171,7 @@ section, footer {
   }
 }
 
-/* line 358, main.scss */
+/* line 360, main.scss */
 .demo-image-iphone {
   width: 17%;
   margin-bottom: -13%;
@@ -10131,7 +10182,7 @@ section, footer {
   transform: rotate(15deg);
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 366, main.scss */
+  /* line 368, main.scss */
   .demo-image-iphone:hover {
     z-index: 4;
     -webkit-transform: scale(1.25) rotate(10deg);
@@ -10140,19 +10191,19 @@ section, footer {
   }
 }
 
-/* line 375, main.scss */
+/* line 377, main.scss */
 .demo-image-ff {
   width: 63%;
   z-index: 1;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 375, main.scss */
+  /* line 377, main.scss */
   .demo-image-ff {
     -webkit-transform-origin: 60% 100%;
     -ms-transform-origin: 60% 100%;
     transform-origin: 60% 100%;
   }
-  /* line 382, main.scss */
+  /* line 384, main.scss */
   .demo-image-ff:hover {
     z-index: 4;
     -webkit-transform: scale(1.25);
@@ -10161,16 +10212,16 @@ section, footer {
   }
 }
 
-/* line 392, main.scss */
+/* line 394, main.scss */
 .product-feedback {
   background-color: #6c7180;
   color: #fff;
 }
-/* line 395, main.scss */
+/* line 397, main.scss */
 .product-feedback a {
   color: #cceeff;
 }
-/* line 397, main.scss */
+/* line 399, main.scss */
 .product-feedback a:hover, .product-feedback a:focus {
   color: #3db6f2;
 }
@@ -10178,26 +10229,26 @@ section, footer {
 /*--------------------------------------------------
   Product: About Page
 --------------------------------------------------*/
-/* line 409, main.scss */
+/* line 411, main.scss */
 .team-section {
   background-color: #ccc;
 }
-/* line 411, main.scss */
+/* line 413, main.scss */
 .team-section .avatar {
   display: block;
   padding-right: 0.9375rem;
 }
 
-/* line 417, main.scss */
+/* line 419, main.scss */
 .clients-section {
   background-color: #ddd;
 }
 
-/* line 420, main.scss */
+/* line 422, main.scss */
 .clients-list {
   text-align: center;
 }
-/* line 422, main.scss */
+/* line 424, main.scss */
 .clients-list img {
   display: block;
   margin: 0.9375rem auto;
@@ -10210,28 +10261,28 @@ section, footer {
 /*--------------------------------------------------
   Product: Shareabouts Page
 --------------------------------------------------*/
-/* line 437, main.scss */
+/* line 439, main.scss */
 .shareabouts-page-header {
   overflow: hidden;
 }
-/* line 439, main.scss */
+/* line 441, main.scss */
 .shareabouts-page-header .columns, .shareabouts-page-header .row {
   overflow: visible;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 442, main.scss */
+  /* line 444, main.scss */
   .shareabouts-page-header .shareabouts-page-header-text {
     margin-top: 4rem;
     position: relative;
     z-index: 2;
   }
 }
-/* line 448, main.scss */
+/* line 450, main.scss */
 .shareabouts-page-header .shareabouts-page-header-text h2 img {
   width: 400px;
 }
 
-/* line 453, main.scss */
+/* line 455, main.scss */
 .shareabouts-slideshow {
   position: relative;
   width: 500px;
@@ -10240,7 +10291,7 @@ section, footer {
   margin-left: -200px;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 453, main.scss */
+  /* line 455, main.scss */
   .shareabouts-slideshow {
     width: 1000px;
     height: 580px;
@@ -10248,7 +10299,7 @@ section, footer {
     margin-left: 0;
   }
 }
-/* line 465, main.scss */
+/* line 467, main.scss */
 .shareabouts-slideshow .shareabouts-slide {
   display: block;
   position: absolute;
@@ -10258,7 +10309,7 @@ section, footer {
   height: 246px;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 465, main.scss */
+  /* line 467, main.scss */
   .shareabouts-slideshow .shareabouts-slide {
     top: 22px;
     left: 115px;
@@ -10266,23 +10317,23 @@ section, footer {
     height: 493px;
   }
 }
-/* line 479, main.scss */
+/* line 481, main.scss */
 .shareabouts-slideshow .fade {
   -webkit-animation: fade 25s linear infinite;
   -moz-animation: fade 25s linear infinite;
   animation: fade 25s linear infinite;
 }
-/* line 483, main.scss */
+/* line 485, main.scss */
 .shareabouts-slideshow .fade.fade2 {
   -webkit-animation-name: fade2;
   animation-name: fade2;
 }
-/* line 484, main.scss */
+/* line 486, main.scss */
 .shareabouts-slideshow .fade.fade3 {
   -webkit-animation-name: fade3;
   animation-name: fade3;
 }
-/* line 485, main.scss */
+/* line 487, main.scss */
 .shareabouts-slideshow .fade.fade4 {
   -webkit-animation-name: fade4;
   animation-name: fade4;
@@ -10492,47 +10543,47 @@ section, footer {
     opacity: 1;
   }
 }
-/* line 507, main.scss */
+/* line 509, main.scss */
 .shareabouts-instances .img {
   margin-right: -110px;
   width: 100px;
   height: 100px;
 }
-/* line 512, main.scss */
+/* line 514, main.scss */
 .shareabouts-instances .description {
   margin-left: 110px;
 }
 
-/* line 516, main.scss */
+/* line 518, main.scss */
 .pricing-table {
   border: 0;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
-/* line 520, main.scss */
+/* line 522, main.scss */
 .pricing-table .title {
   background-color: #666;
 }
 
-/* line 523, main.scss */
+/* line 525, main.scss */
 .pricing-matrix {
   margin-bottom: 2rem !important;
   overflow: hidden;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 527, main.scss */
+  /* line 529, main.scss */
   .pricing-matrix .pricing-table {
     margin-bottom: 0;
   }
 }
 
-/* line 532, main.scss */
+/* line 534, main.scss */
 .extra-pricing-info {
   height: 0;
   overflow: hidden;
 }
 
-/* line 536, main.scss */
+/* line 538, main.scss */
 .extra-pricing-info-header {
   background-color: #ddd;
   margin: 0;
@@ -10542,39 +10593,39 @@ section, footer {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 }
 
-/* line 544, main.scss */
+/* line 546, main.scss */
 .feature-list-icon {
   height: 1.75em;
   width: auto;
   margin: 0 0.375rem;
 }
 
-/* line 549, main.scss */
+/* line 551, main.scss */
 .extra-pricing-info table {
   width: 100%;
   border: 0;
   margin: 0;
 }
 
-/* line 554, main.scss */
+/* line 556, main.scss */
 .extra-pricing-info tr {
   background-color: #f5f5f5;
 }
 
-/* line 557, main.scss */
+/* line 559, main.scss */
 .extra-pricing-info tr.even,
 .extra-pricing-info tr.alt,
 .extra-pricing-info tr:nth-of-type(even) {
   background-color: #fff;
 }
 
-/* line 562, main.scss */
+/* line 564, main.scss */
 .extra-pricing-info tr.spacer td {
   width: 25%;
   padding: 0;
 }
 
-/* line 566, main.scss */
+/* line 568, main.scss */
 .extra-pricing-info td {
   font-size: 0.75rem;
   text-align: left;
@@ -10583,30 +10634,30 @@ section, footer {
   vertical-align: top;
 }
 
-/* line 573, main.scss */
+/* line 575, main.scss */
 .extra-pricing-info td:first-letter {
   text-transform: uppercase;
 }
 
-/* line 576, main.scss */
+/* line 578, main.scss */
 .extra-pricing-info td:last-child {
   border-right: 0;
   box-shadow: none;
 }
 
-/* line 580, main.scss */
+/* line 582, main.scss */
 .all-details-revealed .extra-pricing-info {
   height: auto;
 }
 
-/* line 583, main.scss */
+/* line 585, main.scss */
 .extra-pricing-info p {
   font-size: inherit;
   line-height: inherit;
   margin: 0;
 }
 
-/* line 588, main.scss */
+/* line 590, main.scss */
 .extra-pricing-info p + p {
   margin-top: 0.625rem;
 }
@@ -10614,18 +10665,18 @@ section, footer {
 /*--------------------------------------------------
   Project Layout
 --------------------------------------------------*/
-/* line 597, main.scss */
+/* line 599, main.scss */
 .container {
   background-color: #fff;
   color: #444;
 }
 
-/* line 601, main.scss */
+/* line 603, main.scss */
 .section-heading {
   padding-top: 1.5rem;
 }
 
-/* line 606, main.scss */
+/* line 608, main.scss */
 .project-text-content {
   line-height: 1.6;
   margin-bottom: 1.6rem;
@@ -10634,14 +10685,14 @@ section, footer {
 /*--------------------------------------------------
   Roundups
 --------------------------------------------------*/
-/* line 616, main.scss */
+/* line 618, main.scss */
 .truncated-wysiwyg {
   max-height: 7.5rem;
   position: relative;
   overflow: hidden;
 }
 
-/* line 621, main.scss */
+/* line 623, main.scss */
 .truncated-wysiwyg:after {
   content: '';
   display: block;
@@ -10657,12 +10708,12 @@ section, footer {
 /*--------------------------------------------------
   Project Header
 --------------------------------------------------*/
-/* line 638, main.scss */
+/* line 640, main.scss */
 .site-header {
   background-color: #fff;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 638, main.scss */
+  /* line 640, main.scss */
   .site-header {
     background-color: #268099;
     color: #fff;
@@ -10670,99 +10721,105 @@ section, footer {
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 645, main.scss */
+  /* line 647, main.scss */
   .site-header .site-header-content {
     border-top: 0;
     border-radius: 0.25em 0.25em 0 0;
   }
 }
-/* line 652, main.scss */
+/* line 654, main.scss */
 .site-header.has-image {
   padding-top: 40%;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 652, main.scss */
+  /* line 654, main.scss */
   .site-header.has-image {
     padding-top: 30%;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 652, main.scss */
+  /* line 654, main.scss */
   .site-header.has-image {
     padding-top: 15.25em;
     background-position: center center;
   }
 }
-/* line 662, main.scss */
+/* line 664, main.scss */
 .site-header.has-image .site-header-content {
   float: left;
   width: 100%;
   border-top: 0;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 662, main.scss */
+  /* line 664, main.scss */
   .site-header.has-image .site-header-content {
     float: none;
     width: auto;
   }
 }
-/* line 673, main.scss */
+/* line 675, main.scss */
 .site-header + .orderable-container {
   clear: both;
 }
 
-/* line 678, main.scss */
+/* line 680, main.scss */
 .project-header {
   border-radius: 0.375em 0.375em 0 0;
 }
 
-/* line 682, main.scss */
+/* line 684, main.scss */
 .social-links-header {
   background-color: #fff;
   border-radius: 0.5rem;
   margin: 0.9375rem 0.9375rem 0 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 682, main.scss */
+  /* line 684, main.scss */
+  .social-links-header {
+    margin-top: 0.5rem;
+  }
+}
+@media only screen and (min-width: 64.063em) {
+  /* line 684, main.scss */
   .social-links-header {
     margin-top: -2rem;
   }
 }
-/* line 689, main.scss */
+/* line 694, main.scss */
 .social-links-header a {
   float: left;
   width: 40px;
   border-radius: 0.25rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 689, main.scss */
+  /* line 694, main.scss */
   .social-links-header a {
     margin: 0.5rem;
   }
 }
-/* line 696, main.scss */
+/* line 701, main.scss */
 .social-links-header a + a {
   margin-left: 0.5rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 696, main.scss */
+  /* line 701, main.scss */
   .social-links-header a + a {
     margin-left: 0;
   }
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 705, main.scss */
+  /* line 710, main.scss */
   .project-title {
     font-size: 3.125rem;
   }
 }
-/* line 709, main.scss */
+/* line 714, main.scss */
 .project-title img {
   max-height: 20rem;
 }
 
-/* line 716, main.scss */
+/* line 721, main.scss */
 .logo-table {
   display: table;
   border-collapse: collapse;
@@ -10770,47 +10827,47 @@ section, footer {
   position: relative;
   z-index: 5;
 }
-/* line 722, main.scss */
+/* line 727, main.scss */
 .logo-table .logo-table-row {
   display: table-row;
 }
-/* line 724, main.scss */
+/* line 729, main.scss */
 .logo-table .logo-table-row > div {
   display: table-cell;
   padding: 0;
   vertical-align: top;
 }
-/* line 728, main.scss */
+/* line 733, main.scss */
 .logo-table .logo-table-row > div.image-holder, .logo-table .logo-table-row > div.has-image {
   padding-right: 1em;
 }
-/* line 734, main.scss */
+/* line 739, main.scss */
 .logo-table img {
   max-height: 8em;
   height: auto;
   width: auto;
 }
 
-/* line 742, main.scss */
+/* line 747, main.scss */
 .project-menu-container.has-project-menu {
   position: relative;
 }
 
-/* line 746, main.scss */
+/* line 751, main.scss */
 [data-magellan-expedition],
 [data-magellan-expedition-clone] {
   background-color: transparent;
   padding: 0;
 }
 
-/* line 752, main.scss */
+/* line 757, main.scss */
 .project-menu .row {
   position: relative;
   z-index: 2;
   padding-top: .9375rem;
   padding-bottom: 0;
 }
-/* line 758, main.scss */
+/* line 763, main.scss */
 .project-menu .columns:after {
   content: '';
   display: block;
@@ -10827,22 +10884,22 @@ section, footer {
 /*--------------------------------------------------
   Project Footer
 --------------------------------------------------*/
-/* line 777, main.scss */
+/* line 782, main.scss */
 .social-links-section {
   max-width: 64.375rem;
 }
-/* line 779, main.scss */
+/* line 784, main.scss */
 .social-links-section .panel {
   border: 0;
 }
 
-/* line 784, main.scss */
+/* line 789, main.scss */
 .site-colophon {
   padding-top: 2rem;
   background-color: #eee;
   color: #888d9b;
 }
-/* line 788, main.scss */
+/* line 793, main.scss */
 .site-colophon .powered-by {
   margin-top: 4rem;
   margin-bottom: 4rem;
@@ -10851,20 +10908,20 @@ section, footer {
 /*--------------------------------------------------
   Project Timeline
 --------------------------------------------------*/
-/* line 799, main.scss */
+/* line 804, main.scss */
 .event-list {
   border-left: 1rem solid #fff;
   box-shadow: inset 0.75rem 0 0 #bbb;
 }
 
-/* line 803, main.scss */
+/* line 808, main.scss */
 .event {
   padding: 0 0 2rem 3.25rem;
   margin-left: -1rem;
   position: relative;
 }
 
-/* line 808, main.scss */
+/* line 813, main.scss */
 .event:first-child:before {
   content: '';
   background-color: #fff;
@@ -10875,7 +10932,7 @@ section, footer {
   left: 0.625rem;
 }
 
-/* line 817, main.scss */
+/* line 822, main.scss */
 .event:last-child:before {
   content: '';
   background-color: #fff;
@@ -10886,7 +10943,7 @@ section, footer {
   left: 0.625rem;
 }
 
-/* line 826, main.scss */
+/* line 831, main.scss */
 .event:only-child:before {
   content: '';
   background-color: #fff;
@@ -10898,7 +10955,7 @@ section, footer {
   left: 0.625rem;
 }
 
-/* line 836, main.scss */
+/* line 841, main.scss */
 .event:after {
   content: '';
   position: absolute;
@@ -10912,64 +10969,64 @@ section, footer {
   z-index: 1;
 }
 
-/* line 850, main.scss */
+/* line 855, main.scss */
 .event .calendar-icon {
   cursor: pointer;
 }
 
-/* line 853, main.scss */
+/* line 858, main.scss */
 .datetime-picker-container {
   position: relative;
 }
 
-/* line 856, main.scss */
+/* line 861, main.scss */
 .picker {
   margin-top: -1.125rem;
 }
 
-/* line 859, main.scss */
+/* line 864, main.scss */
 .picker__holder {
   max-width: 100%;
 }
 
-/* line 862, main.scss */
+/* line 867, main.scss */
 .picker__nav--prev:hover,
 .picker__nav--next:hover {
   background-color: transparent;
 }
 
-/* line 866, main.scss */
+/* line 871, main.scss */
 .picker button {
   color: inherit;
 }
 
-/* line 869, main.scss */
+/* line 874, main.scss */
 .picker table tr td {
   text-align: center;
 }
 
-/* line 874, main.scss */
+/* line 879, main.scss */
 ol.attachment-list.no-bullet {
   margin-left: 0;
 }
 
-/* line 878, main.scss */
+/* line 883, main.scss */
 .attachment .row {
   margin: 0 -0.5rem;
 }
-/* line 879, main.scss */
+/* line 884, main.scss */
 .attachment .row .column, .attachment .row .columns {
   padding: 0 0.5rem;
 }
-/* line 880, main.scss */
+/* line 885, main.scss */
 .attachment .row.collapse {
   margin: 0;
 }
-/* line 881, main.scss */
+/* line 886, main.scss */
 .attachment .row.collapse .column, .attachment .row.collapse .columns {
   padding: 0;
 }
-/* line 882, main.scss */
+/* line 887, main.scss */
 .attachment .row.collapse input {
   -webkit-border-bottom-right-radius: 0;
   -webkit-border-top-right-radius: 0;
@@ -10977,12 +11034,12 @@ ol.attachment-list.no-bullet {
   border-top-right-radius: 0;
 }
 
-/* line 887, main.scss */
+/* line 892, main.scss */
 .handle {
   cursor: move;
 }
 
-/* line 890, main.scss */
+/* line 895, main.scss */
 .event > .handle {
   position: absolute;
   top: 0.25rem;
@@ -10994,22 +11051,22 @@ ol.attachment-list.no-bullet {
   text-indent: -9999px;
 }
 
-/* line 900, main.scss */
+/* line 905, main.scss */
 .event:only-child > .handle {
   display: none;
 }
 
-/* line 903, main.scss */
+/* line 908, main.scss */
 .attachment-icon {
   position: relative;
 }
 
-/* line 906, main.scss */
+/* line 911, main.scss */
 img.attachment-icon {
   margin-bottom: 1.6rem;
 }
 
-/* line 909, main.scss */
+/* line 914, main.scss */
 .attachment-handle {
   position: absolute;
   top: 0;
@@ -11022,114 +11079,268 @@ img.attachment-icon {
 /*--------------------------------------------------
   Project Shareabouts
 --------------------------------------------------*/
-/* line 923, main.scss */
-.map {
+/* line 929, main.scss */
+.project-section-shareabouts .map {
   height: 300px;
 }
 
-/* line 928, main.scss */
+/* line 934, main.scss */
 .project-shareabouts {
   border-top: 2px solid #eee;
   border-bottom: 2px solid #eee;
+  position: relative;
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 928, main.scss */
+  /* line 934, main.scss */
   .project-shareabouts {
     height: 400px;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 928, main.scss */
+  /* line 934, main.scss */
   .project-shareabouts {
     height: 500px;
   }
 }
-/* line 940, main.scss */
+/* line 947, main.scss */
 .project-shareabouts .shareabouts-add-button-container {
   margin-left: 0;
   bottom: 0;
 }
+/* line 952, main.scss */
+.project-shareabouts .map {
+  height: 300px;
+}
+/* line 956, main.scss */
+.project-shareabouts .avatar {
+  width: 30px;
+}
+/* line 961, main.scss */
+.project-shareabouts .signed-in-as .avatar {
+  width: 50px;
+}
+/* line 966, main.scss */
+.project-shareabouts .response-body {
+  padding-top: 0.25em;
+}
+/* line 970, main.scss */
+.project-shareabouts a.auth-inline {
+  display: inline;
+  font-size: 0.875em;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 0.25em 0.5em;
+}
 
-/* line 945, main.scss */
+/* line 978, main.scss */
 .shareabouts-geometry-set .form-instructions {
   display: none;
 }
 
 /* NOTE: use these selectors to style invalid form elements on non-HTML5 browsers */
-/* line 950, main.scss */
+/* line 983, main.scss */
 .project-shareabouts .form-submitted input:invalid,
 .project-shareabouts .form-submitted textarea:invalid,
 .project-shareabouts .form-submitted select:invalid {
   border: 1px solid #f04124;
 }
 
-/* line 956, main.scss */
+/* line 989, main.scss */
 .shareabouts-submit-button {
   margin-top: 0.5em;
 }
 
-/* line 960, main.scss */
+/* line 993, main.scss */
+.shareabouts-auth-container {
+  position: absolute;
+  z-index: 2;
+  top: 1rem;
+  right: 1rem;
+  bottom: auto;
+  left: 1rem;
+  text-align: right;
+  height: 0;
+  overflow: visible;
+}
+
+/* line 1004, main.scss */
+.shareabouts-auth-avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-top: 0.125rem;
+  margin-bottom: 0.125rem;
+}
+
+/* line 1010, main.scss */
+.shareabouts-auth-social-button {
+  color: #fff !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+/* line 1014, main.scss */
+.shareabouts-auth-social-button.shareabouts-auth-twitter-button {
+  background-color: #66caf4;
+}
+/* line 1017, main.scss */
+.shareabouts-auth-social-button.shareabouts-auth-facebook-button {
+  background-color: #4f79c1;
+}
+/* line 1020, main.scss */
+.shareabouts-auth-social-button img {
+  display: inline-block;
+  max-width: 2.5rem;
+  max-height: 2.5rem;
+}
+
+/* line 1027, main.scss */
 .shareabouts-add-button {
   display: block;
 }
 @media only screen and (max-width: 40em) {
-  /* line 960, main.scss */
+  /* line 1027, main.scss */
   .shareabouts-add-button {
     margin: 0;
   }
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 1027, main.scss */
+  .shareabouts-add-button {
+    box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
+  }
+}
+
+/* line 1037, main.scss */
+.shareabouts-panel {
+  background-color: #fff;
+}
+
+/* line 1041, main.scss */
+.heart {
+  color: LightGrey;
+  font-size: 1.5em;
+  display: inline-block;
+  margin-top: -1em;
+  margin-bottom: -1em;
+  position: relative;
+  top: 0.125em;
+}
+/* line 1049, main.scss */
+.heart.suported {
+  color: LightPink;
 }
 
 /*--------------------------------------------------
   Project Layout
 --------------------------------------------------*/
-/* line 971, main.scss */
+/* line 1059, main.scss */
 .project-map-region > div {
   height: 300px;
+}
+
+/* line 1065, main.scss */
+.shareabouts-side-nav.fixed div {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 62.5rem;
+}
+/* line 172, ../bower_components/foundation/scss/foundation/components/_global.scss */
+.shareabouts-side-nav.fixed div:before, .shareabouts-side-nav.fixed div:after {
+  content: " ";
+  display: table;
+}
+/* line 173, ../bower_components/foundation/scss/foundation/components/_global.scss */
+.shareabouts-side-nav.fixed div:after {
+  clear: both;
+}
+/* line 1068, main.scss */
+.shareabouts-side-nav.fixed .side-nav {
+  background-color: #fff;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+  width: 33.33333%;
+  float: left;
+}
+
+@media only screen and (max-width: 40em) {
+  /* line 1077, main.scss */
+  .project-shareabouts.panel-open + .after-shareabouts, .project-shareabouts.panel-form-open + .after-shareabouts {
+    display: none;
+  }
+}
+
+/* line 1085, main.scss */
+.shareabouts-page {
+  height: 100%;
+}
+/* line 1087, main.scss */
+.shareabouts-page .project-shareabouts {
+  border: 0;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 1087, main.scss */
+  .shareabouts-page .project-shareabouts {
+    height: 60%;
+  }
+  /* line 1091, main.scss */
+  .shareabouts-page .project-shareabouts:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 100%;
+    height: 1rem;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    box-shadow: 0 -3px 0 rgba(51, 51, 51, 0.1);
+  }
 }
 
 /*--------------------------------------------------
   The Admin
 --------------------------------------------------*/
-/* line 979, main.scss */
+/* line 1111, main.scss */
 .project-edit-form {
   background-color: #fff;
   box-shadow: 0 -65px 0 #fff;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 979, main.scss */
+  /* line 1111, main.scss */
   .project-edit-form {
     padding-bottom: 4rem;
   }
 }
 
-/* line 987, main.scss */
+/* line 1119, main.scss */
 .project-section {
   z-index: auto;
 }
 
-/* line 991, main.scss */
+/* line 1123, main.scss */
 .project-section-fieldset {
   padding: 0;
   border: 0;
 }
 
 @-moz-document url-prefix() {
-  /* line 998, main.scss */
+  /* line 1130, main.scss */
   .project-section-fieldset {
     display: table-cell;
   }
 }
-/* line 1003, main.scss */
+/* line 1135, main.scss */
 .location-map-region .map {
   height: 200px;
   border: 1px solid #c9c9c9;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1008, main.scss */
+  /* line 1140, main.scss */
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
@@ -11140,7 +11351,7 @@ img.attachment-icon {
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1017, main.scss */
+  /* line 1149, main.scss */
   input[type=text].sub-heading-input {
     font-size: 1.75rem;
     margin: 0 0 1rem 0;
@@ -11150,12 +11361,12 @@ img.attachment-icon {
   }
 }
 
-/* line 1026, main.scss */
+/* line 1158, main.scss */
 span.sub-heading-postfix {
   color: #999;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1026, main.scss */
+  /* line 1158, main.scss */
   span.sub-heading-postfix {
     margin: 0 0 1rem 0;
     padding: 0.5rem 0.75rem;
@@ -11163,7 +11374,7 @@ span.sub-heading-postfix {
   }
 }
 
-/* line 1035, main.scss */
+/* line 1167, main.scss */
 .content-editable {
   line-height: 1.6;
   background-color: #FFFFFF;
@@ -11183,7 +11394,7 @@ span.sub-heading-postfix {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
   height: auto;
 }
-/* line 1037, main.scss */
+/* line 1169, main.scss */
 .content-editable.rich-editable {
   min-height: 8rem;
 }
@@ -11208,77 +11419,77 @@ span.sub-heading-postfix {
   background-color: #DDDDDD;
   cursor: default;
 }
-/* line 1045, main.scss */
+/* line 1177, main.scss */
 .content-editable.radius {
   border-radius: 3px;
 }
-/* line 1049, main.scss */
+/* line 1181, main.scss */
 .error .content-editable, .content-editable.error {
   margin-bottom: 0;
 }
-/* line 1052, main.scss */
+/* line 1184, main.scss */
 .content-editable a {
   color: #308fbf;
   text-decoration: none;
   line-height: inherit;
 }
-/* line 1057, main.scss */
+/* line 1189, main.scss */
 .content-editable a:hover, .content-editable a:focus {
   color: #267299;
 }
 
-/* line 1066, main.scss */
+/* line 1198, main.scss */
 .pen-menu,
 .pen-menu * {
   box-sizing: content-box !important;
 }
 
-/* line 1071, main.scss */
+/* line 1203, main.scss */
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
   padding-top: 0.5rem;
   padding-right: 0.25rem;
 }
 
-/* line 1077, main.scss */
+/* line 1209, main.scss */
 .section-settings {
   background-color: #f7f7f7;
   padding-top: 1.75rem;
 }
-/* line 1080, main.scss */
+/* line 1212, main.scss */
 .section-settings-toggle-container + .section-settings {
   margin-top: -2.5rem;
 }
 
-/* line 1085, main.scss */
+/* line 1217, main.scss */
 .section-insert {
   margin-bottom: -1rem;
   margin-right: -0.9375rem;
   margin-left: -0.9375rem;
 }
-/* line 1089, main.scss */
+/* line 1221, main.scss */
 .section-insert hr {
   margin-top: 1rem;
   border-color: #ff8b38;
 }
 
-/* line 1095, main.scss */
+/* line 1227, main.scss */
 .unassigned {
   cursor: default;
 }
 
-/* line 1099, main.scss */
+/* line 1231, main.scss */
 .project-settings-container {
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
   background-color: #d9d9d9;
 }
-/* line 1100, main.scss */
+/* line 1232, main.scss */
 .project-settings-container .save-btn {
   outline: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1099, main.scss */
+  /* line 1231, main.scss */
   .project-settings-container {
     position: fixed;
     top: 65px;
@@ -11290,25 +11501,25 @@ span.sub-heading-postfix {
     overflow: hidden;
     box-shadow: inset 3px 0 0 rgba(51, 51, 51, 0.1);
   }
-  /* line 1116, main.scss */
+  /* line 1248, main.scss */
   .project-settings-container .project-settings {
     max-height: 60%;
     overflow: auto;
   }
 }
 
-/* line 1123, main.scss */
+/* line 1255, main.scss */
 textarea.no-resize {
   resize: none;
 }
 
-/* line 1128, main.scss */
+/* line 1260, main.scss */
 .drag-area-container {
   position: relative;
   text-align: center;
 }
 
-/* line 1132, main.scss */
+/* line 1264, main.scss */
 .drag-area {
   position: absolute;
   top: 1rem;
@@ -11319,17 +11530,17 @@ textarea.no-resize {
   border-radius: 0.375rem;
   background-color: rgba(242, 242, 242, 0.4);
 }
-/* line 1141, main.scss */
+/* line 1273, main.scss */
 .drag-area:hover {
   border-color: rgba(133, 133, 133, 0.9);
   background-color: rgba(242, 242, 242, 0.9);
 }
-/* line 1145, main.scss */
+/* line 1277, main.scss */
 .drag-area p {
   margin-bottom: 0.5rem;
 }
 
-/* line 1149, main.scss */
+/* line 1281, main.scss */
 .no-file-upload-message {
   clear: both;
   font-size: 0.75em;
@@ -11342,18 +11553,18 @@ textarea.no-resize {
   border-radius: 0.25em;
 }
 
-/* line 1160, main.scss */
+/* line 1292, main.scss */
 .no-file-upload-message a {
   color: #fff;
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 1164, main.scss */
+/* line 1296, main.scss */
 .no-file-upload-message a:hover {
   color: #fff;
 }
 
-/* line 1167, main.scss */
+/* line 1299, main.scss */
 .file-upload {
   margin: 2em 1em 1em;
   text-align: center;
@@ -11364,7 +11575,7 @@ textarea.no-resize {
   position: relative;
 }
 
-/* line 1176, main.scss */
+/* line 1308, main.scss */
 .file-upload:hover,
 .file-dragging,
 .file-uploading {
@@ -11373,12 +11584,12 @@ textarea.no-resize {
   background-color: rgba(90, 90, 90, 0.5);
 }
 
-/* line 1183, main.scss */
+/* line 1315, main.scss */
 .file-upload p {
   margin-bottom: 0.5em;
 }
 
-/* line 1186, main.scss */
+/* line 1318, main.scss */
 .file-upload-input-container {
   position: relative;
   overflow: hidden;
@@ -11386,12 +11597,12 @@ textarea.no-resize {
   margin-bottom: 0;
 }
 
-/* line 1192, main.scss */
+/* line 1324, main.scss */
 .file-upload-input {
   display: none;
 }
 
-/* line 1195, main.scss */
+/* line 1327, main.scss */
 .uploading-message,
 .file-uploading > .drop-instructions {
   display: none;
@@ -11419,7 +11630,7 @@ textarea.no-resize {
     color: #888;
   }
 }
-/* line 1209, main.scss */
+/* line 1341, main.scss */
 .file-uploading > .uploading-message {
   display: block;
   position: relative;
@@ -11430,44 +11641,44 @@ textarea.no-resize {
   animation: uploading 1.5s infinite ease-in-out;
 }
 
-/* line 1218, main.scss */
+/* line 1350, main.scss */
 .file-uploading > .file-upload-input-container {
   visibility: hidden;
 }
 
-/* line 1223, main.scss */
+/* line 1355, main.scss */
 .full-width-image-container {
   margin: 0 -0.9375rem 0.5rem -0.9375rem;
 }
-/* line 1225, main.scss */
+/* line 1357, main.scss */
 .full-width-image-container.drag-area-container {
   min-height: 9rem;
 }
 
-/* line 1229, main.scss */
+/* line 1361, main.scss */
 .cover-image-container {
   margin-top: -1.125rem;
 }
 
-/* line 1234, main.scss */
+/* line 1366, main.scss */
 .logo-image-container {
   min-height: 9rem;
   margin-bottom: 1rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1234, main.scss */
+  /* line 1366, main.scss */
   .logo-image-container {
     float: left;
     width: 50%;
   }
 }
-/* line 1241, main.scss */
+/* line 1373, main.scss */
 .logo-image-container img {
   max-height: 20rem;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1245, main.scss */
+  /* line 1377, main.scss */
   .project-title-container {
     float: right;
     width: 50%;
@@ -11476,7 +11687,7 @@ textarea.no-resize {
     padding-right: 1rem;
     padding-bottom: 1rem;
   }
-  /* line 1253, main.scss */
+  /* line 1385, main.scss */
   .logo-image-container.hide + .project-title-container {
     float: none;
     width: auto;
@@ -11486,62 +11697,62 @@ textarea.no-resize {
     padding-bottom: 0;
   }
 }
-/* line 1262, main.scss */
+/* line 1394, main.scss */
 .project-title-container .project-title-help-text {
   margin-top: -0.75rem;
 }
 
-/* line 1269, main.scss */
+/* line 1401, main.scss */
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none;
 }
 
-/* line 1281, main.scss */
+/* line 1413, main.scss */
 .existing-snapshot-wrapper .button {
   margin-bottom: 0;
 }
 
-/* line 1287, main.scss */
+/* line 1419, main.scss */
 .avatar-container {
   padding: 0.3rem;
 }
-/* line 1289, main.scss */
+/* line 1421, main.scss */
 .avatar-container .avatar {
   display: inline-block;
 }
-/* line 1292, main.scss */
+/* line 1424, main.scss */
 .avatar-container .drag-area-container {
   min-height: 10.125rem;
 }
 
-/* line 1300, main.scss */
+/* line 1432, main.scss */
 .project-list > li + li, .member-list > li + li, .team-list > li + li {
   margin-top: 0.625rem;
   padding-top: 0.625rem;
   border-top: 1px solid #e3e3e3;
 }
 
-/* line 1307, main.scss */
+/* line 1439, main.scss */
 .member-list li, .team-list li {
   padding-left: 4.375rem;
 }
-/* line 1310, main.scss */
+/* line 1442, main.scss */
 .member-list .avatar, .team-list .avatar {
   width: 3.75rem;
   margin-left: -4.375rem;
 }
 
-/* line 1315, main.scss */
+/* line 1447, main.scss */
 .user-profile .member-list {
   display: none;
 }
 
-/* line 1318, main.scss */
+/* line 1450, main.scss */
 .user-profile .project-list {
   display: none;
 }
 
-/* line 1321, main.scss */
+/* line 1453, main.scss */
 .team-profile .team-list {
   display: none;
 }

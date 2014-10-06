@@ -56,6 +56,8 @@ INSTALLED_APPS = (
 
 HANDLEBARS_APP_DIRNAMES = ['jstemplates']
 CANONICAL_ROOT = ''
+
+TEMPLATES_PROFILE = 'templates'
 DEFAULT_PROJECT_TEMPLATE = 'templates/default'
 
 LOGIN_URL = 'app-signin'
