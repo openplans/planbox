@@ -944,6 +944,11 @@ img.attachment-icon {
   .shareabouts-add-button-container {
     margin-left: 0;
     bottom: 0;
+    @media #{$large-up} {
+      margin-left: 50%;
+      left: -31.25rem;
+      width: 20rem;
+    }
   }
 
   .map {
@@ -1022,6 +1027,7 @@ img.attachment-icon {
 }
 
 .shareabouts-add-button {
+  @include button($button-lrg); 
   display: block;
   @media #{$small-only} {
     margin: 0;
@@ -1066,6 +1072,9 @@ img.attachment-icon {
       background-color: #fff;
       @include grid-column(4);
     }
+  }
+  .social-link img {
+    max-height: 1.5em;
   }
 }
 

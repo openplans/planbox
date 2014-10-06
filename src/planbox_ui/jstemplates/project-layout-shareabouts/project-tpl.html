@@ -10,11 +10,6 @@
   <header class="small-12 medium-4 columns text-center medium-text-left">
   {{/if}}
     {{# if details.tagline }}<h2 class="project-tagline some-margin-top">{{ details.tagline }}</h2>{{/ if }}
-    <div class="social-links-header right">
-      {{#if details.facebook_url}}<a href="{{ details.facebook_url }}" class="social-link"><img src="{{ static_url }}/images/social-facebook.gif"></a>{{/if}}
-      {{#if details.instagram_url}}<a href="{{ details.instagram_url }}" class="social-link"><img src="{{ static_url }}/images/social-instagram.gif"></a>{{/if}}
-      {{#if details.twitter_url}}<a href="{{ details.twitter_url }}" class="social-link"><img src="{{ static_url }}/images/social-twitter.gif"></a>{{/if}}
-    </div>
     <div class="shareabouts-side-nav hide-for-small" data-magellan-expedition="fixed">
       <div>
         {{! Think of a more general solution when you have time }}
@@ -26,47 +21,17 @@
             <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
             {{/if}}{{/if}}
           {{/each}}
+          <li class="divider"></li>
+          {{#if details.facebook_url}}<li class="social-link"><a href="{{ details.facebook_url }}"><img src="{{ static_url }}/images/social-facebook.gif"> <small>Join us on Facebook!</small></a></li>{{/if}}
+          {{#if details.instagram_url}}<li class="social-link"><a href="{{ details.instagram_url }}"><img src="{{ static_url }}/images/social-instagram.gif"> <small>Follow us on Instagram!</small></a></li>{{/if}}
+          {{#if details.twitter_url}}<li class="social-link"><a href="{{ details.twitter_url }}"><img src="{{ static_url }}/images/social-twitter.gif"> <small>Follow us on Twitter!</small></a></li>{{/if}}
         </ul>
         {{/gte_active_section_length}}
       </div>
   </header>
 
-  <div class="small-12 medium-8 columns {{#if logo_img_url}} extra-padding-top{{else}} some-margin-top{{/if}}">
+  <div class="small-12 medium-8 columns {{#if logo_img_url}} extra-padding-top{{else}} some-margin-top{{/if}} extra-padding-bottom">
     <div class="orderable-container" id="section-list"></div>
-
-    <div class="row social-links-section text-center extra-margin-top">
-      {{#if details.facebook_url}}
-      <div class="medium-4 columns">
-        <a href="{{ details.facebook_url }}" class="social-link">
-          <div class="panel">
-            <img src="{{ static_url }}/images/social-facebook.gif" class="some-margin-bottom">
-            <h4>Join us on <br>Facebook!</h4>
-          </div>
-        </a>
-      </div>
-      {{/if}}
-      {{#if details.instagram_url}}
-      <div class="medium-4 columns">
-        <a href="{{ details.instagram_url }}" class="social-link">
-          <div class="panel">
-            <img src="{{ static_url }}/images/social-instagram.gif" class="some-margin-bottom">
-            <h4>Follow us on <br>Instagram!</h4>
-          </div>
-        </a>
-      </div>
-      {{/if}}
-      {{#if details.twitter_url}}
-      <div class="medium-4 columns">
-        <a href="{{ details.twitter_url }}" class="social-link">
-          <div class="panel">
-            <img src="{{ static_url }}/images/social-twitter.gif" class="some-margin-bottom">
-            <h4>Follow us on <br>Twitter!</h4>
-          </div>
-        </a>
-      </div>
-      {{/if}}
-    </div>
-
   </div>
 
   <footer class="site-colophon small-12 columns">
