@@ -1,9 +1,15 @@
 <div id="shareabouts-region" class="project-section-shareabouts project-shareabouts" data-magellan-destination="shareabouts-region"></div>
 
 <div class="after-shareabouts row container">
+
+  {{#if logo_img_url}}
   <header class="small-12 medium-4 columns text-center medium-text-left">
-    <h1 class="project-title some-margin-top">{{#if logo_img_url}}<img src="{{ logo_img_url }}" alt="{{ title }}">{{else}}{{{ title }}}{{/if}}</h1>
-    {{# if details.tagline }}<h2 class="project-tagline">{{ details.tagline }}</h2>{{/ if }}
+    <h1 class="project-title project-logo extra-margin-top"><img src="{{ logo_img_url }}" alt="{{ title }}"></h1>
+  {{else}}
+  <h1 class="project-title no-margins some-padding-top small-12 columns text-center medium-text-left">{{{ title }}}</h1>
+  <header class="small-12 medium-4 columns text-center medium-text-left">
+  {{/if}}
+    {{# if details.tagline }}<h2 class="project-tagline some-margin-top">{{ details.tagline }}</h2>{{/ if }}
     <div class="social-links-header right">
       {{#if details.facebook_url}}<a href="{{ details.facebook_url }}" class="social-link"><img src="{{ static_url }}/images/social-facebook.gif"></a>{{/if}}
       {{#if details.instagram_url}}<a href="{{ details.instagram_url }}" class="social-link"><img src="{{ static_url }}/images/social-instagram.gif"></a>{{/if}}
@@ -25,7 +31,7 @@
       </div>
   </header>
 
-  <div class="small-12 medium-8 columns">
+  <div class="small-12 medium-8 columns {{#if logo_img_url}} extra-padding-top{{else}} some-margin-top{{/if}}">
     <div class="orderable-container" id="section-list"></div>
 
     <div class="row social-links-section text-center extra-margin-top">

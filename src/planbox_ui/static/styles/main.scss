@@ -1069,13 +1069,26 @@ img.attachment-icon {
   }
 }
 
-.project-shareabouts {
-  &.panel-open, &.panel-form-open {
-    & + .after-shareabouts {
-      @media #{$small-only} {
-        display: none;
-      }
+.after-shareabouts {
+  @media #{$small-only} {
+    .project-shareabouts.panel-open + &,
+    .project-shareabouts.panel-form-open + & {
+      display: none;
     }
+  }
+  @media #{$large-up} {
+    position: relative;
+    z-index: 2;
+    margin-top: -5px;
+    &:before {
+      width: 100%;
+      height: 5px;
+      margin-bottom: -5px;
+      box-shadow: -3px -3px 0 rgba(51, 51, 51, 0.1);
+    }
+  }
+  .project-tagline {
+    font-size: 1.5rem;
   }
 }
 
