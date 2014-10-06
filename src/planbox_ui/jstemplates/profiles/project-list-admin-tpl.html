@@ -1,7 +1,13 @@
 <div class="panel-header">
   <h5 class="page-list-header subheader no-margins">
     Plans
-    <a href="#" class="new-project-button button radius tiny right" data-dropdown="new-project-template-chooser" data-options="align:left">New Plan</a>
+    {{#bootstrapped 'projectTemplates'}}
+      {{#lengthEqual . 1}}
+        <a href="{{> url-project-new-tpl ../.. }}" class="new-project-button button radius tiny right">New Plan</a>
+      {{else}}
+        <a href="#" class="new-project-button button radius tiny right" data-dropdown="new-project-template-chooser" data-options="align:left">New Plan</a>
+      {{/lengthEqual}}
+    {{/bootstrapped}}
   </h5>
 </div>
 
