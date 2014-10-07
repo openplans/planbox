@@ -1127,6 +1127,13 @@ img.attachment-icon {
       }
     }
   }
+  // hide admin stuff not used in Shareabouts-specific plans
+  // TODO FIXME: Maybe don't put this stuff in the markup? 
+  .cover-image-container,
+  .project-section-fieldset .section-settings label:first-child,
+  .project-section-fieldset .section-settings label:first-child + br {
+    display: none !important;
+  }
 }
 
 
