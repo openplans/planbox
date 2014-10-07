@@ -325,15 +325,6 @@ class ProfileView (AppMixin, AlwaysFresh, LoginRequired, SSLRequired, S3UploadMi
 
 
 class ProjectMixin (AppMixin):
-    def get_template_names(self):
-        if self.get_project_is_editable():
-            if self.request.user.profile.project_editor_version == Profile.Versions.BISTRE:
-                return ['project-admin.html']
-            else:
-                return ['project.html']
-        else:
-            return ['project.html']
-
     def get_owner_profile(self):
         if not hasattr(self, 'owner_profile'):
             try:
@@ -409,6 +400,8 @@ class ProjectEditorView (SSLRequired, LoginRequired, S3UploadMixin, BaseExisting
     authenticated user is the owner of the project.
     """
 
+    template_name = 'project-admin.html'
+
     def get_project_serialized_data(self):
         project_serializer = FullProjectSerializer(self.project)
         return project_serializer.data
@@ -450,6 +443,8 @@ class ProjectPageView (ReadOnlyMixin, BaseExistingProjectView):
     the project owner (thus it is always in read-only mode).
     """
 
+    template_name = 'project.html'
+
     def get_project_is_editable(self):
         return False
 
@@ -466,6 +461,30 @@ class ProjectPageView (ReadOnlyMixin, BaseExistingProjectView):
         return super(ProjectPageView, self).get(request, pk=self.project.pk)
 
 
+class ProjectDashboardView (SSLRequired, LoginRequired, BaseExistingProjectView):
+    """
+    A view on an existing project where that always presumes the user is NOT
+    the project owner (thus it is always in read-only mode).
+    """
+
+    template_name = 'project-dashboard.html'
+
+    def get_project_is_editable(self):
+        return False
+
+    def get(self, request, owner_slug, project_slug):
+        self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
+                                         owner__slug=owner_slug, slug__iexact=project_slug)
+
+        if not self.is_project_active():
+            raise Http404
+
+        if not self.get_project_is_visible():
+            raise Http404
+
+        return super(ProjectDashboardView, self).get(request, pk=self.project.pk)
+
+
 class NewProjectView (SSLRequired, LoginRequired, S3UploadMixin, ProjectMixin, TemplateView):
     """
     A project view for a project that does not yet exist. The project
@@ -477,6 +496,9 @@ class NewProjectView (SSLRequired, LoginRequired, S3UploadMixin, ProjectMixin, T
     The current user is always assumed to be the owner of the project in this
     view.
     """
+
+    template_name = 'project-admin.html'
+
     def get_template_project(self):
         request = self.request
         if 'template' in request.GET:
@@ -566,6 +588,7 @@ map_flavors_view = MapFlavorsView.as_view()
 plan_expired_view = ExpiredPlanView.as_view()
 
 project_editor_view = ProjectEditorView.as_view()
+project_dashboard_view = ProjectDashboardView.as_view()
 project_page_view = ProjectPageView.as_view()
 profile_view = ProfileView.as_view()
 new_project_view = NewProjectView.as_view()

@@ -3,12 +3,12 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, url
 from .views import (
     # Static site and metadata views
-    index_view, about_view, shareabouts_view, open_source_view, map_flavors_view, help_view, plan_expired_view,
+    index_view, about_view, shareabouts_view, open_source_view, map_flavors_view, help_view,
     robots_view, sitemap_view,
 
     # User authentication views
     signup_view, signin_view, password_reset_view, password_change_view,
-    password_reset_request_view, password_reset_instructions_view,
+    password_reset_request_view, password_reset_instructions_view, 
 
     # Profile views
     profile_view,
@@ -18,6 +18,7 @@ from .views import (
 
     # Project views
     project_editor_view, new_project_view, project_page_view,
+    plan_expired_view, project_dashboard_view,
 
     # Shareabouts auth
     shareabouts_auth_success_view, shareabouts_auth_error_view,
@@ -63,6 +64,8 @@ urlpatterns = patterns('',
 
     url(r'^(?P<owner_slug>[^/]+)/new/$', new_project_view, name='app-new-project'),
     url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/edit/$', project_editor_view, name='app-project-editor'),
+    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/dashboard/$', project_dashboard_view, name='app-project-dashboard'),
     # Read-only project page
     url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', project_page_view, name='app-project-page'),
+
 )
