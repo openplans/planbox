@@ -33,3 +33,6 @@ AWS_SECRET_KEY = '67890'
 SHAREABOUTS_HOST = 'data.shareabouts.org'
 SHAREABOUTS_USERNAME = 'planbox-dev'
 SHAREABOUTS_PASSWORD = '[Insert correct password here]'
+
+MOONCLERK_MONTHLY_TOKEN = '4yi4ge9c6sz'
+MOONCLERK_ONETIME_TOKEN = 'hta9susgouj'

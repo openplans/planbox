@@ -1,0 +1,38 @@
+{% extends 'product-base.html' %}
+
+{% block page %}
+
+<div class="row extra-padding-top extra-padding-bottom">
+  <div class="small-12 columns text-center">
+    <br>
+    <h1>Buy <i>&quot;{{ project.title }}&quot;</i></h1>
+
+    <hr>
+
+    <dl class="tabs" data-tab>
+      <dd class="active small-6"><a href="#monthly"><h3>Monthly Subscription:<br>$1,200/mo</h3></a></dd>
+      <dd class="small-6"><a href="#one-time"><h3>One-time Payment:<br>$9,900</h3></a></dd>
+    </dl>
+
+    <div class="tabs-content">
+      <div class="content active" id="monthly" style="padding-top: 0;">
+
+        {% with token=settings.MOONCLERK_MONTHLY_TOKEN title='OpenPlans Monthly Plan Subscription' %}
+        <div id="mc{{token}}"><a href="https://app.moonclerk.com/pay/{{token}}">{{title}}</a></div><script type="text/javascript">var mc{{token}};(function(d,t) {var s=d.createElement(t),opts={"checkoutToken":"{{token}}","width":"100%"};s.src='https://d2l7e0y6ygya2s.cloudfront.net/assets/embed.js';s.onload=s.onreadystatechange = function() {var rs=this.readyState;if(rs) if(rs!='complete') if(rs!='loaded') return;try {mc{{token}}=new MoonclerkEmbed(opts);mc{{token}}.display();} catch(e){}};var scr=d.getElementsByTagName(t)[0];scr.parentNode.insertBefore(s,scr);})(document,'script');</script>
+        {% endwith %}
+
+      </div>
+      <div class="content" id="one-time" style="padding-top: 0;">
+
+        {% with token=settings.MOONCLERK_ONETIME_TOKEN title='OpenPlans One-time Play Payment' %}
+        <div id="mc{{token}}"><a href="https://app.moonclerk.com/pay/{{token}}">{{title}}</a></div><script type="text/javascript">var mc{{token}};(function(d,t) {var s=d.createElement(t),opts={"checkoutToken":"{{token}}","width":"100%"};s.src='https://d2l7e0y6ygya2s.cloudfront.net/assets/embed.js';s.onload=s.onreadystatechange = function() {var rs=this.readyState;if(rs) if(rs!='complete') if(rs!='loaded') return;try {mc{{token}}=new MoonclerkEmbed(opts);mc{{token}}.display();} catch(e){}};var scr=d.getElementsByTagName(t)[0];scr.parentNode.insertBefore(s,scr);})(document,'script');</script>
+        {% endwith %}
+
+      </div>
+    </div>
+
+    <p>Need to extend your trial? Can't pay online? <a href="mailto:{{contact_email}}" class="open-intercom">Contact us.</a></p>
+  </div>
+</div>
+
+{% endblock %}

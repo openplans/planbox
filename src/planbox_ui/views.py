@@ -214,7 +214,7 @@ class OpenSourceView (AppMixin, TemplateView):
 class MapFlavorsView (AppMixin, TemplateView):
     template_name = 'map-flavors.html'
 
-class ExpiredPlanView (AppMixin, TemplateView):
+class ExpiredProjectView (AppMixin, TemplateView):
     template_name = 'plan-expired.html'
 
 class HelpView (AppMixin, TemplateView):
@@ -437,6 +437,23 @@ class ProjectEditorView (SSLRequired, LoginRequired, S3UploadMixin, BaseExisting
         return super(ProjectEditorView, self).get(request, pk=self.project.pk)
 
 
+class ProjectPaymentsView (SSLRequired, LoginRequired, BaseExistingProjectView):
+    """
+    A view on an existing project that allows users to make payments.
+    """
+
+    def get_project_is_editable(self):
+        return False
+
+    def get_template_names(self):
+        return ['project-payment.html']
+
+    def get(self, request, owner_slug, project_slug):
+        self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
+                                         owner__slug=owner_slug, slug__iexact=project_slug)
+        return super(ProjectPaymentsView, self).get(request, pk=self.project.pk)
+
+
 class ProjectPageView (ReadOnlyMixin, BaseExistingProjectView):
     """
     A view on an existing project where that always presumes the user is NOT
@@ -585,10 +602,11 @@ shareabouts_auth_success_view = ShareaboutsAuthSuccessView.as_view()
 shareabouts_auth_error_view = ShareaboutsAuthErrorView.as_view()
 open_source_view = OpenSourceView.as_view()
 map_flavors_view = MapFlavorsView.as_view()
-plan_expired_view = ExpiredPlanView.as_view()
+project_expired_view = ExpiredProjectView.as_view()
 
 project_editor_view = ProjectEditorView.as_view()
 project_dashboard_view = ProjectDashboardView.as_view()
+project_payments_view = ProjectPaymentsView.as_view()
 project_page_view = ProjectPageView.as_view()
 profile_view = ProfileView.as_view()
 new_project_view = NewProjectView.as_view()
