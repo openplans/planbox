@@ -41,10 +41,6 @@ var Planbox = Planbox || {};
     }, false);
   });
 
-  NS.app.addInitializer(function(options) {
-    NS.Utils.logEvents('body', 'profile-dashboard');
-  });
-
   // Init =====================================================================
   $(function() {
     NS.app.start();

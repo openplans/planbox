@@ -14,8 +14,8 @@
     {{/if}}
     <div class="project-text-content">{{{ description }}}</div>
     <p>
-      <small><a href="#" class="profile-edit-button">Edit Profile</a></small><br>
-      {{#unless auth}}<small><a href="{{> url-roundup-display-tpl }}" target="_blank">View Profile →</a></small>{{/unless}}
+      <small><a href="#" class="profile-edit-button" data-log-click>Edit Profile</a></small><br>
+      {{#unless auth}}<small><a href="{{> url-roundup-display-tpl }}" target="_blank" data-log-click>View Profile →</a></small>{{/unless}}
     </p>
   </div>
 </div>
@@ -65,7 +65,7 @@
       <div class="project-text-content content-editable rich-editable float-label-input" data-attr="description" contenteditable>{{{ description }}}</div>
       <span class="float-label">Description</span>
     </div>
-    <button class="button small radius save-btn">Save</button>&nbsp;&nbsp;
-    <small><a href="#" class="cancel-profile-edit-button alert">Cancel</a></small>
+    <button class="button small radius save-btn" data-log-click>Save</button>&nbsp;&nbsp;
+    <small><a href="#" class="cancel-profile-edit-button alert" data-log-click>Cancel</a></small>
   </div>
 </form>
