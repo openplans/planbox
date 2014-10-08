@@ -158,7 +158,7 @@ var Planbox = Planbox || {};
       });
 
       Shareabouts.auth = new Shareabouts.Auth({
-        apiRoot: 'http://data.shareabouts.org/api/v2/',
+        apiRoot: 'https://data.shareabouts.org/api/v2/',
         successPage: '/shareabouts/success',
         errorPage: '/shareabouts/error'
       });

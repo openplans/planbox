@@ -686,6 +686,9 @@ section, footer {
   border-radius: 0.5rem;
   margin: 0.9375rem 0.9375rem 0 0;
   @media #{$medium-up} {
+    margin-top: 0.5rem;
+  }
+  @media #{$large-up} {
     margin-top: -2rem;
   }
   a {
