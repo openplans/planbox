@@ -188,7 +188,7 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
         EventInline,
     )
     objectactions = ('clone_project',)
-    raw_id_fields = ('theme', 'template', 'owner')
+    raw_id_fields = ('theme', 'template', 'owner', 'customer')
     readonly_fields = ('_api_url',)
     form = modelform_factory(Project, fields='__all__', widgets={
         'title': TextInput(attrs={'class': 'vTextField'}),

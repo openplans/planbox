@@ -416,6 +416,9 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
 
     expires_at = models.DateTimeField(null=True, blank=True)
     payment_type = models.CharField(max_length=20, blank=True)
+    customer = models.OneToOneField('moonclerk.Customer', blank=True, null=True, related_name='project')
+    payments = GenericRelation('moonclerk.Payment',
+        content_type_field='item_type', object_id_field='item_id')
 
     # NOTE: These may belong in a separate model, but are on the project for
     #       now. I think the model would be called a Highlight.

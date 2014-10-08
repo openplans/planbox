@@ -36,3 +36,4 @@ SHAREABOUTS_PASSWORD = '[Insert correct password here]'
 
 MOONCLERK_MONTHLY_TOKEN = '4yi4ge9c6sz'
 MOONCLERK_ONETIME_TOKEN = 'hta9susgouj'
+MOONCLERK_API_KEY = '[Put MoonClerk API key here]'

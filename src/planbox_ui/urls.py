@@ -18,7 +18,7 @@ from .views import (
 
     # Project views
     project_editor_view, project_payments_view, new_project_view, project_page_view,
-    project_expired_view, project_dashboard_view,
+    project_payments_success_view, project_expired_view, project_dashboard_view,
 
     # Shareabouts auth
     shareabouts_auth_success_view, shareabouts_auth_error_view,
@@ -47,6 +47,8 @@ urlpatterns = patterns('',
     url(r'^open-source/$', open_source_view, name='app-open-source'),
     url(r'^map-flavors/$', map_flavors_view, name='app-map-flavors'),
     url(r'^plan-expired/$', project_expired_view, name='app-plan-expired'),
+
+    url(r'^moonclerk/pay-for/(?P<pk>[^/]+)/success$', project_payments_success_view, name='app-project-payments-success'),
 
     # ==============================
     # Profile dashboards

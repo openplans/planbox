@@ -91,6 +91,7 @@ SHAREABOUTS_PASSWORD = os.environ.get('SHAREABOUTS_PASSWORD')
 # Payment integration
 MOONCLERK_MONTHLY_TOKEN = os.environ.get('MOONCLERK_MONTHLY_TOKEN')
 MOONCLERK_ONETIME_TOKEN = os.environ.get('MOONCLERK_ONETIME_TOKEN')
+MOONCLERK_API_KEY = os.environ.get('MOONCLERK_API_KEY')
 
 # Error logging
 SENTRY_DSN = os.environ.get('SENTRY_DSN')

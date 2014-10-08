@@ -4,11 +4,13 @@ from django.http import Http404
 from django.test import TestCase, RequestFactory
 from django.utils.timezone import datetime, now, timedelta, utc
 from nose.tools import assert_equal, assert_raises, assert_in, assert_not_in
+from urllib import urlencode
+import responses
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
 from planbox_data.models import Profile, Project, Event, Theme
 from planbox_ui.views import (project_editor_view, project_page_view, new_project_view,
-    signup_view, signin_view, profile_view)
+    project_payments_success_view, signup_view, signin_view, profile_view)
 
 
 class PlanBoxUITestCase (TestCase):
@@ -308,6 +310,116 @@ class ProjectEditorViewTests (PlanBoxUITestCase):
         response = project_editor_view(request, **kwargs)
 
         assert_equal(response.status_code, 402)
+
+
+class ProjectPaymentsViewsTests (PlanBoxUITestCase):
+    def test_anon_user_redirects_to_login_before_payment_success(self):
+        owner = Profile.objects.create(slug='openplans')
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
+
+        kwargs = {
+            'pk': project.pk
+        }
+
+        url = reverse('app-project-payments-success', kwargs=kwargs) + '?customer_id=12345'
+        request = self.factory.get(url)
+        request.user = AnonymousUser()
+        response = project_payments_success_view(request, **kwargs)
+
+        signin_url = reverse('app-signin') + '?next=' + url.replace('?', '%3F').replace('=', '%3D')
+        assert_equal(response.status_code, 302)
+        assert_equal(response.url, signin_url)
+
+    @responses.activate
+    def test_success_from_a_recurring_moonclerk_form(self):
+        owner = Profile.objects.create(slug='openplans')
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        member = auth.profile
+        owner.members.add(member)
+
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
+
+        kwargs = {
+            'pk': project.pk
+        }
+
+        responses.add(responses.GET, "https://api.moonclerk.com/customers/12345",
+                  body='''{"id":523425,"account_balance":0,"name":"Ryan Wood","email":"ryan@moonclerk.com","card_last4":"4242","card_type":"Visa","card_exp_month":12,"card_exp_year":2018,"customer_reference":"cus_4SOZuEc4cxP5L7","discount":{"coupon":{"code":"10off","duration":"once","amount_off":1000,"currency":"USD","percent_off":null,"duration_in_months":null,"max_redemptions":null,"redeem_by":null },"starts_at":"2013-04-12T20:05:37Z","ends_at":"2013-05-12T20:05:37Z"},"delinquent":false,"custom_fields":{"shirt_size":{"type":"string","response":"XL"},"shipping_address":{"type":"address","response":{"id":32,"line1":"123 Main St.","line2":"Ste. 153","city":"Greenville","state":"SC","postal_code":"29651","country":"United States"}}},"form_id":101,"checkout":{"date":"2014-07-23T13:44:12Z","subtotal":1000,"fee":200,"upfront_amount":500,"total":1700,"coupon_amount":0,"amount_due":1700,"trial_period_days":null },"subscription":{"id":98,"subscription_reference":"sub_3oLgqlp4MgTZC3","status":"active","start":"2014-07-23T13:44:16Z","first_payment_attempt":"2014-07-23T13:44:16Z","next_payment_attempt":"2014-08-23T13:44:16Z","current_period_start":"2014-07-23T13:44:16Z","current_period_end":"2014-08-23T13:44:16Z","trial_start":null,"trial_end":null,"trial_period_days":null,"expires_at":null,"canceled_at":null,"ended_at":null,"plan":{"id":131,"plan_reference":"131","amount":1200,"currency":"USD","interval":"month","interval_count":1 }}}''',
+                  content_type="application/json")
+
+        url = reverse('app-project-payments-success', kwargs=kwargs) + '?customer_id=12345'
+        request = self.factory.get(url)
+        request.user = auth
+        response = project_payments_success_view(request, **kwargs)
+
+        project_editor_url = reverse('app-project-editor', kwargs={'owner_slug': owner.slug, 'project_slug': project.slug})
+        assert_equal(response.status_code, 302)
+        assert_equal(response.url, project_editor_url)
+
+        project = Project.objects.get(slug='test-slug', owner=owner)
+        customer = project.customer
+        assert_equal(customer.customer_id, 12345)
+        assert_equal(customer.reference, 'cus_4SOZuEc4cxP5L7')
+        assert_equal(customer.user, auth)
+
+    @responses.activate
+    def test_success_from_a_onetime_moonclerk_form(self):
+        owner = Profile.objects.create(slug='openplans')
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        member = auth.profile
+        owner.members.add(member)
+
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
+
+        kwargs = {
+            'pk': project.pk
+        }
+
+        responses.add(responses.GET, "https://api.moonclerk.com/payments/12345",
+                  body='''{"id":1348394,"date":"2014-04-08T18:57:26Z","status":"successful","currency":"USD","amount":1000,"fee":59,"amount_refunded":0,"name":"Jim Customer","email":"customer@example.com","card_last4":"4242","card_type":"Visa","card_exp_month":12,"card_exp_year":2018,"charge_reference":"ch_3ohpsF8ra5rqjj","customer_reference":null,"invoice_reference":"in_1La8pLqS2UnhPZ","custom_fields":{"shirt_size":{"type":"string","response":"XL"},"shipping_address":{"type":"address","response":{"id":32,"line1":"123 Main St.","line2":"Ste. 153","city":"Greenville","state":"SC","postal_code":"29651","country":"United States"}}},"form_id":112,"coupon":{"code":"10off","duration":"once","amount_off":1000,"currency":"USD","percent_off":null,"duration_in_months":null,"max_redemptions":null,"redeem_by":null}}''',
+                  content_type="application/json")
+
+        url = reverse('app-project-payments-success', kwargs=kwargs) + '?payment_id=12345'
+        request = self.factory.get(url)
+        request.user = auth
+        response = project_payments_success_view(request, **kwargs)
+
+        project_editor_url = reverse('app-project-editor', kwargs={'owner_slug': owner.slug, 'project_slug': project.slug})
+        assert_equal(response.status_code, 302)
+        assert_equal(response.url, project_editor_url)
+
+        project = Project.objects.get(slug='test-slug', owner=owner)
+        assert_equal(project.payments.all().count(), 1)
+        payment = project.payments.all()[0]
+        assert_equal(payment.payment_id, 12345)
+        assert_equal(payment.user, auth)
+
+    @responses.activate
+    def test_empty_payment_and_customer_id_is_allowed(self):
+        # NOTE: This test should be obsoleted once the MoonClerkk customer_id
+        # issues are resolved.
+        owner = Profile.objects.create(slug='openplans')
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        member = auth.profile
+        owner.members.add(member)
+
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
+
+        kwargs = {
+            'pk': project.pk
+        }
+
+        url = reverse('app-project-payments-success', kwargs=kwargs) + '?customer_id='
+        request = self.factory.get(url)
+        request.user = auth
+        response = project_payments_success_view(request, **kwargs)
+
+        project_editor_url = reverse('app-project-editor', kwargs={'owner_slug': owner.slug, 'project_slug': project.slug})
+        assert_equal(response.status_code, 302)
+        assert_equal(response.url, project_editor_url)
+
+        project = Project.objects.get(slug='test-slug', owner=owner)
+        assert_equal(project.expires_at, None)
 
 
 class ProjectPageViewTests (PlanBoxUITestCase):

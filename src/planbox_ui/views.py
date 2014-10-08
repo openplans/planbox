@@ -4,19 +4,21 @@ import base64
 import hmac
 import hashlib
 import json
+import requests
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User as UserAuth
 from django.contrib.auth.views import redirect_to_login
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import resolve_url
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
 from django.utils.timezone import now
-from django.views.generic import TemplateView, FormView, View
+from django.views.generic import TemplateView, FormView, View, DetailView
+from moonclerk.models import Customer, Payment
 from password_reset.views import (
     PasswordResetView as BasePasswordResetView,
     PasswordResetRequestView as BasePasswordResetRequestView,
@@ -448,10 +450,103 @@ class ProjectPaymentsView (SSLRequired, LoginRequired, BaseExistingProjectView):
     def get_template_names(self):
         return ['project-payment.html']
 
+    def get_project_token(self):
+        project_token = self.project.id
+        return project_token
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectPaymentsView, self).get_context_data(**kwargs)
+        context['project_token'] = self.get_project_token()
+        return context
+
     def get(self, request, owner_slug, project_slug):
         self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
                                          owner__slug=owner_slug, slug__iexact=project_slug)
         return super(ProjectPaymentsView, self).get(request, pk=self.project.pk)
+
+
+class ProjectPaymentsSuccessView (SSLRequired, LoginRequired, AppMixin, View):
+    def get_moonclerk_customer(self, request, customer_id, moonclerk_key):
+        url = 'https://api.moonclerk.com/customers/%s' % (customer_id,)
+        headers = {'Authorization': 'Token token=%s' % (moonclerk_key,),
+                   'Accept': 'application/vnd.moonclerk+json;version=1'}
+
+        try:
+            response = requests.get(url, headers=headers, timeout=15)
+        except:  # Socket timeout, or other such connection errors
+            raise Exception('Failed to connect to the MookClerk API')
+
+        if response.status_code != 200:
+            response_body = response.text
+            raise Exception('Invalid response from the MoonClerk API')
+
+        customer_data = response.json()
+        customer = Customer.objects.create(
+            user=request.user,
+            reference=customer_data.get('customer_reference'),
+            customer_id=customer_id,
+            data=customer_data)
+        return customer
+
+    def get_moonclerk_payment(self, request, payment_id, moonclerk_key):
+        url = 'https://api.moonclerk.com/payments/%s' % (payment_id,)
+        headers = {'Authorization': 'Token token=%s' % (moonclerk_key,),
+                   'Accept': 'application/vnd.moonclerk+json;version=1'}
+
+        try:
+            response = requests.get(url, headers=headers, timeout=15)
+        except:  # Socket timeout, or other such connection errors
+            raise Exception('Failed to connect to the MookClerk API')
+
+        if response.status_code != 200:
+            response_body = response.text
+            raise Exception('Invalid response from the MoonClerk API')
+
+        payment_data = response.json()
+        payment = Payment.objects.create(
+            user=request.user,
+            payment_id=payment_id,
+            data=payment_data)
+        return payment
+
+    def set_payment_info(self, project, payment, customer):
+        if payment and payment.customer_id is None:
+            project.payment_type = 'moonclerk-onetime'
+        else:
+            project.payment_type = 'moonclerk-monthly'
+
+        if customer:
+            project.customer = customer
+        if payment:
+            project.payments.add(payment)
+
+        project.expires_at = None
+        project.save()
+
+    def get(self, request, pk):
+        project = get_object_or_404(Project.objects.select_related('owner'), pk=pk)
+        moonclerk_key = settings.MOONCLERK_API_KEY
+
+        customer_id = request.GET.get('customer_id', None)
+        payment_id = request.GET.get('payment_id', None)
+
+        # # NOTE: There's currently some issue with receiving the customer_id
+        # # from MoonClerk. For now, be lenient about not having one.
+        #
+        # if not (customer_id or payment_id):
+        #     return HttpResponse('You must specify either a customer_id or a payment_id.', status=400)
+
+        payment = customer = None
+        if customer_id:
+            customer = self.get_moonclerk_customer(request, customer_id, moonclerk_key)
+        if payment_id:
+            payment = self.get_moonclerk_payment(request, payment_id, moonclerk_key)
+
+        self.set_payment_info(project, payment, customer)
+
+        return redirect('app-project-editor',
+            owner_slug=project.owner.slug,
+            project_slug=project.slug)
 
 
 class ProjectPageView (ReadOnlyMixin, BaseExistingProjectView):
@@ -607,6 +702,7 @@ project_expired_view = ExpiredProjectView.as_view()
 project_editor_view = ProjectEditorView.as_view()
 project_dashboard_view = ProjectDashboardView.as_view()
 project_payments_view = ProjectPaymentsView.as_view()
+project_payments_success_view = ProjectPaymentsSuccessView.as_view()
 project_page_view = ProjectPageView.as_view()
 profile_view = ProfileView.as_view()
 new_project_view = NewProjectView.as_view()

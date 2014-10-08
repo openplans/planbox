@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'django_object_actions',
     'raven.contrib.django.raven_compat',
 
+    'moonclerk',
     'custom_domains',
     'password_reset',
     'planbox_ui',
