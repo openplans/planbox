@@ -4,7 +4,7 @@
     <h5>Create a new project from one of these templates...</h5>
   {{#bootstrapped 'projectTemplates'}}
     {{#each .}}
-    <div class="large-4 medium-6 columns text-center">
+    <div class="large-4 medium-6 columns text-center template-{{ profile.slug }}-{{ project.slug }}">
       <a href="{{> url-project-new-tpl ../.. }}?template={{ profile.slug }}/{{ project.slug }}" data-log-click>
         <img src="{{ image_url }}" style="width: 50%">
         <h5>{{ label }}</h5>
