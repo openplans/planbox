@@ -5,10 +5,39 @@
 <div class="row extra-padding-top extra-padding-bottom">
   <div class="small-12 columns text-center">
     <br>
-    <h1>Buy <i>&quot;{{ project.title }}&quot;</i></h1>
+    <h1>Activate <i>&quot;{{ project.title }}&quot;</i></h1>
+  </div>
 
-    <hr>
+  <hr>
 
+  <div class="large-8 medium-10 small-12 medium-centered columns">
+    <h5>
+      {% if project.expires_at > current_time %}
+        Your plan will expire <time datetime="{{ project.expires_at }}">{{ project.expires_at|timeuntil }}</time>.
+      {% else %}
+        Your plan has expired.
+      {% endif %}
+
+      Activate it to get:
+    </h5>
+
+    <ul>
+      <li>Unlimited support from the OpenPlans team, via email &amp; phone</li>
+      <li>Daily email reports, customized for your project</li>
+      <li>Access to our real-time data dashboard, showing the latest activity on your plan</li>
+      <li>Moderation tools, to review &amp; manage input as it comes in</li>
+      <li>Export your data to other tools for further work</li>
+      <li>User-tested templates for effective data collection on desktop &amp; mobile</li>
+      <li>Straightforward site management&mdash;add images &amp; documents to give your plan context</li>
+      <li>Hassle-free hosting &amp; domain names</li>
+    </ul>
+
+    <em>Choose a payment that fits your project budget&mdash;monthly or a one-time fee.</em>
+  </div>
+
+  <hr>
+
+  <div class="small-12 columns text-center">
     <dl class="tabs" data-tab>
       <dd class="active small-6"><a href="#monthly"><h3>Monthly Subscription:<br>$1,200/mo</h3></a></dd>
       <dd class="small-6"><a href="#one-time"><h3>One-time Payment:<br>$9,900</h3></a></dd>
@@ -31,7 +60,7 @@
       </div>
     </div>
 
-    <p>Working on community-based project? Doing multiple projects with OpenPlans? Can't pay online? Contact us to discuss options. <a href="mailto:{{contact_email}}" class="open-intercom">Contact us.</a></p>
+    <p>Working on a community project? Need to pay by an alternate method? Multiple projects? <a href="mailto:{{contact_email}}" class="open-intercom">Contact us.</a></p>
   </div>
 </div>
 
