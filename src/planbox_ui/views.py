@@ -92,6 +92,9 @@ class AppMixin (object):
         def window_location_helper(this):
             return self.request.get_full_path()
 
+        # The current time, because it's useful sometimes
+        context['current_time'] = now()
+
         return context
 
 

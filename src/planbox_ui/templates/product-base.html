@@ -80,12 +80,14 @@ OpenPlans
 {% block scripts %}
   {% if debug %}
   <script src="{{ STATIC_URL }}bower_components/jquery/dist/jquery.js"></script>
+  <script src="{{ STATIC_URL }}scripts/utils.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/components.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
 
   <script>
     $(function() {
+      Planbox.Utils.logEvents('body', 'product-pages');
 
       $('.user-menu-link').click(function(evt) {
         evt.preventDefault();
