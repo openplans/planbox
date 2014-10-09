@@ -1,0 +1,26 @@
+{% if user.is_authenticated and user.profile %}
+
+  {% with teams=user.profile.teams.all %}
+  {% if teams|length == 1 %}
+
+    {% with team=teams.0 %}
+    <a class="button expand large radius" href="{% url 'app-new-project' team.slug %}?template=templates/{{ template }}">Create Plan</a>
+    {% endwith %}
+
+  {% else %}
+
+    <button class="button expand large radius" data-dropdown="team-selector-{{ template }}" aria-controls="team-selector-{{ template }}" aria-expanded="false">Create plan for&hellip;</button>
+    <ul id="team-selector-{{ template }}" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+      {% for team in teams %}
+      <li><a href="{% url 'app-new-project' team.slug %}?template=templates/{{ template }}">{{ team.name }}</a></li>
+      {% endfor %}
+    </ul>
+
+  {% endif %} {# 1 or more teams #}
+  {% endwith %}
+
+{% else %}
+
+  <a class="button expand large radius" href="/signin">Sign In</a>
+
+{% endif %} {# user.is_authenticated #}
