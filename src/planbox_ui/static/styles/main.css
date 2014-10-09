@@ -11280,7 +11280,7 @@ img.attachment-icon {
 
 /* line 1069, main.scss */
 .shareabouts-side-nav {
-  height: 0;
+  height: 1px;
   overflow: visible;
 }
 /* line 1078, main.scss */

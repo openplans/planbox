@@ -1071,7 +1071,7 @@ img.attachment-icon {
   // TODO FIXME: this ugly hack is because magellan
   // sets the threshold based on the outerHeight of
   // the menu. Upgrading to 5.4.5 might resolve this.
-  height: 0;
+  height: 1px;
   overflow: visible;
 
   &.fixed {
