@@ -60,7 +60,8 @@ CANONICAL_ROOT = ''
 
 TEMPLATES_PROFILE = 'templates'
 DEFAULT_PROJECT_TEMPLATE = 'templates/default'
-TRIAL_DURATION = 60 * 60 * 24 * 7
+TRIAL_DAYS = 15
+TRIAL_DURATION = 60 * 60 * 24 * TRIAL_DAYS
 
 LOGIN_URL = 'app-signin'
 LOGIN_REDIRECT_URL = 'app-user-profile'
