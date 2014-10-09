@@ -15,6 +15,7 @@
         {{! Think of a more general solution when you have time }}
         {{#gte_active_section_length sections 1}}
         <ul class="side-nav">
+          <li class="divider"></li>
           <li data-magellan-arrival="shareabouts-region"><a href="#shareabouts-region">Map</a></li>
           {{#each sections}}
             {{#if active}}{{#if menu_label}}
