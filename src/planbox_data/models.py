@@ -393,7 +393,7 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     )
 
     LAYOUT_CHOICES = (
-        ('generic', _('Generic (classic)')),
+        ('generic', _('Default (classic)')),
         ('shareabouts', _('Shareabouts Map')),
     )
 
@@ -413,6 +413,12 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     template = models.ForeignKey('Project', help_text=_("The project, if any, that this one is based off of"), null=True, blank=True, on_delete=models.SET_NULL)
 
     geometry = models.GeometryField(null=True, blank=True)
+
+    expires_at = models.DateTimeField(null=True, blank=True)
+    payment_type = models.CharField(max_length=20, blank=True)
+    customer = models.OneToOneField('moonclerk.Customer', blank=True, null=True, related_name='project')
+    payments = GenericRelation('moonclerk.Payment',
+        content_type_field='item_type', object_id_field='item_id')
 
     # NOTE: These may belong in a separate model, but are on the project for
     #       now. I think the model would be called a Highlight.
@@ -508,6 +514,19 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
             return True
 
         return self.owned_by(obj) or (obj in self.owner.members.all())
+
+    def reset_trial_period(self):
+        if hasattr(settings, 'TRIAL_DURATION'):
+            duration = settings.TRIAL_DURATION
+            if not isinstance(duration, timedelta):
+                duration = timedelta(seconds=duration)
+            self.expires_at = now() + duration
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:  # Creating...
+            if self.expires_at is None:
+                self.reset_trial_period()
+        return super(Project, self).save(*args, **kwargs)
 
 
 class EventManager (models.Manager):
@@ -678,8 +697,12 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
 class ProfileProjectTemplate(OrderedModelMixin, TimeStampedModel):
     profile = models.ForeignKey('Profile', related_name='project_templates')
     project = models.ForeignKey('Project')
-    label = models.TextField()
-    index = models.PositiveIntegerField()
+    index = models.PositiveIntegerField(blank=True)
+
+    label = models.TextField(default='', blank=True)
+    short_description = models.TextField(default='', blank=True)
+    long_description = models.TextField(default='', blank=True)
+    image_url = models.URLField(null=True, blank=True)
 
     class Meta:
         ordering = ('index',)

@@ -1,15 +1,26 @@
-<h3 class="no-margins"><a href="{{> url-project-edit-tpl }}">{{ title }}</a></h3>
-<small class="url">
-  openplans.org/{{ ./owner }}/<span class="slug">{{ slug }}</span>/
-  &mdash; <a href="#" class="" data-dropdown="project-{{ id }}-menu">Edit&nbsp;Plan&nbsp;Link</a>
-  <ul id="project-{{ id }}-menu" class="f-dropdown" data-dropdown-content>
-    <li><a href="#" class="change-slug">Edit Plan Link</a></li>
-    <li><a href="mailto:{{contact_email}}" class="open-intercom">Request a custom domain&hellip;</a></li>
-  </ul>
-</small>
-<form class="slug-form hide">
-  <!-- TODO: validate; don't save if blank -->
-  <small><span class="hide-for-small-only">openplans.org/{{ ./owner }}/</span><input type="text" id="slug" class="slug-field inline-input" value="{{ slug }}" pattern="[A-Za-z0-9-]+" data-validity-message="Please use only letters, numbers, and dashes."><span class="hide-for-small-only">/&nbsp;&nbsp;</span><button class="tiny less-padding">OK</button>&nbsp;&nbsp;<a href="#" class="cancel-slug-change alert">Cancel</a></small>
-
-  <div data-error-attr="slug" data-error-message="That link is already used by another plan. Please use a different link for each plan."></div>
-</form>
+<div class="row">
+  <div class="medium-10 columns">
+    <h3 class="no-margins"><a href="{{> url-project-edit-tpl }}">{{ title }}</a></h3>
+    <small class="url">
+      openplans.org/{{ ./owner }}/<span class="slug">{{ slug }}</span>/
+      &mdash; <a href="#" class="" data-dropdown="project-{{ id }}-menu">Edit&nbsp;Plan&nbsp;Link</a>
+      <ul id="project-{{ id }}-menu" class="f-dropdown" data-dropdown-content>
+        <li><a href="#" class="change-slug">Edit Plan Link</a></li>
+        <li><a href="mailto:{{contact_email}}" class="open-intercom">Request a custom domain&hellip;</a></li>
+      </ul>
+    </small>
+    <form class="slug-form hide">
+      <!-- TODO: validate; don't save if blank -->
+      <small><span class="hide-for-small-only">openplans.org/{{ ./owner }}/</span><input type="text" id="slug" class="slug-field inline-input" value="{{ slug }}" pattern="[A-Za-z0-9-]+" data-validity-message="Please use only letters, numbers, and dashes."><span class="hide-for-small-only">/&nbsp;&nbsp;</span><button class="tiny less-padding">OK</button>&nbsp;&nbsp;<a href="#" class="cancel-slug-change alert">Cancel</a></small>
+      <div data-error-attr="slug" data-error-message="That link is already used by another plan. Please use a different link for each plan."></div>
+    </form>
+    {{#if expires_at}}
+    <p class="text-small no-margins">
+      {{>project-expiration-message-tpl}}
+    </p>
+    {{/if}}
+  </div>
+  <div class="medium-2 columns medium-text-center">
+    <p class="text-small no-margins"><strong><a href="/{{ ./owner }}/{{ slug }}/dashboard/" data-log-click><span class="show-for-medium-up"><span style="display:block;width:0;margin:auto;border-radius:100%;border:0.75rem solid #cdf;border-left-color:#adf;border-top-color:#bcd;"></span></span>Dashboard</a></strong></p>
+  </div>
+</div>

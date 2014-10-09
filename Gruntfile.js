@@ -334,7 +334,8 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/shareabouts-js/src/place-support-view.js',
             '<%= yeoman.app %>/bower_components/shareabouts-js/src/place-detail-view.js',
             '<%= yeoman.app %>/bower_components/shareabouts-js/src/place-form-view.js',
-            '<%= yeoman.app %>/bower_components/shareabouts-js/src/map.js'
+            '<%= yeoman.app %>/bower_components/shareabouts-js/src/map.js',
+            '<%= yeoman.app %>/scripts/utils.js',
           ],
           '<%= yeoman.app %>/scripts/components-admin.min.js': [
             '<%= yeoman.app %>/bower_components/jqueryui/ui/jquery.ui.core.js',

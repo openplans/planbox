@@ -1,0 +1,67 @@
+{% extends 'product-base.html' %}
+
+{% block page %}
+
+<div class="row extra-padding-top extra-padding-bottom">
+  <div class="small-12 columns text-center">
+    <br>
+    <h1>Activate <i>&quot;{{ project.title }}&quot;</i></h1>
+  </div>
+
+  <hr>
+
+  <div class="large-8 medium-10 small-12 medium-centered columns">
+    <h5>
+      {% if project.expires_at > current_time %}
+        Your plan will expire <time datetime="{{ project.expires_at }}">{{ project.expires_at|timeuntil }}</time>.
+      {% else %}
+        Your plan has expired.
+      {% endif %}
+
+      Activate it to get:
+    </h5>
+
+    <ul>
+      <li>Unlimited support from the OpenPlans team, via email &amp; phone</li>
+      <li>Daily email reports, customized for your project</li>
+      <li>Access to our real-time data dashboard, showing the latest activity on your plan</li>
+      <li>Moderation tools, to review &amp; manage input as it comes in</li>
+      <li>Export your data to other tools for further work</li>
+      <li>User-tested templates for effective data collection on desktop &amp; mobile</li>
+      <li>Straightforward site management&mdash;add images &amp; documents to give your plan context</li>
+      <li>Hassle-free hosting &amp; domain names</li>
+    </ul>
+
+    <em>Choose a payment that fits your project budget&mdash;monthly or a one-time fee.</em>
+  </div>
+
+  <hr>
+
+  <div class="small-12 columns text-center">
+    <dl class="tabs" data-tab>
+      <dd class="active small-6"><a href="#monthly"><h3>Monthly Subscription:<br>$1,200/mo</h3></a></dd>
+      <dd class="small-6"><a href="#one-time"><h3>One-time Payment:<br>$9,900</h3></a></dd>
+    </dl>
+
+    <div class="tabs-content">
+      <div class="content active" id="monthly" style="padding-top: 0;">
+
+        {% with form_token=settings.MOONCLERK_MONTHLY_TOKEN title='OpenPlans Monthly Plan Subscription' %}
+        <div id="mc{{form_token}}"><a href="https://app.moonclerk.com/pay/{{form_token}}">{{title}}</a></div><script type="text/javascript">var mc{{form_token}};(function(d,t) {var s=d.createElement(t),opts={"checkoutToken":"{{form_token}}","cid":encodeURIComponent("{{project_token}}"),"width":"100%"};s.src='https://d2l7e0y6ygya2s.cloudfront.net/assets/embed.js';s.onload=s.onreadystatechange = function() {var rs=this.readyState;if(rs) if(rs!='complete') if(rs!='loaded') return;try {mc{{form_token}}=new MoonclerkEmbed(opts);mc{{form_token}}.display();} catch(e){}};var scr=d.getElementsByTagName(t)[0];scr.parentNode.insertBefore(s,scr);})(document,'script');</script>
+        {% endwith %}
+
+      </div>
+      <div class="content" id="one-time" style="padding-top: 0;">
+
+        {% with form_token=settings.MOONCLERK_ONETIME_TOKEN title='OpenPlans One-time Play Payment' %}
+        <div id="mc{{form_token}}"><a href="https://app.moonclerk.com/pay/{{form_token}}">{{title}}</a></div><script type="text/javascript">var mc{{form_token}};(function(d,t) {var s=d.createElement(t),opts={"checkoutToken":"{{form_token}}","cid":encodeURIComponent("{{project_token}}"),"width":"100%"};s.src='https://d2l7e0y6ygya2s.cloudfront.net/assets/embed.js';s.onload=s.onreadystatechange = function() {var rs=this.readyState;if(rs) if(rs!='complete') if(rs!='loaded') return;try {mc{{form_token}}=new MoonclerkEmbed(opts);mc{{form_token}}.display();} catch(e){}};var scr=d.getElementsByTagName(t)[0];scr.parentNode.insertBefore(s,scr);})(document,'script');</script>
+        {% endwith %}
+
+      </div>
+    </div>
+
+    <p>Working on a community project? Need to pay by an alternate method? Multiple projects? <a href="mailto:{{contact_email}}" class="open-intercom">Contact us.</a></p>
+  </div>
+</div>
+
+{% endblock %}

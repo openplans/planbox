@@ -1,34 +1,43 @@
 <div id="shareabouts-region" class="project-section-shareabouts project-shareabouts" data-magellan-destination="shareabouts-region"></div>
 
 <div class="after-shareabouts row container">
+
+  {{#if logo_img_url}}
   <header class="small-12 medium-4 columns text-center medium-text-left">
-    <h1 class="project-title some-margin-top">{{#if logo_img_url}}<img src="{{ logo_img_url }}" alt="{{ title }}">{{else}}{{{ title }}}{{/if}}</h1>
-    {{# if details.tagline }}<h2 class="project-tagline">{{ details.tagline }}</h2>{{/ if }}
-    <div class="social-links-header right">
-      {{#if details.facebook_url}}<a href="{{ details.facebook_url }}" class="social-link"><img src="{{ static_url }}/images/social-facebook.gif"></a>{{/if}}
-      {{#if details.instagram_url}}<a href="{{ details.instagram_url }}" class="social-link"><img src="{{ static_url }}/images/social-instagram.gif"></a>{{/if}}
-      {{#if details.twitter_url}}<a href="{{ details.twitter_url }}" class="social-link"><img src="{{ static_url }}/images/social-twitter.gif"></a>{{/if}}
-    </div>
+    <h1 class="project-title project-logo extra-margin-top"><img src="{{ logo_img_url }}" alt="{{ title }}"></h1>
+  {{else}}
+  <h1 class="project-title no-margins some-padding-top small-12 columns text-center medium-text-left">{{{ title }}}</h1>
+  <header class="small-12 medium-4 columns text-center medium-text-left">
+  {{/if}}
+    {{# if details.tagline }}<h2 class="project-tagline some-margin-top">{{ details.tagline }}</h2>{{/ if }}
     <div class="shareabouts-side-nav hide-for-small" data-magellan-expedition="fixed">
       <div>
         {{! Think of a more general solution when you have time }}
         {{#gte_active_section_length sections 1}}
         <ul class="side-nav">
+          <li class="divider"></li>
           <li data-magellan-arrival="shareabouts-region"><a href="#shareabouts-region">Map</a></li>
           {{#each sections}}
             {{#if active}}{{#if menu_label}}
             <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
             {{/if}}{{/if}}
           {{/each}}
+          <li class="divider"></li>
+          {{#if details.facebook_url}}<li class="social-link"><a href="{{ details.facebook_url }}"><img src="{{ static_url }}/images/social-facebook.gif"> <small>Join us on Facebook!</small></a></li>{{/if}}
+          {{#if details.instagram_url}}<li class="social-link"><a href="{{ details.instagram_url }}"><img src="{{ static_url }}/images/social-instagram.gif"> <small>Follow us on Instagram!</small></a></li>{{/if}}
+          {{#if details.twitter_url}}<li class="social-link"><a href="{{ details.twitter_url }}"><img src="{{ static_url }}/images/social-twitter.gif"> <small>Follow us on Twitter!</small></a></li>{{/if}}
         </ul>
         {{/gte_active_section_length}}
       </div>
   </header>
 
-  <div class="small-12 medium-8 columns">
+  <div class="small-12 medium-8 columns {{#if logo_img_url}} extra-padding-top{{else}} some-margin-top{{/if}} extra-padding-bottom">
     <div class="orderable-container" id="section-list"></div>
+  </div>
 
-    <div class="row social-links-section text-center extra-margin-top">
+  <footer class="site-colophon small-12 columns">
+
+    <div class="row social-links-section text-center extra-margin-top hide-for-medium-up">
       {{#if details.facebook_url}}
       <div class="medium-4 columns">
         <a href="{{ details.facebook_url }}" class="social-link">
@@ -61,9 +70,6 @@
       {{/if}}
     </div>
 
-  </div>
-
-  <footer class="site-colophon small-12 columns">
       <p class="project-contact-info text-center medium-text-left">{{{ contact }}}</p>
       {{! NOTE: These URLs is hardcoded for the sake of pages with custom URLs. Should maybe be passed in as context? }}
       <p class="powered-by text-center medium-text-right text-small">{{#_}}Powered by <a href="http://openplans.org/">OpenPlans.org</a>.{{/_}}</p>

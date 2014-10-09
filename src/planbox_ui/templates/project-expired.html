@@ -1,0 +1,15 @@
+{% extends 'product-base.html' %}
+
+{% block page %}
+
+<div class="row extra-padding-top extra-padding-bottom">
+  <div class="small-12 columns text-center">
+    <br>
+    <h1>Uh-oh. Your&nbsp;plan has&nbsp;expired.</h1>
+    <h3 class="extra-margin-bottom">(But it's not too late.)</h3>
+    <p><a href="{% url 'app-project-payments' project.owner.slug project.slug %}" class="button large radius shadowed" data-log-click>Activate Plan</a></p>
+    <p>Need to extend your trial? <a href="mailto:{{contact_email}}" class="open-intercom">Contact us.</a></p>
+  </div>
+</div>
+
+{% endblock %}

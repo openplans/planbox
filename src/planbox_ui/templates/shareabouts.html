@@ -2,7 +2,7 @@
 
 {% block page %}
 
-<section class="">
+<section class="extra-padding-bottom">
   <div class="extra-padding-top extra-padding-bottom shareabouts-page-header">
     <div class="row shareabouts-page-header">
       <div class="small-12 large-5 columns">
@@ -12,7 +12,6 @@
             <h2 class="extra-padding-bottom"><img src="{{ STATIC_URL }}images/shareabouts/shareabouts-logo.png" alt="Shareabouts" title="Shareabouts"></h2>
             <h4 class="some-padding-bottom">Shareabouts is a flexible tool for gathering public input on a map.</h4>
             <p>Collect local insights from neighborhood residents, or round up data at a state-wide scale. Bike networks, trash maps, street safety, participatory budgeting&hellip; Pick a Shareabouts that meets your needs.</p>
-            <p class="text-large"><a href="#pricing"><strong>Work with us</strong></a> <small>or</small> <a href="#pricing"><strong>DIY</strong></a>.</p>
           </div>
           <div class="medium-4 large-12 columns text-center extra-padding-top">
             <p><a href="http://www.planetizen.com/websites2013"><img src="{{ STATIC_URL }}images/shareabouts/plnz-topwebsite-2013.png"></a></p>
@@ -37,7 +36,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row extra-padding-bottom extra-margin-bottom">
     <div class="small-12 large-7 columns">
       <h3 class="some-padding-top">Who's using Shareabouts?</h3>
       <p class="text-large">Shareabouts has been used to gather public input in dozens of municipalities, for transportation planning, participatory budgeting, resiliency mapping and more. Check out some recent Shareabouts maps:</p>
@@ -146,7 +145,7 @@
           <p>Explore and better understand the information you're collecting.</p>
         </div>
       </div>
-      <h5 class="some-padding-top">Configure What Information You Gather</h5>
+      <h5 class="extra-padding-top">Configure What Information You Gather</h5>
       <ul style="padding-right: 1rem;">
         <li><p class="some-margin-bottom">Configure categories for submissions, differentiating them with map icons.</p></li>
         <li><p class="some-margin-bottom">Collect additional information about participants&mdash;optionally gather name, zip code, and private contact info. Send automatic followup emails to keep people engaged.</p></li>
@@ -160,251 +159,6 @@
     </div>
   </div>
 
-  <div class="row some-padding-top extra-margin-top">
-    <div class="small-12 columns">
-
-      <div class="pricing-matrix row collapse" data-equalizer>
-         <div id="pricing" class="page-anchor"></div>
-        <div class="small-12 large-3 columns">
-          <ul class="pricing-table">
-            <li class="title">Basic</li>
-            <li class="bullet-item"><strong>Free</strong></li>
-            <li class="description" data-equalizer-watch>Embed a basic Shareabouts map in your OpenPlans project page to collect locations and comments.</li>
-            <li class="cta-button"><a class="button expand radius" href="/signup/">Sign Up</a></li>
-          </ul>
-        </div>
-        <div class="small-12 large-3 columns">
-          <ul class="pricing-table">
-            <li class="title">Subscription</li>
-            <li class="bullet-item"><strong>$500 setup + $300/month</strong></li>
-            <li class="description" data-equalizer-watch>You decide what information to collect from your community. We configure Shareabouts for you, using our tried and tested default template. <a href="http://demo.shareabouts.org/">Try it here</a>.</li>
-            <!-- <li class="cta-button"><a class="button expand radius" href="#">Get Started</a></li> -->
-            <li class="cta-button"><a class="button expand radius" href="https://app.moonclerk.com/pay/121pf2ytngg">Sign Up</a></li>
-          </ul>
-        </div>
-        <div class="small-12 large-3 columns">
-          <ul class="pricing-table">
-            <li class="title">Custom</li>
-            <li class="bullet-item"><strong>$9,900</strong></li>
-            <li class="description" data-equalizer-watch>We tailor Shareabouts to fit your project, including custom styling of colors, typography, icons, and map tiles to match your brand.</li>
-            <li class="cta-button"><a class="button expand radius" href="mailto:hello@openplans.org?subject=Shareabouts Project">Contact Us</a></li>
-          </ul>
-        </div>
-        <div class="small-12 large-3 columns">
-          <ul class="pricing-table">
-            <li class="title">Multi-site</li>
-            <li class="bullet-item"><strong>Contact for Pricing</strong></li>
-            <li class="description" data-equalizer-watch>Engage communities in all of your mapping projects with your Custom Shareabouts template.</li>
-            <li class="cta-button"><a class="button expand radius" href="mailto:hello@openplans.org?subject=Shareabouts Enterprise">Contact Us</a></li>
-          </ul>
-        </div>
-        <div class="small-12 columns">
-          <a class="show-details-all button secondary expand show-for-large-up" href="#">Show More Information&nbsp;&nbsp;<small>&#x25BC;</small></a>
-          <div class="extra-pricing-info">
-
-            <h3 class="extra-pricing-info-header">Collect Information About Places <img class="feature-list-icon" src="{{ STATIC_URL }}images/shareabouts/feature-list-icon-marker.png"> </h3>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Simple place surveys</td>
-                  <td>Configurable surveys</td>
-                  <td>Multi-page surveys with conditional logic</td>
-                  <td>Multi-page surveys with conditional logic</td>
-                </tr>
-                <tr>
-                  <td>Collect places only</td>
-                  <td>Comments, support clicks and photos</td>
-                  <td>Comments, support clicks and photos</td>
-                  <td>Comments, support clicks and photos</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>Search for addresses</td>
-                  <td>Save the nearest address to each location</td>
-                  <td>Save the nearest address to each location</td>
-                </tr>
-                <tr class="spacer"><td></td><td></td><td></td><td></td></tr>
-              </tbody>
-            </table>
-
-            <h3 class="extra-pricing-info-header">Use a Styled Map to Engage Participants <img class="feature-list-icon" src="{{ STATIC_URL }}images/shareabouts/feature-list-icon-map.png"> </h3>
-            <table>
-              <tbody>
-                <tr>
-                  <td>OpenPlans map</td>
-                  <td>Streets or satellite map</td>
-                  <td>Custom map and icons</td>
-                  <td>Custom map and icons</td>
-                </tr>
-                <tr>
-                  <td>OpenPlans template</td>
-                  <td>Standard Shareabouts with your logo</td>
-                  <td>Hand-styling to match your project</td>
-                  <td>Hand-styling to match your project</td>
-                </tr>
-                <tr class="spacer"><td></td><td></td><td></td><td></td></tr>
-              </tbody>
-            </table>
-
-            <h3 class="extra-pricing-info-header">Be In Control of Your Data <img class="feature-list-icon" src="{{ STATIC_URL }}images/shareabouts/feature-list-icon-chart.png"> </h3>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Data download link</td>
-                  <td>Data download link</td>
-                  <td>Data manager to review, moderate and download data</td>
-                  <td>Custom workflow tools </td>
-                </tr>
-                <tr>
-                  <td>No reports</td>
-                  <td>Weekly activity report</td>
-                  <td>Custom reports and data analysis</td>
-                  <td>Custom reports and data analysis</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td>Auto-locate contributions into a community district</td>
-                  <td>Auto-locate contributions into a community district</td>
-                </tr>
-                <tr class="spacer"><td></td><td></td><td></td><td></td></tr>
-              </tbody>
-            </table>
-
-            <h3 class="extra-pricing-info-header">Keep People Engaged <img class="feature-list-icon" src="{{ STATIC_URL }}images/shareabouts/feature-list-icon-conversation.png"> </h3>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Collect name and email only</td>
-                  <td>Sign in with social media accounts</td>
-                  <td>Sign in with social media accounts</td>
-                  <td>Sign in with social media accounts</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td>Email followups</td>
-                  <td>Email followups</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td>Translations</td>
-                  <td>Translations</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td>CRM integration</td>
-                  <td>CRM integration</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>Support desk for submission issues</td>
-                </tr>
-                <tr class="spacer"><td></td><td></td><td></td><td></td></tr>
-              </tbody>
-            </table>
-
-            <h3 class="extra-pricing-info-header">Scale Shareabouts for Your Organization <img class="feature-list-icon" src="{{ STATIC_URL }}images/shareabouts/feature-list-icon-knob.png"> </h3>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Self-service</td>
-                  <td>Monthly, pay as you go</td>
-                  <td>One-time project engagement</td>
-                  <td>Dedicated training and support hours</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>Launch new maps based on your custom template</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>Integration with your internal GIS tools</td>
-                </tr>
-                <tr class="spacer"><td></td><td></td><td></td><td></td></tr>
-              </tbody>
-            </table>
-
-            <h3 class="extra-pricing-info-header">All Features <img class="feature-list-icon" src="{{ STATIC_URL }}images/shareabouts/feature-list-icon-box.png"> </h3>
-            <table>
-              <tbody>
-                <tr>
-                  <td>
-                    <p>Included in <strong>Basic</strong></p>
-                    <p>Collect locations with names &amp; descriptions</p>
-                    <p>High-quality Mapbox basemap</p>
-                    <p>Default map markers</p>
-                  </td>
-                  <td>
-                    <p>Included in <strong>Subscription</strong></p>
-                    <p>Collect all the information you need through configurable surveys</p>
-                    <p>Collect comments and support clicks</p>
-                    <p>Search by neighborhood or address</p>
-                    <p>Upload photos&nbsp;*limited IE support</p>
-                    <p>Satellite or Streets basemap from Mapbox</p>
-                    <p>Choose from our selection of map icons</p>
-                    <p>Add your logo to the header</p>
-                    <p>Admin access to moderate submissions</p>
-                    <p>Weekly summary email with new activity</p>
-                  </td>
-                  <td>
-                    <p>Included in <strong>Custom</strong></p>
-                    <p>Dynamic multi-page surveys with conditional logic</p>
-                    <p>Collect comments and support clicks</p>
-                    <p>Search by neighborhood or address</p>
-                    <p>Upload photos&nbsp;*limited IE support</p>
-                    <p>Keep submitters engaged with follow-up emails</p>
-                    <p>Custom-designed map to match your project</p>
-                    <p>Custom-designed map icons</p>
-                    <p>Interface styled to match your project</p>
-                    <p>Manager tool for review, responses, and downloads of your data</p>
-                    <p>Assign locations automatically to community districts</p>
-                    <p>Human-translated multi-language interface</p>
-                    <p>Custom activity reports</p>
-                    <p>Custom data analysis &amp; presentation</p>
-                    <p>Support desk for submission issues</p>
-                    <p>CRM integration</p>
-                  </td>
-                  <td>
-                    <p>Included in <strong>Multi-site</strong></p>
-                    <p>Dynamic multi-page surveys with conditional logic</p>
-                    <p>Collect comments and support clicks</p>
-                    <p>Search by neighborhood or address</p>
-                    <p>Upload photos&nbsp;*limited IE support</p>
-                    <p>Keep submitters engaged with follow-up emails</p>
-                    <p>Custom-designed map to match your project</p>
-                    <p>Custom-designed map markers</p>
-                    <p>Interface styled to match your project</p>
-                    <p>Manager tool for review, responses, and downloads of your data</p>
-                    <p>Assign locations automatically to multiple custom boundaries</p>
-                    <p>Human-translated multi-language interface</p>
-                    <p>Custom activity reports</p>
-                    <p>Custom data analysis &amp; presentation</p>
-                    <p>Support desk for submission issues</p>
-                    <p>CRM integration</p>
-                    <p>Easily launch new maps based on your custom template</p>
-                    <p>Integration with your internal GIS tools</p>
-                    <p>Support hours &amp; training</p>
-                  </td>
-                </tr>
-                <tr class="spacer"><td></td><td></td><td></td><td></td></tr>
-              </tbody>
-            </table>
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
 </section>
 
 {% endblock %}

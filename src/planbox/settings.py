@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'django_object_actions',
     'raven.contrib.django.raven_compat',
 
+    'moonclerk',
     'custom_domains',
     'password_reset',
     'planbox_ui',
@@ -59,6 +60,7 @@ CANONICAL_ROOT = ''
 
 TEMPLATES_PROFILE = 'templates'
 DEFAULT_PROJECT_TEMPLATE = 'templates/default'
+TRIAL_DURATION = 60 * 60 * 24 * 7
 
 LOGIN_URL = 'app-signin'
 LOGIN_REDIRECT_URL = 'app-user-profile'

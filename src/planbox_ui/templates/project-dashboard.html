@@ -1,0 +1,141 @@
+{% extends 'admin-base.html' %}
+
+{% block title %}Dashboard: {{ project.title }}{% endblock %}
+
+{% block page %}
+
+<div class="row extra-padding-top some-padding-bottom">
+
+  <h3 class="small-12 columns">{{ project.title }}</h3>
+  <div class="small-2 columns">
+    <a href="../edit/">Edit<span class="show-for-medium-up"> Plan</span></a>
+  </div>
+  <div class="small-10 columns">
+    <ul class="tabs right" data-tab role="tablist" data-options="deep_linking:true">
+      <li class="tab-title active" role="presentational" ><a href="#panel-activity" role="tab" tabindex="0" aria-selected="true" controls="panel-activity">Activity</a></li>
+      <li class="tab-title" role="presentational" ><a href="#panel-manage" role="tab" tabindex="0" aria-selected="false" controls="panel-manage">Manage</a></li>
+      <li class="tab-title" role="presentational" ><a href="#panel-export" role="tab" tabindex="0" aria-selected="false" controls="panel-export">Export</a></li>
+    </ul>
+  </div>
+  <div class="tabs-content small-12 columns container some-padding-top">
+    <section role="tabpanel" aria-hidden="false" class="content active" id="panel-activity">
+      <div class="row">
+        <div class="medium-4 columns">
+          <div class="stat-widget coming-soon stat-widget-big-number panel radius text-center">
+            <strong class="count">#</strong> <span class="unit">places</span>
+          </div>
+        </div>
+        <div class="medium-4 columns">
+          <div class="stat-widget coming-soon stat-widget-big-number panel radius text-center">
+            <strong class="count">#</strong> <span class="unit">comments</span>
+          </div>
+        </div>
+        <div class="medium-4 columns">
+          <div class="stat-widget coming-soon stat-widget-big-number panel radius text-center">
+            <strong class="count">#</strong> <span class="unit">supports</span>
+          </div>
+        </div>
+      </div><!-- end .row -->
+      <div class="row">
+        <div class="medium-4 columns">
+          <div class="stat-widget coming-soon stat-widget-big-number panel radius text-center">
+            <strong class="count">#</strong> <span class="unit">Unique Contributors</span>
+          </div>
+          <div class="stat-widget coming-soon stat-widget-big-number panel radius text-center">
+            <strong class="count">&hellip;</strong> <span class="unit">User Demographics</span>
+          </div>
+        </div>
+        <div class="medium-8 columns">
+          <div class="stat-widget coming-soon stat-widget-big-number panel radius text-center">
+            <div><strong>Age: &hellip;<br>Ethnicity: &hellip;<br>ZIP: &hellip;<br>Language: &hellip;<br><br></strong></div>
+            <span class="unit">User Demographics</span>
+          </div>
+          <div class="stat-widget coming-soon stat-widget-big-number panel radius text-center">
+            <div class="row collapse">
+              <div class="small-1 columns"><div style="background-color:transparent; border-right:1px solid transparent; border-left:1px solid transparent; border-top:10px solid transparent; border-bottom:30px solid #ddd;"></div></div>
+              <div class="small-1 columns"><div style="background-color:transparent; border-right:1px solid transparent; border-left:1px solid transparent; border-top:28px solid transparent; border-bottom:12px solid #ddd;"></div></div>
+              <div class="small-1 columns"><div style="background-color:transparent; border-right:1px solid transparent; border-left:1px solid transparent; border-top:20px solid transparent; border-bottom:20px solid #ddd;"></div></div>
+              <div class="small-1 columns"><div style="background-color:transparent; border-right:1px solid transparent; border-left:1px solid transparent; border-top:30px solid transparent; border-bottom:10px solid #ddd;"></div></div>
+              <div class="small-1 columns"><div style="background-color:transparent; border-right:1px solid transparent; border-left:1px solid transparent; border-top:31px solid transparent; border-bottom:9px solid #ddd;"></div></div>
+              <div class="small-1 columns"><div style="background-color:transparent; border-right:1px solid transparent; border-left:1px solid transparent; border-top:33px solid transparent; border-bottom:7px solid #ddd;"></div></div>
+              <div class="small-1 columns"><div style="background-color:transparent; border-right:1px solid transparent; border-left:1px solid transparent; border-top:20px solid transparent; border-bottom:20px solid #ddd;"></div></div>
+              <div class="small-1 columns"><div style="background-color:transparent; border-right:1px solid transparent; border-left:1px solid transparent; border-top:21px solid transparent; border-bottom:19px solid #ddd;"></div></div>
+              <div class="small-1 columns"><div style="background-color:transparent; border-right:1px solid transparent; border-left:1px solid transparent; border-top:23px solid transparent; border-bottom:17px solid #ddd;"></div></div>
+              <div class="small-1 columns"><div style="background-color:transparent; border-right:1px solid transparent; border-left:1px solid transparent; border-top:5px solid transparent; border-bottom:35px solid #ddd;"></div></div>
+              <div class="small-1 columns"><div style="background-color:transparent; border-right:1px solid transparent; border-left:1px solid transparent; border-top:0px solid transparent; border-bottom:40px solid #ddd;"></div></div>
+              <div class="small-1 columns"><div style="background-color:transparent; border-right:1px solid transparent; border-left:1px solid transparent; border-top:4px solid transparent; border-bottom:36px solid #ddd;"></div></div>
+            </div>
+            <span class="unit">Usage Over Time</span>
+          </div>
+        </div>
+      </div><!-- end .row -->
+    </section>
+    <section role="tabpanel" aria-hidden="true" class="content" id="panel-manage">
+      <table>
+        <thead>
+          <tr>
+            <th width="200">Table Header</th>
+            <th>Table Header</th>
+            <th width="150">Table Header</th>
+            <th width="150">Table Header</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Content Goes Here</td>
+            <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+            <td>Content Goes Here</td>
+            <td>Content Goes Here</td>
+          </tr>
+          <tr>
+            <td>Content Goes Here</td>
+            <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+            <td>Content Goes Here</td>
+            <td>Content Goes Here</td>
+          </tr>
+          <tr>
+            <td>Content Goes Here</td>
+            <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+            <td>Content Goes Here</td>
+            <td>Content Goes Here</td>
+          </tr>
+          <tr>
+            <td>Content Goes Here</td>
+            <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+            <td>Content Goes Here</td>
+            <td>Content Goes Here</td>
+          </tr>
+          <tr>
+            <td>Content Goes Here</td>
+            <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+            <td>Content Goes Here</td>
+            <td>Content Goes Here</td>
+          </tr>
+          <tr>
+            <td>Content Goes Here</td>
+            <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+            <td>Content Goes Here</td>
+            <td>Content Goes Here</td>
+          </tr>
+          <tr>
+            <td>Content Goes Here</td>
+            <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+            <td>Content Goes Here</td>
+            <td>Content Goes Here</td>
+          </tr>
+          <tr>
+            <td>Content Goes Here</td>
+            <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+            <td>Content Goes Here</td>
+            <td>Content Goes Here</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section role="tabpanel" aria-hidden="false" class="content active" id="panel-export">
+    </section>
+  </div>
+
+</div>
+
+{% endblock %}

@@ -92,6 +92,15 @@ var Planbox = Planbox || {};
     // ====================================================
     // Event and State Logging
 
+    logEvents: function(root, appName) {
+      $(root).on('click', '[data-log-click]', function(evt) {
+        var $target = $(this),
+            category = appName,
+            action = 'click: ' + ($target.attr('data-ga-action') || $target.text());
+        NS.Utils.log('USER', category, action);
+      });
+    },
+
     log: function() {
       var args = Array.prototype.slice.call(arguments, 0);
 

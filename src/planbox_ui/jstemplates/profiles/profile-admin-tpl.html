@@ -1,3 +1,22 @@
+{{#unless auth}}
+<div class="project-template-gallery">
+  <div class="row">
+    <h5>Create a new project from one of these templates...</h5>
+  {{#bootstrapped 'projectTemplates'}}
+    {{#each .}}
+    <div class="large-4 medium-6 columns text-center template-{{ profile.slug }}-{{ project.slug }}">
+      <a href="{{> url-project-new-tpl ../.. }}?template={{ profile.slug }}/{{ project.slug }}" data-log-click>
+        <img src="{{ image_url }}" style="width: 50%">
+        <h5>{{ label }}</h5>
+      </a>
+    </div>
+    {{/each}}
+  {{/bootstrapped}}
+  </div>
+</div>
+{{/unless}}
+
+
 <div class="row extra-margin-top extra-margin-bottom {{#if auth}}user-profile{{^}}team-profile{{/if}}">
   <div class="profile large-3 columns"></div>
   <div class="large-9 columns">
