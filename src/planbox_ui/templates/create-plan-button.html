@@ -21,6 +21,6 @@
 
 {% else %}
 
-  <a class="button expand large radius" href="/signin">Sign In</a>
+  <a class="button expand large radius" href="{% url 'app-signin' %}?next={{ request.get_full_path }}">Sign In</a>
 
 {% endif %} {# user.is_authenticated #}
