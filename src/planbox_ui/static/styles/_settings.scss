@@ -362,6 +362,7 @@ $hr-border-color: rgba(0,0,0,0.15);
 // $alert-font-size: rem-calc(13);
 // $alert-font-color: $white;
 // $alert-font-color-alt: scale-color($secondary-color, $lightness: -66%);
+$alert-font-color-alt: $body-font-color;
 
 // We use this for close hover effect.
 // $alert-function-factor: -14%;
@@ -700,9 +701,7 @@ $input-prefix-border-size: 1px;
 
 // Select variables
 // $select-bg-color: $ghost;
-$select-bg-color: scale-color($primary-color, $lightness: 85%);
 // $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%);
-$select-hover-bg-color: scale-color($select-bg-color, $lightness: -5%);
 
 
 // 12. Icon Bar

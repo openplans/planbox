@@ -1044,6 +1044,17 @@ img.attachment-icon {
   background-color: #fff;
 }
 
+.shareabouts-panel-content {
+  padding: 1rem 0 3rem;
+  .form-instructions strong {
+    font-size: 1rem;
+  }
+  .or-sign-in {
+    position: relative;
+    top: -0.5rem;
+  }
+}
+
 .heart {
   color: LightGrey;
   font-size: 1.5em;
@@ -1056,6 +1067,7 @@ img.attachment-icon {
     color: LightPink;
   }
 }
+
 
 
 /*--------------------------------------------------
