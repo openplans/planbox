@@ -589,16 +589,18 @@ class ProjectDashboardView (SSLRequired, LoginRequired, BaseExistingProjectView)
     template_name = 'project-dashboard.html'
 
     def get_project_is_editable(self):
-        return False
+        return self.project.editable_by(self.request.user)
+
+    def get_template_names(self):
+        if not self.is_project_active():
+            return ['project-expired.html']
+        return super(ProjectDashboardView, self).get_template_names()
 
     def get(self, request, owner_slug, project_slug):
         self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
                                          owner__slug=owner_slug, slug__iexact=project_slug)
 
-        if not self.is_project_active():
-            raise Http404
-
-        if not self.get_project_is_visible():
+        if not self.get_project_is_editable():
             raise Http404
 
         return super(ProjectDashboardView, self).get(request, pk=self.project.pk)
