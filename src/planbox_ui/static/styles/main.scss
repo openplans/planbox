@@ -1505,6 +1505,17 @@ textarea.no-resize {
   display: none;
 }
 
+// Template Gallery
+.project-template-gallery {
+  background-color: white;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+  padding: 0.5rem;
+
+  h5:first-child {
+    margin-bottom: 1rem;
+  }
+}
+
 
 /*--------------------------------------------------
   Project Dashboard / Widgets

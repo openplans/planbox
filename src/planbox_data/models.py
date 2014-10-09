@@ -697,8 +697,12 @@ class Section (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, TimeS
 class ProfileProjectTemplate(OrderedModelMixin, TimeStampedModel):
     profile = models.ForeignKey('Profile', related_name='project_templates')
     project = models.ForeignKey('Project')
-    label = models.TextField()
-    index = models.PositiveIntegerField()
+    index = models.PositiveIntegerField(blank=True)
+
+    label = models.TextField(default='', blank=True)
+    short_description = models.TextField(default='', blank=True)
+    long_description = models.TextField(default='', blank=True)
+    image_url = models.URLField(null=True, blank=True)
 
     class Meta:
         ordering = ('index',)

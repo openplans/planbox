@@ -11846,16 +11846,27 @@ textarea.no-resize {
   display: none;
 }
 
+/* line 1509, main.scss */
+.project-template-gallery {
+  background-color: white;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+  padding: 0.5rem;
+}
+/* line 1514, main.scss */
+.project-template-gallery h5:first-child {
+  margin-bottom: 1rem;
+}
+
 /*--------------------------------------------------
   Project Dashboard / Widgets
 --------------------------------------------------*/
-/* line 1514, main.scss */
+/* line 1525, main.scss */
 .stat-widget.coming-soon {
   background-color: #f6f6f6;
   color: #ddd;
   position: relative;
 }
-/* line 1518, main.scss */
+/* line 1529, main.scss */
 .stat-widget.coming-soon:before {
   content: "Coming Soon...";
   position: absolute;
@@ -11869,13 +11880,13 @@ textarea.no-resize {
   font-style: italic;
 }
 
-/* line 1534, main.scss */
+/* line 1545, main.scss */
 .stat-widget-big-number .count {
   display: block;
   font-size: 2.5rem;
   line-height: 1.2;
 }
-/* line 1539, main.scss */
+/* line 1550, main.scss */
 .stat-widget-big-number .unit {
   text-transform: uppercase;
 }

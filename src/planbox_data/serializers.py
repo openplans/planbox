@@ -237,7 +237,7 @@ class ProfileProjectTemplateSerializer (AddRemoveModelSerializer):
 
     class Meta:
         model = models.ProfileProjectTemplate
-        fields = ('label', 'project', 'profile')
+        fields = ('label', 'project', 'profile', 'image_url', 'short_description', 'long_description')
 
 
 class ProfileSerializer (SlugValidationMixin, AddRemoveModelSerializer):
