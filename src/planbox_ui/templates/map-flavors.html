@@ -22,7 +22,19 @@
               <li><strong>Track activity with daily email reports.</strong></li>
               <li><strong>Get the complete picture with the OpenPlans Dashboard.</strong></li>
             </ul>
-            <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Bike%20Parking%20Map" class="open-intercom button expand large radius">Contact Us</a>
+            {% if user.is_authenticated %}
+            <!-- if 1 team -->
+            <a class="button expand large radius" href="#">Create Plan</a>
+            <!-- if > 1 team -->
+            <button class="button expand large radius" data-dropdown="team-selector-bike-parking-map" aria-controls="team-selector-bike-parking-map" aria-expanded="false">Create plan for&hellip;</a>
+            <ul id="team-selector-bike-parking-map" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+              <li><a href="#">Team 1</a></li>
+              <li><a href="#">Another Awesome Team</a></li>
+              <li><a href="#">Yet Another Team</a></li>
+            </ul>
+            {% else %}
+            <a class="button expand large radius" href="/signin">Sign In</a>
+            {% endif %}
           </div>
         </div>
         <div class="medium-6 columns some-margin-bottom">
@@ -39,7 +51,6 @@
               <li><strong>Track activity with daily email reports.</strong></li>
               <li><strong>Get the complete picture with the OpenPlans Dashboard.</strong></li>
             </ul>
-            <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Bike%20Share%20Map" class="open-intercom button expand large radius">Contact Us</a>
           </div>
         </div>
       </div>
@@ -58,7 +69,6 @@
               <li><strong>Track activity with daily email reports.</strong></li>
               <li><strong>Get the complete picture with the OpenPlans Dashboard.</strong></li>
             </ul>
-            <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Neighborhood%20Assessment%20Map" class="open-intercom button expand large radius">Contact Us</a>
           </div>
         </div>
         <div class="medium-6 columns some-margin-bottom">
@@ -73,7 +83,6 @@
               <li><strong>Track activity with daily email reports.</strong></li>
               <li><strong>Get the complete picture with the OpenPlans Dashboard.</strong></li>
             </ul>            
-            <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Street%20Safety%20Map" class="open-intercom button expand large radius">Contact Us</a>
           </div>
         </div>
       </div>
