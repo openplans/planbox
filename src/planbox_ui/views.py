@@ -10,6 +10,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User as UserAuth
 from django.contrib.auth.views import redirect_to_login
+from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
@@ -456,7 +457,10 @@ class ProjectPaymentsView (SSLRequired, LoginRequired, BaseExistingProjectView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjectPaymentsView, self).get_context_data(**kwargs)
-        context['project_token'] = self.get_project_token()
+        project_token = self.get_project_token()
+        project_token_path = reverse('app-project-payments-success', kwargs={'pk': project_token})
+        context['project_token'] = project_token
+        context['project_token_url'] = self.request.build_absolute_uri(project_token_path)
         return context
 
     def get(self, request, owner_slug, project_slug):

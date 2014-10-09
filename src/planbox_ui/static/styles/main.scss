@@ -1030,7 +1030,7 @@ img.attachment-icon {
 }
 
 .shareabouts-add-button {
-  @include button($button-lrg); 
+  @include button($button-lrg);
   display: block;
   @media #{$small-only} {
     margin: 0;
@@ -1068,9 +1068,9 @@ img.attachment-icon {
 
 .shareabouts-side-nav {
 
-  // TODO FIXME: this ugly hack is because magellan 
-  // sets the threshold based on the outerHeight of 
-  // the menu. Upgrading to 5.4.5 might resolve this. 
+  // TODO FIXME: this ugly hack is because magellan
+  // sets the threshold based on the outerHeight of
+  // the menu. Upgrading to 5.4.5 might resolve this.
   height: 0;
   overflow: visible;
 
@@ -1131,10 +1131,13 @@ img.attachment-icon {
     }
   }
   // hide admin stuff not used in Shareabouts-specific plans
-  // TODO FIXME: Maybe don't put this stuff in the markup? 
+  // TODO FIXME: Maybe don't put this stuff in the markup?
   .cover-image-container,
   .project-section-fieldset .section-settings label:first-child,
-  .project-section-fieldset .section-settings label:first-child + br {
+  .project-section-fieldset .section-settings label:first-child + br,
+  .project-section-shareabouts .section-settings-toggle-container,
+  .add-shareabouts-section,
+  .project-header-section .section-insert {
     display: none !important;
   }
 }
