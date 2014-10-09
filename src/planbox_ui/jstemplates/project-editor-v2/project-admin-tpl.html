@@ -172,6 +172,14 @@
           {{/bootstrapped}}
         </div>
 
+        {{#if expires_at}}
+        <p class="text-small no-margins">
+          {{>project-expiration-message-tpl}}
+        </p>
+
+        <hr>
+        {{/if}}
+
         <button class="button expand radius save-btn disabled">Save</button>
 
         <div class="project-settings">

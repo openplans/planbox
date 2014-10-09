@@ -947,6 +947,11 @@ img.attachment-icon {
   .shareabouts-add-button-container {
     margin-left: 0;
     bottom: 0;
+    @media #{$large-up} {
+      margin-left: 50%;
+      left: -31.25rem;
+      width: 20rem;
+    }
   }
 
   .map {
@@ -1025,6 +1030,7 @@ img.attachment-icon {
 }
 
 .shareabouts-add-button {
+  @include button($button-lrg);
   display: block;
   @media #{$small-only} {
     margin: 0;
@@ -1036,6 +1042,17 @@ img.attachment-icon {
 
 .shareabouts-panel {
   background-color: #fff;
+}
+
+.shareabouts-panel-content {
+  padding: 1rem 0 3rem;
+  .form-instructions strong {
+    font-size: 1rem;
+  }
+  .or-sign-in {
+    position: relative;
+    top: -0.5rem;
+  }
 }
 
 .heart {
@@ -1051,6 +1068,10 @@ img.attachment-icon {
   }
 }
 
+.survey-header-container {
+  border-bottom: 1px solid #ddd;
+}
+
 
 /*--------------------------------------------------
   Project Layout
@@ -1061,6 +1082,13 @@ img.attachment-icon {
 }
 
 .shareabouts-side-nav {
+
+  // TODO FIXME: this ugly hack is because magellan
+  // sets the threshold based on the outerHeight of
+  // the menu. Upgrading to 5.4.5 might resolve this.
+  height: 1px;
+  overflow: visible;
+
   &.fixed {
     div {
       @include grid-row();
@@ -1070,15 +1098,31 @@ img.attachment-icon {
       @include grid-column(4);
     }
   }
+  .social-link img {
+    max-height: 1.5em;
+  }
 }
 
-.project-shareabouts {
-  &.panel-open, &.panel-form-open {
-    & + .after-shareabouts {
-      @media #{$small-only} {
-        display: none;
-      }
+.after-shareabouts {
+  @media #{$small-only} {
+    .project-shareabouts.panel-open + &,
+    .project-shareabouts.panel-form-open + & {
+      display: none;
     }
+  }
+  @media #{$large-up} {
+    position: relative;
+    z-index: 2;
+    margin-top: -5px;
+    &:before {
+      width: 100%;
+      height: 5px;
+      margin-bottom: -5px;
+      box-shadow: -3px -3px 0 rgba(51, 51, 51, 0.1);
+    }
+  }
+  .project-tagline {
+    font-size: 1.5rem;
   }
 }
 
@@ -1100,6 +1144,16 @@ img.attachment-icon {
         box-shadow: 0 -3px 0 rgba(51, 51, 51, 0.1);
       }
     }
+  }
+  // hide admin stuff not used in Shareabouts-specific plans
+  // TODO FIXME: Maybe don't put this stuff in the markup?
+  .cover-image-container,
+  .project-section-fieldset .section-settings label:first-child,
+  .project-section-fieldset .section-settings label:first-child + br,
+  .project-section-shareabouts .section-settings-toggle-container,
+  .add-shareabouts-section,
+  .project-header-section .section-insert {
+    display: none !important;
   }
 }
 
@@ -1452,4 +1506,55 @@ textarea.no-resize {
 }
 .team-profile .team-list {
   display: none;
+}
+
+// Template Gallery
+.project-template-gallery {
+  background-color: white;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+  padding: 0.5rem;
+
+  h5:first-child {
+    margin-bottom: 1rem;
+  }
+
+  .template-templates-default {
+    display: none;
+  }
+}
+
+
+/*--------------------------------------------------
+  Project Dashboard / Widgets
+--------------------------------------------------*/
+
+.stat-widget {
+  &.coming-soon {
+    background-color: mix(#eee, #fff);
+    color: #ddd;
+    position: relative;
+    &:before {
+      content: "Coming Soon...";
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      background-color: mix(#6c7180, #fff);
+      color: mix(#eee, #fff);
+      font-size: 0.75rem;
+      padding: 0.125rem 0.375rem;
+      border-radius: 0.125rem;
+      font-style: italic;
+    }
+  }
+}
+
+.stat-widget-big-number {
+  .count {
+    display: block;
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  .unit {
+    text-transform: uppercase;
+  }
 }

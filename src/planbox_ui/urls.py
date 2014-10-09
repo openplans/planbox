@@ -17,7 +17,8 @@ from .views import (
     roundup_view,
 
     # Project views
-    project_view, new_project_view, ro_project_view,
+    project_editor_view, project_payments_view, new_project_view, project_page_view,
+    project_payments_success_view, project_expired_view, project_dashboard_view,
 
     # Shareabouts auth
     shareabouts_auth_success_view, shareabouts_auth_error_view,
@@ -45,6 +46,9 @@ urlpatterns = patterns('',
     url(r'^shareabouts/error$', shareabouts_auth_error_view, name='app-shareabouts-error'),
     url(r'^open-source/$', open_source_view, name='app-open-source'),
     url(r'^map-flavors/$', map_flavors_view, name='app-map-flavors'),
+    url(r'^plan-expired/$', project_expired_view, name='app-plan-expired'),
+
+    url(r'^moonclerk/pay-for/(?P<pk>[^/]+)/success$', project_payments_success_view, name='app-project-payments-success'),
 
     # ==============================
     # Profile dashboards
@@ -61,7 +65,10 @@ urlpatterns = patterns('',
     # Project pages
 
     url(r'^(?P<owner_slug>[^/]+)/new/$', new_project_view, name='app-new-project'),
-    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/edit/$', project_view, name='app-project-editor'),
+    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/edit/$', project_editor_view, name='app-project-editor'),
+    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/dashboard/$', project_dashboard_view, name='app-project-dashboard'),
+    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/payments/$', project_payments_view, name='app-project-payments'),
     # Read-only project page
-    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', ro_project_view, name='app-project-page'),
+    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', project_page_view, name='app-project-page'),
+
 )

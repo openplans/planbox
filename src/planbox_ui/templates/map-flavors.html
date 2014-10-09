@@ -4,32 +4,36 @@
 
 <section class="">
   <div class="row extra-padding-top extra-padding-bottom">
-    <div class="small-12 columns">
+    <div class="columns extra-padding-bottom extra-margin-bottom">
 
       <h2>Choose the right map for your plan&hellip;</h2>
+
+      <p class="text-large">Set up a fully functional map using our tested templates. Then, when you're ready to gather public input, activate your plan with a one-time or monthly fee.</p>
 
       <div class="row extra-padding-top" data-equalizer>
         <div class="medium-6 columns some-margin-bottom">
           <span id="bike-parking-map" class="offset-anchor"></span>
           <div class="panel radius" data-equalizer-watch>
             <h3><strong>Bike Parking Map</strong></h3>
-            <a href="http://bikeparking.chicagocompletestreets.org/" target="_blank"><!-- <img src="{{ STATIC_URL }}images/plan-types/illustration-bikeparking.png" class="some-margin-bottom some-margin-top"> --><img src="{{ STATIC_URL }}images/shareabouts/shareabouts-600x375-chicagobikeparking.jpg" class="some-margin-bottom some-margin-top shadowed"></a>
+            <img src="{{ STATIC_URL }}images/plan-types/illustration-bikeparking.png" class="some-margin-bottom">
             <p>Make it easy and social for people to request bike parking. Collect suggestions, including photos of the sidewalk to help evaluate the locations. Use the admin interface to review and respond to requests, and to see stats&mdash;like which locations are popular.</p>
             <ul>
               <li><strong>Easily collect &amp; manage requests for bike parking.</strong></li>
               <li><strong>Engage people with address lookup for easy location finding on desktop or mobile.</strong></li>
               <li><strong>Follow up with confirmation emails to participants.</strong></li>
               <li><strong>Track activity with daily email reports.</strong></li>
-              <li><small><strong>COMING SOON:</strong> Get the complete picture with the OpenPlans Dashboard.</small></li>
+              <li><strong>Get the complete picture with the OpenPlans Dashboard.</strong></li>
             </ul>
-            <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Bike%20Parking%20Map" class="open-intercom button expand large radius">Contact Us</a>
+
+            {% include 'create-plan-button.html' with template='shareabouts-bikeparking' %}
+
           </div>
         </div>
         <div class="medium-6 columns some-margin-bottom">
           <span id="bike-share-map" class="offset-anchor"></span>
           <div class="panel radius" data-equalizer-watch>
             <h3><strong>Bike Share Map</strong></h3>
-            <a href="http://www.phillybikeshare.com/" target="_blank"><!-- <img src="{{ STATIC_URL }}images/plan-types/illustration-bikeshare.png" class="some-margin-bottom some-margin-top"> --><img src="{{ STATIC_URL }}images/shareabouts/shareabouts-600x375-phillybikeshare.jpg" class="some-margin-bottom some-margin-top shadowed"></a>
+            <img src="{{ STATIC_URL }}images/plan-types/illustration-bikeshare.png" class="some-margin-bottom">
             <p>Build support for bike share by engaging the community in suggesting locations, or get feedback on a shortlist of possible sites. Use on-the-ground local wisdom to pick the best spots, and demonstrate support from a diverse range of participants.</p>
             <ul>
               <li><strong>Collect suggested locations for bike share.</strong></li>
@@ -37,9 +41,11 @@
               <li><strong>Engage people with address lookup for easy location finding on desktop or mobile.</strong></li>
               <li><strong>Follow up with confirmation emails to participants.</strong></li>
               <li><strong>Track activity with daily email reports.</strong></li>
-              <li><small><strong>COMING SOON:</strong> Get the complete picture with the OpenPlans Dashboard.</small></li>
+              <li><strong>Get the complete picture with the OpenPlans Dashboard.</strong></li>
             </ul>
-            <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Bike%20Share%20Map" class="open-intercom button expand large radius">Contact Us</a>
+
+            {% include 'create-plan-button.html' with template='shareabouts-bikeshare' %}
+
           </div>
         </div>
       </div>
@@ -48,41 +54,68 @@
           <span id="neighborhood-assessment-map" class="offset-anchor"></span>
           <div class="panel radius" data-equalizer-watch>
             <h3><strong>Neighborhood Assessment Map</strong></h3>
-            <a href="http://map.maconactionplan.com/" target="_blank"><!-- <img src="{{ STATIC_URL }}images/plan-types/illustration-assessment.png" class="some-margin-bottom some-margin-top"> --><img src="{{ STATIC_URL }}images/shareabouts/shareabouts-600x375-maconactionplan.jpg" class="some-margin-bottom some-margin-top shadowed"></a>
-            <p>What&rsquo;s your experience of your neighborhood, and how would you like that to change or stay the same? What are your ideas for the neighborhood? Use our neighborhood assessment map to collect this feedback.</p>
+            <img src="{{ STATIC_URL }}images/plan-types/illustration-assessment.png" class="some-margin-bottom">
+            <p>What's your experience of your neighborhood, and how would you like that to change or stay the same? What are your ideas for the neighborhood? Use our neighborhood assessment map to collect this feedback.</p>
             <ul>
               <li><strong>Collect feedback about places people like/dislike and the opportunities they see.</strong></li>
               <li><strong>Differentiate categories with beautiful icons.</strong></li>
               <li><strong>Engage people with address lookup for easy location finding on desktop or mobile.</strong></li>
               <li><strong>Follow up with confirmation emails to participants.</strong></li>
               <li><strong>Track activity with daily email reports.</strong></li>
-              <li><small><strong>COMING SOON:</strong> Get the complete picture with the OpenPlans Dashboard.</small></li>
+              <li><strong>Get the complete picture with the OpenPlans Dashboard.</strong></li>
             </ul>
-            <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Neighborhood%20Assessment%20Map" class="open-intercom button expand large radius">Contact Us</a>
+
+            {% include 'create-plan-button.html' with template='shareabouts-neighborhood-assessment' %}
+
           </div>
         </div>
         <div class="medium-6 columns some-margin-bottom">
           <span id="street-safety-map" class="offset-anchor"></span>
           <div class="panel radius" data-equalizer-watch>
             <h3><strong>Street Safety Map</strong></h3>
-            <a href="http://www.nyc.gov/html/visionzero/pages/dialogue/map.html" target="_blank"><!-- <img src="{{ STATIC_URL }}images/plan-types/illustration-streetview.png" class="some-margin-bottom some-margin-top"> --><img src="{{ STATIC_URL }}images/shareabouts/shareabouts-600x375-visionzero.jpg" class="some-margin-bottom some-margin-top shadowed"></a>
+            <img src="{{ STATIC_URL }}images/plan-types/illustration-streetview.png" class="some-margin-bottom">
             <p>Gather information about walking and biking safety using panorama images of streets.</p>
             <ul>
               <li><strong>Use Google Street View to collect feedback as people see it on the ground.</strong></li>
               <li><strong>Collect comments and clicks of support.</strong></li>
               <li><strong>Track activity with daily email reports.</strong></li>
-              <li><small><strong>COMING SOON:</strong> Get the complete picture with the OpenPlans Dashboard.</small></li>
-            </ul>            
-            <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}?Subject=Street%20Safety%20Map" class="open-intercom button expand large radius">Contact Us</a>
+              <li><strong>Get the complete picture with the OpenPlans Dashboard.</strong></li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="columns some-padding-top extra-padding-bottom">
-          <p class="text-large text-center"><a href="/signup/"><em><strong>Or build a plan from scratch&hellip;</strong></em></a></p>
+      <h2 class="extra-margin-top">Setting Up Your Plan</h2>
+      <div class="row" data-equalizer>
+        <div class="medium-5 columns some-margin-bottom">
+          <p class="text-large">OpenPlans includes all the right settings for your collaborative map. Create a map and customize it, then start gathering input. We'll be with you every step, helping you get the most from your map.</p>
+          <h3>Start a trial plan anytime!</h3>
+          <p><em>Trial plans will be fully-functional for {{ settings.TRIAL_DAYS }} days. After that, you'll need activate to continue using the plan.</em></p>
+        </div>
+        <div class="medium-7 columns some-margin-bottom">
+          <h5>After setting up your plan, activate it to get:</h5>
+          <ul>
+            <li>Unlimited support from the OpenPlans team, via email &amp; phone</li>
+            <li>Daily email reports, customized for your project</li>
+            <li>Access to our real-time data dashboard, showing the latest activity on your plan</li>
+            <li>Moderation tools, to review &amp; manage input as it comes in</li>
+            <li>Export your data to other tools for further work</li>
+            <li>User-tested templates for effective data collection on desktop &amp; mobile</li>
+            <li>Straightforward site management&mdash;add images &amp; documents to give your plan context</li>
+            <li>Hassle-free hosting &amp; domain names</li>
+          </ul>
         </div>
       </div>
+
+      <h2 class="extra-padding-top">Plan Costs</h2>
+      <em>Choose a payment that fits your project budget&mdash;monthly or a one-time fee.</em>
+      <p class="text-large"><strong>Activating a plan costs $1,200 monthly or a one-time fee of $9,900.</strong></p>
+      <ul class="no-bullet">
+        <li>Monthly plans can be stopped anytime.</li>
+        <li>One-time payments are good for the entire duration of your project.</li>
+      </ul>
+
+      <p class="">Working on a community project? Need to pay by an alternate method? Multiple projects? <a href="mailto:{{contact_email}}" class="open-intercom"><strong>Contact us.</strong></a></p>
 
     </div>
   </div>

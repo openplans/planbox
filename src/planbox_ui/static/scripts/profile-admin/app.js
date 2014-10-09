@@ -13,6 +13,10 @@ var Planbox = Planbox || {};
   // App ======================================================================
   // (NS.app is defined in base-app.js)
 
+  NS.app.addInitializer(function(options) {
+    NS.Utils.logEvents('body', 'profile-dashboard');
+  });
+
   NS.app.addInitializer(function(options){
     NS.app.profileModel = new NS.ProfileModel(NS.Data.profile);
     NS.app.projectsCollection = NS.app.profileModel.get('projects');

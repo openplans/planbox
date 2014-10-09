@@ -219,7 +219,8 @@ class AssociatedProfileSerializer (FlexibleFields, AddRemoveModelSerializer):
 class OwnedProjectSerializer (AddRemoveModelSerializer):
     class Meta:
         model = models.Project
-        fields = ('id', 'slug', 'title',)
+        fields = ('id', 'slug', 'title', 'expires_at', 'payment_type',)
+        read_only_fields = ('expires_at', 'payment_type',)
 
 
 class UserSerializer (AddRemoveModelSerializer):
@@ -236,7 +237,7 @@ class ProfileProjectTemplateSerializer (AddRemoveModelSerializer):
 
     class Meta:
         model = models.ProfileProjectTemplate
-        fields = ('label', 'project', 'profile')
+        fields = ('label', 'project', 'profile', 'image_url', 'short_description', 'long_description')
 
 
 class ProfileSerializer (SlugValidationMixin, AddRemoveModelSerializer):
@@ -313,7 +314,13 @@ class ProjectSerializer (SlugValidationMixin, AddRemoveModelSerializer):
 
     class Meta:
         model = models.Project
+        exclude = ('last_opened_at', 'last_opened_by', 'last_saved_at', 'last_saved_by', 'expires_at', 'payment_type',)
+
+
+class FullProjectSerializer (ProjectSerializer):
+    class Meta (ProjectSerializer.Meta):
         exclude = ('last_opened_at', 'last_opened_by', 'last_saved_at', 'last_saved_by')
+        read_only_fields = ('expires_at', 'payment_type',)
 
 
 class ProjectActivitySerializer (AddRemoveModelSerializer):
@@ -336,7 +343,8 @@ class ProjectSummarySerializer (AddRemoveModelSerializer):
 
     class Meta:
         model = models.Project
-        fields = ('id', 'slug', 'title', 'summary', 'owner', 'geometry', 'location', 'details')
+        fields = ('id', 'slug', 'title', 'summary', 'owner', 'geometry', 'location', 'details', 'expires_at')
+        read_only_fields = ('expires_at',)
 
     def get_project_summary(self, project):
         return project.get_summary()
@@ -387,4 +395,5 @@ class TemplateProjectSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = models.Project
-        exclude = ('owner', 'slug', 'id', 'public')
+        exclude = ('owner', 'slug', 'id', 'public', 'expires_at',
+            'last_opened_at', 'last_opened_by', 'last_saved_at', 'last_saved_by')

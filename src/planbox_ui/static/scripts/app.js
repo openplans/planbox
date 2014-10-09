@@ -60,4 +60,12 @@ var Planbox = Planbox || {};
     }, false);
   });
 
+  NS.app.addInitializer(function(options) {
+    if (NS.Data.isEditable) {
+      NS.Utils.logEvents('body', 'project-editor');
+    } else {
+      NS.Utils.logEvents('body', 'project-page');
+    }
+  });
+
 }(Planbox, jQuery));

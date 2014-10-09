@@ -18,13 +18,20 @@ raven==5.0.0
 psycopg2==2.5.3
 psycogreen==1.0
 jsonfield==1.0.0
+pytz==2014.7
 
 
 
 # ========================================
 # Data Admin and API
 # ========================================
-django-genericadmin==0.6.1
+
+# Use macropin's fork of genericadmin until jschrewe turns over the reins and
+# he gets a release onto PyPI
+#
+# django-genericadmin==0.6.1
+https://github.com/macropin/django-genericadmin/archive/7f982a6fb815e7088e35e065955d9119202dfd76.zip
+
 django-ace==1.0.1
 djangorestframework==2.4.3
 requests==2.3.0
@@ -48,6 +55,7 @@ djangobars==0.1.4
 django-debug-toolbar==1.2.1
 django-nose==1.2
 nose==1.3.3
+responses==0.2.2
 
 
 

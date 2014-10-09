@@ -1,0 +1,19 @@
+{{#isfuture expires_at}}
+  <strong>
+    {{#if payment_type}}
+      <em>Your plan expires {{ fromnow expires_at }}.</em>
+    {{else}}
+      <em>Your trial expires {{ fromnow expires_at }}.</em>
+    {{/if}}
+    <a href="{{>url-project-payments-tpl}}" data-log-click>Activate Plan</a>
+  </strong>
+{{else}}
+  <strong>
+    {{#if payment_type}}
+      <em>Your plan has expired.</em>
+    {{else}}
+      <em>Your trial has expired.</em>
+    {{/if}}
+    <a href="{{>url-project-payments-tpl}}" data-log-click>Activate Plan</a>
+  </strong>
+{{/isfuture}}
