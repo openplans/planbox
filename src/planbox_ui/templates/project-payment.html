@@ -11,15 +11,16 @@
   <hr>
 
   <div class="large-8 medium-10 small-12 medium-centered columns">
-    <h5>
+    <h4>
       {% if project.expires_at > current_time %}
         Your plan will expire <time datetime="{{ project.expires_at }}">{{ project.expires_at|timeuntil }}</time>.
       {% else %}
         Your plan has expired.
       {% endif %}
 
-      Activate it to get:
-    </h5>
+    </h4>
+
+    <h5>Activate your plan to continue using all features, including&hellip;</h5>
 
     <ul>
       <li>Unlimited support from the OpenPlans team, via email &amp; phone</li>
@@ -60,7 +61,8 @@
       </div>
     </div>
 
-    <p>Working on a community project? Need to pay by an alternate method? Multiple projects? <a href="mailto:{{contact_email}}" class="open-intercom">Contact us.</a></p>
+    <p>Working on a community project? Multiple projects? <br class="show-for-medium-up">Need to pay by an alternate method?</p>
+    <p class="extra-padding-bottom"><a href="mailto:{{contact_email}}" class="open-intercom button small less-padding">Contact us.</a></p>
   </div>
 </div>
 
