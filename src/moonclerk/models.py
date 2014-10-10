@@ -10,7 +10,7 @@ class Customer (models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
 
     customer_id = models.PositiveIntegerField(primary_key=True)
-    reference = models.CharField(max_length=30)
+    reference = models.CharField(max_length=30, null=True, blank=True)
     data = JSONField(default=dict)
 
     def __str__(self):
