@@ -490,7 +490,7 @@ class ProjectPaymentsSuccessView (SSLRequired, LoginRequired, AppMixin, View):
         customer_data = response.json()
         customer = Customer.objects.create(
             user=request.user,
-            reference=customer_data.get('customer_reference'),
+            reference=customer_data.get('customer', {}).get('customer_reference'),
             customer_id=customer_id,
             data=customer_data)
         return customer
