@@ -73,14 +73,19 @@
           <span id="street-safety-map" class="offset-anchor"></span>
           <div class="panel radius" data-equalizer-watch>
             <h3><strong>Street Safety Map</strong></h3>
-            <img src="{{ STATIC_URL }}images/plan-types/illustration-streetview.png" class="some-margin-bottom">
-            <p>Gather information about walking and biking safety using panorama images of streets.</p>
+            <img src="{{ STATIC_URL }}images/plan-types/illustration-street-safety.png" class="some-margin-bottom">
+            <p>Too many people are injured while walking and biking. Gather information about street safety issues so that street design changes can be informed by knowledge from many participants.</p>
             <ul>
-              <li><strong>Use Google Street View to collect feedback as people see it on the ground.</strong></li>
-              <li><strong>Collect comments and clicks of support.</strong></li>
+              <li><strong>Easily collect &amp; manage safety concerns.</strong></li>
+              <li><strong>Differentiate categories with beautiful icons.</strong></li>
+              <li><strong>Engage people with address lookup for easy location finding on desktop or mobile.</strong></li>
+              <li><strong>Follow up with confirmation emails to participants.</strong></li>
               <li><strong>Track activity with daily email reports.</strong></li>
               <li><strong>Get the complete picture with the OpenPlans Dashboard.</strong></li>
             </ul>
+
+            {% include 'create-plan-button.html' with template='shareabouts-street-safety' %}
+
           </div>
         </div>
       </div>
