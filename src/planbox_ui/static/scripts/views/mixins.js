@@ -273,17 +273,55 @@ var Planbox = Planbox || {};
   };
 
   NS.MagellanMenuMixin = {
+    buildArrivalMap: function() {
+      var $arrivals = $('[data-magellan-arrival]'),
+          $desinations = $('[data-magellan-destination]'),
+          map = {}, arrivals = [], desinations = [], currentArrival;
+
+      // Get the names of all the arrivals
+      $arrivals.each(function(i, el) {
+        var arrival = $(el).attr('data-magellan-arrival');
+        arrivals.push(arrival);
+      });
+
+      if (arrivals.length === 0) {
+        this.arrivalMap = map;
+        return map;
+      } else {
+        currentArrival = arrivals[0];
+      }
+
+      // Map each destination to the closest preceding arrival
+      $desinations.each(function(i, el) {
+        var destination = $(el).attr('data-magellan-destination');
+        if (_.contains(arrivals, destination)) {
+          currentArrival = destination;
+        }
+        map[destination] = currentArrival;
+      });
+
+      this.arrivalMap = map;
+      return map;
+    },
+
     onDomRefresh: function() {
       var self = this,
           debouncedScrollHandler = _.debounce(function(evt) {
             var offsets = self.offsets(),
-                item, i, dest, path;
+                item, i, dest, arr, path, isMenuItem;
 
             for(i=0; i<offsets.length; i++){
               item = offsets[i];
               if (item.viewport_offset >= item.top_offset) {
                 dest = item.arrival.attr('data-magellan-destination');
-                path = NS.Utils.rootPathJoin(dest);
+
+                if (_.isUndefined(self.arrivalMap) ||
+                    _.isUndefined(self.arrivalMap[dest])) {
+                  self.buildArrivalMap();
+                }
+
+                arr = self.arrivalMap[dest];
+                path = NS.Utils.rootPathJoin(arr);
 
                 if (path !== self.currentPath) {
                   self.currentPath = path;
