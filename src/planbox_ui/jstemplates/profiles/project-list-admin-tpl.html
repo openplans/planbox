@@ -1,14 +1,5 @@
 <div class="panel-header">
-  <h5 class="page-list-header subheader no-margins">
-    Plans
-    {{#bootstrapped 'projectTemplates'}}
-      {{#lengthEqual . 1}}
-        <a href="{{> url-project-new-tpl ../.. }}" class="new-project-button button radius tiny right" data-log-click>New Plan</a>
-      {{else}}
-        <a href="#" class="new-project-button button radius tiny right" data-dropdown="new-project-template-chooser" data-options="align:left">New Plan</a>
-      {{/lengthEqual}}
-    {{/bootstrapped}}
-  </h5>
+  <h5 class="page-list-header subheader no-margins">Plans</h5>
 </div>
 
 <div id="new-project-template-chooser" class="f-dropdown" data-dropdown-content>
