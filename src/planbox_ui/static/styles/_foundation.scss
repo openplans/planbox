@@ -90,13 +90,6 @@ p {
   }
 }
 
-// No margins! 
-h1, h2, h3, h4, h5, h6, p, ul, ul, li {
-  &.no-margins {
-    margin: 0;
-  }
-}
-
 // Make links visible inside alerts with white text
 .alert-box {
   a {
@@ -164,6 +157,16 @@ a.alert {
 
 
 /*--------------------------------------------------
+  Images
+--------------------------------------------------*/
+
+img {
+  &.block { display: block; }
+  &.inline-block { display: inline-block; }
+}
+
+
+/*--------------------------------------------------
   Grid
 --------------------------------------------------*/
 
@@ -175,7 +178,47 @@ a.alert {
   max-width: initial;
 }
 
+// No margins! No paddings! 
+.no-margins {
+  margin: 0 !important;
+}
+.no-paddings {
+  padding: 0 !important;
+}
+
 // Margin for specific grid elements, e.g. between header & content or at bottom of page.
+.no-margin-top {
+  margin-top: 0;
+}
+.no-margin-right {
+  margin-right: 0;
+}
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+.no-margin-left {
+  margin-left: 0;
+}
+
+.tiny-margin {
+  margin: 0.5rem;
+}
+.tiny-margin-top {
+  margin-top: 0.5rem;
+}
+.tiny-margin-right {
+  margin-right: 0.5rem;
+}
+.tiny-margin-bottom {
+  margin-bottom: 0.5rem;
+}
+.tiny-margin-left {
+  margin-left: 0.5rem;
+}
+
+.some-margin {
+  margin: 0.9375rem;
+}
 .some-margin-top {
   margin-top: 0.9375rem;
 }
@@ -187,6 +230,10 @@ a.alert {
 }
 .some-margin-left {
   margin-left: 0.9375rem;
+}
+
+.extra-margin {
+  margin: 2rem;
 }
 .extra-margin-top {
   margin-top: 2rem;
@@ -201,18 +248,66 @@ a.alert {
   margin-left: 2rem;
 }
 
-// Extra padding, as above.
+// Padding for specific grid elements (as for margin above).
+.no-padding-top {
+  padding-top: 0;
+}
+.no-padding-right {
+  padding-right: 0;
+}
+.no-padding-bottom {
+  padding-bottom: 0;
+}
+.no-padding-left {
+  padding-left: 0;
+}
+
+.tiny-padding {
+  padding: 0.5rem;
+}
+.tiny-padding-top {
+  padding-top: 0.5rem;
+}
+.tiny-padding-right {
+  padding-right: 0.5rem;
+}
+.tiny-padding-bottom {
+  padding-bottom: 0.5rem;
+}
+.tiny-padding-left {
+  padding-left: 0.5rem;
+}
+
+.some-padding {
+  padding: 0.9375rem;
+}
 .some-padding-top {
   padding-top: 0.9375rem;
+}
+.some-padding-right {
+  padding-right: 0.9375rem;
 }
 .some-padding-bottom {
   padding-bottom: 0.9375rem;
 }
+.some-padding-left {
+  padding-left: 0.9375rem;
+}
+
+.extra-padding {
+  padding: 2rem;
+}
 .extra-padding-top {
   padding-top: 2rem;
 }
+.extra-padding-right {
+  padding-right: 2rem;
+}
 .extra-padding-bottom {
   padding-bottom: 2rem;
+}
+.extra-padding-left {
+  padding-left: 2rem;
 }
 
 
