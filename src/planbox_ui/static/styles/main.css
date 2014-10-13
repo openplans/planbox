@@ -12008,8 +12008,9 @@ textarea.no-resize {
 .project-template-gallery h5:first-child {
   margin-bottom: 1rem;
 }
-/* line 1521, main.scss */
-.project-template-gallery .template-templates-default {
+
+/* line 1522, main.scss */
+.panel .template-templates-default {
   display: none;
 }
 
