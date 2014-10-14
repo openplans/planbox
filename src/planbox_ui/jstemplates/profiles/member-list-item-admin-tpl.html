@@ -2,7 +2,7 @@
   <img class="avatar show-for-medium-up left" src="{{#if avatar_url}}{{ avatar_url }}{{^}}{{#if auth}}{{ static_url }}images/avatar-user.gif{{^}}{{ static_url }}images/avatar-user.gif{{/if}}{{/if}}">
   <h3 class="no-margins">
     {{#bootstrapped 'user'}}
-      {{#is slug ../slug}}<a href="/dashboard/">{{/is}}
+      {{#is slug ../slug}}<a href="/profile/">{{/is}}
     {{/bootstrapped}}
 
     {{> profile-name-tpl }}

@@ -51,10 +51,10 @@ urlpatterns = patterns('',
     url(r'^moonclerk/pay-for/(?P<pk>[^/]+)/success$', project_payments_success_view, name='app-project-payments-success'),
 
     # ==============================
-    # Profile dashboards
+    # Profiles
 
-    url(r'^dashboard/', profile_view, name='app-user-profile'),
-    url(r'^(?P<profile_slug>[^/]+)/dashboard/$', profile_view, name='app-profile'),
+    url(r'^profile/', profile_view, name='app-user-profile'),
+    url(r'^(?P<profile_slug>[^/]+)/plans/$', profile_view, name='app-profile'),
 
     # ==============================
     # Roundup pages
