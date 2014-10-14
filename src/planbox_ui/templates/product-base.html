@@ -49,7 +49,6 @@ OpenPlans
     <section class="top-bar-section">
       <ul class="right">
         <li><a href="http://blog.openplans.org/">Blog</a></li>
-        <li><a href="http://community.openplans.org/">Community</a></li>
         <li class="has-dropdown">
           <a href="/about/">About</a>
           <ul class="dropdown">
@@ -59,7 +58,13 @@ OpenPlans
           </ul>
         </li>
         {% if user.is_authenticated %}
-        <li><a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}" class="open-intercom">Help</a></li>
+        <li class="has-dropdown">
+          <a>Help</a>
+          <ul class="dropdown">
+            <li><a href="http://help.openplans.org/" target="_blank" class="">How To&hellip;</a></li>
+            <li><a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}" class="open-intercom">Contact Us</a></li>
+          </ul>
+        </li>
         <li class="active has-dropdown">
           <a>{{ user.username }}</a>
           <ul class="dropdown">
