@@ -10376,26 +10376,22 @@ section, footer {
 /*--------------------------------------------------
   Product: About Page
 --------------------------------------------------*/
-/* line 411, main.scss */
-.team-section {
-  background-color: #ccc;
-}
-/* line 413, main.scss */
+/* line 412, main.scss */
 .team-section .avatar {
   display: block;
   padding-right: 0.9375rem;
 }
 
-/* line 419, main.scss */
-.clients-section {
+/* line 418, main.scss */
+.alt-about-section {
   background-color: #ddd;
 }
 
-/* line 422, main.scss */
+/* line 421, main.scss */
 .clients-list {
   text-align: center;
 }
-/* line 424, main.scss */
+/* line 423, main.scss */
 .clients-list img {
   display: block;
   margin: 0.9375rem auto;
@@ -10408,28 +10404,28 @@ section, footer {
 /*--------------------------------------------------
   Product: Shareabouts Page
 --------------------------------------------------*/
-/* line 439, main.scss */
+/* line 438, main.scss */
 .shareabouts-page-header {
   overflow: hidden;
 }
-/* line 441, main.scss */
+/* line 440, main.scss */
 .shareabouts-page-header .columns, .shareabouts-page-header .row {
   overflow: visible;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 444, main.scss */
+  /* line 443, main.scss */
   .shareabouts-page-header .shareabouts-page-header-text {
     margin-top: 4rem;
     position: relative;
     z-index: 2;
   }
 }
-/* line 450, main.scss */
+/* line 449, main.scss */
 .shareabouts-page-header .shareabouts-page-header-text h2 img {
   width: 400px;
 }
 
-/* line 455, main.scss */
+/* line 454, main.scss */
 .shareabouts-slideshow {
   position: relative;
   width: 500px;
@@ -10438,7 +10434,7 @@ section, footer {
   margin-left: -200px;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 455, main.scss */
+  /* line 454, main.scss */
   .shareabouts-slideshow {
     width: 1000px;
     height: 580px;
@@ -10446,7 +10442,7 @@ section, footer {
     margin-left: 0;
   }
 }
-/* line 467, main.scss */
+/* line 466, main.scss */
 .shareabouts-slideshow .shareabouts-slide {
   display: block;
   position: absolute;
@@ -10456,7 +10452,7 @@ section, footer {
   height: 246px;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 467, main.scss */
+  /* line 466, main.scss */
   .shareabouts-slideshow .shareabouts-slide {
     top: 22px;
     left: 115px;
@@ -10464,23 +10460,23 @@ section, footer {
     height: 493px;
   }
 }
-/* line 481, main.scss */
+/* line 480, main.scss */
 .shareabouts-slideshow .fade {
   -webkit-animation: fade 25s linear infinite;
   -moz-animation: fade 25s linear infinite;
   animation: fade 25s linear infinite;
 }
-/* line 485, main.scss */
+/* line 484, main.scss */
 .shareabouts-slideshow .fade.fade2 {
   -webkit-animation-name: fade2;
   animation-name: fade2;
 }
-/* line 486, main.scss */
+/* line 485, main.scss */
 .shareabouts-slideshow .fade.fade3 {
   -webkit-animation-name: fade3;
   animation-name: fade3;
 }
-/* line 487, main.scss */
+/* line 486, main.scss */
 .shareabouts-slideshow .fade.fade4 {
   -webkit-animation-name: fade4;
   animation-name: fade4;
@@ -10690,47 +10686,47 @@ section, footer {
     opacity: 1;
   }
 }
-/* line 509, main.scss */
+/* line 508, main.scss */
 .shareabouts-instances .img {
   margin-right: -110px;
   width: 100px;
   height: 100px;
 }
-/* line 514, main.scss */
+/* line 513, main.scss */
 .shareabouts-instances .description {
   margin-left: 110px;
 }
 
-/* line 518, main.scss */
+/* line 517, main.scss */
 .pricing-table {
   border: 0;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
-/* line 522, main.scss */
+/* line 521, main.scss */
 .pricing-table .title {
   background-color: #666;
 }
 
-/* line 525, main.scss */
+/* line 524, main.scss */
 .pricing-matrix {
   margin-bottom: 2rem !important;
   overflow: hidden;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 529, main.scss */
+  /* line 528, main.scss */
   .pricing-matrix .pricing-table {
     margin-bottom: 0;
   }
 }
 
-/* line 534, main.scss */
+/* line 533, main.scss */
 .extra-pricing-info {
   height: 0;
   overflow: hidden;
 }
 
-/* line 538, main.scss */
+/* line 537, main.scss */
 .extra-pricing-info-header {
   background-color: #ddd;
   margin: 0;
@@ -10740,39 +10736,39 @@ section, footer {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 }
 
-/* line 546, main.scss */
+/* line 545, main.scss */
 .feature-list-icon {
   height: 1.75em;
   width: auto;
   margin: 0 0.375rem;
 }
 
-/* line 551, main.scss */
+/* line 550, main.scss */
 .extra-pricing-info table {
   width: 100%;
   border: 0;
   margin: 0;
 }
 
-/* line 556, main.scss */
+/* line 555, main.scss */
 .extra-pricing-info tr {
   background-color: #f5f5f5;
 }
 
-/* line 559, main.scss */
+/* line 558, main.scss */
 .extra-pricing-info tr.even,
 .extra-pricing-info tr.alt,
 .extra-pricing-info tr:nth-of-type(even) {
   background-color: #fff;
 }
 
-/* line 564, main.scss */
+/* line 563, main.scss */
 .extra-pricing-info tr.spacer td {
   width: 25%;
   padding: 0;
 }
 
-/* line 568, main.scss */
+/* line 567, main.scss */
 .extra-pricing-info td {
   font-size: 0.75rem;
   text-align: left;
@@ -10781,30 +10777,30 @@ section, footer {
   vertical-align: top;
 }
 
-/* line 575, main.scss */
+/* line 574, main.scss */
 .extra-pricing-info td:first-letter {
   text-transform: uppercase;
 }
 
-/* line 578, main.scss */
+/* line 577, main.scss */
 .extra-pricing-info td:last-child {
   border-right: 0;
   box-shadow: none;
 }
 
-/* line 582, main.scss */
+/* line 581, main.scss */
 .all-details-revealed .extra-pricing-info {
   height: auto;
 }
 
-/* line 585, main.scss */
+/* line 584, main.scss */
 .extra-pricing-info p {
   font-size: inherit;
   line-height: inherit;
   margin: 0;
 }
 
-/* line 590, main.scss */
+/* line 589, main.scss */
 .extra-pricing-info p + p {
   margin-top: 0.625rem;
 }
@@ -10812,18 +10808,18 @@ section, footer {
 /*--------------------------------------------------
   Project Layout
 --------------------------------------------------*/
-/* line 599, main.scss */
+/* line 598, main.scss */
 .container {
   background-color: #fff;
   color: #444;
 }
 
-/* line 603, main.scss */
+/* line 602, main.scss */
 .section-heading {
   padding-top: 1.5rem;
 }
 
-/* line 608, main.scss */
+/* line 607, main.scss */
 .project-text-content {
   line-height: 1.6;
   margin-bottom: 1.6rem;
@@ -10832,14 +10828,14 @@ section, footer {
 /*--------------------------------------------------
   Roundups
 --------------------------------------------------*/
-/* line 618, main.scss */
+/* line 617, main.scss */
 .truncated-wysiwyg {
   max-height: 7.5rem;
   position: relative;
   overflow: hidden;
 }
 
-/* line 623, main.scss */
+/* line 622, main.scss */
 .truncated-wysiwyg:after {
   content: '';
   display: block;
@@ -10855,12 +10851,12 @@ section, footer {
 /*--------------------------------------------------
   Project Header
 --------------------------------------------------*/
-/* line 640, main.scss */
+/* line 639, main.scss */
 .site-header {
   background-color: #fff;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 640, main.scss */
+  /* line 639, main.scss */
   .site-header {
     background-color: #268099;
     color: #fff;
@@ -10868,105 +10864,105 @@ section, footer {
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 647, main.scss */
+  /* line 646, main.scss */
   .site-header .site-header-content {
     border-top: 0;
     border-radius: 0.25em 0.25em 0 0;
   }
 }
-/* line 654, main.scss */
+/* line 653, main.scss */
 .site-header.has-image {
   padding-top: 40%;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 654, main.scss */
+  /* line 653, main.scss */
   .site-header.has-image {
     padding-top: 30%;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 654, main.scss */
+  /* line 653, main.scss */
   .site-header.has-image {
     padding-top: 15.25em;
     background-position: center center;
   }
 }
-/* line 664, main.scss */
+/* line 663, main.scss */
 .site-header.has-image .site-header-content {
   float: left;
   width: 100%;
   border-top: 0;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 664, main.scss */
+  /* line 663, main.scss */
   .site-header.has-image .site-header-content {
     float: none;
     width: auto;
   }
 }
-/* line 675, main.scss */
+/* line 674, main.scss */
 .site-header + .orderable-container {
   clear: both;
 }
 
-/* line 680, main.scss */
+/* line 679, main.scss */
 .project-header {
   border-radius: 0.375em 0.375em 0 0;
 }
 
-/* line 684, main.scss */
+/* line 683, main.scss */
 .social-links-header {
   background-color: #fff;
   border-radius: 0.5rem;
   margin: 0.9375rem 0.9375rem 0 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 684, main.scss */
+  /* line 683, main.scss */
   .social-links-header {
     margin-top: 0.5rem;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 684, main.scss */
+  /* line 683, main.scss */
   .social-links-header {
     margin-top: -2rem;
   }
 }
-/* line 694, main.scss */
+/* line 693, main.scss */
 .social-links-header a {
   float: left;
   width: 40px;
   border-radius: 0.25rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 694, main.scss */
+  /* line 693, main.scss */
   .social-links-header a {
     margin: 0.5rem;
   }
 }
-/* line 701, main.scss */
+/* line 700, main.scss */
 .social-links-header a + a {
   margin-left: 0.5rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 701, main.scss */
+  /* line 700, main.scss */
   .social-links-header a + a {
     margin-left: 0;
   }
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 710, main.scss */
+  /* line 709, main.scss */
   .project-title {
     font-size: 3.125rem;
   }
 }
-/* line 714, main.scss */
+/* line 713, main.scss */
 .project-title img {
   max-height: 20rem;
 }
 
-/* line 721, main.scss */
+/* line 720, main.scss */
 .logo-table {
   display: table;
   border-collapse: collapse;
@@ -10974,47 +10970,47 @@ section, footer {
   position: relative;
   z-index: 5;
 }
-/* line 727, main.scss */
+/* line 726, main.scss */
 .logo-table .logo-table-row {
   display: table-row;
 }
-/* line 729, main.scss */
+/* line 728, main.scss */
 .logo-table .logo-table-row > div {
   display: table-cell;
   padding: 0;
   vertical-align: top;
 }
-/* line 733, main.scss */
+/* line 732, main.scss */
 .logo-table .logo-table-row > div.image-holder, .logo-table .logo-table-row > div.has-image {
   padding-right: 1em;
 }
-/* line 739, main.scss */
+/* line 738, main.scss */
 .logo-table img {
   max-height: 8em;
   height: auto;
   width: auto;
 }
 
-/* line 747, main.scss */
+/* line 746, main.scss */
 .project-menu-container.has-project-menu {
   position: relative;
 }
 
-/* line 751, main.scss */
+/* line 750, main.scss */
 [data-magellan-expedition],
 [data-magellan-expedition-clone] {
   background-color: transparent;
   padding: 0;
 }
 
-/* line 757, main.scss */
+/* line 756, main.scss */
 .project-menu .row {
   position: relative;
   z-index: 2;
   padding-top: .9375rem;
   padding-bottom: 0;
 }
-/* line 763, main.scss */
+/* line 762, main.scss */
 .project-menu .columns:after {
   content: '';
   display: block;
@@ -11031,22 +11027,22 @@ section, footer {
 /*--------------------------------------------------
   Project Footer
 --------------------------------------------------*/
-/* line 782, main.scss */
+/* line 781, main.scss */
 .social-links-section {
   max-width: 64.375rem;
 }
-/* line 784, main.scss */
+/* line 783, main.scss */
 .social-links-section .panel {
   border: 0;
 }
 
-/* line 789, main.scss */
+/* line 788, main.scss */
 .site-colophon {
   padding-top: 2rem;
   background-color: #eee;
   color: #888d9b;
 }
-/* line 793, main.scss */
+/* line 792, main.scss */
 .site-colophon .powered-by {
   margin-top: 4rem;
   margin-bottom: 4rem;
@@ -11055,20 +11051,20 @@ section, footer {
 /*--------------------------------------------------
   Project Timeline
 --------------------------------------------------*/
-/* line 804, main.scss */
+/* line 803, main.scss */
 .event-list {
   border-left: 1rem solid #fff;
   box-shadow: inset 0.75rem 0 0 #bbb;
 }
 
-/* line 808, main.scss */
+/* line 807, main.scss */
 .event {
   padding: 0 0 2rem 3.25rem;
   margin-left: -1rem;
   position: relative;
 }
 
-/* line 813, main.scss */
+/* line 812, main.scss */
 .event:first-child:before {
   content: '';
   background-color: #fff;
@@ -11079,7 +11075,7 @@ section, footer {
   left: 0.625rem;
 }
 
-/* line 822, main.scss */
+/* line 821, main.scss */
 .event:last-child:before {
   content: '';
   background-color: #fff;
@@ -11090,7 +11086,7 @@ section, footer {
   left: 0.625rem;
 }
 
-/* line 831, main.scss */
+/* line 830, main.scss */
 .event:only-child:before {
   content: '';
   background-color: #fff;
@@ -11102,7 +11098,7 @@ section, footer {
   left: 0.625rem;
 }
 
-/* line 841, main.scss */
+/* line 840, main.scss */
 .event:after {
   content: '';
   position: absolute;
@@ -11116,64 +11112,64 @@ section, footer {
   z-index: 1;
 }
 
-/* line 855, main.scss */
+/* line 854, main.scss */
 .event .calendar-icon {
   cursor: pointer;
 }
 
-/* line 858, main.scss */
+/* line 857, main.scss */
 .datetime-picker-container {
   position: relative;
 }
 
-/* line 861, main.scss */
+/* line 860, main.scss */
 .picker {
   margin-top: -1.125rem;
 }
 
-/* line 864, main.scss */
+/* line 863, main.scss */
 .picker__holder {
   max-width: 100%;
 }
 
-/* line 867, main.scss */
+/* line 866, main.scss */
 .picker__nav--prev:hover,
 .picker__nav--next:hover {
   background-color: transparent;
 }
 
-/* line 871, main.scss */
+/* line 870, main.scss */
 .picker button {
   color: inherit;
 }
 
-/* line 874, main.scss */
+/* line 873, main.scss */
 .picker table tr td {
   text-align: center;
 }
 
-/* line 879, main.scss */
+/* line 878, main.scss */
 ol.attachment-list.no-bullet {
   margin-left: 0;
 }
 
-/* line 883, main.scss */
+/* line 882, main.scss */
 .attachment .row {
   margin: 0 -0.5rem;
 }
-/* line 884, main.scss */
+/* line 883, main.scss */
 .attachment .row .column, .attachment .row .columns {
   padding: 0 0.5rem;
 }
-/* line 885, main.scss */
+/* line 884, main.scss */
 .attachment .row.collapse {
   margin: 0;
 }
-/* line 886, main.scss */
+/* line 885, main.scss */
 .attachment .row.collapse .column, .attachment .row.collapse .columns {
   padding: 0;
 }
-/* line 887, main.scss */
+/* line 886, main.scss */
 .attachment .row.collapse input {
   -webkit-border-bottom-right-radius: 0;
   -webkit-border-top-right-radius: 0;
@@ -11181,12 +11177,12 @@ ol.attachment-list.no-bullet {
   border-top-right-radius: 0;
 }
 
-/* line 892, main.scss */
+/* line 891, main.scss */
 .handle {
   cursor: move;
 }
 
-/* line 895, main.scss */
+/* line 894, main.scss */
 .event > .handle {
   position: absolute;
   top: 0.25rem;
@@ -11198,22 +11194,22 @@ ol.attachment-list.no-bullet {
   text-indent: -9999px;
 }
 
-/* line 905, main.scss */
+/* line 904, main.scss */
 .event:only-child > .handle {
   display: none;
 }
 
-/* line 908, main.scss */
+/* line 907, main.scss */
 .attachment-icon {
   position: relative;
 }
 
-/* line 911, main.scss */
+/* line 910, main.scss */
 img.attachment-icon {
   margin-bottom: 1.6rem;
 }
 
-/* line 914, main.scss */
+/* line 913, main.scss */
 .attachment-handle {
   position: absolute;
   top: 0;
@@ -11226,12 +11222,12 @@ img.attachment-icon {
 /*--------------------------------------------------
   Project Shareabouts
 --------------------------------------------------*/
-/* line 929, main.scss */
+/* line 928, main.scss */
 .project-section-shareabouts .map {
   height: 300px;
 }
 
-/* line 934, main.scss */
+/* line 933, main.scss */
 .project-shareabouts {
   border-top: 2px solid #eee;
   border-bottom: 2px solid #eee;
@@ -11241,47 +11237,47 @@ img.attachment-icon {
   overflow: hidden;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 934, main.scss */
+  /* line 933, main.scss */
   .project-shareabouts {
     height: 400px;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 934, main.scss */
+  /* line 933, main.scss */
   .project-shareabouts {
     height: 500px;
   }
 }
-/* line 947, main.scss */
+/* line 946, main.scss */
 .project-shareabouts .shareabouts-add-button-container {
   margin-left: 0;
   bottom: 0;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 947, main.scss */
+  /* line 946, main.scss */
   .project-shareabouts .shareabouts-add-button-container {
     margin-left: 50%;
     left: -31.25rem;
     width: 20rem;
   }
 }
-/* line 957, main.scss */
+/* line 956, main.scss */
 .project-shareabouts .map {
   height: 300px;
 }
-/* line 961, main.scss */
+/* line 960, main.scss */
 .project-shareabouts .avatar {
   width: 30px;
 }
-/* line 966, main.scss */
+/* line 965, main.scss */
 .project-shareabouts .signed-in-as .avatar {
   width: 50px;
 }
-/* line 971, main.scss */
+/* line 970, main.scss */
 .project-shareabouts .response-body {
   padding-top: 0.25em;
 }
-/* line 975, main.scss */
+/* line 974, main.scss */
 .project-shareabouts a.auth-inline {
   display: inline;
   font-size: 0.875em;
@@ -11290,25 +11286,25 @@ img.attachment-icon {
   padding: 0.25em 0.5em;
 }
 
-/* line 983, main.scss */
+/* line 982, main.scss */
 .shareabouts-geometry-set .form-instructions {
   display: none;
 }
 
 /* NOTE: use these selectors to style invalid form elements on non-HTML5 browsers */
-/* line 988, main.scss */
+/* line 987, main.scss */
 .project-shareabouts .form-submitted input:invalid,
 .project-shareabouts .form-submitted textarea:invalid,
 .project-shareabouts .form-submitted select:invalid {
   border: 1px solid #f04124;
 }
 
-/* line 994, main.scss */
+/* line 993, main.scss */
 .shareabouts-submit-button {
   margin-top: 0.5em;
 }
 
-/* line 998, main.scss */
+/* line 997, main.scss */
 .shareabouts-auth-container {
   position: absolute;
   z-index: 2;
@@ -11321,7 +11317,7 @@ img.attachment-icon {
   overflow: visible;
 }
 
-/* line 1009, main.scss */
+/* line 1008, main.scss */
 .shareabouts-auth-avatar {
   width: 2.25rem;
   height: 2.25rem;
@@ -11329,28 +11325,28 @@ img.attachment-icon {
   margin-bottom: 0.125rem;
 }
 
-/* line 1015, main.scss */
+/* line 1014, main.scss */
 .shareabouts-auth-social-button {
   color: #fff !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
-/* line 1019, main.scss */
+/* line 1018, main.scss */
 .shareabouts-auth-social-button.shareabouts-auth-twitter-button {
   background-color: #66caf4;
 }
-/* line 1022, main.scss */
+/* line 1021, main.scss */
 .shareabouts-auth-social-button.shareabouts-auth-facebook-button {
   background-color: #4f79c1;
 }
-/* line 1025, main.scss */
+/* line 1024, main.scss */
 .shareabouts-auth-social-button img {
   display: inline-block;
   max-width: 2.5rem;
   max-height: 2.5rem;
 }
 
-/* line 1032, main.scss */
+/* line 1031, main.scss */
 .shareabouts-add-button {
   border-style: solid;
   border-width: 0px;
@@ -11385,38 +11381,38 @@ img.attachment-icon {
   color: #FFFFFF;
 }
 @media only screen and (max-width: 40em) {
-  /* line 1032, main.scss */
+  /* line 1031, main.scss */
   .shareabouts-add-button {
     margin: 0;
   }
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1032, main.scss */
+  /* line 1031, main.scss */
   .shareabouts-add-button {
     box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
   }
 }
 
-/* line 1043, main.scss */
+/* line 1042, main.scss */
 .shareabouts-panel {
   background-color: #fff;
 }
 
-/* line 1047, main.scss */
+/* line 1046, main.scss */
 .shareabouts-panel-content {
   padding: 1rem 0 3rem;
 }
-/* line 1049, main.scss */
+/* line 1048, main.scss */
 .shareabouts-panel-content .form-instructions strong {
   font-size: 1rem;
 }
-/* line 1052, main.scss */
+/* line 1051, main.scss */
 .shareabouts-panel-content .or-sign-in {
   position: relative;
   top: -0.5rem;
 }
 
-/* line 1058, main.scss */
+/* line 1057, main.scss */
 .heart {
   color: LightGrey;
   font-size: 1.5em;
@@ -11426,12 +11422,12 @@ img.attachment-icon {
   position: relative;
   top: 0.125em;
 }
-/* line 1066, main.scss */
+/* line 1065, main.scss */
 .heart.suported {
   color: LightPink;
 }
 
-/* line 1071, main.scss */
+/* line 1070, main.scss */
 .survey-header-container {
   border-bottom: 1px solid #ddd;
 }
@@ -11439,17 +11435,17 @@ img.attachment-icon {
 /*--------------------------------------------------
   Project Layout
 --------------------------------------------------*/
-/* line 1080, main.scss */
+/* line 1079, main.scss */
 .project-map-region > div {
   height: 300px;
 }
 
-/* line 1084, main.scss */
+/* line 1083, main.scss */
 .shareabouts-side-nav {
   height: 1px;
   overflow: visible;
 }
-/* line 1093, main.scss */
+/* line 1092, main.scss */
 .shareabouts-side-nav.fixed div {
   width: 100%;
   margin-left: auto;
@@ -11467,7 +11463,7 @@ img.attachment-icon {
 .shareabouts-side-nav.fixed div:after {
   clear: both;
 }
-/* line 1096, main.scss */
+/* line 1095, main.scss */
 .shareabouts-side-nav.fixed .side-nav {
   background-color: #fff;
   padding-left: 0.9375rem;
@@ -11475,25 +11471,25 @@ img.attachment-icon {
   width: 33.33333%;
   float: left;
 }
-/* line 1101, main.scss */
+/* line 1100, main.scss */
 .shareabouts-side-nav .social-link img {
   max-height: 1.5em;
 }
 
 @media only screen and (max-width: 40em) {
-  /* line 1108, main.scss */
+  /* line 1107, main.scss */
   .project-shareabouts.panel-open + .after-shareabouts, .project-shareabouts.panel-form-open + .after-shareabouts {
     display: none;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 1106, main.scss */
+  /* line 1105, main.scss */
   .after-shareabouts {
     position: relative;
     z-index: 2;
     margin-top: -5px;
   }
-  /* line 1117, main.scss */
+  /* line 1116, main.scss */
   .after-shareabouts:before {
     width: 100%;
     height: 5px;
@@ -11501,25 +11497,25 @@ img.attachment-icon {
     box-shadow: -3px -3px 0 rgba(51, 51, 51, 0.1);
   }
 }
-/* line 1124, main.scss */
+/* line 1123, main.scss */
 .after-shareabouts .project-tagline {
   font-size: 1.5rem;
 }
 
-/* line 1129, main.scss */
+/* line 1128, main.scss */
 .shareabouts-page {
   height: 100%;
 }
-/* line 1131, main.scss */
+/* line 1130, main.scss */
 .shareabouts-page .project-shareabouts {
   border: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1131, main.scss */
+  /* line 1130, main.scss */
   .shareabouts-page .project-shareabouts {
     height: 60%;
   }
-  /* line 1135, main.scss */
+  /* line 1134, main.scss */
   .shareabouts-page .project-shareabouts:after {
     content: '';
     display: block;
@@ -11532,7 +11528,7 @@ img.attachment-icon {
     box-shadow: 0 -3px 0 rgba(51, 51, 51, 0.1);
   }
 }
-/* line 1150, main.scss */
+/* line 1149, main.scss */
 .shareabouts-page .cover-image-container,
 .shareabouts-page .project-section-fieldset .section-settings label:first-child,
 .shareabouts-page .project-section-fieldset .section-settings label:first-child + br,
@@ -11545,43 +11541,43 @@ img.attachment-icon {
 /*--------------------------------------------------
   The Admin
 --------------------------------------------------*/
-/* line 1165, main.scss */
+/* line 1164, main.scss */
 .project-edit-form {
   background-color: #fff;
   box-shadow: 0 -65px 0 #fff;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1165, main.scss */
+  /* line 1164, main.scss */
   .project-edit-form {
     padding-bottom: 4rem;
   }
 }
 
-/* line 1173, main.scss */
+/* line 1172, main.scss */
 .project-section {
   z-index: auto;
 }
 
-/* line 1177, main.scss */
+/* line 1176, main.scss */
 .project-section-fieldset {
   padding: 0;
   border: 0;
 }
 
 @-moz-document url-prefix() {
-  /* line 1184, main.scss */
+  /* line 1183, main.scss */
   .project-section-fieldset {
     display: table-cell;
   }
 }
-/* line 1189, main.scss */
+/* line 1188, main.scss */
 .location-map-region .map {
   height: 200px;
   border: 1px solid #c9c9c9;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1194, main.scss */
+  /* line 1193, main.scss */
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
@@ -11592,7 +11588,7 @@ img.attachment-icon {
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1203, main.scss */
+  /* line 1202, main.scss */
   input[type=text].sub-heading-input {
     font-size: 1.75rem;
     margin: 0 0 1rem 0;
@@ -11602,12 +11598,12 @@ img.attachment-icon {
   }
 }
 
-/* line 1212, main.scss */
+/* line 1211, main.scss */
 span.sub-heading-postfix {
   color: #999;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1212, main.scss */
+  /* line 1211, main.scss */
   span.sub-heading-postfix {
     margin: 0 0 1rem 0;
     padding: 0.5rem 0.75rem;
@@ -11615,7 +11611,7 @@ span.sub-heading-postfix {
   }
 }
 
-/* line 1221, main.scss */
+/* line 1220, main.scss */
 .content-editable {
   line-height: 1.6;
   background-color: #FFFFFF;
@@ -11635,7 +11631,7 @@ span.sub-heading-postfix {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
   height: auto;
 }
-/* line 1223, main.scss */
+/* line 1222, main.scss */
 .content-editable.rich-editable {
   min-height: 8rem;
 }
@@ -11660,77 +11656,77 @@ span.sub-heading-postfix {
   background-color: #DDDDDD;
   cursor: default;
 }
-/* line 1231, main.scss */
+/* line 1230, main.scss */
 .content-editable.radius {
   border-radius: 3px;
 }
-/* line 1235, main.scss */
+/* line 1234, main.scss */
 .error .content-editable, .content-editable.error {
   margin-bottom: 0;
 }
-/* line 1238, main.scss */
+/* line 1237, main.scss */
 .content-editable a {
   color: #308fbf;
   text-decoration: none;
   line-height: inherit;
 }
-/* line 1243, main.scss */
+/* line 1242, main.scss */
 .content-editable a:hover, .content-editable a:focus {
   color: #267299;
 }
 
-/* line 1252, main.scss */
+/* line 1251, main.scss */
 .pen-menu,
 .pen-menu * {
   box-sizing: content-box !important;
 }
 
-/* line 1257, main.scss */
+/* line 1256, main.scss */
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
   padding-top: 0.5rem;
   padding-right: 0.25rem;
 }
 
-/* line 1263, main.scss */
+/* line 1262, main.scss */
 .section-settings {
   background-color: #f7f7f7;
   padding-top: 1.75rem;
 }
-/* line 1266, main.scss */
+/* line 1265, main.scss */
 .section-settings-toggle-container + .section-settings {
   margin-top: -2.5rem;
 }
 
-/* line 1271, main.scss */
+/* line 1270, main.scss */
 .section-insert {
   margin-bottom: -1rem;
   margin-right: -0.9375rem;
   margin-left: -0.9375rem;
 }
-/* line 1275, main.scss */
+/* line 1274, main.scss */
 .section-insert hr {
   margin-top: 1rem;
   border-color: #ff8b38;
 }
 
-/* line 1281, main.scss */
+/* line 1280, main.scss */
 .unassigned {
   cursor: default;
 }
 
-/* line 1285, main.scss */
+/* line 1284, main.scss */
 .project-settings-container {
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
   background-color: #d9d9d9;
 }
-/* line 1286, main.scss */
+/* line 1285, main.scss */
 .project-settings-container .save-btn {
   outline: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1285, main.scss */
+  /* line 1284, main.scss */
   .project-settings-container {
     position: fixed;
     top: 65px;
@@ -11742,25 +11738,25 @@ span.sub-heading-postfix {
     overflow: hidden;
     box-shadow: inset 3px 0 0 rgba(51, 51, 51, 0.1);
   }
-  /* line 1302, main.scss */
+  /* line 1301, main.scss */
   .project-settings-container .project-settings {
     max-height: 60%;
     overflow: auto;
   }
 }
 
-/* line 1309, main.scss */
+/* line 1308, main.scss */
 textarea.no-resize {
   resize: none;
 }
 
-/* line 1314, main.scss */
+/* line 1313, main.scss */
 .drag-area-container {
   position: relative;
   text-align: center;
 }
 
-/* line 1318, main.scss */
+/* line 1317, main.scss */
 .drag-area {
   position: absolute;
   top: 1rem;
@@ -11771,17 +11767,17 @@ textarea.no-resize {
   border-radius: 0.375rem;
   background-color: rgba(242, 242, 242, 0.4);
 }
-/* line 1327, main.scss */
+/* line 1326, main.scss */
 .drag-area:hover {
   border-color: rgba(133, 133, 133, 0.9);
   background-color: rgba(242, 242, 242, 0.9);
 }
-/* line 1331, main.scss */
+/* line 1330, main.scss */
 .drag-area p {
   margin-bottom: 0.5rem;
 }
 
-/* line 1335, main.scss */
+/* line 1334, main.scss */
 .no-file-upload-message {
   clear: both;
   font-size: 0.75em;
@@ -11794,18 +11790,18 @@ textarea.no-resize {
   border-radius: 0.25em;
 }
 
-/* line 1346, main.scss */
+/* line 1345, main.scss */
 .no-file-upload-message a {
   color: #fff;
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 1350, main.scss */
+/* line 1349, main.scss */
 .no-file-upload-message a:hover {
   color: #fff;
 }
 
-/* line 1353, main.scss */
+/* line 1352, main.scss */
 .file-upload {
   margin: 2em 1em 1em;
   text-align: center;
@@ -11816,7 +11812,7 @@ textarea.no-resize {
   position: relative;
 }
 
-/* line 1362, main.scss */
+/* line 1361, main.scss */
 .file-upload:hover,
 .file-dragging,
 .file-uploading {
@@ -11825,12 +11821,12 @@ textarea.no-resize {
   background-color: rgba(90, 90, 90, 0.5);
 }
 
-/* line 1369, main.scss */
+/* line 1368, main.scss */
 .file-upload p {
   margin-bottom: 0.5em;
 }
 
-/* line 1372, main.scss */
+/* line 1371, main.scss */
 .file-upload-input-container {
   position: relative;
   overflow: hidden;
@@ -11838,12 +11834,12 @@ textarea.no-resize {
   margin-bottom: 0;
 }
 
-/* line 1378, main.scss */
+/* line 1377, main.scss */
 .file-upload-input {
   display: none;
 }
 
-/* line 1381, main.scss */
+/* line 1380, main.scss */
 .uploading-message,
 .file-uploading > .drop-instructions {
   display: none;
@@ -11871,7 +11867,7 @@ textarea.no-resize {
     color: #888;
   }
 }
-/* line 1395, main.scss */
+/* line 1394, main.scss */
 .file-uploading > .uploading-message {
   display: block;
   position: relative;
@@ -11882,44 +11878,44 @@ textarea.no-resize {
   animation: uploading 1.5s infinite ease-in-out;
 }
 
-/* line 1404, main.scss */
+/* line 1403, main.scss */
 .file-uploading > .file-upload-input-container {
   visibility: hidden;
 }
 
-/* line 1409, main.scss */
+/* line 1408, main.scss */
 .full-width-image-container {
   margin: 0 -0.9375rem 0.5rem -0.9375rem;
 }
-/* line 1411, main.scss */
+/* line 1410, main.scss */
 .full-width-image-container.drag-area-container {
   min-height: 9rem;
 }
 
-/* line 1415, main.scss */
+/* line 1414, main.scss */
 .cover-image-container {
   margin-top: -1.125rem;
 }
 
-/* line 1420, main.scss */
+/* line 1419, main.scss */
 .logo-image-container {
   min-height: 9rem;
   margin-bottom: 1rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1420, main.scss */
+  /* line 1419, main.scss */
   .logo-image-container {
     float: left;
     width: 50%;
   }
 }
-/* line 1427, main.scss */
+/* line 1426, main.scss */
 .logo-image-container img {
   max-height: 20rem;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1431, main.scss */
+  /* line 1430, main.scss */
   .project-title-container {
     float: right;
     width: 50%;
@@ -11928,7 +11924,7 @@ textarea.no-resize {
     padding-right: 1rem;
     padding-bottom: 1rem;
   }
-  /* line 1439, main.scss */
+  /* line 1438, main.scss */
   .logo-image-container.hide + .project-title-container {
     float: none;
     width: auto;
@@ -11938,78 +11934,78 @@ textarea.no-resize {
     padding-bottom: 0;
   }
 }
-/* line 1448, main.scss */
+/* line 1447, main.scss */
 .project-title-container .project-title-help-text {
   margin-top: -0.75rem;
 }
 
-/* line 1455, main.scss */
+/* line 1454, main.scss */
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none;
 }
 
-/* line 1467, main.scss */
+/* line 1466, main.scss */
 .existing-snapshot-wrapper .button {
   margin-bottom: 0;
 }
 
-/* line 1473, main.scss */
+/* line 1472, main.scss */
 .avatar-container {
   padding: 0.3rem;
 }
-/* line 1475, main.scss */
+/* line 1474, main.scss */
 .avatar-container .avatar {
   display: inline-block;
 }
-/* line 1478, main.scss */
+/* line 1477, main.scss */
 .avatar-container .drag-area-container {
   min-height: 10.125rem;
 }
 
-/* line 1486, main.scss */
+/* line 1485, main.scss */
 .project-list > li + li, .member-list > li + li, .team-list > li + li {
   margin-top: 0.625rem;
   padding-top: 0.625rem;
   border-top: 1px solid #e3e3e3;
 }
 
-/* line 1493, main.scss */
+/* line 1492, main.scss */
 .member-list li, .team-list li {
   padding-left: 4.375rem;
 }
-/* line 1496, main.scss */
+/* line 1495, main.scss */
 .member-list .avatar, .team-list .avatar {
   width: 3.75rem;
   margin-left: -4.375rem;
 }
 
-/* line 1501, main.scss */
+/* line 1500, main.scss */
 .user-profile .member-list {
   display: none;
 }
 
-/* line 1504, main.scss */
+/* line 1503, main.scss */
 .user-profile .project-list {
   display: none;
 }
 
-/* line 1507, main.scss */
+/* line 1506, main.scss */
 .team-profile .team-list {
   display: none;
 }
 
-/* line 1512, main.scss */
+/* line 1511, main.scss */
 .project-template-gallery {
   background-color: white;
   border-bottom: 1px solid rgba(51, 51, 51, 0.2);
   padding: 0.5rem;
 }
-/* line 1517, main.scss */
+/* line 1516, main.scss */
 .project-template-gallery h5:first-child {
   margin-bottom: 1rem;
 }
 
-/* line 1522, main.scss */
+/* line 1521, main.scss */
 .panel .template-templates-default {
   display: none;
 }
@@ -12017,13 +12013,13 @@ textarea.no-resize {
 /*--------------------------------------------------
   Project Dashboard / Widgets
 --------------------------------------------------*/
-/* line 1532, main.scss */
+/* line 1531, main.scss */
 .stat-widget.coming-soon {
   background-color: #f6f6f6;
   color: #ddd;
   position: relative;
 }
-/* line 1536, main.scss */
+/* line 1535, main.scss */
 .stat-widget.coming-soon:before {
   content: "Coming Soon...";
   position: absolute;
@@ -12037,13 +12033,13 @@ textarea.no-resize {
   font-style: italic;
 }
 
-/* line 1552, main.scss */
+/* line 1551, main.scss */
 .stat-widget-big-number .count {
   display: block;
   font-size: 2.5rem;
   line-height: 1.2;
 }
-/* line 1557, main.scss */
+/* line 1556, main.scss */
 .stat-widget-big-number .unit {
   text-transform: uppercase;
 }
