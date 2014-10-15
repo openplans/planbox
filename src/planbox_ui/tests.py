@@ -397,9 +397,9 @@ class ProjectPaymentsViewsTests (PlanBoxUITestCase):
         request.user = auth
         response = project_payments_success_view(request, **kwargs)
 
-        project_editor_url = reverse('app-project-editor', kwargs={'owner_slug': owner.slug, 'project_slug': project.slug})
+        project_activation_url = reverse('app-project-activation-success', kwargs={'owner_slug': owner.slug, 'project_slug': project.slug})
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, project_editor_url)
+        assert_equal(response.url, project_activation_url)
 
         project = Project.objects.get(slug='test-slug', owner=owner)
         customer = project.customer
@@ -429,9 +429,9 @@ class ProjectPaymentsViewsTests (PlanBoxUITestCase):
         request.user = auth
         response = project_payments_success_view(request, **kwargs)
 
-        project_editor_url = reverse('app-project-editor', kwargs={'owner_slug': owner.slug, 'project_slug': project.slug})
+        project_activation_url = reverse('app-project-activation-success', kwargs={'owner_slug': owner.slug, 'project_slug': project.slug})
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, project_editor_url)
+        assert_equal(response.url, project_activation_url)
 
         project = Project.objects.get(slug='test-slug', owner=owner)
         assert_equal(project.payments.all().count(), 1)

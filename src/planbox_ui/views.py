@@ -544,7 +544,7 @@ class ProjectPaymentsSuccessView (SSLRequired, LoginRequired, AppMixin, DetailVi
         return self.render_to_response(context, status=500)
 
     def get(self, request, pk):
-        project = get_object_or_404(Project.objects.select_related('owner'), pk=pk)
+        self.object = project = get_object_or_404(Project.objects.select_related('owner'), pk=pk)
         moonclerk_key = settings.MOONCLERK_API_KEY
 
         customer_id = request.GET.get('customer_id', None)
