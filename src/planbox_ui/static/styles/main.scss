@@ -93,6 +93,13 @@
 img.shadowed {
   box-shadow: -5px 5px 0 rgba(51,51,51,0.2);
 }
+.inline-icon {
+  display: inline-block;
+  max-height: 1.5em;
+  &.large {
+    max-height: 2em;
+  }
+}
 
 
 /*--------------------------------------------------
@@ -231,6 +238,24 @@ section, footer {
 //  prevent overflowing float-labels from being overlapped by previous sections
   position: relative;
   z-index: 10;
+}
+
+
+/*--------------------------------------------------
+  Toggle Adjacent Sibling Pattern
+--------------------------------------------------*/
+
+.toggle-adjacent-sibling-label {
+  color: $primary-color;
+  font-weight: bold;
+  display: inline-block;
+}
+.toggle-adjacent-sibling {
+  display: none;
+  .toggle-adjacent-sibling-input:checked + & {
+    margin-top: 0.5rem;
+    display: block;
+  }
 }
 
 
