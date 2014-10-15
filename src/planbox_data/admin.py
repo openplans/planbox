@@ -3,6 +3,8 @@
 from __future__ import unicode_literals
 
 import json
+from django.conf import settings
+from django.contrib.admin import SimpleListFilter
 from django.contrib.gis import admin
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -205,8 +207,36 @@ class EventInline (admin.StackedInline):
     })
 
 
+class TemplateProjectListFilter(SimpleListFilter):
+    title = _('template project')
+    parameter_name = 'template'
+
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+        templates_profile = Profile.objects.get(slug=settings.TEMPLATES_PROFILE)
+        return [
+            (template.project_id, template.label or '(No label)')
+            for template in templates_profile.project_templates.all()
+        ]
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        return queryset.filter(template_id=self.value())
+
+
 class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
     list_display = ('_title', 'public', '_owner_slug', '_owner_email', '_owner_affiliation', 'location', '_updated_at', '_created_at', '_permalink')
+    list_filter = (TemplateProjectListFilter,)
     prepopulated_fields = {"slug": ("title",)}
     ordering = ('-updated_at',)
     search_fields = ('owner__name', 'owner__slug', 'location', 'title', 'slug')
