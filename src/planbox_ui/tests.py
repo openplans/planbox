@@ -4,7 +4,7 @@ from django.http import Http404
 from django.test import TestCase, RequestFactory
 from django.utils.timezone import datetime, now, timedelta, utc
 from django_nose.tools import assert_num_queries
-from nose.tools import assert_equal, assert_raises, assert_in, assert_not_in
+from nose.tools import assert_equal, assert_raises, assert_in, assert_not_in, assert_is_not_none
 from urllib import urlencode
 import responses
 
@@ -439,10 +439,29 @@ class ProjectPaymentsViewsTests (PlanBoxUITestCase):
         assert_equal(payment.payment_id, 12345)
         assert_equal(payment.user, auth)
 
-    @responses.activate
-    def test_empty_payment_and_customer_id_is_allowed(self):
-        # NOTE: This test should be obsoleted once the MoonClerkk customer_id
-        # issues are resolved.
+    def test_empty_payment_and_customer_id_is_not_allowed(self):
+        owner = Profile.objects.create(slug='openplans')
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        member = auth.profile
+        owner.members.add(member)
+
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
+
+        kwargs = {
+            'pk': project.pk
+        }
+
+        url = reverse('app-project-payments-success', kwargs=kwargs) + '?'
+        request = self.factory.get(url)
+        request.user = auth
+        response = project_payments_success_view(request, **kwargs)
+
+        assert_equal(response.status_code, 400)
+
+        project = Project.objects.get(slug='test-slug', owner=owner)
+        assert_is_not_none(project.expires_at)
+
+    def test_invalid_payment_or_customer_id_is_not_allowed(self):
         owner = Profile.objects.create(slug='openplans')
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         member = auth.profile
@@ -459,12 +478,10 @@ class ProjectPaymentsViewsTests (PlanBoxUITestCase):
         request.user = auth
         response = project_payments_success_view(request, **kwargs)
 
-        project_editor_url = reverse('app-project-editor', kwargs={'owner_slug': owner.slug, 'project_slug': project.slug})
-        assert_equal(response.status_code, 302)
-        assert_equal(response.url, project_editor_url)
+        assert_equal(response.status_code, 500)
 
         project = Project.objects.get(slug='test-slug', owner=owner)
-        assert_equal(project.expires_at, None)
+        assert_is_not_none(project.expires_at)
 
 
 class ProjectPageViewTests (PlanBoxUITestCase):

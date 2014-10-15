@@ -480,7 +480,7 @@ class ProjectPaymentsView (SSLRequired, LoginRequired, BaseExistingProjectView):
         return super(ProjectPaymentsView, self).get(request, pk=self.project.pk)
 
 
-class ProjectPaymentsSuccessView (SSLRequired, LoginRequired, AppMixin, View):
+class ProjectPaymentsSuccessView (SSLRequired, LoginRequired, AppMixin, TemplateView):
     def get_moonclerk_customer(self, request, customer_id, moonclerk_key):
         url = 'https://api.moonclerk.com/customers/%s' % (customer_id,)
         headers = {'Authorization': 'Token token=%s' % (moonclerk_key,),
@@ -538,6 +538,11 @@ class ProjectPaymentsSuccessView (SSLRequired, LoginRequired, AppMixin, View):
         project.expires_at = None
         project.save()
 
+    def get_payment_error(self):
+        self.template_name = 'payment-error.html'
+        context = self.get_context_data()
+        return self.render_to_response(context, status=500)
+
     def get(self, request, pk):
         project = get_object_or_404(Project.objects.select_related('owner'), pk=pk)
         moonclerk_key = settings.MOONCLERK_API_KEY
@@ -545,17 +550,22 @@ class ProjectPaymentsSuccessView (SSLRequired, LoginRequired, AppMixin, View):
         customer_id = request.GET.get('customer_id', None)
         payment_id = request.GET.get('payment_id', None)
 
-        # # NOTE: There's currently some issue with receiving the customer_id
-        # # from MoonClerk. For now, be lenient about not having one.
-        #
-        # if not (customer_id or payment_id):
-        #     return HttpResponse('You must specify either a customer_id or a payment_id.', status=400)
+        if customer_id is None and payment_id is None:
+            return HttpResponse('You must specify either a customer_id or a payment_id.', status=400)
 
         payment = customer = None
-        if customer_id:
-            customer = self.get_moonclerk_customer(request, customer_id, moonclerk_key)
-        if payment_id:
-            payment = self.get_moonclerk_payment(request, payment_id, moonclerk_key)
+        try:
+            if customer_id:
+                customer = self.get_moonclerk_customer(request, customer_id, moonclerk_key)
+            if payment_id:
+                payment = self.get_moonclerk_payment(request, payment_id, moonclerk_key)
+            assert customer or payment
+        except:
+            # Something went wrong and we weren't able to create a customer or
+            # payment.
+            from raven.contrib.django.models import client
+            client.captureException()
+            return self.get_payment_error()
 
         self.set_payment_info(project, payment, customer)
 
