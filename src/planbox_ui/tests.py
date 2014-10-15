@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.test import TestCase, RequestFactory
 from django.utils.timezone import datetime, now, timedelta, utc
+from django_nose.tools import assert_num_queries
 from nose.tools import assert_equal, assert_raises, assert_in, assert_not_in
 from urllib import urlencode
 import responses
@@ -45,7 +46,7 @@ class SignupViewTests (PlanBoxUITestCase):
 
         # If you get a 200 here, it's probably because of wrong form data.
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, reverse('app-user-profile'))
+        assert_equal(response.url, reverse('app-profile', kwargs=dict(profile_slug='openplans')))
 
         user_profile = Profile.objects.get(auth__username='mjumbewu')
         assert_equal(user_profile.affiliation, 'OpenPlans')
@@ -114,8 +115,52 @@ class SignupViewTests (PlanBoxUITestCase):
 
 
 class SigninViewTests (PlanBoxUITestCase):
-    def test_user_is_redirected_home_on_successful_signin(self):
-        UserAuth.objects.create_user(username='mjumbewu', password='123')
+    def test_user_with_no_teams_is_redirected_home_on_successful_signin(self):
+        user = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        assert_equal(user.profile.teams.all().count(), 0)
+
+        url = reverse('app-signin')
+
+        user_data = {
+            'username': 'mjumbewu',
+            'password': '123',
+        }
+
+        request = self.factory.post(url, data=user_data)
+        request.user = AnonymousUser()
+        request.session = SessionStore('session')
+        response = signin_view(request)
+        assert_equal(response.status_code, 302)
+        assert_equal(response.url, reverse('app-user-profile'))
+
+    def test_user_with_one_team_is_redirected_home_on_successful_signin(self):
+        user = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        team = Profile.objects.create(slug='openplans')
+        team.members.add(user.profile)
+        assert_equal(user.profile.teams.all().count(), 1)
+
+        url = reverse('app-signin')
+
+        user_data = {
+            'username': 'mjumbewu',
+            'password': '123',
+        }
+
+        request = self.factory.post(url, data=user_data)
+        request.user = AnonymousUser()
+        request.session = SessionStore('session')
+        response = signin_view(request)
+
+        assert_equal(response.status_code, 302)
+        assert_equal(response.url, reverse('app-profile', kwargs=dict(profile_slug='openplans')))
+
+    def test_user_with_multiple_teams_is_redirected_home_on_successful_signin(self):
+        user = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        teams = [Profile.objects.create(slug='team1'),
+                 Profile.objects.create(slug='team2')]
+        for team in teams: team.members.add(user.profile)
+        assert_equal(user.profile.teams.all().count(), 2)
+
         url = reverse('app-signin')
 
         user_data = {

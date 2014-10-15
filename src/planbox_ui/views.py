@@ -64,7 +64,15 @@ class AppMixin (object):
         return self.user_profile
 
     def get_home_url(self, obj=None):
-        return resolve_url('app-user-profile')
+        if obj is None:
+            profile = self.get_user_profile()
+        else:
+            profile = obj.profile
+
+        if profile and profile.teams.all().count() == 1:
+            return resolve_url('app-profile', profile_slug=profile.teams.all()[0].slug)
+        else:
+            return resolve_url('app-user-profile')
 
     def get_context_data(self, **kwargs):
         context = super(AppMixin, self).get_context_data(**kwargs)
