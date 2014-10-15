@@ -976,6 +976,9 @@ img.attachment-icon {
       left: -31.25rem;
       width: 20rem;
     }
+    @media #{$xlarge-up} {
+      bottom: 1rem;
+    }
   }
 
   .map {
@@ -1003,7 +1006,33 @@ img.attachment-icon {
     text-decoration: none;
     padding: 0.25em 0.5em;
   }
+
+  &.panel-open .shareabouts-close-button {
+    // Having the add button visible while place details are open
+    // means the close button can't stick out the top of the form
+    // overlapping the map.
+    @media #{$small-only} {
+      position: relative;
+      top: 0;
+      left: 0;
+      padding: 0.5rem 0.5rem 0.5rem 1rem;
+      margin-bottom: -0.5rem;
+      height: auto;
+      width: auto;
+      display: inline-block;
+      &:after {
+        content: 'CLOSE';
+        font-size: 0.75em;
+        margin-left: 0.25em;
+      }
+    }
+    @media #{$medium-up} {
+      box-shadow: -0.25em 5px 0 rgba(51, 51, 51, 0.2);
+    }
+  }
+
 }
+
 .shareabouts-geometry-set .form-instructions {
   display: none;
 }
@@ -1066,6 +1095,11 @@ img.attachment-icon {
 
 .shareabouts-panel {
   background-color: #fff;
+  @media #{$medium-up} {
+    .panel-open & {
+      box-shadow: -5px 0 0 rgba(51,51,51,0.2);
+    }
+  }
 }
 
 .shareabouts-panel-content {
@@ -1136,13 +1170,20 @@ img.attachment-icon {
   }
   @media #{$large-up} {
     position: relative;
-    z-index: 2;
-    margin-top: -5px;
+    z-index: 10;
+    top: -5px;
     &:before {
       width: 100%;
       height: 5px;
       margin-bottom: -5px;
       box-shadow: -3px -3px 0 rgba(51, 51, 51, 0.1);
+    }
+  }
+  @media #{$xlarge-up} {
+    top: -1rem;
+    &:before {
+      height: 1rem;
+      margin-bottom: -1rem;
     }
   }
   .project-tagline {
@@ -1154,8 +1195,15 @@ img.attachment-icon {
   height: 100%;
   .project-shareabouts {
     border: 0;
+
+    // set height of map on Shareabouts-specific layouts
     @media #{$medium-up} {
-      height: 60%; // set height of map on Shareabouts-specific layouts
+      height: 60%;
+      transition: height 0.2s ease-in-out;
+
+      &.panel-open {
+        height: 85%;
+      }
       &:after {
         content: '';
         display: block;
@@ -1582,3 +1630,22 @@ textarea.no-resize {
     text-transform: uppercase;
   }
 }
+
+
+/*--------------------------------------------------
+  Leaflet Overrides
+--------------------------------------------------*/
+
+.leaflet-bar {
+  box-shadow: -3px 3px 0 rgba(51, 51, 51, 0.1);
+  border-radius: 0;
+}
+.leaflet-bar a:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.leaflet-bar a:last-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
