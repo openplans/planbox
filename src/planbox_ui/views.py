@@ -480,7 +480,7 @@ class ProjectPaymentsView (SSLRequired, LoginRequired, BaseExistingProjectView):
         return super(ProjectPaymentsView, self).get(request, pk=self.project.pk)
 
 
-class ProjectPaymentsSuccessView (SSLRequired, LoginRequired, AppMixin, TemplateView):
+class ProjectPaymentsSuccessView (SSLRequired, LoginRequired, AppMixin, DetailView):
     def get_moonclerk_customer(self, request, customer_id, moonclerk_key):
         url = 'https://api.moonclerk.com/customers/%s' % (customer_id,)
         headers = {'Authorization': 'Token token=%s' % (moonclerk_key,),
@@ -569,9 +569,23 @@ class ProjectPaymentsSuccessView (SSLRequired, LoginRequired, AppMixin, Template
 
         self.set_payment_info(project, payment, customer)
 
-        return redirect('app-project-editor',
+        return redirect('app-project-activation-success',
             owner_slug=project.owner.slug,
             project_slug=project.slug)
+
+
+class ProjectActivationSuccessView (SSLRequired, LoginRequired, AppMixin, TemplateView):
+    template_name = 'payment-success.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectActivationSuccessView, self).get_context_data(**kwargs)
+        context['project'] = self.project
+        return context
+
+    def get(self, request, owner_slug, project_slug):
+        self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
+                                         owner__slug=owner_slug, slug__iexact=project_slug)
+        return super(ProjectActivationSuccessView, self).get(request, pk=self.project.pk)
 
 
 class ProjectPageView (ReadOnlyMixin, BaseExistingProjectView):
@@ -730,6 +744,7 @@ project_editor_view = ProjectEditorView.as_view()
 project_dashboard_view = ProjectDashboardView.as_view()
 project_payments_view = ProjectPaymentsView.as_view()
 project_payments_success_view = ProjectPaymentsSuccessView.as_view()
+project_activation_success_view = ProjectActivationSuccessView.as_view()
 project_page_view = ProjectPageView.as_view()
 profile_view = ProfileView.as_view()
 new_project_view = NewProjectView.as_view()

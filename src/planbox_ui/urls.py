@@ -18,7 +18,8 @@ from .views import (
 
     # Project views
     project_editor_view, project_payments_view, new_project_view, project_page_view,
-    project_payments_success_view, project_expired_view, project_dashboard_view,
+    project_payments_success_view, project_activation_success_view,
+    project_expired_view, project_dashboard_view,
 
     # Shareabouts auth
     shareabouts_auth_success_view, shareabouts_auth_error_view,
@@ -68,6 +69,8 @@ urlpatterns = patterns('',
     url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/edit/$', project_editor_view, name='app-project-editor'),
     url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/dashboard/$', project_dashboard_view, name='app-project-dashboard'),
     url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/payments/$', project_payments_view, name='app-project-payments'),
+    url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/payments/complete$', project_activation_success_view, name='app-project-activation-success'),
+
     # Read-only project page
     url(r'^(?P<owner_slug>[^/]+)/(?P<project_slug>[^/]+)/', project_page_view, name='app-project-page'),
 
