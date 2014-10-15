@@ -13,6 +13,7 @@ from django.http import HttpResponseRedirect
 from django.forms import TextInput, Textarea
 from django.forms.models import inlineformset_factory, modelform_factory
 from django.utils.html import format_html
+from django.utils.timezone import now
 from django.utils.translation import ugettext as _
 from django_ace import AceWidget
 from django_object_actions import DjangoObjectActions
@@ -212,13 +213,6 @@ class TemplateProjectListFilter(SimpleListFilter):
     parameter_name = 'template'
 
     def lookups(self, request, model_admin):
-        """
-        Returns a list of tuples. The first element in each
-        tuple is the coded value for the option that will
-        appear in the URL query. The second element is the
-        human-readable name for the option that will appear
-        in the right sidebar.
-        """
         templates_profile = Profile.objects.get(slug=settings.TEMPLATES_PROFILE)
         return [
             (template.project_id, template.label or '(No label)')
@@ -226,17 +220,34 @@ class TemplateProjectListFilter(SimpleListFilter):
         ]
 
     def queryset(self, request, queryset):
-        """
-        Returns the filtered queryset based on the value
-        provided in the query string and retrievable via
-        `self.value()`.
-        """
-        return queryset.filter(template_id=self.value())
+        if self.value():
+            return queryset.filter(template_id=self.value())
+        else:
+            return queryset
+
+
+class ExpiredProjectListFilter(SimpleListFilter):
+    title = _('expiration status')
+    parameter_name = 'is_expired'
+
+    def lookups(self, request, model_admin):
+        return [
+            ('yes', 'Expired'),
+            ('no', 'Not expired'),
+        ]
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.filter(expires_at__lte=now())
+        elif self.value == 'no':
+            return queryset.exclude(expires_at__lte=now())
+        else:
+            return queryset
 
 
 class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
-    list_display = ('_title', 'public', '_owner_slug', '_owner_email', '_owner_affiliation', 'location', '_updated_at', '_created_at', '_permalink')
-    list_filter = (TemplateProjectListFilter,)
+    list_display = ('_title', 'public', '_owner_slug', '_owner_email', '_owner_affiliation', 'location', '_expires_at', '_updated_at', '_created_at', '_permalink')
+    list_filter = (TemplateProjectListFilter, ExpiredProjectListFilter)
     prepopulated_fields = {"slug": ("title",)}
     ordering = ('-updated_at',)
     search_fields = ('owner__name', 'owner__slug', 'location', 'title', 'slug')
@@ -312,6 +323,14 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
     _api_url.short_description = _('API URL')
 
     # Format datetimes
+    def _expires_at(self, project):
+        if project.expires_at:
+            return project.expires_at.strftime('%Y-%m-%d %H:%M')
+        else:
+            return 'Never'
+    _expires_at.short_description = _('Expires')
+    _expires_at.admin_order_field = 'expires_at'
+
     def _updated_at(self, project):
         return project.updated_at.strftime('%Y-%m-%d %H:%M')
     _updated_at.short_description = _('Updated')
