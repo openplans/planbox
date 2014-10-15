@@ -45,18 +45,46 @@ class ProfileProjectTemplateInline (admin.TabularInline):
     }
 
 
+class ProfileTeamMembersInline (admin.TabularInline):
+    model = Profile.teams.through
+    fk_name = 'to_profile'
+    raw_id_fields = ('from_profile',)
+    verbose_name = 'member'
+    verbose_name_plural = 'members'
+    extra = 0
+
+
 class ProfileAdmin (admin.ModelAdmin):
-    list_display = ('__str__', '_date_joined', 'affiliation', 'email')
-    filter_horizontal = ('teams',)
+    list_display = ('__str__', '_date_joined', 'affiliation', 'email', '_is_user')
     raw_id_fields = ('auth',)
     search_fields = ('name', 'slug', 'email')
 
-    inlines = (ProfileProjectTemplateInline,)
+    # filter_horizontal and inlines set in get_form
 
     def _date_joined(self, obj):
         return obj.created_at
     _date_joined.short_description = _('Date joined')
     _date_joined.admin_order_field = 'created_at'
+
+    def _is_user(self, obj):
+        return obj.auth_id is not None
+    _is_user.boolean = True
+    _is_user.short_description = _('Is User?')
+    _is_user.admin_order_field = 'auth_id'
+
+    def get_form(self, request, obj=None, **kwargs):
+        self.exclude = []
+        self.inlines = [ProfileProjectTemplateInline]
+
+        if not obj or obj.is_user_profile():
+            # For user profiles, show the team selector
+            self.filter_horizontal = ['teams']
+        else:
+            # For team profiles, show the members in an inline
+            self.exclude.append('teams')
+            self.inlines.insert(0, ProfileTeamMembersInline)
+
+        return super(ProfileAdmin, self).get_form(request, obj, **kwargs)
 
 
 class SectionInline (admin.StackedInline):
