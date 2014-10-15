@@ -61,7 +61,13 @@ OpenPlans
         <li class="active has-dropdown">
           <a>{{ user.username }}</a>
           <ul class="dropdown">
-            {% include_handlebars 'user-menu.html' %}
+            {% for team in user.profile.teams.all %}
+            <li><a href="{% url 'app-profile' profile_slug=team.slug %}" data-log-click>{{ team.name }} Plans</a></li>
+            {% endfor %}
+            <li class="divider"></li>
+            <li><a href="/profile/" data-log-click>My Profile</a></li>
+            <li><a href="/change-password" data-log-click>Change Password</a></li>
+            <li><a href="/signout?next={{window_location}}" data-log-click>Sign Out</a></li>
           </ul>
         </li>
         {% else %}
