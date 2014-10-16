@@ -64,7 +64,15 @@ class AppMixin (object):
         return self.user_profile
 
     def get_home_url(self, obj=None):
-        return resolve_url('app-user-profile')
+        if obj is None:
+            profile = self.get_user_profile()
+        else:
+            profile = obj.profile
+
+        if profile and profile.teams.all().count() == 1:
+            return resolve_url('app-profile', profile_slug=profile.teams.all()[0].slug)
+        else:
+            return resolve_url('app-user-profile')
 
     def get_context_data(self, **kwargs):
         context = super(AppMixin, self).get_context_data(**kwargs)
@@ -472,7 +480,7 @@ class ProjectPaymentsView (SSLRequired, LoginRequired, BaseExistingProjectView):
         return super(ProjectPaymentsView, self).get(request, pk=self.project.pk)
 
 
-class ProjectPaymentsSuccessView (SSLRequired, LoginRequired, AppMixin, View):
+class ProjectPaymentsSuccessView (SSLRequired, LoginRequired, AppMixin, DetailView):
     def get_moonclerk_customer(self, request, customer_id, moonclerk_key):
         url = 'https://api.moonclerk.com/customers/%s' % (customer_id,)
         headers = {'Authorization': 'Token token=%s' % (moonclerk_key,),
@@ -530,30 +538,54 @@ class ProjectPaymentsSuccessView (SSLRequired, LoginRequired, AppMixin, View):
         project.expires_at = None
         project.save()
 
+    def get_payment_error(self):
+        self.template_name = 'payment-error.html'
+        context = self.get_context_data()
+        return self.render_to_response(context, status=500)
+
     def get(self, request, pk):
-        project = get_object_or_404(Project.objects.select_related('owner'), pk=pk)
+        self.object = project = get_object_or_404(Project.objects.select_related('owner'), pk=pk)
         moonclerk_key = settings.MOONCLERK_API_KEY
 
         customer_id = request.GET.get('customer_id', None)
         payment_id = request.GET.get('payment_id', None)
 
-        # # NOTE: There's currently some issue with receiving the customer_id
-        # # from MoonClerk. For now, be lenient about not having one.
-        #
-        # if not (customer_id or payment_id):
-        #     return HttpResponse('You must specify either a customer_id or a payment_id.', status=400)
+        if customer_id is None and payment_id is None:
+            return HttpResponse('You must specify either a customer_id or a payment_id.', status=400)
 
         payment = customer = None
-        if customer_id:
-            customer = self.get_moonclerk_customer(request, customer_id, moonclerk_key)
-        if payment_id:
-            payment = self.get_moonclerk_payment(request, payment_id, moonclerk_key)
+        try:
+            if customer_id:
+                customer = self.get_moonclerk_customer(request, customer_id, moonclerk_key)
+            if payment_id:
+                payment = self.get_moonclerk_payment(request, payment_id, moonclerk_key)
+            assert customer or payment
+        except:
+            # Something went wrong and we weren't able to create a customer or
+            # payment.
+            from raven.contrib.django.models import client
+            client.captureException()
+            return self.get_payment_error()
 
         self.set_payment_info(project, payment, customer)
 
-        return redirect('app-project-editor',
+        return redirect('app-project-activation-success',
             owner_slug=project.owner.slug,
             project_slug=project.slug)
+
+
+class ProjectActivationSuccessView (SSLRequired, LoginRequired, AppMixin, TemplateView):
+    template_name = 'payment-success.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectActivationSuccessView, self).get_context_data(**kwargs)
+        context['project'] = self.project
+        return context
+
+    def get(self, request, owner_slug, project_slug):
+        self.project = get_object_or_404(Project.objects.select_related('theme', 'owner'),
+                                         owner__slug=owner_slug, slug__iexact=project_slug)
+        return super(ProjectActivationSuccessView, self).get(request, pk=self.project.pk)
 
 
 class ProjectPageView (ReadOnlyMixin, BaseExistingProjectView):
@@ -712,6 +744,7 @@ project_editor_view = ProjectEditorView.as_view()
 project_dashboard_view = ProjectDashboardView.as_view()
 project_payments_view = ProjectPaymentsView.as_view()
 project_payments_success_view = ProjectPaymentsSuccessView.as_view()
+project_activation_success_view = ProjectActivationSuccessView.as_view()
 project_page_view = ProjectPageView.as_view()
 profile_view = ProfileView.as_view()
 new_project_view = NewProjectView.as_view()

@@ -49,13 +49,7 @@ OpenPlans
     <section class="top-bar-section">
       <ul class="right">
         <li><a href="http://blog.openplans.org/">Blog</a></li>
-        <li class="has-dropdown">
-          <a href="/about/">About</a>
-          <ul class="dropdown">
-            <li><a href="/about/">About OpenPlans</a></li>
-            <li><a href="/open-source/">Open Source</a></li>
-          </ul>
-        </li>
+        <li><a href="/about/">About</a></li>
         {% if user.is_authenticated %}
         <li class="has-dropdown">
           <a>Help</a>
@@ -67,7 +61,13 @@ OpenPlans
         <li class="active has-dropdown">
           <a>{{ user.username }}</a>
           <ul class="dropdown">
-            {% include_handlebars 'user-menu.html' %}
+            {% for team in user.profile.teams.all %}
+            <li><a href="{% url 'app-profile' profile_slug=team.slug %}" data-log-click>{{ team.name }} Plans</a></li>
+            {% endfor %}
+            <li class="divider"></li>
+            <li><a href="/profile/" data-log-click>My Profile</a></li>
+            <li><a href="/change-password" data-log-click>Change Password</a></li>
+            <li><a href="/signout?next={{window_location}}" data-log-click>Sign Out</a></li>
           </ul>
         </li>
         {% else %}

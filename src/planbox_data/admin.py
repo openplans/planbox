@@ -3,6 +3,8 @@
 from __future__ import unicode_literals
 
 import json
+from django.conf import settings
+from django.contrib.admin import SimpleListFilter
 from django.contrib.gis import admin
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -11,6 +13,7 @@ from django.http import HttpResponseRedirect
 from django.forms import TextInput, Textarea
 from django.forms.models import inlineformset_factory, modelform_factory
 from django.utils.html import format_html
+from django.utils.timezone import now
 from django.utils.translation import ugettext as _
 from django_ace import AceWidget
 from django_object_actions import DjangoObjectActions
@@ -45,18 +48,46 @@ class ProfileProjectTemplateInline (admin.TabularInline):
     }
 
 
+class ProfileTeamMembersInline (admin.TabularInline):
+    model = Profile.teams.through
+    fk_name = 'to_profile'
+    raw_id_fields = ('from_profile',)
+    verbose_name = 'member'
+    verbose_name_plural = 'members'
+    extra = 0
+
+
 class ProfileAdmin (admin.ModelAdmin):
-    list_display = ('__str__', '_date_joined', 'affiliation', 'email')
-    filter_horizontal = ('teams',)
+    list_display = ('__str__', '_date_joined', 'affiliation', 'email', '_is_user')
     raw_id_fields = ('auth',)
     search_fields = ('name', 'slug', 'email')
 
-    inlines = (ProfileProjectTemplateInline,)
+    # filter_horizontal and inlines set in get_form
 
     def _date_joined(self, obj):
         return obj.created_at
     _date_joined.short_description = _('Date joined')
     _date_joined.admin_order_field = 'created_at'
+
+    def _is_user(self, obj):
+        return obj.auth_id is not None
+    _is_user.boolean = True
+    _is_user.short_description = _('Is User?')
+    _is_user.admin_order_field = 'auth_id'
+
+    def get_form(self, request, obj=None, **kwargs):
+        self.exclude = []
+        self.inlines = [ProfileProjectTemplateInline]
+
+        if not obj or obj.is_user_profile():
+            # For user profiles, show the team selector
+            self.filter_horizontal = ['teams']
+        else:
+            # For team profiles, show the members in an inline
+            self.exclude.append('teams')
+            self.inlines.insert(0, ProfileTeamMembersInline)
+
+        return super(ProfileAdmin, self).get_form(request, obj, **kwargs)
 
 
 class SectionInline (admin.StackedInline):
@@ -177,8 +208,46 @@ class EventInline (admin.StackedInline):
     })
 
 
+class TemplateProjectListFilter(SimpleListFilter):
+    title = _('template project')
+    parameter_name = 'template'
+
+    def lookups(self, request, model_admin):
+        templates_profile = Profile.objects.get(slug=settings.TEMPLATES_PROFILE)
+        return [
+            (template.project_id, template.label or '(No label)')
+            for template in templates_profile.project_templates.all()
+        ]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(template_id=self.value())
+        else:
+            return queryset
+
+
+class ExpiredProjectListFilter(SimpleListFilter):
+    title = _('expiration status')
+    parameter_name = 'is_expired'
+
+    def lookups(self, request, model_admin):
+        return [
+            ('yes', 'Expired'),
+            ('no', 'Not expired'),
+        ]
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.filter(expires_at__lte=now())
+        elif self.value == 'no':
+            return queryset.exclude(expires_at__lte=now())
+        else:
+            return queryset
+
+
 class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
-    list_display = ('_title', 'public', '_owner_slug', '_owner_email', '_owner_affiliation', 'location', '_updated_at', '_created_at', '_permalink')
+    list_display = ('_title', 'public', '_owner_slug', '_owner_email', '_owner_affiliation', 'location', '_expires_at', '_updated_at', '_created_at', '_permalink')
+    list_filter = (TemplateProjectListFilter, ExpiredProjectListFilter)
     prepopulated_fields = {"slug": ("title",)}
     ordering = ('-updated_at',)
     search_fields = ('owner__name', 'owner__slug', 'location', 'title', 'slug')
@@ -254,6 +323,14 @@ class ProjectAdmin (DjangoObjectActions, admin.ModelAdmin):
     _api_url.short_description = _('API URL')
 
     # Format datetimes
+    def _expires_at(self, project):
+        if project.expires_at:
+            return project.expires_at.strftime('%Y-%m-%d %H:%M')
+        else:
+            return 'Never'
+    _expires_at.short_description = _('Expires')
+    _expires_at.admin_order_field = 'expires_at'
+
     def _updated_at(self, project):
         return project.updated_at.strftime('%Y-%m-%d %H:%M')
     _updated_at.short_description = _('Updated')

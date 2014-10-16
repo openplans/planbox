@@ -3,7 +3,8 @@ from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.test import TestCase, RequestFactory
 from django.utils.timezone import datetime, now, timedelta, utc
-from nose.tools import assert_equal, assert_raises, assert_in, assert_not_in
+from django_nose.tools import assert_num_queries
+from nose.tools import assert_equal, assert_raises, assert_in, assert_not_in, assert_is_not_none
 from urllib import urlencode
 import responses
 
@@ -45,7 +46,7 @@ class SignupViewTests (PlanBoxUITestCase):
 
         # If you get a 200 here, it's probably because of wrong form data.
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, reverse('app-user-profile'))
+        assert_equal(response.url, reverse('app-profile', kwargs=dict(profile_slug='openplans')))
 
         user_profile = Profile.objects.get(auth__username='mjumbewu')
         assert_equal(user_profile.affiliation, 'OpenPlans')
@@ -114,8 +115,52 @@ class SignupViewTests (PlanBoxUITestCase):
 
 
 class SigninViewTests (PlanBoxUITestCase):
-    def test_user_is_redirected_home_on_successful_signin(self):
-        UserAuth.objects.create_user(username='mjumbewu', password='123')
+    def test_user_with_no_teams_is_redirected_home_on_successful_signin(self):
+        user = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        assert_equal(user.profile.teams.all().count(), 0)
+
+        url = reverse('app-signin')
+
+        user_data = {
+            'username': 'mjumbewu',
+            'password': '123',
+        }
+
+        request = self.factory.post(url, data=user_data)
+        request.user = AnonymousUser()
+        request.session = SessionStore('session')
+        response = signin_view(request)
+        assert_equal(response.status_code, 302)
+        assert_equal(response.url, reverse('app-user-profile'))
+
+    def test_user_with_one_team_is_redirected_home_on_successful_signin(self):
+        user = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        team = Profile.objects.create(slug='openplans')
+        team.members.add(user.profile)
+        assert_equal(user.profile.teams.all().count(), 1)
+
+        url = reverse('app-signin')
+
+        user_data = {
+            'username': 'mjumbewu',
+            'password': '123',
+        }
+
+        request = self.factory.post(url, data=user_data)
+        request.user = AnonymousUser()
+        request.session = SessionStore('session')
+        response = signin_view(request)
+
+        assert_equal(response.status_code, 302)
+        assert_equal(response.url, reverse('app-profile', kwargs=dict(profile_slug='openplans')))
+
+    def test_user_with_multiple_teams_is_redirected_home_on_successful_signin(self):
+        user = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        teams = [Profile.objects.create(slug='team1'),
+                 Profile.objects.create(slug='team2')]
+        for team in teams: team.members.add(user.profile)
+        assert_equal(user.profile.teams.all().count(), 2)
+
         url = reverse('app-signin')
 
         user_data = {
@@ -352,9 +397,9 @@ class ProjectPaymentsViewsTests (PlanBoxUITestCase):
         request.user = auth
         response = project_payments_success_view(request, **kwargs)
 
-        project_editor_url = reverse('app-project-editor', kwargs={'owner_slug': owner.slug, 'project_slug': project.slug})
+        project_activation_url = reverse('app-project-activation-success', kwargs={'owner_slug': owner.slug, 'project_slug': project.slug})
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, project_editor_url)
+        assert_equal(response.url, project_activation_url)
 
         project = Project.objects.get(slug='test-slug', owner=owner)
         customer = project.customer
@@ -384,9 +429,9 @@ class ProjectPaymentsViewsTests (PlanBoxUITestCase):
         request.user = auth
         response = project_payments_success_view(request, **kwargs)
 
-        project_editor_url = reverse('app-project-editor', kwargs={'owner_slug': owner.slug, 'project_slug': project.slug})
+        project_activation_url = reverse('app-project-activation-success', kwargs={'owner_slug': owner.slug, 'project_slug': project.slug})
         assert_equal(response.status_code, 302)
-        assert_equal(response.url, project_editor_url)
+        assert_equal(response.url, project_activation_url)
 
         project = Project.objects.get(slug='test-slug', owner=owner)
         assert_equal(project.payments.all().count(), 1)
@@ -394,10 +439,29 @@ class ProjectPaymentsViewsTests (PlanBoxUITestCase):
         assert_equal(payment.payment_id, 12345)
         assert_equal(payment.user, auth)
 
-    @responses.activate
-    def test_empty_payment_and_customer_id_is_allowed(self):
-        # NOTE: This test should be obsoleted once the MoonClerkk customer_id
-        # issues are resolved.
+    def test_empty_payment_and_customer_id_is_not_allowed(self):
+        owner = Profile.objects.create(slug='openplans')
+        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
+        member = auth.profile
+        owner.members.add(member)
+
+        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=owner, public=True)
+
+        kwargs = {
+            'pk': project.pk
+        }
+
+        url = reverse('app-project-payments-success', kwargs=kwargs) + '?'
+        request = self.factory.get(url)
+        request.user = auth
+        response = project_payments_success_view(request, **kwargs)
+
+        assert_equal(response.status_code, 400)
+
+        project = Project.objects.get(slug='test-slug', owner=owner)
+        assert_is_not_none(project.expires_at)
+
+    def test_invalid_payment_or_customer_id_is_not_allowed(self):
         owner = Profile.objects.create(slug='openplans')
         auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
         member = auth.profile
@@ -414,12 +478,10 @@ class ProjectPaymentsViewsTests (PlanBoxUITestCase):
         request.user = auth
         response = project_payments_success_view(request, **kwargs)
 
-        project_editor_url = reverse('app-project-editor', kwargs={'owner_slug': owner.slug, 'project_slug': project.slug})
-        assert_equal(response.status_code, 302)
-        assert_equal(response.url, project_editor_url)
+        assert_equal(response.status_code, 500)
 
         project = Project.objects.get(slug='test-slug', owner=owner)
-        assert_equal(project.expires_at, None)
+        assert_is_not_none(project.expires_at)
 
 
 class ProjectPageViewTests (PlanBoxUITestCase):
