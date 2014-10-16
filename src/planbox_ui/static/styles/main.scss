@@ -1199,11 +1199,11 @@ img.attachment-icon {
     // set height of map on Shareabouts-specific layouts
     @media #{$medium-up} {
       height: 60%;
-      transition: height 0.2s ease-in-out;
-
-      &.panel-open {
-        height: 85%;
-      }
+//      TODO: This breaks the map center, giving new points the wrong lat/lon
+//      transition: height 0.2s ease-in-out;
+//      &.panel-open {
+//        height: 85%;
+//      }
       &:after {
         content: '';
         display: block;
