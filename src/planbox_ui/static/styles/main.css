@@ -11592,11 +11592,6 @@ img.attachment-icon {
   /* line 1196, main.scss */
   .shareabouts-page .project-shareabouts {
     height: 60%;
-    transition: height 0.2s ease-in-out;
-  }
-  /* line 1204, main.scss */
-  .shareabouts-page .project-shareabouts.panel-open {
-    height: 85%;
   }
   /* line 1207, main.scss */
   .shareabouts-page .project-shareabouts:after {
