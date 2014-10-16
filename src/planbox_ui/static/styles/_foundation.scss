@@ -409,3 +409,17 @@ input[type="url"] {
     margin: -0.25rem -0.75rem;
   }
 }
+
+
+/*--------------------------------------------------
+  Tables
+--------------------------------------------------*/
+
+.table-container {
+  max-width: 100%;
+  overflow: scroll;
+  table {
+    margin-bottom: 0;
+  }
+}
+

@@ -5734,7 +5734,7 @@ ul.pagination {
 ul.pagination li {
   height: 1.5rem;
   color: #222222;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   margin-left: 0.3125rem;
 }
 /* line 110, ../bower_components/foundation/scss/foundation/components/_pagination.scss */
@@ -6662,46 +6662,46 @@ dialog[open] {
 table {
   background: #FFFFFF;
   margin-bottom: 1.25rem;
-  border: solid 1px #DDDDDD;
+  border: solid 1px #eee;
   table-layout: auto;
 }
 /* line 69, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table caption {
   background: transparent;
-  color: #222222;
+  color: #6c7180;
   font-size: 1rem;
   font-weight: bold;
 }
 /* line 78, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table thead {
-  background: #F5F5F5;
+  background: #eee;
 }
 /* line 82, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table thead tr th,
 table thead tr td {
-  padding: 0.5rem 0.625rem 0.625rem;
-  font-size: 0.875rem;
+  padding: 0.1875rem 0.375rem 0.25rem;
+  font-size: 0.6875rem;
   font-weight: bold;
-  color: #222222;
+  color: #6c7180;
 }
 /* line 92, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table tfoot {
-  background: #F5F5F5;
+  background: #eee;
 }
 /* line 96, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table tfoot tr th,
 table tfoot tr td {
-  padding: 0.5rem 0.625rem 0.625rem;
-  font-size: 0.875rem;
+  padding: 0.1875rem 0.375rem 0.25rem;
+  font-size: 0.6875rem;
   font-weight: bold;
-  color: #222222;
+  color: #6c7180;
 }
 /* line 107, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table tr th,
 table tr td {
-  padding: 0.5625rem 0.625rem;
-  font-size: 0.875rem;
-  color: #222222;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  color: #6c7180;
   text-align: left;
 }
 /* line 115, ../bower_components/foundation/scss/foundation/components/_tables.scss */
@@ -6716,7 +6716,7 @@ table tbody tr th,
 table tbody tr td,
 table tr td {
   display: table-cell;
-  line-height: 1.125rem;
+  line-height: 1.2;
 }
 
 /* line 155, ../bower_components/foundation/scss/foundation/components/_type.scss */
@@ -9902,6 +9902,19 @@ input[type="url"].inline-input {
 /* line 408, _foundation.scss */
 .panel-header .button {
   margin: -0.25rem -0.75rem;
+}
+
+/*--------------------------------------------------
+  Tables
+--------------------------------------------------*/
+/* line 418, _foundation.scss */
+.table-container {
+  max-width: 100%;
+  overflow: scroll;
+}
+/* line 421, _foundation.scss */
+.table-container table {
+  margin-bottom: 0;
 }
 
 /*--------------------------------------------------

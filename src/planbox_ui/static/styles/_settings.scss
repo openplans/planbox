@@ -954,6 +954,7 @@ $label-font-color: #6c7180;
 // $pagination-li-height: rem-calc(24);
 // $pagination-li-font-color: $jet;
 // $pagination-li-font-size: rem-calc(14);
+$pagination-li-font-size: rem-calc(12);
 // $pagination-li-margin: rem-calc(5);
 
 // We use these for the pagination anchor links
@@ -1315,19 +1316,28 @@ $switch-bg: #c9c9c9;
 // $table-border-style: solid;
 // $table-border-size: 1px;
 // $table-border-color: $gainsboro;
+$table-border-color: #eee;
 
 // These control the table head styles
 // $table-head-bg: $white-smoke  ;
+$table-head-bg: #eee;
 // $table-head-font-size: rem-calc(14);
+$table-head-font-size: rem-calc(11);
 // $table-head-font-color: $jet;
+$table-head-font-color: $body-font-color;
 // $table-head-font-weight: $font-weight-bold;
 // $table-head-padding: rem-calc(8 10 10);
+$table-head-padding: rem-calc(3 6 4);
 
 // These control the row padding and font styles
 // $table-row-padding: rem-calc(9 10);
+$table-row-padding: rem-calc(4 8);
 // $table-row-font-size: rem-calc(14);
+$table-row-font-size: rem-calc(11);
 // $table-row-font-color: $jet;
+$table-row-font-color: $body-font-color;
 // $table-line-height: rem-calc(18);
+$table-line-height: 1.2;
 
 // These are for controlling the display and margin of tables
 // $table-display: table-cell;
