@@ -245,7 +245,16 @@ section, footer {
   Toggle Sibling Pattern
 --------------------------------------------------*/
 
-.toggle-sibling-label {}
+.toggle-sibling-label {
+  &.button {
+    background-color: #eee;
+    color: $body-font-color;
+  }
+  input:checked + &.button {
+    background-color: $primary-color;
+    color: #fff;
+  }
+}
 @for $i from 1 through 10 {
   .toggle-sibling-#{$i} {
     display: none;
