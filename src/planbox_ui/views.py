@@ -66,8 +66,10 @@ class AppMixin (object):
     def get_home_url(self, obj=None):
         if obj is None:
             profile = self.get_user_profile()
-        else:
+        elif hasattr(obj, 'profile'):
             profile = obj.profile
+        else:
+            profile = obj
 
         if profile and profile.teams.all().count() == 1:
             return resolve_url('app-profile', profile_slug=profile.teams.all()[0].slug)
