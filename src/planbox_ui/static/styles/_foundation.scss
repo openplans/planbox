@@ -144,6 +144,9 @@ p {
 a.alert {
   color: $alert-color;
 }
+.link {
+  color: $primary-color;
+}
 
 // Heavy-handed list styles... ugh (I've submitted an issue for this on github. -AC)
 .project-text-content, .pen {
@@ -167,8 +170,19 @@ img {
 
 
 /*--------------------------------------------------
-  Grid
+  Grid & Box Model
 --------------------------------------------------*/
+
+// Force Display
+.force-inline {
+  display: inline !important;
+}
+.force-inline-block {
+  display: inline-block !important;
+}
+.force-block {
+  display: block !important;
+}
 
 // Add .full-width to .row and the element fills the width of the page (or container).
 .full-width {

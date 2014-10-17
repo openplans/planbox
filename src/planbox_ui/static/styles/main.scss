@@ -242,18 +242,15 @@ section, footer {
 
 
 /*--------------------------------------------------
-  Toggle Adjacent Sibling Pattern
+  Toggle Sibling Pattern
 --------------------------------------------------*/
 
-.toggle-adjacent-sibling-label {
-  color: $primary-color;
-  font-weight: bold;
-  display: inline-block;
-}
-.toggle-adjacent-sibling {
-  display: none;
-  .toggle-adjacent-sibling-input:checked + & {
-    margin-top: 0.5rem;
+.toggle-sibling-label {}
+@for $i from 1 through 10 {
+  .toggle-sibling-#{$i} {
+    display: none;
+  }
+  .toggle-sibling-input-#{$i}:checked ~ .toggle-sibling-#{$i} {
     display: block;
   }
 }
