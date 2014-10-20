@@ -10,6 +10,8 @@
   {% else %}
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" />
   {% endif %}
+
+  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/tablesaw/dist/tablesaw.css" type="text/css" />
 {% endblock %}
 
 {% block appscripts %}
