@@ -396,6 +396,18 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/base-app.js',
             '<%= yeoman.app %>/scripts/app.js'
           ],
+          '<%= yeoman.app %>/scripts/app-project-dashboard.min.js': [
+            '<%= yeoman.app %>/bower_components/tablesaw/dist/tablesaw.js',
+            '<%= yeoman.app %>/scripts/utils.js',
+            '<%= yeoman.app %>/scripts/handlebars-helpers.js',
+            '<%= yeoman.app %>/scripts/file-upload.js',
+            '<%= yeoman.app %>/scripts/models.js',
+            '<%= yeoman.app %>/scripts/views/mixins.js',
+            '<%= yeoman.app %>/scripts/project-dashboard/project-dashboard-view.js',
+            '<%= yeoman.app %>/scripts/project-dashboard/activity-panel-view.js',
+            '<%= yeoman.app %>/scripts/base-app.js',
+            '<%= yeoman.app %>/scripts/project-dashboard/app.js'
+          ],
           '<%= yeoman.app %>/scripts/app-profile-admin.min.js': [
             '<%= yeoman.app %>/scripts/utils.js',
             '<%= yeoman.app %>/scripts/handlebars-helpers.js',
