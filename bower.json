@@ -27,5 +27,8 @@
     "leaflet": "~0.7.3",
     "tablesaw": "~0.1.6"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "jquery": "~2.1.0"
+  }
 }
