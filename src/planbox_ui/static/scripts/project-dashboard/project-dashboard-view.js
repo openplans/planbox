@@ -21,6 +21,8 @@ var Planbox = Planbox || {};
     onShow: function() {
       this.app.triggerMethod('show:projectDashboard:before', this);
       this.showRegions();
+
+      this.$('table').table();
       this.app.triggerMethod('show:projectDashboard:after', this);
     },
 
