@@ -113,8 +113,10 @@
     // GA Dimensions:
     // 1 - Domain
     // 2 - Root path
+    // 3 - Username
     ga('set', 'dimension1', '{{ request.domain_mapping.domain|safe }}');
     ga('set', 'dimension2', '{{ request.domain_mapping.root_path|safe }}');
+    ga('set', 'dimension3', '{% if user.profile %}{{ user.username }}{% endif %}');
 
     // Override the page info as derived from window.location with what is
     // attached to the request, which takes into account the domain mapping.

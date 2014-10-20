@@ -334,7 +334,8 @@ var Planbox = Planbox || {};
 
       // Only bind the scroll event if a magellan widget exists. They don't if
       // there are not enough items to warrant it.
-      if ($('[data-magellan-expedition]').length) {
+      if ($('[data-magellan-expedition]').length > 0 &&
+          $('[data-magellan-arrival]').length > 0) {
         $(window).off('scroll', debouncedScrollHandler).on('scroll', debouncedScrollHandler);
 
         $(document).on('click', '[data-magellan-link]', function(evt) {

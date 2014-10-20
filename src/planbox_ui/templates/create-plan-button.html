@@ -1,10 +1,12 @@
+<p class="some-margin-bottom some-padding-top"><strong>Set up a fully-functional trial plan using this template:</strong></p>
+
 {% if user.is_authenticated and user.profile %}
 
   {% with teams=user.profile.teams.all %}
   {% if teams|length == 1 %}
 
     {% with team=teams.0 %}
-    <a class="button expand large radius" href="{% url 'app-new-project' team.slug %}?template=templates/{{ template }}">Create Plan</a>
+    <a class="button expand large radius" href="{% url 'app-new-project' team.slug %}?template=templates/{{ template }}">Create a Plan</a>
     {% endwith %}
 
   {% else %}
@@ -21,6 +23,6 @@
 
 {% else %}
 
-  <a class="button expand large radius" href="{% url 'app-signin' %}?next={{ request.get_full_path }}">Sign In</a>
+  <a class="button expand large radius" href="{% url 'app-signin' %}?next={{ request.get_full_path }}">Create a Plan</a>
 
 {% endif %} {# user.is_authenticated #}
