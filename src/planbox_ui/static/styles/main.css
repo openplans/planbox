@@ -12199,15 +12199,36 @@ textarea.no-resize {
 }
 
 /*--------------------------------------------------
+  Leaflet Overrides
+--------------------------------------------------*/
+/* line 1609, main.scss */
+.leaflet-bar {
+  box-shadow: -3px 3px 0 rgba(51, 51, 51, 0.1);
+  border-radius: 0;
+}
+
+/* line 1613, main.scss */
+.leaflet-bar a:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* line 1617, main.scss */
+.leaflet-bar a:last-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/*--------------------------------------------------
   Project Dashboard / Widgets
 --------------------------------------------------*/
-/* line 1610, main.scss */
+/* line 1629, main.scss */
 .stat-widget.coming-soon {
   background-color: #f6f6f6;
   color: #ddd;
   position: relative;
 }
-/* line 1614, main.scss */
+/* line 1633, main.scss */
 .stat-widget.coming-soon:before {
   content: "Coming Soon...";
   position: absolute;
@@ -12221,86 +12242,62 @@ textarea.no-resize {
   font-style: italic;
 }
 
-/* line 1630, main.scss */
+/* line 1648, main.scss */
 .stat-widget-big-number .count {
   display: block;
   font-size: 2.5rem;
   line-height: 1.2;
 }
-/* line 1635, main.scss */
+/* line 1653, main.scss */
 .stat-widget-big-number .unit {
   text-transform: uppercase;
 }
 
-/*--------------------------------------------------
-  Leaflet Overrides
---------------------------------------------------*/
-/* line 1645, main.scss */
-.leaflet-bar {
-  box-shadow: -3px 3px 0 rgba(51, 51, 51, 0.1);
-  border-radius: 0;
-}
-
-/* line 1649, main.scss */
-.leaflet-bar a:first-child {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-/* line 1653, main.scss */
-.leaflet-bar a:last-child {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-/*--------------------------------------------------
-  Dashboard Tables
---------------------------------------------------*/
-/* line 1663, main.scss */
+/* line 1659, main.scss */
 .table-container {
   max-width: 100%;
   overflow: scroll;
 }
-/* line 1666, main.scss */
+/* line 1662, main.scss */
 .table-container table {
   margin-bottom: 0;
   border: 0;
 }
-
-@media only screen and (min-width: 40.063em) {
-  /* line 1673, main.scss */
-  .table-column-10em {
-    min-width: 10em;
-  }
-
-  /* line 1674, main.scss */
-  .table-column-20em {
-    min-width: 20em;
-  }
-
-  /* line 1675, main.scss */
-  .table-column-30em {
-    min-width: 30em;
-  }
-
-  /* line 1676, main.scss */
-  .table-column-40em {
-    min-width: 40em;
-  }
-
-  /* line 1677, main.scss */
-  .table-column-50em {
-    min-width: 50em;
-  }
-
-  /* line 1678, main.scss */
-  .table-column-75em {
-    min-width: 75em;
-  }
-}
-/* line 1680, main.scss */
-td > div {
+/* line 1666, main.scss */
+.table-container td > div {
   max-height: 6.5em;
   max-width: 75em;
   overflow: scroll;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 1672, main.scss */
+  .table-container .table-column-10em {
+    min-width: 10em;
+  }
+  /* line 1673, main.scss */
+  .table-container .table-column-20em {
+    min-width: 20em;
+  }
+  /* line 1674, main.scss */
+  .table-container .table-column-30em {
+    min-width: 30em;
+  }
+  /* line 1675, main.scss */
+  .table-container .table-column-40em {
+    min-width: 40em;
+  }
+  /* line 1676, main.scss */
+  .table-container .table-column-50em {
+    min-width: 50em;
+  }
+  /* line 1677, main.scss */
+  .table-container .table-column-75em {
+    min-width: 75em;
+  }
+}
+
+/* line 1684, main.scss */
+.tab-title > a:focus,
+.tabs-content [tabindex]:focus {
+  outline: 0;
 }
