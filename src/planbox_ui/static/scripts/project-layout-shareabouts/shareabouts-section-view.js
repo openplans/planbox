@@ -11,6 +11,13 @@ var Planbox = Planbox || {};
 
     getShareaboutsEl: function() {
       return this.$el;
+    },
+
+    onShow: function() {
+      NS.BaseShareaboutsSectionView.prototype.onShow.apply(this, arguments);
+      this.getShareaboutsEl().on('showpanel', function() {
+        $('body').animate({scrollTop: 0}, 'fast');
+      });
     }
   });
 
