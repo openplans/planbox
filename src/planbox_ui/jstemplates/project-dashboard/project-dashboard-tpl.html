@@ -1,9 +1,11 @@
-  <h3 class="small-12 columns">{{ project.title }}</h3>
-  <div class="small-2 columns">
-    <a href="../edit/">Edit<span class="show-for-medium-up"> Plan</span></a>
-  </div>
-  <div class="small-10 columns">
-    <ul class="tabs right" data-tab role="tablist" data-options="deep_linking:true">
+<div class="row full-width some-padding-top">
+  <h3 class="small-12 columns no-margins">{{ title }}</h3>
+  <p class="small-4 columns text-small no-margins">
+    <a href="../edit/" class="button tiny less-padding no-margin-bottom">Edit<span class="show-for-medium-up">&nbsp;Plan</span></a>
+    <a href="../" class="button tiny less-padding no-margin-bottom">View<span class="show-for-medium-up">&nbsp;Plan</span></a>
+  </p>
+  <div class="small-8 columns">
+    <ul class="tabs right" data-tab role="tablist" data-options="deep_linking:true;scroll_to_content:false;">
       <li class="tab-title active" role="presentational" ><a href="#panel-activity" role="tab" tabindex="0" aria-selected="true" controls="panel-activity">Activity</a></li>
       <li class="tab-title" role="presentational" ><a href="#panel-manage" role="tab" tabindex="0" aria-selected="false">Manage</a></li>
       <!-- li class="tab-title" role="presentational" ><a href="#panel-export" role="tab" tabindex="0" aria-selected="false" controls="panel-export">Export</a></li -->
@@ -82,7 +84,9 @@
         <table class="tablesaw tablesaw-stack" data-mode="stack" role="grid">
         <thead>
         <th>AREA_NUMBE</th>
-        <th>CommArea</th>
+        <th>
+          <div class="table-column-10em">CommArea</div>
+        </th>
         <th>WARD</th>
         <th>_imported_id</th>
         <th>attachments.0.created_datetime</th>
@@ -92,7 +96,9 @@
         <th>created_datetime</th>
         <th>dataset</th>
         <th>date_surveyed</th>
-        <th>description</th>
+        <th>
+          <div class="table-column-50em">description</div>
+        </th>
         <th>geometry</th>
         <th>id</th>
         <th>location.adminArea1</th>
@@ -424,9 +430,9 @@
         <td>2014-08-02T07:01:40.303504+00:00</td>
         <td>374</td>
         <td >6/19/14</td>
-        <td>There's a Mariano's, Chase bank, and a
-        McDonald's at this intersection.  A bike rack or two in the general area
-        would be nice, so that people didn't have to lock to poles.</td>
+        <td>
+          There's a Mariano's, Chase bank, and a McDonald's at this intersection.  A bike rack or two in the general area would be nice, so that people didn't have to lock to poles.
+        </td>
         <td>POINT (-87.6549179999999950
         41.9765650000000008)</td>
         <td>233902</td>
@@ -494,20 +500,21 @@
         <td>2014-06-27T18:25:01.279688+00:00</td>
         <td>374</td>
         <td></td>
-        <td>Hello there! <br>
-        <br>
-        <br>
-        <br>
-        I am requesting on behalf of Ignite GL. We are a gaming business which
-        brings many kids to our location, and many of which have bikes. Since the
-        area does not have many poles, and it's summer (meaning more cyclists), we
-        are lacking space for these bikes. Many people are now trying to park on our
-        handicap ramp, which we cannot have. We would like to request at least 2 bike
-        parking spots, if allowed. Thank you so much for your time!<br>
-        <br>
-        <br>
-        <br>
-        Amy</td>
+        <td>
+          <div>
+            Hello there! <br>
+            I am requesting on behalf of Ignite GL. We are a gaming business which
+            brings many kids to our location, and many of which have bikes. Since the
+            area does not have many poles, and it's summer (meaning more cyclists), we
+            are lacking space for these bikes. Many people are now trying to park on our
+            handicap ramp, which we cannot have. We would like to request at least 2 bike
+            parking spots, if allowed. Thank you so much for your time!<br>
+            <br>
+            <br>
+            <br>
+            Amy
+          </div>
+        </td>
         <td>POINT (-87.7022266387999991
         41.9421352541000019)</td>
         <td>203885</td>
@@ -534,9 +541,11 @@
         <td>s</td>
         <td>bikeparking</td>
         <td>Ignite Gaming Lounge </td>
-        <td>Sidewalk here is very narrow - CDOT requires a
-        10' or wider sidewalk to install bike racks, in order to not block pedestrian
-        flow.</td>
+        <td>
+          <div>
+            Sidewalk here is very narrow - CDOT requires a 10' or wider sidewalk to install bike racks, in order to not block pedestrian flow.
+          </div>
+        </td>
         <td colspan=2>lorem@gmail.com</td>
         <td></td>
         <td></td>
@@ -1533,3 +1542,4 @@
     <section role="tabpanel" aria-hidden="false" class="content active" id="panel-export">
     </section>
   </div>
+</div>

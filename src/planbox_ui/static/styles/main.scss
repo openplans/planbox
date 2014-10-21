@@ -1655,3 +1655,41 @@ textarea.no-resize {
   border-bottom-right-radius: 0;
 }
 
+
+/*--------------------------------------------------
+  Tablesaw Overrides
+--------------------------------------------------*/
+
+table.tablesaw {
+  font-size: 0.75rem;
+}
+.tablesaw-toolbar {
+//  font-size: .875em;
+}
+.tablesaw-bar .tablesaw-toolbar .btn {
+  font-family: $body-font-family;
+}
+table.tablesaw thead th,
+table.tablesaw thead td {
+  color: $body-font-color;
+//  font-size: .9em;
+}
+table.tablesaw td,
+table.tablesaw tbody th {
+  font-size: 1em;
+}
+.tablesaw-cell-label-top {
+//  text-transform: uppercase;
+//  font-size: .9em;
+//  font-weight: normal;
+}
+.tablesaw-cell-label {
+//  font-size: .65em;
+//  text-transform: uppercase;
+//  color: #888;
+  font-family: $body-font-family;
+}
+
+table.tablesaw-stack tbody tr {
+  border-bottom: 0;
+}

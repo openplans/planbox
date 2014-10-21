@@ -6656,7 +6656,7 @@ dialog[open] {
 
 /* line 131, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table {
-  background: #FFFFFF;
+  background: #f9f9f9;
   margin-bottom: 1.25rem;
   border: solid 1px #eee;
   table-layout: auto;
@@ -6702,7 +6702,7 @@ table tr td {
 }
 /* line 115, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table tr.even, table tr.alt, table tr:nth-of-type(even) {
-  background: #F9F9F9;
+  background: #eee;
 }
 /* line 120, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table thead tr th,
@@ -9923,14 +9923,52 @@ input[type="url"].inline-input {
 /*--------------------------------------------------
   Tables
 --------------------------------------------------*/
-/* line 418, _foundation.scss */
+/* line 432, _foundation.scss */
 .table-container {
   max-width: 100%;
   overflow: scroll;
 }
-/* line 421, _foundation.scss */
+/* line 435, _foundation.scss */
 .table-container table {
   margin-bottom: 0;
+}
+
+@media only screen and (min-width: 40.063em) {
+  /* line 441, _foundation.scss */
+  .table-column-10em {
+    min-width: 10em;
+  }
+
+  /* line 442, _foundation.scss */
+  .table-column-20em {
+    min-width: 20em;
+  }
+
+  /* line 443, _foundation.scss */
+  .table-column-30em {
+    min-width: 30em;
+  }
+
+  /* line 444, _foundation.scss */
+  .table-column-40em {
+    min-width: 40em;
+  }
+
+  /* line 445, _foundation.scss */
+  .table-column-50em {
+    min-width: 50em;
+  }
+
+  /* line 446, _foundation.scss */
+  .table-column-75em {
+    min-width: 75em;
+  }
+}
+/* line 448, _foundation.scss */
+td > div {
+  max-height: 7.125em;
+  max-width: 75em;
+  overflow: scroll;
 }
 
 /*--------------------------------------------------
@@ -12264,4 +12302,39 @@ textarea.no-resize {
 .leaflet-bar a:last-child {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+/*--------------------------------------------------
+  Tablesaw Overrides
+--------------------------------------------------*/
+/* line 1663, main.scss */
+table.tablesaw {
+  font-size: 0.75rem;
+}
+
+/* line 1669, main.scss */
+.tablesaw-bar .tablesaw-toolbar .btn {
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+
+/* line 1672, main.scss */
+table.tablesaw thead th,
+table.tablesaw thead td {
+  color: #6c7180;
+}
+
+/* line 1677, main.scss */
+table.tablesaw td,
+table.tablesaw tbody th {
+  font-size: 1em;
+}
+
+/* line 1686, main.scss */
+.tablesaw-cell-label {
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+
+/* line 1693, main.scss */
+table.tablesaw-stack tbody tr {
+  border-bottom: 0;
 }
