@@ -9931,40 +9931,41 @@ input[type="url"].inline-input {
 /* line 435, _foundation.scss */
 .table-container table {
   margin-bottom: 0;
+  border: 1px solid #e4e1de;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 441, _foundation.scss */
+  /* line 442, _foundation.scss */
   .table-column-10em {
     min-width: 10em;
   }
 
-  /* line 442, _foundation.scss */
+  /* line 443, _foundation.scss */
   .table-column-20em {
     min-width: 20em;
   }
 
-  /* line 443, _foundation.scss */
+  /* line 444, _foundation.scss */
   .table-column-30em {
     min-width: 30em;
   }
 
-  /* line 444, _foundation.scss */
+  /* line 445, _foundation.scss */
   .table-column-40em {
     min-width: 40em;
   }
 
-  /* line 445, _foundation.scss */
+  /* line 446, _foundation.scss */
   .table-column-50em {
     min-width: 50em;
   }
 
-  /* line 446, _foundation.scss */
+  /* line 447, _foundation.scss */
   .table-column-75em {
     min-width: 75em;
   }
 }
-/* line 448, _foundation.scss */
+/* line 449, _foundation.scss */
 td > div {
   max-height: 7.125em;
   max-width: 75em;
