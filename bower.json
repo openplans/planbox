@@ -25,7 +25,7 @@
     "jqxdomainrequest": "https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest.git#v1.0.2",
     "raven-js": "~1.1.16",
     "leaflet": "~0.7.3",
-    "tablesaw": "~0.1.6"
+    "list.js": "~1.1.1"
   },
   "devDependencies": {},
   "resolutions": {

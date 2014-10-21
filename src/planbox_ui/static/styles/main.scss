@@ -1657,39 +1657,28 @@ textarea.no-resize {
 
 
 /*--------------------------------------------------
-  Tablesaw Overrides
+  Dashboard Tables
 --------------------------------------------------*/
 
-table.tablesaw {
-  font-size: 0.75rem;
-}
-.tablesaw-toolbar {
-//  font-size: .875em;
-}
-.tablesaw-bar .tablesaw-toolbar .btn {
-  font-family: $body-font-family;
-}
-table.tablesaw thead th,
-table.tablesaw thead td {
-  color: $body-font-color;
-//  font-size: .9em;
-}
-table.tablesaw td,
-table.tablesaw tbody th {
-  font-size: 1em;
-}
-.tablesaw-cell-label-top {
-//  text-transform: uppercase;
-//  font-size: .9em;
-//  font-weight: normal;
-}
-.tablesaw-cell-label {
-//  font-size: .65em;
-//  text-transform: uppercase;
-//  color: #888;
-  font-family: $body-font-family;
+.table-container {
+  max-width: 100%;
+  overflow: scroll;
+  table {
+    margin-bottom: 0;
+    border: 0;
+  }
 }
 
-table.tablesaw-stack tbody tr {
-  border-bottom: 0;
+@media #{$medium-up} {
+  .table-column-10em { min-width: 10em; }
+  .table-column-20em { min-width: 20em; }
+  .table-column-30em { min-width: 30em; }
+  .table-column-40em { min-width: 40em; }
+  .table-column-50em { min-width: 50em; }
+  .table-column-75em { min-width: 75em; }
+}
+td > div {
+  max-height: 6.5em;
+  max-width: 75em;
+  overflow: scroll;
 }

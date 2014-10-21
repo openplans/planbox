@@ -6664,13 +6664,13 @@ table {
 /* line 69, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table caption {
   background: transparent;
-  color: #6c7180;
+  color: #fff;
   font-size: 1rem;
   font-weight: bold;
 }
 /* line 78, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table thead {
-  background: #eee;
+  background: #308fbf;
 }
 /* line 82, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table thead tr th,
@@ -6678,11 +6678,11 @@ table thead tr td {
   padding: 0.1875rem 0.375rem 0.25rem;
   font-size: 0.6875rem;
   font-weight: bold;
-  color: #6c7180;
+  color: #fff;
 }
 /* line 92, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table tfoot {
-  background: #eee;
+  background: #308fbf;
 }
 /* line 96, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table tfoot tr th,
@@ -6690,7 +6690,7 @@ table tfoot tr td {
   padding: 0.1875rem 0.375rem 0.25rem;
   font-size: 0.6875rem;
   font-weight: bold;
-  color: #6c7180;
+  color: #fff;
 }
 /* line 107, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table tr th,
@@ -9921,58 +9921,6 @@ input[type="url"].inline-input {
 }
 
 /*--------------------------------------------------
-  Tables
---------------------------------------------------*/
-/* line 432, _foundation.scss */
-.table-container {
-  max-width: 100%;
-  overflow: scroll;
-}
-/* line 435, _foundation.scss */
-.table-container table {
-  margin-bottom: 0;
-  border: 1px solid #e4e1de;
-}
-
-@media only screen and (min-width: 40.063em) {
-  /* line 442, _foundation.scss */
-  .table-column-10em {
-    min-width: 10em;
-  }
-
-  /* line 443, _foundation.scss */
-  .table-column-20em {
-    min-width: 20em;
-  }
-
-  /* line 444, _foundation.scss */
-  .table-column-30em {
-    min-width: 30em;
-  }
-
-  /* line 445, _foundation.scss */
-  .table-column-40em {
-    min-width: 40em;
-  }
-
-  /* line 446, _foundation.scss */
-  .table-column-50em {
-    min-width: 50em;
-  }
-
-  /* line 447, _foundation.scss */
-  .table-column-75em {
-    min-width: 75em;
-  }
-}
-/* line 449, _foundation.scss */
-td > div {
-  max-height: 7.125em;
-  max-width: 75em;
-  overflow: scroll;
-}
-
-/*--------------------------------------------------
   OpenPlans-Branded Top Bar
 --------------------------------------------------*/
 /* line 9, main.scss */
@@ -12306,36 +12254,53 @@ textarea.no-resize {
 }
 
 /*--------------------------------------------------
-  Tablesaw Overrides
+  Dashboard Tables
 --------------------------------------------------*/
 /* line 1663, main.scss */
-table.tablesaw {
-  font-size: 0.75rem;
+.table-container {
+  max-width: 100%;
+  overflow: scroll;
+}
+/* line 1666, main.scss */
+.table-container table {
+  margin-bottom: 0;
+  border: 0;
 }
 
-/* line 1669, main.scss */
-.tablesaw-bar .tablesaw-toolbar .btn {
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-}
+@media only screen and (min-width: 40.063em) {
+  /* line 1673, main.scss */
+  .table-column-10em {
+    min-width: 10em;
+  }
 
-/* line 1672, main.scss */
-table.tablesaw thead th,
-table.tablesaw thead td {
-  color: #6c7180;
-}
+  /* line 1674, main.scss */
+  .table-column-20em {
+    min-width: 20em;
+  }
 
-/* line 1677, main.scss */
-table.tablesaw td,
-table.tablesaw tbody th {
-  font-size: 1em;
-}
+  /* line 1675, main.scss */
+  .table-column-30em {
+    min-width: 30em;
+  }
 
-/* line 1686, main.scss */
-.tablesaw-cell-label {
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-}
+  /* line 1676, main.scss */
+  .table-column-40em {
+    min-width: 40em;
+  }
 
-/* line 1693, main.scss */
-table.tablesaw-stack tbody tr {
-  border-bottom: 0;
+  /* line 1677, main.scss */
+  .table-column-50em {
+    min-width: 50em;
+  }
+
+  /* line 1678, main.scss */
+  .table-column-75em {
+    min-width: 75em;
+  }
+}
+/* line 1680, main.scss */
+td > div {
+  max-height: 6.5em;
+  max-width: 75em;
+  overflow: scroll;
 }

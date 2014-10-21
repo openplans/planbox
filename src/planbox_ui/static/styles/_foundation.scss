@@ -424,30 +424,3 @@ input[type="url"] {
   }
 }
 
-
-/*--------------------------------------------------
-  Tables
---------------------------------------------------*/
-
-.table-container {
-  max-width: 100%;
-  overflow: scroll;
-  table {
-    margin-bottom: 0;
-    border: 1px solid #e4e1de;
-  }
-}
-
-@media #{$medium-up} {
-  .table-column-10em { min-width: 10em; }
-  .table-column-20em { min-width: 20em; }
-  .table-column-30em { min-width: 30em; }
-  .table-column-40em { min-width: 40em; }
-  .table-column-50em { min-width: 50em; }
-  .table-column-75em { min-width: 75em; }
-}
-td > div {
-  max-height: 7.125em;
-  max-width: 75em;
-  overflow: scroll;
-}

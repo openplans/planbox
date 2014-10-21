@@ -22,7 +22,38 @@ var Planbox = Planbox || {};
       this.app.triggerMethod('show:projectDashboard:before', this);
       this.showRegions();
 
-      this.$('table').table();
+      // TODO: Don't hardcode this. Loop through project's data to get column classes.
+      var options = {
+        valueNames: [
+         'dataset'
+        ,'description'
+        ,'geometry'
+        ,'id'
+        ,'lat'
+        ,'lng'
+        ,'dragPoint'
+        ,'geocodeQuality'
+        ,'geocodeQualityCode'
+        ,'linkId'
+        ,'mapUrl'
+        ,'postalCode'
+        ,'sideOfStreet'
+        ,'street'
+        ,'locationtype'
+        ,'name'
+        ,'notes_public'
+        ,'submitter_email'
+        ,'submitter'
+        ,'avatar_url'
+        ,'submitterid'
+        ,'submittername'
+        ,'updated_datetime'
+        ,'url'
+        ,'user_token'
+        ,'visible'
+        ]
+      };
+      new List('datatable', options);
       this.app.triggerMethod('show:projectDashboard:after', this);
     },
 

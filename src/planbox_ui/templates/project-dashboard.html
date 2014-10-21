@@ -7,7 +7,6 @@
 {% block styles %}
   {% if debug %}
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/tablesaw/dist/tablesaw.css" type="text/css" />
   {% else %}
   <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.min.css?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}" type="text/css" />
   {% endif %}
@@ -39,7 +38,7 @@
   </script>
 
   {% if debug %}
-  <script src="{{ STATIC_URL }}bower_components/tablesaw/dist/tablesaw.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/list.js/dist/list.js"></script>
 
   <script src="{{ STATIC_URL }}scripts/utils.js"></script>
   <script src="{{ STATIC_URL }}scripts/handlebars-helpers.js"></script>
