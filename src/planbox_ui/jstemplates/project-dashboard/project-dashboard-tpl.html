@@ -1,4 +1,4 @@
-<div class="row full-width some-padding-top">
+<div class="row full-width some-padding-top no-margin-bottom no-padding-bottom">
   <h3 class="small-12 columns no-margins">{{ title }}</h3>
   <p class="small-4 columns text-small no-margins">
     <a href="../edit/" class="button tiny less-padding no-margin-bottom">Edit<span class="show-for-medium-up">&nbsp;Plan</span></a>
@@ -11,7 +11,7 @@
       <!-- li class="tab-title" role="presentational" ><a href="#panel-export" role="tab" tabindex="0" aria-selected="false" controls="panel-export">Export</a></li -->
     </ul>
   </div>
-  <div class="tabs-content small-12 columns container some-padding-top">
+  <div class="tabs-content small-12 columns container some-padding-top no-margin-bottom no-padding-bottom">
     <section role="tabpanel" aria-hidden="false" class="content active" id="panel-activity">
       <div class="row">
         <div class="medium-4 columns">
@@ -94,145 +94,565 @@
 
           <table class="" role="grid">
             <thead>
-              <th><div class=""><button class="sort tiny less-padding no-margins expand" data-sort="dataset">dataset</button></div></th>
-              <th><div class="table-column-50em"><button class="sort tiny less-padding no-margins expand" data-sort="description">description</button></div></th>
-              <th><div class="table-column-20em"><button class="sort tiny less-padding no-margins expand" data-sort="geometry">geometry</button></div></th>
-              <th><div class=""><button class="sort tiny less-padding no-margins expand" data-sort="id">id</button></div></th>
-              <th><div class="">lat</div></th>
-              <th><div class="">lng</div></th>
-              <th><div class="">dragPoint</div></th>
-              <th><div class="">geocodeQuality</div></th>
-              <th><div class="">geocodeQualityCode</div></th>
-              <th><div class="">linkId</div></th>
-              <th><div class="">mapUrl</div></th>
-              <th><div class="">postalCode</div></th>
-              <th><div class="">sideOfStreet</div></th>
-              <th><div class="table-column-20em">street</div></th>
-              <th><div class="">locationtype</div></th>
-              <th><div class="">name</div></th>
-              <th><div class="table-column-20em">notes_public</div></th>
-              <th><div class="table-column-30em">private-submitter_email</div></th>
-              <th><div class="">submitter</div></th>
-              <th><div class="">avatar_url</div></th>
-              <th><div class="">submitterid</div></th>
-              <th><div class="">submittername</div></th>
-              <th><div class="">updated_datetime</div></th>
-              <th><div class="">url</div></th>
-              <th><div class="">user_token</div></th>
-              <th><div class="">visible</div></th>
+              <th><div class="table-column "><button class="sort tiny less-padding no-margins expand" data-sort="dataset">dataset</button></div></th>
+              <th><div class="table-column table-column-50rem"><button class="sort tiny less-padding no-margins expand" data-sort="description">description</button></div></th>
+              <th><div class="table-column table-column-20rem"><button class="sort tiny less-padding no-margins expand" data-sort="geometry">geometry</button></div></th>
+              <th><div class="table-column "><button class="sort tiny less-padding no-margins expand" data-sort="id">id</button></div></th>
+              <th><div class="table-column ">lat</div></th>
+              <th><div class="table-column ">lng</div></th>
+              <th><div class="table-column ">dragPoint</div></th>
+              <th><div class="table-column ">geocodeQuality</div></th>
+              <th><div class="table-column ">geocodeQualityCode</div></th>
+              <th><div class="table-column ">linkId</div></th>
+              <th><div class="table-column ">mapUrl</div></th>
+              <th><div class="table-column ">postalCode</div></th>
+              <th><div class="table-column ">sideOfStreet</div></th>
+              <th><div class="table-column table-column-20rem">street</div></th>
+              <th><div class="table-column ">locationtype</div></th>
+              <th><div class="table-column ">name</div></th>
+              <th><div class="table-column table-column-20rem">notes_public</div></th>
+              <th><div class="table-column table-column-30rem">private-submitter_email</div></th>
+              <th><div class="table-column ">submitter</div></th>
+              <th><div class="table-column ">avatar_url</div></th>
+              <th><div class="table-column ">submitterid</div></th>
+              <th><div class="table-column ">submittername</div></th>
+              <th><div class="table-column ">updated_datetime</div></th>
+              <th><div class="table-column ">url</div></th>
+              <th><div class="table-column ">user_token</div></th>
+              <th><div class="table-column ">visible</div></th>
             </thead>
             <tbody class="list">
               <tr>
-                <td class="dataset"><div>375</div></td>
-                <td class="description"><div>foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
-                <td class="geometry"><div>POINT (-87.6408579999999944 41.9411860000000019)</div></td>
-                <td class="id"><div>256257</div></td>
-                <td class="lat"><div>41.941509</div></td>
-                <td class="lng"><div>-87.640764</div></td>
-                <td class="dragPoint><div">FALSE</div></td>
-                <td class="geocodeQuality><div">ADDRESS</div></td>
-                <td class="geocodeQualityCode><div">L1AAA</div></td>
-                <td class="linkId"><div>0</div></td>
-                <td class="mapUrl"><div>http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
-                <td class="postalCode"><div>60657</div></td>
-                <td class="sideOfStreet"><div>N</div></td>
-                <td class="street"><div>422-424 West Melrose Street</div></td>
-                <td class="locationtype"><div>bikeparking</div></td>
-                <td class="name"><div>422-424 West Melrose</div></td>
-                <td class="notes_public"><div></div></td>
-                <td class="submitter_email">lorem@gmail.com</div></td>
-                <td class="submitter"><div></div></td>
-                <td class="avatar_url"><div></div></td>
-                <td class="submitterid"><div></div></td>
-                <td class="submittername"><div>Matt</div></td>
-                <td class="updated_datetime"><div>2014-10-13T14:32:21.256761+00:00</div></td>
-                <td class="url"><div>http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
-                <td class="user_token"><div>session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
-                <td class="visible"><div>TRUE</div></td>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
               </tr>
               <tr>
-                <td class="dataset"><div>374</div></td>
-                <td class="description"><div>foo There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
-                <td class="geometry"><div>POINT (-87.6408579999999944 41.9411860000000019)</div></td>
-                <td class="id"><div>256257</div></td>
-                <td class="lat"><div>41.941509</div></td>
-                <td class="lng"><div>-87.640764</div></td>
-                <td class="dragPoint><div">FALSE</div></td>
-                <td class="geocodeQuality><div">ADDRESS</div></td>
-                <td class="geocodeQualityCode><div">L1AAA</div></td>
-                <td class="linkId"><div>0</div></td>
-                <td class="mapUrl"><div>http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
-                <td class="postalCode"><div>60657</div></td>
-                <td class="sideOfStreet"><div>N</div></td>
-                <td class="street"><div>422-424 West Melrose Street</div></td>
-                <td class="locationtype"><div>bikeparking</div></td>
-                <td class="name"><div>422-424 West Melrose</div></td>
-                <td class="notes_public"><div></div></td>
-                <td class="submitter_email">lorem@gmail.com</div></td>
-                <td class="submitter"><div></div></td>
-                <td class="avatar_url"><div></div></td>
-                <td class="submitterid"><div></div></td>
-                <td class="submittername"><div>Matt</div></td>
-                <td class="updated_datetime"><div>2014-10-13T14:32:21.256761+00:00</div></td>
-                <td class="url"><div>http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
-                <td class="user_token"><div>session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
-                <td class="visible"><div>TRUE</div></td>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
               </tr>
               <tr>
-                <td class="dataset"><div>325</div></td>
-                <td class="description"><div>foo foo There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
-                <td class="geometry"><div>POINT (-87.6408579999999944 41.9411860000000019)</div></td>
-                <td class="id"><div>256257</div></td>
-                <td class="lat"><div>41.941509</div></td>
-                <td class="lng"><div>-87.640764</div></td>
-                <td class="dragPoint><div">FALSE</div></td>
-                <td class="geocodeQuality><div">ADDRESS</div></td>
-                <td class="geocodeQualityCode><div">L1AAA</div></td>
-                <td class="linkId"><div>0</div></td>
-                <td class="mapUrl"><div>http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
-                <td class="postalCode"><div>60657</div></td>
-                <td class="sideOfStreet"><div>N</div></td>
-                <td class="street"><div>422-424 West Melrose Street</div></td>
-                <td class="locationtype"><div>bikeparking</div></td>
-                <td class="name"><div>422-424 West Melrose</div></td>
-                <td class="notes_public"><div></div></td>
-                <td class="submitter_email">lorem@gmail.com</div></td>
-                <td class="submitter"><div></div></td>
-                <td class="avatar_url"><div></div></td>
-                <td class="submitterid"><div></div></td>
-                <td class="submittername"><div>Matt</div></td>
-                <td class="updated_datetime"><div>2014-10-13T14:32:21.256761+00:00</div></td>
-                <td class="url"><div>http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
-                <td class="user_token"><div>session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
-                <td class="visible"><div>TRUE</div></td>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
               </tr>
               <tr>
-                <td class="dataset"><div>385</div></td>
-                <td class="description"><div>There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
-                <td class="geometry"><div>POINT (-87.6408579999999944 41.9411860000000019)</div></td>
-                <td class="id"><div>256257</div></td>
-                <td class="lat"><div>41.941509</div></td>
-                <td class="lng"><div>-87.640764</div></td>
-                <td class="dragPoint><div">FALSE</div></td>
-                <td class="geocodeQuality><div">ADDRESS</div></td>
-                <td class="geocodeQualityCode><div">L1AAA</div></td>
-                <td class="linkId"><div>0</div></td>
-                <td class="mapUrl"><div>http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
-                <td class="postalCode"><div>60657</div></td>
-                <td class="sideOfStreet"><div>N</div></td>
-                <td class="street"><div>422-424 West Melrose Street</div></td>
-                <td class="locationtype"><div>bikeparking</div></td>
-                <td class="name"><div>422-424 West Melrose</div></td>
-                <td class="notes_public"><div></div></td>
-                <td class="submitter_email">lorem@gmail.com</div></td>
-                <td class="submitter"><div></div></td>
-                <td class="avatar_url"><div></div></td>
-                <td class="submitterid"><div></div></td>
-                <td class="submittername"><div>Matt</div></td>
-                <td class="updated_datetime"><div>2014-10-13T14:32:21.256761+00:00</div></td>
-                <td class="url"><div>http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
-                <td class="user_token"><div>session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
-                <td class="visible"><div>TRUE</div></td>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
+              </tr>
+              <tr>
+                <td class="dataset"><div class="table-column ">375</div></td>
+                <td class="description"><div class="table-column table-column-50rem text-left">foo bar There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated! There are several large apartment buildings here with nowhere for friends, visitors, workers, delivery persons, etc. to lock bikes. There are only sucker poles and private property fences with &quot;bikes will be removed&quot; signs. Proper racks would be much appreciated!</div></td>
+                <td class="geometry"><div class="table-column table-column-20rem">POINT (-87.6408579999999944 41.9411860000000019)</div></td>
+                <td class="id"><div class="table-column ">256257</div></td>
+                <td class="lat"><div class="table-column ">41.941509</div></td>
+                <td class="lng"><div class="table-column ">-87.640764</div></td>
+                <td class="dragPoint"><div class="table-column ">FALSE</div></td>
+                <td class="geocodeQuality"><div class="table-column ">ADDRESS</div></td>
+                <td class="geocodeQualityCode"><div class="table-column ">L1AAA</div></td>
+                <td class="linkId"><div class="table-column ">0</div></td>
+                <td class="mapUrl"><div class="table-column ">http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luur2g0bnl,25=o5-9at29u&amp;type=map&amp;size=225,160&amp;pois=purple-1,41.94118558830663,-87.6408576965332,0,0|&amp;center=41.94118558830663,-87.6408576965332&amp;zoom=15&amp;rand=759142403</div></td>
+                <td class="postalCode"><div class="table-column ">60657</div></td>
+                <td class="sideOfStreet"><div class="table-column ">N</div></td>
+                <td class="street"><div class="table-column table-column-20rem">422-424 West Melrose Street</div></td>
+                <td class="locationtype"><div class="table-column ">bikeparking</div></td>
+                <td class="name"><div class="table-column ">422-424 West Melrose</div></td>
+                <td class="notes_public"><div class="table-column table-column-20rem">&nbsp;</div></td>
+                <td class="submitter_email"><div class="table-column table-column-30rem">lorem@gmail.com</div></td>
+                <td class="submitter"><div class="table-column ">&nbsp;</div></td>
+                <td class="avatar_url"><div class="table-column ">&nbsp;</div></td>
+                <td class="submitterid"><div class="table-column ">&nbsp;</div></td>
+                <td class="submittername"><div class="table-column ">Matt</div></td>
+                <td class="updated_datetime"><div class="table-column ">2014-10-13T14:32:21.256761+00:00</div></td>
+                <td class="url"><div class="table-column ">http://data.shareabouts.org/api/v2/chicagobikes/datasets/chicago-bike-parking/places/256257</div></td>
+                <td class="user_token"><div class="table-column ">session:4aa8ed3dc29bf129f29595818abb9fb9</div></td>
+                <td class="visible"><div class="table-column ">TRUE</div></td>
               </tr>
             </tbody>
           </table>

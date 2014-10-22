@@ -18,9 +18,22 @@ var Planbox = Planbox || {};
       this.app = options.app;
     },
 
+    initFixedTableHeader: function() {
+      $(window).on('load resize', function() {
+        if (window.matchMedia(Foundation.media_queries.large).matches) {
+          var tbodyHeight = $(window).height() - $('#datatable table').offset().top - 45;
+          $('#datatable tbody').css({ maxHeight: tbodyHeight });
+        } else {
+          $('#datatable tbody').css({ maxHeight: 'none' });
+        }
+      });
+    },
+
     onShow: function() {
       this.app.triggerMethod('show:projectDashboard:before', this);
       this.showRegions();
+
+      this.initFixedTableHeader();
 
       // TODO: Don't hardcode this. Loop through project's data to get column classes.
       var options = {
