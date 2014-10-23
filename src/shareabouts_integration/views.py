@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from shareabouts_integration.oauth_dance import get_auth_header, get_authorization_code, get_credentials
 
+from raven.contrib.django.models import client
+
 
 @login_required
 def oauth_credentials(request):
@@ -23,9 +25,16 @@ def oauth_credentials(request):
 
     session = requests.session()
 
-    auth_header = get_auth_header(client_id, client_secret, username)
-    authorization_code = get_authorization_code(session, host, auth_header)
-    credentials = get_credentials(session, host, authorization_code, client_id, client_secret)
+    try:
+        auth_header = get_auth_header(client_id, client_secret, username)
+        authorization_code = get_authorization_code(session, host, auth_header)
+        credentials = get_credentials(session, host, authorization_code, client_id, client_secret)
+    except AssertionError:
+        if settings.DEBUG: raise
+        client.captureException()
+        return HttpResponse('Upstream error occurred.',
+            status=502,
+            content_type='text/plain')
 
     return HttpResponse(json.dumps(credentials, indent=2, sort_keys=True),
         status=200,

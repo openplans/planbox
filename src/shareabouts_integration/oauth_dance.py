@@ -27,14 +27,14 @@ def get_authorization_code(session, host, auth_header):
         },
         headers={
             'Authorization': auth_header,
-            'X-CSRFToken': 'abc123',
+            'X-CSRFToken': 'dummycsrftoken',
             'Referer': host
         },
         cookies={
-            'csrftoken': 'abc123'
+            'csrftoken': 'dummycsrftoken'
         })
 
-    assert response.status_code == 200
+    assert response.status_code == 200, 'Failure response from [Shareabouts API]/users/oauth2/authorize: (%s) "%s"' % (response.status_code, response.text)
 
     # Call .../authorize/confirm with the session from above to retrieve an
     # authorization token.
@@ -43,19 +43,19 @@ def get_authorization_code(session, host, auth_header):
             'scope': 'read',
             'authorize': 'Authorize'
         },
-        headers={'X-CSRFToken': 'abc123', 'Referer': host + '/api/v2/users/oauth2/authorize'},
-        cookies={'csrftoken': 'abc123'})
+        headers={'X-CSRFToken': 'dummycsrftoken', 'Referer': host + '/api/v2/users/oauth2/authorize'},
+        cookies={'csrftoken': 'dummycsrftoken'})
 
-    assert response.status_code == 200, response.text
+    assert response.status_code == 200, 'Failure response from [Shareabouts API]/users/oauth2/authorize/confirm: (%s) "%s"' % (response.status_code, response.text)
 
     # Parse the authorization token out of the resultant URL
     url = response.url
     parts = urlparse.urlparse(url)
     query = urlparse.parse_qs(parts.query)
 
-    assert 'error' not in query, query['error']
-    assert 'code' in query
-    assert len(query['code']) >= 1
+    assert 'error' not in query, 'Error from [Shareabouts API]/users/oauth2/authorize/confirm: ' + query['error']
+    assert 'code' in query, 'No authorization code found in response from [Shareabouts API]/users/oauth2/authorize/confirm'
+    assert len(query['code']) >= 1, 'Invalid Authorization code parsed from [Shareabouts API]/users/oauth2/authorize/confirm'
 
     return query['code'][0]
 
@@ -69,9 +69,9 @@ def get_credentials(session, host, authorization_code, client_id, client_secret)
             'client_id': client_id,
             'client_secret': client_secret
         },
-        headers={'X-CSRFToken': 'abc123', 'Referer': host + '/api/v2/users/oauth2/authorize/confirm'},
-        cookies={'csrftoken': 'abc123'})
+        headers={'X-CSRFToken': 'dummycsrftoken', 'Referer': host + '/api/v2/users/oauth2/authorize/confirm'},
+        cookies={'csrftoken': 'dummycsrftoken'})
 
-    assert response.status_code == 200
+    assert response.status_code == 200, 'Failure response from [Shareabouts API]/users/oauth2/access_token: (%s) "%s"' % (response.status_code, response.text)
 
     return response.json()
