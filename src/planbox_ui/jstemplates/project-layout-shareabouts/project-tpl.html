@@ -1,4 +1,4 @@
-<div id="shareabouts-region" class="project-section-shareabouts project-shareabouts" data-magellan-destination="shareabouts-region"></div>
+<a id="map"></a><div id="shareabouts-region" class="project-section-shareabouts project-shareabouts" data-magellan-destination="shareabouts-region"></div>
 
 <div class="after-shareabouts row container">
 
@@ -16,7 +16,7 @@
         {{#gte_active_section_length sections 1}}
         <ul class="side-nav">
           <li class="divider"></li>
-          <li data-magellan-arrival="shareabouts-region"><a href="#shareabouts-region">Map</a></li>
+          <li data-magellan-arrival="map"><a href="#map">Map</a></li>
           {{#each sections}}
             {{#if active}}{{#if menu_label}}
             <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
