@@ -1151,6 +1151,7 @@ img.attachment-icon {
   // sets the threshold based on the outerHeight of
   // the menu. Upgrading to 5.4.5 might resolve this.
   height: 1px;
+  margin-bottom: 350px;
   overflow: visible;
 
   &.fixed {
@@ -1162,8 +1163,12 @@ img.attachment-icon {
       @include grid-column(4);
     }
   }
+}
+.side-nav,
+.button-group { 
   .social-link img {
     max-height: 1.5em;
+    margin: -0.25em 0.25em;
   }
 }
 

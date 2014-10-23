@@ -1,4 +1,4 @@
-<div id="shareabouts-region" class="project-section-shareabouts project-shareabouts" data-magellan-destination="shareabouts-region"></div>
+<a id="map"></a><div id="shareabouts-region" class="project-section-shareabouts project-shareabouts" data-magellan-destination="shareabouts-region"></div>
 
 <div class="after-shareabouts row container">
 
@@ -10,24 +10,44 @@
   <header class="small-12 medium-4 columns text-center medium-text-left">
   {{/if}}
     {{# if details.tagline }}<h2 class="project-tagline some-margin-top">{{ details.tagline }}</h2>{{/ if }}
-    <div class="shareabouts-side-nav hide-for-small" data-magellan-expedition="fixed">
+    <div class="show-for-small-only">
+      <dl class="accordion" data-accordion="myAccordionGroup" data-magellan-expedition="fixed">
+        <dd class="accordion-navigation">
+          <a href="#mobilemenu">&#9776;&nbsp;Menu</a>
+          <div id="mobilemenu" class="content no-paddings">
+            <ul class="stack button-group">
+              <li><a href="#map" class="button">Map</a></li>
+              {{#each sections}}
+                {{#if active}}{{#if menu_label}}
+                <li><a href="#section-{{ slug }}" class="button">{{ menu_label }}</a></li>
+                {{/if}}{{/if}}
+              {{/each}}
+              {{#if details.facebook_url}}<li class="social-link"><a href="{{ details.facebook_url }}" class="button"><img src="{{ static_url }}/images/social-facebook.gif"> Join us on Facebook!</a></li>{{/if}}
+              {{#if details.instagram_url}}<li class="social-link"><a href="{{ details.instagram_url }}" class="button"><img src="{{ static_url }}/images/social-instagram.gif"> Follow us on Instagram!</a></li>{{/if}}
+              {{#if details.twitter_url}}<li class="social-link"><a href="{{ details.twitter_url }}" class="button"><img src="{{ static_url }}/images/social-twitter.gif"> Follow us on Twitter!</a></li>{{/if}}
+            </ul>
+        </div>
+      </dd>
+    </dl>
+    </div>
+    <div class="shareabouts-side-nav hide-for-small-only" data-magellan-expedition="fixed">
       <div>
-        {{! Think of a more general solution when you have time }}
-        {{#gte_active_section_length sections 1}}
         <ul class="side-nav">
+          {{! Think of a more general solution when you have time }}
+          {{#gte_active_section_length sections 1}}
           <li class="divider"></li>
-          <li data-magellan-arrival="shareabouts-region"><a href="#shareabouts-region">Map</a></li>
+          <li data-magellan-arrival="map"><a href="#map">Map</a></li>
           {{#each sections}}
             {{#if active}}{{#if menu_label}}
             <li data-magellan-arrival="section-{{ slug }}"><a href="#section-{{ slug }}">{{ menu_label }}</a></li>
             {{/if}}{{/if}}
           {{/each}}
           <li class="divider"></li>
-          {{#if details.facebook_url}}<li class="social-link"><a href="{{ details.facebook_url }}"><img src="{{ static_url }}/images/social-facebook.gif"> <small>Join us on Facebook!</small></a></li>{{/if}}
-          {{#if details.instagram_url}}<li class="social-link"><a href="{{ details.instagram_url }}"><img src="{{ static_url }}/images/social-instagram.gif"> <small>Follow us on Instagram!</small></a></li>{{/if}}
-          {{#if details.twitter_url}}<li class="social-link"><a href="{{ details.twitter_url }}"><img src="{{ static_url }}/images/social-twitter.gif"> <small>Follow us on Twitter!</small></a></li>{{/if}}
+          {{/gte_active_section_length}}
+          {{#if details.facebook_url}}<li class="social-link"><a href="{{ details.facebook_url }}"><img src="{{ static_url }}/images/social-facebook.gif"> <small><span class="show-for-large-up">Join us on </span>Facebook<span class="show-for-large-up">!</span></small></a></li>{{/if}}
+          {{#if details.instagram_url}}<li class="social-link"><a href="{{ details.instagram_url }}"><img src="{{ static_url }}/images/social-instagram.gif"> <small><span class="show-for-large-up">Follow us on </span>Instagram<span class="show-for-large-up">!</span></small></a></li>{{/if}}
+          {{#if details.twitter_url}}<li class="social-link"><a href="{{ details.twitter_url }}"><img src="{{ static_url }}/images/social-twitter.gif"> <small><span class="show-for-large-up">Follow us on </span>Twitter<span class="show-for-large-up">!</span></small></a></li>{{/if}}
         </ul>
-        {{/gte_active_section_length}}
       </div>
   </header>
 
