@@ -1,10 +1,5 @@
-import requests
 import base64
 import urlparse
-
-# Create a new session so that we save cookies as we redirect through the
-# OAuth dance.
-session = requests.session()
 
 
 def get_auth_header(client_id, client_secret, username, email=None):
@@ -16,14 +11,14 @@ def get_auth_header(client_id, client_secret, username, email=None):
     return 'Remote ' + encoded_auth_data
 
 
-def get_authorization_code(session, host, auth_header):
+def get_authorization_code(session, host, client_id, auth_header):
     # Call .../authorize to start the process of getting an authorization token.
     # The session started here will be continued in the which will be stored in a
     # next call.
     response = session.post(host + '/api/v2/users/oauth2/authorize',
         data={
             'response_type': 'code',
-            'client_id': 'd900f3ecc26100eeb852'
+            'client_id': client_id
         },
         headers={
             'Authorization': auth_header,

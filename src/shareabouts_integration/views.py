@@ -27,7 +27,7 @@ def oauth_credentials(request):
 
     try:
         auth_header = get_auth_header(client_id, client_secret, username)
-        authorization_code = get_authorization_code(session, host, auth_header)
+        authorization_code = get_authorization_code(session, host, client_id, auth_header)
         credentials = get_credentials(session, host, authorization_code, client_id, client_secret)
     except AssertionError:
         if settings.DEBUG: raise
