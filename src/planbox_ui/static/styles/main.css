@@ -11620,9 +11620,10 @@ img.attachment-icon {
 /* line 1148, main.scss */
 .shareabouts-side-nav {
   height: 1px;
+  margin-bottom: 350px;
   overflow: visible;
 }
-/* line 1157, main.scss */
+/* line 1158, main.scss */
 .shareabouts-side-nav.fixed div {
   width: 100%;
   margin-left: auto;
@@ -11640,7 +11641,7 @@ img.attachment-icon {
 .shareabouts-side-nav.fixed div:after {
   clear: both;
 }
-/* line 1160, main.scss */
+/* line 1161, main.scss */
 .shareabouts-side-nav.fixed .side-nav {
   background-color: #fff;
   padding-left: 0.9375rem;
@@ -11648,25 +11649,28 @@ img.attachment-icon {
   width: 33.33333%;
   float: left;
 }
-/* line 1165, main.scss */
-.shareabouts-side-nav .social-link img {
+
+/* line 1169, main.scss */
+.side-nav .social-link img,
+.button-group .social-link img {
   max-height: 1.5em;
+  margin: -0.25em 0.25em;
 }
 
 @media only screen and (max-width: 40em) {
-  /* line 1172, main.scss */
+  /* line 1177, main.scss */
   .project-shareabouts.panel-open + .after-shareabouts, .project-shareabouts.panel-form-open + .after-shareabouts {
     display: none;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 1170, main.scss */
+  /* line 1175, main.scss */
   .after-shareabouts {
     position: relative;
     z-index: 10;
     top: -5px;
   }
-  /* line 1181, main.scss */
+  /* line 1186, main.scss */
   .after-shareabouts:before {
     width: 100%;
     height: 5px;
@@ -11675,35 +11679,35 @@ img.attachment-icon {
   }
 }
 @media only screen and (min-width: 80.063em) {
-  /* line 1170, main.scss */
+  /* line 1175, main.scss */
   .after-shareabouts {
     top: -1rem;
   }
-  /* line 1190, main.scss */
+  /* line 1195, main.scss */
   .after-shareabouts:before {
     height: 1rem;
     margin-bottom: -1rem;
   }
 }
-/* line 1195, main.scss */
+/* line 1200, main.scss */
 .after-shareabouts .project-tagline {
   font-size: 1.5rem;
 }
 
-/* line 1200, main.scss */
+/* line 1205, main.scss */
 .shareabouts-page {
   height: 100%;
 }
-/* line 1202, main.scss */
+/* line 1207, main.scss */
 .shareabouts-page .project-shareabouts {
   border: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1202, main.scss */
+  /* line 1207, main.scss */
   .shareabouts-page .project-shareabouts {
     height: 60%;
   }
-  /* line 1213, main.scss */
+  /* line 1218, main.scss */
   .shareabouts-page .project-shareabouts:after {
     content: '';
     display: block;
@@ -11716,7 +11720,7 @@ img.attachment-icon {
     box-shadow: 0 -3px 0 rgba(51, 51, 51, 0.1);
   }
 }
-/* line 1228, main.scss */
+/* line 1233, main.scss */
 .shareabouts-page .cover-image-container,
 .shareabouts-page .project-section-fieldset .section-settings label:first-child,
 .shareabouts-page .project-section-fieldset .section-settings label:first-child + br,
@@ -11729,43 +11733,43 @@ img.attachment-icon {
 /*--------------------------------------------------
   The Admin
 --------------------------------------------------*/
-/* line 1243, main.scss */
+/* line 1248, main.scss */
 .project-edit-form {
   background-color: #fff;
   box-shadow: 0 -65px 0 #fff;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1243, main.scss */
+  /* line 1248, main.scss */
   .project-edit-form {
     padding-bottom: 4rem;
   }
 }
 
-/* line 1251, main.scss */
+/* line 1256, main.scss */
 .project-section {
   z-index: auto;
 }
 
-/* line 1255, main.scss */
+/* line 1260, main.scss */
 .project-section-fieldset {
   padding: 0;
   border: 0;
 }
 
 @-moz-document url-prefix() {
-  /* line 1262, main.scss */
+  /* line 1267, main.scss */
   .project-section-fieldset {
     display: table-cell;
   }
 }
-/* line 1267, main.scss */
+/* line 1272, main.scss */
 .location-map-region .map {
   height: 200px;
   border: 1px solid #c9c9c9;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1272, main.scss */
+  /* line 1277, main.scss */
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
@@ -11776,7 +11780,7 @@ img.attachment-icon {
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1281, main.scss */
+  /* line 1286, main.scss */
   input[type=text].sub-heading-input {
     font-size: 1.75rem;
     margin: 0 0 1rem 0;
@@ -11786,12 +11790,12 @@ img.attachment-icon {
   }
 }
 
-/* line 1290, main.scss */
+/* line 1295, main.scss */
 span.sub-heading-postfix {
   color: #999;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1290, main.scss */
+  /* line 1295, main.scss */
   span.sub-heading-postfix {
     margin: 0 0 1rem 0;
     padding: 0.5rem 0.75rem;
@@ -11799,7 +11803,7 @@ span.sub-heading-postfix {
   }
 }
 
-/* line 1299, main.scss */
+/* line 1304, main.scss */
 .content-editable {
   line-height: 1.6;
   background-color: #FFFFFF;
@@ -11819,7 +11823,7 @@ span.sub-heading-postfix {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
   height: auto;
 }
-/* line 1301, main.scss */
+/* line 1306, main.scss */
 .content-editable.rich-editable {
   min-height: 8rem;
 }
@@ -11844,77 +11848,77 @@ span.sub-heading-postfix {
   background-color: #DDDDDD;
   cursor: default;
 }
-/* line 1309, main.scss */
+/* line 1314, main.scss */
 .content-editable.radius {
   border-radius: 3px;
 }
-/* line 1313, main.scss */
+/* line 1318, main.scss */
 .error .content-editable, .content-editable.error {
   margin-bottom: 0;
 }
-/* line 1316, main.scss */
+/* line 1321, main.scss */
 .content-editable a {
   color: #308fbf;
   text-decoration: none;
   line-height: inherit;
 }
-/* line 1321, main.scss */
+/* line 1326, main.scss */
 .content-editable a:hover, .content-editable a:focus {
   color: #267299;
 }
 
-/* line 1330, main.scss */
+/* line 1335, main.scss */
 .pen-menu,
 .pen-menu * {
   box-sizing: content-box !important;
 }
 
-/* line 1335, main.scss */
+/* line 1340, main.scss */
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
   padding-top: 0.5rem;
   padding-right: 0.25rem;
 }
 
-/* line 1341, main.scss */
+/* line 1346, main.scss */
 .section-settings {
   background-color: #f7f7f7;
   padding-top: 1.75rem;
 }
-/* line 1344, main.scss */
+/* line 1349, main.scss */
 .section-settings-toggle-container + .section-settings {
   margin-top: -2.5rem;
 }
 
-/* line 1349, main.scss */
+/* line 1354, main.scss */
 .section-insert {
   margin-bottom: -1rem;
   margin-right: -0.9375rem;
   margin-left: -0.9375rem;
 }
-/* line 1353, main.scss */
+/* line 1358, main.scss */
 .section-insert hr {
   margin-top: 1rem;
   border-color: #ff8b38;
 }
 
-/* line 1359, main.scss */
+/* line 1364, main.scss */
 .unassigned {
   cursor: default;
 }
 
-/* line 1363, main.scss */
+/* line 1368, main.scss */
 .project-settings-container {
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
   background-color: #d9d9d9;
 }
-/* line 1364, main.scss */
+/* line 1369, main.scss */
 .project-settings-container .save-btn {
   outline: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1363, main.scss */
+  /* line 1368, main.scss */
   .project-settings-container {
     position: fixed;
     top: 65px;
@@ -11926,25 +11930,25 @@ span.sub-heading-postfix {
     overflow: hidden;
     box-shadow: inset 3px 0 0 rgba(51, 51, 51, 0.1);
   }
-  /* line 1380, main.scss */
+  /* line 1385, main.scss */
   .project-settings-container .project-settings {
     max-height: 60%;
     overflow: auto;
   }
 }
 
-/* line 1387, main.scss */
+/* line 1392, main.scss */
 textarea.no-resize {
   resize: none;
 }
 
-/* line 1392, main.scss */
+/* line 1397, main.scss */
 .drag-area-container {
   position: relative;
   text-align: center;
 }
 
-/* line 1396, main.scss */
+/* line 1401, main.scss */
 .drag-area {
   position: absolute;
   top: 1rem;
@@ -11955,17 +11959,17 @@ textarea.no-resize {
   border-radius: 0.375rem;
   background-color: rgba(242, 242, 242, 0.4);
 }
-/* line 1405, main.scss */
+/* line 1410, main.scss */
 .drag-area:hover {
   border-color: rgba(133, 133, 133, 0.9);
   background-color: rgba(242, 242, 242, 0.9);
 }
-/* line 1409, main.scss */
+/* line 1414, main.scss */
 .drag-area p {
   margin-bottom: 0.5rem;
 }
 
-/* line 1413, main.scss */
+/* line 1418, main.scss */
 .no-file-upload-message {
   clear: both;
   font-size: 0.75em;
@@ -11978,18 +11982,18 @@ textarea.no-resize {
   border-radius: 0.25em;
 }
 
-/* line 1424, main.scss */
+/* line 1429, main.scss */
 .no-file-upload-message a {
   color: #fff;
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 1428, main.scss */
+/* line 1433, main.scss */
 .no-file-upload-message a:hover {
   color: #fff;
 }
 
-/* line 1431, main.scss */
+/* line 1436, main.scss */
 .file-upload {
   margin: 2em 1em 1em;
   text-align: center;
@@ -12000,7 +12004,7 @@ textarea.no-resize {
   position: relative;
 }
 
-/* line 1440, main.scss */
+/* line 1445, main.scss */
 .file-upload:hover,
 .file-dragging,
 .file-uploading {
@@ -12009,12 +12013,12 @@ textarea.no-resize {
   background-color: rgba(90, 90, 90, 0.5);
 }
 
-/* line 1447, main.scss */
+/* line 1452, main.scss */
 .file-upload p {
   margin-bottom: 0.5em;
 }
 
-/* line 1450, main.scss */
+/* line 1455, main.scss */
 .file-upload-input-container {
   position: relative;
   overflow: hidden;
@@ -12022,12 +12026,12 @@ textarea.no-resize {
   margin-bottom: 0;
 }
 
-/* line 1456, main.scss */
+/* line 1461, main.scss */
 .file-upload-input {
   display: none;
 }
 
-/* line 1459, main.scss */
+/* line 1464, main.scss */
 .uploading-message,
 .file-uploading > .drop-instructions {
   display: none;
@@ -12055,7 +12059,7 @@ textarea.no-resize {
     color: #888;
   }
 }
-/* line 1473, main.scss */
+/* line 1478, main.scss */
 .file-uploading > .uploading-message {
   display: block;
   position: relative;
@@ -12066,44 +12070,44 @@ textarea.no-resize {
   animation: uploading 1.5s infinite ease-in-out;
 }
 
-/* line 1482, main.scss */
+/* line 1487, main.scss */
 .file-uploading > .file-upload-input-container {
   visibility: hidden;
 }
 
-/* line 1487, main.scss */
+/* line 1492, main.scss */
 .full-width-image-container {
   margin: 0 -0.9375rem 0.5rem -0.9375rem;
 }
-/* line 1489, main.scss */
+/* line 1494, main.scss */
 .full-width-image-container.drag-area-container {
   min-height: 9rem;
 }
 
-/* line 1493, main.scss */
+/* line 1498, main.scss */
 .cover-image-container {
   margin-top: -1.125rem;
 }
 
-/* line 1498, main.scss */
+/* line 1503, main.scss */
 .logo-image-container {
   min-height: 9rem;
   margin-bottom: 1rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1498, main.scss */
+  /* line 1503, main.scss */
   .logo-image-container {
     float: left;
     width: 50%;
   }
 }
-/* line 1505, main.scss */
+/* line 1510, main.scss */
 .logo-image-container img {
   max-height: 20rem;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1509, main.scss */
+  /* line 1514, main.scss */
   .project-title-container {
     float: right;
     width: 50%;
@@ -12112,7 +12116,7 @@ textarea.no-resize {
     padding-right: 1rem;
     padding-bottom: 1rem;
   }
-  /* line 1517, main.scss */
+  /* line 1522, main.scss */
   .logo-image-container.hide + .project-title-container {
     float: none;
     width: auto;
@@ -12122,78 +12126,78 @@ textarea.no-resize {
     padding-bottom: 0;
   }
 }
-/* line 1526, main.scss */
+/* line 1531, main.scss */
 .project-title-container .project-title-help-text {
   margin-top: -0.75rem;
 }
 
-/* line 1533, main.scss */
+/* line 1538, main.scss */
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none;
 }
 
-/* line 1545, main.scss */
+/* line 1550, main.scss */
 .existing-snapshot-wrapper .button {
   margin-bottom: 0;
 }
 
-/* line 1551, main.scss */
+/* line 1556, main.scss */
 .avatar-container {
   padding: 0.3rem;
 }
-/* line 1553, main.scss */
+/* line 1558, main.scss */
 .avatar-container .avatar {
   display: inline-block;
 }
-/* line 1556, main.scss */
+/* line 1561, main.scss */
 .avatar-container .drag-area-container {
   min-height: 10.125rem;
 }
 
-/* line 1564, main.scss */
+/* line 1569, main.scss */
 .project-list > li + li, .member-list > li + li, .team-list > li + li {
   margin-top: 0.625rem;
   padding-top: 0.625rem;
   border-top: 1px solid #e3e3e3;
 }
 
-/* line 1571, main.scss */
+/* line 1576, main.scss */
 .member-list li, .team-list li {
   padding-left: 4.375rem;
 }
-/* line 1574, main.scss */
+/* line 1579, main.scss */
 .member-list .avatar, .team-list .avatar {
   width: 3.75rem;
   margin-left: -4.375rem;
 }
 
-/* line 1579, main.scss */
+/* line 1584, main.scss */
 .user-profile .member-list {
   display: none;
 }
 
-/* line 1582, main.scss */
+/* line 1587, main.scss */
 .user-profile .project-list {
   display: none;
 }
 
-/* line 1585, main.scss */
+/* line 1590, main.scss */
 .team-profile .team-list {
   display: none;
 }
 
-/* line 1590, main.scss */
+/* line 1595, main.scss */
 .project-template-gallery {
   background-color: white;
   border-bottom: 1px solid rgba(51, 51, 51, 0.2);
   padding: 0.5rem;
 }
-/* line 1595, main.scss */
+/* line 1600, main.scss */
 .project-template-gallery h5:first-child {
   margin-bottom: 1rem;
 }
 
-/* line 1600, main.scss */
+/* line 1605, main.scss */
 .panel .template-templates-default {
   display: none;
 }
@@ -12201,13 +12205,13 @@ textarea.no-resize {
 /*--------------------------------------------------
   Project Dashboard / Widgets
 --------------------------------------------------*/
-/* line 1610, main.scss */
+/* line 1615, main.scss */
 .stat-widget.coming-soon {
   background-color: #f6f6f6;
   color: #ddd;
   position: relative;
 }
-/* line 1614, main.scss */
+/* line 1619, main.scss */
 .stat-widget.coming-soon:before {
   content: "Coming Soon...";
   position: absolute;
@@ -12221,13 +12225,13 @@ textarea.no-resize {
   font-style: italic;
 }
 
-/* line 1630, main.scss */
+/* line 1635, main.scss */
 .stat-widget-big-number .count {
   display: block;
   font-size: 2.5rem;
   line-height: 1.2;
 }
-/* line 1635, main.scss */
+/* line 1640, main.scss */
 .stat-widget-big-number .unit {
   text-transform: uppercase;
 }
@@ -12235,19 +12239,19 @@ textarea.no-resize {
 /*--------------------------------------------------
   Leaflet Overrides
 --------------------------------------------------*/
-/* line 1645, main.scss */
+/* line 1650, main.scss */
 .leaflet-bar {
   box-shadow: -3px 3px 0 rgba(51, 51, 51, 0.1);
   border-radius: 0;
 }
 
-/* line 1649, main.scss */
+/* line 1654, main.scss */
 .leaflet-bar a:first-child {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-/* line 1653, main.scss */
+/* line 1658, main.scss */
 .leaflet-bar a:last-child {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
