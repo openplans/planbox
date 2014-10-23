@@ -4,7 +4,32 @@ from requests.auth import HTTPBasicAuth
 from django.conf import settings
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from shareabouts_integration.oauth_dance import get_auth_header, get_authorization_code, get_credentials
 
+
+@login_required
+def oauth_credentials(request):
+    """
+    How do we correlate Planbox and Shareabouts users? Username is faulty but
+    easy. With normal OAuth we wouldn't have this issue because the user would
+    specify their own account.
+
+    But for now, there's only one user to support.
+    """
+    host = 'https://' + settings.SHAREABOUTS_HOST
+    client_id = settings.SHAREABOUTS_CLIENT_ID
+    client_secret = settings.SHAREABOUTS_CLIENT_SECRET
+    username = settings.SHAREABOUTS_USERNAME
+
+    session = requests.session()
+
+    auth_header = get_auth_header(client_id, client_secret, username)
+    authorization_code = get_authorization_code(session, host, auth_header)
+    credentials = get_credentials(session, host, authorization_code, client_id, client_secret)
+
+    return HttpResponse(json.dumps(credentials, indent=2, sort_keys=True),
+        status=200,
+        content_type='application/json')
 
 @login_required
 def create_dataset(request):
