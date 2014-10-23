@@ -1,0 +1,17 @@
+{% extends 'product-base.html' %}
+
+{% block page %}
+
+<div class="row extra-padding-top extra-padding-bottom">
+  <div class="small-12 columns text-center">
+    <br>
+    <h1>Harrumph&hellip;</h1>
+    <h3>
+        We were unable to complete your plan activation.<br>
+        Please get in contact with us so that we can straighten this out.</h3>
+    <br>
+    <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}" class="open-intercom button radius">Contact Us</a>
+  </div>
+</div>
+
+{% endblock %}
