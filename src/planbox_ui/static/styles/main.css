@@ -11707,6 +11707,10 @@ img.attachment-icon {
   .shareabouts-page .project-shareabouts {
     height: 60%;
   }
+  /* line 1215, main.scss */
+  .shareabouts-page .project-shareabouts.panel-open {
+    height: 85%;
+  }
   /* line 1218, main.scss */
   .shareabouts-page .project-shareabouts:after {
     content: '';
