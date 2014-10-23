@@ -1658,7 +1658,7 @@ textarea.no-resize {
 // Table
 .table-container {
   max-width: 100%;
-  overflow: scroll;
+  overflow: auto;
 }
 .datatable {
   table {
@@ -1668,7 +1668,7 @@ textarea.no-resize {
   .table-column {
     max-height: 6.5em;
     width: 8rem;
-    overflow: scroll;
+    overflow: auto;
     text-align: center;
   }
   .table-column-20rem { width: 10rem; }
@@ -1685,13 +1685,14 @@ textarea.no-resize {
     }
     tbody {
       display: block;
-      overflow: scroll;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
   }
 }
 
 // Tabs
-.tab-title > a, 
+.tab-title > a,
 .tabs-content [tabindex] {
   &:focus {
     outline: 0;
