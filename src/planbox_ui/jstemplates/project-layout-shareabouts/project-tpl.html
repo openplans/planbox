@@ -11,20 +11,17 @@
   {{/if}}
     {{# if details.tagline }}<h2 class="project-tagline some-margin-top">{{ details.tagline }}</h2>{{/ if }}
     <div class="show-for-small-only">
-      <dl class="accordion" data-accordion="myAccordionGroup">
+      <dl class="accordion" data-accordion="myAccordionGroup" data-magellan-expedition="fixed">
         <dd class="accordion-navigation">
           <a href="#mobilemenu">&#9776;&nbsp;Menu</a>
           <div id="mobilemenu" class="content no-paddings">
             <ul class="stack button-group">
-              {{! Think of a more general solution when you have time }}
-              {{#gte_active_section_length sections 1}}
               <li><a href="#map" class="button">Map</a></li>
               {{#each sections}}
                 {{#if active}}{{#if menu_label}}
                 <li><a href="#section-{{ slug }}" class="button">{{ menu_label }}</a></li>
                 {{/if}}{{/if}}
               {{/each}}
-              {{/gte_active_section_length}}
               {{#if details.facebook_url}}<li class="social-link"><a href="{{ details.facebook_url }}" class="button"><img src="{{ static_url }}/images/social-facebook.gif"> Join us on Facebook!</a></li>{{/if}}
               {{#if details.instagram_url}}<li class="social-link"><a href="{{ details.instagram_url }}" class="button"><img src="{{ static_url }}/images/social-instagram.gif"> Follow us on Instagram!</a></li>{{/if}}
               {{#if details.twitter_url}}<li class="social-link"><a href="{{ details.twitter_url }}" class="button"><img src="{{ static_url }}/images/social-twitter.gif"> Follow us on Twitter!</a></li>{{/if}}
