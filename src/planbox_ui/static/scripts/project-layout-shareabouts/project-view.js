@@ -61,11 +61,18 @@ var Planbox = Planbox || {};
         }));
       },
 
+      toggleMobileMenu: function() {
+        $( '#mobilemenu a' ).click(function() {
+          $( '#mobilemenu-container .active' ).removeClass('active');
+        });
+      },
+
       onShow: function() {
         // Create, render, and show the Shareabouts map specially
         this.showShareaboutsSection();
         // After the project is in the DOM, show the project sections
         this.showPageSections();
+        this.toggleMobileMenu();
       }
     })
   );
