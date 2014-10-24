@@ -13,36 +13,34 @@ var Planbox = Planbox || {};
   // App ======================================================================
   // (NS.app is defined in base-app.js)
 
-  var initializePlugin = function() {
-    var PluginNS = NS.app.Shareabouts = NS.app.Shareabouts  || {};
+  var syncWithCredentials = function(method, model, options) {
+    _.defaults(options || (options = {}), {
+      xhrFields: {withCredentials: true}
+    });
 
-    var syncWithCredentials = function(method, model, options) {
-      _.defaults(options || (options = {}), {
-        xhrFields: {withCredentials: true}
-      });
-
-      return Backbone.sync.apply(this, [method, model, options]);
-    };
-
-    if (!PluginNS.section) {
-      PluginNS.section = NS.app.projectModel.get('sections').findWhere({type: 'shareabouts'});
-    }
-
-    if (!PluginNS.dataset) {
-      PluginNS.dataset = new Backbone.Model();
-      PluginNS.dataset.url = PluginNS.section.get('details').dataset_url;
-      PluginNS.dataset.sync = syncWithCredentials;
-      PluginNS.dataset.fetch();
-    }
-
-    // if (!PluginNS.places) {
-    //   PluginNS.places = new Shareabouts.PlaceCollection();
-    //   PluginNS.places.url = PluginNS.section.get('dataset_url') + '/places';
-    // }
+    return Backbone.sync.apply(this, [method, model, options]);
   };
 
-  NS.app.on('show:projectDashboard:activityPanel:after', function() {
-    initializePlugin();
+  NS.ShareaboutsDashboardPlugin = NS.Plugin.extend({
+    initialize: function() {
+      this.config = this.getShareaboutsConfig();
+      this.dataset = new Backbone.Model();
+      this.dataset.url = this.config.details.dataset_url;
+      this.dataset.sync = syncWithCredentials;
+      this.dataset.fetch();
+
+      this.app.on('show:projectDashboard:activityPanel:after', _.bind(this.onShowActivityPanel, this));
+    },
+
+    getShareaboutsConfig: function() {
+      var projectSections = NS.Data.project.sections,
+          shareaboutsSection = _.findWhere(projectSections, {type: 'shareabouts'});
+      return shareaboutsSection;
+    },
+
+    onShowActivityPanel: function() {
+
+    }
   });
 
 }(Planbox, jQuery));

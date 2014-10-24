@@ -18,6 +18,9 @@ var Planbox = Planbox || {};
   });
 
   NS.app.addInitializer(function(options){
+    NS.app.plugins = [];
+    NS.app.plugins.push(new NS.ShareaboutsDashboardPlugin(NS.app));
+
     NS.app.projectModel = new NS.ProjectModel(NS.Data.project);
     NS.app.sectionCollection = NS.app.projectModel.get('sections');
 

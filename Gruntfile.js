@@ -405,8 +405,15 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/views/mixins.js',
             '<%= yeoman.app %>/scripts/project-dashboard/project-dashboard-view.js',
             '<%= yeoman.app %>/scripts/project-dashboard/activity-panel-view.js',
+            '<%= yeoman.app %>/scripts/plugins.js',
             '<%= yeoman.app %>/scripts/base-app.js',
             '<%= yeoman.app %>/scripts/project-dashboard/app.js'
+          ],
+          '<%= yeoman.all %>/scripts/shareabouts-project-dashboard.min.js': [
+            '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-dataset-place-count-widget-view.js',
+            '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-dataset-comment-count-widget-view.js',
+            '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-dataset-support-count-widget-view.js',
+            '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-project-dashboard-plugin.js'
           ],
           '<%= yeoman.app %>/scripts/app-profile-admin.min.js': [
             '<%= yeoman.app %>/scripts/utils.js',

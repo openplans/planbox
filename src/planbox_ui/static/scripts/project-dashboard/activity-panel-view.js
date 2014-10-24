@@ -8,6 +8,9 @@ var Planbox = Planbox || {};
   NS.ActivityPanelView = Backbone.Marionette.Layout.extend({
     template: '#activity-panel-tpl',
     regions: {
+      placeCountWidget: '.place-count-widget',
+      commentCountWidget: '.comment-count-widget',
+      supportCountWidget: '.support-count-widget'
     },
 
     initialize: function(options) {
@@ -22,9 +25,15 @@ var Planbox = Planbox || {};
 
     showRegions: function() {
 
-      // this.profileDetailsRegion.show(new NS.ProfileDetailsAdminView({
-      //   model: this.model
-      // }));
+      this.placeCountWidget.show(new NS.DatasetPlaceCountWidgetView({
+        model: this.app.plugins[0].dataset
+      }));
+      this.commentCountWidget.show(new NS.DatasetCommentCountWidgetView({
+        model: this.app.plugins[0].dataset
+      }));
+      this.supportCountWidget.show(new NS.DatasetSupportCountWidgetView({
+        model: this.app.plugins[0].dataset
+      }));
       // this.projectListRegion.show(new NS.ProjectListAdminView({
       //   model: this.model,
       //   collection: this.model.get('projects')

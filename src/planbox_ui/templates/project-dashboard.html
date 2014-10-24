@@ -47,6 +47,7 @@
   <script src="{{ STATIC_URL }}scripts/views/mixins.js"></script>
   <script src="{{ STATIC_URL }}scripts/project-dashboard/project-dashboard-view.js"></script>
   <script src="{{ STATIC_URL }}scripts/project-dashboard/activity-panel-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/plugins.js"></script>
   <script src="{{ STATIC_URL }}scripts/base-app.js"></script>
   <script src="{{ STATIC_URL }}scripts/project-dashboard/app.js"></script>
   {% else %}
@@ -54,11 +55,15 @@
   {% endif %}
 
   {% if debug %}
-  <script src="{{ STATIC_URL }}scripts/project-dashboard/shareabouts-project-dashboard-app.js"></script>
+  <script src="{{ STATIC_URL }}scripts/project-dashboard/shareabouts-dataset-place-count-widget-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/project-dashboard/shareabouts-dataset-comment-count-widget-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/project-dashboard/shareabouts-dataset-support-count-widget-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/project-dashboard/shareabouts-project-dashboard-plugin.js"></script>
   {% else %}
-  <script src="{{ STATIC_URL }}scripts/app-project-dashboard.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
+  <script src="{{ STATIC_URL }}scripts/shareabouts-project-dashboard.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
 
+  {% handlebarsjs 'shareabouts-dashboard/(.*)' precompile register_partials %}
   {% handlebarsjs 'project-dashboard/(.*)' precompile register_partials %}
   {% handlebarsjs 'common/(.*)' precompile register_partials %}
 
