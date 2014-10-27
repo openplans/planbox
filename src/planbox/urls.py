@@ -5,6 +5,7 @@ import password_reset.urls
 import planbox_data.urls
 import planbox_ui.urls
 import shareabouts_integration.urls
+import sparklines.urls
 
 
 admin.autodiscover()
@@ -35,6 +36,7 @@ urlpatterns = patterns('',
     url(r'^contact/?$', redirect_to_about),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(sparklines.urls)),
     url(r'^api/v1/', include(planbox_data.urls)),
     url(r'^generate-error$', generate_error),
     url(r'^shareabouts/', include(shareabouts_integration.urls)),

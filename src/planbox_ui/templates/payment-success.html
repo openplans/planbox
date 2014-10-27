@@ -1,0 +1,18 @@
+{% extends 'product-base.html' %}
+
+{% block page %}
+
+<div class="row extra-padding-top extra-padding-bottom">
+  <div class="small-12 columns text-center">
+    <br>
+    <h1>Hooray!</h1>
+    <h3>
+        Thank you for your payment. Your plan is activated.<br>
+        Our team will be in touch soon to get you up and running.
+    </h3>
+    <br>
+    <a href="{% url 'app-project-editor' owner_slug=project.owner.slug project_slug=project.slug %}" class="button radius">Continue to project...</a>
+  </div>
+</div>
+
+{% endblock %}

@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'django_ace',
     'django_object_actions',
     'raven.contrib.django.raven_compat',
+    'sparklines',
 
     'moonclerk',
     'custom_domains',
