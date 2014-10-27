@@ -29,6 +29,15 @@ var Planbox = Planbox || {};
       this.dataset.sync = syncWithCredentials;
       this.dataset.fetch();
 
+      this.places = new Shareabouts.PlaceCollection();
+      this.places.url = this.config.details.dataset_url.replace(/^\/|\/$/g, '') + '/places';
+      this.places.fetchAllPages({data: {'include_private': true}});
+
+      this.submissions = new Shareabouts.PaginatedCollection();
+      this.submissions.url = this.config.details.dataset_url.replace(/^\/|\/$/g, '') + '/submissions';
+      this.submissions.sync = syncWithCredentials;
+      this.submissions.fetchAllPages({data: {'include_private': true}});
+
       this.app.on('show:projectDashboard:activityPanel:after', _.bind(this.onShowActivityPanel, this));
     },
 

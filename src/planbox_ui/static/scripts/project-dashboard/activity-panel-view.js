@@ -10,7 +10,8 @@ var Planbox = Planbox || {};
     regions: {
       placeCountWidget: '.place-count-widget',
       commentCountWidget: '.comment-count-widget',
-      supportCountWidget: '.support-count-widget'
+      supportCountWidget: '.support-count-widget',
+      uniqueContribCountWidget: '.unique-contrib-count-widget'
     },
 
     initialize: function(options) {
@@ -26,13 +27,24 @@ var Planbox = Planbox || {};
     showRegions: function() {
 
       this.placeCountWidget.show(new NS.DatasetPlaceCountWidgetView({
-        model: this.app.plugins[0].dataset
+        model: this.app.plugins[0].dataset,
+        app: this.app,
+        plugin: this.app.plugins[0]
       }));
       this.commentCountWidget.show(new NS.DatasetCommentCountWidgetView({
-        model: this.app.plugins[0].dataset
+        model: this.app.plugins[0].dataset,
+        app: this.app,
+        plugin: this.app.plugins[0]
       }));
       this.supportCountWidget.show(new NS.DatasetSupportCountWidgetView({
-        model: this.app.plugins[0].dataset
+        model: this.app.plugins[0].dataset,
+        app: this.app,
+        plugin: this.app.plugins[0]
+      }));
+      this.uniqueContribCountWidget.show(new NS.DatasetUniqueContribCountWidgetView({
+        model: this.app.plugins[0].dataset,
+        app: this.app,
+        plugin: this.app.plugins[0]
       }));
       // this.projectListRegion.show(new NS.ProjectListAdminView({
       //   model: this.model,
