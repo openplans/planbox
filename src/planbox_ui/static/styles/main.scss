@@ -974,6 +974,44 @@ img.attachment-icon {
   @media #{$large-up} {
     height: 500px;
   }
+
+  .shareabouts-legend-container {
+    position: relative;
+    z-index: 2;
+    @media #{$medium-up} {
+      position: absolute;
+      top: 6rem;
+      bottom: 2rem;
+      right: 1rem;
+    }
+  }
+  &.panel-open .shareabouts-legend-container {
+    display: none;
+  }
+  .shareabouts-legend-button {
+    position: absolute;
+    z-index: 2;
+    top: -4rem;
+    right: 1rem;
+    margin: 0;
+    outline: 0;
+    @media #{$medium-up} {
+      top: auto;
+      right: 0;
+      bottom: 0;
+    }
+  }
+  .shareabouts-legend {
+    @media #{$medium-up} {
+      position: absolute;
+      z-index: 1;
+      bottom: 2rem;
+      right: 0;
+      box-shadow: -5px 5px 0 rgba(51,51,51,0.2);
+      max-height: 100%;
+    }
+  }
+
   .shareabouts-add-button-container {
     margin-left: 0;
     bottom: 0;
