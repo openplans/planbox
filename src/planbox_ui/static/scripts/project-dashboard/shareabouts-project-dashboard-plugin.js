@@ -13,30 +13,46 @@ var Planbox = Planbox || {};
   // App ======================================================================
   // (NS.app is defined in base-app.js)
 
-  var syncWithCredentials = function(method, model, options) {
-    _.defaults(options || (options = {}), {
-      xhrFields: {withCredentials: true}
-    });
-
-    return Backbone.sync.apply(this, [method, model, options]);
-  };
-
   NS.ShareaboutsDashboardPlugin = NS.Plugin.extend({
     initialize: function() {
       this.config = this.getShareaboutsConfig();
+
       this.dataset = new Backbone.Model();
       this.dataset.url = this.config.details.dataset_url;
-      this.dataset.sync = syncWithCredentials;
-      this.dataset.fetch();
 
       this.places = new Shareabouts.PlaceCollection();
       this.places.url = this.config.details.dataset_url.replace(/^\/|\/$/g, '') + '/places';
-      this.places.fetchAllPages({data: {'include_private': true}});
 
       this.submissions = new Shareabouts.PaginatedCollection();
       this.submissions.url = this.config.details.dataset_url.replace(/^\/|\/$/g, '') + '/submissions';
-      this.submissions.sync = syncWithCredentials;
-      this.submissions.fetchAllPages({data: {'include_private': true}});
+
+      // Log in to the Shareabouts server
+      $.ajax({
+        url: '/shareabouts/oauth-credentials',
+        data: {'project_id': NS.Data.project.id},
+        success: _.bind(this.fetchShareaboutsData, this)
+      });
+    },
+
+    fetchShareaboutsData: function(credentials) {
+      this.credentials = credentials;
+      var addAccessToken = function(xhr) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + credentials.access_token);
+      };
+
+      this.dataset.fetch({
+        beforeSend: addAccessToken
+      });
+
+      this.places.fetchAllPages({
+        data: {'include_private': true},
+        beforeSend: addAccessToken
+      });
+
+      this.submissions.fetchAllPages({
+        data: {'include_private': true},
+        beforeSend: addAccessToken
+      });
 
       this.app.on('show:projectDashboard:activityPanel:after', _.bind(this.onShowActivityPanel, this));
     },
