@@ -18,6 +18,11 @@ var Planbox = Planbox || {};
       NS.Data.project.owner = _.clone(NS.Data.owner);
     }
 
+    if (NS.Data.isEditable) {
+      NS.app.plugins = [];
+      NS.app.plugins.push(new NS.ShareaboutsProjectEditorPlugin(NS.app));
+    }
+
     NS.app.projectModel = new NS.ProjectModel(NS.Data.project);
     NS.app.sectionCollection = NS.app.projectModel.get('sections');
 

@@ -55,10 +55,17 @@
   <script src="{{ STATIC_URL }}scripts/project-editor-v2/project-location-map-view.js"></script>
   <script src="{{ STATIC_URL }}scripts/project-editor-v2/project-admin-view.js"></script>
   <script src="{{ STATIC_URL }}scripts/project-editor-v2/project-admin-modal-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/plugins.js"></script>
   <script src="{{ STATIC_URL }}scripts/base-app.js"></script>
   <script src="{{ STATIC_URL }}scripts/app.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/app-admin.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
+  {% endif %}
+
+  {% if debug %}
+  <script src="{{ STATIC_URL }}scripts/project-editor-v2/shareabouts-project-editor-plugin.js"></script>
+  {% else %}
+  <script src="{{ STATIC_URL }}scripts/shareabouts-project-editor.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>
   {% endif %}
 
   {% handlebarsjs 'project-editor-v2/(.*)' precompile register_partials %}
