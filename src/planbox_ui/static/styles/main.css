@@ -6676,7 +6676,7 @@ table thead {
 table thead tr th,
 table thead tr td {
   padding: 0.25rem 0.5rem;
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: bold;
   color: #fff;
 }
@@ -6688,7 +6688,7 @@ table tfoot {
 table tfoot tr th,
 table tfoot tr td {
   padding: 0.25rem 0.5rem;
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: bold;
   color: #fff;
 }
@@ -6696,7 +6696,7 @@ table tfoot tr td {
 table tr th,
 table tr td {
   padding: 0.25rem 0.5rem;
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   color: #6c7180;
   text-align: left;
 }
@@ -12348,47 +12348,51 @@ textarea.no-resize {
   border: 0;
 }
 /* line 1734, main.scss */
+.datatable table tr th, .datatable table tr td {
+  font-size: 0.6875rem;
+}
+/* line 1739, main.scss */
 .datatable .table-column {
   max-height: 6.5em;
   width: 8rem;
   overflow: auto;
   text-align: center;
 }
-/* line 1740, main.scss */
+/* line 1745, main.scss */
 .datatable .table-column-20rem {
   width: 10rem;
 }
-/* line 1741, main.scss */
+/* line 1746, main.scss */
 .datatable .table-column-20rem {
   width: 20rem;
 }
-/* line 1742, main.scss */
+/* line 1747, main.scss */
 .datatable .table-column-30rem {
   width: 30rem;
 }
-/* line 1743, main.scss */
+/* line 1748, main.scss */
 .datatable .table-column-40rem {
   width: 40rem;
 }
-/* line 1744, main.scss */
+/* line 1749, main.scss */
 .datatable .table-column-50rem {
   width: 50rem;
 }
-/* line 1745, main.scss */
+/* line 1750, main.scss */
 .datatable .table-column-75rem {
   width: 75rem;
 }
-/* line 1746, main.scss */
+/* line 1751, main.scss */
 .datatable .table-column-75rem {
   width: 100rem;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 1748, main.scss */
+  /* line 1753, main.scss */
   .datatable thead tr,
   .datatable tbody tr {
     display: block;
   }
-  /* line 1752, main.scss */
+  /* line 1757, main.scss */
   .datatable tbody {
     display: block;
     overflow-x: hidden;
@@ -12396,7 +12400,7 @@ textarea.no-resize {
   }
 }
 
-/* line 1763, main.scss */
+/* line 1768, main.scss */
 .tab-title > a:focus,
 .tabs-content [tabindex]:focus {
   outline: 0;

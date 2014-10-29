@@ -1730,6 +1730,11 @@ textarea.no-resize {
   table {
     margin-bottom: 0;
     border: 0;
+    tr {
+      th, td {
+        font-size: rem-calc(11);
+      }
+    }
   }
   .table-column {
     max-height: 6.5em;
