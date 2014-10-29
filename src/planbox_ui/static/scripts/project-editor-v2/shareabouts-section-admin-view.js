@@ -104,7 +104,7 @@ var Planbox = Planbox || {};
         }
       },
 
-      initialize: function() {
+      presave: function() {
         var self = this;
 
         if (!this.model.get('details').dataset_url) {
@@ -116,12 +116,35 @@ var Planbox = Planbox || {};
               dataset_slug: NS.Data.owner.slug + '-' + (new Date()).getTime()
             },
             success: function(data) {
-              self.model.set('dataset_url', data.url);
+              self.model.set('dataset_url', data['dataset_url']);
+              self.shareaboutsAccessData = data;
             },
             error: function(xhr, status, error) {
               // Remove the unsaved collection (and the view automatically)
               self.model.collection.remove(self.model);
 
+              NS.showErrorModal('Unable to activate Shareabouts',
+                'There was a temporary problem while we were setting up your ' +
+                'Shareabouts map.',
+                'We\'ve been notified and will investigate it right away. ' +
+                'This is likely a temporary issue so please try again shortly.');
+            }
+          });
+        }
+      },
+
+      postsave: function() {
+        var self = this;
+
+        if (self.shareaboutsAccessData) {
+          $.ajax({
+            url: '/shareabouts/authorize-project',
+            type: 'POST',
+            data: self.shareaboutsAccessData,
+            success: function(data) {
+              delete self.shareaboutsAccessData;
+            },
+            error: function(xhr, status, error) {
               NS.showErrorModal('Unable to activate Shareabouts',
                 'There was a temporary problem while we were setting up your ' +
                 'Shareabouts map.',

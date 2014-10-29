@@ -296,22 +296,28 @@ var Planbox = Planbox || {};
         $(evt.currentTarget).parents('.section-settings-toggle-container').next('.section-settings').slideToggle(400);
       },
       save: function(data) {
-        var self = this;
+        var self = this,
+            _saveModel;
 
-        this.model.clean();
-        this.model.save(data, {
-          success: function(model) {
-            self.onSaveSuccess(model);
-          },
-          error: function(model, resp) {
-            // Did we specifically change the public status? Put it back.
-            if (data && data.public) {
-              self.ui.publishCheckbox.prop('checked', !data.public);
+        _saveModel = function() {
+          self.model.clean();
+          self.model.save(data, {
+            success: function(model) {
+              self.onSaveSuccess(model);
+              NS.Utils.runHook(NS.app.plugins, 'postsave', {args: [self.model]});
+            },
+            error: function(model, resp) {
+              // Did we specifically change the public status? Put it back.
+              if (data && data.public) {
+                self.ui.publishCheckbox.prop('checked', !data.public);
+              }
+
+              self.onSaveError(model, resp);
             }
+          });
+        };
 
-            self.onSaveError(model, resp);
-          }
-        });
+        NS.Utils.runHook(NS.app.plugins, 'presave', {done: _saveModel, args: [self.model]});
       },
       handleSave: function(evt) {
         evt.preventDefault();

@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 import password_reset.urls
 import planbox_data.urls
 import planbox_ui.urls
+import shareabouts_integration.urls
 import sparklines.urls
 
 
@@ -38,6 +39,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(sparklines.urls)),
     url(r'^api/v1/', include(planbox_data.urls)),
     url(r'^generate-error$', generate_error),
-    url(r'^shareabouts/create-dataset$', 'shareabouts_integration.views.create_dataset'),
+    url(r'^shareabouts/', include(shareabouts_integration.urls)),
     url(r'^', include(planbox_ui.urls)),
 )

@@ -5733,7 +5733,7 @@ ul.pagination {
 ul.pagination li {
   height: 1.5rem;
   color: #222222;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   margin-left: 0.3125rem;
 }
 /* line 110, ../bower_components/foundation/scss/foundation/components/_pagination.scss */
@@ -6656,53 +6656,53 @@ dialog[open] {
 
 /* line 131, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table {
-  background: #FFFFFF;
+  background: #f9f9f9;
   margin-bottom: 1.25rem;
-  border: solid 1px #DDDDDD;
+  border: solid 1px #eee;
   table-layout: auto;
 }
 /* line 69, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table caption {
   background: transparent;
-  color: #222222;
+  color: #fff;
   font-size: 1rem;
   font-weight: bold;
 }
 /* line 78, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table thead {
-  background: #F5F5F5;
+  background: #308fbf;
 }
 /* line 82, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table thead tr th,
 table thead tr td {
-  padding: 0.5rem 0.625rem 0.625rem;
-  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8125rem;
   font-weight: bold;
-  color: #222222;
+  color: #fff;
 }
 /* line 92, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table tfoot {
-  background: #F5F5F5;
+  background: #308fbf;
 }
 /* line 96, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table tfoot tr th,
 table tfoot tr td {
-  padding: 0.5rem 0.625rem 0.625rem;
-  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8125rem;
   font-weight: bold;
-  color: #222222;
+  color: #fff;
 }
 /* line 107, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table tr th,
 table tr td {
-  padding: 0.5625rem 0.625rem;
-  font-size: 0.875rem;
-  color: #222222;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8125rem;
+  color: #6c7180;
   text-align: left;
 }
 /* line 115, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table tr.even, table tr.alt, table tr:nth-of-type(even) {
-  background: #F9F9F9;
+  background: #eee;
 }
 /* line 120, ../bower_components/foundation/scss/foundation/components/_tables.scss */
 table thead tr th,
@@ -6712,7 +6712,7 @@ table tbody tr th,
 table tbody tr td,
 table tr td {
   display: table-cell;
-  line-height: 1.125rem;
+  line-height: 1.2;
 }
 
 /* line 155, ../bower_components/foundation/scss/foundation/components/_type.scss */
@@ -11388,13 +11388,88 @@ img.attachment-icon {
     height: 500px;
   }
 }
-/* line 977, main.scss */
+/* line 978, main.scss */
+.project-shareabouts .shareabouts-legend-container {
+  position: relative;
+  z-index: 2;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 978, main.scss */
+  .project-shareabouts .shareabouts-legend-container {
+    position: absolute;
+    top: 6rem;
+    bottom: 2rem;
+    right: 1rem;
+  }
+}
+/* line 988, main.scss */
+.project-shareabouts.panel-open .shareabouts-legend-container {
+  display: none;
+}
+/* line 991, main.scss */
+.project-shareabouts .shareabouts-legend-button {
+  position: absolute;
+  z-index: 2;
+  top: -4rem;
+  right: 1rem;
+  margin: 0;
+  outline: 0;
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 991, main.scss */
+  .project-shareabouts .shareabouts-legend-button {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+  }
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 1005, main.scss */
+  .project-shareabouts .shareabouts-legend {
+    position: absolute;
+    z-index: 1;
+    bottom: 2rem;
+    right: 0;
+    box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
+    max-height: 100%;
+  }
+}
+/* line 1015, main.scss */
+.project-shareabouts .shareabouts-legend-table {
+  width: 100%;
+  border: 0;
+}
+/* line 1018, main.scss */
+.project-shareabouts .shareabouts-legend-table img {
+  max-width: none;
+  width: 1.5em;
+}
+/* line 1022, main.scss */
+.project-shareabouts .shareabouts-legend-table tr {
+  background-color: transparent;
+}
+/* line 1025, main.scss */
+.project-shareabouts .shareabouts-legend-table td {
+  padding: 0.375rem;
+  text-align: right;
+}
+/* line 1029, main.scss */
+.project-shareabouts .shareabouts-legend-table tr + tr td {
+  padding-top: 0;
+}
+/* line 1032, main.scss */
+.project-shareabouts .shareabouts-legend-table td + td {
+  padding-left: 0;
+  text-align: left;
+}
+/* line 1038, main.scss */
 .project-shareabouts .shareabouts-add-button-container {
   margin-left: 0;
   bottom: 0;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 977, main.scss */
+  /* line 1038, main.scss */
   .project-shareabouts .shareabouts-add-button-container {
     margin-left: 50%;
     left: -31.25rem;
@@ -11402,28 +11477,28 @@ img.attachment-icon {
   }
 }
 @media only screen and (min-width: 80.063em) {
-  /* line 977, main.scss */
+  /* line 1038, main.scss */
   .project-shareabouts .shareabouts-add-button-container {
     bottom: 1rem;
   }
 }
-/* line 990, main.scss */
+/* line 1051, main.scss */
 .project-shareabouts .map {
   height: 300px;
 }
-/* line 994, main.scss */
+/* line 1055, main.scss */
 .project-shareabouts .avatar {
   width: 30px;
 }
-/* line 999, main.scss */
+/* line 1060, main.scss */
 .project-shareabouts .signed-in-as .avatar {
   width: 50px;
 }
-/* line 1004, main.scss */
+/* line 1065, main.scss */
 .project-shareabouts .response-body {
   padding-top: 0.25em;
 }
-/* line 1008, main.scss */
+/* line 1069, main.scss */
 .project-shareabouts a.auth-inline {
   display: inline;
   font-size: 0.875em;
@@ -11432,7 +11507,7 @@ img.attachment-icon {
   padding: 0.25em 0.5em;
 }
 @media only screen and (max-width: 40em) {
-  /* line 1016, main.scss */
+  /* line 1077, main.scss */
   .project-shareabouts.panel-open .shareabouts-close-button {
     position: relative;
     top: 0;
@@ -11443,7 +11518,7 @@ img.attachment-icon {
     width: auto;
     display: inline-block;
   }
-  /* line 1029, main.scss */
+  /* line 1090, main.scss */
   .project-shareabouts.panel-open .shareabouts-close-button:after {
     content: 'CLOSE';
     font-size: 0.75em;
@@ -11451,31 +11526,31 @@ img.attachment-icon {
   }
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1016, main.scss */
+  /* line 1077, main.scss */
   .project-shareabouts.panel-open .shareabouts-close-button {
     box-shadow: -0.25em 5px 0 rgba(51, 51, 51, 0.2);
   }
 }
 
-/* line 1042, main.scss */
+/* line 1103, main.scss */
 .shareabouts-geometry-set .form-instructions {
   display: none;
 }
 
 /* NOTE: use these selectors to style invalid form elements on non-HTML5 browsers */
-/* line 1047, main.scss */
+/* line 1108, main.scss */
 .project-shareabouts .form-submitted input:invalid,
 .project-shareabouts .form-submitted textarea:invalid,
 .project-shareabouts .form-submitted select:invalid {
   border: 1px solid #f04124;
 }
 
-/* line 1053, main.scss */
+/* line 1114, main.scss */
 .shareabouts-submit-button {
   margin-top: 0.5em;
 }
 
-/* line 1057, main.scss */
+/* line 1118, main.scss */
 .shareabouts-auth-container {
   position: absolute;
   z-index: 2;
@@ -11488,7 +11563,7 @@ img.attachment-icon {
   overflow: visible;
 }
 
-/* line 1068, main.scss */
+/* line 1129, main.scss */
 .shareabouts-auth-avatar {
   width: 2.25rem;
   height: 2.25rem;
@@ -11496,28 +11571,28 @@ img.attachment-icon {
   margin-bottom: 0.125rem;
 }
 
-/* line 1074, main.scss */
+/* line 1135, main.scss */
 .shareabouts-auth-social-button {
   color: #fff !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
-/* line 1078, main.scss */
+/* line 1139, main.scss */
 .shareabouts-auth-social-button.shareabouts-auth-twitter-button {
   background-color: #66caf4;
 }
-/* line 1081, main.scss */
+/* line 1142, main.scss */
 .shareabouts-auth-social-button.shareabouts-auth-facebook-button {
   background-color: #4f79c1;
 }
-/* line 1084, main.scss */
+/* line 1145, main.scss */
 .shareabouts-auth-social-button img {
   display: inline-block;
   max-width: 2.5rem;
   max-height: 2.5rem;
 }
 
-/* line 1091, main.scss */
+/* line 1152, main.scss */
 .shareabouts-add-button {
   border-style: solid;
   border-width: 0px;
@@ -11552,44 +11627,44 @@ img.attachment-icon {
   color: #FFFFFF;
 }
 @media only screen and (max-width: 40em) {
-  /* line 1091, main.scss */
+  /* line 1152, main.scss */
   .shareabouts-add-button {
     margin: 0;
   }
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1091, main.scss */
+  /* line 1152, main.scss */
   .shareabouts-add-button {
     box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
   }
 }
 
-/* line 1102, main.scss */
+/* line 1163, main.scss */
 .shareabouts-panel {
   background-color: #fff;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1105, main.scss */
+  /* line 1166, main.scss */
   .panel-open .shareabouts-panel {
     box-shadow: -5px 0 0 rgba(51, 51, 51, 0.2);
   }
 }
 
-/* line 1111, main.scss */
+/* line 1172, main.scss */
 .shareabouts-panel-content {
   padding: 1rem 0 3rem;
 }
-/* line 1113, main.scss */
+/* line 1174, main.scss */
 .shareabouts-panel-content .form-instructions strong {
   font-size: 1rem;
 }
-/* line 1116, main.scss */
+/* line 1177, main.scss */
 .shareabouts-panel-content .or-sign-in {
   position: relative;
   top: -0.5rem;
 }
 
-/* line 1122, main.scss */
+/* line 1183, main.scss */
 .heart {
   color: LightGrey;
   font-size: 1.5em;
@@ -11599,12 +11674,12 @@ img.attachment-icon {
   position: relative;
   top: 0.125em;
 }
-/* line 1130, main.scss */
+/* line 1191, main.scss */
 .heart.suported {
   color: LightPink;
 }
 
-/* line 1135, main.scss */
+/* line 1196, main.scss */
 .survey-header-container {
   border-bottom: 1px solid #ddd;
 }
@@ -11612,18 +11687,18 @@ img.attachment-icon {
 /*--------------------------------------------------
   Project Layout
 --------------------------------------------------*/
-/* line 1144, main.scss */
+/* line 1205, main.scss */
 .project-map-region > div {
   height: 300px;
 }
 
-/* line 1148, main.scss */
+/* line 1209, main.scss */
 .shareabouts-side-nav {
   height: 1px;
   margin-bottom: 350px;
   overflow: visible;
 }
-/* line 1158, main.scss */
+/* line 1219, main.scss */
 .shareabouts-side-nav.fixed div {
   width: 100%;
   margin-left: auto;
@@ -11641,7 +11716,7 @@ img.attachment-icon {
 .shareabouts-side-nav.fixed div:after {
   clear: both;
 }
-/* line 1161, main.scss */
+/* line 1222, main.scss */
 .shareabouts-side-nav.fixed .side-nav {
   background-color: #fff;
   padding-left: 0.9375rem;
@@ -11650,7 +11725,7 @@ img.attachment-icon {
   float: left;
 }
 
-/* line 1169, main.scss */
+/* line 1230, main.scss */
 .side-nav .social-link img,
 .button-group .social-link img {
   max-height: 1.5em;
@@ -11658,19 +11733,19 @@ img.attachment-icon {
 }
 
 @media only screen and (max-width: 40em) {
-  /* line 1177, main.scss */
+  /* line 1238, main.scss */
   .project-shareabouts.panel-open + .after-shareabouts, .project-shareabouts.panel-form-open + .after-shareabouts {
     display: none;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 1175, main.scss */
+  /* line 1236, main.scss */
   .after-shareabouts {
     position: relative;
     z-index: 10;
     top: -5px;
   }
-  /* line 1186, main.scss */
+  /* line 1247, main.scss */
   .after-shareabouts:before {
     width: 100%;
     height: 5px;
@@ -11679,39 +11754,39 @@ img.attachment-icon {
   }
 }
 @media only screen and (min-width: 80.063em) {
-  /* line 1175, main.scss */
+  /* line 1236, main.scss */
   .after-shareabouts {
     top: -1rem;
   }
-  /* line 1195, main.scss */
+  /* line 1256, main.scss */
   .after-shareabouts:before {
     height: 1rem;
     margin-bottom: -1rem;
   }
 }
-/* line 1200, main.scss */
+/* line 1261, main.scss */
 .after-shareabouts .project-tagline {
   font-size: 1.5rem;
 }
 
-/* line 1205, main.scss */
+/* line 1266, main.scss */
 .shareabouts-page {
   height: 100%;
 }
-/* line 1207, main.scss */
+/* line 1268, main.scss */
 .shareabouts-page .project-shareabouts {
   border: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1207, main.scss */
+  /* line 1268, main.scss */
   .shareabouts-page .project-shareabouts {
     height: 60%;
   }
-  /* line 1215, main.scss */
+  /* line 1276, main.scss */
   .shareabouts-page .project-shareabouts.panel-open {
     height: 85%;
   }
-  /* line 1218, main.scss */
+  /* line 1279, main.scss */
   .shareabouts-page .project-shareabouts:after {
     content: '';
     display: block;
@@ -11724,7 +11799,7 @@ img.attachment-icon {
     box-shadow: 0 -3px 0 rgba(51, 51, 51, 0.1);
   }
 }
-/* line 1233, main.scss */
+/* line 1294, main.scss */
 .shareabouts-page .cover-image-container,
 .shareabouts-page .project-section-fieldset .section-settings label:first-child,
 .shareabouts-page .project-section-fieldset .section-settings label:first-child + br,
@@ -11737,43 +11812,43 @@ img.attachment-icon {
 /*--------------------------------------------------
   The Admin
 --------------------------------------------------*/
-/* line 1248, main.scss */
+/* line 1309, main.scss */
 .project-edit-form {
   background-color: #fff;
   box-shadow: 0 -65px 0 #fff;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1248, main.scss */
+  /* line 1309, main.scss */
   .project-edit-form {
     padding-bottom: 4rem;
   }
 }
 
-/* line 1256, main.scss */
+/* line 1317, main.scss */
 .project-section {
   z-index: auto;
 }
 
-/* line 1260, main.scss */
+/* line 1321, main.scss */
 .project-section-fieldset {
   padding: 0;
   border: 0;
 }
 
 @-moz-document url-prefix() {
-  /* line 1267, main.scss */
+  /* line 1328, main.scss */
   .project-section-fieldset {
     display: table-cell;
   }
 }
-/* line 1272, main.scss */
+/* line 1333, main.scss */
 .location-map-region .map {
   height: 200px;
   border: 1px solid #c9c9c9;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1277, main.scss */
+  /* line 1338, main.scss */
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
@@ -11784,7 +11859,7 @@ img.attachment-icon {
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1286, main.scss */
+  /* line 1347, main.scss */
   input[type=text].sub-heading-input {
     font-size: 1.75rem;
     margin: 0 0 1rem 0;
@@ -11794,12 +11869,12 @@ img.attachment-icon {
   }
 }
 
-/* line 1295, main.scss */
+/* line 1356, main.scss */
 span.sub-heading-postfix {
   color: #999;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1295, main.scss */
+  /* line 1356, main.scss */
   span.sub-heading-postfix {
     margin: 0 0 1rem 0;
     padding: 0.5rem 0.75rem;
@@ -11807,7 +11882,7 @@ span.sub-heading-postfix {
   }
 }
 
-/* line 1304, main.scss */
+/* line 1365, main.scss */
 .content-editable {
   line-height: 1.6;
   background-color: #FFFFFF;
@@ -11827,7 +11902,7 @@ span.sub-heading-postfix {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
   height: auto;
 }
-/* line 1306, main.scss */
+/* line 1367, main.scss */
 .content-editable.rich-editable {
   min-height: 8rem;
 }
@@ -11852,77 +11927,77 @@ span.sub-heading-postfix {
   background-color: #DDDDDD;
   cursor: default;
 }
-/* line 1314, main.scss */
+/* line 1375, main.scss */
 .content-editable.radius {
   border-radius: 3px;
 }
-/* line 1318, main.scss */
+/* line 1379, main.scss */
 .error .content-editable, .content-editable.error {
   margin-bottom: 0;
 }
-/* line 1321, main.scss */
+/* line 1382, main.scss */
 .content-editable a {
   color: #308fbf;
   text-decoration: none;
   line-height: inherit;
 }
-/* line 1326, main.scss */
+/* line 1387, main.scss */
 .content-editable a:hover, .content-editable a:focus {
   color: #267299;
 }
 
-/* line 1335, main.scss */
+/* line 1396, main.scss */
 .pen-menu,
 .pen-menu * {
   box-sizing: content-box !important;
 }
 
-/* line 1340, main.scss */
+/* line 1401, main.scss */
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
   padding-top: 0.5rem;
   padding-right: 0.25rem;
 }
 
-/* line 1346, main.scss */
+/* line 1407, main.scss */
 .section-settings {
   background-color: #f7f7f7;
   padding-top: 1.75rem;
 }
-/* line 1349, main.scss */
+/* line 1410, main.scss */
 .section-settings-toggle-container + .section-settings {
   margin-top: -2.5rem;
 }
 
-/* line 1354, main.scss */
+/* line 1415, main.scss */
 .section-insert {
   margin-bottom: -1rem;
   margin-right: -0.9375rem;
   margin-left: -0.9375rem;
 }
-/* line 1358, main.scss */
+/* line 1419, main.scss */
 .section-insert hr {
   margin-top: 1rem;
   border-color: #ff8b38;
 }
 
-/* line 1364, main.scss */
+/* line 1425, main.scss */
 .unassigned {
   cursor: default;
 }
 
-/* line 1368, main.scss */
+/* line 1429, main.scss */
 .project-settings-container {
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
   background-color: #d9d9d9;
 }
-/* line 1369, main.scss */
+/* line 1430, main.scss */
 .project-settings-container .save-btn {
   outline: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1368, main.scss */
+  /* line 1429, main.scss */
   .project-settings-container {
     position: fixed;
     top: 65px;
@@ -11934,25 +12009,25 @@ span.sub-heading-postfix {
     overflow: hidden;
     box-shadow: inset 3px 0 0 rgba(51, 51, 51, 0.1);
   }
-  /* line 1385, main.scss */
+  /* line 1446, main.scss */
   .project-settings-container .project-settings {
     max-height: 60%;
     overflow: auto;
   }
 }
 
-/* line 1392, main.scss */
+/* line 1453, main.scss */
 textarea.no-resize {
   resize: none;
 }
 
-/* line 1397, main.scss */
+/* line 1458, main.scss */
 .drag-area-container {
   position: relative;
   text-align: center;
 }
 
-/* line 1401, main.scss */
+/* line 1462, main.scss */
 .drag-area {
   position: absolute;
   top: 1rem;
@@ -11963,17 +12038,17 @@ textarea.no-resize {
   border-radius: 0.375rem;
   background-color: rgba(242, 242, 242, 0.4);
 }
-/* line 1410, main.scss */
+/* line 1471, main.scss */
 .drag-area:hover {
   border-color: rgba(133, 133, 133, 0.9);
   background-color: rgba(242, 242, 242, 0.9);
 }
-/* line 1414, main.scss */
+/* line 1475, main.scss */
 .drag-area p {
   margin-bottom: 0.5rem;
 }
 
-/* line 1418, main.scss */
+/* line 1479, main.scss */
 .no-file-upload-message {
   clear: both;
   font-size: 0.75em;
@@ -11986,18 +12061,18 @@ textarea.no-resize {
   border-radius: 0.25em;
 }
 
-/* line 1429, main.scss */
+/* line 1490, main.scss */
 .no-file-upload-message a {
   color: #fff;
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 1433, main.scss */
+/* line 1494, main.scss */
 .no-file-upload-message a:hover {
   color: #fff;
 }
 
-/* line 1436, main.scss */
+/* line 1497, main.scss */
 .file-upload {
   margin: 2em 1em 1em;
   text-align: center;
@@ -12008,7 +12083,7 @@ textarea.no-resize {
   position: relative;
 }
 
-/* line 1445, main.scss */
+/* line 1506, main.scss */
 .file-upload:hover,
 .file-dragging,
 .file-uploading {
@@ -12017,12 +12092,12 @@ textarea.no-resize {
   background-color: rgba(90, 90, 90, 0.5);
 }
 
-/* line 1452, main.scss */
+/* line 1513, main.scss */
 .file-upload p {
   margin-bottom: 0.5em;
 }
 
-/* line 1455, main.scss */
+/* line 1516, main.scss */
 .file-upload-input-container {
   position: relative;
   overflow: hidden;
@@ -12030,12 +12105,12 @@ textarea.no-resize {
   margin-bottom: 0;
 }
 
-/* line 1461, main.scss */
+/* line 1522, main.scss */
 .file-upload-input {
   display: none;
 }
 
-/* line 1464, main.scss */
+/* line 1525, main.scss */
 .uploading-message,
 .file-uploading > .drop-instructions {
   display: none;
@@ -12063,7 +12138,7 @@ textarea.no-resize {
     color: #888;
   }
 }
-/* line 1478, main.scss */
+/* line 1539, main.scss */
 .file-uploading > .uploading-message {
   display: block;
   position: relative;
@@ -12074,44 +12149,44 @@ textarea.no-resize {
   animation: uploading 1.5s infinite ease-in-out;
 }
 
-/* line 1487, main.scss */
+/* line 1548, main.scss */
 .file-uploading > .file-upload-input-container {
   visibility: hidden;
 }
 
-/* line 1492, main.scss */
+/* line 1553, main.scss */
 .full-width-image-container {
   margin: 0 -0.9375rem 0.5rem -0.9375rem;
 }
-/* line 1494, main.scss */
+/* line 1555, main.scss */
 .full-width-image-container.drag-area-container {
   min-height: 9rem;
 }
 
-/* line 1498, main.scss */
+/* line 1559, main.scss */
 .cover-image-container {
   margin-top: -1.125rem;
 }
 
-/* line 1503, main.scss */
+/* line 1564, main.scss */
 .logo-image-container {
   min-height: 9rem;
   margin-bottom: 1rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1503, main.scss */
+  /* line 1564, main.scss */
   .logo-image-container {
     float: left;
     width: 50%;
   }
 }
-/* line 1510, main.scss */
+/* line 1571, main.scss */
 .logo-image-container img {
   max-height: 20rem;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1514, main.scss */
+  /* line 1575, main.scss */
   .project-title-container {
     float: right;
     width: 50%;
@@ -12120,7 +12195,7 @@ textarea.no-resize {
     padding-right: 1rem;
     padding-bottom: 1rem;
   }
-  /* line 1522, main.scss */
+  /* line 1583, main.scss */
   .logo-image-container.hide + .project-title-container {
     float: none;
     width: auto;
@@ -12130,92 +12205,113 @@ textarea.no-resize {
     padding-bottom: 0;
   }
 }
-/* line 1531, main.scss */
+/* line 1592, main.scss */
 .project-title-container .project-title-help-text {
   margin-top: -0.75rem;
 }
 
-/* line 1538, main.scss */
+/* line 1599, main.scss */
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none;
 }
 
-/* line 1550, main.scss */
+/* line 1611, main.scss */
 .existing-snapshot-wrapper .button {
   margin-bottom: 0;
 }
 
-/* line 1556, main.scss */
+/* line 1617, main.scss */
 .avatar-container {
   padding: 0.3rem;
 }
-/* line 1558, main.scss */
+/* line 1619, main.scss */
 .avatar-container .avatar {
   display: inline-block;
 }
-/* line 1561, main.scss */
+/* line 1622, main.scss */
 .avatar-container .drag-area-container {
   min-height: 10.125rem;
 }
 
-/* line 1569, main.scss */
+/* line 1630, main.scss */
 .project-list > li + li, .member-list > li + li, .team-list > li + li {
   margin-top: 0.625rem;
   padding-top: 0.625rem;
   border-top: 1px solid #e3e3e3;
 }
 
-/* line 1576, main.scss */
+/* line 1637, main.scss */
 .member-list li, .team-list li {
   padding-left: 4.375rem;
 }
-/* line 1579, main.scss */
+/* line 1640, main.scss */
 .member-list .avatar, .team-list .avatar {
   width: 3.75rem;
   margin-left: -4.375rem;
 }
 
-/* line 1584, main.scss */
+/* line 1645, main.scss */
 .user-profile .member-list {
   display: none;
 }
 
-/* line 1587, main.scss */
+/* line 1648, main.scss */
 .user-profile .project-list {
   display: none;
 }
 
-/* line 1590, main.scss */
+/* line 1651, main.scss */
 .team-profile .team-list {
   display: none;
 }
 
-/* line 1595, main.scss */
+/* line 1656, main.scss */
 .project-template-gallery {
   background-color: white;
   border-bottom: 1px solid rgba(51, 51, 51, 0.2);
   padding: 0.5rem;
 }
-/* line 1600, main.scss */
+/* line 1661, main.scss */
 .project-template-gallery h5:first-child {
   margin-bottom: 1rem;
 }
 
-/* line 1605, main.scss */
+/* line 1666, main.scss */
 .panel .template-templates-default {
   display: none;
 }
 
 /*--------------------------------------------------
+  Leaflet Overrides
+--------------------------------------------------*/
+/* line 1675, main.scss */
+.leaflet-bar {
+  box-shadow: -3px 3px 0 rgba(51, 51, 51, 0.1);
+  border-radius: 0;
+}
+
+/* line 1679, main.scss */
+.leaflet-bar a:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* line 1683, main.scss */
+.leaflet-bar a:last-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/*--------------------------------------------------
   Project Dashboard / Widgets
 --------------------------------------------------*/
-/* line 1615, main.scss */
+/* line 1695, main.scss */
 .stat-widget.coming-soon {
   background-color: #f6f6f6;
   color: #ddd;
   position: relative;
 }
-/* line 1619, main.scss */
+/* line 1699, main.scss */
 .stat-widget.coming-soon:before {
   content: "Coming Soon...";
   position: absolute;
@@ -12229,34 +12325,83 @@ textarea.no-resize {
   font-style: italic;
 }
 
-/* line 1635, main.scss */
+/* line 1714, main.scss */
 .stat-widget-big-number .count {
   display: block;
   font-size: 2.5rem;
   line-height: 1.2;
 }
-/* line 1640, main.scss */
+/* line 1719, main.scss */
 .stat-widget-big-number .unit {
   text-transform: uppercase;
 }
 
-/*--------------------------------------------------
-  Leaflet Overrides
---------------------------------------------------*/
-/* line 1650, main.scss */
-.leaflet-bar {
-  box-shadow: -3px 3px 0 rgba(51, 51, 51, 0.1);
-  border-radius: 0;
+/* line 1725, main.scss */
+.table-container {
+  max-width: 100%;
+  overflow: auto;
 }
 
-/* line 1654, main.scss */
-.leaflet-bar a:first-child {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+/* line 1730, main.scss */
+.datatable table {
+  margin-bottom: 0;
+  border: 0;
+}
+/* line 1734, main.scss */
+.datatable table tr th, .datatable table tr td {
+  font-size: 0.6875rem;
+}
+/* line 1739, main.scss */
+.datatable .table-column {
+  max-height: 6.5em;
+  width: 8rem;
+  overflow: auto;
+  text-align: center;
+}
+/* line 1745, main.scss */
+.datatable .table-column-20rem {
+  width: 10rem;
+}
+/* line 1746, main.scss */
+.datatable .table-column-20rem {
+  width: 20rem;
+}
+/* line 1747, main.scss */
+.datatable .table-column-30rem {
+  width: 30rem;
+}
+/* line 1748, main.scss */
+.datatable .table-column-40rem {
+  width: 40rem;
+}
+/* line 1749, main.scss */
+.datatable .table-column-50rem {
+  width: 50rem;
+}
+/* line 1750, main.scss */
+.datatable .table-column-75rem {
+  width: 75rem;
+}
+/* line 1751, main.scss */
+.datatable .table-column-75rem {
+  width: 100rem;
+}
+@media only screen and (min-width: 64.063em) {
+  /* line 1753, main.scss */
+  .datatable thead tr,
+  .datatable tbody tr {
+    display: block;
+  }
+  /* line 1757, main.scss */
+  .datatable tbody {
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }
 
-/* line 1658, main.scss */
-.leaflet-bar a:last-child {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+/* line 1768, main.scss */
+.tab-title > a:focus,
+.tabs-content [tabindex]:focus {
+  outline: 0;
 }

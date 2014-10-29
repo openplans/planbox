@@ -974,6 +974,67 @@ img.attachment-icon {
   @media #{$large-up} {
     height: 500px;
   }
+
+  .shareabouts-legend-container {
+    position: relative;
+    z-index: 2;
+    @media #{$medium-up} {
+      position: absolute;
+      top: 6rem;
+      bottom: 2rem;
+      right: 1rem;
+    }
+  }
+  &.panel-open .shareabouts-legend-container {
+    display: none;
+  }
+  .shareabouts-legend-button {
+    position: absolute;
+    z-index: 2;
+    top: -4rem;
+    right: 1rem;
+    margin: 0;
+    outline: 0;
+    @media #{$medium-up} {
+      top: auto;
+      right: 0;
+      bottom: 0;
+      overflow: auto;
+    }
+  }
+  .shareabouts-legend {
+    @media #{$medium-up} {
+      position: absolute;
+      z-index: 1;
+      bottom: 2rem;
+      right: 0;
+      box-shadow: -5px 5px 0 rgba(51,51,51,0.2);
+      max-height: 100%;
+    }
+  }
+  .shareabouts-legend-table {
+    width: 100%;
+    border: 0;
+    img {
+      max-width: none;
+      width: 1.5em;
+    }
+    tr {
+      background-color: transparent;
+    }
+    td {
+      padding: 0.375rem;
+      text-align: right;
+    }
+    tr + tr td {
+      padding-top: 0;
+    }
+    td + td {
+      padding-left: 0;
+      text-align: left;
+    }
+  }
+
   .shareabouts-add-button-container {
     margin-left: 0;
     bottom: 0;
@@ -1165,7 +1226,7 @@ img.attachment-icon {
   }
 }
 .side-nav,
-.button-group { 
+.button-group {
   .social-link img {
     max-height: 1.5em;
     margin: -0.25em 0.25em;
@@ -1608,9 +1669,28 @@ textarea.no-resize {
 
 
 /*--------------------------------------------------
+  Leaflet Overrides
+--------------------------------------------------*/
+
+.leaflet-bar {
+  box-shadow: -3px 3px 0 rgba(51, 51, 51, 0.1);
+  border-radius: 0;
+}
+.leaflet-bar a:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.leaflet-bar a:last-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+
+/*--------------------------------------------------
   Project Dashboard / Widgets
 --------------------------------------------------*/
 
+// Widgets
 .stat-widget {
   &.coming-soon {
     background-color: mix(#eee, #fff);
@@ -1630,7 +1710,6 @@ textarea.no-resize {
     }
   }
 }
-
 .stat-widget-big-number {
   .count {
     display: block;
@@ -1642,21 +1721,51 @@ textarea.no-resize {
   }
 }
 
-
-/*--------------------------------------------------
-  Leaflet Overrides
---------------------------------------------------*/
-
-.leaflet-bar {
-  box-shadow: -3px 3px 0 rgba(51, 51, 51, 0.1);
-  border-radius: 0;
+// Table
+.table-container {
+  max-width: 100%;
+  overflow: auto;
 }
-.leaflet-bar a:first-child {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-.leaflet-bar a:last-child {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+.datatable {
+  table {
+    margin-bottom: 0;
+    border: 0;
+    tr {
+      th, td {
+        font-size: rem-calc(11);
+      }
+    }
+  }
+  .table-column {
+    max-height: 6.5em;
+    width: 8rem;
+    overflow: auto;
+    text-align: center;
+  }
+  .table-column-20rem { width: 10rem; }
+  .table-column-20rem { width: 20rem; }
+  .table-column-30rem { width: 30rem; }
+  .table-column-40rem { width: 40rem; }
+  .table-column-50rem { width: 50rem; }
+  .table-column-75rem { width: 75rem; }
+  .table-column-75rem { width: 100rem; }
+  @media #{$large-up} {
+    thead tr,
+    tbody tr {
+      display: block;
+    }
+    tbody {
+      display: block;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+  }
 }
 
+// Tabs
+.tab-title > a,
+.tabs-content [tabindex] {
+  &:focus {
+    outline: 0;
+  }
+}

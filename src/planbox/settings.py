@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'password_reset',
     'planbox_ui',
     'planbox_data',
+    'shareabouts_integration',
 )
 
 HANDLEBARS_APP_DIRNAMES = ['jstemplates']

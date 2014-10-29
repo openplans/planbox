@@ -89,6 +89,48 @@ var Planbox = Planbox || {};
       return NS.Utils.pathJoin.apply(this, allArgs);
     },
 
+    // Plugin hooks
+    runHook: function(objects, hook, options, undefined) {
+      // Go through each item and run the given hook. This can be useful, for
+      // example, to run some initialization tasks that it's not appropriate
+      // to do before a project is about to be saved for the first time
+      // (like creating a shareabouts dataset).
+
+      options = _.defaults(options || {}, {
+        startIndex: 0,
+        done: function() {},
+        args: []
+      });
+
+      // Go through the items in objects and find the next one that defines
+      // the hook function.
+      var index = options.startIndex,
+          item, hookArgs;
+
+      if (index < _.size(objects)) {
+        do {
+          item = objects[index];
+          index += 1;
+        } while (item && !item[hook]);
+      }
+
+      // Recursively call each item's hook. When finished the hook should call
+      // the `options.nextHook` callback.
+      if (item) {
+        hookArgs = options.args.concat([{
+          nextHook: function() {
+            NS.Utils.runHook(objects, hook, _.extend({}, options, {startIndex: index}));
+          }
+        }]);
+        item[hook].apply(item, hookArgs);
+      }
+
+      else {
+        options.done.apply(undefined, options.args);
+      }
+
+    },
+
     // ====================================================
     // Event and State Logging
 
