@@ -10,7 +10,7 @@ from planbox_data.admin import ProjectAdmin
 
 class ShareaboutsPreauthorizationInline (admin.TabularInline):
     model = Preauthorization
-    extra = 0
+    verbose_name_plural = 'Shareabouts Preauthorization'
     formfield_overrides = {
         TextField: {'widget': TextInput(attrs={'class': 'vTextField'})},
     }
