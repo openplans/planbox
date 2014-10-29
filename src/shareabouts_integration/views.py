@@ -46,7 +46,7 @@ def oauth_credentials(request):
         auth = Preauthorization.objects.get(project=project)
     except Preauthorization.DoesNotExist:
         raise Http404
-    username = auth.shareabouts_user
+    username = auth.username
 
     # Get the requested credentials from the Shareabouts API server
     session = requests.session()
@@ -182,7 +182,7 @@ def authorize_project(request):
 
     # Ensure that a preauthorization for the project exists.
     auth, _ = Preauthorization.objects.get_or_create(project=project)
-    auth.shareabouts_user = owner_username
+    auth.username = owner_username
     auth.save()
 
     return HttpResponse('', status=204)
