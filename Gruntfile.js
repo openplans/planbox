@@ -417,7 +417,7 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-project-dashboard-plugin.js'
           ],
           '<%= yeoman.app %>/scripts/shareabouts-project-editor.min.js': [
-            '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-project-editor-plugin.js'
+            '<%= yeoman.app %>/scripts/project-editor-v2/shareabouts-project-editor-plugin.js'
           ],
           '<%= yeoman.app %>/scripts/app-profile-admin.min.js': [
             '<%= yeoman.app %>/scripts/utils.js',
