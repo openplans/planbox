@@ -999,6 +999,7 @@ img.attachment-icon {
       top: auto;
       right: 0;
       bottom: 0;
+      overflow: auto;
     }
   }
   .shareabouts-legend {
@@ -1009,6 +1010,28 @@ img.attachment-icon {
       right: 0;
       box-shadow: -5px 5px 0 rgba(51,51,51,0.2);
       max-height: 100%;
+    }
+  }
+  .shareabouts-legend-table {
+    width: 100%;
+    border: 0;
+    img {
+      max-width: none;
+      width: 1.5em;
+    }
+    tr {
+      background-color: transparent;
+    }
+    td {
+      padding: 0.375rem;
+      text-align: right;
+    }
+    tr + tr td {
+      padding-top: 0;
+    }
+    td + td {
+      padding-left: 0;
+      text-align: left;
     }
   }
 
