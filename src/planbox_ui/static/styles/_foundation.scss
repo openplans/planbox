@@ -147,6 +147,10 @@ a.alert {
 .link {
   color: $primary-color;
 }
+.unstyled-link {
+  color: inherit;
+  text-decoration: inherit;
+}
 
 // Heavy-handed list styles... ugh (I've submitted an issue for this on github. -AC)
 .project-text-content, .pen {
