@@ -1788,3 +1788,11 @@ textarea.no-resize {
     outline: 0;
   }
 }
+
+
+// OH NOES, HIDE ALL TEH AUTHZ!!! 
+.shareabouts-auth-container,
+.or-sign-in {
+  display: none !important;
+}
+
