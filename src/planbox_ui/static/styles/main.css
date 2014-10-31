@@ -12433,3 +12433,9 @@ textarea.no-resize {
 .tabs-content [tabindex]:focus {
   outline: 0;
 }
+
+/* line 1794, main.scss */
+.shareabouts-auth-container,
+.or-sign-in {
+  display: none !important;
+}
