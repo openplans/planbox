@@ -12,7 +12,7 @@ var Planbox = Planbox || {};
   Handlebars.registerHelper('lookup', function(obj, attrName, options) {
     var value, isDefined = true;
 
-    if (!_.isUndefined(obj)) { value = obj[attrName]; }
+    if (obj) { value = obj[attrName]; }
 
     // Determine whether to treat as a block helper or not.
     if (options && options.fn) {
@@ -27,7 +27,7 @@ var Planbox = Planbox || {};
         current, index, value = obj, isDefined = true;
 
     for (index = 0; index < path.length; index++) {
-      if (_.isUndefined(value)) { break; }
+      if (!value) { break; }
       current = path[index];
       value = value[current];
     }
