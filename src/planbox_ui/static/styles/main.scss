@@ -1320,6 +1320,22 @@ img.attachment-icon {
   }
 }
 
+/*--------------------------------------------------
+  Shareabouts Project Dashboard
+--------------------------------------------------*/
+
+.shareabouts-url-field {
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.shareabouts-image-field {
+  height: 40px;
+}
+
 
 /*--------------------------------------------------
   The Admin

@@ -1,0 +1,77 @@
+
+
+  <div id="datatable" class="datatable">
+
+    <div class="row">
+      <div class="columns large-6">
+        <input type="text" class="search" placeholder="Search" />
+      </div>
+
+      <div class="columns large-6">
+        <div class="pagination-centered">
+          <ul class="pagination some-margin-bottom">
+            <li class="arrow unavailable"><a href="">&laquo;</a></li>
+            <li class="current"><a href="">1</a></li>
+            <li><a href="">2</a></li>
+            <li><a href="">3</a></li>
+            <li><a href="">4</a></li>
+            <li class="unavailable"><a href="">&hellip;</a></li>
+            <li><a href="">12</a></li>
+            <li><a href="">13</a></li>
+            <li class="arrow"><a href="">&raquo;</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-container">
+
+      <table class="" role="grid">
+        <thead>
+          {{#each headers}}
+          <th><div class="table-column
+            {{#is . 'description'}}table-column-50rem{{/is}}
+            {{#is . 'geometry'}}table-column-20rem{{/is}}">
+
+            {{#lookup ../labels .}}
+            <button class="sort tiny less-padding no-margins expand" data-sort="{{.}}">{{.}}</button>
+            {{^}}
+            <button class="sort tiny less-padding no-margins expand" data-sort="{{.}}">{{.}}</button>
+            {{/lookup}}
+          </div></th>
+          {{/each}}
+        </thead>
+        <tbody class="list">
+          {{#each places}}
+          <tr>
+            {{#each ../headers}}
+            <td class="{{.}}"><div class="table-column
+              {{#is . 'description'}}table-column-50rem{{/is}}
+              {{#is . 'geometry'}}table-column-20rem{{/is}}">
+
+              {{#isTimeAttr .}}
+                <time datetime="{{resolve ../.. ..}}">{{#resolve ../.. ..}}{{fromnow .}}{{/resolve}}</time>
+              {{/isTimeAttr}}
+
+              {{#isImageAttr .}}
+                <img src="{{resolve ../.. ..}}" class="shareabouts-image-field">
+              {{/isImageAttr}}
+
+              {{#isUrlAttr .}}
+                {{#resolve ../.. ..}}<a href="{{.}}" class="shareabouts-url-field">{{.}}</a>{{/resolve}}
+              {{/isUrlAttr}}
+
+              {{#isDefaultAttr .}}
+                {{resolve ../.. ..}}
+              {{/isDefaultAttr}}
+            </div></td>
+            {{/each}}
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+    </div>
+
+  </div><!-- end #datatable.table-container -->
+

@@ -9,6 +9,64 @@ var Planbox = Planbox || {};
     return JSON.stringify(obj);
   });
 
+  Handlebars.registerHelper('lookup', function(obj, attrName, options) {
+    var value, isDefined = true;
+
+    if (!_.isUndefined(obj)) { value = obj[attrName]; }
+
+    // Determine whether to treat as a block helper or not.
+    if (options && options.fn) {
+      return (value ? options.fn(value) : options.inverse(this));
+    } else {
+      return value;
+    }
+  });
+
+  Handlebars.registerHelper('resolve', function(obj, attrName, options) {
+    var path = (attrName ? attrName.split('.') : []),
+        current, index, value = obj, isDefined = true;
+
+    for (index = 0; index < path.length; index++) {
+      if (_.isUndefined(value)) { break; }
+      current = path[index];
+      value = value[current];
+    }
+
+    // Determine whether to treat as a block helper or not.
+    if (options && options.fn) {
+      return (value ? options.fn(value) : options.inverse(this));
+    } else {
+      return value;
+    }
+  });
+
+  Handlebars.registerHelper('isAny', function(value, /* test1, test2, test3, ..., */ options) {
+    var tests = _.rest(_.initial(arguments)),
+        isAny = false,
+        result = function(value) {
+          if (_.isFunction(value)) {
+            return value();
+          } else {
+            return value;
+          }
+        };
+    options = _.last(arguments);
+    value = result(value);
+
+    isAny = !!(_.find(tests, function(test) {
+      test = result(test);
+      if (value && value === test) {
+        return true;
+      }
+    }));
+
+    if (isAny) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  });
+
   Handlebars.registerHelper('window_location', function() {
     return window.location.toString();
   });

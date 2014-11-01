@@ -32,6 +32,9 @@ var Planbox = Planbox || {};
         data: {'project_id': NS.Data.project.id},
         success: _.bind(this.fetchShareaboutsData, this)
       });
+
+      this.app.on('show:projectDashboard:after', _.bind(this.onShowProjectDashboard, this));
+      this.app.on('show:projectDashboard:activityPanel:after', _.bind(this.onShowActivityPanel, this));
     },
 
     fetchShareaboutsData: function(credentials) {
@@ -53,14 +56,28 @@ var Planbox = Planbox || {};
         data: {'include_private': true},
         beforeSend: addAccessToken
       });
-
-      this.app.on('show:projectDashboard:activityPanel:after', _.bind(this.onShowActivityPanel, this));
     },
 
     getShareaboutsConfig: function() {
       var projectSections = NS.Data.project.sections,
           shareaboutsSection = _.findWhere(projectSections, {type: 'shareabouts'});
       return shareaboutsSection;
+    },
+
+    _addManagerTab: function(view) {
+      var tabTemplate = Handlebars.templates['shareabouts-manager-tab-tpl'],
+          sectionTemplate = Handlebars.templates['shareabouts-manager-content-tpl'];
+      view.$('.tabs').append(tabTemplate());
+      view.$('.tabs-content').append('<section role="tabpanel" aria-hidden="true" class="content" id="panel-manage"></section>');
+
+      view.addRegion('shareaboutsManagerRegion', '#panel-manage');
+      view.shareaboutsManagerRegion.show(new NS.ManagePlacesView({
+        plugin: this
+      }));
+    },
+
+    onShowProjectDashboard: function(view) {
+      this._addManagerTab(view);
     },
 
     onShowActivityPanel: function() {
