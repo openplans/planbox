@@ -70,7 +70,10 @@ var Planbox = Planbox || {};
       },
       onRender: function() {
         this.initValidityMessages();
-      }
+      },
+      onShow: function() {
+        $('#teamWelomeModal').foundation('reveal', 'open');
+      }      
     })
   );
 
