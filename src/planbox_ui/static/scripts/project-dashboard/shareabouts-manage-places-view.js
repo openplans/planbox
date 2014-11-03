@@ -98,35 +98,6 @@ var Planbox = Planbox || {};
       this.render();
     },
     serializeData: function() {
-      // var columnHeaders = [
-      //     'dataset'
-      //   , 'description'
-      //   , 'geometry'
-      //   , 'id'
-      //   , 'lat'
-      //   , 'lng'
-      //   , 'dragPoint'
-      //   , 'geocodeQuality'
-      //   , 'geocodeQualityCode'
-      //   , 'linkId'
-      //   , 'mapUrl'
-      //   , 'postalCode'
-      //   , 'sideOfStreet'
-      //   , 'street'
-      //   , 'locationtype'
-      //   , 'name'
-      //   , 'notes_public'
-      //   , 'submitter_email'
-      //   , 'submitter'
-      //   , 'avatar_url'
-      //   , 'submitterid'
-      //   , 'submittername'
-      //   , 'updated_datetime'
-      //   , 'url'
-      //   , 'user_token'
-      //   , 'visible'
-      //   ];
-
       var attrLabelMap = {
         'url': 'api url',
         'created_datetime': 'created',
@@ -168,6 +139,29 @@ var Planbox = Planbox || {};
       data['labels'] = attrLabelMap;
 
       return data;
+    },
+
+    initFixedTableHeader: function() {
+      $(window).on('load resize', function() {
+        if (window.matchMedia(Foundation.media_queries.large).matches) {
+          var tbodyHeight = $(window).height() - $('#datatable table').offset().top - 45;
+          $('#datatable tbody').css({ maxHeight: tbodyHeight });
+        } else {
+          $('#datatable tbody').css({ maxHeight: 'none' });
+        }
+      });
+    },
+
+    initSortableTable: function() {
+      var options = {valueNames: this.columnHeaders};
+      new List('datatable', options);
+    },
+
+    render: function() {
+      Backbone.Marionette.ItemView.prototype.render.apply(this, arguments);
+      this.initFixedTableHeader();
+      this.initSortableTable();
+      return this;
     }
   });
 
