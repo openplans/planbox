@@ -53,6 +53,9 @@ var Planbox = Planbox || {};
       this.plugin.places.on('add', _.debounce(_.bind(this.handleAddPlace, this), 500));
 
       this.columnHeaders = [];
+      $(window).on('resize', function() {
+        this.fixTableHeader();
+      });
     },
     getHeadersForValue: function(key, value) {
       var self = this,
@@ -141,21 +144,19 @@ var Planbox = Planbox || {};
       return data;
     },
 
-    initFixedTableHeader: function() {
-      $(window).on('load resize', function() {
-        if (window.matchMedia(Foundation.media_queries.large).matches) {
-          var tbodyHeight = $(window).height() - $('#datatable table').offset().top - 45;
-          $('#datatable tbody').css({ maxHeight: tbodyHeight });
-        } else {
-          $('#datatable tbody').css({ maxHeight: 'none' });
-        }
-      });
+    fixTableHeader: function() {
+      if (window.matchMedia(Foundation.media_queries.large).matches) {
+        var tbodyHeight = $(window).height() - $('#datatable table').offset().top - 45;
+        $('#datatable tbody').css({ maxHeight: tbodyHeight });
+      } else {
+        $('#datatable tbody').css({ maxHeight: 'none' });
+      }
     },
 
     initSortableTable: function() {
       var options = {
         valueNames: this.columnHeaders,
-        page: 10,
+        page: 50,
         plugins: [ ListPagination({outerWindow: 2}) ]
       };
       new List('datatable', options);
@@ -163,9 +164,12 @@ var Planbox = Planbox || {};
 
     render: function() {
       Backbone.Marionette.ItemView.prototype.render.apply(this, arguments);
-      this.initFixedTableHeader();
       this.initSortableTable();
       return this;
+    },
+
+    onShow: function() {
+      this.fixTableHeader();
     }
   });
 

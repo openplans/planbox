@@ -19,11 +19,17 @@ var Planbox = Planbox || {};
     },
 
     onShow: function() {
+      var self = this;
+
       this.app.triggerMethod('show:projectDashboard:before', this);
       this.showRegions();
       this.app.triggerMethod('show:projectDashboard:after', this);
 
-      $(document).foundation({'tab': {}});
+      $(document).foundation({'tab': {
+        callback: function(tab) {
+          self.app.triggerMethod('toggle:projectDashboard', tab, this);
+        }
+      }});
     },
 
     showRegions: function() {

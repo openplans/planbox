@@ -35,6 +35,7 @@ var Planbox = Planbox || {};
 
       this.app.on('show:projectDashboard:after', _.bind(this.onShowProjectDashboard, this));
       this.app.on('show:projectDashboard:activityPanel:after', _.bind(this.onShowActivityPanel, this));
+      this.app.on('toggle:projectDashboard', _.bind(this.onTogglePanel, this));
     },
 
     fetchShareaboutsData: function(credentials) {
@@ -81,6 +82,10 @@ var Planbox = Planbox || {};
     },
 
     onShowActivityPanel: function() {
+
+    },
+
+    onTogglePanel: function(tab, view) {
 
     }
   });
