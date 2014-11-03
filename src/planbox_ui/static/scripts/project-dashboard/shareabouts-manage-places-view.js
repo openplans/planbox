@@ -153,7 +153,11 @@ var Planbox = Planbox || {};
     },
 
     initSortableTable: function() {
-      var options = {valueNames: this.columnHeaders};
+      var options = {
+        valueNames: this.columnHeaders,
+        page: 10,
+        plugins: [ ListPagination({}) ]
+      };
       new List('datatable', options);
     },
 
