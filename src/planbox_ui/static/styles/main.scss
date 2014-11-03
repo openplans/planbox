@@ -955,6 +955,12 @@ img.attachment-icon {
   Project Shareabouts
 --------------------------------------------------*/
 
+body.shareabouts-panel-hovered {
+  @media #{$medium-up} {
+    overflow: hidden;
+  }
+}
+
 .project-section-shareabouts {
   .map {
     height: 300px;
