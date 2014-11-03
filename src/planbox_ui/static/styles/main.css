@@ -9927,6 +9927,21 @@ input[type="url"].inline-input {
 }
 
 /*--------------------------------------------------
+  Pagination
+--------------------------------------------------*/
+/* line 68, ../bower_components/foundation/scss/foundation/components/_pagination.scss */
+ul.pagination li.active a, ul.pagination li.active button {
+  background: #308fbf;
+  color: #FFFFFF;
+  font-weight: bold;
+  cursor: default;
+}
+/* line 74, ../bower_components/foundation/scss/foundation/components/_pagination.scss */
+ul.pagination li.active a:hover, ul.pagination li.active a:focus, ul.pagination li.active button:hover, ul.pagination li.active button:focus {
+  background: #308fbf;
+}
+
+/*--------------------------------------------------
   OpenPlans-Branded Top Bar
 --------------------------------------------------*/
 /* line 9, main.scss */
@@ -11861,46 +11876,52 @@ img.attachment-icon {
   height: 40px;
 }
 
+/* line 1345, main.scss */
+.pagination:before {
+  content: 'Page: ';
+  font-size: 0.75rem;
+}
+
 /*--------------------------------------------------
   The Admin
 --------------------------------------------------*/
-/* line 1350, main.scss */
+/* line 1355, main.scss */
 .project-edit-form {
   background-color: #fff;
   box-shadow: 0 -65px 0 #fff;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1350, main.scss */
+  /* line 1355, main.scss */
   .project-edit-form {
     padding-bottom: 4rem;
   }
 }
 
-/* line 1358, main.scss */
+/* line 1363, main.scss */
 .project-section {
   z-index: auto;
 }
 
-/* line 1362, main.scss */
+/* line 1367, main.scss */
 .project-section-fieldset {
   padding: 0;
   border: 0;
 }
 
 @-moz-document url-prefix() {
-  /* line 1369, main.scss */
+  /* line 1374, main.scss */
   .project-section-fieldset {
     display: table-cell;
   }
 }
-/* line 1374, main.scss */
+/* line 1379, main.scss */
 .location-map-region .map {
   height: 200px;
   border: 1px solid #c9c9c9;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1379, main.scss */
+  /* line 1384, main.scss */
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
@@ -11911,7 +11932,7 @@ img.attachment-icon {
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1388, main.scss */
+  /* line 1393, main.scss */
   input[type=text].sub-heading-input {
     font-size: 1.75rem;
     margin: 0 0 1rem 0;
@@ -11921,12 +11942,12 @@ img.attachment-icon {
   }
 }
 
-/* line 1397, main.scss */
+/* line 1402, main.scss */
 span.sub-heading-postfix {
   color: #999;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1397, main.scss */
+  /* line 1402, main.scss */
   span.sub-heading-postfix {
     margin: 0 0 1rem 0;
     padding: 0.5rem 0.75rem;
@@ -11934,7 +11955,7 @@ span.sub-heading-postfix {
   }
 }
 
-/* line 1406, main.scss */
+/* line 1411, main.scss */
 .content-editable {
   line-height: 1.6;
   background-color: #FFFFFF;
@@ -11954,7 +11975,7 @@ span.sub-heading-postfix {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
   height: auto;
 }
-/* line 1408, main.scss */
+/* line 1413, main.scss */
 .content-editable.rich-editable {
   min-height: 8rem;
 }
@@ -11979,77 +12000,77 @@ span.sub-heading-postfix {
   background-color: #DDDDDD;
   cursor: default;
 }
-/* line 1416, main.scss */
+/* line 1421, main.scss */
 .content-editable.radius {
   border-radius: 3px;
 }
-/* line 1420, main.scss */
+/* line 1425, main.scss */
 .error .content-editable, .content-editable.error {
   margin-bottom: 0;
 }
-/* line 1423, main.scss */
+/* line 1428, main.scss */
 .content-editable a {
   color: #308fbf;
   text-decoration: none;
   line-height: inherit;
 }
-/* line 1428, main.scss */
+/* line 1433, main.scss */
 .content-editable a:hover, .content-editable a:focus {
   color: #267299;
 }
 
-/* line 1437, main.scss */
+/* line 1442, main.scss */
 .pen-menu,
 .pen-menu * {
   box-sizing: content-box !important;
 }
 
-/* line 1442, main.scss */
+/* line 1447, main.scss */
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
   padding-top: 0.5rem;
   padding-right: 0.25rem;
 }
 
-/* line 1448, main.scss */
+/* line 1453, main.scss */
 .section-settings {
   background-color: #f7f7f7;
   padding-top: 1.75rem;
 }
-/* line 1451, main.scss */
+/* line 1456, main.scss */
 .section-settings-toggle-container + .section-settings {
   margin-top: -2.5rem;
 }
 
-/* line 1456, main.scss */
+/* line 1461, main.scss */
 .section-insert {
   margin-bottom: -1rem;
   margin-right: -0.9375rem;
   margin-left: -0.9375rem;
 }
-/* line 1460, main.scss */
+/* line 1465, main.scss */
 .section-insert hr {
   margin-top: 1rem;
   border-color: #ff8b38;
 }
 
-/* line 1466, main.scss */
+/* line 1471, main.scss */
 .unassigned {
   cursor: default;
 }
 
-/* line 1470, main.scss */
+/* line 1475, main.scss */
 .project-settings-container {
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
   background-color: #d9d9d9;
 }
-/* line 1471, main.scss */
+/* line 1476, main.scss */
 .project-settings-container .save-btn {
   outline: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1470, main.scss */
+  /* line 1475, main.scss */
   .project-settings-container {
     position: fixed;
     top: 65px;
@@ -12061,25 +12082,25 @@ span.sub-heading-postfix {
     overflow: hidden;
     box-shadow: inset 3px 0 0 rgba(51, 51, 51, 0.1);
   }
-  /* line 1487, main.scss */
+  /* line 1492, main.scss */
   .project-settings-container .project-settings {
     max-height: 60%;
     overflow: auto;
   }
 }
 
-/* line 1494, main.scss */
+/* line 1499, main.scss */
 textarea.no-resize {
   resize: none;
 }
 
-/* line 1499, main.scss */
+/* line 1504, main.scss */
 .drag-area-container {
   position: relative;
   text-align: center;
 }
 
-/* line 1503, main.scss */
+/* line 1508, main.scss */
 .drag-area {
   position: absolute;
   top: 1rem;
@@ -12090,17 +12111,17 @@ textarea.no-resize {
   border-radius: 0.375rem;
   background-color: rgba(242, 242, 242, 0.4);
 }
-/* line 1512, main.scss */
+/* line 1517, main.scss */
 .drag-area:hover {
   border-color: rgba(133, 133, 133, 0.9);
   background-color: rgba(242, 242, 242, 0.9);
 }
-/* line 1516, main.scss */
+/* line 1521, main.scss */
 .drag-area p {
   margin-bottom: 0.5rem;
 }
 
-/* line 1520, main.scss */
+/* line 1525, main.scss */
 .no-file-upload-message {
   clear: both;
   font-size: 0.75em;
@@ -12113,18 +12134,18 @@ textarea.no-resize {
   border-radius: 0.25em;
 }
 
-/* line 1531, main.scss */
+/* line 1536, main.scss */
 .no-file-upload-message a {
   color: #fff;
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 1535, main.scss */
+/* line 1540, main.scss */
 .no-file-upload-message a:hover {
   color: #fff;
 }
 
-/* line 1538, main.scss */
+/* line 1543, main.scss */
 .file-upload {
   margin: 2em 1em 1em;
   text-align: center;
@@ -12135,7 +12156,7 @@ textarea.no-resize {
   position: relative;
 }
 
-/* line 1547, main.scss */
+/* line 1552, main.scss */
 .file-upload:hover,
 .file-dragging,
 .file-uploading {
@@ -12144,12 +12165,12 @@ textarea.no-resize {
   background-color: rgba(90, 90, 90, 0.5);
 }
 
-/* line 1554, main.scss */
+/* line 1559, main.scss */
 .file-upload p {
   margin-bottom: 0.5em;
 }
 
-/* line 1557, main.scss */
+/* line 1562, main.scss */
 .file-upload-input-container {
   position: relative;
   overflow: hidden;
@@ -12157,12 +12178,12 @@ textarea.no-resize {
   margin-bottom: 0;
 }
 
-/* line 1563, main.scss */
+/* line 1568, main.scss */
 .file-upload-input {
   display: none;
 }
 
-/* line 1566, main.scss */
+/* line 1571, main.scss */
 .uploading-message,
 .file-uploading > .drop-instructions {
   display: none;
@@ -12190,7 +12211,7 @@ textarea.no-resize {
     color: #888;
   }
 }
-/* line 1580, main.scss */
+/* line 1585, main.scss */
 .file-uploading > .uploading-message {
   display: block;
   position: relative;
@@ -12201,44 +12222,44 @@ textarea.no-resize {
   animation: uploading 1.5s infinite ease-in-out;
 }
 
-/* line 1589, main.scss */
+/* line 1594, main.scss */
 .file-uploading > .file-upload-input-container {
   visibility: hidden;
 }
 
-/* line 1594, main.scss */
+/* line 1599, main.scss */
 .full-width-image-container {
   margin: 0 -0.9375rem 0.5rem -0.9375rem;
 }
-/* line 1596, main.scss */
+/* line 1601, main.scss */
 .full-width-image-container.drag-area-container {
   min-height: 9rem;
 }
 
-/* line 1600, main.scss */
+/* line 1605, main.scss */
 .cover-image-container {
   margin-top: -1.125rem;
 }
 
-/* line 1605, main.scss */
+/* line 1610, main.scss */
 .logo-image-container {
   min-height: 9rem;
   margin-bottom: 1rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1605, main.scss */
+  /* line 1610, main.scss */
   .logo-image-container {
     float: left;
     width: 50%;
   }
 }
-/* line 1612, main.scss */
+/* line 1617, main.scss */
 .logo-image-container img {
   max-height: 20rem;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1616, main.scss */
+  /* line 1621, main.scss */
   .project-title-container {
     float: right;
     width: 50%;
@@ -12247,7 +12268,7 @@ textarea.no-resize {
     padding-right: 1rem;
     padding-bottom: 1rem;
   }
-  /* line 1624, main.scss */
+  /* line 1629, main.scss */
   .logo-image-container.hide + .project-title-container {
     float: none;
     width: auto;
@@ -12257,78 +12278,78 @@ textarea.no-resize {
     padding-bottom: 0;
   }
 }
-/* line 1633, main.scss */
+/* line 1638, main.scss */
 .project-title-container .project-title-help-text {
   margin-top: -0.75rem;
 }
 
-/* line 1640, main.scss */
+/* line 1645, main.scss */
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none;
 }
 
-/* line 1652, main.scss */
+/* line 1657, main.scss */
 .existing-snapshot-wrapper .button {
   margin-bottom: 0;
 }
 
-/* line 1658, main.scss */
+/* line 1663, main.scss */
 .avatar-container {
   padding: 0.3rem;
 }
-/* line 1660, main.scss */
+/* line 1665, main.scss */
 .avatar-container .avatar {
   display: inline-block;
 }
-/* line 1663, main.scss */
+/* line 1668, main.scss */
 .avatar-container .drag-area-container {
   min-height: 10.125rem;
 }
 
-/* line 1671, main.scss */
+/* line 1676, main.scss */
 .project-list > li + li, .member-list > li + li, .team-list > li + li {
   margin-top: 0.625rem;
   padding-top: 0.625rem;
   border-top: 1px solid #e3e3e3;
 }
 
-/* line 1678, main.scss */
+/* line 1683, main.scss */
 .member-list li, .team-list li {
   padding-left: 4.375rem;
 }
-/* line 1681, main.scss */
+/* line 1686, main.scss */
 .member-list .avatar, .team-list .avatar {
   width: 3.75rem;
   margin-left: -4.375rem;
 }
 
-/* line 1686, main.scss */
+/* line 1691, main.scss */
 .user-profile .member-list {
   display: none;
 }
 
-/* line 1689, main.scss */
+/* line 1694, main.scss */
 .user-profile .project-list {
   display: none;
 }
 
-/* line 1692, main.scss */
+/* line 1697, main.scss */
 .team-profile .team-list {
   display: none;
 }
 
-/* line 1697, main.scss */
+/* line 1702, main.scss */
 .project-template-gallery {
   background-color: white;
   border-bottom: 1px solid rgba(51, 51, 51, 0.2);
   padding: 0.5rem;
 }
-/* line 1702, main.scss */
+/* line 1707, main.scss */
 .project-template-gallery h5:first-child {
   margin-bottom: 1rem;
 }
 
-/* line 1707, main.scss */
+/* line 1712, main.scss */
 .panel .template-templates-default {
   display: none;
 }
@@ -12336,19 +12357,19 @@ textarea.no-resize {
 /*--------------------------------------------------
   Leaflet Overrides
 --------------------------------------------------*/
-/* line 1716, main.scss */
+/* line 1721, main.scss */
 .leaflet-bar {
   box-shadow: -3px 3px 0 rgba(51, 51, 51, 0.1);
   border-radius: 0;
 }
 
-/* line 1720, main.scss */
+/* line 1725, main.scss */
 .leaflet-bar a:first-child {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-/* line 1724, main.scss */
+/* line 1729, main.scss */
 .leaflet-bar a:last-child {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -12357,13 +12378,13 @@ textarea.no-resize {
 /*--------------------------------------------------
   Project Dashboard / Widgets
 --------------------------------------------------*/
-/* line 1736, main.scss */
+/* line 1741, main.scss */
 .stat-widget.coming-soon {
   background-color: #f6f6f6;
   color: #ddd;
   position: relative;
 }
-/* line 1740, main.scss */
+/* line 1745, main.scss */
 .stat-widget.coming-soon:before {
   content: "Coming Soon...";
   position: absolute;
@@ -12377,74 +12398,74 @@ textarea.no-resize {
   font-style: italic;
 }
 
-/* line 1755, main.scss */
+/* line 1760, main.scss */
 .stat-widget-big-number .count {
   display: block;
   font-size: 2.5rem;
   line-height: 1.2;
 }
-/* line 1760, main.scss */
+/* line 1765, main.scss */
 .stat-widget-big-number .unit {
   text-transform: uppercase;
 }
 
-/* line 1766, main.scss */
+/* line 1771, main.scss */
 .table-container {
   max-width: 100%;
   overflow: auto;
 }
 
-/* line 1771, main.scss */
+/* line 1776, main.scss */
 .datatable table {
   margin-bottom: 0;
   border: 0;
 }
-/* line 1775, main.scss */
+/* line 1780, main.scss */
 .datatable table tr th, .datatable table tr td {
   font-size: 0.6875rem;
 }
-/* line 1780, main.scss */
+/* line 1785, main.scss */
 .datatable .table-column {
   max-height: 6.5em;
   width: 8rem;
   overflow: auto;
   text-align: center;
 }
-/* line 1786, main.scss */
+/* line 1791, main.scss */
 .datatable .table-column-20rem {
   width: 10rem;
 }
-/* line 1787, main.scss */
+/* line 1792, main.scss */
 .datatable .table-column-20rem {
   width: 20rem;
 }
-/* line 1788, main.scss */
+/* line 1793, main.scss */
 .datatable .table-column-30rem {
   width: 30rem;
 }
-/* line 1789, main.scss */
+/* line 1794, main.scss */
 .datatable .table-column-40rem {
   width: 40rem;
 }
-/* line 1790, main.scss */
+/* line 1795, main.scss */
 .datatable .table-column-50rem {
   width: 50rem;
 }
-/* line 1791, main.scss */
+/* line 1796, main.scss */
 .datatable .table-column-75rem {
   width: 75rem;
 }
-/* line 1792, main.scss */
+/* line 1797, main.scss */
 .datatable .table-column-75rem {
   width: 100rem;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 1794, main.scss */
+  /* line 1799, main.scss */
   .datatable thead tr,
   .datatable tbody tr {
     display: block;
   }
-  /* line 1798, main.scss */
+  /* line 1803, main.scss */
   .datatable tbody {
     display: block;
     overflow-x: hidden;
@@ -12452,13 +12473,13 @@ textarea.no-resize {
   }
 }
 
-/* line 1809, main.scss */
+/* line 1814, main.scss */
 .tab-title > a:focus,
 .tabs-content [tabindex]:focus {
   outline: 0;
 }
 
-/* line 1816, main.scss */
+/* line 1821, main.scss */
 .shareabouts-auth-container,
 .or-sign-in {
   display: none !important;
