@@ -22,6 +22,8 @@ var Planbox = Planbox || {};
       this.app.triggerMethod('show:projectDashboard:before', this);
       this.showRegions();
       this.app.triggerMethod('show:projectDashboard:after', this);
+
+      $(document).foundation({'tab': {}});
     },
 
     showRegions: function() {
