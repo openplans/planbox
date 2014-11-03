@@ -48,8 +48,8 @@ var Planbox = Planbox || {};
     initialize: function(options) {
       this.plugin = options.plugin;
 
-      this.plugin.places.on('add', _.bind(this.handleAddPlace, this));
-      this.plugin.submissions.on('add', _.bind(this.render, this));
+      this.plugin.places.on('add', _.debounce(_.bind(this.handleAddPlace, this), 1000, true));
+      // this.plugin.submissions.on('add', _.bind(this.render, this));
 
       this.columnHeaders = [];
     },
