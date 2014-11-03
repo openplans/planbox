@@ -53,9 +53,8 @@ var Planbox = Planbox || {};
       this.plugin.places.on('add', _.debounce(_.bind(this.handleAddPlace, this), 500));
 
       this.columnHeaders = [];
-      $(window).on('resize', function() {
-        this.fixTableHeader();
-      });
+      $(window).on('resize', _.bind(this.onWindowResize, this));
+      this.plugin.app.on('toggle:projectDashboard:tabs', _.bind(this.onToggleTabs, this));
     },
     getHeadersForValue: function(key, value) {
       var self = this,
@@ -169,6 +168,14 @@ var Planbox = Planbox || {};
     },
 
     onShow: function() {
+      this.fixTableHeader();
+    },
+
+    onWindowResize: function() {
+      this.fixTableHeader();
+    },
+
+    onToggleTabs: function() {
       this.fixTableHeader();
     }
   });

@@ -27,7 +27,7 @@ var Planbox = Planbox || {};
 
       $(document).foundation({'tab': {
         callback: function(tab) {
-          self.app.triggerMethod('toggle:projectDashboard', tab, this);
+          self.app.triggerMethod('toggle:projectDashboard:tabs', tab, this);
         }
       }});
     },
