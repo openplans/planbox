@@ -132,11 +132,11 @@ var Planbox = Planbox || {};
       });
 
       var data = Backbone.Marionette.ItemView.prototype.serializeData.call(this);
-      data['headers'] = this.columnHeaders;
-      data['places'] = this.plugin.places.toJSON();
-      data['submissions'] = this.plugin.submissions.toJSON();
+      data.headers = this.columnHeaders;
+      data.places = this.plugin.places.toJSON();
+      data.submissions = this.plugin.submissions.toJSON();
 
-      data['labels'] = attrLabelMap;
+      data.labels = attrLabelMap;
 
       return data;
     },
@@ -156,7 +156,7 @@ var Planbox = Planbox || {};
       var options = {
         valueNames: this.columnHeaders,
         page: 10,
-        plugins: [ ListPagination({}) ]
+        plugins: [ ListPagination({outerWindow: 2}) ]
       };
       new List('datatable', options);
     },
