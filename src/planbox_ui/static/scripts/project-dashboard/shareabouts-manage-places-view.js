@@ -48,8 +48,9 @@ var Planbox = Planbox || {};
     initialize: function(options) {
       this.plugin = options.plugin;
 
-      this.plugin.places.on('add', _.debounce(_.bind(this.handleAddPlace, this), 1000, true));
-      // this.plugin.submissions.on('add', _.bind(this.render, this));
+      // For now, debounce the add-place handler, since it will rerender the
+      // entire table. TODO: We can probably do the adding smarter though.
+      this.plugin.places.on('add', _.debounce(_.bind(this.handleAddPlace, this), 500));
 
       this.columnHeaders = [];
     },
