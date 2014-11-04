@@ -45,6 +45,15 @@ var Planbox = Planbox || {};
     modelEvents: {
       'change': 'render'
     },
+    ui: {
+      scrolltable: '.table-container',
+      scrollLeft: '.scroll-button.left',
+      scrollRight: '.scroll-button.right'
+    },
+    events: {
+      'click @ui.scrollLeft': 'handleScrollLeft',
+      'click @ui.scrollRight': 'handleScrollRight'
+    },
     initialize: function(options) {
       this.plugin = options.plugin;
 
@@ -152,6 +161,33 @@ var Planbox = Planbox || {};
       }
     },
 
+    toggleScrollNavButtons: function() {
+      if ( this.ui.scrolltable.scrollLeft() > 15 ) {
+        $('.scroll-button.left').removeClass('hide');
+      } else {
+        $('.scroll-button.left').addClass('hide');
+      }
+      
+      var tableContainerWidth = this.ui.scrolltable.width();
+      var tableWidth = $('#datatable table').width();
+      if ( this.ui.scrolltable.scrollLeft() <= tableWidth - tableContainerWidth - 15 ) {
+        $('.scroll-button.right').removeClass('hide');
+      } else {
+        $('.scroll-button.right').addClass('hide');
+      }
+    },
+
+    handleScrollLeft: function(evt) {
+      evt.preventDefault();
+      this.ui.scrolltable.animate({ scrollLeft: 0 });
+    },
+
+    handleScrollRight: function(evt) {
+      evt.preventDefault();
+      var tableWidth = $('#datatable table').width();
+      this.ui.scrolltable.animate({ scrollLeft: tableWidth });
+    },
+
     initSortableTable: function() {
       var options = {
         valueNames: this.columnHeaders,
@@ -159,6 +195,8 @@ var Planbox = Planbox || {};
         plugins: [ ListPagination({outerWindow: 2}) ]
       };
       this.table = new List('datatable', options);
+      this.ui.scrolltable.scroll(_.bind(this.toggleScrollNavButtons, this));
+      this.toggleScrollNavButtons();
     },
 
     render: function() {
@@ -173,6 +211,7 @@ var Planbox = Planbox || {};
 
     onWindowResize: function() {
       this.fixTableHeader();
+      this.toggleScrollNavButtons();
     },
 
     onToggleTabs: function() {

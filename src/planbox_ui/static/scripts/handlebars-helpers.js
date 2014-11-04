@@ -9,6 +9,17 @@ var Planbox = Planbox || {};
     return JSON.stringify(obj);
   });
 
+  Handlebars.registerHelper('makeUniquifier', function(name, options) {
+    if (!options) {
+      options = name;
+      name = 'uniquifier';
+    }
+
+    var newContext = {};
+    newContext[name] = NS.Utils.guid();
+    return options.fn(_.extend({}, this, newContext));
+  });
+
   Handlebars.registerHelper('lookup', function(obj, attrName, options) {
     var value, isDefined = true;
 

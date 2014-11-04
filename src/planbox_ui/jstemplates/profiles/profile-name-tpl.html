@@ -1,7 +1,2 @@
 {{! A simple template to construct a profile name string }}
-
-{{#if username}}
-  {{ default name username }}
-{{^}}
-  {{ default name slug }}
-{{/if}}
+{{#if username}}{{ default name username }}{{^}}{{ default name slug }}{{/if}}
