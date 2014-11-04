@@ -89,6 +89,16 @@ var Planbox = Planbox || {};
       return NS.Utils.pathJoin.apply(this, allArgs);
     },
 
+    guid: function() {
+      var s4 = function() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+                   .toString(16)
+                   .substring(1);
+      };
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+             s4() + '-' + s4() + s4() + s4();
+    },
+
     // Plugin hooks
     runHook: function(objects, hook, options, undefined) {
       // Go through each item and run the given hook. This can be useful, for
