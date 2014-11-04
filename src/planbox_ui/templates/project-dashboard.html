@@ -39,6 +39,7 @@
 
   {% if debug %}
   <script src="{{ STATIC_URL }}bower_components/list.js/dist/list.js"></script>
+  <script src="{{ STATIC_URL }}bower_components/list.pagination.js/dist/list.pagination.js"></script>
 
   <script src="{{ STATIC_URL }}scripts/utils.js"></script>
   <script src="{{ STATIC_URL }}scripts/handlebars-helpers.js"></script>
@@ -59,6 +60,7 @@
   <script src="{{ STATIC_URL }}scripts/project-dashboard/shareabouts-dataset-comment-count-widget-view.js"></script>
   <script src="{{ STATIC_URL }}scripts/project-dashboard/shareabouts-dataset-support-count-widget-view.js"></script>
   <script src="{{ STATIC_URL }}scripts/project-dashboard/shareabouts-dataset-unique-contrib-count-widget-view.js"></script>
+  <script src="{{ STATIC_URL }}scripts/project-dashboard/shareabouts-manage-places-view.js"></script>
   <script src="{{ STATIC_URL }}scripts/project-dashboard/shareabouts-project-dashboard-plugin.js"></script>
   {% else %}
   <script src="{{ STATIC_URL }}scripts/shareabouts-project-dashboard.min.js?deployed_at={{ settings.LAST_DEPLOY_DATE|urlencode:'' }}"></script>

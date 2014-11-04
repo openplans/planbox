@@ -44,7 +44,7 @@ ol {
   }
 }
 
-// Set dropdown hover font-color. Background should maybe be on the a:hover, not the li:hover. 
+// Set dropdown hover font-color. Background should maybe be on the a:hover, not the li:hover.
 .f-dropdown li a:hover, .f-dropdown li a:focus {
   color: #fff;
 }
@@ -196,7 +196,7 @@ img {
   max-width: initial;
 }
 
-// No margins! No paddings! 
+// No margins! No paddings!
 .no-margins {
   margin: 0 !important;
 }
@@ -375,7 +375,7 @@ input[type="url"] {
   }
 }
 
-// Switch Labels 
+// Switch Labels
 .switch {
   & + label.inline {
     margin-left: 4.5rem;
@@ -428,3 +428,11 @@ input[type="url"] {
   }
 }
 
+
+/*--------------------------------------------------
+  Pagination
+--------------------------------------------------*/
+
+ul.pagination li.active {
+  @include pagination-current-item();
+}
