@@ -24,6 +24,9 @@ var Planbox = Planbox || {};
       this.places = new Shareabouts.PlaceCollection();
       this.places.url = this.config.details.dataset_url.replace(/^\/|\/$/g, '') + '/places';
 
+      this.comments = new Shareabouts.PaginatedCollection();
+      this.comments.url = this.config.details.dataset_url.replace(/^\/|\/$/g, '') + '/comments';
+
       this.submissions = new Shareabouts.PaginatedCollection();
       this.submissions.url = this.config.details.dataset_url.replace(/^\/|\/$/g, '') + '/submissions';
 
@@ -54,6 +57,11 @@ var Planbox = Planbox || {};
         beforeSend: addAccessToken
       });
 
+      this.comments.fetchAllPages({
+        data: {'include_private': true},
+        beforeSend: addAccessToken
+      });
+
       this.submissions.fetchAllPages({
         data: {'include_private': true},
         beforeSend: addAccessToken
@@ -78,8 +86,21 @@ var Planbox = Planbox || {};
       }));
     },
 
+    _addCommentsListTab: function(view) {
+      var tabTemplate = Handlebars.templates['shareabouts-dashboard-comments-tab-tpl'],
+          sectionTemplate = Handlebars.templates['shareabouts-dashboard-comments-list-tpl'];
+      view.$('.tabs').append(tabTemplate());
+      view.$('.tabs-content').append('<section role="tabpanel" aria-hidden="true" class="content" id="panel-comments-list"></section>');
+
+      view.addRegion('commentsListRegion', '#panel-comments-list');
+      view.commentsListRegion.show(new NS.ShareaboutsDashboardCommentsListView({
+        plugin: this
+      }));
+    },
+
     onShowProjectDashboard: function(view) {
       this._addPlacesListTab(view);
+      this._addCommentsListTab(view);
     },
 
     onShowActivityPanel: function() {
