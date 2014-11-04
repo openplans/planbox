@@ -28,7 +28,7 @@ var Planbox = Planbox || {};
       var self = this,
           section = project.get('sections').findWhere({type: 'shareabouts'});
 
-      if (!section.get('details').dataset_url) {
+      if (section && !section.get('details').dataset_url) {
         // Create the dataset and set the dataset url on the section model
         $.ajax({
           url: '/shareabouts/create-dataset',
@@ -60,7 +60,7 @@ var Planbox = Planbox || {};
       var self = this,
           section = project.get('sections').findWhere({type: 'shareabouts'});
 
-      if (self.shareaboutsAccessData) {
+      if (section && self.shareaboutsAccessData) {
         self.shareaboutsAccessData.project_id = project.id;
         $.ajax({
           url: '/shareabouts/authorize-project',

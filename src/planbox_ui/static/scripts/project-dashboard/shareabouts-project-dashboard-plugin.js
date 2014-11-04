@@ -16,6 +16,7 @@ var Planbox = Planbox || {};
   NS.ShareaboutsDashboardPlugin = NS.Plugin.extend({
     initialize: function() {
       this.config = this.getShareaboutsConfig();
+      if (!this.config) { return; }
 
       this.dataset = new Backbone.Model();
       this.dataset.url = this.config.details.dataset_url;
