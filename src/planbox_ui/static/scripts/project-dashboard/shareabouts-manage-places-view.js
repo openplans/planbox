@@ -119,26 +119,26 @@ var Planbox = Planbox || {};
 
     fixTableHeader: function() {
       if (window.matchMedia(Foundation.media_queries.large).matches) {
-        var tbodyHeight = $(window).height() - $('#datatable table').offset().top - 45;
-        $('#datatable tbody').css({ maxHeight: tbodyHeight });
+        var tbodyHeight = $(window).height() - $('#places-datatable table').offset().top - 45;
+        this.$('#places-datatable tbody').css({ maxHeight: tbodyHeight });
       } else {
-        $('#datatable tbody').css({ maxHeight: 'none' });
+        this.$('#places-datatable tbody').css({ maxHeight: 'none' });
       }
     },
 
     toggleScrollNavButtons: function() {
       if ( this.ui.scrolltable.scrollLeft() > 15 ) {
-        $('.scroll-button.left').removeClass('hide');
+        this.$('.scroll-button.left').removeClass('hide');
       } else {
-        $('.scroll-button.left').addClass('hide');
+        this.$('.scroll-button.left').addClass('hide');
       }
 
       var tableContainerWidth = this.ui.scrolltable.width();
-      var tableWidth = $('#datatable table').width();
+      var tableWidth = this.$('#places-datatable table').width();
       if ( this.ui.scrolltable.scrollLeft() <= tableWidth - tableContainerWidth - 15 ) {
-        $('.scroll-button.right').removeClass('hide');
+        this.$('.scroll-button.right').removeClass('hide');
       } else {
-        $('.scroll-button.right').addClass('hide');
+        this.$('.scroll-button.right').addClass('hide');
       }
     },
 
@@ -149,7 +149,7 @@ var Planbox = Planbox || {};
 
     handleScrollRight: function(evt) {
       evt.preventDefault();
-      var tableWidth = $('#datatable table').width();
+      var tableWidth = this.$('#places-datatable table').width();
       this.ui.scrolltable.animate({ scrollLeft: tableWidth });
     },
 
@@ -159,7 +159,7 @@ var Planbox = Planbox || {};
         page: 50,
         plugins: [ ListPagination({outerWindow: 2}) ]
       };
-      this.table = new List('datatable', options);
+      this.table = new List('places-datatable', options);
       this.ui.scrolltable.scroll(_.bind(this.toggleScrollNavButtons, this));
       this.toggleScrollNavButtons();
     },
