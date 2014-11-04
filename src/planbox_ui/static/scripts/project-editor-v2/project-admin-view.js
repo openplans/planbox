@@ -144,7 +144,7 @@ var Planbox = Planbox || {};
 
         // Show the plan welcome modal
         if(!this.model.id) {
-          $('#planWelomeModal').foundation('reveal', 'open');        
+          $('#planWelomeModal').foundation('reveal', 'open');
         }
 
       },
@@ -306,11 +306,17 @@ var Planbox = Planbox || {};
             _saveModel;
 
         _saveModel = function() {
+          var isNew = self.model.isNew(),
+              isPublishing = (data && data.public);
+
           self.model.clean();
           self.model.save(data, {
             success: function(model) {
               self.onSaveSuccess(model);
               NS.Utils.runHook(NS.app.plugins, 'postsave', {args: [self.model]});
+
+              if (isNew) { NS.Utils.log('SUPPORT', 'saved-new-project', { project_url: model.pageUrl() }); }
+              if (isPublishing) { NS.Utils.log('SUPPORT', 'made-project-public', { project_url: model.pageUrl() }); }
             },
             error: function(model, resp) {
               // Did we specifically change the public status? Put it back.

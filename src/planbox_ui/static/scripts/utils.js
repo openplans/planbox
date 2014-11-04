@@ -156,11 +156,20 @@ var Planbox = Planbox || {};
     log: function() {
       var args = Array.prototype.slice.call(arguments, 0);
 
-      if (window.ga) {
+      if (window.Intercom && args[0].toLowerCase() === 'support') {
+        this.support(args);
+      } else if (window.ga && args[0].toLowerCase() !== 'support') {
         this.analytics(args);
       } else {
         NS.Utils.console.log(args);
       }
+    },
+
+    support: function(args) {
+      var eventName = args[1],
+          eventData;
+      if (args.length > 2) { eventData = args[2]; }
+      window.Intercom('trackEvent', args[1], args[2]);
     },
 
     // TODO: Update for Planbox rather than Shareabouts

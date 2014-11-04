@@ -136,6 +136,11 @@ var Planbox = Planbox || {};
         url: endpoint,
         dataType: 'json'
       }, options));
+    },
+
+    pageUrl: function() {
+      var siteRoot = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+      return siteRoot + '/' + this.get('owner').slug + '/' + this.get('slug') + '/';
     }
   });
 
