@@ -66,20 +66,20 @@ var Planbox = Planbox || {};
       return shareaboutsSection;
     },
 
-    _addManagerTab: function(view) {
-      var tabTemplate = Handlebars.templates['shareabouts-manager-tab-tpl'],
-          sectionTemplate = Handlebars.templates['shareabouts-manager-content-tpl'];
+    _addPlacesListTab: function(view) {
+      var tabTemplate = Handlebars.templates['shareabouts-dashboard-places-tab-tpl'],
+          sectionTemplate = Handlebars.templates['shareabouts-dashboard-places-list-tpl'];
       view.$('.tabs').append(tabTemplate());
-      view.$('.tabs-content').append('<section role="tabpanel" aria-hidden="true" class="content" id="panel-manage"></section>');
+      view.$('.tabs-content').append('<section role="tabpanel" aria-hidden="true" class="content" id="panel-places-list"></section>');
 
-      view.addRegion('shareaboutsManagerRegion', '#panel-manage');
-      view.shareaboutsManagerRegion.show(new NS.ManagePlacesView({
+      view.addRegion('placesListRegion', '#panel-places-list');
+      view.placesListRegion.show(new NS.ShareaboutsDashboardPlacesListView({
         plugin: this
       }));
     },
 
     onShowProjectDashboard: function(view) {
-      this._addManagerTab(view);
+      this._addPlacesListTab(view);
     },
 
     onShowActivityPanel: function() {
