@@ -19,14 +19,14 @@
       <table class="" role="grid">
         <thead>
           {{#each headers}}
-          <th><div class="table-column
-            {{#is . 'description'}}table-column-50rem{{/is}}
+          <th class="{{.}}-header"><div class="table-column
+            {{#is . 'description'}}table-column-30rem{{/is}}
             {{#is . 'geometry'}}table-column-20rem{{/is}}">
 
             {{#lookup ../labels .}}
-            <button class="sort tiny less-padding no-margins expand" data-sort="{{.}}">{{.}}</button>
+            <button class="sort tiny less-padding no-margins expand" data-sort="{{..}}">{{.}}</button>
             {{^}}
-            <button class="sort tiny less-padding no-margins expand" data-sort="{{.}}">{{.}}</button>
+            <button class="sort tiny less-padding no-margins expand" data-sort="{{..}}">{{.}}</button>
             {{/lookup}}
           </div></th>
           {{/each}}
@@ -35,24 +35,25 @@
           {{#each places}}
           <tr>
             {{#each ../headers}}
-            <td class="{{.}}"><div class="table-column
-              {{#is . 'description'}}table-column-50rem{{/is}}
+            <td class="{{.}}-cell"><div class="table-column
+              {{#is . 'description'}}table-column-30rem text-left{{/is}}
               {{#is . 'geometry'}}table-column-20rem{{/is}}">
 
               {{#isTimeAttr .}}
+                <div class="{{..}} hide">{{resolve ../.. ..}}"</div>
                 <time datetime="{{resolve ../.. ..}}">{{#resolve ../.. ..}}{{fromnow .}}{{/resolve}}</time>
               {{/isTimeAttr}}
 
               {{#isImageAttr .}}
-                <img src="{{resolve ../.. ..}}" class="shareabouts-image-field">
+                <div class="{{..}}"><img src="{{resolve ../.. ..}}" class="shareabouts-image-field"></div>
               {{/isImageAttr}}
 
               {{#isUrlAttr .}}
-                {{#resolve ../.. ..}}<a href="{{.}}" class="shareabouts-url-field">{{.}}</a>{{/resolve}}
+                <div class="{{..}}">{{#resolve ../.. ..}}<a href="{{.}}" class="shareabouts-url-field">{{.}}</a>{{/resolve}}</div>
               {{/isUrlAttr}}
 
               {{#isDefaultAttr .}}
-                {{resolve ../.. ..}}
+                <div class="{{..}}">{{resolve ../.. ..}}</div>
               {{/isDefaultAttr}}
             </div></td>
             {{/each}}

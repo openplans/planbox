@@ -158,7 +158,7 @@ var Planbox = Planbox || {};
         page: 50,
         plugins: [ ListPagination({outerWindow: 2}) ]
       };
-      new List('datatable', options);
+      this.table = new List('datatable', options);
     },
 
     render: function() {
