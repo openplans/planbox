@@ -141,6 +141,12 @@ var Planbox = Planbox || {};
 
         // Start letting the server know you have the project open.
         this.openNotification = window.setInterval(_.bind(this.notifyProjectOpen, this), 15000);
+
+        // Show the plan welcome modal
+        if(!this.model.id) {
+          $('#planWelomeModal').foundation('reveal', 'open');        
+        }
+
       },
 
       onClose: function() {

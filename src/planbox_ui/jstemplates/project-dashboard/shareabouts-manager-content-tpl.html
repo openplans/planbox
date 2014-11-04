@@ -1,0 +1,68 @@
+
+
+  <div id="datatable" class="datatable">
+
+    <div class="row">
+      <div class="columns large-6">
+        <input type="text" class="search" placeholder="Search" />
+      </div>
+
+      <div class="columns large-6">
+        <div class="pagination-centered">
+          <ul class="pagination some-margin-bottom"><li>&hellip;</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-container">
+
+      <table class="" role="grid">
+        <thead>
+          {{#each headers}}
+          <th class="{{.}}-header"><div class="table-column
+            {{#is . 'description'}}table-column-30rem{{/is}}
+            {{#is . 'geometry'}}table-column-20rem{{/is}}">
+
+            {{#lookup ../labels .}}
+            <button class="sort tiny less-padding no-margins expand" data-sort="{{..}}">{{.}}</button>
+            {{^}}
+            <button class="sort tiny less-padding no-margins expand" data-sort="{{..}}">{{.}}</button>
+            {{/lookup}}
+          </div></th>
+          {{/each}}
+        </thead>
+        <tbody class="list">
+          {{#each places}}
+          <tr>
+            {{#each ../headers}}
+            <td class="{{.}}-cell"><div class="table-column
+              {{#is . 'description'}}table-column-30rem text-left{{/is}}
+              {{#is . 'geometry'}}table-column-20rem{{/is}}">
+
+              {{#isTimeAttr .}}
+                <div class="{{..}} hide">{{resolve ../.. ..}}"</div>
+                <time datetime="{{resolve ../.. ..}}">{{#resolve ../.. ..}}{{fromnow .}}{{/resolve}}</time>
+              {{/isTimeAttr}}
+
+              {{#isImageAttr .}}
+                <div class="{{..}}"><img src="{{resolve ../.. ..}}" class="shareabouts-image-field"></div>
+              {{/isImageAttr}}
+
+              {{#isUrlAttr .}}
+                <div class="{{..}}">{{#resolve ../.. ..}}<a href="{{.}}" class="shareabouts-url-field">{{.}}</a>{{/resolve}}</div>
+              {{/isUrlAttr}}
+
+              {{#isDefaultAttr .}}
+                <div class="{{..}}">{{resolve ../.. ..}}</div>
+              {{/isDefaultAttr}}
+            </div></td>
+            {{/each}}
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+    </div>
+
+  </div><!-- end #datatable.table-container -->
+

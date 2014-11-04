@@ -399,6 +399,7 @@ module.exports = function (grunt) {
           ],
           '<%= yeoman.app %>/scripts/app-project-dashboard.min.js': [
             '<%= yeoman.app %>/bower_components/list.js/dist/list.js',
+            '<%= yeoman.app %>/bower_components/list.pagination.js/dist/list.pagination.js',
             '<%= yeoman.app %>/scripts/utils.js',
             '<%= yeoman.app %>/scripts/handlebars-helpers.js',
             '<%= yeoman.app %>/scripts/file-upload.js',
@@ -415,6 +416,7 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-dataset-comment-count-widget-view.js',
             '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-dataset-support-count-widget-view.js',
             '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-dataset-unique-contrib-count-widget-view.js',
+            '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-manage-places-view.js',
             '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-project-dashboard-plugin.js'
           ],
           '<%= yeoman.app %>/scripts/shareabouts-project-editor.min.js': [

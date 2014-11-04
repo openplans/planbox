@@ -955,6 +955,12 @@ img.attachment-icon {
   Project Shareabouts
 --------------------------------------------------*/
 
+body.shareabouts-panel-hovered {
+  @media #{$medium-up} {
+    overflow: hidden;
+  }
+}
+
 .project-section-shareabouts {
   .map {
     height: 300px;
@@ -1318,6 +1324,27 @@ img.attachment-icon {
   .project-header-section .section-insert {
     display: none !important;
   }
+}
+
+/*--------------------------------------------------
+  Shareabouts Project Dashboard
+--------------------------------------------------*/
+
+.shareabouts-url-field {
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.shareabouts-image-field {
+  height: 40px;
+}
+
+.pagination:before {
+  content: 'Page: ';
+  font-size: 0.75rem;
 }
 
 
@@ -1790,7 +1817,7 @@ textarea.no-resize {
 }
 
 
-// OH NOES, HIDE ALL TEH AUTHZ!!! 
+// OH NOES, HIDE ALL TEH AUTHZ!!!
 .shareabouts-auth-container,
 .or-sign-in {
   display: none !important;

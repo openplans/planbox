@@ -20,12 +20,13 @@
     "chrono": "~0.1.9",
     "pickadate": "~3.4.0",
     "foundation": "5.4.3",
-    "shareabouts-js": "https://github.com/openplans/shareabouts.js.git#3.6.1",
+    "shareabouts-js": "https://github.com/openplans/shareabouts.js.git#3.6.2",
     "gatekeeper": "https://github.com/openplans/gatekeeper.git#~0.1.1",
     "jqxdomainrequest": "https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest.git#v1.0.2",
     "raven-js": "~1.1.16",
     "leaflet": "~0.7.3",
-    "list.js": "~1.1.1"
+    "list.js": "~1.1.1",
+    "list.pagination.js": "~0.1.1"
   },
   "devDependencies": {},
   "resolutions": {

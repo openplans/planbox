@@ -18,56 +18,18 @@ var Planbox = Planbox || {};
       this.app = options.app;
     },
 
-    initFixedTableHeader: function() {
-      $(window).on('load resize', function() {
-        if (window.matchMedia(Foundation.media_queries.large).matches) {
-          var tbodyHeight = $(window).height() - $('#datatable table').offset().top - 45;
-          $('#datatable tbody').css({ maxHeight: tbodyHeight });
-        } else {
-          $('#datatable tbody').css({ maxHeight: 'none' });
-        }
-      });
-    },
-
     onShow: function() {
+      var self = this;
+
       this.app.triggerMethod('show:projectDashboard:before', this);
       this.showRegions();
-
-      this.initFixedTableHeader();
-
-      // TODO: Don't hardcode this. Loop through project's data to get column classes.
-      var options = {
-        valueNames: [
-          'dataset'
-        , 'description'
-        , 'geometry'
-        , 'id'
-        , 'lat'
-        , 'lng'
-        , 'dragPoint'
-        , 'geocodeQuality'
-        , 'geocodeQualityCode'
-        , 'linkId'
-        , 'mapUrl'
-        , 'postalCode'
-        , 'sideOfStreet'
-        , 'street'
-        , 'locationtype'
-        , 'name'
-        , 'notes_public'
-        , 'submitter_email'
-        , 'submitter'
-        , 'avatar_url'
-        , 'submitterid'
-        , 'submittername'
-        , 'updated_datetime'
-        , 'url'
-        , 'user_token'
-        , 'visible'
-        ]
-      };
-      new List('datatable', options);
       this.app.triggerMethod('show:projectDashboard:after', this);
+
+      $(document).foundation({'tab': {
+        callback: function(tab) {
+          self.app.triggerMethod('toggle:projectDashboard:tabs', tab, this);
+        }
+      }});
     },
 
     showRegions: function() {
