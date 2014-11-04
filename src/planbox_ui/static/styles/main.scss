@@ -1808,6 +1808,41 @@ textarea.no-resize {
   }
 }
 
+// Scroll Navigation 
+$scroll-nav-button-color: scale-color($button-bg-color, $lightness: $button-function-factor);
+.scroll-nav {
+  position: relative;
+  z-index: 2;
+  .scroll-button {
+    position: absolute;
+    top: 0;
+    width: 1.5rem;
+    height: 1.75rem;
+    line-height: 1.75rem;
+    text-align: center;
+    overflow: visible;
+    color: #fff;
+    background-color: $scroll-nav-button-color;
+    box-shadow: 
+    1px 0 0 rgba($primary-color, 1),
+    -1px 0 0 rgba($primary-color, 1),
+    2px 0 0 rgba($primary-color, 0.8),
+    -2px 0 0 rgba($primary-color, 0.8),
+    3px 0 0 rgba($primary-color, 0.5),
+    -3px 0 0 rgba($primary-color, 0.5),
+    4px 0 0 rgba($primary-color, 0.2),
+    -4px 0 0 rgba($primary-color, 0.2),
+    5px 0 0 rgba($primary-color, 0.1),
+    -5px 0 0 rgba($primary-color, 0.1)
+    ;
+    &.right { right: 0; margin-right: -0.9375rem; }
+    &.left { left: 0; margin-left: -0.9375rem; }
+    &:hover {
+      background-color: scale-color($scroll-nav-button-color, $lightness: $button-function-factor);
+    }
+  }
+}
+
 // Tabs
 .tab-title > a,
 .tabs-content [tabindex] {

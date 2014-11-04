@@ -138,6 +138,10 @@ p {
   &.shadowed {
     box-shadow: -5px 5px 0 rgba(51,51,51,0.2);
   }
+  &.desc, 
+  &.asc {
+    background-color: scale-color($button-bg-color, $lightness: $button-function-factor);;
+  }
 }
 
 // Extend link styles
