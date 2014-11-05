@@ -12402,74 +12402,160 @@ textarea.no-resize {
   font-style: italic;
 }
 
-/* line 1760, main.scss */
+/* line 1761, main.scss */
+.stat-widget.loading {
+  position: relative;
+  -webkit-animation: loading-shadow 2s linear infinite;
+  animation: loading-shadow 2s linear infinite;
+  box-shadow: 0 0 2rem rgba(108, 113, 128, 0.25);
+  border-color: rgba(108, 113, 128, 0.25);
+  color: rgba(108, 113, 128, 0.25);
+}
+/* line 1768, main.scss */
+.stat-widget.loading:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(48, 143, 191, 0.05);
+  -webkit-animation: loading-bg 3s linear infinite;
+  animation: loading-bg 3s linear infinite;
+}
+/* line 1779, main.scss */
+.stat-widget.loading:after {
+  content: "LOADING...";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  text-align: center;
+  line-height: 2;
+  margin-top: -1em;
+  font-size: 1.25rem;
+  color: #6c7180;
+  text-shadow: -2px -2px 0.5rem #fff, 2px -2px 0.5rem #fff, 2px 2px 0.5rem #fff, -2px 2px 0.5rem #fff;
+}
+
+@-webkit-keyframes loading-shadow {
+  0% {
+    box-shadow: 0 0 2rem rgba(108, 113, 128, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 0.5rem rgba(108, 113, 128, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 2rem rgba(108, 113, 128, 0.25);
+  }
+}
+@keyframes loading-shadow {
+  0% {
+    box-shadow: 0 0 2rem rgba(108, 113, 128, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 0.5rem rgba(108, 113, 128, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 2rem rgba(108, 113, 128, 0.25);
+  }
+}
+@-webkit-keyframes loading-bg {
+  0% {
+    left: 0%;
+    right: 100%;
+  }
+  50% {
+    left: 0%;
+    right: 0%;
+  }
+  100% {
+    left: 100%;
+    right: 0%;
+  }
+}
+@keyframes loading-bg {
+  0% {
+    left: 0%;
+    right: 100%;
+  }
+  50% {
+    left: 0%;
+    right: 0%;
+  }
+  100% {
+    left: 100%;
+    right: 0%;
+  }
+}
+/* line 1816, main.scss */
 .stat-widget-big-number .count {
   display: block;
   font-size: 2.5rem;
   line-height: 1.2;
 }
-/* line 1765, main.scss */
+/* line 1821, main.scss */
 .stat-widget-big-number .unit {
   text-transform: uppercase;
 }
 
-/* line 1771, main.scss */
+/* line 1827, main.scss */
 .table-container {
   max-width: 100%;
   overflow: auto;
 }
 
-/* line 1776, main.scss */
+/* line 1832, main.scss */
 .datatable table {
   margin-bottom: 0;
   border: 0;
 }
-/* line 1780, main.scss */
+/* line 1836, main.scss */
 .datatable table tr th, .datatable table tr td {
   font-size: 0.6875rem;
 }
-/* line 1785, main.scss */
+/* line 1841, main.scss */
 .datatable .table-column {
   max-height: 6.5em;
   width: 8rem;
   overflow: auto;
   text-align: center;
 }
-/* line 1791, main.scss */
+/* line 1847, main.scss */
 .datatable .table-column-20rem {
   width: 10rem;
 }
-/* line 1792, main.scss */
+/* line 1848, main.scss */
 .datatable .table-column-20rem {
   width: 20rem;
 }
-/* line 1793, main.scss */
+/* line 1849, main.scss */
 .datatable .table-column-30rem {
   width: 30rem;
 }
-/* line 1794, main.scss */
+/* line 1850, main.scss */
 .datatable .table-column-40rem {
   width: 40rem;
 }
-/* line 1795, main.scss */
+/* line 1851, main.scss */
 .datatable .table-column-50rem {
   width: 50rem;
 }
-/* line 1796, main.scss */
+/* line 1852, main.scss */
 .datatable .table-column-75rem {
   width: 75rem;
 }
-/* line 1797, main.scss */
+/* line 1853, main.scss */
 .datatable .table-column-75rem {
   width: 100rem;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 1799, main.scss */
+  /* line 1855, main.scss */
   .datatable thead tr,
   .datatable tbody tr {
     display: block;
   }
-  /* line 1803, main.scss */
+  /* line 1859, main.scss */
   .datatable tbody {
     display: block;
     overflow-x: hidden;
@@ -12477,12 +12563,12 @@ textarea.no-resize {
   }
 }
 
-/* line 1813, main.scss */
+/* line 1869, main.scss */
 .scroll-nav {
   position: relative;
   z-index: 2;
 }
-/* line 1816, main.scss */
+/* line 1872, main.scss */
 .scroll-nav .scroll-button {
   position: absolute;
   top: 0;
@@ -12495,28 +12581,28 @@ textarea.no-resize {
   background-color: #267299;
   box-shadow: 1px 0 0 #308fbf, -1px 0 0 #308fbf, 2px 0 0 rgba(48, 143, 191, 0.8), -2px 0 0 rgba(48, 143, 191, 0.8), 3px 0 0 rgba(48, 143, 191, 0.5), -3px 0 0 rgba(48, 143, 191, 0.5), 4px 0 0 rgba(48, 143, 191, 0.2), -4px 0 0 rgba(48, 143, 191, 0.2), 5px 0 0 rgba(48, 143, 191, 0.1), -5px 0 0 rgba(48, 143, 191, 0.1);
 }
-/* line 1838, main.scss */
+/* line 1894, main.scss */
 .scroll-nav .scroll-button.right {
   right: 0;
   margin-right: -0.9375rem;
 }
-/* line 1839, main.scss */
+/* line 1895, main.scss */
 .scroll-nav .scroll-button.left {
   left: 0;
   margin-left: -0.9375rem;
 }
-/* line 1840, main.scss */
+/* line 1896, main.scss */
 .scroll-nav .scroll-button:hover {
   background-color: #1f5c7a;
 }
 
-/* line 1849, main.scss */
+/* line 1905, main.scss */
 .tab-title > a:focus,
 .tabs-content [tabindex]:focus {
   outline: 0;
 }
 
-/* line 1856, main.scss */
+/* line 1912, main.scss */
 .shareabouts-auth-container,
 .or-sign-in {
   display: none !important;
