@@ -10,10 +10,10 @@
           <h5 class="page-list-header subheader no-margins">Create a new plan from one of these templates&hellip;</h5>
         </div>
 
-        <ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-4">
+        <ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-4" id="flavor-chooser">
           {{#bootstrapped 'projectTemplates'}}
           {{#each .}}
-          <li class="template-{{ profile.slug }}-{{ project.slug }} no-margins no-padding-bottom">
+          <li class="flavor template-{{ profile.slug }}-{{ project.slug }} no-margins no-padding-bottom">
             <h5 class="text-center no-margins">
               <a href="{{> url-project-new-tpl ../.. }}?template={{ profile.slug }}/{{ project.slug }}" data-log-click>
                 <img src="{{ image_url }}" class="block some-margin-bottom">

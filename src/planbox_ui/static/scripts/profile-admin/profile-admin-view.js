@@ -13,9 +13,29 @@ var Planbox = Planbox || {};
       memberListRegion: '.member-list',
       teamListRegion: '.team-list'
     },
+    ui: {
+      flavor: '.flavor',
+      showFlavorsBtn: '.show-all-flavors'
+    },
+    events: {
+      'click @ui.showFlavorsBtn': 'handleShowFlavors'
+    },
+
+    hideCopiousFlavors: function() {
+      if ( this.ui.flavor.length > 4 ) {
+        this.$('.flavor:gt(3)').hide().addClass('some-padding-top');
+        $('<p class="no-margins some-padding-top text-center"><a class="show-all-flavors button tiny radius no-margins less-padding" href="#">&nbsp;SHOW ALL TEMPLATES&nbsp;</a></p>').insertAfter('#flavor-chooser');
+      }
+    },
+    handleShowFlavors: function(evt) {
+      evt.preventDefault();
+      this.$('.flavor:gt(3)').show();
+      this.$('.show-all-flavors').parent('p').hide();
+    },
 
     onShow: function() {
       this.showRegions();
+      this.hideCopiousFlavors();
     },
 
     showRegions: function() {
