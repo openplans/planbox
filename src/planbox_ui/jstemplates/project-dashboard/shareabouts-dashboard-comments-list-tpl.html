@@ -23,6 +23,10 @@
 
       <table class="" role="grid">
         <thead>
+          <th class="visible-header"><div class="table-column">
+            <button class="sort tiny less-padding no-margins expand" data-sort="visible-value">visible</button>
+          </div></th>
+
           {{#each headers}}
           <th class="{{.}}-header"><div class="table-column
             {{#is . 'comment'}}table-column-30rem{{/is}}">
@@ -37,27 +41,46 @@
         </thead>
         <tbody class="list">
           {{#each comments}}
-          <tr>
+          <tr class="{{#if visible}}row-visible{{^}}row-invisible{{/if}}">
+            <td class="visible-cell">
+              <div class="table-column">
+                <div class="visible-value hide">{{#if visible}}true{{^}}false{{/if}}</div>
+                <input type="checkbox" class="visible-checkbox" {{#if visible}}checked{{/if}} data-shareabouts-id="{{ id }}">
+              </div>
+            </td>
+
             {{#each ../headers}}
             <td class="{{.}}-cell"><div class="table-column
               {{#is . 'comment'}}table-column-30rem text-left{{/is}}">
 
-              {{#isTimeAttr .}}
-                <div class="{{..}} hide">{{resolve ../.. ..}}"</div>
-                <time datetime="{{resolve ../.. ..}}">{{#resolve ../.. ..}}{{fromnow .}}{{/resolve}}</time>
-              {{/isTimeAttr}}
+              {{#buildContext attr=. place=..}}
 
-              {{#isImageAttr .}}
-                <div class="{{..}}"><img src="{{resolve ../.. ..}}" class="shareabouts-image-field"></div>
-              {{/isImageAttr}}
+                {{#isTimeAttr attr}}
+                  {{#resolve place attr}}
+                    <div class="{{../attr}} hide">{{.}}</div>
+                    <time datetime="{{.}}">{{fromnow .}}</time>
+                  {{/resolve}}
+                {{/isTimeAttr}}
 
-              {{#isUrlAttr .}}
-                <div class="{{..}}">{{#resolve ../.. ..}}<a href="{{.}}" class="shareabouts-url-field">{{.}}</a>{{/resolve}}</div>
-              {{/isUrlAttr}}
+                {{#isImageAttr attr}}
+                  <div class="{{attr}}">
+                    <img src="{{resolve place attr}}" class="shareabouts-image-field">
+                  </div>
+                {{/isImageAttr}}
 
-              {{#isDefaultAttr .}}
-                <div class="{{..}}">{{resolve ../.. ..}}</div>
-              {{/isDefaultAttr}}
+                {{#isUrlAttr attr}}
+                  <div class="{{attr}}">
+                    {{#resolve place attr}}
+                      <a href="{{.}}" class="shareabouts-url-field">{{.}}</a>
+                    {{/resolve}}
+                  </div>
+                {{/isUrlAttr}}
+
+                {{#isDefaultAttr attr}}
+                  <div class="{{attr}}">{{resolve place attr}}</div>
+                {{/isDefaultAttr}}
+
+              {{/buildContext}}
             </div></td>
             {{/each}}
           </tr>

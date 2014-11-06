@@ -13,18 +13,20 @@ var Planbox = Planbox || {};
     ui: {
       scrolltable: '.table-container',
       scrollLeft: '.scroll-button.left',
-      scrollRight: '.scroll-button.right'
+      scrollRight: '.scroll-button.right',
+      visibleCheckboxes: '.visible-checkbox'
     },
     events: {
       'click @ui.scrollLeft': 'handleScrollLeft',
-      'click @ui.scrollRight': 'handleScrollRight'
+      'click @ui.scrollRight': 'handleScrollRight',
+      'change @ui.visibleCheckboxes': 'handleVisibilityChange'
     },
     initialize: function(options) {
       this.plugin = options.plugin;
 
       // For now, debounce the add-place handler, since it will rerender the
       // entire table. TODO: We can probably do the adding smarter though.
-      this.plugin.comments.on('add', _.debounce(_.bind(this.handleAddPlace, this), 500));
+      this.plugin.comments.on('add', _.debounce(_.bind(this.handleAddComment, this), 500));
 
       this.columnHeaders = [];
       $(window).on('resize', _.bind(this.onWindowResize, this));
@@ -50,11 +52,13 @@ var Planbox = Planbox || {};
 
       return headers;
     },
-    getPlaceColumnHeaders: function(place) {
+    getColumnHeaders: function(place) {
       var data = place.attributes,
-          headers = [], key, value;
+          headers = [], key, value,
+          exclude = ['visible'];
 
       for (key in data) {
+        if (_.contains(exclude, key)) { continue; }
         headers = headers.concat(this.getHeadersForValue(key, data[key]));
       }
 
@@ -68,8 +72,8 @@ var Planbox = Planbox || {};
       });
       self.columnHeaders = _.uniq(self.columnHeaders, true);
     },
-    handleAddPlace: function(place) {
-      var newColumnHeaders = this.getPlaceColumnHeaders(place);
+    handleAddComment: function(comment) {
+      var newColumnHeaders = this.getColumnHeaders(comment);
       this.updateColumnHeaders(newColumnHeaders);
       this.render();
     },
@@ -78,9 +82,6 @@ var Planbox = Planbox || {};
         'url': 'api url',
         'created_datetime': 'created',
         'updated_datetime': 'last updated',
-        'geometry.coordinates.0': 'geometry lng',
-        'geometry.coordinates.1': 'geometry lat',
-        'geometry.type': 'geometry type',
         'private-email': 'email'
       };
 
@@ -118,6 +119,32 @@ var Planbox = Planbox || {};
       data.labels = attrLabelMap;
 
       return data;
+    },
+
+    handleVisibilityChange: function(evt) {
+      var $checkbox = $(evt.currentTarget),
+          checked = $checkbox.prop('checked'),
+          id = $checkbox.attr('data-shareabouts-id'),
+          comment = this.plugin.comments.get(id),
+          $row = $checkbox.closest('tr');
+
+      $checkbox.prop('disabled', true);
+      comment.save({visible: checked}, {
+        url: comment.get('url') + '?include_invisible',
+        patch: true,
+        success: function() {
+          $row.toggleClass('row-visible', checked);
+          $row.toggleClass('row-invisible', !checked);
+          $row.find('.visible-value').html(checked.toString());
+        },
+        error: function() {
+          $checkbox.prop('checked', !checked);
+          // TODO: Handle error
+        },
+        complete: function() {
+          $checkbox.prop('disabled', false);
+        }
+      });
     },
 
     fixTableHeader: function() {

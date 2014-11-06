@@ -52,7 +52,7 @@ var Planbox = Planbox || {};
 
       return headers;
     },
-    getPlaceColumnHeaders: function(place) {
+    getColumnHeaders: function(place) {
       var data = place.attributes,
           headers = [], key, value,
           exclude = ['visible'];
@@ -73,7 +73,7 @@ var Planbox = Planbox || {};
       self.columnHeaders = _.uniq(self.columnHeaders, true);
     },
     handleAddPlace: function(place) {
-      var newColumnHeaders = this.getPlaceColumnHeaders(place);
+      var newColumnHeaders = this.getColumnHeaders(place);
       this.updateColumnHeaders(newColumnHeaders);
       this.render();
     },
@@ -121,31 +121,6 @@ var Planbox = Planbox || {};
       return data;
     },
 
-    fixTableHeader: function() {
-      if (window.matchMedia(Foundation.media_queries.large).matches) {
-        var tbodyHeight = $(window).height() - $('#places-datatable table').offset().top - 45;
-        this.$('#places-datatable tbody').css({ maxHeight: tbodyHeight });
-      } else {
-        this.$('#places-datatable tbody').css({ maxHeight: 'none' });
-      }
-    },
-
-    toggleScrollNavButtons: function() {
-      if ( this.ui.scrolltable.scrollLeft() > 15 ) {
-        this.$('.scroll-button.left').removeClass('hide');
-      } else {
-        this.$('.scroll-button.left').addClass('hide');
-      }
-
-      var tableContainerWidth = this.ui.scrolltable.width();
-      var tableWidth = this.$('#places-datatable table').width();
-      if ( this.ui.scrolltable.scrollLeft() <= tableWidth - tableContainerWidth - 15 ) {
-        this.$('.scroll-button.right').removeClass('hide');
-      } else {
-        this.$('.scroll-button.right').addClass('hide');
-      }
-    },
-
     handleVisibilityChange: function(evt) {
       var $checkbox = $(evt.currentTarget),
           checked = $checkbox.prop('checked'),
@@ -170,6 +145,31 @@ var Planbox = Planbox || {};
           $checkbox.prop('disabled', false);
         }
       });
+    },
+
+    fixTableHeader: function() {
+      if (window.matchMedia(Foundation.media_queries.large).matches) {
+        var tbodyHeight = $(window).height() - $('#places-datatable table').offset().top - 45;
+        this.$('#places-datatable tbody').css({ maxHeight: tbodyHeight });
+      } else {
+        this.$('#places-datatable tbody').css({ maxHeight: 'none' });
+      }
+    },
+
+    toggleScrollNavButtons: function() {
+      if ( this.ui.scrolltable.scrollLeft() > 15 ) {
+        this.$('.scroll-button.left').removeClass('hide');
+      } else {
+        this.$('.scroll-button.left').addClass('hide');
+      }
+
+      var tableContainerWidth = this.ui.scrolltable.width();
+      var tableWidth = this.$('#places-datatable table').width();
+      if ( this.ui.scrolltable.scrollLeft() <= tableWidth - tableContainerWidth - 15 ) {
+        this.$('.scroll-button.right').removeClass('hide');
+      } else {
+        this.$('.scroll-button.right').addClass('hide');
+      }
     },
 
     handleScrollLeft: function(evt) {
