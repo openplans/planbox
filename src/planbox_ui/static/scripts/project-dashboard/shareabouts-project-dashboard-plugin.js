@@ -47,25 +47,22 @@ var Planbox = Planbox || {};
       var addAccessToken = function(xhr) {
         xhr.setRequestHeader('Authorization', 'Bearer ' + credentials.access_token);
       };
+      var syncWithAccessToken = function(method, model, options) {
+        _.defaults(options || (options = {}), {
+          beforeSend: addAccessToken
+        });
+        return Backbone.sync.call(this, method, model, options);
+      };
 
-      this.dataset.fetch({
-        beforeSend: addAccessToken
-      });
+      // Patch all the sync methods to use the access token.
+      this.dataset.sync = this.places.sync = this.comments.sync = this.submissions.sync = syncWithAccessToken;
+      this.places.model.prototype.sync = this.comments.model.prototype.sync = this.submissions.model.prototype.sync = syncWithAccessToken;
 
-      this.places.fetchAllPages({
-        data: {'include_private': true, 'include_invisible': true},
-        beforeSend: addAccessToken
-      });
-
-      this.comments.fetchAllPages({
-        data: {'include_private': true, 'include_invisible': true},
-        beforeSend: addAccessToken
-      });
-
-      this.submissions.fetchAllPages({
-        data: {'include_private': true, 'include_invisible': true},
-        beforeSend: addAccessToken
-      });
+      var includes = {'include_private': true, 'include_invisible': true};
+      this.dataset.fetch();
+      this.places.fetchAllPages({ data: includes });
+      this.comments.fetchAllPages({ data: includes });
+      this.submissions.fetchAllPages({ data: includes });
     },
 
     getShareaboutsConfig: function() {
