@@ -52,9 +52,11 @@ var Planbox = Planbox || {};
     },
     getPlaceColumnHeaders: function(place) {
       var data = place.attributes,
-          headers = [], key, value;
+          headers = [], key, value,
+          exclude = ['visible'];
 
       for (key in data) {
+        if (_.contains(exclude, key)) { continue; }
         headers = headers.concat(this.getHeadersForValue(key, data[key]));
       }
 

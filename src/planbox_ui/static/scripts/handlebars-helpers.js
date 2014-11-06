@@ -51,6 +51,20 @@ var Planbox = Planbox || {};
     }
   });
 
+  Handlebars.registerHelper('buildContext', function(/* name1, value1, name2, value2, ..., */ options) {
+    var names_values = _.initial(arguments),
+        context = {}, name, value, index;
+    options = _.last(arguments);
+
+    for (index = 0; index < names_values.length; index += 2) {
+      name = names_values[index];
+      value = names_values[index + 1];
+      context[name] = value;
+    }
+
+    return options.fn(context);
+  });
+
   Handlebars.registerHelper('isAny', function(value, /* test1, test2, test3, ..., */ options) {
     var tests = _.rest(_.initial(arguments)),
         isAny = false,
