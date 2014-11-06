@@ -55,7 +55,7 @@
               {{#is . 'description'}}table-column-30rem text-left{{/is}}
               {{#is . 'geometry'}}table-column-20rem{{/is}}">
 
-              {{#buildContext 'attr' . 'place' ..}}
+              {{#buildContext attr=. place=..}}
 
                 {{#isTimeAttr attr}}
                   {{#resolve place attr}}
