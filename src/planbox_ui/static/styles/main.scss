@@ -1,6 +1,15 @@
 @import "foundation";
 
 
+html {
+  // Always show scrollbars to not toggle page width on panel hover
+  @media #{$medium-up} {
+    overflow-y: scroll;
+    overflow-y: -moz-scrollbars-vertical;
+  }
+}
+
+
 /*--------------------------------------------------
   OpenPlans-Branded Top Bar
 --------------------------------------------------*/
