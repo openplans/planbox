@@ -53,17 +53,17 @@ var Planbox = Planbox || {};
       });
 
       this.places.fetchAllPages({
-        data: {'include_private': true},
+        data: {'include_private': true, 'include_invisible': true},
         beforeSend: addAccessToken
       });
 
       this.comments.fetchAllPages({
-        data: {'include_private': true},
+        data: {'include_private': true, 'include_invisible': true},
         beforeSend: addAccessToken
       });
 
       this.submissions.fetchAllPages({
-        data: {'include_private': true},
+        data: {'include_private': true, 'include_invisible': true},
         beforeSend: addAccessToken
       });
     },

@@ -13,11 +13,13 @@ var Planbox = Planbox || {};
     ui: {
       scrolltable: '.table-container',
       scrollLeft: '.scroll-button.left',
-      scrollRight: '.scroll-button.right'
+      scrollRight: '.scroll-button.right',
+      visibleCheckboxes: '.visible-checkbox'
     },
     events: {
       'click @ui.scrollLeft': 'handleScrollLeft',
-      'click @ui.scrollRight': 'handleScrollRight'
+      'click @ui.scrollRight': 'handleScrollRight',
+      'change @ui.visibleCheckboxes': 'handleVisibilityChange'
     },
     initialize: function(options) {
       this.plugin = options.plugin;
@@ -142,6 +144,32 @@ var Planbox = Planbox || {};
       } else {
         this.$('.scroll-button.right').addClass('hide');
       }
+    },
+
+    handleVisibilityChange: function(evt) {
+      var $checkbox = $(evt.currentTarget),
+          checked = $checkbox.prop('checked'),
+          id = $checkbox.attr('data-shareabouts-id'),
+          place = this.plugin.places.get(id),
+          $row = $checkbox.closest('tr');
+
+      $checkbox.prop('disabled', true);
+      place.save({type: 'Feature', properties: {visible: checked}}, {
+        url: place.url() + '?include_invisible',
+        patch: true,
+        success: function() {
+          $row.toggleClass('row-visible', checked);
+          $row.toggleClass('row-invisible', !checked);
+          $row.find('.visible-value').html(checked.toString());
+        },
+        error: function() {
+          $checkbox.prop('checked', !checked);
+          // TODO: Handle error
+        },
+        complete: function() {
+          $checkbox.prop('disabled', false);
+        }
+      });
     },
 
     handleScrollLeft: function(evt) {

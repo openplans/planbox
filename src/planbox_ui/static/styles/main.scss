@@ -1347,6 +1347,11 @@ body.shareabouts-panel-hovered {
   font-size: 0.75rem;
 }
 
+.row-invisible td {
+  text-decoration: line-through;
+  color: silver;
+}
+
 
 /*--------------------------------------------------
   The Admin
@@ -1864,7 +1869,7 @@ $loading-shadow-color: rgba($primary-color,0.05);
   }
 }
 
-// Scroll Navigation 
+// Scroll Navigation
 $scroll-nav-button-color: scale-color($button-bg-color, $lightness: $button-function-factor);
 .scroll-nav {
   position: relative;
@@ -1879,7 +1884,7 @@ $scroll-nav-button-color: scale-color($button-bg-color, $lightness: $button-func
     overflow: visible;
     color: #fff;
     background-color: $scroll-nav-button-color;
-    box-shadow: 
+    box-shadow:
     1px 0 0 rgba($primary-color, 1),
     -1px 0 0 rgba($primary-color, 1),
     2px 0 0 rgba($primary-color, 0.8),

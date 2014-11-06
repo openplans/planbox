@@ -45,7 +45,7 @@
           <tr class="{{#if visible}}row-visible{{^}}row-invisible{{/if}}">
             <td class="visible-cell">
               <div class="table-column">
-                <div class="visible-value hide">{{ visible }}</div>
+                <div class="visible-value hide">{{#if visible}}true{{^}}false{{/if}}</div>
                 <input type="checkbox" class="visible-checkbox" {{#if visible}}checked{{/if}} data-shareabouts-id="{{ id }}">
               </div>
             </td>
