@@ -1,3 +1,4 @@
+{{#unless auth}}
 <div id="teamWelomeModal" class="reveal-modal small text-center" data-reveal>
 
   <p>Hi, {{# user}}{{> profile-name-tpl }}{{/user}}.</p>
@@ -9,6 +10,7 @@
 
   <a class="close-reveal-modal">&#215;</a>
 </div>
+{{/unless}}
 
 <div class="panel-header">
   <h5 class="page-list-header subheader no-margins">Plans</h5>
