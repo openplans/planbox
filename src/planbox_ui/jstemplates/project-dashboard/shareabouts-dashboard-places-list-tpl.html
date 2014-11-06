@@ -57,28 +57,30 @@
 
               {{#buildContext 'attr' . 'place' ..}}
 
-              {{#isTimeAttr attr}}
-                <div class="{{attr}} hide">{{resolve place attr}}"</div>
-                <time datetime="{{resolve place attr}}">
-                  {{#resolve place attr}}{{fromnow .}}{{/resolve}}
-                </time>
-              {{/isTimeAttr}}
+                {{#isTimeAttr attr}}
+                  {{#resolve place attr}}
+                    <div class="{{../attr}} hide">{{.}}</div>
+                    <time datetime="{{.}}">{{fromnow .}}</time>
+                  {{/resolve}}
+                {{/isTimeAttr}}
 
-              {{#isImageAttr attr}}
-                <div class="{{attr}}">
-                  <img src="{{resolve place attr}}" class="shareabouts-image-field">
-                </div>
-              {{/isImageAttr}}
+                {{#isImageAttr attr}}
+                  <div class="{{attr}}">
+                    <img src="{{resolve place attr}}" class="shareabouts-image-field">
+                  </div>
+                {{/isImageAttr}}
 
-              {{#isUrlAttr attr}}
-                <div class="{{attr}}">
-                  {{#resolve place attr}}<a href="{{.}}" class="shareabouts-url-field">{{.}}</a>{{/resolve}}
-                </div>
-              {{/isUrlAttr}}
+                {{#isUrlAttr attr}}
+                  <div class="{{attr}}">
+                    {{#resolve place attr}}
+                      <a href="{{.}}" class="shareabouts-url-field">{{.}}</a>
+                    {{/resolve}}
+                  </div>
+                {{/isUrlAttr}}
 
-              {{#isDefaultAttr attr}}
-                <div class="{{attr}}">{{resolve place attr}}</div>
-              {{/isDefaultAttr}}
+                {{#isDefaultAttr attr}}
+                  <div class="{{attr}}">{{resolve place attr}}</div>
+                {{/isDefaultAttr}}
 
               {{/buildContext}}
             </div></td>
