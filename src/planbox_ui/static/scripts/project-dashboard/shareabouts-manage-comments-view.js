@@ -5,8 +5,8 @@ var Planbox = Planbox || {};
 (function(NS, $) {
   'use strict';
 
-  NS.ShareaboutsDashboardPlacesListView = Backbone.Marionette.ItemView.extend({
-    template: '#shareabouts-dashboard-places-list-tpl',
+  NS.ShareaboutsDashboardCommentsListView = Backbone.Marionette.ItemView.extend({
+    template: '#shareabouts-dashboard-comments-list-tpl',
     modelEvents: {
       'change': 'render'
     },
@@ -26,7 +26,7 @@ var Planbox = Planbox || {};
 
       // For now, debounce the add-place handler, since it will rerender the
       // entire table. TODO: We can probably do the adding smarter though.
-      this.plugin.places.on('add', _.debounce(_.bind(this.handleAddPlace, this), 500));
+      this.plugin.comments.on('add', _.debounce(_.bind(this.handleAddComment, this), 500));
 
       this.columnHeaders = [];
       $(window).on('resize', _.bind(this.onWindowResize, this));
@@ -72,8 +72,8 @@ var Planbox = Planbox || {};
       });
       self.columnHeaders = _.uniq(self.columnHeaders, true);
     },
-    handleAddPlace: function(place) {
-      var newColumnHeaders = this.getColumnHeaders(place);
+    handleAddComment: function(comment) {
+      var newColumnHeaders = this.getColumnHeaders(comment);
       this.updateColumnHeaders(newColumnHeaders);
       this.render();
     },
@@ -82,9 +82,6 @@ var Planbox = Planbox || {};
         'url': 'api url',
         'created_datetime': 'created',
         'updated_datetime': 'last updated',
-        'geometry.coordinates.0': 'geometry lng',
-        'geometry.coordinates.1': 'geometry lat',
-        'geometry.type': 'geometry type',
         'private-email': 'email'
       };
 
@@ -92,6 +89,9 @@ var Planbox = Planbox || {};
         'created_datetime': 'time',
         'updated_datetime': 'time',
         'submitter.avatar_url': 'image',
+        'place': 'url',
+        'dataset': 'url',
+        'set': 'url',
         'url': 'url'
       };
 
@@ -114,7 +114,7 @@ var Planbox = Planbox || {};
       var data = Backbone.Marionette.ItemView.prototype.serializeData.call(this);
       data.headers = this.columnHeaders;
       data.places = this.plugin.places.toJSON();
-      data.submissions = this.plugin.submissions.toJSON();
+      data.comments = this.plugin.comments.toJSON();
 
       data.labels = attrLabelMap;
 
@@ -125,12 +125,12 @@ var Planbox = Planbox || {};
       var $checkbox = $(evt.currentTarget),
           checked = $checkbox.prop('checked'),
           id = $checkbox.attr('data-shareabouts-id'),
-          place = this.plugin.places.get(id),
+          comment = this.plugin.comments.get(id),
           $row = $checkbox.closest('tr');
 
       $checkbox.prop('disabled', true);
-      place.save({type: 'Feature', properties: {visible: checked}}, {
-        url: place.url() + '?include_invisible',
+      comment.save({visible: checked}, {
+        url: comment.get('url') + '?include_invisible',
         patch: true,
         success: function() {
           $row.toggleClass('row-visible', checked);
@@ -149,10 +149,10 @@ var Planbox = Planbox || {};
 
     fixTableHeader: function() {
       if (window.matchMedia(Foundation.media_queries.large).matches) {
-        var tbodyHeight = $(window).height() - $('#places-datatable table').offset().top - 45;
-        this.$('#places-datatable tbody').css({ maxHeight: tbodyHeight });
+        var tbodyHeight = $(window).height() - $('#comments-datatable table').offset().top - 45;
+        this.$('#comments-datatable tbody').css({ maxHeight: tbodyHeight });
       } else {
-        this.$('#places-datatable tbody').css({ maxHeight: 'none' });
+        this.$('#comments-datatable tbody').css({ maxHeight: 'none' });
       }
     },
 
@@ -164,7 +164,7 @@ var Planbox = Planbox || {};
       }
 
       var tableContainerWidth = this.ui.scrolltable.width();
-      var tableWidth = this.$('#places-datatable table').width();
+      var tableWidth = this.$('#comments-datatable table').width();
       if ( this.ui.scrolltable.scrollLeft() <= tableWidth - tableContainerWidth - 15 ) {
         this.$('.scroll-button.right').removeClass('hide');
       } else {
@@ -179,7 +179,7 @@ var Planbox = Planbox || {};
 
     handleScrollRight: function(evt) {
       evt.preventDefault();
-      var tableWidth = this.$('#places-datatable table').width();
+      var tableWidth = this.$('#comments-datatable table').width();
       this.ui.scrolltable.animate({ scrollLeft: tableWidth });
     },
 
@@ -189,7 +189,7 @@ var Planbox = Planbox || {};
         page: 50,
         plugins: [ ListPagination({outerWindow: 2}) ]
       };
-      this.table = new List('places-datatable', options);
+      this.table = new List('comments-datatable', options);
       this.ui.scrolltable.scroll(_.bind(this.toggleScrollNavButtons, this));
       this.toggleScrollNavButtons();
     },

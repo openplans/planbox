@@ -70,10 +70,7 @@ var Planbox = Planbox || {};
       },
       onRender: function() {
         this.initValidityMessages();
-      },
-      onShow: function() {
-        $('#teamWelomeModal').foundation('reveal', 'open');
-      }      
+      }
     })
   );
 
@@ -102,6 +99,10 @@ var Planbox = Planbox || {};
 
     handleModelSync: function() {
       this.render();
+    },
+
+    onShow: function() {
+      $('#teamWelomeModal').foundation('reveal', 'open');
     }
   });
 

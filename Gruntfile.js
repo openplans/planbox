@@ -417,6 +417,7 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-dataset-support-count-widget-view.js',
             '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-dataset-unique-contrib-count-widget-view.js',
             '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-manage-places-view.js',
+            '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-manage-comments-view.js',
             '<%= yeoman.app %>/scripts/project-dashboard/shareabouts-project-dashboard-plugin.js'
           ],
           '<%= yeoman.app %>/scripts/shareabouts-project-editor.min.js': [

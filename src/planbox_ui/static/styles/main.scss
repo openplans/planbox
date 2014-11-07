@@ -1,6 +1,15 @@
 @import "foundation";
 
 
+html {
+  // Always show scrollbars to not toggle page width on panel hover
+  @media #{$medium-up} {
+    overflow-y: scroll;
+    overflow-y: -moz-scrollbars-vertical;
+  }
+}
+
+
 /*--------------------------------------------------
   OpenPlans-Branded Top Bar
 --------------------------------------------------*/
@@ -1347,6 +1356,11 @@ body.shareabouts-panel-hovered {
   font-size: 0.75rem;
 }
 
+.row-invisible td {
+  text-decoration: line-through;
+  color: silver;
+}
+
 
 /*--------------------------------------------------
   The Admin
@@ -1756,6 +1770,62 @@ textarea.no-resize {
     }
   }
 }
+$loading-color: $body-font-color;
+$loading-shadow-color: rgba($primary-color,0.05);
+.stat-widget.loading {
+  position: relative;
+  -webkit-animation: loading-shadow 2s linear infinite;
+          animation: loading-shadow 2s linear infinite;
+  box-shadow: 0 0 2rem rgba($loading-color, 0.25);
+  border-color: rgba($loading-color, 0.25);
+  color: rgba($loading-color, 0.25);
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $loading-shadow-color;
+    -webkit-animation: loading-bg 3s linear infinite;
+    animation: loading-bg 3s linear infinite;
+  }
+  &:after {
+    content: "LOADING...";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    text-align: center;
+    line-height: 2;
+    margin-top: -1em;
+    font-size: 1.25rem;
+    color: $loading-color;
+    text-shadow: -2px -2px 0.5rem #fff, 2px -2px 0.5rem #fff, 2px 2px 0.5rem #fff, -2px 2px 0.5rem #fff;
+  }
+}
+@-webkit-keyframes loading-shadow {
+    0% { box-shadow: 0 0 2rem rgba($loading-color, 0.25); }
+   50% { box-shadow: 0 0 0.5rem rgba($loading-color, 0.5); }
+  100% { box-shadow: 0 0 2rem rgba($loading-color, 0.25); }
+}
+@keyframes loading-shadow {
+    0% { box-shadow: 0 0 2rem rgba($loading-color, 0.25); }
+   50% { box-shadow: 0 0 0.5rem rgba($loading-color, 0.5); }
+  100% { box-shadow: 0 0 2rem rgba($loading-color, 0.25); }
+}
+
+@-webkit-keyframes loading-bg {
+    0% { left:   0%; right: 100%; }
+   50% { left:   0%; right:   0%; }
+  100% { left: 100%; right:   0%; }
+}
+@keyframes loading-bg {
+    0% { left:   0%; right: 100%; }
+   50% { left:   0%; right:   0%; }
+  100% { left: 100%; right:   0%; }
+}
+
 .stat-widget-big-number {
   .count {
     display: block;
@@ -1808,7 +1878,7 @@ textarea.no-resize {
   }
 }
 
-// Scroll Navigation 
+// Scroll Navigation
 $scroll-nav-button-color: scale-color($button-bg-color, $lightness: $button-function-factor);
 .scroll-nav {
   position: relative;
@@ -1823,7 +1893,7 @@ $scroll-nav-button-color: scale-color($button-bg-color, $lightness: $button-func
     overflow: visible;
     color: #fff;
     background-color: $scroll-nav-button-color;
-    box-shadow: 
+    box-shadow:
     1px 0 0 rgba($primary-color, 1),
     -1px 0 0 rgba($primary-color, 1),
     2px 0 0 rgba($primary-color, 0.8),

@@ -218,6 +218,42 @@ var Planbox = Planbox || {};
       info: function(){},
       warn: function(){},
       error: function(){}
+    },
+
+    merge: function(sa1, sa2) {
+      // Merge two sorted lists, without duplication.
+      var i1 = 0, i2 = 0,
+          len1 = sa1.length,
+          len2 = sa2.length,
+          result = [],
+          val1, val2;
+
+      while (i1 < len1 && i2 < len2) {
+        val1 = sa1[i1];
+        val2 = sa2[i2];
+        if (val1 < val2) {
+          result.push(val1);
+          i1++;
+        }
+        else if (val1 > val2) {
+          result.push(val2);
+          i2++;
+        }
+        else {  // val1 == val2
+          result.push(val1);
+          i1++;
+          i2++;
+        }
+      }
+
+      if (i1 < len1) {
+        result.splice(result.length, 0, sa1.slice(i1));
+      }
+      if (i2 < len2) {
+        result.splice(result.length, 0, sa2.slice(i2));
+      }
+
+      return result;
     }
   };
 

@@ -51,6 +51,11 @@ var Planbox = Planbox || {};
     }
   });
 
+  Handlebars.registerHelper('buildContext', function(options) {
+    var context = options.hash;
+    return options.fn(context);
+  });
+
   Handlebars.registerHelper('isAny', function(value, /* test1, test2, test3, ..., */ options) {
     var tests = _.rest(_.initial(arguments)),
         isAny = false,

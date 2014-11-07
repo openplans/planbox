@@ -24,6 +24,9 @@ var Planbox = Planbox || {};
       this.places = new Shareabouts.PlaceCollection();
       this.places.url = this.config.details.dataset_url.replace(/^\/|\/$/g, '') + '/places';
 
+      this.comments = new Shareabouts.PaginatedCollection();
+      this.comments.url = this.config.details.dataset_url.replace(/^\/|\/$/g, '') + '/comments';
+
       this.submissions = new Shareabouts.PaginatedCollection();
       this.submissions.url = this.config.details.dataset_url.replace(/^\/|\/$/g, '') + '/submissions';
 
@@ -44,20 +47,22 @@ var Planbox = Planbox || {};
       var addAccessToken = function(xhr) {
         xhr.setRequestHeader('Authorization', 'Bearer ' + credentials.access_token);
       };
+      var syncWithAccessToken = function(method, model, options) {
+        _.defaults(options || (options = {}), {
+          beforeSend: addAccessToken
+        });
+        return Backbone.sync.call(this, method, model, options);
+      };
 
-      this.dataset.fetch({
-        beforeSend: addAccessToken
-      });
+      // Patch all the sync methods to use the access token.
+      this.dataset.sync = this.places.sync = this.comments.sync = this.submissions.sync = syncWithAccessToken;
+      this.places.model.prototype.sync = this.comments.model.prototype.sync = this.submissions.model.prototype.sync = syncWithAccessToken;
 
-      this.places.fetchAllPages({
-        data: {'include_private': true},
-        beforeSend: addAccessToken
-      });
-
-      this.submissions.fetchAllPages({
-        data: {'include_private': true},
-        beforeSend: addAccessToken
-      });
+      var includes = {'include_private': true, 'include_invisible': true};
+      this.dataset.fetch();
+      this.places.fetchAllPages({ data: includes });
+      this.comments.fetchAllPages({ data: includes });
+      this.submissions.fetchAllPages({ data: includes });
     },
 
     getShareaboutsConfig: function() {
@@ -66,20 +71,33 @@ var Planbox = Planbox || {};
       return shareaboutsSection;
     },
 
-    _addManagerTab: function(view) {
-      var tabTemplate = Handlebars.templates['shareabouts-manager-tab-tpl'],
-          sectionTemplate = Handlebars.templates['shareabouts-manager-content-tpl'];
+    _addPlacesListTab: function(view) {
+      var tabTemplate = Handlebars.templates['shareabouts-dashboard-places-tab-tpl'],
+          sectionTemplate = Handlebars.templates['shareabouts-dashboard-places-list-tpl'];
       view.$('.tabs').append(tabTemplate());
-      view.$('.tabs-content').append('<section role="tabpanel" aria-hidden="true" class="content" id="panel-manage"></section>');
+      view.$('.tabs-content').append('<section role="tabpanel" aria-hidden="true" class="content" id="panel-places-list"></section>');
 
-      view.addRegion('shareaboutsManagerRegion', '#panel-manage');
-      view.shareaboutsManagerRegion.show(new NS.ManagePlacesView({
+      view.addRegion('placesListRegion', '#panel-places-list');
+      view.placesListRegion.show(new NS.ShareaboutsDashboardPlacesListView({
+        plugin: this
+      }));
+    },
+
+    _addCommentsListTab: function(view) {
+      var tabTemplate = Handlebars.templates['shareabouts-dashboard-comments-tab-tpl'],
+          sectionTemplate = Handlebars.templates['shareabouts-dashboard-comments-list-tpl'];
+      view.$('.tabs').append(tabTemplate());
+      view.$('.tabs-content').append('<section role="tabpanel" aria-hidden="true" class="content" id="panel-comments-list"></section>');
+
+      view.addRegion('commentsListRegion', '#panel-comments-list');
+      view.commentsListRegion.show(new NS.ShareaboutsDashboardCommentsListView({
         plugin: this
       }));
     },
 
     onShowProjectDashboard: function(view) {
-      this._addManagerTab(view);
+      this._addPlacesListTab(view);
+      this._addCommentsListTab(view);
     },
 
     onShowActivityPanel: function() {
