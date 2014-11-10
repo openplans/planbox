@@ -183,6 +183,10 @@ var Planbox = Planbox || {};
       this.ui.scrolltable.animate({ scrollLeft: tableWidth });
     },
 
+    handleTableUpdated: function(table) {
+      this.updateMap();
+    },
+
     initSortableTable: function() {
       var options = {
         valueNames: this.columnHeaders,
@@ -190,27 +194,45 @@ var Planbox = Planbox || {};
         plugins: [ ListPagination({outerWindow: 2}) ]
       };
       this.table = new List('places-datatable', options);
+      this.table.on('updated', _.bind(this.handleTableUpdated, this));
       this.ui.scrolltable.scroll(_.bind(this.toggleScrollNavButtons, this));
       this.toggleScrollNavButtons();
+    },
+
+    initMap: function() {
+      var $map = this.$('.places-map');
+      this.map = L.map($map[0]).setView([0, 0], 1);
+      L.tileLayer('https://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png', {
+          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+          maxZoom: 18
+        }).addTo(this.map);
+    },
+
+    redrawMap: function() {
+      this.map.invalidateSize();
     },
 
     render: function() {
       Backbone.Marionette.ItemView.prototype.render.apply(this, arguments);
       this.initSortableTable();
+      this.initMap();
       return this;
     },
 
     onShow: function() {
       this.fixTableHeader();
+      this.redrawMap();
     },
 
     onWindowResize: function() {
       this.fixTableHeader();
       this.toggleScrollNavButtons();
+      this.redrawMap();
     },
 
     onToggleTabs: function() {
       this.fixTableHeader();
+      this.redrawMap();
     }
   });
 
