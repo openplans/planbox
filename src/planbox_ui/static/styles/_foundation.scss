@@ -144,6 +144,12 @@ p {
   }
 }
 
+.button.tertiary {
+  @include button-style(#eee);
+  color: $body-font-color;
+}
+
+
 // Extend link styles
 a.alert {
   color: $alert-color;
