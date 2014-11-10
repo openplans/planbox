@@ -48,7 +48,7 @@
           </thead>
           <tbody class="list">
             {{#each places}}
-            <tr class="{{#if visible}}row-visible{{^}}row-invisible{{/if}}">
+            <tr class="{{#if visible}}row-visible{{^}}row-invisible{{/if}}" data-shareabouts-id="{{id}}">
               <td class="visible-cell">
                 <div class="table-column">
                   <div class="visible-value hide">{{#if visible}}true{{^}}false{{/if}}</div>

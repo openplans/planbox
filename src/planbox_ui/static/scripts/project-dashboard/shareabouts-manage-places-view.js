@@ -187,7 +187,7 @@ var Planbox = Planbox || {};
     },
 
     handleTableUpdated: function(table) {
-      this.updateMap();
+      this.updateMapMarkers();
     },
 
     initSortableTable: function() {
@@ -206,36 +206,71 @@ var Planbox = Planbox || {};
       var $map = this.$('.places-map');
       this.map = L.map($map[0]).setView([0, 0], 1);
       L.tileLayer('https://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png', {
-          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-          maxZoom: 18
-        }).addTo(this.map);
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18
+      }).addTo(this.map);
+
+      this.markerLayer = L.featureGroup([])
+        .addTo(this.map);
     },
 
     redrawMap: function() {
       this.map.invalidateSize();
     },
 
+    updateMapMarkers: function() {
+      if (this.markerLayer) {
+        var self = this;
+        this.$('.table-container tbody tr').off('hover');
+        this.markerLayer.clearLayers();
+
+        this.rowToLayerMap = {};
+        self.$('.table-container tbody tr').each(function(i, row) {
+          var id = $(row).attr('data-shareabouts-id'),
+              place = self.plugin.places.get(id);
+          self.rowToLayerMap[id] = L.circleMarker([place.get('geometry').coordinates[1], place.get('geometry').coordinates[0]])
+            .addTo(self.markerLayer);
+        });
+
+        // $('.table-container tbody tr').on('hover', function(evt) {
+        //   var id = $(this).attr('data-shareabouts-id'),
+        //       place = this.plugin.places.get(id);
+        // });
+      }
+    },
+
+    fitToMapMarkers: function() {
+      if (this.markerLayer.getLayers().length) {
+        this.map.fitBounds(this.markerLayer);
+      }
+    },
+
     render: function() {
       Backbone.Marionette.ItemView.prototype.render.apply(this, arguments);
       this.initSortableTable();
       this.initMap();
+      this.updateMapMarkers();
+      this.fitToMapMarkers();
       return this;
     },
 
     onShow: function() {
       this.fixTableHeader();
       this.redrawMap();
+      this.fitToMapMarkers();
     },
 
     onWindowResize: function() {
       this.fixTableHeader();
       this.toggleScrollNavButtons();
       this.redrawMap();
+      this.fitToMapMarkers();
     },
 
     onToggleTabs: function() {
       this.fixTableHeader();
       this.redrawMap();
+      this.fitToMapMarkers();
     }
   });
 
