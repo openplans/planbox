@@ -12577,12 +12577,17 @@ textarea.no-resize {
   }
 }
 
-/* line 1883, main.scss */
+/* line 1881, main.scss */
+.table-map {
+  height: 200px;
+}
+
+/* line 1887, main.scss */
 .scroll-nav {
   position: relative;
   z-index: 2;
 }
-/* line 1886, main.scss */
+/* line 1890, main.scss */
 .scroll-nav .scroll-button {
   position: absolute;
   top: 0;
@@ -12593,30 +12598,31 @@ textarea.no-resize {
   overflow: visible;
   color: #fff;
   background-color: #267299;
-  box-shadow: 1px 0 0 #308fbf, -1px 0 0 #308fbf, 2px 0 0 rgba(48, 143, 191, 0.8), -2px 0 0 rgba(48, 143, 191, 0.8), 3px 0 0 rgba(48, 143, 191, 0.5), -3px 0 0 rgba(48, 143, 191, 0.5), 4px 0 0 rgba(48, 143, 191, 0.2), -4px 0 0 rgba(48, 143, 191, 0.2), 5px 0 0 rgba(48, 143, 191, 0.1), -5px 0 0 rgba(48, 143, 191, 0.1);
 }
-/* line 1908, main.scss */
+/* line 1900, main.scss */
 .scroll-nav .scroll-button.right {
   right: 0;
-  margin-right: -0.9375rem;
+  margin-right: -0.75rem;
+  border-radius: 0 1rem 1rem 0;
 }
-/* line 1909, main.scss */
+/* line 1901, main.scss */
 .scroll-nav .scroll-button.left {
   left: 0;
-  margin-left: -0.9375rem;
+  margin-left: -0.75rem;
+  border-radius: 1rem 0 0 1rem;
 }
-/* line 1910, main.scss */
+/* line 1902, main.scss */
 .scroll-nav .scroll-button:hover {
   background-color: #1f5c7a;
 }
 
-/* line 1919, main.scss */
+/* line 1911, main.scss */
 .tab-title > a:focus,
 .tabs-content [tabindex]:focus {
   outline: 0;
 }
 
-/* line 1926, main.scss */
+/* line 1918, main.scss */
 .shareabouts-auth-container,
 .or-sign-in {
   display: none !important;

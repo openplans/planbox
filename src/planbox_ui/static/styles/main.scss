@@ -1878,6 +1878,10 @@ $loading-shadow-color: rgba($primary-color,0.05);
   }
 }
 
+.table-map {
+  height: 200px;
+}
+
 // Scroll Navigation
 $scroll-nav-button-color: scale-color($button-bg-color, $lightness: $button-function-factor);
 .scroll-nav {
@@ -1893,20 +1897,8 @@ $scroll-nav-button-color: scale-color($button-bg-color, $lightness: $button-func
     overflow: visible;
     color: #fff;
     background-color: $scroll-nav-button-color;
-    box-shadow:
-    1px 0 0 rgba($primary-color, 1),
-    -1px 0 0 rgba($primary-color, 1),
-    2px 0 0 rgba($primary-color, 0.8),
-    -2px 0 0 rgba($primary-color, 0.8),
-    3px 0 0 rgba($primary-color, 0.5),
-    -3px 0 0 rgba($primary-color, 0.5),
-    4px 0 0 rgba($primary-color, 0.2),
-    -4px 0 0 rgba($primary-color, 0.2),
-    5px 0 0 rgba($primary-color, 0.1),
-    -5px 0 0 rgba($primary-color, 0.1)
-    ;
-    &.right { right: 0; margin-right: -0.9375rem; }
-    &.left { left: 0; margin-left: -0.9375rem; }
+    &.right { right: 0; margin-right: -0.75rem; border-radius: 0 1rem 1rem 0; }
+    &.left { left: 0; margin-left: -0.75rem; border-radius: 1rem 0 0 1rem; }
     &:hover {
       background-color: scale-color($scroll-nav-button-color, $lightness: $button-function-factor);
     }

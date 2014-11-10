@@ -149,10 +149,13 @@ var Planbox = Planbox || {};
 
     fixTableHeader: function() {
       if (window.matchMedia(Foundation.media_queries.large).matches) {
-        var tbodyHeight = $(window).height() - $('#places-datatable table').offset().top - 45;
+        var tbodyHeight = $(window).height() - $('#places-datatable table').offset().top - 60;
+        var tHeadHeight = this.$('#places-datatable thead').height();
         this.$('#places-datatable tbody').css({ maxHeight: tbodyHeight });
+        this.$('#places-datatable .table-map').css({ height: tbodyHeight + tHeadHeight });
       } else {
         this.$('#places-datatable tbody').css({ maxHeight: 'none' });
+        this.$('#places-datatable .table-map').css({ height: 200 });
       }
     },
 
