@@ -149,7 +149,7 @@ var Planbox = Planbox || {};
 
     fixTableHeader: function() {
       if (window.matchMedia(Foundation.media_queries.large).matches) {
-        var tbodyHeight = $(window).height() - $('#places-datatable table').offset().top - 60;
+        var tbodyHeight = $(window).height() - this.$('#places-datatable table').offset().top - 60;
         var tHeadHeight = this.$('#places-datatable thead').height();
         this.$('#places-datatable tbody').css({ maxHeight: tbodyHeight });
         this.$('#places-datatable .table-map').css({ height: tbodyHeight + tHeadHeight });
@@ -218,25 +218,80 @@ var Planbox = Planbox || {};
       this.map.invalidateSize();
     },
 
+    getLayerForRow: function(row) {
+      var id = $(row).attr('data-shareabouts-id'),
+          layer = this.rowToLayerMap[id];
+      return layer;
+    },
+
     updateMapMarkers: function() {
       if (this.markerLayer) {
         var self = this;
-        this.$('.table-container tbody tr').off('hover');
+
+        var normalStyle = {
+          fillColor: 'blue',
+          color: 'blue',
+          fillOpacity: 0.2,
+          opacity: 0.5,
+          radius: 5
+        };
+
+        var highlightStyle = {
+          fillColor: 'black',
+          color: 'blue',
+          fillOpacity: 1,
+          opacity: 1
+        };
+
+        // Clear any existing events and markers
+        this.$('.table-container tbody tr').off('onmouseenter').off('onmouseleave').off('click');
         this.markerLayer.clearLayers();
 
+        // Add the markers to the map for each visible row
         this.rowToLayerMap = {};
         self.$('.table-container tbody tr').each(function(i, row) {
           var id = $(row).attr('data-shareabouts-id'),
-              place = self.plugin.places.get(id);
-          self.rowToLayerMap[id] = L.circleMarker([place.get('geometry').coordinates[1], place.get('geometry').coordinates[0]])
+              place = self.plugin.places.get(id),
+              lat = place.get('geometry').coordinates[1],
+              lng = place.get('geometry').coordinates[0],
+              marker;
+
+          marker = L.circleMarker([lat, lng], normalStyle)
             .addTo(self.markerLayer);
+
+          self.rowToLayerMap[id] = marker;
+          self.bindRowEvents(row, marker, normalStyle, highlightStyle);
+        });
+      }
+    },
+
+    bindRowEvents: function(row, marker, normalStyle, highlightStyle) {
+      var self = this;
+
+      $(row)
+        .on('mouseenter', function(evt) {
+          marker.setStyle(highlightStyle);
+        })
+        .on('mouseleave', function(evt) {
+          marker.setStyle(normalStyle);
+        })
+        .on('click', function(evt) {
+          self.map.panTo(marker.getLatLng(), {animate: false});
+          self.map.setZoom(15, {animate: false});
         });
 
-        // $('.table-container tbody tr').on('hover', function(evt) {
-        //   var id = $(this).attr('data-shareabouts-id'),
-        //       place = this.plugin.places.get(id);
-        // });
-      }
+      marker
+        .on('mouseover', function() {
+          $(row).addClass('is-hovering');
+          marker.setStyle(highlightStyle);
+        })
+        .on('mouseout', function() {
+          $(row).removeClass('is-hovering');
+          marker.setStyle(normalStyle);
+        })
+        .on('click', function() {
+          row.scrollIntoView();
+        });
     },
 
     fitToMapMarkers: function() {
@@ -249,6 +304,8 @@ var Planbox = Planbox || {};
       Backbone.Marionette.ItemView.prototype.render.apply(this, arguments);
       this.initSortableTable();
       this.initMap();
+      this.fixTableHeader();
+      this.redrawMap();
       this.updateMapMarkers();
       this.fitToMapMarkers();
       return this;
@@ -264,7 +321,6 @@ var Planbox = Planbox || {};
       this.fixTableHeader();
       this.toggleScrollNavButtons();
       this.redrawMap();
-      this.fitToMapMarkers();
     },
 
     onToggleTabs: function() {
