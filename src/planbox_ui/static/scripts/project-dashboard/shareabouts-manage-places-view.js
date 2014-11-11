@@ -305,9 +305,10 @@ var Planbox = Planbox || {};
       Backbone.Marionette.ItemView.prototype.render.apply(this, arguments);
       this.initSortableTable();
       this.initMap();
+      this.updateMapMarkers();
+
       this.fixTableHeader();
       this.redrawMap();
-      this.updateMapMarkers();
       this.fitToMapMarkers();
       return this;
     },
