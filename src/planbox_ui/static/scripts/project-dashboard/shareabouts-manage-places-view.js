@@ -271,7 +271,7 @@ var Planbox = Planbox || {};
 
       $(row)
         .on('mouseenter', function(evt) {
-          marker.setStyle(highlightStyle);
+          marker.setStyle(highlightStyle).bringToFront();
         })
         .on('mouseleave', function(evt) {
           marker.setStyle(normalStyle);
@@ -284,7 +284,7 @@ var Planbox = Planbox || {};
       marker
         .on('mouseover', function() {
           $(row).addClass('is-hovering');
-          marker.setStyle(highlightStyle);
+          marker.setStyle(highlightStyle).bringToFront();
         })
         .on('mouseout', function() {
           $(row).removeClass('is-hovering');
