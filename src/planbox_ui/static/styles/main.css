@@ -11917,52 +11917,57 @@ img.attachment-icon {
 }
 
 /* line 1364, main.scss */
-tbody tr:hover,
-tr.is-hovering {
-  background-color: black;
+.table-container tbody tr:hover,
+.table-container tr.is-hovering {
+  background-color: #1f5c7a;
+}
+
+/* line 1369, main.scss */
+.table-container tbody tr:hover td,
+.table-container tr.is-hovering td {
   color: white;
 }
 
 /*--------------------------------------------------
   The Admin
 --------------------------------------------------*/
-/* line 1375, main.scss */
+/* line 1379, main.scss */
 .project-edit-form {
   background-color: #fff;
   box-shadow: 0 -65px 0 #fff;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1375, main.scss */
+  /* line 1379, main.scss */
   .project-edit-form {
     padding-bottom: 4rem;
   }
 }
 
-/* line 1383, main.scss */
+/* line 1387, main.scss */
 .project-section {
   z-index: auto;
 }
 
-/* line 1387, main.scss */
+/* line 1391, main.scss */
 .project-section-fieldset {
   padding: 0;
   border: 0;
 }
 
 @-moz-document url-prefix() {
-  /* line 1394, main.scss */
+  /* line 1398, main.scss */
   .project-section-fieldset {
     display: table-cell;
   }
 }
-/* line 1399, main.scss */
+/* line 1403, main.scss */
 .location-map-region .map {
   height: 200px;
   border: 1px solid #c9c9c9;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1404, main.scss */
+  /* line 1408, main.scss */
   input[type=text].heading-input, .logo-image-container.hide + .project-title-container input[type=text].project-title-input {
     font-size: 2.25rem;
     margin: 0 0 1rem 0;
@@ -11973,7 +11978,7 @@ tr.is-hovering {
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1413, main.scss */
+  /* line 1417, main.scss */
   input[type=text].sub-heading-input {
     font-size: 1.75rem;
     margin: 0 0 1rem 0;
@@ -11984,7 +11989,7 @@ tr.is-hovering {
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1422, main.scss */
+  /* line 1426, main.scss */
   input[type=text].small-input {
     font-size: 1rem;
     padding: 0.375rem;
@@ -11992,12 +11997,12 @@ tr.is-hovering {
   }
 }
 
-/* line 1429, main.scss */
+/* line 1433, main.scss */
 span.sub-heading-postfix {
   color: #999;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1429, main.scss */
+  /* line 1433, main.scss */
   span.sub-heading-postfix {
     margin: 0 0 1rem 0;
     padding: 0.5rem 0.75rem;
@@ -12005,7 +12010,7 @@ span.sub-heading-postfix {
   }
 }
 
-/* line 1438, main.scss */
+/* line 1442, main.scss */
 .content-editable {
   line-height: 1.6;
   background-color: #FFFFFF;
@@ -12025,7 +12030,7 @@ span.sub-heading-postfix {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
   height: auto;
 }
-/* line 1440, main.scss */
+/* line 1444, main.scss */
 .content-editable.rich-editable {
   min-height: 8rem;
 }
@@ -12050,77 +12055,77 @@ span.sub-heading-postfix {
   background-color: #DDDDDD;
   cursor: default;
 }
-/* line 1448, main.scss */
+/* line 1452, main.scss */
 .content-editable.radius {
   border-radius: 3px;
 }
-/* line 1452, main.scss */
+/* line 1456, main.scss */
 .error .content-editable, .content-editable.error {
   margin-bottom: 0;
 }
-/* line 1455, main.scss */
+/* line 1459, main.scss */
 .content-editable a {
   color: #308fbf;
   text-decoration: none;
   line-height: inherit;
 }
-/* line 1460, main.scss */
+/* line 1464, main.scss */
 .content-editable a:hover, .content-editable a:focus {
   color: #267299;
 }
 
-/* line 1469, main.scss */
+/* line 1473, main.scss */
 .pen-menu,
 .pen-menu * {
   box-sizing: content-box !important;
 }
 
-/* line 1474, main.scss */
+/* line 1478, main.scss */
 .section-settings-toggle-container {
   margin-bottom: 0.75rem;
   padding-top: 0.5rem;
   padding-right: 0.25rem;
 }
 
-/* line 1480, main.scss */
+/* line 1484, main.scss */
 .section-settings {
   background-color: #f7f7f7;
   padding-top: 1.75rem;
 }
-/* line 1483, main.scss */
+/* line 1487, main.scss */
 .section-settings-toggle-container + .section-settings {
   margin-top: -2.5rem;
 }
 
-/* line 1488, main.scss */
+/* line 1492, main.scss */
 .section-insert {
   margin-bottom: -1rem;
   margin-right: -0.9375rem;
   margin-left: -0.9375rem;
 }
-/* line 1492, main.scss */
+/* line 1496, main.scss */
 .section-insert hr {
   margin-top: 1rem;
   border-color: #ff8b38;
 }
 
-/* line 1498, main.scss */
+/* line 1502, main.scss */
 .unassigned {
   cursor: default;
 }
 
-/* line 1502, main.scss */
+/* line 1506, main.scss */
 .project-settings-container {
   padding-top: 1.25rem;
   padding-bottom: 0.9375rem;
   background-color: #d9d9d9;
 }
-/* line 1503, main.scss */
+/* line 1507, main.scss */
 .project-settings-container .save-btn {
   outline: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1502, main.scss */
+  /* line 1506, main.scss */
   .project-settings-container {
     position: fixed;
     top: 65px;
@@ -12132,25 +12137,25 @@ span.sub-heading-postfix {
     overflow: hidden;
     box-shadow: inset 3px 0 0 rgba(51, 51, 51, 0.1);
   }
-  /* line 1519, main.scss */
+  /* line 1523, main.scss */
   .project-settings-container .project-settings {
     max-height: 60%;
     overflow: auto;
   }
 }
 
-/* line 1526, main.scss */
+/* line 1530, main.scss */
 textarea.no-resize {
   resize: none;
 }
 
-/* line 1531, main.scss */
+/* line 1535, main.scss */
 .drag-area-container {
   position: relative;
   text-align: center;
 }
 
-/* line 1535, main.scss */
+/* line 1539, main.scss */
 .drag-area {
   position: absolute;
   top: 1rem;
@@ -12161,17 +12166,17 @@ textarea.no-resize {
   border-radius: 0.375rem;
   background-color: rgba(242, 242, 242, 0.4);
 }
-/* line 1544, main.scss */
+/* line 1548, main.scss */
 .drag-area:hover {
   border-color: rgba(133, 133, 133, 0.9);
   background-color: rgba(242, 242, 242, 0.9);
 }
-/* line 1548, main.scss */
+/* line 1552, main.scss */
 .drag-area p {
   margin-bottom: 0.5rem;
 }
 
-/* line 1552, main.scss */
+/* line 1556, main.scss */
 .no-file-upload-message {
   clear: both;
   font-size: 0.75em;
@@ -12184,18 +12189,18 @@ textarea.no-resize {
   border-radius: 0.25em;
 }
 
-/* line 1563, main.scss */
+/* line 1567, main.scss */
 .no-file-upload-message a {
   color: #fff;
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 1567, main.scss */
+/* line 1571, main.scss */
 .no-file-upload-message a:hover {
   color: #fff;
 }
 
-/* line 1570, main.scss */
+/* line 1574, main.scss */
 .file-upload {
   margin: 2em 1em 1em;
   text-align: center;
@@ -12206,7 +12211,7 @@ textarea.no-resize {
   position: relative;
 }
 
-/* line 1579, main.scss */
+/* line 1583, main.scss */
 .file-upload:hover,
 .file-dragging,
 .file-uploading {
@@ -12215,12 +12220,12 @@ textarea.no-resize {
   background-color: rgba(90, 90, 90, 0.5);
 }
 
-/* line 1586, main.scss */
+/* line 1590, main.scss */
 .file-upload p {
   margin-bottom: 0.5em;
 }
 
-/* line 1589, main.scss */
+/* line 1593, main.scss */
 .file-upload-input-container {
   position: relative;
   overflow: hidden;
@@ -12228,12 +12233,12 @@ textarea.no-resize {
   margin-bottom: 0;
 }
 
-/* line 1595, main.scss */
+/* line 1599, main.scss */
 .file-upload-input {
   display: none;
 }
 
-/* line 1598, main.scss */
+/* line 1602, main.scss */
 .uploading-message,
 .file-uploading > .drop-instructions {
   display: none;
@@ -12261,7 +12266,7 @@ textarea.no-resize {
     color: #888;
   }
 }
-/* line 1612, main.scss */
+/* line 1616, main.scss */
 .file-uploading > .uploading-message {
   display: block;
   position: relative;
@@ -12272,44 +12277,44 @@ textarea.no-resize {
   animation: uploading 1.5s infinite ease-in-out;
 }
 
-/* line 1621, main.scss */
+/* line 1625, main.scss */
 .file-uploading > .file-upload-input-container {
   visibility: hidden;
 }
 
-/* line 1626, main.scss */
+/* line 1630, main.scss */
 .full-width-image-container {
   margin: 0 -0.9375rem 0.5rem -0.9375rem;
 }
-/* line 1628, main.scss */
+/* line 1632, main.scss */
 .full-width-image-container.drag-area-container {
   min-height: 9rem;
 }
 
-/* line 1632, main.scss */
+/* line 1636, main.scss */
 .cover-image-container {
   margin-top: -1.125rem;
 }
 
-/* line 1637, main.scss */
+/* line 1641, main.scss */
 .logo-image-container {
   min-height: 9rem;
   margin-bottom: 1rem;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 1637, main.scss */
+  /* line 1641, main.scss */
   .logo-image-container {
     float: left;
     width: 50%;
   }
 }
-/* line 1644, main.scss */
+/* line 1648, main.scss */
 .logo-image-container img {
   max-height: 20rem;
 }
 
 @media only screen and (min-width: 40.063em) {
-  /* line 1648, main.scss */
+  /* line 1652, main.scss */
   .project-title-container {
     float: right;
     width: 50%;
@@ -12318,7 +12323,7 @@ textarea.no-resize {
     padding-right: 1rem;
     padding-bottom: 1rem;
   }
-  /* line 1656, main.scss */
+  /* line 1660, main.scss */
   .logo-image-container.hide + .project-title-container {
     float: none;
     width: auto;
@@ -12328,78 +12333,78 @@ textarea.no-resize {
     padding-bottom: 0;
   }
 }
-/* line 1665, main.scss */
+/* line 1669, main.scss */
 .project-title-container .project-title-help-text {
   margin-top: -0.75rem;
 }
 
-/* line 1672, main.scss */
+/* line 1676, main.scss */
 .logo-image-container.hide + .project-title-container .project-title-help-text {
   display: none;
 }
 
-/* line 1684, main.scss */
+/* line 1688, main.scss */
 .existing-snapshot-wrapper .button {
   margin-bottom: 0;
 }
 
-/* line 1690, main.scss */
+/* line 1694, main.scss */
 .avatar-container {
   padding: 0.3rem;
 }
-/* line 1692, main.scss */
+/* line 1696, main.scss */
 .avatar-container .avatar {
   display: inline-block;
 }
-/* line 1695, main.scss */
+/* line 1699, main.scss */
 .avatar-container .drag-area-container {
   min-height: 10.125rem;
 }
 
-/* line 1703, main.scss */
+/* line 1707, main.scss */
 .project-list > li + li, .member-list > li + li, .team-list > li + li {
   margin-top: 0.625rem;
   padding-top: 0.625rem;
   border-top: 1px solid #e3e3e3;
 }
 
-/* line 1710, main.scss */
+/* line 1714, main.scss */
 .member-list li, .team-list li {
   padding-left: 4.375rem;
 }
-/* line 1713, main.scss */
+/* line 1717, main.scss */
 .member-list .avatar, .team-list .avatar {
   width: 3.75rem;
   margin-left: -4.375rem;
 }
 
-/* line 1718, main.scss */
+/* line 1722, main.scss */
 .user-profile .member-list {
   display: none;
 }
 
-/* line 1721, main.scss */
+/* line 1725, main.scss */
 .user-profile .project-list {
   display: none;
 }
 
-/* line 1724, main.scss */
+/* line 1728, main.scss */
 .team-profile .team-list {
   display: none;
 }
 
-/* line 1729, main.scss */
+/* line 1733, main.scss */
 .project-template-gallery {
   background-color: white;
   border-bottom: 1px solid rgba(51, 51, 51, 0.2);
   padding: 0.5rem;
 }
-/* line 1734, main.scss */
+/* line 1738, main.scss */
 .project-template-gallery h5:first-child {
   margin-bottom: 1rem;
 }
 
-/* line 1739, main.scss */
+/* line 1743, main.scss */
 .panel .template-templates-default {
   display: none;
 }
@@ -12407,19 +12412,19 @@ textarea.no-resize {
 /*--------------------------------------------------
   Leaflet Overrides
 --------------------------------------------------*/
-/* line 1748, main.scss */
+/* line 1752, main.scss */
 .leaflet-bar {
   box-shadow: -3px 3px 0 rgba(51, 51, 51, 0.1);
   border-radius: 0;
 }
 
-/* line 1752, main.scss */
+/* line 1756, main.scss */
 .leaflet-bar a:first-child {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-/* line 1756, main.scss */
+/* line 1760, main.scss */
 .leaflet-bar a:last-child {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -12428,13 +12433,13 @@ textarea.no-resize {
 /*--------------------------------------------------
   Project Dashboard / Widgets
 --------------------------------------------------*/
-/* line 1768, main.scss */
+/* line 1772, main.scss */
 .stat-widget.coming-soon {
   background-color: #f6f6f6;
   color: #ddd;
   position: relative;
 }
-/* line 1772, main.scss */
+/* line 1776, main.scss */
 .stat-widget.coming-soon:before {
   content: "Coming Soon...";
   position: absolute;
@@ -12448,7 +12453,7 @@ textarea.no-resize {
   font-style: italic;
 }
 
-/* line 1788, main.scss */
+/* line 1792, main.scss */
 .stat-widget.loading {
   position: relative;
   -webkit-animation: loading-shadow 2s linear infinite;
@@ -12457,7 +12462,7 @@ textarea.no-resize {
   border-color: rgba(108, 113, 128, 0.25);
   color: rgba(108, 113, 128, 0.25);
 }
-/* line 1795, main.scss */
+/* line 1799, main.scss */
 .stat-widget.loading:before {
   content: "";
   position: absolute;
@@ -12469,7 +12474,7 @@ textarea.no-resize {
   -webkit-animation: loading-bg 3s linear infinite;
   animation: loading-bg 3s linear infinite;
 }
-/* line 1806, main.scss */
+/* line 1810, main.scss */
 .stat-widget.loading:after {
   content: "LOADING...";
   position: absolute;
@@ -12534,74 +12539,74 @@ textarea.no-resize {
     right: 0%;
   }
 }
-/* line 1843, main.scss */
+/* line 1847, main.scss */
 .stat-widget-big-number .count {
   display: block;
   font-size: 2.5rem;
   line-height: 1.2;
 }
-/* line 1848, main.scss */
+/* line 1852, main.scss */
 .stat-widget-big-number .unit {
   text-transform: uppercase;
 }
 
-/* line 1854, main.scss */
+/* line 1858, main.scss */
 .table-container {
   max-width: 100%;
   overflow: auto;
 }
 
-/* line 1859, main.scss */
+/* line 1863, main.scss */
 .datatable table {
   margin-bottom: 0;
   border: 0;
 }
-/* line 1863, main.scss */
+/* line 1867, main.scss */
 .datatable table tr th, .datatable table tr td {
   font-size: 0.6875rem;
 }
-/* line 1868, main.scss */
+/* line 1872, main.scss */
 .datatable .table-column {
   max-height: 6.5em;
   width: 8rem;
   overflow: auto;
   text-align: center;
 }
-/* line 1874, main.scss */
+/* line 1878, main.scss */
 .datatable .table-column-20rem {
   width: 10rem;
 }
-/* line 1875, main.scss */
+/* line 1879, main.scss */
 .datatable .table-column-20rem {
   width: 20rem;
 }
-/* line 1876, main.scss */
+/* line 1880, main.scss */
 .datatable .table-column-30rem {
   width: 30rem;
 }
-/* line 1877, main.scss */
+/* line 1881, main.scss */
 .datatable .table-column-40rem {
   width: 40rem;
 }
-/* line 1878, main.scss */
+/* line 1882, main.scss */
 .datatable .table-column-50rem {
   width: 50rem;
 }
-/* line 1879, main.scss */
+/* line 1883, main.scss */
 .datatable .table-column-75rem {
   width: 75rem;
 }
-/* line 1880, main.scss */
+/* line 1884, main.scss */
 .datatable .table-column-75rem {
   width: 100rem;
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 1882, main.scss */
+  /* line 1886, main.scss */
   .datatable thead tr,
   .datatable tbody tr {
     display: block;
   }
-  /* line 1886, main.scss */
+  /* line 1890, main.scss */
   .datatable tbody {
     display: block;
     overflow-x: hidden;
@@ -12609,17 +12614,17 @@ textarea.no-resize {
   }
 }
 
-/* line 1894, main.scss */
+/* line 1898, main.scss */
 .table-map {
   height: 200px;
 }
 
-/* line 1900, main.scss */
+/* line 1904, main.scss */
 .scroll-nav {
   position: relative;
   z-index: 2;
 }
-/* line 1903, main.scss */
+/* line 1907, main.scss */
 .scroll-nav .scroll-button {
   position: absolute;
   top: 0;
@@ -12631,30 +12636,30 @@ textarea.no-resize {
   color: #fff;
   background-color: #267299;
 }
-/* line 1913, main.scss */
+/* line 1917, main.scss */
 .scroll-nav .scroll-button.right {
   right: 0;
   margin-right: -0.75rem;
   border-radius: 0 1rem 1rem 0;
 }
-/* line 1914, main.scss */
+/* line 1918, main.scss */
 .scroll-nav .scroll-button.left {
   left: 0;
   margin-left: -0.75rem;
   border-radius: 1rem 0 0 1rem;
 }
-/* line 1915, main.scss */
+/* line 1919, main.scss */
 .scroll-nav .scroll-button:hover {
   background-color: #1f5c7a;
 }
 
-/* line 1924, main.scss */
+/* line 1928, main.scss */
 .tab-title > a:focus,
 .tabs-content [tabindex]:focus {
   outline: 0;
 }
 
-/* line 1931, main.scss */
+/* line 1935, main.scss */
 .shareabouts-auth-container,
 .or-sign-in {
   display: none !important;

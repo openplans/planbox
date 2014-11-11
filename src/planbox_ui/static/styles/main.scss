@@ -1361,9 +1361,13 @@ body.shareabouts-panel-hovered {
   color: silver;
 }
 
-tbody tr:hover,
-tr.is-hovering {
-  background-color: black;
+.table-container tbody tr:hover,
+.table-container tr.is-hovering {
+  background-color: #1f5c7a;
+}
+
+.table-container tbody tr:hover td,
+.table-container tr.is-hovering td {
   color: white;
 }
 
