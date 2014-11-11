@@ -245,7 +245,7 @@ var Planbox = Planbox || {};
         };
 
         // Clear any existing events and markers
-        this.$('.table-container tbody tr').off('onmouseenter').off('onmouseleave').off('click');
+        this.$('.table-container tbody tr').off('mouseenter').off('mouseleave').off('click');
         this.markerLayer.clearLayers();
 
         // Add the markers to the map for each visible row
