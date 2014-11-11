@@ -1361,6 +1361,12 @@ body.shareabouts-panel-hovered {
   color: silver;
 }
 
+tbody tr:hover,
+tr.is-hovering {
+  background-color: black;
+  color: white;
+}
+
 
 /*--------------------------------------------------
   The Admin
