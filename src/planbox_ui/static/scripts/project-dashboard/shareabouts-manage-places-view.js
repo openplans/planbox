@@ -231,17 +231,14 @@ var Planbox = Planbox || {};
 
         var normalStyle = {
           fillColor: 'blue',
-          color: 'blue',
-          fillOpacity: 0.2,
-          opacity: 0.5,
+          fillOpacity: 0.5,
+          stroke: false,
           radius: 5
         };
 
         var highlightStyle = {
-          fillColor: 'black',
-          color: 'blue',
-          fillOpacity: 1,
-          opacity: 1
+          fillColor: '#FF8B38',
+          fillOpacity: 1
         };
 
         // Clear any existing events and markers
