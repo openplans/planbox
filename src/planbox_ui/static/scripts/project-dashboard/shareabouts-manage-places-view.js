@@ -231,21 +231,18 @@ var Planbox = Planbox || {};
 
         var normalStyle = {
           fillColor: 'blue',
-          color: 'blue',
-          fillOpacity: 0.2,
-          opacity: 0.5,
+          fillOpacity: 0.5,
+          stroke: false,
           radius: 5
         };
 
         var highlightStyle = {
-          fillColor: 'black',
-          color: 'blue',
-          fillOpacity: 1,
-          opacity: 1
+          fillColor: '#FF8B38',
+          fillOpacity: 1
         };
 
         // Clear any existing events and markers
-        this.$('.table-container tbody tr').off('onmouseenter').off('onmouseleave').off('click');
+        this.$('.table-container tbody tr').off('mouseenter').off('mouseleave').off('click');
         this.markerLayer.clearLayers();
 
         // Add the markers to the map for each visible row
@@ -271,7 +268,7 @@ var Planbox = Planbox || {};
 
       $(row)
         .on('mouseenter', function(evt) {
-          marker.setStyle(highlightStyle);
+          marker.setStyle(highlightStyle).bringToFront();
         })
         .on('mouseleave', function(evt) {
           marker.setStyle(normalStyle);
@@ -284,7 +281,7 @@ var Planbox = Planbox || {};
       marker
         .on('mouseover', function() {
           $(row).addClass('is-hovering');
-          marker.setStyle(highlightStyle);
+          marker.setStyle(highlightStyle).bringToFront();
         })
         .on('mouseout', function() {
           $(row).removeClass('is-hovering');
