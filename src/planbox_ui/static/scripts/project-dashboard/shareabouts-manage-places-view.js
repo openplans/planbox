@@ -149,10 +149,13 @@ var Planbox = Planbox || {};
 
     fixTableHeader: function() {
       if (window.matchMedia(Foundation.media_queries.large).matches) {
-        var tbodyHeight = $(window).height() - $('#places-datatable table').offset().top - 45;
+        var tbodyHeight = $(window).height() - this.$('#places-datatable table').offset().top - 60;
+        var tHeadHeight = this.$('#places-datatable thead').height();
         this.$('#places-datatable tbody').css({ maxHeight: tbodyHeight });
+        this.$('#places-datatable .table-map').css({ height: tbodyHeight + tHeadHeight });
       } else {
         this.$('#places-datatable tbody').css({ maxHeight: 'none' });
+        this.$('#places-datatable .table-map').css({ height: 200 });
       }
     },
 
@@ -183,6 +186,11 @@ var Planbox = Planbox || {};
       this.ui.scrolltable.animate({ scrollLeft: tableWidth });
     },
 
+    handleTableUpdated: function(table) {
+      this.updateMapMarkers();
+      this.fitToMapMarkers();
+    },
+
     initSortableTable: function() {
       var options = {
         valueNames: this.columnHeaders,
@@ -190,27 +198,137 @@ var Planbox = Planbox || {};
         plugins: [ ListPagination({outerWindow: 2}) ]
       };
       this.table = new List('places-datatable', options);
+      this.table.on('updated', _.bind(this.handleTableUpdated, this));
       this.ui.scrolltable.scroll(_.bind(this.toggleScrollNavButtons, this));
       this.toggleScrollNavButtons();
+    },
+
+    initMap: function() {
+      var $map = this.$('.places-map');
+      this.map = L.map($map[0]).setView([0, 0], 1);
+      L.tileLayer('https://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18
+      }).addTo(this.map);
+
+      this.markerLayer = L.featureGroup([])
+        .addTo(this.map);
+    },
+
+    redrawMap: function() {
+      this.map.invalidateSize();
+    },
+
+    getLayerForRow: function(row) {
+      var id = $(row).attr('data-shareabouts-id'),
+          layer = this.rowToLayerMap[id];
+      return layer;
+    },
+
+    updateMapMarkers: function() {
+      if (this.markerLayer) {
+        var self = this;
+
+        var normalStyle = {
+          fillColor: 'blue',
+          color: 'blue',
+          fillOpacity: 0.2,
+          opacity: 0.5,
+          radius: 5
+        };
+
+        var highlightStyle = {
+          fillColor: 'black',
+          color: 'blue',
+          fillOpacity: 1,
+          opacity: 1
+        };
+
+        // Clear any existing events and markers
+        this.$('.table-container tbody tr').off('onmouseenter').off('onmouseleave').off('click');
+        this.markerLayer.clearLayers();
+
+        // Add the markers to the map for each visible row
+        this.rowToLayerMap = {};
+        self.$('.table-container tbody tr').each(function(i, row) {
+          var id = $(row).attr('data-shareabouts-id'),
+              place = self.plugin.places.get(id),
+              lat = place.get('geometry').coordinates[1],
+              lng = place.get('geometry').coordinates[0],
+              marker;
+
+          marker = L.circleMarker([lat, lng], normalStyle)
+            .addTo(self.markerLayer);
+
+          self.rowToLayerMap[id] = marker;
+          self.bindRowEvents(row, marker, normalStyle, highlightStyle);
+        });
+      }
+    },
+
+    bindRowEvents: function(row, marker, normalStyle, highlightStyle) {
+      var self = this;
+
+      $(row)
+        .on('mouseenter', function(evt) {
+          marker.setStyle(highlightStyle);
+        })
+        .on('mouseleave', function(evt) {
+          marker.setStyle(normalStyle);
+        })
+        .on('click', function(evt) {
+          self.map.panTo(marker.getLatLng(), {animate: false});
+          self.map.setZoom(15, {animate: false});
+        });
+
+      marker
+        .on('mouseover', function() {
+          $(row).addClass('is-hovering');
+          marker.setStyle(highlightStyle);
+        })
+        .on('mouseout', function() {
+          $(row).removeClass('is-hovering');
+          marker.setStyle(normalStyle);
+        })
+        .on('click', function() {
+          row.scrollIntoView();
+        });
+    },
+
+    fitToMapMarkers: function() {
+      if (this.markerLayer.getLayers().length) {
+        this.map.fitBounds(this.markerLayer);
+      }
     },
 
     render: function() {
       Backbone.Marionette.ItemView.prototype.render.apply(this, arguments);
       this.initSortableTable();
+      this.initMap();
+      this.updateMapMarkers();
+
+      this.fixTableHeader();
+      this.redrawMap();
+      this.fitToMapMarkers();
       return this;
     },
 
     onShow: function() {
       this.fixTableHeader();
+      this.redrawMap();
+      this.fitToMapMarkers();
     },
 
     onWindowResize: function() {
       this.fixTableHeader();
       this.toggleScrollNavButtons();
+      this.redrawMap();
     },
 
     onToggleTabs: function() {
       this.fixTableHeader();
+      this.redrawMap();
+      this.fitToMapMarkers();
     }
   });
 
