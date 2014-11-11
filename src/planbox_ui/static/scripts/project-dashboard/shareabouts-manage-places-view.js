@@ -188,6 +188,7 @@ var Planbox = Planbox || {};
 
     handleTableUpdated: function(table) {
       this.updateMapMarkers();
+      this.fitToMapMarkers();
     },
 
     initSortableTable: function() {
