@@ -1,10 +1,14 @@
 <div class="row full-width some-padding-top no-margin-bottom no-padding-bottom">
-  <h3 class="small-12 columns no-margins">{{ title }}</h3>
-  <p class="small-4 columns text-small no-margins">
-    <a href="../edit/" class="button tiny less-padding no-margin-bottom">Edit<span class="show-for-medium-up">&nbsp;Plan</span></a>
-    <a href="../" class="button tiny less-padding no-margin-bottom">View<span class="show-for-medium-up">&nbsp;Plan</span></a>
-  </p>
-  <div class="small-8 columns">
+  <div class="medium-6 large-8 columns">
+    <h3 class="no-margin-top no-margin-bottom tiny-margin-right">
+      {{ title }}
+      <span class="nowrap">
+        <a href="../edit/" class="button tiny less-padding no-margin-bottom radius">Edit</a>
+        <a href="../" class="button tiny less-padding no-margin-bottom radius">View</a>
+      </span>
+    </h3>
+  </div>
+  <div class="medium-6 large-4 columns tiny-padding-top">
     <ul class="tabs right" data-tab role="tablist" data-options="deep_linking:false;"><!-- scroll_to_content:false; -->
       <li class="tab-title active" role="presentational" ><a role="tab" tabindex="0" aria-selected="true" controls="panel-activity" href="#panel-activity">Activity</a></li>
     </ul>

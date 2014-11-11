@@ -75,7 +75,7 @@ var Planbox = Planbox || {};
       var tabTemplate = Handlebars.templates['shareabouts-dashboard-places-tab-tpl'],
           sectionTemplate = Handlebars.templates['shareabouts-dashboard-places-list-tpl'];
       view.$('.tabs').append(tabTemplate());
-      view.$('.tabs-content').append('<section role="tabpanel" aria-hidden="true" class="content" id="panel-places-list"></section>');
+      view.$('.tabs-content').append('<section role="tabpanel" aria-hidden="true" class="content no-paddings" id="panel-places-list"></section>');
 
       view.addRegion('placesListRegion', '#panel-places-list');
       view.placesListRegion.show(new NS.ShareaboutsDashboardPlacesListView({
@@ -87,7 +87,7 @@ var Planbox = Planbox || {};
       var tabTemplate = Handlebars.templates['shareabouts-dashboard-comments-tab-tpl'],
           sectionTemplate = Handlebars.templates['shareabouts-dashboard-comments-list-tpl'];
       view.$('.tabs').append(tabTemplate());
-      view.$('.tabs-content').append('<section role="tabpanel" aria-hidden="true" class="content" id="panel-comments-list"></section>');
+      view.$('.tabs-content').append('<section role="tabpanel" aria-hidden="true" class="content no-paddings" id="panel-comments-list"></section>');
 
       view.addRegion('commentsListRegion', '#panel-comments-list');
       view.commentsListRegion.show(new NS.ShareaboutsDashboardCommentsListView({
