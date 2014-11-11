@@ -55,7 +55,7 @@ var Planbox = Planbox || {};
     getColumnHeaders: function(place) {
       var data = place.attributes,
           headers = [], key, value,
-          exclude = ['visible'];
+          exclude = ['visible', 'dataset', 'place', 'set', 'updated_datetime', 'url'];
 
       for (key in data) {
         if (_.contains(exclude, key)) { continue; }
