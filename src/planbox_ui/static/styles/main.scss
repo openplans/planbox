@@ -1248,6 +1248,7 @@ body.shareabouts-panel-hovered {
   height: 1px;
   margin-bottom: 350px;
   overflow: visible;
+  z-index: 1;
 
   &.fixed {
     div {
