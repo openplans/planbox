@@ -24,6 +24,9 @@ HTTPS_ENABLED = False
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
+PLANBOX_CONTACT_EMAIL = 'test@example.com'
+PLANBOX_FLAVORS_ROOT_URL = 'http://example.com/flavors/'
+
 # S3 stuff
 S3_MEDIA_BUCKET = 'planbox-media'
 AWS_ACCESS_KEY = '12345'
