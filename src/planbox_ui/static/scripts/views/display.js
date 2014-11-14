@@ -55,17 +55,17 @@ var Planbox = Planbox || {};
       var pastCount = 0;
       var futureCount = 0;
       $('.event-datetime').each(function() {
-        var eventTime = $(this).attr('data-datetime');
-        var eventTime = new Date(eventTime);
         var nowTime = $.now();
+        var eventTime = $(this).attr('data-datetime');
+        eventTime = new Date(eventTime);
         if ( eventTime < nowTime ) {
           $(this).closest('li.event').addClass('past-event hide');
-          $('.show-more-past-events').removeClass('hide')
+          $('.show-more-past-events').removeClass('hide');
           pastCount = pastCount + 1;
         } else {
           if ( futureCount >= 4 ) {
             $(this).closest('li.event').addClass('future-event hide');
-            $('.show-more-future-events').removeClass('hide')
+            $('.show-more-future-events').removeClass('hide');
           }
           futureCount = futureCount + 1;
         }
@@ -88,11 +88,13 @@ var Planbox = Planbox || {};
 
     ui: {
       showPastEventsBtn: '.show-more-past-events',
-      showFutureEventsBtn: '.show-more-future-events'
+      showFutureEventsBtn: '.show-more-future-events',
+      tagBtn: '.tag-btn'
     },
     events: {
       'click @ui.showPastEventsBtn': 'handleShowPastEventsBtn',
-      'click @ui.showFutureEventsBtn': 'handleShowFutureEventsBtn'
+      'click @ui.showFutureEventsBtn': 'handleShowFutureEventsBtn',
+      'click @ui.tagBtn': 'handleClickTagBtn'
     },
     handleShowPastEventsBtn: function(evt) {
       evt.preventDefault();
@@ -103,6 +105,21 @@ var Planbox = Planbox || {};
       evt.preventDefault();
       $('li.future-event').removeClass('hide');
       $('.show-more-future-events').addClass('hide');
+    },
+    handleClickTagBtn: function(evt) {
+      evt.preventDefault();
+    },
+    serializeData: function() {
+      var data = NS.TimelineSectionView.__super__.serializeData.call(this),
+          alltags = [], tags;
+
+      this.model.get('project').get('events').each(function(eventModel) {
+        tags = (eventModel.get('details') || {}).tags || [];
+        alltags = alltags.concat(tags);
+      });
+      data.tags = _.uniq(alltags.sort(), true);
+
+      return data;
     }
   });
 
