@@ -551,6 +551,7 @@ class Event (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, models.
     description = models.TextField(help_text=_("A summary description of the timeline item"), default='', blank=True)
     index = models.PositiveIntegerField(help_text=_("Leave this field blank; it will be filled in automatically"))
     project = models.ForeignKey(Project, related_name='events')
+    details = JSONField(blank=True, default=dict)
 
     datetime_label = models.TextField(blank=True, help_text=_("A description of this event's date and time, preferably in a parsable format."))
     start_datetime = models.DateTimeField(null=True, blank=True)
