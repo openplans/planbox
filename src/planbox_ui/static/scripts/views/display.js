@@ -55,17 +55,17 @@ var Planbox = Planbox || {};
       var pastCount = 0;
       var futureCount = 0;
       $('.event-datetime').each(function() {
-        var eventTime = $(this).attr('data-datetime');
-        var eventTime = new Date(eventTime);
         var nowTime = $.now();
+        var eventTime = $(this).attr('data-datetime');
+        eventTime = new Date(eventTime);
         if ( eventTime < nowTime ) {
           $(this).closest('li.event').addClass('past-event hide');
-          $('.show-more-past-events').removeClass('hide')
+          $('.show-more-past-events').removeClass('hide');
           pastCount = pastCount + 1;
         } else {
           if ( futureCount >= 4 ) {
             $(this).closest('li.event').addClass('future-event hide');
-            $('.show-more-future-events').removeClass('hide')
+            $('.show-more-future-events').removeClass('hide');
           }
           futureCount = futureCount + 1;
         }
