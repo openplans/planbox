@@ -27,7 +27,7 @@
     "leaflet": "~0.7.3",
     "list.js": "~1.1.1",
     "list.pagination.js": "~0.1.1",
-    "chosen": "chosen-build#~1.1.0"
+    "chosen": "https://github.com/mjumbewu/chosen-option-adding-build.git#~1.1.0"
   },
   "devDependencies": {},
   "resolutions": {
