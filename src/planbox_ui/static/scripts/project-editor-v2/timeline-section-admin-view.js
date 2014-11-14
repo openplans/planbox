@@ -121,7 +121,13 @@ var Planbox = Planbox || {};
         }));
 
         var chooser = this.ui.tagsChooser;
-        chooser.chosen({width: '100%', create_option: true});
+        chooser.chosen({
+          width: '100%',
+          create_option: true,
+          create_option_text: 'Add new tag',
+          no_results_text: 'No tags match',
+          multiple_text: 'Select some tags'
+        });
       },
       initDatepicker: function() {
         var picker;
