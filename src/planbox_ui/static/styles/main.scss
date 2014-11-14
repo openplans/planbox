@@ -632,6 +632,32 @@ section, footer {
 
 
 /*--------------------------------------------------
+  Product: Shareabouts Plan Flavors
+--------------------------------------------------*/
+
+.flavor-list {
+  .flavor {
+    position: relative;
+  }
+  .flavor-grid & {
+    @media #{$medium} {
+      @include block-grid(2);
+      .panel {
+        margin-bottom: 0;
+      }
+      h3 {
+        line-height: 1.2;
+        min-height: 2.75em;
+      }
+    }
+    @media #{$large-up} {
+      @include block-grid(3);
+    }
+  }
+}
+
+
+/*--------------------------------------------------
   Project Layout
 --------------------------------------------------*/
 
