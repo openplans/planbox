@@ -286,7 +286,8 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/styles/admin.min.css': [
             '<%= yeoman.app %>/bower_components/pen/src/pen.css',
             '<%= yeoman.app %>/bower_components/pickadate/lib/themes/classic.css',
-            '<%= yeoman.app %>/bower_components/pickadate/lib/themes/classic.date.css'
+            '<%= yeoman.app %>/bower_components/pickadate/lib/themes/classic.date.css',
+            '<%= yeoman.app %>/bower_components/chosen/chosen.css'
           ]
         }
       }
