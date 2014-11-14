@@ -158,7 +158,7 @@ var Planbox = Planbox || {};
         });
 
         events.each(function(model) {
-          tags = model.get('details').tags || [];
+          tags = (model.get('details') || {}).tags || [];
           newtags = _.difference(tags, alltags);
           alltags = alltags.concat(newtags);
           _.map(newtags, function(tag) {
