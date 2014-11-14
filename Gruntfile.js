@@ -492,6 +492,14 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.app %>/images/'
         }]
       },
+      chosen: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/bower_components/chosen/',
+          src: ['*.png'],
+          dest: '<%= yeoman.app %>/'
+        }]
+      },
       dist: {
         files: [{
           expand: true,
@@ -608,6 +616,7 @@ module.exports = function (grunt) {
     'fixSourceMaps',
     'copy:shareabouts',
     'copy:leaflet',
+    'copy:chosen',
     // 'rev',
     // 'usemin',
     // 'htmlmin'
