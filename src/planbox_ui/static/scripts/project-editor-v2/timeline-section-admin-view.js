@@ -166,6 +166,8 @@ var Planbox = Planbox || {};
           });
         });
 
+        chooser.html(NS.Utils.sortByInnerHTML(chooser.children('option')));
+
         chooser.trigger('chosen:updated');
         this.ui.tagsInput.val(currentVal);
       }

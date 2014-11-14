@@ -29,9 +29,11 @@
 
     <div class="float-label-container">
       <select multiple data-placeholder="Tags..." data-attr="tags" class="chosen-select">
+        {{#sortByInnerHTML}}
         {{#each details.tags}}
         <option selected>{{.}}</option>
         {{/each}}
+        {{/sortByInnerHTML}}
       </select>
       <span class="float-label">Tags</span>
     </div>
