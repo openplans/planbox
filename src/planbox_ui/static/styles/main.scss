@@ -1409,6 +1409,10 @@ body.shareabouts-panel-hovered {
   The Admin
 --------------------------------------------------*/
 
+.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+  box-sizing: content-box;
+}
+
 .project-edit-form {
   background-color: #fff;
   box-shadow: 0 -65px 0 #fff;

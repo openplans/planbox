@@ -16,11 +16,13 @@ var Planbox = Planbox || {};
         deleteBtn: '.delete-event',
         datetimeEditable: '.event-datetime',
         datetimeInput: '.event-datetime-picker',
-        calendarIcon: '.calendar-icon'
+        calendarIcon: '.calendar-icon',
+        tagsChooser: '.chosen-select'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'input @ui.editables': 'handleEditableBlur',
+        'change @ui.tagsChooser': 'handleEditableBlur',
         'click @ui.deleteBtn': 'handleDeleteClick',
         'blur @ui.datetimeEditable': 'handleDatetimeChange',
         'input @ui.datetimeEditable': 'handleDatetimeChange',
@@ -91,12 +93,17 @@ var Planbox = Planbox || {};
         this.initRichEditables();
         // Init the date picker
         this.initDatepicker();
+        // Init the chosen widget for tags
+        this.initTagsChooser();
 
         this.attachmentList.show(new NS.AttachmentListAdminView({
           parent: this.options.parent,
           model: this.model,
           collection: this.model.get('attachments')
         }));
+
+        var chooser = this.ui.tagsChooser;
+        chooser.chosen({width: '100%', create_option: true});
       },
       initDatepicker: function() {
         var picker;
@@ -111,6 +118,27 @@ var Planbox = Planbox || {};
 
         picker = this.ui.datetimeInput.pickadate('picker');
         picker.on('set', _.bind(this.handleDatetimePickerChange, this));
+      },
+      initTagsChooser: function() {
+        // Add all the tags to the tag chooser.
+        var events = this.model.collection,
+            chooser = this.ui.tagsChooser,
+            alltags = [], tags, newtags;
+
+        chooser.find('option').each(function(i, option) {
+          alltags.push(option.innerHTML);
+        });
+
+        events.each(function(model) {
+          tags = model.get('details').tags || [];
+          newtags = _.difference(tags, alltags);
+          alltags = alltags.concat(newtags);
+          _.map(newtags, function(tag) {
+            chooser.append('<option>' + tag + '</option>');
+          });
+        });
+
+        chooser.trigger('chosen:update');
       }
     })
   );
