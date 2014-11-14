@@ -88,11 +88,13 @@ var Planbox = Planbox || {};
 
     ui: {
       showPastEventsBtn: '.show-more-past-events',
-      showFutureEventsBtn: '.show-more-future-events'
+      showFutureEventsBtn: '.show-more-future-events',
+      tagBtn: '.tag-btn'
     },
     events: {
       'click @ui.showPastEventsBtn': 'handleShowPastEventsBtn',
-      'click @ui.showFutureEventsBtn': 'handleShowFutureEventsBtn'
+      'click @ui.showFutureEventsBtn': 'handleShowFutureEventsBtn',
+      'click @ui.tagBtn': 'handleClickTagBtn'
     },
     handleShowPastEventsBtn: function(evt) {
       evt.preventDefault();
@@ -103,6 +105,21 @@ var Planbox = Planbox || {};
       evt.preventDefault();
       $('li.future-event').removeClass('hide');
       $('.show-more-future-events').addClass('hide');
+    },
+    handleClickTagBtn: function(evt) {
+      evt.preventDefault();
+    },
+    serializeData: function() {
+      var data = NS.TimelineSectionView.__super__.serializeData.call(this),
+          alltags = [], tags;
+
+      this.model.get('project').get('events').each(function(eventModel) {
+        tags = (eventModel.get('details') || {}).tags || [];
+        alltags = alltags.concat(tags);
+      });
+      data.tags = _.uniq(alltags.sort(), true);
+
+      return data;
     }
   });
 
