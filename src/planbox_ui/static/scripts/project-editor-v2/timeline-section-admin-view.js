@@ -17,12 +17,16 @@ var Planbox = Planbox || {};
         datetimeEditable: '.event-datetime',
         datetimeInput: '.event-datetime-picker',
         calendarIcon: '.calendar-icon',
-        tagsChooser: '.chosen-select'
+        tagsChooser: '.chosen-select',
+        tagsInput: '.chosen-container input[type="text"]'
       },
       events: {
         'blur @ui.editables': 'handleEditableBlur',
         'input @ui.editables': 'handleEditableBlur',
         'change @ui.tagsChooser': 'handleEditableBlur',
+        'chosen:showing_dropdown @ui.tagsChooser': 'handleTagsDropDown',
+        'focus @ui.tagsInput': 'handleTagsInputFocus',
+        'blur @ui.tagsInput': 'handleTagsInputBlur',
         'click @ui.deleteBtn': 'handleDeleteClick',
         'blur @ui.datetimeEditable': 'handleDatetimeChange',
         'input @ui.datetimeEditable': 'handleDatetimeChange',
@@ -88,6 +92,20 @@ var Planbox = Planbox || {};
           this.ui.datetimeEditable.val(val);
         }
       },
+      handleTagsDropDown: function() {
+        // If we're already focused on the tags field, we can assume the update
+        // has already been done.
+        if (!this.alreadyInTagsField) {
+          this.updateTagChoices();
+        }
+      },
+      handleTagsInputFocus: function() {
+        var self = this;
+        _.delay(function() { self.alreadyInTagsField = true; }, 50);
+      },
+      handleTagsInputBlur: function() {
+        this.alreadyInTagsField = false;
+      },
       onRender: function() {
         // ContentEditableMixin
         this.initRichEditables();
@@ -120,10 +138,14 @@ var Planbox = Planbox || {};
         picker.on('set', _.bind(this.handleDatetimePickerChange, this));
       },
       initTagsChooser: function() {
+        this.updateTagChoices();
+      },
+      updateTagChoices: function() {
         // Add all the tags to the tag chooser.
         var events = this.model.collection,
             chooser = this.ui.tagsChooser,
-            alltags = [], tags, newtags;
+            alltags = [], tags, newtags,
+            currentVal = this.ui.tagsInput.val();
 
         chooser.find('option').each(function(i, option) {
           alltags.push(option.innerHTML);
@@ -138,7 +160,8 @@ var Planbox = Planbox || {};
           });
         });
 
-        chooser.trigger('chosen:update');
+        chooser.trigger('chosen:updated');
+        this.ui.tagsInput.val(currentVal);
       }
     })
   );
