@@ -64,6 +64,19 @@ var Planbox = Planbox || {};
             .replace(/>/g, '&gt;');
     },
 
+    sortByInnerHTML: function(elements) {
+      var sortedElements = [],
+          sortedIndex;
+      elements = $(elements);
+
+      elements.each(function(i, element) {
+        sortedIndex = _.sortedIndex(sortedElements, element, function(el) { return el.innerHTML; });
+        sortedElements.splice(sortedIndex, 0, element);
+      });
+
+      return sortedElements;
+    },
+
     // pathJoin translated from Python's os.path.join
     pathJoin: function() {
       var i, segment, path = '';

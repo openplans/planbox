@@ -845,7 +845,7 @@ section, footer {
   box-shadow: inset 0.75rem 0 0 #bbb;
 }
 .event {
-  padding: 0 0 2rem 3.25rem;
+  padding: 0 0 1.5rem 3.25rem;
   margin-left: -1rem;
   position: relative;
 }
@@ -888,6 +888,38 @@ section, footer {
   background-color: #fff;
   border: 0.5rem solid #bbb;
   z-index: 1;
+}
+.past-event {
+  background-color: rgba(255,255,255,0.6);
+  &:after {
+    background-color: #ddd;
+    border-color: #fff;
+  }
+}
+
+.show-more-past-events {
+  position: relative;
+  &:after {
+    content: '';
+    width: 0.75rem;
+    height: 2.25rem;
+    background-color: #bbb;
+    position: absolute;
+    top: 100%;
+    left: 1rem;
+  }
+}
+.show-more-future-events {
+  position: relative;
+  &:after {
+    content: '';
+    width: 0.75rem;
+    height: 1.75rem;
+    background-color: #bbb;
+    position: absolute;
+    bottom: 100%;
+    left: 1rem;
+  }
 }
 
 // Date Picker
@@ -1248,6 +1280,7 @@ body.shareabouts-panel-hovered {
   height: 1px;
   margin-bottom: 350px;
   overflow: visible;
+  z-index: 1;
 
   &.fixed {
     div {
@@ -1375,6 +1408,10 @@ body.shareabouts-panel-hovered {
 /*--------------------------------------------------
   The Admin
 --------------------------------------------------*/
+
+.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+  box-sizing: content-box;
+}
 
 .project-edit-form {
   background-color: #fff;

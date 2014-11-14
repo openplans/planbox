@@ -1,13 +1,14 @@
 <span id="event-{{ slug }}" class="event-anchor"></span>
 
-<h4 class="event-title">{{{ label }}}</h4>
+<h4 class="event-title no-margin-top"><a href="#" class="show-event-details">{{{ label }}}</a></h4>
 
-<div class="row">
+{{#if datetime_label }}
+<h5 class="event-datetime subheader" data-datetime="{{ start_datetime }}">{{ datetime_label }}</h5>
+{{/if}}
+
+<div class="row event-details hide">
 
   <div class="medium-7 columns">
-    {{#if datetime_label }}
-    <h5 class="event-datetime subheader">{{ datetime_label }}</h5>
-    {{/if}}
     <div class="event-description project-text-content">{{{ description }}}</div>
   </div>
 

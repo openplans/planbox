@@ -56,6 +56,13 @@ var Planbox = Planbox || {};
     return options.fn(context);
   });
 
+  Handlebars.registerHelper('sortByInnerHTML', function(options) {
+    var elements = $(options.fn(this)),
+        sortedElements = NS.Utils.sortByInnerHTML(elements),
+        container = $('<div/>').append(sortedElements);
+    return container.html();
+  });
+
   Handlebars.registerHelper('isAny', function(value, /* test1, test2, test3, ..., */ options) {
     var tests = _.rest(_.initial(arguments)),
         isAny = false,

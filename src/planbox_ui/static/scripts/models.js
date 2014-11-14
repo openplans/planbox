@@ -159,7 +159,10 @@ var Planbox = Planbox || {};
     model: NS.AttachmentModel
   });
 
-  NS.EventModel = Backbone.RelationalModel.extend({
+  NS.EventModel = NS.DetailModel.extend({
+    baseAttrs: ['details', 'id', 'label', 'slug', 'description', 'index',
+                'project', 'datetime_label', 'start_datetime', 'end_datetime',
+                'attachments'],
     relations: [{
       type: Backbone.HasMany,
       key: 'attachments',
