@@ -27,6 +27,17 @@
       <span class="float-label">Event Description</span>
     </div>
 
+    <div class="float-label-container">
+      <select multiple data-placeholder="Tags..." data-attr="tags" class="chosen-select">
+        {{#sortByInnerHTML}}
+        {{#each details.tags}}
+        <option selected>{{.}}</option>
+        {{/each}}
+        {{/sortByInnerHTML}}
+      </select>
+      <span class="float-label">Tags</span>
+    </div>
+
     <span class="delete-event button tiny less-padding round alert">Delete Event</span>
 
   </div>

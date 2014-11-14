@@ -38,11 +38,42 @@ var Planbox = Planbox || {};
     regions: {
       attachmentList: '.attachments-region'
     },
+    ui: {
+      showEventDetailsBtn: '.show-event-details',
+      eventDetails: '.event-details'
+    },
+    events: {
+      'click @ui.showEventDetailsBtn': 'handleShowEventDetails',
+    },
     onRender: function() {
       this.attachmentList.show(new NS.AttachmentListView({
         model: this.model,
         collection: this.model.get('attachments')
       }));
+    },
+    onShow: function() {
+      var pastCount = 0;
+      var futureCount = 0;
+      $('.event-datetime').each(function() {
+        var nowTime = $.now();
+        var eventTime = $(this).attr('data-datetime');
+        eventTime = new Date(eventTime);
+        if ( eventTime < nowTime ) {
+          $(this).closest('li.event').addClass('past-event hide');
+          $('.show-more-past-events').removeClass('hide');
+          pastCount = pastCount + 1;
+        } else {
+          if ( futureCount >= 4 ) {
+            $(this).closest('li.event').addClass('future-event hide');
+            $('.show-more-future-events').removeClass('hide');
+          }
+          futureCount = futureCount + 1;
+        }
+      });
+    },
+    handleShowEventDetails: function(evt) {
+      evt.preventDefault();
+      this.ui.eventDetails.toggleClass('hide');
     }
   });
 
@@ -53,7 +84,43 @@ var Planbox = Planbox || {};
     className: 'project-section-timeline',
 
     itemView: NS.EventView,
-    itemViewContainer: '.event-list'
+    itemViewContainer: '.event-list',
+
+    ui: {
+      showPastEventsBtn: '.show-more-past-events',
+      showFutureEventsBtn: '.show-more-future-events',
+      tagBtn: '.tag-btn'
+    },
+    events: {
+      'click @ui.showPastEventsBtn': 'handleShowPastEventsBtn',
+      'click @ui.showFutureEventsBtn': 'handleShowFutureEventsBtn',
+      'click @ui.tagBtn': 'handleClickTagBtn'
+    },
+    handleShowPastEventsBtn: function(evt) {
+      evt.preventDefault();
+      $('li.past-event').removeClass('hide');
+      $('.show-more-past-events').addClass('hide');
+    },
+    handleShowFutureEventsBtn: function(evt) {
+      evt.preventDefault();
+      $('li.future-event').removeClass('hide');
+      $('.show-more-future-events').addClass('hide');
+    },
+    handleClickTagBtn: function(evt) {
+      evt.preventDefault();
+    },
+    serializeData: function() {
+      var data = NS.TimelineSectionView.__super__.serializeData.call(this),
+          alltags = [], tags;
+
+      this.model.get('project').get('events').each(function(eventModel) {
+        tags = (eventModel.get('details') || {}).tags || [];
+        alltags = alltags.concat(tags);
+      });
+      data.tags = _.uniq(alltags.sort(), true);
+
+      return data;
+    }
   });
 
   NS.TextSectionView = Backbone.Marionette.ItemView.extend({
