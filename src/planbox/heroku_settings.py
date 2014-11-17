@@ -40,6 +40,8 @@ if any(email_setting in os.environ
 PLANBOX_CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL', '')
 EMAIL_ADDRESS = PLANBOX_CONTACT_EMAIL
 
+PLANBOX_FLAVORS_ROOT_URL = os.environ.get('FLAVORS_ROOT_URL', '')
+
 import dj_database_url
 DATABASES = {'default': dj_database_url.config()}
 # https://devcenter.heroku.com/articles/postgis#geodjango-setup
