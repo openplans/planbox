@@ -236,7 +236,7 @@ class ProjectFlavorView (AppMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjectFlavorView, self).get_context_data(**kwargs)
-        context['details'] = self.render_flavor_details_template(context)
+        context['details'] = self.render_flavor_details(context)
         return context
 
     def get_flavor_details_template(self, slug):
@@ -249,7 +249,7 @@ class ProjectFlavorView (AppMixin, TemplateView):
         else:
             raise Exception('Invalid response while retrieving flavor details: %s %s' % (response.status_code, response.content))
 
-    def render_flavor_details_template(self, context_data):
+    def render_flavor_details(self, context_data):
         details_context = Context(context_data)
         return self.details_template.render(details_context)
 
