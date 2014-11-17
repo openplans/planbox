@@ -285,13 +285,13 @@ var Planbox = Planbox || {};
   );
 
   NS.RawHtmlSectionAdminView = Backbone.Marionette.ItemView.extend(
-    _.extend({}, NS.SectionAdminMixin, {
+    _.extend({}, NS.ContentEditableMixin, NS.SectionAdminMixin, {
       template: '#raw-section-admin-tpl',
       tagName: 'section',
       id: NS.SectionMixin.id,
 
       ui: {
-        editables: '[contenteditable]',
+        editables: '[data-attr]',
         activeToggle: '.active-toggle'
       },
       events: {
