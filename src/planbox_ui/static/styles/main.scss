@@ -50,6 +50,9 @@ html {
     height: 65px;
     line-height: 65px;
   }
+  .name {
+    margin-right: 1rem;
+  }
   .name h1,
   .name h1 a {
     height: 100%;
@@ -57,6 +60,7 @@ html {
   }
   .name h1 a:hover img {
     background-color: #cceeff;
+    background-color: rgba(204,238,255,0.75);
   }
   .openplans-logo-hole {
     height: 100%;
