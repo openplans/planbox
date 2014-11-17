@@ -497,7 +497,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.app %>/bower_components/chosen/',
           src: ['*.png'],
-          dest: '<%= yeoman.app %>/'
+          dest: '<%= yeoman.app %>/styles/'
         }]
       },
       dist: {
