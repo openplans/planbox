@@ -23,9 +23,9 @@
   contributed back to Foundation.
 --------------------------------------------------*/
 
-// Specificity of .hide doesn't apply to inputs.
-input.hide {
-  display: none;
+// Specificity of .hide doesn't apply to inputs or buttons.
+.hide {
+  display: none !important;
 }
 
 // .no-bullet only works on ul

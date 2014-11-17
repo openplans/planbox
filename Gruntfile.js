@@ -286,7 +286,8 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/styles/admin.min.css': [
             '<%= yeoman.app %>/bower_components/pen/src/pen.css',
             '<%= yeoman.app %>/bower_components/pickadate/lib/themes/classic.css',
-            '<%= yeoman.app %>/bower_components/pickadate/lib/themes/classic.date.css'
+            '<%= yeoman.app %>/bower_components/pickadate/lib/themes/classic.date.css',
+            '<%= yeoman.app %>/bower_components/chosen/chosen.css'
           ]
         }
       }
@@ -348,7 +349,9 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/bower_components/FileAPI/dist/FileAPI.js',
             '<%= yeoman.app %>/bower_components/chrono/chrono.min.js',
             '<%= yeoman.app %>/bower_components/pickadate/lib/picker.js',
-            '<%= yeoman.app %>/bower_components/pickadate/lib/picker.date.js'
+            '<%= yeoman.app %>/bower_components/pickadate/lib/picker.date.js',
+            '<%= yeoman.app %>/bower_components/chosen/chosen.jquery.js',
+
           ],
           '<%= yeoman.app %>/scripts/app.min.js': [
             '<%= yeoman.app %>/scripts/utils.js',
@@ -489,6 +492,14 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.app %>/images/'
         }]
       },
+      chosen: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/bower_components/chosen/',
+          src: ['*.png'],
+          dest: '<%= yeoman.app %>/styles/'
+        }]
+      },
       dist: {
         files: [{
           expand: true,
@@ -605,6 +616,7 @@ module.exports = function (grunt) {
     'fixSourceMaps',
     'copy:shareabouts',
     'copy:leaflet',
+    'copy:chosen',
     // 'rev',
     // 'usemin',
     // 'htmlmin'

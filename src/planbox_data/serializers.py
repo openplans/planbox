@@ -279,6 +279,7 @@ class EventSerializer (OrderedSerializerMixin, AddRemoveModelSerializer):
     label = CleanedHtmlField()
     description = CleanedHtmlField(required=False)
     attachments = AttachmentSerializer(many=True, required=False, allow_add_remove=True)
+    details = serializers.WritableField(required=False)
 
     class Meta:
         model = models.Event
