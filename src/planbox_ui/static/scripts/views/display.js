@@ -149,8 +149,8 @@ var Planbox = Planbox || {};
       var index;
 
       // Only one tag at a time...
-      this.ui.tagBtn.removeClass('selected');
-      if ($el) { $el.addClass('selected'); }
+      this.ui.tagBtn.removeClass('selected').addClass('tertiary');
+      if ($el) { $el.addClass('selected').removeClass('tertiary'); }
       this.selectedTags = [text];
 
       this.showPastEvents();
@@ -160,7 +160,7 @@ var Planbox = Planbox || {};
     deselectTag: function(text, $el) {
       var index;
 
-      if ($el) { $el.removeClass('selected'); }
+      if ($el) { $el.removeClass('selected').addClass('tertiary'); }
       index = _.indexOf(this.selectedTags, text);
       this.selectedTags.splice(index, 1);
 
