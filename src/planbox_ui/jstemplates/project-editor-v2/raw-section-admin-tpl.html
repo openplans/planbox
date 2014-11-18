@@ -15,21 +15,18 @@
 
       <a href="#" class="button tiny round alert less-padding right delete-section">Delete&nbsp;Section</a>
     </div>
-
-    {{^if_fileapi_support 'cors'}}
-    <div class="alert-box secondary radius">
-      Your browser doesn't support adding event attachments. Please <a href="http://browsehappy.com/">upgrade</a> to use this feature.
-    </div>
-    {{/if_fileapi_support}}
-
     <div class="float-label-container">
-      <input type="text" placeholder="Timeline Heading" class="sub-heading-input float-label-input" value="{{ label }}" data-attr="label" />
-      <span class="float-label">Timeline Heading</span>
+      <input type="text" placeholder="Section Heading (optional)" class="sub-heading-input float-label-input" value="{{{ label }}}" data-attr="label" />
+      <span class="float-label">Section Heading</span>
     </div>
-    <ol class="event-list no-bullet"></ol>
-    <br>
-    <a href="#" class="add-event-btn button small radius">Add Event</a>
-
+    <div class="row section-layout-container">
+      <div class="large-12 columns pen-container-1">
+        <div class="float-label-container">
+          <textarea class="rich-editable content-editable float-label-input" data-attr="content">{{ details.content }}</textarea>
+          <span class="float-label">Raw HTML</span>
+        </div>
+      </div>
+    </div>
   </fieldset>
 
   {{> insert-new-section-tpl }}

@@ -189,21 +189,16 @@
         <hr>
         {{/if}}
 
-        <button class="button expand radius save-btn disabled">Save</button>
+        <button class="button expand radius save-btn disabled tiny-margin-bottom">Save</button>
 
         <div class="project-settings">
-          <div class="row collapse">
-            <div class="large-6 columns">
-              <div class="switch left">
-                <input id="public-switch" type="checkbox"{{#if public}} checked{{/if}}>
-                <label for="public-switch"></label>
-              </div>
-              <label id="public-switch-label" class="inline unassigned">Published</label>
-            </div>
-            {{!-- <div class="project-save-info-wrapper large-6 columns some-margin-bottom">{{>project-save-info-tpl}}</div> --}}
-            <div class="project-preview-wrapper large-6 columns text-right">{{>project-preview-link-tpl}}</div>
+          {{!-- <div class="project-save-info-wrapper ">{{>project-save-info-tpl}}</div> --}}
+          {{>project-preview-link-tpl}}
+          <div class="switch left tiny-margin-top">
+            <input id="public-switch" type="checkbox"{{#if public}} checked{{/if}}>
+            <label for="public-switch"></label>
           </div>
-
+          <label id="public-switch-label" class="inline unassigned">Published</label>
           <div class="row collapse location-map-region"></div>
         </div>
 
