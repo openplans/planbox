@@ -275,7 +275,7 @@ section, footer {
     color: #fff;
   }
 }
-@for $i from 1 through 10 {
+@for $i from 1 through 30 {
   .toggle-sibling-#{$i} {
     display: none;
   }
