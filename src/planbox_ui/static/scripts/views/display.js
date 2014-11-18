@@ -148,9 +148,10 @@ var Planbox = Planbox || {};
     selectTag: function(text, $el) {
       var index;
 
+      // Only one tag at a time...
+      this.ui.tagBtn.removeClass('selected');
       if ($el) { $el.addClass('selected'); }
-      index = _.sortedIndex(this.selectedTags, text);
-      this.selectedTags.splice(index, 0, text);
+      this.selectedTags = [text];
 
       this.showPastEvents();
       this.showFutureEvents();
