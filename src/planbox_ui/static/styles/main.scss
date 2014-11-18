@@ -952,8 +952,7 @@ section, footer {
 }
 
 .tag-btn.selected {
-  color: #333333;
-  background-color: #bebebe;
+  @extend .secondary;
 }
 
 // Date Picker
