@@ -98,11 +98,11 @@ var Planbox = Planbox || {};
       if ( pastCount ) {
         this.$('.past-event').addClass('hide');
         this.$('.show-more-past-events').removeClass('hide');
-      } else {
-        if ( futureCount > 4 ) {
-          this.$('.future-event').slice(4).addClass('hide');
-          this.$('.show-more-future-events').removeClass('hide');
-        }
+      }
+
+      if ( futureCount > 4 ) {
+        this.$('.future-event').slice(4).addClass('hide');
+        this.$('.show-more-future-events').removeClass('hide');
       }
     },
     showPastEvents: function() {
