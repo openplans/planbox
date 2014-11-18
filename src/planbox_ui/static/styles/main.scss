@@ -951,10 +951,6 @@ section, footer {
   }
 }
 
-.tag-btn.selected {
-  @extend .secondary;
-}
-
 // Date Picker
 .event .calendar-icon {
   cursor: pointer;
