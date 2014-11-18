@@ -50,26 +50,21 @@ var Planbox = Planbox || {};
         model: this.model,
         collection: this.model.get('attachments')
       }));
-    },
-    onShow: function() {
-      var pastCount = 0;
-      var futureCount = 0;
-      $('.event-datetime').each(function() {
-        var nowTime = $.now();
-        var eventTime = $(this).attr('data-datetime');
-        eventTime = new Date(eventTime);
-        if ( eventTime < nowTime ) {
-          $(this).closest('li.event').addClass('past-event hide');
-          $('.show-more-past-events').removeClass('hide');
-          pastCount = pastCount + 1;
-        } else {
-          if ( futureCount >= 4 ) {
-            $(this).closest('li.event').addClass('future-event hide');
-            $('.show-more-future-events').removeClass('hide');
-          }
-          futureCount = futureCount + 1;
-        }
-      });
+
+      var nowTime = $.now();
+      var eventTime = this.$('.event-datetime').attr('data-datetime');
+
+      // Associate with a past or future event
+      eventTime = new Date(eventTime);
+      if ( eventTime < nowTime ) {
+        this.$el.addClass('past-event');
+      } else {
+        this.$el.addClass('future-event');
+      }
+
+      // Store the tags on the element
+      var tags = this.model.get('details').tags;
+      $.data(this.el, 'tags', tags);
     },
     handleShowEventDetails: function(evt) {
       evt.preventDefault();
@@ -96,18 +91,81 @@ var Planbox = Planbox || {};
       'click @ui.showFutureEventsBtn': 'handleShowFutureEventsBtn',
       'click @ui.tagBtn': 'handleClickTagBtn'
     },
-    handleShowPastEventsBtn: function(evt) {
-      evt.preventDefault();
+    onRender: function() {
+      var pastCount = this.$('.past-event').length;
+      var futureCount = this.$('.future-event').length;
+
+      if ( pastCount ) {
+        this.$('.past-event').addClass('hide');
+        this.$('.show-more-past-events').removeClass('hide');
+      } else {
+        if ( futureCount > 4 ) {
+          this.$('.future-event').slice(4).addClass('hide');
+          this.$('.show-more-future-events').removeClass('hide');
+        }
+      }
+    },
+    showPastEvents: function() {
       $('li.past-event').removeClass('hide');
       $('.show-more-past-events').addClass('hide');
     },
-    handleShowFutureEventsBtn: function(evt) {
-      evt.preventDefault();
+    showFutureEvents: function() {
       $('li.future-event').removeClass('hide');
       $('.show-more-future-events').addClass('hide');
     },
+    showEventsBySelectedTags: function() {
+      var selectedTags = this.selectedTags;
+
+      this.$('li.event').removeClass('hide');
+      if (selectedTags.length === 0) { return; }
+
+      this.$('li.event').each(function(i, li) {
+        var tags = $.data(li, 'tags') || [];
+        if (_.intersection(selectedTags, tags).length === 0) {
+          $(li).addClass('hide');
+        }
+      });
+    },
+    handleShowPastEventsBtn: function(evt) {
+      evt.preventDefault();
+      this.showPastEvents();
+    },
+    handleShowFutureEventsBtn: function(evt) {
+      evt.preventDefault();
+      this.showFutureEvents();
+    },
     handleClickTagBtn: function(evt) {
       evt.preventDefault();
+      var $tag = $(evt.currentTarget),
+          tag = $tag.text();
+      this.selectedTags = this.selectedTags || [];
+      if (_.contains(this.selectedTags, tag)) {
+        this.deselectTag(tag, $tag);
+      } else {
+        this.selectTag(tag, $tag);
+      }
+    },
+    selectTag: function(text, $el) {
+      var index;
+
+      if ($el) { $el.addClass('selected'); }
+      index = _.sortedIndex(this.selectedTags, text);
+      this.selectedTags.splice(index, 0, text);
+
+      this.showPastEvents();
+      this.showFutureEvents();
+      this.showEventsBySelectedTags();
+    },
+    deselectTag: function(text, $el) {
+      var index;
+
+      if ($el) { $el.removeClass('selected'); }
+      index = _.indexOf(this.selectedTags, text);
+      this.selectedTags.splice(index, 1);
+
+      this.showPastEvents();
+      this.showFutureEvents();
+      this.showEventsBySelectedTags();
     },
     serializeData: function() {
       var data = NS.TimelineSectionView.__super__.serializeData.call(this),

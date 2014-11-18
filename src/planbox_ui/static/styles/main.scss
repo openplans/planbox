@@ -50,6 +50,9 @@ html {
     height: 65px;
     line-height: 65px;
   }
+  .name {
+    margin-right: 1rem;
+  }
   .name h1,
   .name h1 a {
     height: 100%;
@@ -57,6 +60,7 @@ html {
   }
   .name h1 a:hover img {
     background-color: #cceeff;
+    background-color: rgba(204,238,255,0.75);
   }
   .openplans-logo-hole {
     height: 100%;
@@ -281,19 +285,19 @@ section, footer {
 .product-tagline-section {
   margin: -65px 0 0;
   padding: 7% 0 17%;
-  background-image: url(../images/flickr-ghbremer-6268027064-b.jpg);
+  background-image: url(../images/index-map.jpg);
   background-position: center 70%;
   color: #fff;
   text-align: center;
+  box-shadow: inset 0 -2px 0 rgba(51,51,51,0.2);
   .tagline {
     margin: 65px 0 0;
     padding: 0.5rem;
     font-size: 1.125rem;
     font-family: $body-font-family;
     font-weight: 500;
-    background-color: #ffa260;
-    background-color: rgba(246,138,61,1);
-    opacity: 0.75;
+    background-color: scale-color($secondary-color, $lightness: 10%, $saturation: -15%);
+    opacity: 0.9;
     @media #{$medium-up} {
       font-size: 1.875rem;
     }
@@ -319,12 +323,11 @@ section, footer {
   .slogan {
     margin: 0;
     padding: 0.5rem;
-    color: #eee;
     font-family: 'Bitter', serif;
     font-size: 0.875rem;
     font-weight: 400;
-    background-color: #fa6b23;
-    background-color: rgba(250,107,35,0.7);
+    background-color: rgba(scale-color($secondary-color, $lightness: -22%, $saturation: 20%), 0.8);
+    box-shadow: 0 5px 0 rgba(51,51,51,0.2);
     @media #{$medium-up} {
       font-size: 1rem;
     }
@@ -632,6 +635,32 @@ section, footer {
 
 
 /*--------------------------------------------------
+  Product: Shareabouts Plan Flavors
+--------------------------------------------------*/
+
+.flavor-list {
+  .flavor {
+    position: relative;
+  }
+  .flavor-grid & {
+    @media #{$medium} {
+      @include block-grid(2);
+      .panel {
+        margin-bottom: 0;
+      }
+      h3 {
+        line-height: 1.2;
+        min-height: 2.75em;
+      }
+    }
+    @media #{$large-up} {
+      @include block-grid(3);
+    }
+  }
+}
+
+
+/*--------------------------------------------------
   Project Layout
 --------------------------------------------------*/
 
@@ -920,6 +949,11 @@ section, footer {
     bottom: 100%;
     left: 1rem;
   }
+}
+
+.tag-btn.selected {
+  color: #333333;
+  background-color: #bebebe;
 }
 
 // Date Picker

@@ -15,6 +15,7 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import resolve_url
+from django.template import Context, Template
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
 from django.utils.timezone import now
@@ -229,6 +230,32 @@ class OpenSourceView (AppMixin, TemplateView):
 
 class MapFlavorsView (AppMixin, TemplateView):
     template_name = 'map-flavors.html'
+
+class ProjectFlavorView (AppMixin, TemplateView):
+    template_name = 'flavor.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectFlavorView, self).get_context_data(**kwargs)
+        context['details'] = self.render_flavor_details(context)
+        return context
+
+    def get_flavor_details_template(self, slug):
+        flavor_base_url = '%s/%s/' % (settings.PLANBOX_FLAVORS_ROOT_URL.strip('/'), slug)
+        response = requests.get(flavor_base_url + 'details.html')
+        if response.status_code == 200:
+            return Template(response.text)
+        elif response.status_code == 404:
+            raise Http404
+        else:
+            raise Exception('Invalid response while retrieving flavor details: %s %s' % (response.status_code, response.content))
+
+    def render_flavor_details(self, context_data):
+        details_context = Context(context_data)
+        return self.details_template.render(details_context)
+
+    def get(self, request, slug):
+        self.details_template = self.get_flavor_details_template(slug)
+        return super(ProjectFlavorView, self).get(request, slug)
 
 class ExpiredProjectView (AppMixin, TemplateView):
     template_name = 'plan-expired.html'
@@ -740,6 +767,7 @@ shareabouts_auth_success_view = ShareaboutsAuthSuccessView.as_view()
 shareabouts_auth_error_view = ShareaboutsAuthErrorView.as_view()
 open_source_view = OpenSourceView.as_view()
 map_flavors_view = MapFlavorsView.as_view()
+project_flavor_view = ProjectFlavorView.as_view()
 project_expired_view = ExpiredProjectView.as_view()
 
 project_editor_view = ProjectEditorView.as_view()

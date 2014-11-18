@@ -47,16 +47,13 @@ OpenPlans
     </ul>
 
     <section class="top-bar-section">
-      <ul class="right">
+      <ul class="left">
         <li><a href="http://blog.openplans.org/">Blog</a></li>
         <li><a href="/about/">About</a></li>
-        <li class="has-dropdown">
-          <a>Help</a>
-          <ul class="dropdown">
-            <li><a href="http://help.openplans.org/" target="_blank" class="">How To&hellip;</a></li>
-            <li><a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}" class="open-intercom">Contact Us</a></li>
-          </ul>
-        </li>
+        <li><a href="http://help.openplans.org/" target="_blank" class="">Help</a></li>
+        <li><a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}" class="open-intercom">Contact</a></li>
+      </ul>
+      <ul class="right">
         {% if user.is_authenticated %}
         <li class="active has-dropdown">
           <a>{{ user.username }}</a>
