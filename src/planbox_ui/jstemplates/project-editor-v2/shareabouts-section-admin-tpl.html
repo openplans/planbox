@@ -1,41 +1,43 @@
-<fieldset class="project-section-fieldset">
-  <div class="section-settings-toggle-container text-right"><a class="section-settings-toggle" href="#"><img src="{{ static_url }}images/icon-gear.png" class="icon" /></a></div>
-  <div class="section-settings panel radius hide clearfix">
+{{# makeUniquifier 'new_section_uniquifier' }}
+  <fieldset class="project-section-fieldset">
+    <div class="section-settings-toggle-container text-right"><a class="section-settings-toggle" href="#"><img src="{{ static_url }}images/icon-gear.png" class="icon" /></a></div>
+    <div class="section-settings panel radius hide clearfix">
 
-    <div class="row collapse">
-      <div class="small-3 large-2 columns">
-        <span class="prefix show-for-small-only">Menu</span>
-        <span class="prefix show-for-medium-up">Menu Text</span>
-      </div>
-      <div class="small-9 medium-6 large-4 columns end">
-        <input type="text" placeholder="Leave blank to exclude from menu" value="{{ menu_label }}" data-attr="menu_label">
-      </div>
-    </div>
-
-    <div class="row collapse">
-      <div class="small-9 medium-6 large-4 columns end">
-      </div>
-    </div>
-
-    <a href="#" class="button tiny round alert less-padding right delete-section">Delete&nbsp;Section</a>
-  </div>
-
-  <div class="row container">
-    <div class="small-12 columns">
-
-      <div class="section-settings panel radius">
-        <div class="alert-box info radius text-center">
-          Zoom and center the map to your preferred default location.
+      <div class="row collapse">
+        <div class="small-3 large-2 columns">
+          <span class="prefix show-for-small-only">Menu</span>
+          <span class="prefix show-for-medium-up">Menu Text</span>
         </div>
-        <div class="map"></div>
-        <div class="existing-snapshot-wrapper text-right some-margin-top">
-          <small><a class="generate-snapshot" href="#" data-generating-label="Generating new snapshot&hellip;">Download Map Data&hellip;</a></small>
+        <div class="small-9 medium-6 large-4 columns end">
+          <input type="text" placeholder="Leave blank to exclude from menu" value="{{ menu_label }}" data-attr="menu_label">
         </div>
       </div>
 
+      <div class="row collapse">
+        <div class="small-9 medium-6 large-4 columns end">
+        </div>
+      </div>
+
+      <a href="#" class="button tiny round alert less-padding right delete-section">Delete&nbsp;Section</a>
     </div>
-  </div>
 
-</fieldset>
+    <div class="row container">
+      <div class="small-12 columns">
 
-{{> insert-new-section-tpl }}
+        <div class="section-settings panel radius">
+          <div class="alert-box info radius text-center">
+            Zoom and center the map to your preferred default location.
+          </div>
+          <div class="map"></div>
+          <div class="existing-snapshot-wrapper text-right some-margin-top">
+            <small><a class="generate-snapshot" href="#" data-generating-label="Generating new snapshot&hellip;">Download Map Data&hellip;</a></small>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </fieldset>
+
+  {{> insert-new-section-tpl }}
+{{/ makeUniquifier }}
