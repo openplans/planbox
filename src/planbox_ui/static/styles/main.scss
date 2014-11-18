@@ -258,10 +258,17 @@ section, footer {
   Toggle Sibling Pattern
 --------------------------------------------------*/
 
+.toggle-sibling-input {
+  position: absolute;
+  left: -9999px;
+}
 .toggle-sibling-label {
   &.button {
-    background-color: #eee;
+    background-color: scale-color($primary-color, $lightness: 90%, $saturation: 10%);
     color: $body-font-color;
+    .project-shareabouts .form-submitted input:invalid + & {
+      border: 1px solid #f04124;
+    }
   }
   input:checked + &.button {
     background-color: $primary-color;
