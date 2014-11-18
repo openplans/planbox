@@ -1,7 +1,9 @@
-<small>
-  {{#if slug}}
-  <strong><a class="project-preview-link" href="/{{owner "slug"}}/{{ slug }}/" target="_blank">View&nbsp;Plan&nbsp;&rarr;</a></strong>
-  {{else}}
-  (Save your project to preview it)
-  {{/if}}
-</small>
+{{#if slug}}
+<div class="right tiny-margin-left tiny-margin-bottom text-right">
+  <a class="project-preview-link button tiny less-padding no-margin-bottom radius" href="/{{owner "slug"}}/{{ slug }}/" target="_blank">View</a>
+  <a class="button tiny less-padding no-margin-bottom radius" href="/{{owner "slug"}}/{{ slug }}/dashboard/" target="_blank">Dashboard</a>
+</div>
+<div class="hide-for-large-up clearfix"></div>
+{{else}}
+<p class="text-small text-center"><em>(Save your project to preview it.)</em></p>
+{{/if}}
