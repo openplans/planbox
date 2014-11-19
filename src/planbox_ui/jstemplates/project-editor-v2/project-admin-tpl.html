@@ -193,13 +193,15 @@
 
         <div class="project-settings">
           {{!-- <div class="project-save-info-wrapper ">{{>project-save-info-tpl}}</div> --}}
-          {{>project-preview-link-tpl}}
-          <div class="switch left tiny-margin-top">
-            <input id="public-switch" type="checkbox"{{#if public}} checked{{/if}}>
-            <label for="public-switch"></label>
+          <div class="project-preview-wrapper">{{>project-preview-link-tpl}}</div>
+          <div class="some-margin-top">
+            <div class="switch left">
+              <input id="public-switch" type="checkbox"{{#if public}} checked{{/if}}>
+              <label for="public-switch"></label>
+            </div>
+            <label id="public-switch-label" class="inline unassigned">Published</label>
+            <div class="row collapse location-map-region"></div>
           </div>
-          <label id="public-switch-label" class="inline unassigned">Published</label>
-          <div class="row collapse location-map-region"></div>
         </div>
 
       </div>

@@ -5,6 +5,7 @@ from django.contrib import auth
 from django.contrib.contenttypes.generic import GenericForeignKey, GenericRelation
 from django.contrib.gis.db import models
 from django.db.models.signals import post_save
+from django.dispatch import Signal
 from django.utils.text import slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import strip_tags
@@ -42,29 +43,71 @@ class OrderedModelMixin (object):
         return super(OrderedModelMixin, self).save(*args, **kwargs)
 
 
+
+clone_pre_save = Signal(providing_args=["orig_inst", "new_inst"])
+clone_post_save = Signal(providing_args=["orig_inst", "new_inst"])
+
 class CloneableModelMixin (object):
     """
     Mixin providing a clone method that copies all of a models instance's
     fields to a new instance of the model, allowing overrides.
 
     """
-    def clone(self, commit=True, **inst_kwargs):
+    def get_ignore_fields(self, ModelClass):
+        fields = ModelClass._meta.fields
+        pk_name = ModelClass._meta.pk.name
+
+        ignore_field_names = set([pk_name])
+        for fld in fields:
+            if fld.name == pk_name:
+                pk_fld = fld
+                break
+        else:
+            raise Exception('Model %s somehow has no PK field' % (ModelClass,))
+
+        if pk_fld.rel and pk_fld.rel.parent_link:
+            parent_ignore_fields = self.get_ignore_fields(pk_fld.rel.to)
+            ignore_field_names.update(parent_ignore_fields)
+
+        return ignore_field_names
+
+    def get_clone_save_kwargs(self):
+        return {}
+
+    def clone_related(self, onto):
+        pass
+
+    def clone(self, overrides=None, commit=True):
         """
         Create a duplicate of the model instance, replacing any properties
-        specified as keyword arguments.
+        specified as keyword arguments. This is a simple base implementation
+        and may need to be extended for specific classes, since it is
+        does not address related fields in any way.
         """
         fields = self._meta.fields
-        pk_name = self._meta.pk.name
+        ignore_field_names = self.get_ignore_fields(self.__class__)
+        inst_kwargs = {}
 
         for fld in fields:
-            if fld.name != pk_name:
+            if fld.name not in ignore_field_names:
                 fld_value = getattr(self, fld.name)
-                inst_kwargs.setdefault(fld.name, fld_value)
+                inst_kwargs[fld.name] = fld_value
+
+        if overrides:
+            inst_kwargs.update(overrides)
 
         new_inst = self.__class__(**inst_kwargs)
+        clone_pre_save.send(sender=self.__class__, orig_inst=self, new_inst=new_inst)
 
         if commit:
-            new_inst.save()
+            save_kwargs = self.get_clone_save_kwargs()
+            new_inst.save(**save_kwargs)
+
+            # If commit is true, clone the related submissions. Otherwise,
+            # you will have to call clone_related manually on the cloned
+            # instance once it is saved.
+            self.clone_related(onto=new_inst)
+            clone_post_save.send(sender=self.__class__, orig_inst=self, new_inst=new_inst)
 
         return new_inst
 
@@ -138,6 +181,7 @@ class ModelWithSlugMixin (object):
         new_inst.ensure_slug(force=True, basis=self.slug)
         if commit:
             new_inst.save()
+            self.clone_related(onto=new_inst)
         return new_inst
 
 
@@ -488,11 +532,10 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     def slug_exists(self, slug):
         return self.owner.projects.filter(slug__iexact=slug).exists()
 
-    def clone(self, *args, **kwargs):
-        new_inst = super(Project, self).clone(*args, **kwargs)
-        for e in self.events.all(): e.clone(project=new_inst)
-        for s in self.sections.all(): s.clone(project=new_inst)
-        return new_inst
+    def clone_related(self, onto):
+        kwargs = dict(project=onto)
+        for e in self.events.all(): e.clone(overrides=kwargs)
+        for s in self.sections.all(): s.clone(overrides=kwargs)
 
     def owned_by(self, obj):
         UserAuth = auth.get_user_model()
@@ -588,10 +631,9 @@ class Event (OrderedModelMixin, ModelWithSlugMixin, CloneableModelMixin, models.
     def get_siblings(self):
         return self.project.events.all()
 
-    def clone(self, *args, **kwargs):
-        new_inst = super(Event, self).clone(*args, **kwargs)
-        for a in self.attachments.all(): a.clone(attached_to=new_inst)
-        return new_inst
+    def clone_related(self, onto):
+        kwargs = dict(attached_to=onto)
+        for a in self.attachments.all(): a.clone(overrides=kwargs)
 
 
 class Attachment (OrderedModelMixin, CloneableModelMixin, TimeStampedModel):
