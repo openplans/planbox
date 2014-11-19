@@ -5,6 +5,7 @@ from django.contrib import auth
 from django.contrib.contenttypes.generic import GenericForeignKey, GenericRelation
 from django.contrib.gis.db import models
 from django.db.models.signals import post_save
+from django.dispatch import Signal
 from django.utils.text import slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import strip_tags
@@ -41,6 +42,10 @@ class OrderedModelMixin (object):
             self.index = self.get_next_sibling_index()
         return super(OrderedModelMixin, self).save(*args, **kwargs)
 
+
+
+clone_pre_save = Signal(providing_args=["orig_inst", "new_inst"])
+clone_post_save = Signal(providing_args=["orig_inst", "new_inst"])
 
 class CloneableModelMixin (object):
     """
@@ -92,6 +97,7 @@ class CloneableModelMixin (object):
             inst_kwargs.update(overrides)
 
         new_inst = self.__class__(**inst_kwargs)
+        clone_pre_save.send(sender=self.__class__, orig_inst=self, new_inst=new_inst)
 
         if commit:
             save_kwargs = self.get_clone_save_kwargs()
@@ -101,6 +107,7 @@ class CloneableModelMixin (object):
             # you will have to call clone_related manually on the cloned
             # instance once it is saved.
             self.clone_related(onto=new_inst)
+            clone_post_save.send(sender=self.__class__, orig_inst=self, new_inst=new_inst)
 
         return new_inst
 
