@@ -41,6 +41,7 @@ PLANBOX_CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL', '')
 EMAIL_ADDRESS = PLANBOX_CONTACT_EMAIL
 
 PLANBOX_FLAVORS_ROOT_URL = os.environ.get('FLAVORS_ROOT_URL', '')
+PLANBOX_STARTER_PROJECT_TEMPLATE = os.environ.get('STARTER_PROJECT_TEMPLATE')
 
 import dj_database_url
 DATABASES = {'default': dj_database_url.config()}
