@@ -299,7 +299,9 @@ var Planbox = Planbox || {};
       },
       handleSettingsToggle: function(evt) {
         evt.preventDefault();
-        $(evt.currentTarget).parents('.section-settings-toggle-container').next('.section-settings').slideToggle(400);
+        // $(evt.currentTarget).parents('.section-settings-toggle-container').next('.section-settings').slideToggle(400);
+        // TODO: Investigate when/why slideToggle stopped working. -AC
+        $(evt.currentTarget).parents('.section-settings-toggle-container').next('.section-settings').toggleClass('hide');
       },
       save: function(data) {
         var self = this,
