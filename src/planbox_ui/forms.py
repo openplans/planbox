@@ -78,7 +78,7 @@ class UserCreationForm(forms.ModelForm):
             code='duplicate_username',
         )
 
-    def save(self, commit=True, create_team=True):
+    def save(self, commit=True, create_team=True, starter_template=None):
         auth = super(UserCreationForm, self).save(commit=False)
         auth.set_password(self.cleaned_data["password"])
         if commit:
@@ -95,5 +95,10 @@ class UserCreationForm(forms.ModelForm):
             Roundup.objects.create(title='%s\'s Plans' % (team.name,), owner=team)
 
             # TODO: Send welcome email
+
+        if starter_template:
+            if create_team: owner = team
+            else: owner = auth.profile
+            starter_template.clone(overrides={'owner': owner})
 
         return auth
