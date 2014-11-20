@@ -4,12 +4,12 @@
   {% if teams|length == 1 %}
 
     {% with team=teams.0 %}
-    <a class="button expand large radius shadowed no-margin-bottom" href="{% url 'app-new-project' team.slug %}?template=templates/{{ template }}">Create a Plan</a>
+    <a class="button expand large radius shadowed no-margin-bottom" href="{% url 'app-new-project' team.slug %}?template=templates/{{ template }}">Create a Map</a>
     {% endwith %}
 
   {% else %}
 
-    <button class="button expand large radius shadowed no-margin-bottom" data-dropdown="team-selector-{{ template }}" aria-controls="team-selector-{{ template }}" aria-expanded="false">Create plan for&hellip;</button>
+    <button class="button expand large radius shadowed no-margin-bottom" data-dropdown="team-selector-{{ template }}" aria-controls="team-selector-{{ template }}" aria-expanded="false">Create map for&hellip;</button>
     <ul id="team-selector-{{ template }}" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
       {% for team in teams %}
       <li><a href="{% url 'app-new-project' team.slug %}?template=templates/{{ template }}">{{ team.name }}</a></li>
@@ -21,6 +21,6 @@
 
 {% else %}
 
-  <a class="button expand large radius" href="{% url 'app-signin' %}?next={{ request.get_full_path }}">Create a Plan</a>
+  <a class="button expand large radius" href="{% url 'app-signin' %}?next={{ request.get_full_path }}">Create a Map</a>
 
 {% endif %} {# user.is_authenticated #}

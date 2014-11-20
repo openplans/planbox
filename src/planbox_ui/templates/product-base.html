@@ -59,7 +59,7 @@ OpenPlans
           <a>{{ user.username }}</a>
           <ul class="dropdown">
             {% for team in user.profile.teams.all %}
-            <li><a href="{% url 'app-profile' profile_slug=team.slug %}" data-log-click>{{ team.name }} Plans</a></li>
+            <li><a href="{% url 'app-profile' profile_slug=team.slug %}" data-log-click>{{ team.name }} Maps</a></li>
             {% endfor %}
             <li class="divider"></li>
             <li><a href="/profile/" data-log-click>My Profile</a></li>

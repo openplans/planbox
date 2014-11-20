@@ -1,0 +1,20 @@
+<div style="position:relative;">
+
+  <span id="setup" class="offset-anchor"></span>
+  <span id="pricing" class="offset-anchor"></span>
+  <h2 class="extra-padding-top"><a href="#pricing" class="unstyled-link">Pricing</a></h2>
+  <h3 class=""><em>The first {{ settings.TRIAL_DAYS }}&nbsp;days are on us!</em></h3>
+  <p class="text-large">{% if user.is_authenticated %}Choose from{% else %}<a href="/signup/"><strong>Sign up</strong></a> and start making maps with{% endif %}
+    our tried-and-tested <a href="#"><strong>map templates</strong></a>&mdash;they're fully functional prior to payment. Customize and review with your team. When you're ready, select a payment option that best suits your needs. 
+  </p>
+
+  {% include 'payment-options.html' %}
+
+  <div class="text-center">
+    <p class="tiny-margin-bottom"><strong>Monthly payments can be stopped at any&nbsp;time. Maps are active for 31 days following the last monthly payment.</strong></p>
+    <p class=""><strong>One-time payments are good for the life of your&nbsp;project.</strong></p>
+    <p class="tiny-margin-bottom">Require a registered vendor? <br>Need to pay by an alternate method? <br>Want to purchase multiple projects? <br>Working on a community project?</p>
+    <a href="mailto:{{ settings.PLANBOX_CONTACT_EMAIL }}" class="open-intercom button small radius less-padding"><strong>Contact Us</strong></a>
+  </div>
+
+</div>

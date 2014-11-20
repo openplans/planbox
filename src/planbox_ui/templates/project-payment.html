@@ -14,7 +14,7 @@
       {% endif %}
       </small>
     </h2>
-    <h3 class="some-margin-bottom">Activate your plan to continue using it.</h3>
+    <h3 class="some-margin-bottom">Activate your map to continue using it.</h3>
 
     {% include 'payment-options.html' %}
   </div>
@@ -27,12 +27,12 @@
 
     <div class="tabs-content container some-padding-right some-padding-left">
       <div class="content active" id="monthly">
-        {% with form_token=settings.MOONCLERK_MONTHLY_TOKEN title='OpenPlans Monthly Plan Subscription' %}
+        {% with form_token=settings.MOONCLERK_MONTHLY_TOKEN title='OpenPlans Monthly Subscription' %}
         <div id="mc{{form_token}}"><a href="https://app.moonclerk.com/pay/{{form_token}}">{{title}}</a></div><script type="text/javascript">var mc{{form_token}};(function(d,t) {var s=d.createElement(t),opts={"checkoutToken":"{{form_token}}","cid":encodeURIComponent("{{project_token}}"),"width":"100%"};s.src='https://d2l7e0y6ygya2s.cloudfront.net/assets/embed.js';s.onload=s.onreadystatechange = function() {var rs=this.readyState;if(rs) if(rs!='complete') if(rs!='loaded') return;try {mc{{form_token}}=new MoonclerkEmbed(opts);mc{{form_token}}.display();} catch(e){}};var scr=d.getElementsByTagName(t)[0];scr.parentNode.insertBefore(s,scr);})(document,'script');</script>
         {% endwith %}
       </div>
       <div class="content" id="one-time">
-        {% with form_token=settings.MOONCLERK_ONETIME_TOKEN title='OpenPlans One-time Play Payment' %}
+        {% with form_token=settings.MOONCLERK_ONETIME_TOKEN title='OpenPlans One-time Payment' %}
         <div id="mc{{form_token}}"><a href="https://app.moonclerk.com/pay/{{form_token}}">{{title}}</a></div><script type="text/javascript">var mc{{form_token}};(function(d,t) {var s=d.createElement(t),opts={"checkoutToken":"{{form_token}}","cid":encodeURIComponent("{{project_token}}"),"width":"100%"};s.src='https://d2l7e0y6ygya2s.cloudfront.net/assets/embed.js';s.onload=s.onreadystatechange = function() {var rs=this.readyState;if(rs) if(rs!='complete') if(rs!='loaded') return;try {mc{{form_token}}=new MoonclerkEmbed(opts);mc{{form_token}}.display();} catch(e){}};var scr=d.getElementsByTagName(t)[0];scr.parentNode.insertBefore(s,scr);})(document,'script');</script>
         {% endwith %}
       </div>
