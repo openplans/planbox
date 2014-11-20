@@ -1,3 +1,9 @@
 <div data-alert class="multi-user-warning alert-box alert radius">
-  <small>WARNING:</small> {{last_opened_by.slug}} may be editing this plan!
+  <small>WARNING:</small> 
+  {{#if last_opened_by.name}}
+  {{last_opened_by.name}}
+  {{else }}
+  {{last_opened_by.slug}}
+  {{/if}}  
+  may be editing this plan!
 </div>
