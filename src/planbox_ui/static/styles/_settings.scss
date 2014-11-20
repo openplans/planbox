@@ -1020,8 +1020,10 @@ $price-title-bg: #666;
 // $price-title-align: center;
 // $price-title-color: $smoke;
 // $price-title-weight: $font-weight-normal;
+$price-title-weight: $header-font-weight;
 // $price-title-size: rem-calc(16);
 // $price-title-font-family: $body-font-family;
+$price-title-font-family: $header-font-family;
 
 // We use these to control the price styles
 // $price-money-bg: $vapor  ;
@@ -1038,6 +1040,7 @@ $price-title-bg: #666;
 // $price-desc-padding: rem-calc(15);
 // $price-desc-align: center;
 // $price-desc-font-size: rem-calc(12);
+$price-desc-font-size: $paragraph-font-size;
 // $price-desc-weight: $font-weight-normal;
 // $price-desc-line-height: 1.4;
 // $price-desc-bottom-border: dotted 1px $gainsboro;
@@ -1047,6 +1050,7 @@ $price-title-bg: #666;
 // $price-item-padding: rem-calc(15);
 // $price-item-align: center;
 // $price-item-font-size: rem-calc(14);
+$price-item-font-size: rem-calc(13);
 // $price-item-weight: $font-weight-normal;
 // $price-item-bottom-border: dotted 1px $gainsboro;
 

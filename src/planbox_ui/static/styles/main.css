@@ -5853,9 +5853,9 @@ ul.pagination li {
   padding: 0.9375rem 1.25rem;
   text-align: center;
   color: #EEEEEE;
-  font-weight: normal;
+  font-weight: 700;
   font-size: 1rem;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: "Bitter", serif;
 }
 /* line 143, ../bower_components/foundation/scss/foundation/components/_pricing-tables.scss */
 .pricing-table .price {
@@ -5873,7 +5873,7 @@ ul.pagination li {
   padding: 0.9375rem;
   text-align: center;
   color: #777777;
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: normal;
   line-height: 1.4;
   border-bottom: dotted 1px #DDDDDD;
@@ -5884,7 +5884,7 @@ ul.pagination li {
   padding: 0.9375rem;
   text-align: center;
   color: #333333;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: normal;
   border-bottom: dotted 1px #DDDDDD;
 }
@@ -9933,6 +9933,14 @@ ul.pagination li.active a, ul.pagination li.active button {
 /* line 74, ../bower_components/foundation/scss/foundation/components/_pagination.scss */
 ul.pagination li.active a:hover, ul.pagination li.active a:focus, ul.pagination li.active button:hover, ul.pagination li.active button:focus {
   background: #308fbf;
+}
+
+/*--------------------------------------------------
+  Pricing Tables
+--------------------------------------------------*/
+/* line 455, _foundation.scss */
+.bullet-item:last-child {
+  border-bottom: 0;
 }
 
 @media only screen and (min-width: 40.063em) {
