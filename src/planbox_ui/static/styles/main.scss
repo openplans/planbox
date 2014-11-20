@@ -1419,12 +1419,7 @@ body.shareabouts-panel-hovered {
 
 .table-container tbody tr:hover,
 .table-container tr.is-hovering {
-  background-color: #1f5c7a;
-}
-
-.table-container tbody tr:hover td,
-.table-container tr.is-hovering td {
-  color: white;
+  background-color: scale-color($secondary-color, $saturation: -25%, $lightness: 75%);
 }
 
 

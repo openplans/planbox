@@ -3,11 +3,11 @@ from django.conf import settings
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
-from planbox_data.models import clone_pre_save, Section
+from planbox_data.models import clone_pre_save, Section, CloneableModelMixin
 
 
 @python_2_unicode_compatible
-class Preauthorization (models.Model):
+class Preauthorization (CloneableModelMixin, models.Model):
     username = models.TextField(blank=True, help_text=_('The username of the Shareabouts user'))
     project = models.OneToOneField('planbox_data.Project', related_name='shareabouts_preauthorization')
 

@@ -1,93 +1,98 @@
+  <div id="comments-datatable" class="datatable row collapse">
 
-
-  <div id="comments-datatable" class="datatable">
-
-    <div class="row">
-      <div class="columns large-6">
-        <input type="text" class="search" placeholder="Search" />
-      </div>
-
-      <div class="columns large-6">
-        <div class="pagination-centered">
-          <ul class="pagination some-margin-bottom"><li>&hellip;</li></ul>
+    <div class="columns large-12">
+      <div class="row">
+        <div class="columns medium-9 large-10">
+          <input type="text" class="search" placeholder="Search" />
+        </div>
+        <div class="columns medium-3 large-2">
+          <a href="../edit/#section-map-wrapper" class="button expand small tertiary less-padding radius">Download Data</a>
         </div>
       </div>
     </div>
 
-    <div class="scroll-nav">
-      <a href="#" class="scroll-button left hide">&#10096;</a>
-      <a href="#" class="scroll-button right hide">&#10097;</a>
+    <div class="columns large-12">
+
+      <div class="scroll-nav">
+        <a href="#" class="scroll-button left hide">&#10096;</a>
+        <a href="#" class="scroll-button right hide">&#10097;</a>
+      </div>
+
+      <div class="table-container">
+
+        <table class="" role="grid">
+          <thead>
+            <th class="visible-header"><div class="table-column">
+              <button class="sort tiny less-padding no-margins expand" data-sort="visible-value">visible</button>
+            </div></th>
+
+            {{#each headers}}
+            <th class="{{.}}-header"><div class="table-column
+              {{#is . 'comment'}}table-column-30rem{{/is}}">
+
+              {{#lookup ../labels .}}
+              <button class="sort tiny less-padding no-margins expand" data-sort="{{..}}">{{.}}</button>
+              {{^}}
+              <button class="sort tiny less-padding no-margins expand" data-sort="{{..}}">{{.}}</button>
+              {{/lookup}}
+            </div></th>
+            {{/each}}
+          </thead>
+          <tbody class="list">
+            {{#each comments}}
+            <tr class="{{#if visible}}row-visible{{^}}row-invisible{{/if}}">
+              <td class="visible-cell">
+                <div class="table-column">
+                  <div class="visible-value hide">{{#if visible}}true{{^}}false{{/if}}</div>
+                  <input type="checkbox" class="visible-checkbox" {{#if visible}}checked{{/if}} data-shareabouts-id="{{ id }}">
+                </div>
+              </td>
+
+              {{#each ../headers}}
+              <td class="{{.}}-cell"><div class="table-column
+                {{#is . 'comment'}}table-column-30rem text-left{{/is}}">
+
+                {{#buildContext attr=. place=..}}
+
+                  {{#isTimeAttr attr}}
+                    {{#resolve place attr}}
+                      <div class="{{../attr}} hide">{{.}}</div>
+                      <time datetime="{{.}}">{{fromnow .}}</time>
+                    {{/resolve}}
+                  {{/isTimeAttr}}
+
+                  {{#isImageAttr attr}}
+                    <div class="{{attr}}">
+                      <img src="{{resolve place attr}}" class="shareabouts-image-field">
+                    </div>
+                  {{/isImageAttr}}
+
+                  {{#isUrlAttr attr}}
+                    <div class="{{attr}}">
+                      {{#resolve place attr}}
+                        <a href="{{.}}" class="shareabouts-url-field">{{.}}</a>
+                      {{/resolve}}
+                    </div>
+                  {{/isUrlAttr}}
+
+                  {{#isDefaultAttr attr}}
+                    <div class="{{attr}}">{{resolve place attr}}</div>
+                  {{/isDefaultAttr}}
+
+                {{/buildContext}}
+              </div></td>
+              {{/each}}
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+
+      </div>
+
     </div>
 
-    <div class="table-container">
-
-      <table class="" role="grid">
-        <thead>
-          <th class="visible-header"><div class="table-column">
-            <button class="sort tiny less-padding no-margins expand" data-sort="visible-value">visible</button>
-          </div></th>
-
-          {{#each headers}}
-          <th class="{{.}}-header"><div class="table-column
-            {{#is . 'comment'}}table-column-30rem{{/is}}">
-
-            {{#lookup ../labels .}}
-            <button class="sort tiny less-padding no-margins expand" data-sort="{{..}}">{{.}}</button>
-            {{^}}
-            <button class="sort tiny less-padding no-margins expand" data-sort="{{..}}">{{.}}</button>
-            {{/lookup}}
-          </div></th>
-          {{/each}}
-        </thead>
-        <tbody class="list">
-          {{#each comments}}
-          <tr class="{{#if visible}}row-visible{{^}}row-invisible{{/if}}">
-            <td class="visible-cell">
-              <div class="table-column">
-                <div class="visible-value hide">{{#if visible}}true{{^}}false{{/if}}</div>
-                <input type="checkbox" class="visible-checkbox" {{#if visible}}checked{{/if}} data-shareabouts-id="{{ id }}">
-              </div>
-            </td>
-
-            {{#each ../headers}}
-            <td class="{{.}}-cell"><div class="table-column
-              {{#is . 'comment'}}table-column-30rem text-left{{/is}}">
-
-              {{#buildContext attr=. place=..}}
-
-                {{#isTimeAttr attr}}
-                  {{#resolve place attr}}
-                    <div class="{{../attr}} hide">{{.}}</div>
-                    <time datetime="{{.}}">{{fromnow .}}</time>
-                  {{/resolve}}
-                {{/isTimeAttr}}
-
-                {{#isImageAttr attr}}
-                  <div class="{{attr}}">
-                    <img src="{{resolve place attr}}" class="shareabouts-image-field">
-                  </div>
-                {{/isImageAttr}}
-
-                {{#isUrlAttr attr}}
-                  <div class="{{attr}}">
-                    {{#resolve place attr}}
-                      <a href="{{.}}" class="shareabouts-url-field">{{.}}</a>
-                    {{/resolve}}
-                  </div>
-                {{/isUrlAttr}}
-
-                {{#isDefaultAttr attr}}
-                  <div class="{{attr}}">{{resolve place attr}}</div>
-                {{/isDefaultAttr}}
-
-              {{/buildContext}}
-            </div></td>
-            {{/each}}
-          </tr>
-          {{/each}}
-        </tbody>
-      </table>
-
+    <div class="columns large-12 pagination-centered">
+      <ul class="pagination no-margins"><li>&hellip;</li></ul>
     </div>
 
   </div><!-- end #comments-datatable.table-container -->

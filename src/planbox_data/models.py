@@ -537,6 +537,14 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
         for e in self.events.all(): e.clone(overrides=kwargs)
         for s in self.sections.all(): s.clone(overrides=kwargs)
 
+        # TODO: This should be handled by signals in shareabouts_integration.
+        # Maybe a pre_clone_related signal.
+        from django.core.exceptions import ObjectDoesNotExist
+        try:
+            self.shareabouts_preauthorization.clone(overrides=kwargs)
+        except ObjectDoesNotExist:
+            pass
+
     def owned_by(self, obj):
         UserAuth = auth.get_user_model()
         if isinstance(obj, UserAuth):

@@ -446,3 +446,12 @@ input[type="url"] {
 ul.pagination li.active {
   @include pagination-current-item();
 }
+
+
+/*--------------------------------------------------
+  Pricing Tables
+--------------------------------------------------*/
+
+.bullet-item:last-child {
+  border-bottom: 0;
+}
