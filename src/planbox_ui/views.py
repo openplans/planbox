@@ -291,7 +291,7 @@ class SignupView (AppMixin, LogoutRequired, SSLRequired, FormView):
 
         try:
             owner_slug, project_slug = template_string.strip('/').split('/')
-        except ValueError:
+        except (AttributeError, ValueError):
             return None
 
         try:
