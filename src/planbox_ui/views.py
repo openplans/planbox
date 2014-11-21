@@ -236,6 +236,8 @@ class ProjectFlavorView (AppMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjectFlavorView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+        context['request'] = self.request
         context['details'] = self.render_flavor_details(context)
         return context
 
