@@ -2,21 +2,6 @@
 
 {% block page %}
 
-<section class="extra-padding-bottom">
-  <div class="extra-padding-top extra-padding-bottom shareabouts-page-header">
-
-    {{details|safe}}
-
-    <div class="row">
-      <div class="large-4 columns some-margin-bottom">
-        {% include 'create-plan-button.html' with template='shareabouts-bikeparking' %}
-      </div>
-      <div class="columns">
-        {% include 'payment-options.html' %}
-      </div>
-    </div>
-
-  </div>
-</section>
+  {{details|safe}}
 
 {% endblock %}
