@@ -217,7 +217,7 @@ class AboutView (AppMixin, TemplateView):
     template_name = 'about.html'
 
 class ShareaboutsView (AppMixin, TemplateView):
-    template_name = 'shareabouts.html'
+    template_name = 'map-flavors.html'
 
 class ShareaboutsAuthSuccessView (AppMixin, TemplateView):
     template_name = 'shareabouts/auth-success.html'

@@ -522,6 +522,30 @@ section, footer {
     &.fade3 { -webkit-animation-name: fade3; animation-name: fade3; }
     &.fade4 { -webkit-animation-name: fade4; animation-name: fade4; }
   }
+  a:hover:after {
+    content: 'Demo \2192';
+    display: block;
+    background-color: scale-color($primary-color, $lightness: -50%, $alpha: -75%);
+    color: #fff;
+    position: absolute;
+    top: 11px;
+    left: 57px;
+    width: 385px;
+    height: 246px;
+    line-height: 246px;
+    text-align: center;
+    font-family: 'Bitter', serif;
+    font-weight: 700;
+    font-size: 3rem;
+    text-shadow: 0 0 0.5rem scale-color($primary-color, $lightness: -75%);;
+    @media #{$medium-up} {
+      top: 22px;
+      left: 115px;
+      width: 770px;
+      height: 493px;
+      line-height: 493px;
+    }
+  }
 }
 // 5 images * 5 seconds ea = 25 seconds
 // 100 keyframes / 25 = 4 keyframes per second
