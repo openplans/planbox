@@ -3,9 +3,14 @@
     <ul class="pricing-table">
       <li class="title">Account</li>
       <li class="price">Free</li>
-      <li class="description"><a href="/signup/" class=""><strong>Sign up</strong></a> and start making maps. Try out all our templates&mdash;they're fully functional prior to payment.</li>
-      <li class="bullet-item">Create an unlimited number of trial maps</li>
-      <li class="bullet-item">Test all the <!-- <a href="#"> -->features<!-- </a> -->, <em>risk free!</em></li>
+      <li class="description">
+        {% if user.is_authenticated %}Start making maps.
+        {% else %}<a href="/signup/"><strong>Sign up</strong></a> and start making maps.
+        {% endif %}
+        Try out all our <a href="/map-flavors/#"><strong>templates</strong></a>&mdash;they're fully functional prior to payment. 
+      </li>
+      <li class="bullet-item">Create an unlimited number of maps and test all the <!-- <a href="#"> -->features<!-- </a> -->, <em>risk free!</em></li>
+      <li class="bullet-item">Customize &amp; review with your team. When you're ready, select a payment option that best suits your needs.</li>
       <li class="cta-button"><a class="button large less-padding radius expand" href="/signup/">Get Started</a></li>
     </ul>
   </div>
@@ -15,7 +20,7 @@
       <li class="price">$290<small>/month <small><strong>OR</strong></small></small></li>
       <li class="price" style="background-color:PaleGreen;position:relative;box-shadow:0 0 8px 2px Green;border-radius:3px;text-shadow:1px 1px 0 PaleGreen;margin-right:-2px;margin-left:-3px;"><span style="position:absolute;top:-0.75em;left:-0.75em;-webkit-transform:rotate(-18deg);background-color:DimGray;font-weight:bold;color:#fff;font-size:12px;line-height:1.2;padding:0.875em 0.75em;border-radius:100%;box-shadow: 0 0 8px 2px LightGreen;font-family:Bitter,sans-serif;text-shadow:none;">BEST<br>DEAL</span>$2,900<small> one-time</small></li>
       <!-- TODO: make TRIAL_DAYS works as a variable -->
-      <li class="description">Maps are free for 15{# {{ settings.TRIAL_DAYS }} #}&nbsp;days. After that, you can pay as you go. If you need your map for more than a year, save over 20% with a one-time payment for the life of your project.</li>
+      <li class="description">Maps are free for 15 days. After that, you can pay as you go. For longer projects, a one-time payment can save you <strong>20%&nbsp;or&nbsp;more</strong>.</li>
       <li class="bullet-item">Collect up to <strong>10,000 points</strong> per map</li>
     </ul>    
   </div>
@@ -27,7 +32,7 @@
       <li class="description">Need more? We offer many services, including consultation with the OpenPlans team,
         unlimited email &amp; phone support,
         daily email reports tailored to fit your project,
-        custom map layers, survey configuration, icons, colors, domain name, and&hellip;</li>
+        custom map layers, survey configuration, icons, colors, domain name&hellip;</li>
         <!-- TODO: make PLANBOX_CONTACT_EMAIL works as a variable -->
         <li class="bullet-item"><a href="mailto:hello@openplans.org{# {{ settings.PLANBOX_CONTACT_EMAIL }} #}" class="open-intercom"><strong>CONTACT US TO LEARN MORE</strong></a></li>
     </ul>    
