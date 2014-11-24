@@ -9564,27 +9564,37 @@ p.text-xxlarge {
   color: #333333;
 }
 
-/* line 154, _foundation.scss */
+/* line 152, _foundation.scss */
+.down-button {
+  background-color: #ddd;
+  padding: 0;
+  font-size: 2.5rem;
+  line-height: 1;
+  width: 3rem;
+  height: 3rem;
+}
+
+/* line 163, _foundation.scss */
 a.alert {
   color: #f24c3d;
 }
 
-/* line 157, _foundation.scss */
+/* line 166, _foundation.scss */
 .link {
   color: #308fbf;
 }
 
-/* line 160, _foundation.scss */
+/* line 169, _foundation.scss */
 .unstyled-link {
   color: inherit;
   text-decoration: inherit;
 }
 
-/* line 167, _foundation.scss */
+/* line 176, _foundation.scss */
 .project-text-content ul, .pen ul {
   list-style: disc !important;
 }
-/* line 170, _foundation.scss */
+/* line 179, _foundation.scss */
 .project-text-content ol, .pen ol {
   list-style: decimal !important;
 }
@@ -9592,11 +9602,11 @@ a.alert {
 /*--------------------------------------------------
   Images
 --------------------------------------------------*/
-/* line 181, _foundation.scss */
+/* line 190, _foundation.scss */
 img.block {
   display: block;
 }
-/* line 182, _foundation.scss */
+/* line 191, _foundation.scss */
 img.inline-block {
   display: inline-block;
 }
@@ -9604,22 +9614,22 @@ img.inline-block {
 /*--------------------------------------------------
   Grid & Box Model
 --------------------------------------------------*/
-/* line 191, _foundation.scss */
+/* line 200, _foundation.scss */
 .force-inline {
   display: inline !important;
 }
 
-/* line 194, _foundation.scss */
+/* line 203, _foundation.scss */
 .force-inline-block {
   display: inline-block !important;
 }
 
-/* line 197, _foundation.scss */
+/* line 206, _foundation.scss */
 .force-block {
   display: block !important;
 }
 
-/* line 202, _foundation.scss */
+/* line 211, _foundation.scss */
 .full-width {
   width: 100%;
   margin-left: auto;
@@ -9627,202 +9637,202 @@ img.inline-block {
   max-width: initial;
 }
 
-/* line 210, _foundation.scss */
+/* line 219, _foundation.scss */
 .no-margins {
   margin: 0 !important;
 }
 
-/* line 213, _foundation.scss */
+/* line 222, _foundation.scss */
 .no-paddings {
   padding: 0 !important;
 }
 
-/* line 218, _foundation.scss */
+/* line 227, _foundation.scss */
 .no-margin-top {
   margin-top: 0 !important;
 }
 
-/* line 221, _foundation.scss */
+/* line 230, _foundation.scss */
 .no-margin-right {
   margin-right: 0 !important;
 }
 
-/* line 224, _foundation.scss */
+/* line 233, _foundation.scss */
 .no-margin-bottom {
   margin-bottom: 0 !important;
 }
 
-/* line 227, _foundation.scss */
+/* line 236, _foundation.scss */
 .no-margin-left {
   margin-left: 0 !important;
 }
 
-/* line 231, _foundation.scss */
+/* line 240, _foundation.scss */
 .tiny-margin {
   margin: 0.5rem !important;
 }
 
-/* line 234, _foundation.scss */
+/* line 243, _foundation.scss */
 .tiny-margin-top {
   margin-top: 0.5rem !important;
 }
 
-/* line 237, _foundation.scss */
+/* line 246, _foundation.scss */
 .tiny-margin-right {
   margin-right: 0.5rem !important;
 }
 
-/* line 240, _foundation.scss */
+/* line 249, _foundation.scss */
 .tiny-margin-bottom {
   margin-bottom: 0.5rem !important;
 }
 
-/* line 243, _foundation.scss */
+/* line 252, _foundation.scss */
 .tiny-margin-left {
   margin-left: 0.5rem !important;
 }
 
-/* line 247, _foundation.scss */
+/* line 256, _foundation.scss */
 .some-margin {
   margin: 0.9375rem !important;
 }
 
-/* line 250, _foundation.scss */
+/* line 259, _foundation.scss */
 .some-margin-top {
   margin-top: 0.9375rem !important;
 }
 
-/* line 253, _foundation.scss */
+/* line 262, _foundation.scss */
 .some-margin-right {
   margin-right: 0.9375rem !important;
 }
 
-/* line 256, _foundation.scss */
+/* line 265, _foundation.scss */
 .some-margin-bottom {
   margin-bottom: 0.9375rem !important;
 }
 
-/* line 259, _foundation.scss */
+/* line 268, _foundation.scss */
 .some-margin-left {
   margin-left: 0.9375rem !important;
 }
 
-/* line 263, _foundation.scss */
+/* line 272, _foundation.scss */
 .extra-margin {
   margin: 2rem !important;
 }
 
-/* line 266, _foundation.scss */
+/* line 275, _foundation.scss */
 .extra-margin-top {
   margin-top: 2rem !important;
 }
 
-/* line 269, _foundation.scss */
+/* line 278, _foundation.scss */
 .extra-margin-right {
   margin-right: 2rem !important;
 }
 
-/* line 272, _foundation.scss */
+/* line 281, _foundation.scss */
 .extra-margin-bottom {
   margin-bottom: 2rem !important;
 }
 
-/* line 275, _foundation.scss */
+/* line 284, _foundation.scss */
 .extra-margin-left {
   margin-left: 2rem !important;
 }
 
-/* line 280, _foundation.scss */
+/* line 289, _foundation.scss */
 .no-padding-top {
   padding-top: 0 !important;
 }
 
-/* line 283, _foundation.scss */
+/* line 292, _foundation.scss */
 .no-padding-right {
   padding-right: 0 !important;
 }
 
-/* line 286, _foundation.scss */
+/* line 295, _foundation.scss */
 .no-padding-bottom {
   padding-bottom: 0 !important;
 }
 
-/* line 289, _foundation.scss */
+/* line 298, _foundation.scss */
 .no-padding-left {
   padding-left: 0 !important;
 }
 
-/* line 293, _foundation.scss */
+/* line 302, _foundation.scss */
 .tiny-padding {
   padding: 0.5rem !important;
 }
 
-/* line 296, _foundation.scss */
+/* line 305, _foundation.scss */
 .tiny-padding-top {
   padding-top: 0.5rem !important;
 }
 
-/* line 299, _foundation.scss */
+/* line 308, _foundation.scss */
 .tiny-padding-right {
   padding-right: 0.5rem !important;
 }
 
-/* line 302, _foundation.scss */
+/* line 311, _foundation.scss */
 .tiny-padding-bottom {
   padding-bottom: 0.5rem !important;
 }
 
-/* line 305, _foundation.scss */
+/* line 314, _foundation.scss */
 .tiny-padding-left {
   padding-left: 0.5rem !important;
 }
 
-/* line 309, _foundation.scss */
+/* line 318, _foundation.scss */
 .some-padding {
   padding: 0.9375rem !important;
 }
 
-/* line 312, _foundation.scss */
+/* line 321, _foundation.scss */
 .some-padding-top {
   padding-top: 0.9375rem !important;
 }
 
-/* line 315, _foundation.scss */
+/* line 324, _foundation.scss */
 .some-padding-right {
   padding-right: 0.9375rem !important;
 }
 
-/* line 318, _foundation.scss */
+/* line 327, _foundation.scss */
 .some-padding-bottom {
   padding-bottom: 0.9375rem !important;
 }
 
-/* line 321, _foundation.scss */
+/* line 330, _foundation.scss */
 .some-padding-left {
   padding-left: 0.9375rem !important;
 }
 
-/* line 325, _foundation.scss */
+/* line 334, _foundation.scss */
 .extra-padding {
   padding: 2rem !important;
 }
 
-/* line 328, _foundation.scss */
+/* line 337, _foundation.scss */
 .extra-padding-top {
   padding-top: 2rem !important;
 }
 
-/* line 331, _foundation.scss */
+/* line 340, _foundation.scss */
 .extra-padding-right {
   padding-right: 2rem !important;
 }
 
-/* line 334, _foundation.scss */
+/* line 343, _foundation.scss */
 .extra-padding-bottom {
   padding-bottom: 2rem !important;
 }
 
-/* line 337, _foundation.scss */
+/* line 346, _foundation.scss */
 .extra-padding-left {
   padding-left: 2rem !important;
 }
@@ -9830,13 +9840,13 @@ img.inline-block {
 /*--------------------------------------------------
   Magellan & Location Hashes
 --------------------------------------------------*/
-/* line 347, _foundation.scss */
+/* line 356, _foundation.scss */
 .page-anchor {
   position: relative;
   top: -80px;
 }
 
-/* line 353, _foundation.scss */
+/* line 362, _foundation.scss */
 .offset-anchor {
   display: block;
   position: absolute;
@@ -9846,7 +9856,7 @@ img.inline-block {
 /*--------------------------------------------------
   Forms
 --------------------------------------------------*/
-/* line 378, _foundation.scss */
+/* line 387, _foundation.scss */
 input[type="text"].inline-input,
 input[type="password"].inline-input,
 input[type="date"].inline-input,
@@ -9868,15 +9878,15 @@ input[type="url"].inline-input {
   width: auto;
 }
 
-/* line 390, _foundation.scss */
+/* line 399, _foundation.scss */
 .switch + label.inline {
   margin-left: 4.5rem;
 }
-/* line 393, _foundation.scss */
+/* line 402, _foundation.scss */
 .switch.small + label.inline {
   margin-left: 4rem;
 }
-/* line 396, _foundation.scss */
+/* line 405, _foundation.scss */
 .switch.large + label.inline {
   margin-left: 5.5rem;
 }
@@ -9884,14 +9894,14 @@ input[type="url"].inline-input {
 /*--------------------------------------------------
   Dropdown Menus
 --------------------------------------------------*/
-/* line 406, _foundation.scss */
+/* line 415, _foundation.scss */
 .dropdown,
 .f-dropdown {
   box-shadow: -5px 5px 0 rgba(51, 51, 51, 0.2);
   outline: 0;
 }
 
-/* line 413, _foundation.scss */
+/* line 422, _foundation.scss */
 .f-dropdown li a.disabled {
   background-color: #eee;
   color: #ccc;
@@ -9901,7 +9911,7 @@ input[type="url"].inline-input {
 /*--------------------------------------------------
   Panels
 --------------------------------------------------*/
-/* line 425, _foundation.scss */
+/* line 434, _foundation.scss */
 .panel-header {
   margin: -1.25rem;
   margin-bottom: 1.25rem;
@@ -9911,11 +9921,11 @@ input[type="url"].inline-input {
   padding-bottom: 0.625rem;
   background-color: #6c7180;
 }
-/* line 433, _foundation.scss */
+/* line 442, _foundation.scss */
 .panel-header h1, .panel-header h2, .panel-header h3, .panel-header h4, .panel-header h5, .panel-header h6 {
   color: #eee;
 }
-/* line 436, _foundation.scss */
+/* line 445, _foundation.scss */
 .panel-header .button {
   margin: -0.25rem -0.75rem;
 }
@@ -9938,7 +9948,7 @@ ul.pagination li.active a:hover, ul.pagination li.active a:focus, ul.pagination 
 /*--------------------------------------------------
   Pricing Tables
 --------------------------------------------------*/
-/* line 455, _foundation.scss */
+/* line 464, _foundation.scss */
 .bullet-item:last-child {
   border-bottom: 0;
 }
