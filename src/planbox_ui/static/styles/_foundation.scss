@@ -149,6 +149,15 @@ p {
   color: $body-font-color;
 }
 
+.down-button {
+  background-color: #ddd;
+  padding: 0;
+  font-size: 2.5rem;
+  line-height: 1;
+  width: 3rem;
+  height: 3rem;
+}
+
 
 // Extend link styles
 a.alert {
