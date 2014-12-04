@@ -51,12 +51,19 @@ var Planbox = Planbox || {};
         collection: this.model.get('attachments')
       }));
 
-      var nowTime = $.now();
-      var eventTime = this.$('.event-datetime').attr('data-datetime');
+      var nowTime = new Date();
+      var eventTime = this.$('.event-datetime').attr('data-datetime')
+        , eventStartTime
+        , eventEndTime;
+
+      // Assume that all events span a full day
+      eventStartTime = new Date(eventTime);
+      eventStartTime.setHours(0, 0, 0, 0);
+      eventEndTime = new Date(eventTime);
+      eventEndTime.setHours(11, 59, 59, 999);
 
       // Associate with a past or future event
-      eventTime = new Date(eventTime);
-      if ( eventTime < nowTime ) {
+      if ( eventEndTime < nowTime ) {
         this.$el.addClass('past-event');
       } else {
         this.$el.addClass('future-event');
