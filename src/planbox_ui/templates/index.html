@@ -9,24 +9,8 @@
 
 <section class="extra-padding-top some-padding-bottom" id="get-started">
   <div class="row">
-    <div class="medium-7 columns">
+    <div class="medium-7 columns medium-centered text-center">
       <p class="">Use OpenPlans to set up a collaborative map for community input. Our tried and tested templates help you collect and manage feedback about street issues, suggestions for new bike and walking infrastructure, problems and opportunities for neighborhood planning, and more.</p>
-    </div>
-    <div class="medium-5 columns">
-      <h5>Create an Account:</h5>
-      <form method="GET" action="{% url 'app-signup' %}">
-        <div class="row collapse">
-          <div class="small-8 columns">
-            <div class="float-label-container">
-              <input required name="email" type="email" class="float-label-input" placeholder="email@example.org">
-              <label for="email" class="float-label">Email Address</label>
-            </div>
-          </div>
-          <div class="small-4 columns">
-            <button class="button postfix">Get Started</button>
-          </div>
-        </div>
-      </form>
     </div>
   </div>
 </section>
@@ -38,7 +22,6 @@
       <div class="flavor-grid text-left some-margin-bottom">
         {% include 'flavor-list.html' %}
       </div>
-      <a href="/map-flavors/#setup" class="button large round">Pricing Options</a>
     </div>
   </div>
 </section>
@@ -120,10 +103,5 @@
   </div>
 </section>
 
-<section class="row extra-padding-bottom">
-  <div class="columns">
-    {% include 'pricing-section.html' %}
-  </div>
-</section>
 
 {% endblock %}

@@ -12,13 +12,19 @@
       <h3>Sign In</h3>
 
       <form method="POST" class="panel clearfix">
+        <div class="alert-box radius alert">
+          <p class="no-margin-bottom">Thanks for using OpenPlans!</p>
+          <p class="tiny-margin-bottom text-large"><strong>We are retiring this service on January 15, 2015.</strong></p>
+          Please copy your text and images from your site before January 15. After that, your plans will no longer be accessible.
+          Contact <a href="mailto:hello@openplans.org">hello@openplans.org</a> if you have questions.
+        </div>
         {% csrf_token %}
         <p class="float-label-container"><input required type="text" name="username" id="my-username" class="float-label-input" placeholder="Username" pattern="[A-Za-z0-9-_\.]{1,30}" max="30" tabindex="1"> <label for="my-username" class="float-label">Username</label></p>
         <p class="float-label-container"><input required type="password" name="password" id="my-password" class="float-label-input" placeholder="Password" max="30" tabindex="2"><label for="my-password" class="float-label">Password</label></p>
         <input type="submit" value="Sign In" class="button radius left" tabindex="3">
 
         <div class="text-right"><small>Forgot&nbsp;your&nbsp;password?&nbsp;<a href="{% url 'password-reset-request' %}"><strong>REQUEST&nbsp;A&nbsp;RESET</strong></a></small></div>
-        <div class="text-right"><small>Need&nbsp;an&nbsp;account?&nbsp;<a href="/signup/"><strong>SIGN&nbsp;UP</strong></a></small></div>
+        <!-- <div class="text-right"><small>Need&nbsp;an&nbsp;account?&nbsp;<a href="/signup/"><strong>SIGN&nbsp;UP</strong></a></small></div> -->
 
         {% if next_url %}
         <input type="hidden" name="next" value="{{ next_url }}">
