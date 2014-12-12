@@ -6,16 +6,16 @@
 <h3 class="no-margins">{{ title }}</h3>
 <small class="url">
   openplans.org/{{ ./owner }}/<span class="slug">{{ slug }}</span>/
-  &mdash; <a href="#" class="" data-dropdown="project-{{ id }}-menu">Edit&nbsp;Plan&nbsp;Link</a>
+  &mdash; <a href="#" class="" data-dropdown="project-{{ id }}-menu">Edit&nbsp;Link</a>
   <ul id="project-{{ id }}-menu" class="f-dropdown" data-dropdown-content>
-    <li><a href="#" class="change-slug">Edit Plan Link</a></li>
+    <li><a href="#" class="change-slug">Edit Link</a></li>
     <li><a href="mailto:{{contact_email}}" class="open-intercom">Request a custom domain&hellip;</a></li>
   </ul>
 </small>
 <form class="slug-form hide">
   <!-- TODO: validate; don't save if blank -->
   <small><span class="hide-for-small-only">openplans.org/{{ ./owner }}/</span><input type="text" id="slug" class="slug-field inline-input" value="{{ slug }}" pattern="[A-Za-z0-9-]+" data-validity-message="Please use only letters, numbers, and dashes."><span class="hide-for-small-only">/&nbsp;&nbsp;</span><button class="tiny less-padding">OK</button>&nbsp;&nbsp;<a href="#" class="cancel-slug-change alert">Cancel</a></small>
-  <div data-error-attr="slug" data-error-message="That link is already used by another plan. Please use a different link for each plan."></div>
+  <div data-error-attr="slug" data-error-message="That link is already used by another map. Please use a different link for each map."></div>
 </form>
 {{#if expires_at}}
 <p class="text-small no-margins">
