@@ -28,6 +28,7 @@ def redirect_to_about(request):
 urlpatterns = patterns('',
     # Permanently redirect old URLs to new locations.
     url(r'^blog/?$', redirect_to_blog),
+    url(r'^(wp-content/.*/?)$', redirect_to_blog),
     url(r'^(author/.*/?)$', redirect_to_blog),
     url(r'^(category/.*/?)$', redirect_to_blog),
     url(r'^(\d{4}/\d{1,2}/.*)$', redirect_to_blog),
