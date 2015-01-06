@@ -363,6 +363,7 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/views/display.js',
             '<%= yeoman.app %>/scripts/views/admin/section.js',
             '<%= yeoman.app %>/scripts/views/admin/project.js',
+            '<%= yeoman.app %>/scripts/project-display/timeline.js',
             '<%= yeoman.app %>/scripts/base-app.js',
             '<%= yeoman.app %>/scripts/app.js'
           ],
@@ -376,6 +377,7 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/views/display.js',
             '<%= yeoman.app %>/scripts/project-layout-shareabouts/project-view.js',
             '<%= yeoman.app %>/scripts/project-layout-shareabouts/shareabouts-section-view.js',
+            '<%= yeoman.app %>/scripts/project-display/timeline.js',
             '<%= yeoman.app %>/scripts/base-app.js',
             '<%= yeoman.app %>/scripts/app.js'
           ],
