@@ -89,9 +89,9 @@ var Planbox = Planbox || {};
 
   $(function() {
     var c = new NS.TimelineController();
-    $(document).on('click', '.show-more-past-events', _.bind(c.handleShowPastEventsBtn, c));
-    $(document).on('click', '.show-more-future-events', _.bind(c.handleShowFutureEventsBtn, c));
-    $(document).on('click', '.tag-btn', _.bind(c.handleClickTagBtn, c));
-    $(document).on('click', '.show-event-details', _.bind(c.handleShowEventDetails, c));
+    $(document).on('click', '#page .show-more-past-events', _.bind(c.handleShowPastEventsBtn, c));
+    $(document).on('click', '#page .show-more-future-events', _.bind(c.handleShowFutureEventsBtn, c));
+    $(document).on('click', '#page .tag-btn', _.bind(c.handleClickTagBtn, c));
+    $(document).on('click', '#page .show-event-details', _.bind(c.handleShowEventDetails, c));
   });
 }(Planbox, jQuery));
