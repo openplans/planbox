@@ -456,6 +456,10 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/base-app.js',
             '<%= yeoman.app %>/scripts/roundup/roundup-app.js'
           ],
+          '<%= yeoman.app %>/scripts/static-app.min.js': [
+            '<%= yeoman.app %>/scripts/project-display/timeline.js',
+            '<%= yeoman.app %>/scripts/base-app.js'
+          ],
           '<%= yeoman.app %>/scripts/modernizr.min.js': [
             '<%= yeoman.app %>/bower_components/modernizr/modernizr.js'
           ]
