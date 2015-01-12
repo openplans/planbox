@@ -5,6 +5,47 @@ var Planbox = Planbox || {};
 
   NS.TimelineController = function() {};
   NS.TimelineController.prototype = {
+    initEvents: function($timeline) {
+      $timeline.find('li.event').each(function(i, el) {
+        var $el = $(el);
+        var nowTime = new Date();
+        var eventTime = $el.find('.event-datetime').attr('data-datetime')
+          , eventStartTime
+          , eventEndTime
+          , eventTags = $el.find('.event-details').attr('data-tags');
+
+        // Assume that all events span a full day
+        eventStartTime = new Date(eventTime);
+        eventStartTime.setHours(0, 0, 0, 0);
+        eventEndTime = new Date(eventTime);
+        eventEndTime.setHours(11, 59, 59, 999);
+
+        // Associate with a past or future event
+        if ( eventEndTime < nowTime ) {
+          $el.addClass('past-event');
+        } else {
+          $el.addClass('future-event');
+        }
+
+        // Store the tags on the element
+        var tags = eventTags.split(';');
+        $.data(el, 'tags', _.without(tags, ''));
+      });
+
+      // Hide the initial past and future events
+      var pastCount = $timeline.find('.past-event').length;
+      var futureCount = $timeline.find('.future-event').length;
+
+      if ( pastCount ) {
+        $timeline.find('.past-event').addClass('hide');
+        $timeline.find('.show-more-past-events').removeClass('hide');
+      }
+
+      if ( futureCount > 4 ) {
+        $timeline.find('.future-event').slice(4).addClass('hide');
+        $timeline.find('.show-more-future-events').removeClass('hide');
+      }
+    },
     showPastEvents: function($timeline) {
       $timeline.find('li.past-event').removeClass('hide');
       $timeline.find('.show-more-past-events').addClass('hide');
@@ -89,6 +130,7 @@ var Planbox = Planbox || {};
 
   $(function() {
     var c = new NS.TimelineController();
+    c.initEvents($('.project-section-timeline'));
     $(document).on('click', '#page .show-more-past-events', _.bind(c.handleShowPastEventsBtn, c));
     $(document).on('click', '#page .show-more-future-events', _.bind(c.handleShowFutureEventsBtn, c));
     $(document).on('click', '#page .tag-btn', _.bind(c.handleClickTagBtn, c));
