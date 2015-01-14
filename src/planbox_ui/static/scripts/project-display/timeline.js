@@ -18,7 +18,7 @@ var Planbox = Planbox || {};
         eventStartTime = new Date(eventTime);
         eventStartTime.setHours(0, 0, 0, 0);
         eventEndTime = new Date(eventTime);
-        eventEndTime.setHours(11, 59, 59, 999);
+        eventEndTime.setHours(23, 59, 59, 999);
 
         // Associate with a past or future event
         if ( eventEndTime < nowTime ) {
