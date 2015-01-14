@@ -45,7 +45,7 @@ django-object-actions==0.4.0
 django-jstemplate==1.3.7
 git+git://github.com/mjumbewu/pymeta.git@master#egg=pymeta
 git+git://github.com/mjumbewu/pybars.git@master#egg=pybars
-djangobars==0.1.4
+djangobars==0.1.5
 
 
 

@@ -103,6 +103,11 @@ class AppMixin (object):
         def window_location_helper(this):
             return self.request.get_full_path()
 
+        @register_helper('is')
+        def is_helper(this, options, a, b):
+            if a == b: return options['fn'](this)
+            else: return options['inverse'](this)
+
         # The current time, because it's useful sometimes
         context['current_time'] = now()
 
@@ -275,37 +280,37 @@ class PasswordResetInstructionsView (AppMixin, SSLRequired, BasePasswordResetIns
 # class SignupView (AppMixin, LogoutRequired, SSLRequired, FormView):
 #     template_name = 'signup.html'
 #     form_class = UserCreationForm
-# 
+#
 #     def get_initial(self):
 #         initial = super(SignupView, self).get_initial()
 #         if 'email' in self.request.GET:
 #             initial['email'] = self.request.GET['email']
 #         return initial
-# 
+#
 #     def get_success_url(self):
 #         return self.get_home_url(self.auth)
-# 
+#
 #     def get_template_project(self):
 #         if hasattr(settings, 'PLANBOX_STARTER_PROJECT_TEMPLATE'):
 #             template_string = settings.PLANBOX_STARTER_PROJECT_TEMPLATE
 #         else:
 #             return None
-# 
+#
 #         try:
 #             owner_slug, project_slug = template_string.strip('/').split('/')
 #         except (AttributeError, ValueError):
 #             return None
-# 
+#
 #         try:
 #             project = Project.objects.get(owner__slug=owner_slug, slug=project_slug)
 #             return project
 #         except Project.DoesNotExist:
 #             return None
-# 
+#
 #     def form_valid(self, form):
 #         template = self.get_template_project()
 #         form.save(starter_template=template)
-# 
+#
 #         username = form.cleaned_data.get('username')
 #         password = form.cleaned_data.get('password')
 #         self.auth = authenticate(username=username, password=password)

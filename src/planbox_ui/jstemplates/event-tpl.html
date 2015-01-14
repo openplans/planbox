@@ -6,7 +6,7 @@
 <h5 class="event-datetime subheader" data-datetime="{{ start_datetime }}">{{ datetime_label }}</h5>
 {{/if}}
 
-<div class="row event-details hide">
+<div class="row event-details hide" data-tags="{{#each details.tags}}{{.}};{{/each}}">
 
   <div class="medium-7 columns">
     <div class="event-description project-text-content">{{{ description }}}</div>

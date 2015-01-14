@@ -400,7 +400,7 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/project-editor-v2/project-admin-modal-view.js',
             '<%= yeoman.app %>/scripts/plugins.js',
             '<%= yeoman.app %>/scripts/base-app.js',
-            '<%= yeoman.app %>/scripts/app.js'
+            '<%= yeoman.app %>/scripts/project-editor-v2/app.js'
           ],
           '<%= yeoman.app %>/scripts/app-project-dashboard.min.js': [
             '<%= yeoman.app %>/bower_components/list.js/dist/list.js',
@@ -455,6 +455,10 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/roundup/project-map-view.js',
             '<%= yeoman.app %>/scripts/base-app.js',
             '<%= yeoman.app %>/scripts/roundup/roundup-app.js'
+          ],
+          '<%= yeoman.app %>/scripts/static-app.min.js': [
+            '<%= yeoman.app %>/scripts/project-display/timeline.js',
+            '<%= yeoman.app %>/scripts/base-app.js'
           ],
           '<%= yeoman.app %>/scripts/modernizr.min.js': [
             '<%= yeoman.app %>/bower_components/modernizr/modernizr.js'
