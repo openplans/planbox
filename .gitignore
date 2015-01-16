@@ -21,6 +21,8 @@ bower_components/
 *.min.js
 *.min.map
 *.min.css
+
+# Copied/generated images
 src/planbox_ui/static/images/marker-plus.png
 src/planbox_ui/static/images/marker-shadow.png
 src/planbox_ui/static/images/marker-x.png
@@ -28,6 +30,10 @@ src/planbox_ui/static/images/layers-2x.png
 src/planbox_ui/static/images/layers.png
 src/planbox_ui/static/images/marker-icon-2x.png
 src/planbox_ui/static/images/marker-icon.png
+src/planbox_ui/static/chosen-sprite.png
+src/planbox_ui/static/chosen-sprite@2x.png
+src/planbox_ui/static/styles/chosen-sprite.png
+src/planbox_ui/static/styles/chosen-sprite@2x.png
 
 # Installer logs
 pip-log.txt
@@ -47,9 +53,11 @@ nosetests.xml
 
 # Local settings and environments
 local_settings.py
-env/
 .env/
+env/
 env?/
+newenv/
+newenv?/
 node_modules/
 db.sqlite3
 .env
