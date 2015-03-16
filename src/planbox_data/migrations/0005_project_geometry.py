@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import django.contrib.gis.db.models.fields
 
 
 class Migration(migrations.Migration):
@@ -15,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='project',
             name='geometry',
-            field=django.contrib.gis.db.models.fields.GeometryField(srid=4326, null=True, blank=True),
+            field=models.fields.TextField(null=True, blank=True),
             preserve_default=True,
         ),
     ]

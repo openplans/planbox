@@ -45,8 +45,6 @@ PLANBOX_STARTER_PROJECT_TEMPLATE = os.environ.get('STARTER_PROJECT_TEMPLATE')
 
 import dj_database_url
 DATABASES = {'default': dj_database_url.config()}
-# https://devcenter.heroku.com/articles/postgis#geodjango-setup
-DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
 
 import django_cache_url

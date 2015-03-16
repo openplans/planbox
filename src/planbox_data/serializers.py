@@ -1,6 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
-from planbox_data import models, fields
+from planbox_data import models
 import bleach, re, json
 
 

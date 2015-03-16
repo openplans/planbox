@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.contrib import auth
 from django.contrib.contenttypes.generic import GenericForeignKey, GenericRelation
-from django.contrib.gis.db import models
+from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import Signal
 from django.utils.text import slugify
@@ -399,7 +399,7 @@ class ProjectQuerySet (models.query.QuerySet):
         return self.filter(member_query | public_query)
 
 
-class ProjectManager (models.GeoManager):
+class ProjectManager (models.Manager):
     def get_queryset(self):
         return ProjectQuerySet(self.model, using=self._db)
 
