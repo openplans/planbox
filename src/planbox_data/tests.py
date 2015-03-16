@@ -430,38 +430,6 @@ class ProjectSerializerTests (PlanBoxTestCase):
         ok_(not serializer.is_valid())
         assert_in('events', serializer.errors)
 
-    def test_project_geometry_create(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        user = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=user, geometry='POINT(2 3)')
-
-        serializer = ProjectSerializer(project)
-        assert_in('geometry', serializer.data)
-        assert_equal(serializer.data['geometry'], {u'type': u'Point', u'coordinates': [2.0, 3.0]})
-
-    def test_project_geometry_update(self):
-        auth = UserAuth.objects.create_user(username='mjumbewu', password='123')
-        user = auth.profile
-        project = Project.objects.create(slug='test-slug', title='test title', location='test location', owner=user, geometry='POINT(2 3)')
-        serializer = ProjectSerializer(project, data={
-            'id': project.pk,
-            'slug': 'test-slug',
-            'title': 'test new title',
-            'location': 'test location',
-            'events': [],
-            'sections': [],
-            'owner': {'slug': user.slug},
-            'geometry': {u'type': u'Point', u'coordinates': [4.0, 5.0]}
-        })
-
-        ok_(serializer.is_valid(), serializer.errors)
-
-        serializer.save()
-        project = serializer.object
-
-        assert_equal(project.geometry.x, 4.0)
-        assert_equal(project.geometry.y, 5.0)
-
 
 class ProfileSerializerTests (PlanBoxTestCase):
     def test_can_create_a_profile(self):

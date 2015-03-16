@@ -311,8 +311,6 @@ class ProjectSerializer (SlugValidationMixin, AddRemoveModelSerializer):
     happening_now_description = CleanedHtmlField(required=False)
     get_involved_description = CleanedHtmlField(required=False)
 
-    geometry = fields.GeometryField(required=False)
-
     class Meta:
         model = models.Project
         exclude = ('last_opened_at', 'last_opened_by', 'last_saved_at', 'last_saved_by', 'expires_at', 'payment_type',)
@@ -339,12 +337,11 @@ class ProjectActivitySerializer (AddRemoveModelSerializer):
 class ProjectSummarySerializer (AddRemoveModelSerializer):
     owner = AssociatedProfileSerializer(required=True)
     summary = serializers.SerializerMethodField('get_project_summary')
-    geometry = fields.GeometryField(required=False)
     details = serializers.WritableField()
 
     class Meta:
         model = models.Project
-        fields = ('id', 'slug', 'title', 'summary', 'owner', 'geometry', 'location', 'details', 'expires_at')
+        fields = ('id', 'slug', 'title', 'summary', 'owner', 'location', 'details', 'expires_at')
         read_only_fields = ('expires_at',)
 
     def get_project_summary(self, project):

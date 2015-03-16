@@ -456,8 +456,6 @@ class Project (ModelWithSlugMixin, CloneableModelMixin, TimeStampedModel):
     logo_img_url = models.URLField(_('Logo Image URL'), blank=True, max_length=2048)
     template = models.ForeignKey('Project', help_text=_("The project, if any, that this one is based off of"), null=True, blank=True, on_delete=models.SET_NULL)
 
-    geometry = models.GeometryField(null=True, blank=True)
-
     expires_at = models.DateTimeField(null=True, blank=True)
     payment_type = models.CharField(max_length=20, blank=True)
     customer = models.OneToOneField('moonclerk.Customer', blank=True, null=True, related_name='project')
